@@ -1,0 +1,18 @@
+#+TITLE: My first website template
+#+AUTHOR: Tyler J Burns, PhD
+#+PURPOSE: To get my feet wet with org websites.
+#+SETUPFILE: https://fniessen.github.io/org-html-themes/org/theme-readtheorg.setup
+
+* How to export (in Doom config)
+Spc m e e h o
+* Hello
+** World
+
+#+begin_src R
+x <- 5
+print(x)y
+#+end_src
+
+#+RESULTS:
+: 5
+
