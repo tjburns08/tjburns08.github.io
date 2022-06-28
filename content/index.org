@@ -35,7 +35,7 @@ SPADE uses the L1 norm (Manhattan distance), X-shift uses cosine distance, and F
 ** “Nearest neighborhood comparisons across biological conditions in single cell data.” Invited Speaker, German CyTOF User Forum; Berlin, Germany; February 2018.
 This is the talk version of my 2018 Sconify paper, that ended up being the final chapter of my PhD thesis. There are two aspects to this talk. The first is making visual comparisons of unstimulated and stimulated CyTOF data when looking at measurements of phosphoproteins. This was easily done on SPADE trees, but not t-SNE maps, until I started making k-nearest neighbor based comparisons. The second aspect of this talk is using the same nearest neighbor based comparisons to investigate batch effects in CyTOF data. I note that batch effects were only heavily discussed among CyTOF users starting near 2020 (in my circles), and this work goes back to 2016.
 
-* Other things I've done
+* Other contributions
 **** Former computational biologist, now guest researcher, at the German Rheumatism Research Center in Berlin, Germany. I will always stay connected to my academic roots.
 **** Developing software to interrogate and visualize the local similarities between original manifolds and lower dimensional embeddings. Important for anyone wanting to determine which of these methods is the right tool for the job.
 **** Solved a long-standing data visualization problem for mass cytometry, and developed a Bioconductor package for it, with a visual description here, and this publication..
