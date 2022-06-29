@@ -61,12 +61,16 @@ This is the talk version of my 2018 Sconify paper, that ended up being the final
 CYTO Conference; Prague, Czech Republic; May 2018.
 Abstract: Due to the rise of high-dimensional single cell technologies in the past few years, there has been an increasing number of both computational methods and workflows to analyze the new wealth of data. However, non-intuitive properties of high-dimensional space can give rise to analysis artifacts, collectively known of as the “curse of dimensionality.” Increasing dimensions differentially affect the performance of distance metrics, and there is no clear consensus about which distance metrics to use for which analysis strategies. While the influence of many tool-specific parameters has been evaluated, we study here the impact of commonly used distance metrics on the outcome of dimensionality reduction and clustering.
 
-* Code
-These are primarily R markdowns exploring various topics. I apologize if the one you're reading is a bit messy. Some of these are bits of tinkering that led to interesting results that I simply didn't have the time to finish. Others were pieces I was going to make public but decided not to because of the perfectionist in me (see the coin toss series). I figure that showing unpolished work is better than showing no work. If you have any questions or comments, please feel free to contact me. Anything that gets attention here will trigger me to work on it.
+* Software
+** [[https://www.bioconductor.org/packages/release/bioc/html/Sconify.html][Bioconductor package Sconify]]
+Official description: This package does k-nearest neighbor based statistics and visualizations with flow and mass cytometery data. This gives tSNE maps"fold change" functionality and provides a data quality metric by assessing manifold overlap between fcs files expected to be the same. Other applications using this package include imputation, marker redundancy, and testing the relative information loss of lower dimension embeddings compared to the original manifold.
+
+* Markdowns
+These are primarily R markdowns exploring various topics. I apologize if the one you're reading is a bit messy. Most of these are instances of me just tinkering for the sake of tinkering. These often lead to interesting results that I don't have time to follow up on, but I figure that showing unpolished work is better than showing no work. If you have any questions or comments, please feel free to contact me. Anything that gets attention here will trigger me to work on it.
 
 There are two potenital audiences here. The first are those with questions about any of the topics below that I cover. The second are those learning coding or data science who want to see examples of simple but insightful analyses.
 
-Regardless of the reader's intent, I hope above all that the work below will encourage people to really tinker with words, numbers, and data. You can get surprisingly far if you get in the habit of tinkering. 
+Regardless of the reader's intent, I hope above all that the work below will encourage people to really tinker with words, numbers, and data. You can get surprisingly far if you get in the habit of it. 
 
 
 ** [[./cytof_data_transformations.html][Data transformations for CyTOF]]
