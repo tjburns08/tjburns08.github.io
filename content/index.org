@@ -23,6 +23,7 @@ Understanding how authors of a given field are connected can help you identify k
 ** [[https://medium.com/@tjburns_72591/using-and-mining-pre-prints-to-stay-ahead-of-your-field-with-the-help-of-twitter-50d5bdc528de][Using and mining pre-prints to stay ahead of your field, with the help of Twitter]]
 I explain why pre-prints are important to staying ahead of the technology and general paradigms in your field, with single-cell analysis as an example. I then show how I utilize the Twitter API to harvest and rank tweets from automated pre-print linking bots from bioRxiv to determine what pre-print articles are being talked about (and therefore what you should probably pay attention to).
 
+
 * First author publications
 ** [[https://www.biorxiv.org/content/10.1101/337485v1][Continuous Visualization of Multiple Biological Conditions In Single-Cell Data]]
 Abstract: In high-dimensional single cell data, comparing changes in functional markers between conditions is typically done across manual or algorithm-derived partitions based on population-defining markers. Visualizations of these partitions is commonly done on low-dimensional embeddings (eg. t-SNE), colored by per-partition changes. Here, we provide an analysis and visualization tool that performs these comparisons across overlapping k-nearest neighbor (KNN) groupings. This allows one to color low-dimensional embeddings by marker changes without hard boundaries imposed by partitioning. We devised an objective optimization of k based on minimizing functional marker KNN imputation error. Proof-of-concept work visualized the exact location of an IL-7 responsive subset in a B cell developmental trajectory on a t-SNE map independent of clustering. Per-condition cell frequency analysis revealed that KNN is sensitive to detecting artifacts due to marker shift, and therefore can also be valuable in a quality control pipeline. Overall, we found that KNN groupings lead to useful multiple condition visualizations and efficiently extract a large amount of information from mass cytometry data. Our software is publicly available through the Bioconductor package Sconify.
@@ -62,11 +63,32 @@ CYTO Conference; Prague, Czech Republic; May 2018.
 Abstract: Due to the rise of high-dimensional single cell technologies in the past few years, there has been an increasing number of both computational methods and workflows to analyze the new wealth of data. However, non-intuitive properties of high-dimensional space can give rise to analysis artifacts, collectively known of as the “curse of dimensionality.” Increasing dimensions differentially affect the performance of distance metrics, and there is no clear consensus about which distance metrics to use for which analysis strategies. While the influence of many tool-specific parameters has been evaluated, we study here the impact of commonly used distance metrics on the outcome of dimensionality reduction and clustering.
 
 * Code
-These are primarily R markdowns exploring various topics. I apologize if the one you're reading is a bit messy. Some of these are bits of tinkering that led to interesting results that I simply didn't have the time to finish. If you have any questions or comments, please feel free to contact me.
+These are primarily R markdowns exploring various topics. I apologize if the one you're reading is a bit messy. Some of these are bits of tinkering that led to interesting results that I simply didn't have the time to finish. Others were pieces I was going to make public but decided not to because of the perfectionist in me (see the coin toss series). I figure that showing unpolished work is better than showing no work. If you have any questions or comments, please feel free to contact me. Anything that gets attention here will trigger me to work on it.
+
+There are two potenital audiences here. The first are those with questions about any of the topics below that I cover. The second are those learning coding or data science who want to see examples of simple but insightful analyses.
+
+Regardless of the reader's intent, I hope above all that the work below will encourage people to really tinker with words, numbers, and data. You can get surprisingly far if you get in the habit of tinkering. 
 
 
 ** [[./cytof_data_transformations.html][Data transformations for CyTOF]]
 CyTOF data are transformed using the inverse hyperbolic sine (asinh) of the data divided by 5 (aka scale argument of 5). But does it have to be like that? What happens if we use a scale argument of 1? 500? What if we do a log transform? How does t-SNE look on untransformed CyTOF data?
+
+**  [[./1_law_large_numbers_central_limit_theorem.html][Coin toss series 1: The law of large numbers and the central limit theorem]]
+I taught one of my high school summer students the basics of probability by simulating coin tosses in R. Here, we "discover" the law of large numbers and the central limit theorem using simulated coin tosses. 
+
+** Coin toss series 2: Runs of luck
+
+** [[./3_fair_vs_unfair_coins.html][Coin toss series 3: Fair versus unfair coins]]
+Here, we examine the properties of unfair coins, where the odds of getting heads or tails does not equal 50%. 
+
+** [[./4_random_walk.html][Coin toss series 4: Random walks]]
+Here, we show that if we simulate flipping coins, but we keep a record of the number of heads and the number of tails, we end up doing a random walk. From there, we explore the properties of random walks. 
+
+** [[./5_dice_roll.html][Coin toss series 5: Dice rolls]]
+Here, we do an abstraction of the coin tosses we have been simulating, by coinsidering dice of three or more faces. We simulate these dice rolls and examine their properties. 
+
+** Coin toss series 6: Is this sequence random? 
+
 
 
 * Other contributions
