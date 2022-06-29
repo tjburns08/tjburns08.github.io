@@ -2,13 +2,13 @@
 
 
 * About me
-I am an American CEO and computational biologist who lives in Berlin, Germany. I am best known for my work on single-cell analysis, with respect to the many applications of K-Nearest Neighbors.
+I am an American CEO and computational biologist who lives in Berlin, Germany. I am best known for my work on knowledge graphs, and my work on single-cell analysis with respect to the many applications of K-Nearest Neighbors. 
 
 I run a company called [[https://burnslsc.com/][Burns Life Sciences Consulting, GmbH]], which allows me to do science on my terms, work on diverse projects with many organizations, and develop and sell products. The problem is most of my work is behind NDAs so I can't talk about it. There is another large amount of my work that is unpublished, simply because being a CEO has a lot of demands that don't give me the time.
 
-This website is a place where I can openly share my ideas and work, regardless of how "finished" it is. Aside from publications, I've uploaded PDFs of posters and slide decks from talks I've given, and other files that wouldn't otherwise see the light of day.
+This website is a place where I can openly share my ideas and non-client work, regardless of how "finished" it is. I have uploaded written work, code, posters and powerpoint slides of various project I have driven or contributed to.
 
-If you have quesitons or comments, just contact me (see contact info below). I'm always happy to help. 
+If you have quesitons or comments, or you're interested in working or collaborating with me, just send me a message (see contact info below). I'm always happy to help. 
 
 * Articles
 ** [[./just_paint.org][Just paint]]
@@ -39,14 +39,16 @@ In sum: I started by developing a method to enable flow and mass cytometry to de
 
 In parallel, I was taking computer science classes as a side hobby. I reached a point where I was trying to compare two t-SNE maps between unstimulated and simulated data, and I realized that there was a K-Nearest Neighbors based solution that I could implement with my newfoud computer science competencies. I therefore developed Sconify, a now BioConductor package that allows for these visualizations. There were many use cases, and I spent the remainder of my thesis developing this method further and doing various collaborations with it. 
 
-
 * Talks 
 ** [[./tjb_dimr_talk.pdf][A visual interrogation of dimension reduction tools for single-cell analysis]]
 German CyTOF User Forum; Berlin, Germany; January 2020.
-In this talk, I measured the accurracy of dimension reduction tools (PCA, t-SNE, and UMAP) in terms of their nearest neighbor overlap. This is the k-nearest neighbors of a given cell in the original high dimension space, in comparison to the k-nearest neighbors of a given cell in the embedding. I show that the overlap here is much lower than my audience expected. I've given this talk many times since then, for my clients. 
-** [[./mass.cytometry.analysis.history.pdf][A history of mass cytometry data analysis, and where the field is going]] [[https://www.drfz.de/en/aktuelles/veranstaltungen/cytof-forum-2020/][
-German Rheumatism Research Center]]; Berlin, Germany; March 2019.
-I talk about how CyTOF data analysis developed from its inception at the beginning of 2010 to now. In doing so, I provide a template for proper CyTOF data analysis in terms of how we got there. 
+In this talk, I measured the accurracy of dimension reduction tools (PCA, t-SNE, and UMAP) in terms of their nearest neighbor overlap. This is the k-nearest neighbors of a given cell in the original high dimension space, in comparison to the k-nearest neighbors of a given cell in the embedding. I show that the overlap here is much lower than my audience expected. I've given this talk many times since then, for my clients.
+
+** [[./mass.cytometry.analysis.history.pdf][A history of mass cytometry data analysis, and where the field is going]]
+
+[[https://www.drfz.de/en/aktuelles/veranstaltungen/cytof-forum-2020/][German Rheumatism Research Center]]; Berlin, Germany; March 2019.
+I talk about how CyTOF data analysis developed from its inception at the beginning of 2010 to now. In doing so, I provide a template for proper CyTOF data analysis in terms of how we got there.
+
 ** [[./drfz_tsne_interrogation_talk_final.pdf][A comprehensive interrogation of the t-SNE algorithm for mass cytometry analysis]]
 German Rheumatism Research Center; Berlin, Germany; May 2018.
 This talk was a response to a member of the research institue who was simply not convinced that t-SNE was providing the accurracy that the avearge CyTOF user thought. In this talk, I show that he was right. This being said, I provide recommendations for how to properly use t-SNE for CyTOF analysis. 
@@ -55,8 +57,8 @@ Invited Speaker, German CyTOF User Forum; Berlin, Germany; February 2018.
 This is the talk version of my 2018 Sconify paper, that ended up being the final chapter of my PhD thesis. There are two aspects to this talk. The first is making visual comparisons of unstimulated and stimulated CyTOF data when looking at measurements of phosphoproteins. This was easily done on SPADE trees, but not t-SNE maps, until I started making k-nearest neighbor based comparisons. The second aspect of this talk is using the same nearest neighbor based comparisons to investigate batch effects in CyTOF data. I note that batch effects were only heavily discussed among CyTOF users starting near 2020 (in my circles), and this work goes back to 2016.
 
 * Posters
-** [[./final_distance.project.poster.pdf][Determining which distance metrics are ideal within a mass cytometry data analysis pipeline
-]][[https://isac-net.org/page/CYTO][CYTO Conference]]; Prague, Czech Republic; May 2018.
+** [[./final_distance.project.poster.pdf][Determining which distance metrics are ideal within a mass cytometry data analysis pipeline]]
+CYTO Conference; Prague, Czech Republic; May 2018.
 Abstract: Due to the rise of high-dimensional single cell technologies in the past few years, there has been an increasing number of both computational methods and workflows to analyze the new wealth of data. However, non-intuitive properties of high-dimensional space can give rise to analysis artifacts, collectively known of as the “curse of dimensionality.” Increasing dimensions differentially affect the performance of distance metrics, and there is no clear consensus about which distance metrics to use for which analysis strategies. While the influence of many tool-specific parameters has been evaluated, we study here the impact of commonly used distance metrics on the outcome of dimensionality reduction and clustering.
 
 * Other contributions
@@ -70,7 +72,8 @@ Abstract: Due to the rise of high-dimensional single cell technologies in the pa
 **** Mentored several high school students and undergraduates throughout my thesis work, teaching them biology, computer science, statistics, and importantly how to integrate these fields.
 **** Built a website for my PhD program using HTML, JavaScript, and SQL, that helped first year students connect with current and previous members of a given research laboratory (I'd link it but you have to be a Stanford student to view it).
 
-* Links
+
+* Links and contact info
 *** [[https://www.linkedin.com/in/tylerjburns/][LinkedIn]]
 *** [[https://twitter.com/tjburns08][Twitter]]
 *** [[https://github.com/tjburns08][GitHub]]
