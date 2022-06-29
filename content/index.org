@@ -57,7 +57,7 @@ This is the talk version of my 2018 Sconify paper, that ended up being the final
 * Posters
 ** [[./final_distance.project.poster.pdf][Determining which distance metrics are ideal within a mass cytometry data analysis pipeline
 ]][[https://isac-net.org/page/CYTO][CYTO Conference]]; Prague, Czech Republic; May 2018.
-Poster. SPADE uses the L1 norm (Manhattan distance), X-shift uses cosine distance, and FlowSOM uses the L2 norm (Euclidean distance). Which distance metric should be used for which algorithm? I show that there are indeed differences when using different distance metrics for FlowSOM clustering, though none make or break the algorithm. More work needs to be done here, especially as the dimesnionality of our datasets increase. 
+Abstract: Due to the rise of high-dimensional single cell technologies in the past few years, there has been an increasing number of both computational methods and workflows to analyze the new wealth of data. However, non-intuitive properties of high-dimensional space can give rise to analysis artifacts, collectively known of as the “curse of dimensionality.” Increasing dimensions differentially affect the performance of distance metrics, and there is no clear consensus about which distance metrics to use for which analysis strategies. While the influence of many tool-specific parameters has been evaluated, we study here the impact of commonly used distance metrics on the outcome of dimensionality reduction and clustering.
 
 * Other contributions
 **** Former computational biologist, now guest researcher, at the German Rheumatism Research Center in Berlin, Germany. I will always stay connected to my academic roots.
