@@ -24,15 +24,20 @@ Abstract: In high-dimensional single cell data, comparing changes in functional 
 Abstract: To quantify visual and spatial information in single cells with a throughput of thousands of cells per second, we developed Subcellular Localization Assay (SLA). This adaptation of Proximity Ligation Assay expands the capabilities of flow cytometry to include data relating to localization of proteins to and within organelles. We used SLA to detect the nuclear import of transcription factors across cell subsets in complex samples. We further measured intranuclear re-localization of target proteins across the cell cycle and upon DNA damage induction. SLA combines multiple single-cell methods to bring about a new dimension of inquiry and analysis in complex cell populations. © 2017 International Society for Advancement of Cytometry.
 
 * Talks and posters
-** [[./tjb_dimr_talk.pdf][A visual interrogation of dimension reduction tools for single-cell analysis]], German CyTOF User Forum; Berlin, Germany; January 2020.
+** [[./tjb_dimr_talk.pdf][A visual interrogation of dimension reduction tools for single-cell analysis]]
+German CyTOF User Forum; Berlin, Germany; January 2020.
 In this talk, I measured the accurracy of dimension reduction tools (PCA, t-SNE, and UMAP) in terms of their nearest neighbor overlap. This is the k-nearest neighbors of a given cell in the original high dimension space, in comparison to the k-nearest neighbors of a given cell in the embedding. I show that the overlap here is much lower than my audience expected. I've given this talk many times since then, for my clients. 
-** [[./mass.cytometry.analysis.history.pdf]["A history of mass cytometry data analysis, and where the field is going]]," [[https://www.drfz.de/en/aktuelles/veranstaltungen/cytof-forum-2020/][German Rheumatism Research Center]]; Berlin, Germany; March 2019.
+** [[./mass.cytometry.analysis.history.pdf][A history of mass cytometry data analysis, and where the field is going]] [[https://www.drfz.de/en/aktuelles/veranstaltungen/cytof-forum-2020/][
+German Rheumatism Research Center]]; Berlin, Germany; March 2019.
 I talk about how CyTOF data analysis developed from its inception at the beginning of 2010 to now. In doing so, I provide a template for proper CyTOF data analysis in terms of how we got there. 
-** “A comprehensive interrogation of the t-SNE algorithm,” German Rheumatism Research Center; Berlin, Germany; May 2018.
+** [[./drfz_tsne_interrogation_talk_final.pdf][A comprehensive interrogation of the t-SNE algorithm for mass cytometry analysis]]
+German Rheumatism Research Center; Berlin, Germany; May 2018.
 This talk was a response to a member of the research institue who was simply not convinced that t-SNE was providing the accurracy that the avearge CyTOF user thought. In this talk, I show that he was right. This being said, I provide recommendations for how to properly use t-SNE for CyTOF analysis. 
-** “Determining which distance metrics are ideal within a mass cytometry data analysis pipeline.” [[https://isac-net.org/page/CYTO][CYTO Conference]]; Prague, Czech Republic; May 2018.
+** Determining which distance metrics are ideal within a mass cytometry data analysis pipeline
+[[https://isac-net.org/page/CYTO][CYTO Conference]]; Prague, Czech Republic; May 2018.
 SPADE uses the L1 norm (Manhattan distance), X-shift uses cosine distance, and FlowSOM uses the L2 norm (Euclidean distance). Which distance metric should be used for which algorithm? I show that there are indeed differences when using different distance metrics for FlowSOM clustering, though none make or break the algorithm. More work needs to be done here, especially as the dimesnionality of our datasets increase. 
-** “Nearest neighborhood comparisons across biological conditions in single cell data.” Invited Speaker, German CyTOF User Forum; Berlin, Germany; February 2018.
+** Nearest neighborhood comparisons across biological conditions in single cell data
+Invited Speaker, German CyTOF User Forum; Berlin, Germany; February 2018.
 This is the talk version of my 2018 Sconify paper, that ended up being the final chapter of my PhD thesis. There are two aspects to this talk. The first is making visual comparisons of unstimulated and stimulated CyTOF data when looking at measurements of phosphoproteins. This was easily done on SPADE trees, but not t-SNE maps, until I started making k-nearest neighbor based comparisons. The second aspect of this talk is using the same nearest neighbor based comparisons to investigate batch effects in CyTOF data. I note that batch effects were only heavily discussed among CyTOF users starting near 2020 (in my circles), and this work goes back to 2016.
 
 * Other contributions
