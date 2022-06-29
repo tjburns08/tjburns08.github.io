@@ -33,8 +33,8 @@ I talk about how CyTOF data analysis developed from its inception at the beginni
 ** [[./drfz_tsne_interrogation_talk_final.pdf][A comprehensive interrogation of the t-SNE algorithm for mass cytometry analysis]]
 German Rheumatism Research Center; Berlin, Germany; May 2018.
 This talk was a response to a member of the research institue who was simply not convinced that t-SNE was providing the accurracy that the avearge CyTOF user thought. In this talk, I show that he was right. This being said, I provide recommendations for how to properly use t-SNE for CyTOF analysis. 
-** Determining which distance metrics are ideal within a mass cytometry data analysis pipeline
-[[https://isac-net.org/page/CYTO][CYTO Conference]]; Prague, Czech Republic; May 2018.
+** [[./final_distance.project.poster.pdf][Determining which distance metrics are ideal within a mass cytometry data analysis pipeline
+]][[https://isac-net.org/page/CYTO][CYTO Conference]]; Prague, Czech Republic; May 2018.
 SPADE uses the L1 norm (Manhattan distance), X-shift uses cosine distance, and FlowSOM uses the L2 norm (Euclidean distance). Which distance metric should be used for which algorithm? I show that there are indeed differences when using different distance metrics for FlowSOM clustering, though none make or break the algorithm. More work needs to be done here, especially as the dimesnionality of our datasets increase. 
 ** Nearest neighborhood comparisons across biological conditions in single cell data
 Invited Speaker, German CyTOF User Forum; Berlin, Germany; February 2018.
