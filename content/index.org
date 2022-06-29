@@ -46,7 +46,6 @@ German CyTOF User Forum; Berlin, Germany; January 2020.
 In this talk, I measured the accurracy of dimension reduction tools (PCA, t-SNE, and UMAP) in terms of their nearest neighbor overlap. This is the k-nearest neighbors of a given cell in the original high dimension space, in comparison to the k-nearest neighbors of a given cell in the embedding. I show that the overlap here is much lower than my audience expected. I've given this talk many times since then, for my clients.
 
 ** [[./mass.cytometry.analysis.history.pdf][A history of mass cytometry data analysis, and where the field is going]]
-
 [[https://www.drfz.de/en/aktuelles/veranstaltungen/cytof-forum-2020/][German Rheumatism Research Center]]; Berlin, Germany; March 2019.
 I talk about how CyTOF data analysis developed from its inception at the beginning of 2010 to now. In doing so, I provide a template for proper CyTOF data analysis in terms of how we got there.
 
@@ -89,7 +88,13 @@ Here, we show that if we simulate flipping coins, but we keep a record of the nu
 Here, we do an abstraction of the coin tosses we have been simulating, by coinsidering dice of three or more faces. We simulate these dice rolls and examine their properties. How often does a six sided dice land on the number 3? We can figure that out with simple math, but if you roll a dice 1000 times, and you do that again, and you do that again, what will be the standard deviation of the number of times the dice lands on 3? 
 
 ** [[./6_is_this_sequence_random.html][Coin toss series 6: Is this sequence random?]]
-Here, we look at fair coin tosses, unfair coin tosses, and random walks, and explore the randomness of the sequences by doing convolutions on the sequences with kernel size 2. 
+Here, we look at fair coin tosses, unfair coin tosses, and random walks, and explore the randomness of the sequences by doing convolutions on the sequences with kernel size 2.
+
+** [[./1d_ca.html][1-D Cellular Automata]]
+Here, I write some code to produce each of the 256 Wolfram cellular automata rules, and visualize the output. 
+
+** [[./explore_rule_110.html][Explore Wolfram Rule 110]]
+Here, I write some code to produce Rule 110, a Class 4 1-D cellular automata. I then enhance the gliders to make them easier to see. I explore how the output changes if I make the rule probabilistic (eg. 99.99% chance the rule will be followed. 
 
 
 
