@@ -76,16 +76,17 @@ CyTOF data are transformed using the inverse hyperbolic sine (asinh) of the data
 **  [[./1_law_large_numbers_central_limit_theorem.html][Coin toss series 1: The law of large numbers and the central limit theorem]]
 I taught one of my high school summer students the basics of probability by simulating coin tosses in R. Here, we "discover" the law of large numbers and the central limit theorem using simulated coin tosses. 
 
-** Coin toss series 2: Runs of luck
+** [[./2_runs_of_luck.html][Coin toss series 2: Runs of luck]]
+Here, we build on the initial piece in the series by looking at the properties of runs of luck. If we flip a coin a million times, how often will we get 10 heads in a row? How many times do we need to flip a coin to get 20 heads in a row on average? Related to sports. How often, statistically, would you expect Steph Curry to make 10 three pointers in a row given his 3-point shot percentage? 
 
 ** [[./3_fair_vs_unfair_coins.html][Coin toss series 3: Fair versus unfair coins]]
-Here, we examine the properties of unfair coins, where the odds of getting heads or tails does not equal 50%. 
+Here, we examine the properties of unfair coins, where the odds of getting heads or tails does not equal 50%. Can we figure out whether a coin is a fair coin? 
 
 ** [[./4_random_walk.html][Coin toss series 4: Random walks]]
-Here, we show that if we simulate flipping coins, but we keep a record of the number of heads and the number of tails, we end up doing a random walk. From there, we explore the properties of random walks. 
+Here, we show that if we simulate flipping coins, but we keep a record of the number of heads and the number of tails, we end up doing a random walk. We visualize these walks (they look somewhat like stock market data), and ask questions like how often a random walker crosses zero.  
 
 ** [[./5_dice_roll.html][Coin toss series 5: Dice rolls]]
-Here, we do an abstraction of the coin tosses we have been simulating, by coinsidering dice of three or more faces. We simulate these dice rolls and examine their properties. 
+Here, we do an abstraction of the coin tosses we have been simulating, by coinsidering dice of three or more faces. We simulate these dice rolls and examine their properties. How often does a six sided dice land on the number 3? We can figure that out with simple math, but if you roll a dice 1000 times, and you do that again, and you do that again, what will be the standard deviation of the number of times the dice lands on 3? 
 
 ** [[./6_is_this_sequence_random.html][Coin toss series 6: Is this sequence random?]]
 Here, we look at fair coin tosses, unfair coin tosses, and random walks, and explore the randomness of the sequences by doing convolutions on the sequences with kernel size 2. 
