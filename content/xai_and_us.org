@@ -1,33 +1,37 @@
 #+TITLE: Explainable AI and humanity
-#+DATE: June 30 - June 30
+#+DATE: June 30 - July 8
 
 [[./index.org][Home]]
 
 ** Explainable AI
 Modern AI relies heavily on optimized [[https://en.wikipedia.org/wiki/Artificial_neural_network][artificial neural networks]] that these days do anything from generating [[https://www.gwern.net/GPT-3][creative fiction]] to producing [[https://en.wikipedia.org/wiki/DALL-E][images from a verbal description]]. A common criticism of these types of tools in [[https://en.wikipedia.org/wiki/Single-cell_analysis][my field]] is that they are "black boxes." We can see what they did but we can't see why. We biologists are used to having maximal clarity at every step. Part of our training is is being able to critique prior research, which becomes much harder to do if you just know that some AI tool with some [[https://en.wikipedia.org/wiki/List_of_sequence_alignment_software][acronym]] produced the answer.
 
-So this is where the field of [[https://en.wikipedia.org/wiki/Explainable_artificial_intelligence][explainable artifical intelligence]] comes in. It's a rather broad pursuit of figuring out what these tools, which are otherwise not human-readable, are actually doing.
+So this is where the field of [[https://en.wikipedia.org/wiki/Explainable_artificial_intelligence][explainable artifical intelligence]] (XAI) comes in. It's a rather broad pursuit of figuring out what these tools, which are otherwise not human-readable, are actually doing.
 
-A lot of the explainable AI tools are are highly visual. For example, a neural net that distinguishes healthy tissue from cancerous tissue in a medical image can be tweaked to show where on a given image the tool is focusing. When you're a physician who has to make life or death diagnostic decisions, you'd much rather know why a "helper AI" made the decision it did.
+A lot of the XAI tools are are highly visual. For example, a neural net that distinguishes healthy tissue from cancerous tissue in a medical image can be tweaked to show where on a given image the tool is focusing. When you're a physician who has to make life or death diagnostic decisions, you'd much rather know why a "helper AI" made the decision it did.
 
-Another example is how I used [[./tjb_dimr_talk.pdf][visual tools]] to give my colleagues intuition around how dimension reduction algorithms perform on their single-cell data. This is what got me interested in explainable AI at large. 
+Another example is how I used [[./tjb_dimr_talk.pdf][visual tools]] to give my colleagues intuition around how dimension reduction algorithms perform on their single-cell data. This is what got me interested in XAI at large. 
 
 Explainable AI, or more broadly speaking, explainable black box algorithms, is a particularly broad field, and each new tool depends heavily on the algorithm itself and the context in which the algorithm is being used. But the concepts are similar, in that you're enabling the user to "get to know" the algorithm in order to be more effective with it and have a more comfortable relationship with it.
 
-** Humanity at large
+** When the human is the algorithm
 And that is what got me thinking in this context about...us. Lets make the assumption for a moment that we are, or at least can be represented as, a set of evolutionarily optimized AI tools lumped together in what we call a brain. This would mean that the chunk of tissue we have behind our eyes is really a series of black box algorithms we're stuck with.
 
 We spend a huge chunk of our lives getting to know ourselves and others...what these black boxes are all about. A lot of this is what give my life [[https://www.youtube.com/watch?v=54l8_ewcOlY][meaning]]. This ranges from determining as a kid whether you'd prefer to eat ice cream or iceberg lettuce on a hot summer day, to determining what you want in a lifetime partner.
 
-But there's an abstract level above that. What songs send tingles down your spine? When was the last time you had a spiritual experinece? When you felt like you were part of something bigger? What artwork really stands out to you specifically? Who is your favorite [[https://en.wikipedia.org/wiki/Jungian_archetypes][superhero]] and why?
+But there's an abstract level above that. What songs send tingles down your spine? When was the last time you had a spiritual experinece, and what was that like? When you felt like you were part of something bigger? What artwork really stands out to you specifically and how does it make you feel? Who is your favorite [[https://en.wikipedia.org/wiki/Jungian_archetypes][superhero]] and why?
 
-Then there's a "[[https://www.youtube.com/watch?v=ERbvKrH-GC4][self expression]]" layer. If you are given a paintbrush and you [[./just_paint.html][just paint]] something on the fly, what comes out? If you sit and write for an hour about whatever random thought crosses your mind, what comes out? What if you do the same, but it's only allowed to be poetry? 
+Then there's a "[[https://www.youtube.com/watch?v=ERbvKrH-GC4][self expression]]" level. If you are given a paintbrush and you [[./just_paint.html][just paint]] something on the fly, what comes out? If you sit and write for an hour about whatever random thought crosses your mind, what comes out? What if you do the same, but it's only allowed to be poetry? 
 
-And of course the social layer. What makes you like a person? Dislike a person? What caused that last angry outburst that you had that you didn't see coming?
+And of course the social and narrative level. What makes you like a person? Dislike a person? What caused that last angry outburst that you had that you didn't see coming? What jokes make you laugh more and longer than everyone else? What movie scenes made you unexpectedly teary eyed?
+
+** GPT-3 and prompt-based programming
+Asking oneself these questions actually has an analogue in the field of AI: prompt-based programming. It is a concept that I came across when I got the chance to beta-test OpenAI's [[https://en.wikipedia.org/wiki/GPT-3][GPT-3]] natural language model. You "program" it by giving it a task or asking it a question, similar to interacting with a chatbot. If you want it to generate a Shakespearean sonnet about grad school life, you lieterally just type in the request to do so. Depending on how you prompt it, you get a feel for what the model is capable of doing and how it operates. There is an XAI layer on top of this, where every word that gets outputted is colored by the probability of that word being generated as opposed to the next word. My point here is that it might be that "explaining" the next generation of AI algorithms might become much closer to what we do every day, trying to explain ourselves and others. 
 
 Art, music, moving about the world and experiencing new things, having relationships, all of these are the explainable AI tools of the network of black boxes we call humanity. We have been on this since our [[https://en.wikipedia.org/wiki/Timeline_of_human_evolution][emergence]]. We know what to do here. Accordingly, I'm trying to get intuition around what these black box algorithms are doing by looking at how we get to know ourselves and our bretheren.
 
-My best guess right now is that it won't be one simple algorithm that explains all of AI at that same time. So far there are a [[https://theaisummer.com/xai/][number of tools and methods]] to achieve this aim, depending on the context. Perhaps more an dmore these tools will be lumped into interactive dashboards for users. Nonetheless, I think it will be a constant struggle to get to know the machines as we try to get to know ourselves. The good news is if what I am saying carries any weight at all, then we are humans are already equipped to take on the task of explainable AI. We've been working on it for a long time. 
+** Conclusions
+I am still quite new to the field of XAI, but my best guess right now is that it won't be one simple algorithm that explains all of AI at that same time. So far there are a [[https://theaisummer.com/xai/][number of tools and methods]] to achieve this aim, depending on the context. Perhaps more and more these tools will be lumped into interactive dashboards for users. Nonetheless, I think it will be a constant struggle to get to know the machines as we try to get to know ourselves, with prompt-based programming showing some promise here. The good news is if what I am saying carries any weight at all, then we are humans are already equipped to take on the task of XAI. We've been working on it for a long time. 
 
 
 
