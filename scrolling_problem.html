@@ -16,9 +16,9 @@
 <a href="./index.html">Home</a>
 </p>
 
-<div id="outline-container-org8186394" class="outline-2">
-<h2 id="org8186394">Introduction</h2>
-<div class="outline-text-2" id="text-org8186394">
+<div id="outline-container-org39427ea" class="outline-2">
+<h2 id="org39427ea">Introduction</h2>
+<div class="outline-text-2" id="text-org39427ea">
 <p>
 We make the assumption every day that we have to scroll through our feeds. When we do a Google search, or a PubMed search if you're a biomedical researcher like me, we assume that the relevant results will be at the very top of the list. This might work for specific searches, but not broader ones. In other cases, like when we're checking the news or social media, we face an infinite, constantly updating feed. We find ourselves mindlessly scrolling through a one-dimensional list. We do this because there is no alternative.
 </p>
@@ -28,14 +28,14 @@ I define this as the scrolling problem. A lot of data are presented to us as fee
 </p>
 
 <p>
-The scrolling problem is a <a href="https://en.wikipedia.org/wiki/Wicked_problem">wicked problem</a>. It is not particularly well-defined, but you know it when you see it. My strategy for solving a wicked problem is to <a href="./just_paint.html">solve a simpler but related problem</a>, so I could get some momentum going. In my case, I solved the problem of how to group related texts together in a map. This doesn't remove the need to scroll, but it does allow us to start thinking about alternatives to scrolling.
+The scrolling problem is a <a href="https://en.wikipedia.org/wiki/Wicked_problem">wicked problem</a>: it is not particularly well-defined, but you know it when you see it. My strategy for solving a wicked problem is to <a href="./just_paint.html">solve a simpler but related problem</a>, so I could get some momentum going. In my case, I solved the problem of how to group related texts together in a map. This doesn't remove the need to scroll, but it does allow us to start thinking about alternatives to scrolling.
 </p>
 </div>
 </div>
 
-<div id="outline-container-orgec970d9" class="outline-2">
-<h2 id="orgec970d9">From feeds to maps</h2>
-<div class="outline-text-2" id="text-orgec970d9">
+<div id="outline-container-org87b6e9b" class="outline-2">
+<h2 id="org87b6e9b">From feeds to maps</h2>
+<div class="outline-text-2" id="text-org87b6e9b">
 <p>
 Here is what viewing your feed as a map would ideally like: rather than having an endless list of tweets, posts, news articles, search results, emails, TODOs, and things of that nature, you have a map. Passages that are similar to each other are near each other based on context. A tweet about dogs and another tweet about dogs would be near each other. A tweet about cats would be near the tweets about dogs because they are related in the context of "pets."
 </p>
@@ -50,9 +50,9 @@ Now imagine you're searching PubMed for every scientific paper for a particular 
 </div>
 </div>
 
-<div id="outline-container-org6dc5eb3" class="outline-2">
-<h2 id="org6dc5eb3">My text-to-map protocol</h2>
-<div class="outline-text-2" id="text-org6dc5eb3">
+<div id="outline-container-org42844b4" class="outline-2">
+<h2 id="org42844b4">My text-to-map protocol</h2>
+<div class="outline-text-2" id="text-org42844b4">
 <p>
 The tools needed to convert text to maps are open source and readily avilable if you know how to code. My protocol revolves around the use of the BERT language model (there are alternatives, but this one works well enough and is open source). BERT is a pre-trained transformer that takes any text up to 512 words long and converts it into a 768 element vector. Broadly speaking, you can think of this high-dimensional "context space." Data scientists are used to operating with high-dimensional data like this. We know how to program computers to understand this type of data. However, for it to be human readable, we have to somehow turn these 768 dimensional coordinates into a simple XY plane that we're used to.
 </p>
@@ -75,8 +75,36 @@ The map must be interactive and clickable. I'll get into this later, but I'm usi
 </div>
 </div>
 
-<div id="outline-container-org0a1ded5" class="outline-2">
-<h2 id="org0a1ded5">Use case: news</h2>
+<div id="outline-container-orgd7bb0e7" class="outline-2">
+<h2 id="orgd7bb0e7">A map view of the news</h2>
+<div class="outline-text-2" id="text-orgd7bb0e7">
+<p>
+The news is a high-impact low hanging fruit for this type of analysis. I am often bombarded by too much information, as well as hypernormal clickbait. I decided to make a map based on the news article titles to create a "news space" that I could query from the map view. The easiest solution to doing this was to use twitter. I collected twitter handles for the major news outlets, from CNN to BBC. I used the twitter API to collect as many tweets from each handle as I possibly could, in order to create a more nuanced "news space."
+</p>
+</div>
+
+<div id="outline-container-org567b6a7" class="outline-3">
+<h3 id="org567b6a7">Similar news articles are grouped near each other</h3>
+<div class="outline-text-3" id="text-org567b6a7">
+<p>
+We start with an observation that answers the most obvious question: are the news articles being grouped together in a meaninful way? We start by looking at the overall map. The map was clustered by <a href="https://hdbscan.readthedocs.io/en/latest/how_hdbscan_works.html">hierarchical dbscan</a>, an algorithm developed by Leland Mciness to be used along with UMAP. It is not necessarily the optimal clustering algorithm to be used here, but it's a good place to start. Below is what the map looks like:
+</p>
+
+<br>
+<h2>This is the footer.</h2>
+<p>You can put stuff here.</p>
+<br>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org316ee23" class="outline-2">
+<h2 id="org316ee23">CNN vs Fox News: overlap in "news space"</h2>
+<div class="outline-text-2" id="text-org316ee23">
+<p>
+COMING SOON. 
+</p>
+</div>
 </div>
 </div>
 <div id="postamble" class="status">
