@@ -24,7 +24,7 @@ Now imagine you're searching PubMed for every scientific paper for a particular 
 
 The tools needed to convert text to maps are open source and readily avilable if you know how to code. My protocol revolves around the use of the BERT language model (there are alternatives, but this one works well enough and is open source). BERT is a pre-trained transformer that takes any text up to 512 words long and converts it into a 768 element vector. Broadly speaking, you can think of this high-dimensional "context space." Data scientists are used to operating with high-dimensional data like this. We know how to program computers to understand this type of data. However, for it to be human readable, we have to somehow turn these 768 dimensional coordinates into a simple XY plane that we're used to.
 
-That's where UMAP comes in. It is a [[https://en.wikipedia.org/wiki/Nonlinear_dimensionality_reduction#Uniform_manifold_approximation_and_projection][non-linear dimension reduction]] algorithm. It takes each 768 dimensional vector and converts it into a 2 dimensional vector. Vectors (texts) that are similar to each other in the 768 dimensional space will be near each other in 2 dimensions. In other words, you end up with a map, where each point on the map is a text you care about. A text that would otherwise show up as part of your endless scrolling ritual. Now you have a bit more control, as your feed is now a map. UMAp is by no means [[./tjb_dimr_talk.pdf][perfect]]...you can't perfectly compress 768 dimensions without losing information, but you'll be able to see in later sections that it is good enough to be useful in our goal of solving the scrolling problem.
+That's where UMAP comes in. It is a [[https://en.wikipedia.org/wiki/Nonlinear_dimensionality_reduction#Uniform_manifold_approximation_and_projection][non-linear dimension reduction]] algorithm. It takes each 768 dimensional vector and converts it into a 2 dimensional vector. Vectors (texts) that are similar to each other in the 768 dimensional space will be near each other in 2 dimensions. In other words, you end up with a map, where each point on the map is a text you care about. A text that would otherwise show up as part of your endless scrolling ritual. Now you have a bit more control, as your feed is now a map. UMAP is by no means [[./tjb_dimr_talk.pdf][perfect]]. You can't perfectly compress 768 dimensions without losing information, but you'll be able to see in later sections that it is good enough to be useful in our goal of solving the scrolling problem.
 
 There are other technicalities for the interested user (warning: jargon coming). One can do a preliminary step of determining the effective dimensionality of the data by determining how many principal components explain 95% of the variance. In my experience so far, it's roughly 1/3 of the total dimensions. This could increase both speed and accurracy given you're operating with more signal and less noise.
 
@@ -42,15 +42,19 @@ We start with an observation that answers the most obvious question: are the new
 
 [[./images/news_space.png]]
 
-This doesn't carry much information on its own, so please click on this link that will take you to an interactive html version of this map, where you can spend some time convincing yourself that the articles that are similar to each other are grouped near each other.
-
 If you zoom in, you can get some interesting nuance. Here, I show a single data point corresponding to a single cluster corresponding to inflation.
 
 [[./images/inflation_cluster.png]]
 
-[[./images/todays_news.html]]
+This doesn't carry much information on its own, so please click on this link that will take you to an interactive html version of this map, where you can spend some time determining if the articles that are similar to each other are grouped near each other.
+
+[[./images/todays_news.html][News on 2022-07-15 Fri 22:00]]
+
+Now we have a bit more control. I update this every day, giving you a map of the news that you can go through rather than coming face to face with media organizations incentivized to get you to click on whatever it is. Now granted, we're looking at tweets here, which are also incentivized in that manner, but on top of the map-level control, we also side-step any provocative images that would also incite one to click. 
 
 ** CNN vs Fox News: overlap in "news space"
+
+One use case within news space analysis is to identify topics where conservatives and liberal news agencies are reporting different things. This can help researchers identify news media bias, as well as help ordinary users become more aware of where the narratives differ on a particular topic. Are there regions of news space that are more liberal heavy or more conservative heavy? To start to answer that question, we look at tweets from the main handles of CNN and Fox News. In doing so, we are making the preliminary assumption that CNN and Fox News differences will be liberal versus conservative. In reality, there may simply be differences at the user level. Maybe not all stories are tweeted out. Maybe only a provocative subset. Maybe this provocative subset differs between CNN and Fox News depending on the agency's standards. But like anything new, you have to start somewhere. 
 
 COMING SOON. 
 
