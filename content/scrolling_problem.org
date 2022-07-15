@@ -10,7 +10,7 @@ We make the assumption every day that we have to scroll through our feeds. When 
 
 I define this as the scrolling problem. A lot of data are presented to us as feeds, and in order to "stay updated" we have no choice but to scroll through all of it. This leads us to be reactive if the content has a clickbait element to it (flashy, outrage-inducing). This leads us to be quickly overwhelmed as the feeds force us to rapidly engage in [[https://en.wikipedia.org/wiki/Task_switching_(psychology)][task switching]], which can lead to decreased cognitive performance.
 
-The scrolling problem is a [[https://en.wikipedia.org/wiki/Wicked_problem][wicked problem]]. It is not particularly well-defined, but you know it when you see it. My strategy for solving a wicked problem is to [[./just_paint.org][solve a simpler but related problem]], so I could get some momentum going. In my case, I solved the problem of how to group related texts together in a map. This doesn't remove the need to scroll, but it does allow us to start thinking about alternatives to scrolling.
+The scrolling problem is a [[https://en.wikipedia.org/wiki/Wicked_problem][wicked problem]]: it is not particularly well-defined, but you know it when you see it. My strategy for solving a wicked problem is to [[./just_paint.org][solve a simpler but related problem]], so I could get some momentum going. In my case, I solved the problem of how to group related texts together in a map. This doesn't remove the need to scroll, but it does allow us to start thinking about alternatives to scrolling.
 
 ** From feeds to maps
 
@@ -32,4 +32,26 @@ Additional steps are standard in unsupervised learning and useful here. Clusteri
 
 The map must be interactive and clickable. I'll get into this later, but I'm using the plotly package to produce such maps. The best practices (in my domain) for clickable "maps" come from flow cytometry analysis, which involve drawing "[[https://docs.flowjo.com/flowjo/graphs-and-gating/gw-gating/][gates]]" around populations of interest. Flow cytometry users will most definitely find the "map" solution to the scrolling problem to be intuitive. 
 
-** Use case: news
+** A map view of the news
+
+The news is a high-impact low hanging fruit for this type of analysis. I am often bombarded by too much information, as well as hypernormal clickbait. I decided to make a map based on the news article titles to create a "news space" that I could query from the map view. The easiest solution to doing this was to use twitter. I collected twitter handles for the major news outlets, from CNN to BBC. I used the twitter API to collect as many tweets from each handle as I possibly could, in order to create a more nuanced "news space."
+
+*** Similar news articles are grouped near each other
+
+We start with an observation that answers the most obvious question: are the news articles being grouped together in a meaninful way? We start by looking at the overall map. The map was clustered by [[https://hdbscan.readthedocs.io/en/latest/how_hdbscan_works.html][hierarchical dbscan]], an algorithm developed by Leland Mciness to be used along with UMAP. It is not necessarily the optimal clustering algorithm to be used here, but it's a good place to start. Below is what the map looks like:
+
+#+BEGIN_EXPORT html
+<br>
+<h2>This is the footer.</h2>
+<p>You can put stuff here.</p>
+<br>
+#+END_EXPORT
+
+** CNN vs Fox News: overlap in "news space"
+
+COMING SOON. 
+
+
+
+
+
