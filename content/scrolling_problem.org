@@ -6,7 +6,7 @@
 
 ** Introduction
 
-We make the assumption every day that we have to scroll through our feeds. When we do a Google search, or a PubMed search if you're a biomedical researcher like me, we assume that the relevant results will be at the very top of the list. This might work for specific searches, but not broader ones. In other cases, like when we're checking the news or social media, we face an infinite, constantly updating feed. We find ourselves mindlessly scrolling through a one-dimensional list. We do this because there is no alternative.
+We make the assumption every day that we have to scroll through our feeds. When we do a Google search, or a PubMed search if you're a biomedical researcher like me, we assume that the relevant results will be at the very top of the list. This might work for specific searches, but not broader ones. In other cases, like when we're checking the news or social media, we face an infinite, constantly updating feed. We find ourselves mindlessly scrolling through a one-dimensional list, with little if any control over what hypernormal, outrage-inducing content will show up next. We do this because there is no alternative.
 
 I define this as the scrolling problem. A lot of data are presented to us as feeds, and in order to "stay updated" we have no choice but to scroll through all of it. This leads us to be reactive if the content has a clickbait element to it (flashy, outrage-inducing). This leads us to be quickly overwhelmed as the feeds force us to rapidly engage in [[https://en.wikipedia.org/wiki/Task_switching_(psychology)][task switching]], which can lead to decreased cognitive performance.
 
@@ -34,18 +34,13 @@ The map must be interactive and clickable. I'll get into this later, but I'm usi
 
 ** A map view of the news
 
-The news is a high-impact low hanging fruit for this type of analysis. I am often bombarded by too much information, as well as hypernormal clickbait. I decided to make a map based on the news article titles to create a "news space" that I could query from the map view. The easiest solution to doing this was to use twitter. I collected twitter handles for the major news outlets, from CNN to BBC. I used the twitter API to collect as many tweets from each handle as I possibly could, in order to create a more nuanced "news space."
+The news is a high-impact low hanging fruit for this type of analysis. I am often bombarded by too much information, as well as hypernormal clickbait. I decided to make a map based on the news article titles to create a "neterws space" that I could query from the map view. The easiest solution to doing this was to use twitter. I collected twitter handles for the major news outlets, from CNN to BBC. I used the twitter API to collect as many tweets from each handle as I possibly could, in order to create a more nuanced "news space."
 
 *** Similar news articles are grouped near each other
 
-We start with an observation that answers the most obvious question: are the news articles being grouped together in a meaninful way? We start by looking at the overall map. The map was clustered by [[https://hdbscan.readthedocs.io/en/latest/how_hdbscan_works.html][hierarchical dbscan]], an algorithm developed by Leland Mciness to be used along with UMAP. It is not necessarily the optimal clustering algorithm to be used here, but it's a good place to start. Below is what the map looks like:
+We start with an observation that answers the most obvious question: are the news articles being grouped together in a meaninful way? We start by looking at the overall map. The map was clustered by [[https://hdbscan.readthedocs.io/en/latest/how_hdbscan_works.html][hierarchical dbscan]], an algorithm developed by Leland Mciness to be used along with UMAP. It is not necessarily the optimal clustering algorithm to be used here, but it's a good place to start. Below is what the map looks like. 
 
-#+BEGIN_EXPORT html
-<br>
-<h2>This is the footer.</h2>
-<p>You can put stuff here.</p>
-<br>
-#+END_EXPORT
+[[./images/news_space.png]]
 
 ** CNN vs Fox News: overlap in "news space"
 
