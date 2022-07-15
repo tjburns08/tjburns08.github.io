@@ -16,9 +16,9 @@
 <a href="./index.html">Home</a>
 </p>
 
-<div id="outline-container-org7a32863" class="outline-2">
-<h2 id="org7a32863">Introduction</h2>
-<div class="outline-text-2" id="text-org7a32863">
+<div id="outline-container-org45ed011" class="outline-2">
+<h2 id="org45ed011">Introduction</h2>
+<div class="outline-text-2" id="text-org45ed011">
 <p>
 We make the assumption every day that we have to scroll through our feeds. When we do a Google search, or a PubMed search if you're a biomedical researcher like me, we assume that the relevant results will be at the very top of the list. This might work for specific searches, but not broader ones. In other cases, like when we're checking the news or social media, we face an infinite, constantly updating feed. We find ourselves mindlessly scrolling through a one-dimensional list, with little if any control over what hypernormal, outrage-inducing content will show up next. We do this because there is no alternative.
 </p>
@@ -33,9 +33,9 @@ The scrolling problem is a <a href="https://en.wikipedia.org/wiki/Wicked_problem
 </div>
 </div>
 
-<div id="outline-container-org2648f29" class="outline-2">
-<h2 id="org2648f29">From feeds to maps</h2>
-<div class="outline-text-2" id="text-org2648f29">
+<div id="outline-container-org978266e" class="outline-2">
+<h2 id="org978266e">From feeds to maps</h2>
+<div class="outline-text-2" id="text-org978266e">
 <p>
 Here is what viewing your feed as a map would ideally like: rather than having an endless list of tweets, posts, news articles, search results, emails, TODOs, and things of that nature, you have a map. Passages that are similar to each other are near each other based on context. A tweet about dogs and another tweet about dogs would be near each other. A tweet about cats would be near the tweets about dogs because they are related in the context of "pets."
 </p>
@@ -50,9 +50,9 @@ Now imagine you're searching PubMed for every scientific paper for a particular 
 </div>
 </div>
 
-<div id="outline-container-orgb8def68" class="outline-2">
-<h2 id="orgb8def68">My text-to-map protocol</h2>
-<div class="outline-text-2" id="text-orgb8def68">
+<div id="outline-container-org2ea9a8e" class="outline-2">
+<h2 id="org2ea9a8e">My text-to-map protocol</h2>
+<div class="outline-text-2" id="text-org2ea9a8e">
 <p>
 The tools needed to convert text to maps are open source and readily avilable if you know how to code. My protocol revolves around the use of the BERT language model (there are alternatives, but this one works well enough and is open source). BERT is a pre-trained transformer that takes any text up to 512 words long and converts it into a 768 element vector. Broadly speaking, you can think of this high-dimensional "context space." Data scientists are used to operating with high-dimensional data like this. We know how to program computers to understand this type of data. However, for it to be human readable, we have to somehow turn these 768 dimensional coordinates into a simple XY plane that we're used to.
 </p>
@@ -75,19 +75,19 @@ The map must be interactive and clickable. I'll get into this later, but I'm usi
 </div>
 </div>
 
-<div id="outline-container-org6fef474" class="outline-2">
-<h2 id="org6fef474">A map view of the news</h2>
-<div class="outline-text-2" id="text-org6fef474">
+<div id="outline-container-orgdd877c1" class="outline-2">
+<h2 id="orgdd877c1">A map view of the news</h2>
+<div class="outline-text-2" id="text-orgdd877c1">
 <p>
 The news is a high-impact low hanging fruit for this type of analysis. I am often bombarded by too much information, as well as hypernormal clickbait. I decided to make a map based on the news article titles to create a "neterws space" that I could query from the map view. The easiest solution to doing this was to use twitter. I collected twitter handles for the major news outlets, from CNN to BBC. I used the twitter API to collect as many tweets from each handle as I possibly could, in order to create a more nuanced "news space."
 </p>
 </div>
 
-<div id="outline-container-org12d6c75" class="outline-3">
-<h3 id="org12d6c75">Similar news articles are grouped near each other</h3>
-<div class="outline-text-3" id="text-org12d6c75">
+<div id="outline-container-orgfb55d8d" class="outline-3">
+<h3 id="orgfb55d8d">Similar news articles are grouped near each other</h3>
+<div class="outline-text-3" id="text-orgfb55d8d">
 <p>
-We start with an observation that answers the most obvious question: are the news articles being grouped together in a meaninful way? We start by looking at the overall map. The map was clustered by <a href="https://hdbscan.readthedocs.io/en/latest/how_hdbscan_works.html">hierarchical dbscan</a>, an algorithm developed by Leland Mciness to be used along with UMAP. It is not necessarily the optimal clustering algorithm to be used here, but it's a good place to start. Below is what the map looks like. 
+We start with an observation that answers the most obvious question: are the news articles being grouped together in a meaninful way? We start by looking at the overall map. The map was clustered by <a href="https://hdbscan.readthedocs.io/en/latest/how_hdbscan_works.html">hierarchical dbscan</a>, an algorithm developed by Leland Mciness to be used along with UMAP. It is not necessarily the optimal clustering algorithm to be used here, but it's a good place to start. Keywords were extracted as follows: for each cluster, all the news tweets were lumped together into one large string, and fed into KeyBERT, which is a BERT-based keyword extractor, consistent with how I created the vector space from each tweet to begin with. Below is what the map looks like. 
 </p>
 
 
@@ -95,13 +95,31 @@ We start with an observation that answers the most obvious question: are the new
 <p><img src="./images/news_space.png" alt="news_space.png" />
 </p>
 </div>
+
+<p>
+This doesn't carry much information on its own, so please click on this link that will take you to an interactive html version of this map, where you can spend some time convincing yourself that the articles that are similar to each other are grouped near each other.
+</p>
+
+<p>
+If you zoom in, you can get some interesting nuance. Here, I show a single data point corresponding to a single cluster corresponding to inflation.
+</p>
+
+
+<div class="figure">
+<p><img src="./images/inflation_cluster.png" alt="inflation_cluster.png" />
+</p>
+</div>
+
+<p>
+<a href="./images/todays_news.html">./images/todays_news.html</a>
+</p>
 </div>
 </div>
 </div>
 
-<div id="outline-container-org243788c" class="outline-2">
-<h2 id="org243788c">CNN vs Fox News: overlap in "news space"</h2>
-<div class="outline-text-2" id="text-org243788c">
+<div id="outline-container-org9e3762a" class="outline-2">
+<h2 id="org9e3762a">CNN vs Fox News: overlap in "news space"</h2>
+<div class="outline-text-2" id="text-org9e3762a">
 <p>
 COMING SOON. 
 </p>
