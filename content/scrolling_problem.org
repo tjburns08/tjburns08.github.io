@@ -38,9 +38,17 @@ The news is a high-impact low hanging fruit for this type of analysis. I am ofte
 
 *** Similar news articles are grouped near each other
 
-We start with an observation that answers the most obvious question: are the news articles being grouped together in a meaninful way? We start by looking at the overall map. The map was clustered by [[https://hdbscan.readthedocs.io/en/latest/how_hdbscan_works.html][hierarchical dbscan]], an algorithm developed by Leland Mciness to be used along with UMAP. It is not necessarily the optimal clustering algorithm to be used here, but it's a good place to start. Below is what the map looks like. 
+We start with an observation that answers the most obvious question: are the news articles being grouped together in a meaninful way? We start by looking at the overall map. The map was clustered by [[https://hdbscan.readthedocs.io/en/latest/how_hdbscan_works.html][hierarchical dbscan]], an algorithm developed by Leland Mciness to be used along with UMAP. It is not necessarily the optimal clustering algorithm to be used here, but it's a good place to start. Keywords were extracted as follows: for each cluster, all the news tweets were lumped together into one large string, and fed into KeyBERT, which is a BERT-based keyword extractor, consistent with how I created the vector space from each tweet to begin with. Below is what the map looks like. 
 
 [[./images/news_space.png]]
+
+This doesn't carry much information on its own, so please click on this link that will take you to an interactive html version of this map, where you can spend some time convincing yourself that the articles that are similar to each other are grouped near each other.
+
+If you zoom in, you can get some interesting nuance. Here, I show a single data point corresponding to a single cluster corresponding to inflation.
+
+[[./images/inflation_cluster.png]]
+
+[[./images/todays_news.html]]
 
 ** CNN vs Fox News: overlap in "news space"
 
