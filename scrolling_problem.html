@@ -16,11 +16,11 @@
 <a href="./index.html">Home</a>
 </p>
 
-<div id="outline-container-org755c3da" class="outline-2">
-<h2 id="org755c3da">Introduction</h2>
-<div class="outline-text-2" id="text-org755c3da">
+<div id="outline-container-org7a32863" class="outline-2">
+<h2 id="org7a32863">Introduction</h2>
+<div class="outline-text-2" id="text-org7a32863">
 <p>
-We make the assumption every day that we have to scroll through our feeds. When we do a Google search, or a PubMed search if you're a biomedical researcher like me, we assume that the relevant results will be at the very top of the list. This might work for specific searches, but not broader ones. In other cases, like when we're checking the news or social media, we face an infinite, constantly updating feed. We find ourselves mindlessly scrolling through a one-dimensional list. We do this because there is no alternative.
+We make the assumption every day that we have to scroll through our feeds. When we do a Google search, or a PubMed search if you're a biomedical researcher like me, we assume that the relevant results will be at the very top of the list. This might work for specific searches, but not broader ones. In other cases, like when we're checking the news or social media, we face an infinite, constantly updating feed. We find ourselves mindlessly scrolling through a one-dimensional list, with little if any control over what hypernormal, outrage-inducing content will show up next. We do this because there is no alternative.
 </p>
 
 <p>
@@ -33,9 +33,9 @@ The scrolling problem is a <a href="https://en.wikipedia.org/wiki/Wicked_problem
 </div>
 </div>
 
-<div id="outline-container-orgeedd1d4" class="outline-2">
-<h2 id="orgeedd1d4">From feeds to maps</h2>
-<div class="outline-text-2" id="text-orgeedd1d4">
+<div id="outline-container-org2648f29" class="outline-2">
+<h2 id="org2648f29">From feeds to maps</h2>
+<div class="outline-text-2" id="text-org2648f29">
 <p>
 Here is what viewing your feed as a map would ideally like: rather than having an endless list of tweets, posts, news articles, search results, emails, TODOs, and things of that nature, you have a map. Passages that are similar to each other are near each other based on context. A tweet about dogs and another tweet about dogs would be near each other. A tweet about cats would be near the tweets about dogs because they are related in the context of "pets."
 </p>
@@ -50,9 +50,9 @@ Now imagine you're searching PubMed for every scientific paper for a particular 
 </div>
 </div>
 
-<div id="outline-container-org2cc42ac" class="outline-2">
-<h2 id="org2cc42ac">My text-to-map protocol</h2>
-<div class="outline-text-2" id="text-org2cc42ac">
+<div id="outline-container-orgb8def68" class="outline-2">
+<h2 id="orgb8def68">My text-to-map protocol</h2>
+<div class="outline-text-2" id="text-orgb8def68">
 <p>
 The tools needed to convert text to maps are open source and readily avilable if you know how to code. My protocol revolves around the use of the BERT language model (there are alternatives, but this one works well enough and is open source). BERT is a pre-trained transformer that takes any text up to 512 words long and converts it into a 768 element vector. Broadly speaking, you can think of this high-dimensional "context space." Data scientists are used to operating with high-dimensional data like this. We know how to program computers to understand this type of data. However, for it to be human readable, we have to somehow turn these 768 dimensional coordinates into a simple XY plane that we're used to.
 </p>
@@ -75,32 +75,33 @@ The map must be interactive and clickable. I'll get into this later, but I'm usi
 </div>
 </div>
 
-<div id="outline-container-orgee26b83" class="outline-2">
-<h2 id="orgee26b83">A map view of the news</h2>
-<div class="outline-text-2" id="text-orgee26b83">
+<div id="outline-container-org6fef474" class="outline-2">
+<h2 id="org6fef474">A map view of the news</h2>
+<div class="outline-text-2" id="text-org6fef474">
 <p>
-The news is a high-impact low hanging fruit for this type of analysis. I am often bombarded by too much information, as well as hypernormal clickbait. I decided to make a map based on the news article titles to create a "news space" that I could query from the map view. The easiest solution to doing this was to use twitter. I collected twitter handles for the major news outlets, from CNN to BBC. I used the twitter API to collect as many tweets from each handle as I possibly could, in order to create a more nuanced "news space."
+The news is a high-impact low hanging fruit for this type of analysis. I am often bombarded by too much information, as well as hypernormal clickbait. I decided to make a map based on the news article titles to create a "neterws space" that I could query from the map view. The easiest solution to doing this was to use twitter. I collected twitter handles for the major news outlets, from CNN to BBC. I used the twitter API to collect as many tweets from each handle as I possibly could, in order to create a more nuanced "news space."
 </p>
 </div>
 
-<div id="outline-container-org1ab12d9" class="outline-3">
-<h3 id="org1ab12d9">Similar news articles are grouped near each other</h3>
-<div class="outline-text-3" id="text-org1ab12d9">
+<div id="outline-container-org12d6c75" class="outline-3">
+<h3 id="org12d6c75">Similar news articles are grouped near each other</h3>
+<div class="outline-text-3" id="text-org12d6c75">
 <p>
-We start with an observation that answers the most obvious question: are the news articles being grouped together in a meaninful way? We start by looking at the overall map. The map was clustered by <a href="https://hdbscan.readthedocs.io/en/latest/how_hdbscan_works.html">hierarchical dbscan</a>, an algorithm developed by Leland Mciness to be used along with UMAP. It is not necessarily the optimal clustering algorithm to be used here, but it's a good place to start. Below is what the map looks like:
+We start with an observation that answers the most obvious question: are the news articles being grouped together in a meaninful way? We start by looking at the overall map. The map was clustered by <a href="https://hdbscan.readthedocs.io/en/latest/how_hdbscan_works.html">hierarchical dbscan</a>, an algorithm developed by Leland Mciness to be used along with UMAP. It is not necessarily the optimal clustering algorithm to be used here, but it's a good place to start. Below is what the map looks like. 
 </p>
 
-<br>
-<h2>This is the footer.</h2>
-<p>You can put stuff here.</p>
-<br>
+
+<div class="figure">
+<p><img src="./images/news_space.png" alt="news_space.png" />
+</p>
+</div>
 </div>
 </div>
 </div>
 
-<div id="outline-container-orge100208" class="outline-2">
-<h2 id="orge100208">CNN vs Fox News: overlap in "news space"</h2>
-<div class="outline-text-2" id="text-orge100208">
+<div id="outline-container-org243788c" class="outline-2">
+<h2 id="org243788c">CNN vs Fox News: overlap in "news space"</h2>
+<div class="outline-text-2" id="text-org243788c">
 <p>
 COMING SOON. 
 </p>
