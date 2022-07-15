@@ -1,0 +1,35 @@
+#+TITLE: The Scrolling Problem
+#+AUTHOR: Tyler J Burns, PhD
+#+DATE: July 15, 2022 - July 15, 2022
+
+[[./index.org][Home]]
+
+** Introduction
+
+We make the assumption every day that we have to scroll through our feeds. When we do a Google search, or a PubMed search if you're a biomedical researcher like me, we assume that the relevant results will be at the very top of the list. This might work for specific searches, but not broader ones. In other cases, like when we're checking the news or social media, we face an infinite, constantly updating feed. We find ourselves mindlessly scrolling through a one-dimensional list. We do this because there is no alternative.
+
+I define this as the scrolling problem. A lot of data are presented to us as feeds, and in order to "stay updated" we have no choice but to scroll through all of it. This leads us to be reactive if the content has a clickbait element to it (flashy, outrage-inducing). This leads us to be quickly overwhelmed as the feeds force us to rapidly engage in [[https://en.wikipedia.org/wiki/Task_switching_(psychology)][task switching]], which can lead to decreased cognitive performance.
+
+The scrolling problem is a [[https://en.wikipedia.org/wiki/Wicked_problem][wicked problem]]. It is not particularly well-defined, but you know it when you see it. My strategy for solving a wicked problem is to [[./just_paint.org][solve a simpler but related problem]], so I could get some momentum going. In my case, I solved the problem of how to group related texts together in a map. This doesn't remove the need to scroll, but it does allow us to start thinking about alternatives to scrolling.
+
+** From feeds to maps
+
+Here is what viewing your feed as a map would ideally like: rather than having an endless list of tweets, posts, news articles, search results, emails, TODOs, and things of that nature, you have a map. Passages that are similar to each other are near each other based on context. A tweet about dogs and another tweet about dogs would be near each other. A tweet about cats would be near the tweets about dogs because they are related in the context of "pets."
+
+Focusing on social media, imagine your entire twitter feed is a map. You now have more control. Different regions of the map would be about various topics, from celebrity gossip to sports to social justice. You would have control over where in your "feed" you want to go. You could be able to avoid outrage-inducing content if that's what you wish. You could focus on a particular set of topics in your feed so you don't get "sucked in."
+
+Now imagine you're searching PubMed for every scientific paper for a particular disease you're interested in. There could be thousands of papers. Now let's say your results are a map. AI-based papers are to the northeast. Clinical trial papers are to the south. And so on, with each region of the map properly labeled. These broad searches are a good use case for the map view.
+
+** My text-to-map protocol
+
+The tools needed to convert text to maps are open source and readily avilable if you know how to code. My protocol revolves around the use of the BERT language model (there are alternatives, but this one works well enough and is open source). BERT is a pre-trained transformer that takes any text up to 512 words long and converts it into a 768 element vector. Broadly speaking, you can think of this high-dimensional "context space." Data scientists are used to operating with high-dimensional data like this. We know how to program computers to understand this type of data. However, for it to be human readable, we have to somehow turn these 768 dimensional coordinates into a simple XY plane that we're used to.
+
+That's where UMAP comes in. It is a [[https://en.wikipedia.org/wiki/Nonlinear_dimensionality_reduction#Uniform_manifold_approximation_and_projection][non-linear dimension reduction]] algorithm. It takes each 768 dimensional vector and converts it into a 2 dimensional vector. Vectors (texts) that are similar to each other in the 768 dimensional space will be near each other in 2 dimensions. In other words, you end up with a map, where each point on the map is a text you care about. A text that would otherwise show up as part of your endless scrolling ritual. Now you have a bit more control, as your feed is now a map. UMAp is by no means [[./tjb_dimr_talk.pdf][perfect]]...you can't perfectly compress 768 dimensions without losing information, but you'll be able to see in later sections that it is good enough to be useful in our goal of solving the scrolling problem.
+
+There are other technicalities for the interested user (warning: jargon coming). One can do a preliminary step of determining the effective dimensionality of the data by determining how many principal components explain 95% of the variance. In my experience so far, it's roughly 1/3 of the total dimensions. This could increase both speed and accurracy given you're operating with more signal and less noise.
+
+Additional steps are standard in unsupervised learning and useful here. Clustering the data, so we can access it at the group level is convenient here. Extracting keywords from each cluster helps us determine what clusters are the "sports" versus the "politics that will make me upset" clusters. All of this gets visualized on the map.
+
+The map must be interactive and clickable. I'll get into this later, but I'm using the plotly package to produce such maps. The best practices (in my domain) for clickable "maps" come from flow cytometry analysis, which involve drawing "[[https://docs.flowjo.com/flowjo/graphs-and-gating/gw-gating/][gates]]" around populations of interest. Flow cytometry users will most definitely find the "map" solution to the scrolling problem to be intuitive. 
+
+** Use case: news
