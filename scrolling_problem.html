@@ -16,9 +16,9 @@
 <a href="./index.html">Home</a>
 </p>
 
-<div id="outline-container-org7aba28d" class="outline-2">
-<h2 id="org7aba28d">Introduction</h2>
-<div class="outline-text-2" id="text-org7aba28d">
+<div id="outline-container-org94f5007" class="outline-2">
+<h2 id="org94f5007">Introduction</h2>
+<div class="outline-text-2" id="text-org94f5007">
 <p>
 We make the assumption every day that we have to scroll through our feeds. When we do a Google search, or a PubMed search if you're a biomedical researcher like me, we assume that the relevant results will be at the very top of the list. This might work for specific searches, but not broader ones. In other cases, like when we're checking the news or social media, we face an infinite, constantly updating feed. We find ourselves mindlessly scrolling through a one-dimensional list, with little if any control over what hypernormal, outrage-inducing content will show up next. We do this because there is no alternative.
 </p>
@@ -33,9 +33,9 @@ The scrolling problem is a <a href="https://en.wikipedia.org/wiki/Wicked_problem
 </div>
 </div>
 
-<div id="outline-container-orge3cabac" class="outline-2">
-<h2 id="orge3cabac">From feeds to maps</h2>
-<div class="outline-text-2" id="text-orge3cabac">
+<div id="outline-container-org99a807d" class="outline-2">
+<h2 id="org99a807d">From feeds to maps</h2>
+<div class="outline-text-2" id="text-org99a807d">
 <p>
 Here is what viewing your feed as a map would ideally like: rather than having an endless list of tweets, posts, news articles, search results, emails, TODOs, and things of that nature, you have a map. Passages that are similar to each other are near each other based on context. A tweet about dogs and another tweet about dogs would be near each other. A tweet about cats would be near the tweets about dogs because they are related in the context of "pets."
 </p>
@@ -50,9 +50,9 @@ Now imagine you're searching PubMed for every scientific paper for a particular 
 </div>
 </div>
 
-<div id="outline-container-orgb5f580b" class="outline-2">
-<h2 id="orgb5f580b">My text-to-map protocol</h2>
-<div class="outline-text-2" id="text-orgb5f580b">
+<div id="outline-container-org130a8c0" class="outline-2">
+<h2 id="org130a8c0">My text-to-map protocol</h2>
+<div class="outline-text-2" id="text-org130a8c0">
 <p>
 The tools needed to convert text to maps are open source and readily avilable if you know how to code. My protocol revolves around the use of the BERT language model (there are alternatives, but this one works well enough and is open source). BERT is a pre-trained transformer that takes any text up to 512 words long and converts it into a 768 element vector. Broadly speaking, you can think of this high-dimensional "context space." Data scientists are used to operating with high-dimensional data like this. We know how to program computers to understand this type of data. However, for it to be human readable, we have to somehow turn these 768 dimensional coordinates into a simple XY plane that we're used to.
 </p>
@@ -75,17 +75,17 @@ The map must be interactive and clickable. I'll get into this later, but I'm usi
 </div>
 </div>
 
-<div id="outline-container-orgb7f9f43" class="outline-2">
-<h2 id="orgb7f9f43">A map view of the news</h2>
-<div class="outline-text-2" id="text-orgb7f9f43">
+<div id="outline-container-org9c964d3" class="outline-2">
+<h2 id="org9c964d3">A map view of the news</h2>
+<div class="outline-text-2" id="text-org9c964d3">
 <p>
 The news is a high-impact low hanging fruit for this type of analysis. I am often bombarded by too much information, as well as hypernormal clickbait. I decided to make a map based on the news article titles to create a "neterws space" that I could query from the map view. The easiest solution to doing this was to use twitter. I collected twitter handles for the major news outlets, from CNN to BBC. I used the twitter API to collect as many tweets from each handle as I possibly could, in order to create a more nuanced "news space."
 </p>
 </div>
 
-<div id="outline-container-org4ec6a03" class="outline-3">
-<h3 id="org4ec6a03">Similar news articles are grouped near each other</h3>
-<div class="outline-text-3" id="text-org4ec6a03">
+<div id="outline-container-orge39051e" class="outline-3">
+<h3 id="orge39051e">Similar news articles are grouped near each other</h3>
+<div class="outline-text-3" id="text-orge39051e">
 <p>
 We start with an observation that answers the most obvious question: are the news articles being grouped together in a meaninful way? We start by looking at the overall map. The map was clustered by <a href="https://hdbscan.readthedocs.io/en/latest/how_hdbscan_works.html">hierarchical dbscan</a>, an algorithm developed by Leland Mciness to be used along with UMAP. It is not necessarily the optimal clustering algorithm to be used here, but it's a good place to start. Keywords were extracted as follows: for each cluster, all the news tweets were lumped together into one large string, and fed into KeyBERT, which is a BERT-based keyword extractor, consistent with how I created the vector space from each tweet to begin with. Below is what the map looks like. 
 </p>
@@ -121,16 +121,21 @@ Now we have a bit more control. I update this every day, giving you a map of the
 </div>
 </div>
 
-<div id="outline-container-orga167bd8" class="outline-2">
-<h2 id="orga167bd8">CNN vs Fox News: overlap in "news space"</h2>
-<div class="outline-text-2" id="text-orga167bd8">
+<div id="outline-container-org5db83bd" class="outline-2">
+<h2 id="org5db83bd">CNN vs Fox News: overlap in "news space"</h2>
+<div class="outline-text-2" id="text-org5db83bd">
 <p>
-One use case within news space analysis is to identify topics where conservatives and liberal news agencies are reporting different things. This can help researchers identify news media bias, as well as help ordinary users become more aware of where the narratives differ on a particular topic. Are there regions of news space that are more liberal heavy or more conservative heavy? To start to answer that question, we look at tweets from the main handles of CNN and Fox News. In doing so, we are making the preliminary assumption that CNN and Fox News differences will be liberal versus conservative. In reality, there may simply be differences at the user level. Maybe not all stories are tweeted out. Maybe only a provocative subset. Maybe this provocative subset differs between CNN and Fox News depending on the agency's standards. But like anything new, you have to start somewhere. 
+One use case within news space analysis is to identify topics where conservatives and liberal news agencies are reporting different things. This can help researchers identify news media bias, as well as help ordinary users become more aware of where the narratives differ on a particular topic. Are there regions of news space that are more liberal heavy or more conservative heavy? To start to answer that question, we look at tweets from the main handles of CNN and Fox News. In doing so, we are making the preliminary assumption that CNN and Fox News differences will be liberal versus conservative. In reality, there may simply be differences at the user level. Maybe not all stories are tweeted out. Maybe only a provocative subset. Maybe this provocative subset differs between CNN and Fox News depending on the agency's standards. But like anything new, you have to start somewhere.
 </p>
+</div>
 
+<div id="outline-container-org1a126e8" class="outline-3">
+<h3 id="org1a126e8">There are distinct regions only populated by CNN or Fox News</h3>
+<div class="outline-text-3" id="text-org1a126e8">
 <p>
-COMING SOON. 
+COMING SOON.
 </p>
+</div>
 </div>
 </div>
 </div>
