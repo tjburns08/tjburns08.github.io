@@ -58351,4 +58351,212 @@ Total 4 (delta 3), reused 0 (delta 0), pack-reused 0
 remote: Resolving deltas: 100% (3/3), completed with 3 local objects.        
 To https://github.com/tjburns08/tjburns08.github.io.git
    ad3d35e..b595a53  main -> main
+tylerburns@Tylers-MacBook-Pro-2 tyler_burns_website % git add --all
+git add --all
+tylerburns@Tylers-MacBook-Pro-2 tyler_burns_website % git commit -m "hyperlinked the gpt3 article"
+r_burns_website % git commit -m "hyperlinked the gpt3 article"
+[main 7669042] hyperlinked the gpt3 article
+ 3 files changed, 58357 insertions(+), 3 deletions(-)
+ create mode 100644 *shell*
+ create mode 120000 .#*shell*
+tylerburns@Tylers-MacBook-Pro-2 tyler_burns_website % git push origin main
+r_burns_website % git push origin main
+Enumerating objects: 9, done.
+Counting objects: 100% (9/9), done.
+Delta compression using up to 8 threads
+Compressing objects: 100% (5/5), done.
+Writing objects: 100% (6/6), 362.11 KiB | 8.62 MiB/s, done.
+Total 6 (delta 3), reused 0 (delta 0), pack-reused 0
+remote: Resolving deltas: 100% (3/3), completed with 3 local objects.        
+To https://github.com/tjburns08/tjburns08.github.io.git
+   b595a53..7669042  main -> main
+tylerburns@Tylers-MacBook-Pro-2 tyler_burns_website % git add --all
+git add --all
+tylerburns@Tylers-MacBook-Pro-2 tyler_burns_website % git commit -m "added bulleting questions to the gpt3 essay"
+<d bulleting questions to the gpt3 essay"
+[main da7b719] added bulleting questions to the gpt3 essay
+ 2 files changed, 17 insertions(+)
+ create mode 100644 content/marketing_and_friendship.org
+tylerburns@Tylers-MacBook-Pro-2 tyler_burns_website % git push origin main
+r_burns_website % git push origin main
+Enumerating objects: 8, done.
+Counting objects: 100% (8/8), done.
+Delta compression using up gto 8 threads
+Compressing objects: 100% (5/5), done.
+Writing objects: 100% (5/5), 1.12 KiB | 1.12 MiB/s, done.
+Total 5 (delta 3), reused 0 (delta 0), pack-reused 0
+remote: Resolving deltas: 100% (3/3), completed with 3 local objects.        
+To https://github.com/tjburns08/tjburns08.github.io.git
+   7669042..da7b719  main -> main
+tylerburns@Tylers-MacBook-Pro-2 tyler_burns_website % git add --all
+git add --all
+tylerburns@Tylers-MacBook-Pro-2 tyler_burns_website % git commit -m "expanded the long content""
+r_burns_website % git commit -m "expanded the long content""
+dquote> "
+"
+[main ff5c7bf] expanded the long content
+ 2 files changed, 23 insertions(+), 5 deletions(-)
+tylerburns@Tylers-MacBook-Pro-2 tyler_burns_website % git push origin main
+r_burns_website % git push origin main
+Enumerating objects: 9, done.
+Counting objects: 100% (9/9), done.
+Delta compression using up to 8 threads
+Compressing objects: 100% (5/5), done.
+Writing objects: 100% (5/5), 3.11 KiB | 3.11 MiB/s, done.
+Total 5 (delta 4), reused 0 (delta 0), pack-reused 0
+remote: Resolving deltas: 100% (4/4), completed with 4 local objects.        
+To https://github.com/tjburns08/tjburns08.github.io.git
+   da7b719..ff5c7bf  main -> main
+tylerburns@Tylers-MacBook-Pro-2 tyler_burns_website % git add --all
+git add --all
+tylerburns@Tylers-MacBook-Pro-2 tyler_burns_website % git commit -m "edited description to just paint"
+r_burns_website % git commit -m "edited description to just paint"
+[main 6228972] edited description to just paint
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+tylerburns@Tylers-MacBook-Pro-2 tyler_burns_website % git push origin main
+r_burns_website % git push origin main
+Enumerating objects: 7, done.
+Counting objects: 100% (7/7), done.
+Delta compression using up to 8 threads
+Compressing objects: 100% (4/4), done.
+Writing objects: 100% (4/4), 439 bytes | 439.00 KiB/s, done.
+Total 4 (delta 3), reused 0 (delta 0), pack-reused 0
+remote: Resolving deltas: 100% (3/3), completed with 3 local objects.        
+To https://github.com/tjburns08/tjburns08.github.io.git
+   ff5c7bf..6228972  main -> main
+tylerburns@Tylers-MacBook-Pro-2 tyler_burns_website % git add --all
+git add --all
+tylerburns@Tylers-MacBook-Pro-2 tyler_burns_website % git commit -m "edited description of about me section"
+<ed description of about me section"
+[main ffaffa3] edited description of about me section
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+tylerburns@Tylers-MacBook-Pro-2 tyler_burns_website % git push origin main
+r_burns_website % git push origin main
+Enumerating objects: 7, done.
+Counting objects: 100% (7/7), done.
+Delta compression using up to 8 threads
+Compressing objects: 100% (4/4), done.
+Writing objects: 100% (4/4), 461 bytes | 461.00 KiB/s, done.
+Total 4 (delta 3), reused 0 (delta 0), pack-reused 0
+remote: Resolving deltas: 100% (3/3), completed with 3 local objects.        
+To https://github.com/tjburns08/tjburns08.github.io.git
+   6228972..ffaffa3  main -> main
+tylerburns@Tylers-MacBook-Pro-2 tyler_burns_website % git add --all
+git add --all
+tylerburns@Tylers-MacBook-Pro-2 tyler_burns_website % git commit -m "started on the scrolling problem article"
+<ted on the scrolling problem article"
+[main 1538da4] started on the scrolling problem article
+ 3 files changed, 37 insertions(+)
+ create mode 120000 content/.#index.org
+ create mode 120000 content/.#just_paint.org
+ create mode 100644 content/scrolling_problem.org
+tylerburns@Tylers-MacBook-Pro-2 tyler_burns_website % git push origin main
+r_burns_website % git push origin main
+Enumerating objects: 7, done.
+Counting objects: 100% (7/7), done.
+Delta compression using up to 8 threads
+Compressing objects: 100% (4/4), done.
+Writing objects: 100% (5/5), 3.08 KiB | 3.08 MiB/s, done.
+Total 5 (delta 2), reused 0 (delta 0), pack-reused 0
+remote: Resolving deltas: 100% (2/2), completed with 2 local objects.        
+To https://github.com/tjburns08/tjburns08.github.io.git
+   ffaffa3..1538da4  main -> main
+tylerburns@Tylers-MacBook-Pro-2 tyler_burns_website % git add --all
+git add --all
+tylerburns@Tylers-MacBook-Pro-2 tyler_burns_website % git commit -m "testing html insert"
+r_burns_website % git commit -m "testing html insert"
+[main 6394a74] testing html insert
+ 1 file changed, 24 insertions(+), 2 deletions(-)
+tylerburns@Tylers-MacBook-Pro-2 tyler_burns_website % git push origin main
+r_burns_website % git push origin main
+Enumerating objects: 7, done.
+Counting objects: 100% (7/7), done.
+Delta compression using up to 8 threads
+Compressing objects: 100% (4/4), done.
+Writing objects: 100% (4/4), 1.09 KiB | 1.09 MiB/s, done.
+Total 4 (delta 3), reused 0 (delta 0), pack-reused 0
+remote: Resolving deltas: 100% (3/3), completed with 3 local objects.        
+To https://github.com/tjburns08/tjburns08.github.io.git
+   1538da4..6394a74  main -> main
+tylerburns@Tylers-MacBook-Pro-2 tyler_burns_website % ls
+ls
+*shell*		build_site.el	drafts
+build.sh	content		public
+tylerburns@Tylers-MacBook-Pro-2 tyler_burns_website % git add --all
+git add --all
+tylerburns@Tylers-MacBook-Pro-2 tyler_burns_website % git commit -m "adding scrolling problem article stub to site" 
+<ng scrolling problem article stub to site" 
+[main 3df2d0e] adding scrolling problem article stub to site
+ 2 files changed, 4 insertions(+), 1 deletion(-)
+tylerburns@Tylers-MacBook-Pro-2 tyler_burns_website % git push origin main
+r_burns_website % git push origin main
+Enumerating objects: 7, done.
+Counting objects: 100% (7/7), done.
+Delta compression using up to 8 threads
+Compressing objects: 100% (4/4), done.
+Writing objects: 100% (4/4), 669 bytes | 669.00 KiB/s, done.
+Total 4 (delta 3), reused 0 (delta 0), pack-reused 0
+remote: Resolving deltas: 100% (3/3), completed with 3 local objects.        
+To https://github.com/tjburns08/tjburns08.github.io.git
+   6394a74..3df2d0e  main -> main
+tylerburns@Tylers-MacBook-Pro-2 tyler_burns_website % git add --all
+git add --all
+tylerburns@Tylers-MacBook-Pro-2 tyler_burns_website % git commit -m "added image for testing"
+r_burns_website % git commit -m "added image for testing"
+[main 9fae4f8] added image for testing
+ 3 files changed, 4 insertions(+), 9 deletions(-)
+ create mode 100644 public/images/news_space.png
+tylerburns@Tylers-MacBook-Pro-2 tyler_burns_website % git push origin main
+r_burns_website % git push origin main
+Enumerating objects: 13, done.
+Counting objects: 100% (13/13), done.
+Delta compression using up to 8 threads
+Compressing objects: 100% (7/7), done.
+Writing objects: 100% (8/8), 216.44 KiB | 36.07 MiB/s, done.
+Total 8 (delta 5), reused 0 (delta 0), pack-reused 0
+remote: Resolving deltas: 100% (5/5), completed with 5 local objects.        
+To https://github.com/tjburns08/tjburns08.github.io.git
+   3df2d0e..9fae4f8  main -> main
+tylerburns@Tylers-MacBook-Pro-2 tyler_burns_website % 
+
+tylerburns@Tylers-MacBook-Pro-2 tyler_burns_website % 
+
+tylerburns@Tylers-MacBook-Pro-2 tyler_burns_website % git add --all
+git add --all
+tylerburns@Tylers-MacBook-Pro-2 tyler_burns_website % git commit -m "testing todays news html as inline image hack"
+<ing todays news html as inline image hack"
+[main ff0304b] testing todays news html as inline image hack
+ 3 files changed, 80 insertions(+), 1 deletion(-)
+ create mode 100644 public/images/inflation_cluster.png
+ create mode 100644 public/images/todays_news.html
+tylerburns@Tylers-MacBook-Pro-2 tyler_burns_website % git push origin main
+r_burns_website % git push origin main
+Enumerating objects: 13, done.
+Counting objects: 100% (13/13), done.
+Delta compression using up to 8 threads
+Compressing objects: 100% (8/8), done.
+Writing objects: 100% (8/8), 1.59 MiB | 13.88 MiB/s, done.
+Total 8 (delta 4), reused 0 (delta 0), pack-reused 0
+remote: Resolving deltas: 100% (4/4), completed with 4 local objects.        
+To https://github.com/tjburns08/tjburns08.github.io.git
+   9fae4f8..ff0304b  main -> main
+tylerburns@Tylers-MacBook-Pro-2 tyler_burns_website % git add --all
+git add --all
+tylerburns@Tylers-MacBook-Pro-2 tyler_burns_website % git commit -m "added more to the scrolling problem""
+r_burns_website % git commit -m "added more to the scrolling problem""
+dquote> "
+"
+[main c69fa00] added more to the scrolling problem
+ 1 file changed, 8 insertions(+), 4 deletions(-)
+tylerburns@Tylers-MacBook-Pro-2 tyler_burns_website % git push origin main
+r_burns_website % git push origin main
+Enumerating objects: 7, done.
+Counting objects: 100% (7/7), done.
+Delta compression using up to 8 threads
+Compressing objects: 100% (4/4), done.
+Writing objects: 100% (4/4), 1.13 KiB | 1.13 MiB/s, done.
+Total 4 (delta 3), reused 0 (delta 0), pack-reused 0
+remote: Resolving deltas: 100% (3/3), completed with 3 local objects.        
+To https://github.com/tjburns08/tjburns08.github.io.git
+   ff0304b..c69fa00  main -> main
 tylerburns@Tylers-MacBook-Pro-2 tyler_burns_website % 
