@@ -94,7 +94,30 @@ This doesn't carry much information on its own, so please click on the link belo
 
 This is how I am trying to get control over my news feed. By making it an interactive news map. I indent to update this every day publically for people who are interested, giving you a map of the news that you can go through rather than coming face to face with media organizations incentivized to get you to click on whatever it is. Now granted, we're looking at tweets here, which are also incentivized in that manner, but on top of the map-level control, we also side-step any provocative images that would also incite one to click.
 
-Given that we are viewing the news as a map, we can start to ask broad, systems-level questions. For example, sometimes I check CNN and Fox News one after another for the purpose of seeing if the news articles are different or have a different spin (spoiler alert: yes). What would happen if we modified the map such that we only have CNN and Fox News articles. Would they be perfectly intermixed? Would there be entire swaths of the map that are only CNN or only Fox News based on different wordings of current events (president does smart thing, president does dumb thing, COVID is serious, COVID is overblown). Would there be entire swatths of the map that are only CNN or only Fox News due to these media reporting on completely different current events? 
+Given that we are viewing the news as a map, we can start to ask broad, systems-level questions. For example, sometimes I check CNN and Fox News one after another for the purpose of seeing if the news articles are different or have a different spin (spoiler alert: yes). What would happen if we modified the map such that we only have CNN and Fox News articles. Would they be perfectly intermixed? Would there be entire swaths of the map that are only CNN or only Fox News based on different wordings of current events (president does smart thing, president does dumb thing, COVID is serious, COVID is overblown). Would there be entire swatths of the map that are only CNN or only Fox News due to these media reporting on completely different current events?
+
+*** Fight fire with fire: directed scrolling
+
+I am not trying to demonize all of scrolling, even if it seems that way (I expect the tone of this draft to change as I revise it). Maybe you like the act of scrolling through a list. One thing that we can do once our feeds are converted into coordinates is to do what I call directed scrolling. Consider that you have your news map for the day. One low hanging fruit is you prompt the computer to serve you a feed corresponding to a particular inquiry. How does that work specifically?
+
+I wrote a script that prompts the user to ask a question. For example "What is going on with Germany and its nuclear program?" This question gets converted into a 768 dimensional vector in "news space." This question will in theory sit next to articles that correspond to Germany's nuclear program. Then, I calculate cosine distance (a distance metric that is particularly well suited for high dimensional space...see [[./final_distance.project.poster.pdf][my poster on distance metrics]]) between the inquiry and every other point in news space. I then return a list (or a feed) corresponding to articles that start with the closest one and increasing distance.
+
+This does two things. The first is that it returns a feed that concerns first only Germany's nuclear program, and eventually things related to Germany's nuclear program, like Germany's reliance on Russian gas, or energy programs of other countries. Doing this solves the problem of task switching that I highlight in the introduction. The second is that it serves as a sanity check for the news space making language model itself. If the algorithm works, then we will get Germany nuclear program articles first and then related articles second. If it doesn't work (provided that the user-prompted inquiry is sufficiently detailed) then that gives us a starting point for how we can improve the algorithm for later versions.
+
+Query:'What is going on with Germany and its nuclear program?'
+
+Directed news feed (nearby):
+
+[[./images/germany_nuke_query_near.png]]
+
+We note that we are getting articles that are directly related to Germany's nuclear program, which at the time of writing is in the news because of the tension between Germany shutting down its nuclear program, dependence on Russia for energy, and the effects of burning coal (alternative to nuclear) on climate change. 
+
+Directed news feed (farther away):
+
+[[./images/germany_nuke_query_distant.png]]
+
+We note here that articles that are related to Germany's nuclear program that are not directly Germany's nuclear program come up. This is very important because it suggests that the feed is being queried at a level that is deeper than simply searching for the words "Germany" and "nuclear." An example you can see here is "France prepares itself for total cutoff of Russian gas." Germany's dependence on Russian gas is related to its energy needs which is related to its nuclear program. France is also dependent on Russian gas. Therefore an article on France's dependence on Russian gas is related to Germany's nuclear program. This is evidence that the langugae model is in fact building a map that is dependent on context.
+
 
 ** CNN vs Fox News: overlap in "news space"
 
