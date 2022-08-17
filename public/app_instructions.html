@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Instructions for using this web app</title>
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css" />
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">Instructions for using this web app</h1>
+<p>
+<a href="https://news2vecmap.herokuapp.com/">Click here to return to the app.</a> 
+</p>
+
+<div id="outline-container-orga5a0e44" class="outline-2">
+<h2 id="orga5a0e44">General features</h2>
+<div class="outline-text-2" id="text-orga5a0e44">
+<p>
+You will be presented with a map that has a dropdown menu on top, and the map itself just below that. Associated Press (AP) is set to the default source.
+</p>
+
+
+<div id="org76dc210" class="figure">
+<p><img src="./images/first_time_on_site.png" alt="first_time_on_site.png" />
+</p>
+</div>
+
+<p>
+Each point corresponds to a news article, pulled from the twitter handle corresponding to the news source. Larger points have more likes than smaller points. Points that are more yellow happened more recently, as shown by the color scale on the right of the map. 
+</p>
+
+<p>
+If you're on a standard computer, you can move the cursor over any point on the map. You'll see that a box appears with information about the article corresponding to the point. Importantly, you'll see the article title. If you're on a mobile device, you can get to this box by tapping on one of the points. An example is below. 
+</p>
+
+
+<div id="org54a8695" class="figure">
+<p><img src="./images/ap_hover_example.png" alt="ap_hover_example.png" />
+</p>
+</div>
+
+<p>
+If you have clicked or tapped on that point, you'll see a one-row table appear below the map. The left column is the url for the article, that you can click on. The right column is the article title (for a sanity check).
+</p>
+
+<p>
+To get rid of that box, simply click or tap on any region of the map that does not have a point.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orga081e29" class="outline-2">
+<h2 id="orga081e29">Advanced features</h2>
+<div class="outline-text-2" id="text-orga081e29">
+<p>
+This map is made with an interactive graphics library called <a href="https://plotly.com/python/">Plotly</a>. 
+</p>
+
+<p>
+You'll see a number of buttons on the top right side of the map. I will say right here that if you click on any of them, or anything weird happens to the map, you can go back to the default view by double clicking/tapping on the map. Here is a zoom-in of the buttons.
+</p>
+
+
+<div id="orga57f4f3" class="figure">
+<p><img src="./images/plotly_buttons.png" alt="plotly_buttons.png" />
+</p>
+</div>
+</div>
+
+<div id="outline-container-org7c28a2d" class="outline-3">
+<h3 id="org7c28a2d">Images</h3>
+<div class="outline-text-3" id="text-org7c28a2d">
+<p>
+You'll see on the left side a camera button. You can use that to get an image of the map in its state.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org2734203" class="outline-3">
+<h3 id="org2734203">Zooming</h3>
+<div class="outline-text-3" id="text-org2734203">
+<p>
+Next to that is a zoom button. That is activated by default. It means that if you click/tap and slide, you'll see a square appear with one corner where you first clicked/tapped and one corner where your cursor/finger currently is. Let go and you'll see that you've zoomed into a particlar region of the map. Below, I zoom into the southernmost region of the map.
+</p>
+
+
+<div id="org449ddd0" class="figure">
+<p><img src="./images/ap_zoom_in.png" alt="ap_zoom_in.png" />
+</p>
+</div>
+
+<p>
+Note again that you can zoom back out by double clicking/tapping.
+</p>
+
+<p>
+You'll see that there is a box with a plus sign and a box with a minus sign 6 and 7 buttons from the left, respectively. These are also zoom buttons that will zoom depending on where the map is centered. These are only relevant if you're panning the map, which I describe below.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orged1b5d0" class="outline-3">
+<h3 id="orged1b5d0">Panning</h3>
+<div class="outline-text-3" id="text-orged1b5d0">
+<p>
+The third button from the left is two perpendicular bidirectional arrows. If you click/tap on that, then you can click/tap and hold on the map and drag it around. For example, I take the original view and drag everything over to the right below.
+</p>
+
+
+<div id="orgc9e4190" class="figure">
+<p><img src="./images/ap_right_drag.png" alt="ap_right_drag.png" />
+</p>
+</div>
+
+
+<p>
+None of the other buttons are relevant at this time, but may be down the line.  
+</p>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="date">Date: August 17, 2022</p>
+<p class="creator"><a href="https://www.gnu.org/software/emacs/">Emacs</a> 28.1 (<a href="https://orgmode.org">Org</a> mode 9.5.2)</p>
+</div>
+</body>
+</html>
