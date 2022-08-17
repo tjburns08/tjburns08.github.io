@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Explainable AI and humanity</title>
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css" />
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">Explainable AI and humanity</h1>
+<p>
+<a href="./index.html">Home</a>
+</p>
+
+<div id="outline-container-orgc862a59" class="outline-2">
+<h2 id="orgc862a59">Explainable AI</h2>
+<div class="outline-text-2" id="text-orgc862a59">
+<p>
+Modern AI relies heavily on optimized <a href="https://en.wikipedia.org/wiki/Artificial_neural_network">artificial neural networks</a> that these days do anything from generating <a href="https://www.gwern.net/GPT-3">creative fiction</a> to producing <a href="https://en.wikipedia.org/wiki/DALL-E">images from a verbal description</a>. A common criticism of these types of tools in <a href="https://en.wikipedia.org/wiki/Single-cell_analysis">my field</a> is that they are "black boxes." We can see what they did but we can't see why. We biologists are used to having maximal clarity at every step. Part of our training is is being able to critique prior research, which becomes much harder to do if you just know that some AI tool with some <a href="https://en.wikipedia.org/wiki/List_of_sequence_alignment_software">acronym</a> produced the answer.
+</p>
+
+<p>
+So this is where the field of <a href="https://en.wikipedia.org/wiki/Explainable_artificial_intelligence">explainable artifical intelligence</a> (XAI) comes in. It's a rather broad pursuit of figuring out what these tools, which are otherwise not human-readable, are actually doing.
+</p>
+
+<p>
+A lot of the XAI tools are are highly visual. For example, a neural net that distinguishes healthy tissue from cancerous tissue in a medical image can be tweaked to show where on a given image the tool is focusing. When you're a physician who has to make life or death diagnostic decisions, you'd much rather know why a "helper AI" made the decision it did.
+</p>
+
+<p>
+Another example is how I used <a href="./tjb_dimr_talk.pdf">visual tools</a> to give my colleagues intuition around how dimension reduction algorithms perform on their single-cell data. This is what got me interested in XAI at large. 
+</p>
+
+<p>
+Explainable AI, or more broadly speaking, explainable black box algorithms, is a particularly broad field, and each new tool depends heavily on the algorithm itself and the context in which the algorithm is being used. But the concepts are similar, in that you're enabling the user to "get to know" the algorithm in order to be more effective with it and have a more comfortable relationship with it.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org89aca0a" class="outline-2">
+<h2 id="org89aca0a">When the human is the algorithm</h2>
+<div class="outline-text-2" id="text-org89aca0a">
+<p>
+And that is what got me thinking in this context about&#x2026;us. Lets make the assumption for a moment that we are, or at least can be represented as, a set of evolutionarily optimized AI tools lumped together in an Artificial General Intelligence (AGI) we call a brain. This would mean that the chunk of tissue we have behind our eyes is really a set of interacting black box algorithms we're stuck with.
+</p>
+
+<p>
+We spend a huge chunk of our lives getting to know ourselves and others&#x2026;what these black boxes are all about. A lot of this is what give my life <a href="https://www.youtube.com/watch?v=54l8_ewcOlY">meaning</a>. This ranges from determining as a kid whether you'd prefer to eat ice cream or iceberg lettuce on a hot summer day, to determining what you want in a lifetime partner.
+</p>
+
+<p>
+But there's a level above that, that is much harder to express as logical propositions. What songs send tingles down your spine? When was the last time you had a spiritual experinece, and what was that like? When you felt like you were part of something bigger? What artwork really stands out to you specifically and how does it make you feel? Who is your favorite <a href="https://en.wikipedia.org/wiki/Jungian_archetypes">superhero</a> and why?  
+</p>
+
+<p>
+Then there is the social and narrative level. What makes you like a person? Dislike a person? What caused that last angry outburst that you had that you didn't see coming? What jokes make you laugh more and longer than everyone else? What movie scenes made you unexpectedly teary eyed?
+</p>
+
+<p>
+Then there's a "<a href="https://www.youtube.com/watch?v=ERbvKrH-GC4">self expression</a>" level. If you are given a paintbrush and you <a href="./just_paint.html">just paint</a> something on the fly, what comes out? If you sit and write for an hour about whatever random thought crosses your mind, what comes out? What if you do the same, but it's only allowed to be poetry? 
+</p>
+
+<p>
+Cognitive scientists John Vervaeke studies these non-propositional levels of knowing. He defines the type of knowing that can be reduced to logical propositions as, not surprisingly "propositional knowing." But then the type of "knowing" that these questions in this paragraph elicit are called <a href="https://www.youtube.com/watch?v=n5iGCW3fDb4">"perspectival" and "participatory" knowing</a>. This is a rabbit hole that is far beyond the scope of this article, but I encourage the reader to go through John Vervaeke's Meaning Crisis lecture series, which I linked in the previous paragraph.
+</p>
+
+<p>
+My point here is that "knowing" is complicated, even if you are intelligent agent in quesiton, trying to explain your own thoughts and feelings to yourself. Therefore XAI can be complicated. How do humans get around this when they are explaining what is going on in their brain? They communicate. It's similar to the "self expression" level that I define above. If only we could attach an "expression level" onto algorithms that we are trying to understand. If only we could, for example, attach some sort of natural language model to a some AI agent, like a self-driving car, such that it could tell us why it accelerated or hit the breaks. If only we could get an AI to literally explain itself to us in words.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgf7b93e4" class="outline-2">
+<h2 id="orgf7b93e4">GPT-3 and prompt-based programming</h2>
+<div class="outline-text-2" id="text-orgf7b93e4">
+<p>
+Asking oneself questions actually has an analogue in the field of AI: prompt-based programming. It is a concept that I came across when <a href="./gpt3_student.html">I got the chance to beta-test OpenAI's GPT-3</a> natural language model. You "program" it by giving it a task or asking it a question, similar to interacting with a chatbot. If you want it to generate a Shakespearean sonnet about grad school life, you lieterally just type in the request to do so. If that sounds crazy, here is a <a href="https://www.gwern.net/GPT-3">rabbit hole from tech writer Gwern</a>. Depending on how you prompt it, you get a feel for what the model is capable of doing and how it operates. There is an XAI layer on top of this, where every word that gets outputted is colored by the probability of that word being generated as opposed to the next word. My point here is that it might be that "explaining" the next generation of AI algorithms might become much closer to what we do every day, trying to explain ourselves and others.
+</p>
+
+<p>
+We can potentially use prompt-based programming to get an <a href="https://icml.cc/media/icml-2021/Slides/10835_k1sKQZy.pdf">AI to explain itself</a>. This is a subfield of XAI called Natural Language Explanations (NLE). In the slide decks I link to, you see (among many other things) a hypothetical example of a self-driving car. It stops at a crosswalk for a pedestrian. You ask it "why did you stop." It explains to you that it saw a person crossing. That style of explanation, human-machine communication, could very well be on the horizon. I say this as at the time of writing, <a href="https://arxiv.org/pdf/2204.13807.pdf">DALL-E2</a> has come out, which produces images based on word-based prompts. What does that have to do with natural language explanations? It shows that we are getting better at converting words into other mathematical objects and back (given enough training data), which allows us to make the hypothesis that for a given AI system, we will be able to convert the weights of the model(s) into words (or pictures) relevant to some question that is being "prompted".
+</p>
+
+<p>
+This gets to the point of this article. We do prompt-based queries of AI systems all the time. When my wife asks me why I'm in a bad mood, is that not querying the NLP interface to an AGI agent? This in turn brings me to why I write at all. If I am nothing more than an AGI agent with some sort of NLP-interface to the rest of the world, then one of my purposes in life should to use my NLP layer to explain the AGI agent that is me, to the rest of the AGI bot net that is humanity. It reminds me of a quote by physicist Brian Cox: "We are the cosmos made conscious and life is the means by which the universe understands itself." If we take this quote seriously, then we could say that there are three purposes of life. The fundamental life-specific ones: 1. Survive. 2. Reproduce. And the human-specific one, 3. To understand and explain the universe to the universe. 
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgd007075" class="outline-2">
+<h2 id="orgd007075">Conclusions</h2>
+<div class="outline-text-2" id="text-orgd007075">
+<p>
+Art, music, moving about the world and experiencing new things, having relationships, all of these are the explainable AI tools of the network of black boxes we call humanity. We have been on this since our <a href="https://en.wikipedia.org/wiki/Timeline_of_human_evolution">emergence</a>. We know what to do here. Accordingly, I'm trying to get intuition around what these black box algorithms are doing by looking at how we get to know ourselves and others.
+</p>
+
+<p>
+I am still quite new to the field of XAI, but my best guess right now is that it won't be one simple algorithm that explains all of AI at that same time. So far there are a <a href="https://theaisummer.com/xai/">number of tools and methods</a> to achieve this aim, depending on the context. Perhaps more and more these tools will be lumped into interactive dashboards for users. Nonetheless, I think it will be a constant struggle to get to know the machines as we try to get to know ourselves, with prompt-based programming showing some promise here. The good news is if what I am saying carries any weight at all, then we are humans are already equipped to take on the task of XAI. We've been working on it for a long time. 
+</p>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="date">Date: June 30, 2022 - July 15, 2022</p>
+<p class="creator"><a href="https://www.gnu.org/software/emacs/">Emacs</a> 28.1 (<a href="https://orgmode.org">Org</a> mode 9.5.2)</p>
+</div>
+</body>
+</html>
