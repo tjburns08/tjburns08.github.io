@@ -11,8 +11,12 @@ This website is a place where I can openly share my ideas and non-client work, r
 If you have quesitons or comments, or you're interested in working or collaborating with me, just send me a message (see contact info below). I'm always happy to help. 
 
 * Articles
+
+** [[https://tjburns08.github.io/context_problem_bfx.html][The Context Problem in Bioinformatics]]
+In the age of big data, my bioinformatics analyses often lead to output that is still too much for a human to extract insight from. My use case here, common in my work: what GWAS traits do two or more genes have in common? I produce a context map of GWAS traits using an AI language model based on BERT. I then subset the map by traits associated with the genes the user inputs, coloring the points accordingly. One can quickly know what contexts, rather than traits, the genes share. 
+
 ** [[./scrolling_problem.org][The Scrolling Problem]]
-We spend a large fraction of our lives endlessly scrolling through our feeds, with no control over what hypernormal, outrage-inducing content will appear next. I call this the scrolling problem. I define it, and I have a crack at it by viewing my feeds as maps with the help of BERT, an AI language model. 
+We spend a large fraction of our lives endlessly scrolling through our feeds, with no control over what hypernormal, outrage-inducing content will appear next. I call this the scrolling problem. I define it, and I have a crack at it by viewing my feeds as maps with the help of an AI language model based on BERT. 
 
 ** [[./gpt3_student.org][GPT-3 simulating students]]
 This is a report I wrote for my uncle, who is a professor at the University of Michigan Ross School of Business. The concern was that generative language models would be able to simulate student's responses to essay questions good enough that tech-savvy students would simply offload their homework to GPT-3. I explore this option using my early access to GPT-3, with a conclusion heavily inspired by an article by [[https://www.gwern.net/GPT-3#weaknesses][Gwern]]. You pretty much have to at this point. 
