@@ -12,10 +12,13 @@
 <body>
 <div id="content" class="content">
 <h1 class="title">The context problem in Bioinformatics</h1>
+<p>
+<a href="https://tjburns08.github.io/">Home</a>
+</p>
 
-<div id="outline-container-org9035f46" class="outline-2">
-<h2 id="org9035f46">Introduction</h2>
-<div class="outline-text-2" id="text-org9035f46">
+<div id="outline-container-org93f88c8" class="outline-2">
+<h2 id="org93f88c8">Introduction</h2>
+<div class="outline-text-2" id="text-org93f88c8">
 <p>
 The first biology lab I worked in, as a lab tech prior to grad school, was a classical mouse genetics lab where I was schooled in the art of reductionism. It was a lab where the primary struggle was to get as much data as possible. Each datum would be rigorously analyzed. We would spend hours in lab meeting arguing over a single chart.
 </p>
@@ -42,9 +45,9 @@ In sum, hybrid biologists are constantly solving the "context problem", which I 
 </div>
 </div>
 
-<div id="outline-container-org665954b" class="outline-2">
-<h2 id="org665954b">Context problem definition</h2>
-<div class="outline-text-2" id="text-org665954b">
+<div id="outline-container-org28f427d" class="outline-2">
+<h2 id="org28f427d">Context problem definition</h2>
+<div class="outline-text-2" id="text-org28f427d">
 <p>
 The context problem is any instance where you have (oftentimes a lot of) data that has not yet been converted into useful insights, to use data science terms.
 </p>
@@ -63,13 +66,13 @@ Some of data compression is algorithmic. UMAP and similar algorithms convert hig
 </div>
 </div>
 
-<div id="outline-container-org581d67c" class="outline-2">
-<h2 id="org581d67c">Use case: GWAS catalog</h2>
-<div class="outline-text-2" id="text-org581d67c">
+<div id="outline-container-org0952b08" class="outline-2">
+<h2 id="org0952b08">Use case: GWAS catalog</h2>
+<div class="outline-text-2" id="text-org0952b08">
 </div>
-<div id="outline-container-org1632c84" class="outline-3">
-<h3 id="org1632c84">What traits to two or more genes share?</h3>
-<div class="outline-text-3" id="text-org1632c84">
+<div id="outline-container-org36f8804" class="outline-3">
+<h3 id="org36f8804">What traits to two or more genes share?</h3>
+<div class="outline-text-3" id="text-org36f8804">
 <p>
 Let's consider a use case that I've been dealing with for the past few years in my client work. I want to know what diseases or traits are shared between two or more genes that showed up in the data (eg. top 50 differentially expressed genes in a RNA seq dataset).
 </p>
@@ -93,9 +96,9 @@ I already made such a <a href="https://news2vecmap.herokuapp.com/">map</a> (for 
 </div>
 </div>
 
-<div id="outline-container-orga40776c" class="outline-2">
-<h2 id="orga40776c">My mapmaking protocol</h2>
-<div class="outline-text-2" id="text-orga40776c">
+<div id="outline-container-org243c51c" class="outline-2">
+<h2 id="org243c51c">My mapmaking protocol</h2>
+<div class="outline-text-2" id="text-org243c51c">
 <p>
 The tools needed to convert text to maps are open source and readily avilable if you know how to code. My protocol revolves around the use of <a href="https://www.sbert.net/">sentence tranformer models</a> based on the BERT language model (there are alternatives, but this one works well enough and is open source). The specific model I use, <a href="https://huggingface.co/sentence-transformers/all-mpnet-base-v2">all-mpnet-v2</a> takes any text up to 512 words long and converts it into a 768 element vector. Broadly speaking, you can think of this high-dimensional "context space." Data scientists are used to operating with high-dimensional data like this. We know how to program computers to understand this type of data. However, for it to be human readable, we have to somehow turn these 768 dimensional coordinates into a simple XY plane that we're used to.
 </p>
@@ -114,15 +117,15 @@ The map must be interactive and clickable. I'll get into this later, but I'm usi
 </div>
 </div>
 
-<div id="outline-container-orgbc26fa1" class="outline-2">
-<h2 id="orgbc26fa1">Viewing GWAS traits as a map</h2>
-<div class="outline-text-2" id="text-orgbc26fa1">
+<div id="outline-container-orgb325f7b" class="outline-2">
+<h2 id="orgb325f7b">Viewing GWAS traits as a map</h2>
+<div class="outline-text-2" id="text-orgb325f7b">
 <p>
 I downloaded the <a href="https://www.ebi.ac.uk/gwas/docs/file-downloads">GWAS catalog ("All associations v1.0")</a> and obtained all unique traits (column: DISEASE/TRAIT). I used these as input to the <a href="https://huggingface.co/sentence-transformers/all-mpnet-base-v2">all-mpnet-base-v2</a> model within the sentence-tranformers python package. This gave me a 768 dimensional vector for each unique trait. I then ran UMAP on the 768 dimensional vector space, converting it into an XY coordinate plane. The end result was the following map, which is the first map the user sees in the <a href="https://gwasmap.herokuapp.com/">web app</a>:
 </p>
 
 
-<div id="org7a2f904" class="figure">
+<div id="org08612c5" class="figure">
 <p><img src="./images/gwas_plain_map.png" alt="gwas_plain_map.png" />
 </p>
 </div>
@@ -132,7 +135,7 @@ The rest of the method is an exercise in having UMAP coordinates for each trait.
 </p>
 
 
-<div id="org75a07d1" class="figure">
+<div id="org7fb6b75" class="figure">
 <p><img src="./images/gwas_tp53_map.png" alt="gwas_tp53_map.png" />
 </p>
 </div>
@@ -142,16 +145,16 @@ And and example with hover text:
 </p>
 
 
-<div id="org5d60b64" class="figure">
+<div id="orgb0c1ba9" class="figure">
 <p><img src="./images/gwas_tp53_hover_text.png" alt="gwas_tp53_hover_text.png" />
 </p>
 </div>
 </div>
 
 
-<div id="outline-container-orgb08ca56" class="outline-3">
-<h3 id="orgb08ca56">What trait CONTEXT does two or more genes share?</h3>
-<div class="outline-text-3" id="text-orgb08ca56">
+<div id="outline-container-org4ffd9c0" class="outline-3">
+<h3 id="org4ffd9c0">What trait CONTEXT does two or more genes share?</h3>
+<div class="outline-text-3" id="text-org4ffd9c0">
 <p>
 My grad school education was in cancer biology, so let's look at two genes very relevant to cancer: P53 (or TP53) and EGFR. Because these genes have been well-studied, we'll be able to do sanity checks as we go.
 </p>
@@ -161,7 +164,7 @@ So first we type in TP53 and EGFR into the map to see both how each gene falls o
 </p>
 
 
-<div id="orged38998" class="figure">
+<div id="org94cf81b" class="figure">
 <p><img src="./images/gwas_tp53_egfr_map.png" alt="gwas_tp53_egfr_map.png" />
 </p>
 </div>
@@ -171,7 +174,7 @@ We can see that there is already a bit of overlap. Let's zoom in to the middle a
 </p>
 
 
-<div id="org67560ea" class="figure">
+<div id="org509e110" class="figure">
 <p><img src="./images/gwas_tp53_egfr_zoom.png" alt="gwas_tp53_egfr_zoom.png" />
 </p>
 </div>
@@ -181,7 +184,7 @@ We see a couple of spots with direct overlap. Hovering over these regions of ove
 </p>
 
 
-<div id="org1a5f7dc" class="figure">
+<div id="org6d8a88a" class="figure">
 <p><img src="./images/gwas_tp53_egfr_zoom_glioma.png" alt="gwas_tp53_egfr_zoom_glioma.png" />
 </p>
 </div>
@@ -195,7 +198,7 @@ In another region of the map, I found overlap between the two genes in "breast c
 </p>
 
 
-<div id="org18c86cb" class="figure">
+<div id="org8176f10" class="figure">
 <p><img src="./images/gwas_tp53_egfr_breast_cancer.png" alt="gwas_tp53_egfr_breast_cancer.png" />
 </p>
 </div>
@@ -205,7 +208,7 @@ Finally, in the northwest of our field of view, I found overlap in the trait "me
 </p>
 
 
-<div id="orgc03c414" class="figure">
+<div id="orgd84b262" class="figure">
 <p><img src="./images/gwas_tp53_egfr_haemoglobin.png" alt="gwas_tp53_egfr_haemoglobin.png" />
 </p>
 </div>
@@ -217,9 +220,9 @@ Putting it all together, we're no longer asking questions about shared traits. W
 </div>
 </div>
 
-<div id="outline-container-org0c5dee4" class="outline-2">
-<h2 id="org0c5dee4">Conclusions and future directions</h2>
-<div class="outline-text-2" id="text-org0c5dee4">
+<div id="outline-container-org0d66694" class="outline-2">
+<h2 id="org0d66694">Conclusions and future directions</h2>
+<div class="outline-text-2" id="text-org0d66694">
 <p>
 The context problem in bioinformatics is a very broad problem, which itself has many different contexts. My map-based solution works for instances where the output of a given analysis or query is a list of text, that the user would otherwise have to derive contex from in this format.
 </p>
