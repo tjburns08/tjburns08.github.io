@@ -16,15 +16,15 @@
 <a href="https://tjburns08.github.io/">Home</a>
 </p>
 
-<div id="outline-container-org93f88c8" class="outline-2">
-<h2 id="org93f88c8">Introduction</h2>
-<div class="outline-text-2" id="text-org93f88c8">
+<div id="outline-container-org6ee24e3" class="outline-2">
+<h2 id="org6ee24e3">Introduction</h2>
+<div class="outline-text-2" id="text-org6ee24e3">
 <p>
 The first biology lab I worked in, as a lab tech prior to grad school, was a classical mouse genetics lab where I was schooled in the art of reductionism. It was a lab where the primary struggle was to get as much data as possible. Each datum would be rigorously analyzed. We would spend hours in lab meeting arguing over a single chart.
 </p>
 
 <p>
-When I started grad school in 2011, the buzzword "systems biology" was just starting to take hold. Genomics papers were being published at a faster and faster rate (see the third line graph in <a href="https://medium.com/@tjburns_72591/how-to-utilize-scientific-literature-trends-to-gain-intuition-about-a-topic-b5c554e3d280">my article</a>). Suddenly we had more data than we knew what to do with. When I joined the Nolan Lab in 2012, it was a similar struggle, but now at the <a href="https://pubmed.ncbi.nlm.nih.gov/21551058/">single-cell level</a>, with CyTOF. (As a side note, I remember with this explsion of data naively thinking that the cure for cancer, or at least a good number of cancers, was right around the corner.) 
+When I started grad school in 2011, the buzzword "systems biology" was just starting to take hold. Genomics papers were being published at a faster and faster rate (see the third line graph in <a href="https://medium.com/@tjburns_72591/how-to-utilize-scientific-literature-trends-to-gain-intuition-about-a-topic-b5c554e3d280">my article</a>). Suddenly we had more data than we knew what to do with. When I joined the Nolan Lab in 2012, it was a similar struggle, but now at the <a href="https://pubmed.ncbi.nlm.nih.gov/21551058/">single-cell level</a>, with CyTOF. (As a side note, I remember naively thinking that the cure for cancer, or at least a good number of cancers, was right around the corner given this explosion of data.) 
 </p>
 
 <p>
@@ -32,11 +32,11 @@ The rigorous analysis of each data point that I was used to in my first lab was 
 </p>
 
 <p>
-The point is that for this initial bioinformatics push, both wet-lab and dry-lab skills were needed. Sometimes it was teams of experts debating in lab meeting on the right path to go. I slowly began to see that most of these students and postdocs were trained in both, as Garry initially told me that his lab members are ultimately emerge as hybrids. Either way, the simple act of being in the room while these debates were taking place was enough for me to realize the value of being a "hybrid" wet-lab and dry-lab biologist. This might be basic common sense now <span class="timestamp-wrapper"><span class="timestamp">[2022-08-26 Fri 12:17]</span></span>, but at the time it was not.
+The point is that for this initial bioinformatics push, both wet-lab and dry-lab skills were needed. Sometimes it was teams of experts debating in lab meeting on the right path to go. I slowly began to see that most of these students and postdocs were trained in both, as Garry initially told me that his lab members ultimately emerge as hybrids. Either way, the simple act of being in the room while these debates were taking place was enough for me to realize the value of being a "hybrid" wet-lab and dry-lab biologist. This might be basic common sense now <span class="timestamp-wrapper"><span class="timestamp">[2022-08-26 Fri 12:17]</span></span>, but at the time it was not.
 </p>
 
 <p>
-What does the hybrid biologist bring to the table? For every "systems level" problem, they can identify the tool for the job. On the flip side, for every new solution, they can identify the proper use case. CyTOF's popularity came largely from Garry Nolan seeing the technology early on, seeing immunophenotyping as a use case, and bringing two of the first machines to the lab (One of had a serial number the likes of 0000-0000-0002).
+What does the hybrid biologist bring to the table? For every "systems level" problem, they can identify the tool for the job. On the flip side, for every new solution, they can identify the proper use case. CyTOF's popularity came largely from Garry Nolan seeing the technology early on, seeing immunophenotyping as a use case, and bringing two of the first machines to the lab (One of them had a serial number the likes of 0000-0000-0002).
 </p>
 
 <p>
@@ -45,9 +45,9 @@ In sum, hybrid biologists are constantly solving the "context problem", which I 
 </div>
 </div>
 
-<div id="outline-container-org28f427d" class="outline-2">
-<h2 id="org28f427d">Context problem definition</h2>
-<div class="outline-text-2" id="text-org28f427d">
+<div id="outline-container-orgd8c79ed" class="outline-2">
+<h2 id="orgd8c79ed">Context problem definition</h2>
+<div class="outline-text-2" id="text-orgd8c79ed">
 <p>
 The context problem is any instance where you have (oftentimes a lot of) data that has not yet been converted into useful insights, to use data science terms.
 </p>
@@ -66,13 +66,13 @@ Some of data compression is algorithmic. UMAP and similar algorithms convert hig
 </div>
 </div>
 
-<div id="outline-container-org0952b08" class="outline-2">
-<h2 id="org0952b08">Use case: GWAS catalog</h2>
-<div class="outline-text-2" id="text-org0952b08">
+<div id="outline-container-org51a0727" class="outline-2">
+<h2 id="org51a0727">Use case: GWAS catalog</h2>
+<div class="outline-text-2" id="text-org51a0727">
 </div>
-<div id="outline-container-org36f8804" class="outline-3">
-<h3 id="org36f8804">What traits to two or more genes share?</h3>
-<div class="outline-text-3" id="text-org36f8804">
+<div id="outline-container-org2cda09a" class="outline-3">
+<h3 id="org2cda09a">What traits do two or more genes share?</h3>
+<div class="outline-text-3" id="text-org2cda09a">
 <p>
 Let's consider a use case that I've been dealing with for the past few years in my client work. I want to know what diseases or traits are shared between two or more genes that showed up in the data (eg. top 50 differentially expressed genes in a RNA seq dataset).
 </p>
@@ -82,7 +82,7 @@ What I was doing for a long time was taking the <a href="https://www.ebi.ac.uk/g
 </p>
 
 <p>
-While this approach is valuable and provides both nice insights and visuals, you're still stuck with oftentimes a number of similar diseases that are not exact (eg. gene 1 is associated with cognitive function and gene 2 is associated with Alzheimer's disease, but you yourself have to make the connection between the traits). One is fully capable of doing this, but it gets tricky when each gene is associated with many traits. It becomes an exercise of staring at a list and looking for commonalities between traits.
+While this approach is valuable and provides both nice insights and visuals, you're still stuck with oftentimes a number of traits that share the same context but are nonetheless different traits (eg. gene 1 is associated with cognitive function and gene 2 is associated with Alzheimer's disease, but you yourself have to make the connection between the traits). One is fully capable of doing this, but it gets tricky and time-consuming when each gene is associated with many traits that may be grouped into many contexts. It becomes an exercise of staring at a list and looking for commonalities between traits.
 </p>
 
 <p>
@@ -96,11 +96,11 @@ I already made such a <a href="https://news2vecmap.herokuapp.com/">map</a> (for 
 </div>
 </div>
 
-<div id="outline-container-org243c51c" class="outline-2">
-<h2 id="org243c51c">My mapmaking protocol</h2>
-<div class="outline-text-2" id="text-org243c51c">
+<div id="outline-container-orgdb6e826" class="outline-2">
+<h2 id="orgdb6e826">My mapmaking protocol</h2>
+<div class="outline-text-2" id="text-orgdb6e826">
 <p>
-The tools needed to convert text to maps are open source and readily avilable if you know how to code. My protocol revolves around the use of <a href="https://www.sbert.net/">sentence tranformer models</a> based on the BERT language model (there are alternatives, but this one works well enough and is open source). The specific model I use, <a href="https://huggingface.co/sentence-transformers/all-mpnet-base-v2">all-mpnet-v2</a> takes any text up to 512 words long and converts it into a 768 element vector. Broadly speaking, you can think of this high-dimensional "context space." Data scientists are used to operating with high-dimensional data like this. We know how to program computers to understand this type of data. However, for it to be human readable, we have to somehow turn these 768 dimensional coordinates into a simple XY plane that we're used to.
+The tools needed to convert text to maps are open source and readily available if you know how to code. My protocol revolves around the use of <a href="https://www.sbert.net/">sentence tranformer models</a> based on the BERT language model (there are alternatives, but this one works well enough and is open source). The specific model I use, <a href="https://huggingface.co/sentence-transformers/all-mpnet-base-v2">all-mpnet-v2</a> takes any text up to 512 words long and converts it into a 768 element vector. Broadly speaking, you can think of this high-dimensional "context space." Data scientists are used to operating with high-dimensional data like this. We know how to program computers to understand this type of data. However, for it to be human readable, we have to somehow turn these 768 dimensional coordinates into a simple XY plane that we're used to.
 </p>
 
 <p>
@@ -117,44 +117,44 @@ The map must be interactive and clickable. I'll get into this later, but I'm usi
 </div>
 </div>
 
-<div id="outline-container-orgb325f7b" class="outline-2">
-<h2 id="orgb325f7b">Viewing GWAS traits as a map</h2>
-<div class="outline-text-2" id="text-orgb325f7b">
+<div id="outline-container-org4b6f241" class="outline-2">
+<h2 id="org4b6f241">Viewing GWAS traits as a map</h2>
+<div class="outline-text-2" id="text-org4b6f241">
 <p>
 I downloaded the <a href="https://www.ebi.ac.uk/gwas/docs/file-downloads">GWAS catalog ("All associations v1.0")</a> and obtained all unique traits (column: DISEASE/TRAIT). I used these as input to the <a href="https://huggingface.co/sentence-transformers/all-mpnet-base-v2">all-mpnet-base-v2</a> model within the sentence-tranformers python package. This gave me a 768 dimensional vector for each unique trait. I then ran UMAP on the 768 dimensional vector space, converting it into an XY coordinate plane. The end result was the following map, which is the first map the user sees in the <a href="https://gwasmap.herokuapp.com/">web app</a>:
 </p>
 
 
-<div id="org08612c5" class="figure">
+<div id="orgae00dc2" class="figure">
 <p><img src="./images/gwas_plain_map.png" alt="gwas_plain_map.png" />
 </p>
 </div>
 
 <p>
-The rest of the method is an exercise in having UMAP coordinates for each trait. The color of the points correspond to the gene name and the size of the points coorespond to the -log10(p-value). Thus, when the user types in a given gene or genes, the map is immediately subsetted by the gene(s) along with the p-value information. More information can come from hovering over the points. An example is below:
+The rest of the method is an exercise in having UMAP coordinates for each trait. The color of the points correspond to the gene name and the size of the points correspond to the -log10(p-value). Thus, when the user types in a given gene or genes, the map is immediately subsetted by the gene(s) along with the p-value information. More information can come from hovering over the points. An example is below:
 </p>
 
 
-<div id="org7fb6b75" class="figure">
+<div id="org46dec7e" class="figure">
 <p><img src="./images/gwas_tp53_map.png" alt="gwas_tp53_map.png" />
 </p>
 </div>
 
 <p>
-And and example with hover text:
+And an example with hover text:
 </p>
 
 
-<div id="orgb0c1ba9" class="figure">
+<div id="orgb7915de" class="figure">
 <p><img src="./images/gwas_tp53_hover_text.png" alt="gwas_tp53_hover_text.png" />
 </p>
 </div>
 </div>
 
 
-<div id="outline-container-org4ffd9c0" class="outline-3">
-<h3 id="org4ffd9c0">What trait CONTEXT does two or more genes share?</h3>
-<div class="outline-text-3" id="text-org4ffd9c0">
+<div id="outline-container-orga4b11d6" class="outline-3">
+<h3 id="orga4b11d6">What trait CONTEXTS do two or more genes share?</h3>
+<div class="outline-text-3" id="text-orga4b11d6">
 <p>
 My grad school education was in cancer biology, so let's look at two genes very relevant to cancer: P53 (or TP53) and EGFR. Because these genes have been well-studied, we'll be able to do sanity checks as we go.
 </p>
@@ -164,7 +164,7 @@ So first we type in TP53 and EGFR into the map to see both how each gene falls o
 </p>
 
 
-<div id="org94cf81b" class="figure">
+<div id="org7f33f53" class="figure">
 <p><img src="./images/gwas_tp53_egfr_map.png" alt="gwas_tp53_egfr_map.png" />
 </p>
 </div>
@@ -174,7 +174,7 @@ We can see that there is already a bit of overlap. Let's zoom in to the middle a
 </p>
 
 
-<div id="org509e110" class="figure">
+<div id="org7c66691" class="figure">
 <p><img src="./images/gwas_tp53_egfr_zoom.png" alt="gwas_tp53_egfr_zoom.png" />
 </p>
 </div>
@@ -184,7 +184,7 @@ We see a couple of spots with direct overlap. Hovering over these regions of ove
 </p>
 
 
-<div id="org6d8a88a" class="figure">
+<div id="orgb8ceef6" class="figure">
 <p><img src="./images/gwas_tp53_egfr_zoom_glioma.png" alt="gwas_tp53_egfr_zoom_glioma.png" />
 </p>
 </div>
@@ -198,7 +198,7 @@ In another region of the map, I found overlap between the two genes in "breast c
 </p>
 
 
-<div id="org8176f10" class="figure">
+<div id="org06cf396" class="figure">
 <p><img src="./images/gwas_tp53_egfr_breast_cancer.png" alt="gwas_tp53_egfr_breast_cancer.png" />
 </p>
 </div>
@@ -208,7 +208,7 @@ Finally, in the northwest of our field of view, I found overlap in the trait "me
 </p>
 
 
-<div id="orgd84b262" class="figure">
+<div id="orge829a3e" class="figure">
 <p><img src="./images/gwas_tp53_egfr_haemoglobin.png" alt="gwas_tp53_egfr_haemoglobin.png" />
 </p>
 </div>
@@ -220,11 +220,11 @@ Putting it all together, we're no longer asking questions about shared traits. W
 </div>
 </div>
 
-<div id="outline-container-org0d66694" class="outline-2">
-<h2 id="org0d66694">Conclusions and future directions</h2>
-<div class="outline-text-2" id="text-org0d66694">
+<div id="outline-container-org06c9417" class="outline-2">
+<h2 id="org06c9417">Conclusions and future directions</h2>
+<div class="outline-text-2" id="text-org06c9417">
 <p>
-The context problem in bioinformatics is a very broad problem, which itself has many different contexts. My map-based solution works for instances where the output of a given analysis or query is a list of text, that the user would otherwise have to derive contex from in this format.
+The context problem in bioinformatics is a very broad problem, which itself has many different contexts. My map-based solution works for instances where the output of a given analysis or query is a list of text, that the user would otherwise have to derive context from in this format.
 </p>
 
 <p>
