@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Instructions for using this web app</title>
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css" />
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">Instructions for using this web app</h1>
+<p>
+<a href="https://news2vecmap.herokuapp.com/">Click here to return to the app.</a>
+</p>
+
+<p>
+<a href="https://tjburns08.github.io/scrolling_problem.html">Click here to go to my article on the motivation behind my "mapping" solutions.</a>
+</p>
+
+<div id="outline-container-org7facbd7" class="outline-2">
+<h2 id="org7facbd7">General features</h2>
+<div class="outline-text-2" id="text-org7facbd7">
+<p>
+You will be presented with a map that has a text box on top. Below this text box is a UMAP of every GWAS trait in the GWAS catalog. Each point on the map represents a different GWAS trait. You can hover over each point, and you'll see a pop-up box that tells you the exact trait correspoinding to that point. If you're on mobile, you'll have to tap on a given point to get that information.
+</p>
+
+
+<div id="orgefd540f" class="figure">
+<p><img src="./images/gwas_plain_map.png" alt="gwas_plain_map.png" />
+</p>
+</div>
+
+<p>
+When you type in a single gene (eg. TP53) into the text box, the map will shrink down to only traits that are associated with that gene. You'll see that these points vary in size. The size correspoinds to the negative log 10 of the p-value. In other words, p = 0.01 corresponds to 2, p = 0.001 corresponds to 3, and so on.
+</p>
+
+
+<div id="orgbf53424" class="figure">
+<p><img src="./images/gwas_tp53_map.png" alt="gwas_tp53_map.png" />
+</p>
+</div>
+
+<p>
+When you type in multiple genes separated by a comma (eg. TP53 and EGFR), you'll see that they both show up on the map, with a different color corresponding to each gene. From here, you can identify genes that are near to each other on the map, which corresponds not necessarily to sharing the same trait, but sharing the same context. Maybe they're both associated with specific brain disorders or a type of blood measurement. You'll immediately see that on the map.
+</p>
+
+
+<div id="org1579848" class="figure">
+<p><img src="./images/gwas_tp53_egfr_map.png" alt="gwas_tp53_egfr_map.png" />
+</p>
+</div>
+
+<p>
+Finally, if you type a "1" into the text box as well, you'll get the remainder of the diseases. The reason I don't have this in as a default is because it puts so many points on the map that it makes hovering/clicking on the right points a bit more frustrating.
+</p>
+
+
+<div id="org9e14866" class="figure">
+<p><img src="./images/gwas_egfr_all_diseases_map.png" alt="gwas_egfr_all_diseases_map.png" />
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org20c90a0" class="outline-2">
+<h2 id="org20c90a0">Advanced features</h2>
+<div class="outline-text-2" id="text-org20c90a0">
+<p>
+This map is made with an interactive graphics library called <a href="https://plotly.com/python/">Plotly</a>. The instructions below come from my <a href="https://news2vecmap.herokuapp.com/">news map web app</a>, which also uses Plotly. 
+</p>
+
+<p>
+You'll see a number of buttons on the top right side of the map. I will say right here that if you click on any of them, or anything weird happens to the map, you can go back to the default view by double clicking/tapping on the map. Here is a zoom-in of the buttons.
+</p>
+
+
+<div id="orga834d64" class="figure">
+<p><img src="./images/plotly_buttons.png" alt="plotly_buttons.png" />
+</p>
+</div>
+</div>
+
+<div id="outline-container-org8d05c6f" class="outline-3">
+<h3 id="org8d05c6f">Images</h3>
+<div class="outline-text-3" id="text-org8d05c6f">
+<p>
+You'll see on the left side a camera button. You can use that to get an image of the map in its state.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org76975e5" class="outline-3">
+<h3 id="org76975e5">Zooming</h3>
+<div class="outline-text-3" id="text-org76975e5">
+<p>
+Next to that is a zoom button. That is activated by default. It means that if you click/tap and slide, you'll see a square appear with one corner where you first clicked/tapped and one corner where your cursor/finger currently is. Let go and you'll see that you've zoomed into a particlar region of the map. Below, I zoom into the southernmost region of the map.
+</p>
+
+
+<div id="org24a62d6" class="figure">
+<p><img src="./images/ap_zoom_in.png" alt="ap_zoom_in.png" />
+</p>
+</div>
+
+<p>
+Note again that you can zoom back out by double clicking/tapping.
+</p>
+
+<p>
+You'll see that there is a box with a plus sign and a box with a minus sign 6 and 7 buttons from the left, respectively. These are also zoom buttons that will zoom depending on where the map is centered. These are only relevant if you're panning the map, which I describe below.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org62a8f38" class="outline-3">
+<h3 id="org62a8f38">Panning</h3>
+<div class="outline-text-3" id="text-org62a8f38">
+<p>
+The third button from the left is two perpendicular bidirectional arrows. If you click/tap on that, then you can click/tap and hold on the map and drag it around. For example, I take the original view and drag everything over to the right below.
+</p>
+
+
+<div id="orga280b98" class="figure">
+<p><img src="./images/ap_right_drag.png" alt="ap_right_drag.png" />
+</p>
+</div>
+
+
+<p>
+None of the other buttons are relevant at this time, but may be down the line.  
+</p>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="date">Date: August 17, 2022</p>
+<p class="creator"><a href="https://www.gnu.org/software/emacs/">Emacs</a> 28.1 (<a href="https://orgmode.org">Org</a> mode 9.5.2)</p>
+</div>
+</body>
+</html>
