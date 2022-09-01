@@ -11,7 +11,7 @@ This website is a place where I can openly share my ideas and non-client work, r
 If you have quesitons or comments, or you're interested in working or collaborating with me, just send me a message (see contact info below). I'm always happy to help. 
 
 * Articles
-** [[https://tjburns08.github.io/marcus_aurelius_writeup.html][What would Marcus Aurelius say?]]
+** [[https://tjburns08.github.io/ask_marcus_writeup.html][What would Marcus Aurelius say?]]
 I turn the Meditatios by Marcus Aurelius into a semantic search based language model, where I ask a question and it returns the most relevant passages in the book as answers. This helps me with the study of stoic philosophy, but this approach can be used in any sort of book that is structured as aphorisms. 
 
 ** [[https://tjburns08.github.io/context_problem_bfx.html][The Context Problem in Bioinformatics]]
@@ -83,6 +83,15 @@ Abstract: Due to the rise of high-dimensional single cell technologies in the pa
 * Software
 ** [[https://www.bioconductor.org/packages/release/bioc/html/Sconify.html][Bioconductor package Sconify]]
 Official description: This package does k-nearest neighbor based statistics and visualizations with flow and mass cytometery data. This gives tSNE maps"fold change" functionality and provides a data quality metric by assessing manifold overlap between fcs files expected to be the same. Other applications using this package include imputation, marker redundancy, and testing the relative information loss of lower dimension embeddings compared to the original manifold.
+
+** [[https://news2vecmap.herokuapp.com/][Web app news2vecmap]]
+Associated with [[https://tjburns08.github.io/scrolling_problem.html][The Scrolling Problem]]. An app that converts news of the past few days into a semantic map where articles that are similar to each other in context are near each other on the map.
+
+** [[https://gwasmap.herokuapp.com/][Web app gwasmap]]
+Associated with my article [[https://tjburns08.github.io/context_problem_bfx.html][The Context Problem in Bioinformatics]]. Given one of more genes, what are the GWAS associations? These are placed onto a semantic map where associations that are similar to each other are grouped near each other on the map. Thus, if gene 1 is associated with Alzheimer's disease and gene 2 is associated with age-related cognitive decline (different but related disease) the associations for each gene (colored accordingly) will show up near each other.
+
+** [[https://github.com/tjburns08/ask-marcus-aurelius][Software ask-marcus-aurelius]]
+Associated with [[https://tjburns08.github.io/ask_marcus_writeup.html][What Would Marcus Aurelius Say]]. This project turned the Meditaitons by Marcus Aurelius into a semantic map that can be queried, such that the user can ask a question, and the software will return the most relevant passages in the Meditations. 
 
 * Markdowns
 These are primarily R and python markdowns exploring various topics. I apologize if the one you're reading is a bit messy. Most of these are instances of me just tinkering for the sake of tinkering. These often lead to interesting results that I don't have time to follow up on, but I figure that showing unpolished work is better than showing no work. If you have any questions or comments, please feel free to contact me. Anything that gets attention here will trigger me to work on it.
