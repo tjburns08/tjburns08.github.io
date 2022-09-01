@@ -1,0 +1,501 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>What would Marcus Aurelius say?</title>
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css" />
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">What would Marcus Aurelius say?</h1>
+
+<div id="outline-container-org3ec878f" class="outline-2">
+<h2 id="org3ec878f">Introduction</h2>
+<div class="outline-text-2" id="text-org3ec878f">
+<p>
+This is a writeup for software I wrote that can be downloaded <a href="https://github.com/tjburns08/ask-marcus-aurelius">here</a>. Please follow the instructions in the link. 
+</p>
+
+<p>
+Stoicism is a philosophy that dates back to the 3rd century BC in Athens. It revolves around the pursuit of virtue rather than pleasure, and living in accordance with nature, to sum up a beautifully complicated philosophy that cannot be summed up in a single sentence. I got into stoicism after I found Tim Ferriss's <a href="https://tim.blog/2009/04/13/stoicism-101-a-practical-guide-for-entrepreneurs/">posts</a> and <a href="https://www.youtube.com/watch?v=A0XxceO4qX0&amp;t=55s">videos</a> on it. It appealed to me because a lot of it seems to be centered on being resiliant to pain and misfortune rather than fearing it. One stoic philosopher, Seneca, instructed that one must actively practice misfortune to harden yourself to it. Fast for a few days. Sleep on the floor rather than the bed for a night. Another common practice is negative visualization, where you purposely imagine the worst possible things that could happen to you today, or on the upcoming vacation, or whatever. Then if something bad happens, it probably won't be as bad as whatever you imagined. Another common practice is to meditate on your own mortality. Steve Jobs embodied this one after his cancer diagnosis, as he explains in an amazing <a href="https://www.youtube.com/watch?v=UF8uR6Z6KLc">Stanford commencement speech in 2005</a>. This is not meant to be a comprehensive overview of stoicism. Again, there are many stoic philosophers each with their own take. It's meant to just give you a flavor of what stoicism is.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgac3225e" class="outline-2">
+<h2 id="orgac3225e">Marcus Aurelius and the Meditations</h2>
+<div class="outline-text-2" id="text-orgac3225e">
+<p>
+One thing that is particularly interesting about stoic philospher is that one of the so-called main stoics was an emperor of Rome, Marcus Aurelius. There is an amazing <a href="https://www.youtube.com/watch?v=Auuk1y4DRgk">video lecture</a> on Marcus Aurelus and Stoicism by Professor Michael Sugrue that you should absolutely watch. He is described as a man who could have literally anything he wants during his 19 year rule as the leader of the most powerful empire in the world. Money, women, alcohol by the boatload, you name it. But he didn't have any of it, and focused only on his duty of ruling Rome. From the video: "Lord Acton said that power corrupts, and absolute power corrupts absolutely. And that's generally speaking, true. The difficulty with that generalization&#x2026; is Marcus Aurelius." And also:  He's not afraid of being dead. He's not afraid of being in pain. He's not afraid to have people laugh at him. He's only afraid of doing what's wrong. He's only afraid of making chaos of his soul." Marcus Aurelius wrote in a journal, where from my reading of it, he was trying to fire himself up for the day's upcoming challenges. He did not want the journals to be published. After he died, they were published anyway in a book called <a href="https://www.goodreads.com/book/show/30659.Meditations">Meditations</a>. It is now considered one of the main books on stoic philosophy, and one of my favorite books.
+</p>
+
+<p>
+Meditations reads like a series of aphorisms. It is divided into 12 books, and each book is divided into "verses." Each verse is a self-contained nugget of wisdom. In this regard, I would love to be able to conjure up a verse of the Meditations that is relevant to a given situation in my life. One way to do this is to read the book many times, and study it intensely. I have done that, but I am nowhere near having internalized the whole thing. Other stoic philosopher/explainers like <a href="https://dailystoic.com/">Ryan Holiday</a> are particularly good at finding relevant stoic wisdom given particular situations. I was wondering if there was a tool that could help me (and others) on my journey into stoic philosophy. 
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-org264162c" class="outline-2">
+<h2 id="org264162c">Semantic search</h2>
+<div class="outline-text-2" id="text-org264162c">
+<p>
+It turns out that modern AI language models are very good at determining, at a topic/context level, whether two sentences are similar to each other, and how similar. There is a large subfield of Natural Languge Processing that revolves around what is called "semantic search." Given a particular sentence, find the nearest (most relevant) other sentence given a list. Another way to think of this is taking sentences and turning them into a map where sentences that are similar to each other are grouped near each other on a map. I have done this with <a href="https://tjburns08.github.io/scrolling_problem.html">news articles</a> and <a href="https://tjburns08.github.io/context_problem_bfx.html">GWAS associations</a>. Here, I do it with Meditations.
+</p>
+
+<p>
+I took each book and verse of the Meditations and used it as input to the <a href="https://huggingface.co/sentence-transformers/all-mpnet-base-v2">all-mpnet-base-v2</a> model within the sentence-transformers python package. The model turns each book/verse into a 768 dimensional vector. In my news articles and GWAS associations use cases, I then turn this into an interactive map. Here, I keep everything in high dimensional space. I then enter a question, like "What is the meaning of life?" This question gets used as input into the same model, and out comes a 768 dimensional vector corresponding to the question. Now, we can't visualize space above three dimensions by definition but we can do math on it. We can calculate who is nearby. Accordingly, starting with the 768 dimensional vector corresponding to the question, I figure out the nearest neighbors according to <a href="https://en.wikipedia.org/wiki/Cosine_similarity">cosine distance</a> (to handle the <a href="https://en.wikipedia.org/wiki/Curse_of_dimensionality">curse of dimensionality</a>). These are then listed as the answers to the question.
+</p>
+
+<p>
+Like any of these complicated models, one of the best things we can do is simply get intution by examples. Below are several questions that I ask the model, and the book/verse that comes out. 
+</p>
+</div>
+</div>
+
+<div id="outline-container-org9b4ef3e" class="outline-2">
+<h2 id="org9b4ef3e">Marcus Aurelius Q&amp;A: Semantic search of Meditations</h2>
+<div class="outline-text-2" id="text-org9b4ef3e">
+<p>
+Below is an example of what the software looks like upon asking it the first question on the list. Note that there is a search bar, where you type your question in. The results are outputted as a table below that, in order of relevance. The cosine distance is given as well, to give the user intution around the relevance of each answer. I'll also note that the Marcus Aurelius picture was created with DALL-E 2. 
+</p>
+
+
+<div id="org30643b8" class="figure">
+<p><img src="./images/marcus_software_ui.png" alt="marcus_software_ui.png" />
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-org3221d11" class="outline-3">
+<h3 id="org3221d11">What is the meaning of life?</h3>
+<div class="outline-text-3" id="text-org3221d11">
+<p>
+Cosine distance of best answer: 0.488
+</p>
+
+<p>
+Book 5:27
+</p>
+
+<p>
+“To live with the gods.” And to do that is to show them  that your soul accepts what it is given and does what the  spirit requires—the spirit God gave each of us to lead and  guide us, a fragment of himself. Which is our mind, our logos.
+</p>
+
+<p>
+Book 8:19
+</p>
+
+<p>
+Everything is here for a purpose, from horses to vine shoots. What’s surprising about that? Even the sun will tell  you, “I have a purpose,” and the other gods as well. And why  were you born? For pleasure? See if that answer will stand  up to questioning.
+</p>
+
+<p>
+Book 12:8
+</p>
+
+<p>
+To see the causes of things stripped bare. The aim of  actions.  Pain. Pleasure. Death. Fame.  Who is responsible for our own restlessness.  That no one obstructs us.  That it’s all in how you perceive it. 
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgfe2651d" class="outline-3">
+<h3 id="orgfe2651d">How do I pursue a life of virtue?</h3>
+<div class="outline-text-3" id="text-orgfe2651d">
+<p>
+Cosine distance of best answer: 0.374
+</p>
+
+<p>
+Book 7:31
+</p>
+
+<p>
+Wash yourself clean. With simplicity, with humility, with  indifference to everything but right and wrong.  Care for other human beings. Follow God.
+</p>
+
+<p>
+Book 8:5
+</p>
+
+<p>
+The first step: Don’t be anxious. Nature controls it all.  And before long you’ll be no one, nowhere—like Hadrian,  like Augustus.  The second step: Concentrate on what you have to do. Fix  your eyes on it. Remind yourself that your task is to be a  good human being; remind yourself what nature demands of  people. Then do it, without hesitation, and speak the truth as  you see it. But with kindness. With humility. Without  hypocrisy. 
+</p>
+
+<p>
+Book 2:5
+</p>
+
+<p>
+Concentrate every minute like a Roman—like a man—on  doing what’s in front of you with precise and genuine  seriousness, tenderly, willingly, with justice. And on freeing  yourself from all other distractions. Yes, you can—if you do  everything as if it were the last thing you were doing in your  life, and stop being aimless, stop letting your emotions  override what your mind tells you, stop being hypocritical,  self-centered, irritable. You see how few things you have to  do to live a satisfying and reverent life? If you can manage  this, that’s all even the gods can ask of you.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgc7ea6fc" class="outline-3">
+<h3 id="orgc7ea6fc">How do I deal with fear of death?</h3>
+<div class="outline-text-3" id="text-orgc7ea6fc">
+<p>
+Cosine distance of best answer: 0.323 (quite low&#x2026;suggests that it's a relevant question)
+</p>
+
+<p>
+Book 4:50
+</p>
+
+<p>
+A trite but effective tactic against the fear of death: think  of the list of people who had to be pried away from life.  What did they gain by dying old? In the end, they all sleep six  feet under—Caedicianus, Fabius, Julian, Lepidus, and all the  rest. They buried their contemporaries, and were buried in  turn.  Our lifetime is so brief. And to live it out in these  circumstances, among these people, in this body? Nothing to  get excited about. Consider the abyss of time past, the infinite  future. Three days of life or three generations: what’s the  difference? 
+</p>
+
+<p>
+Book 8:58
+</p>
+
+<p>
+Fear of death is fear of what we may experience. Nothing  at all, or something quite new. But if we experience nothing,  we can experience nothing bad. And if our experience  changes, then our existence will change with it—change, but  not cease.
+</p>
+
+<p>
+Book 10:29
+</p>
+
+<p>
+Stop whatever you’re doing for a moment and ask  yourself: Am I afraid of death because I won’t be able to do  this anymore? 
+</p>
+
+<p>
+Book 7:56 (one of my favorites)
+</p>
+
+<p>
+Think of yourself as dead. You have lived your life. Now take what’s left and live it properly. 
+</p>
+</div>
+</div>
+
+<div id="outline-container-org501b30e" class="outline-3">
+<h3 id="org501b30e">How do I become more courageous?</h3>
+<div class="outline-text-3" id="text-org501b30e">
+<p>
+Cosine distance of best answer: 0.442
+</p>
+
+
+<p>
+Book 8:5 (note that this is a repeat from the life of virtue question)
+</p>
+
+<p>
+The first step: Don’t be anxious. Nature controls it all.  And before long you’ll be no one, nowhere—like Hadrian,  like Augustus.  The second step: Concentrate on what you have to do. Fix  your eyes on it. Remind yourself that your task is to be a  good human being; remind yourself what nature demands of  people. Then do it, without hesitation, and speak the truth as  you see it. But with kindness. With humility. Without  hypocrisy. 
+</p>
+
+<p>
+Book 7:58
+</p>
+
+<p>
+In all that happens, keep before your eyes those who  experienced it before you, and felt shock and outrage and  resentment at it.  And now where are they? Nowhere.  Is that what you want to be like? Instead of avoiding all  these distracting assaults—leaving the alarms and flight to  others—and concentrating on what you can do with it all?  Because you can use it, treat it as raw material. Just pay  attention, and resolve to live up to your own expectations. In  everything. And when faced with a choice, remember: our  business is with things that really matter. 
+</p>
+
+
+<p>
+Book 5:3 (Would Marcus Aurelius be cancelled on Twitter?)
+</p>
+
+<p>
+If an action or utterance is appropriate, then it’s appropriate for you. Don’t be put off by other people’s comments and criticism. If it’s right to say or do it, then it’s  the right thing for you to do or say.  The others obey their own lead, follow their own impulses. Don’t be distracted. Keep walking. Follow your own nature, and follow Nature—along the road they share.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org0b1cff3" class="outline-3">
+<h3 id="org0b1cff3">How do I deal with pain and misfortune?</h3>
+<div class="outline-text-3" id="text-org0b1cff3">
+<p>
+Cosine distance of best answer: 0.339
+</p>
+
+<p>
+Book 7:64
+</p>
+
+<p>
+For times when you feel pain:  See that it doesn’t disgrace you, or degrade your  intelligence—doesn’t keep it from acting rationally or  unselfishly.  And in most cases what Epicurus said should help: that  pain is neither unbearable nor unending, as long as you keep  in mind its limits and don’t magnify them in your imagination.  And keep in mind too that pain often comes in disguise—  as drowsiness, fever, loss of appetite. . . . When you’re  bothered by things like that, remind yourself: “I’m giving in  to pain.” 
+</p>
+
+<p>
+Book 8:36
+</p>
+
+<p>
+Don’t let your imagination be crushed by life as a whole.  Don’t try to picture everything bad that could possibly  happen. Stick with the situation at hand, and ask, “Why is this  so unbearable? Why can’t I endure it?” You’ll be  embarrassed to answer.  Then remind yourself that past and future have no power  over you. Only the present—and even that can be minimized.  Just mark off its limits. And if your mind tries to claim that it  can’t hold out against that. . . well, thea heap shame upon it. 
+</p>
+
+<p>
+Book 8:28
+</p>
+
+<p>
+Either pain affects the body (which is the body’s  problem) or it affects the soul. But the soul can choose not to  be affected, preserving its own serenity, its own tranquillity.  All our decisions, urges, desires, aversions lie within. No  evil can touch them. 
+</p>
+
+<p>
+Book 6:38
+</p>
+
+<p>
+Keep reminding yourself of the way things are connected,  of their relatedness. All things are implicated in one another  and in sympathy with each other. This event is the  consequence of some other one. Things push and pull on each  other, and breathe together, and are one.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgb5ee2de" class="outline-3">
+<h3 id="orgb5ee2de">What is love?</h3>
+<div class="outline-text-3" id="text-orgb5ee2de">
+<p>
+Cosine distance of best answer: 0.59 (Not great. Maybe Marcus Aurelius doesn't have much to say about love). 
+</p>
+
+<p>
+Book 8:11
+</p>
+
+<p>
+What is this, fundamentally? What is its nature and  substance, its reason for being? What is it doing in the  world? How long is it here for? 
+</p>
+
+<p>
+Book 7:57
+</p>
+
+<p>
+To love only what happens, what was destined. No  greater harmony.
+</p>
+
+<p>
+Book 12:10
+</p>
+
+<p>
+To see things as they are. Substance, cause and purpose.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org78b4e95" class="outline-3">
+<h3 id="org78b4e95">What are the most important things in life?</h3>
+<div class="outline-text-3" id="text-org78b4e95">
+<p>
+Cosine distance of best answer: 0.509
+</p>
+
+<p>
+Book 4:17
+</p>
+
+<p>
+Not to live as if you had endless years ahead of you. Death overshadows you. While you’re alive and able—be  good.
+</p>
+
+<p>
+Book 6:15
+</p>
+
+<p>
+Some things are rushing into existence, others out of it.  Some of what now exists is already gone. Change and flux  constantly remake the world, just as the incessant  progression of time remakes eternity.  We find ourselves in a river. Which of the things around us  should we value when none of them can offer a firm  foothold?  Like an attachment to a sparrow: we glimpse it and it’s gone.  And life itself: like the decoction of blood, the drawing in  of air. We expel the power of breathing we drew in at birth  (just yesterday or the day before), breathing it out like the air  we exhale at each moment.
+</p>
+
+<p>
+Book 12:3
+</p>
+
+<p>
+Your three components: body, breath, mind. Two are yours in trust; to the third alone you have clear title.  If you can cut yourself—your mind—free of what other  people do and say, of what you’ve said or done, of the things  that you’re afraid will happen, the impositions of the body  that contains you and the breath withia and what the whirling  chaos sweeps in from outside, so that the mind is freed from  fate, brought to clarity, and lives life on its own recognizance  —doing what’s right, accepting what happens, and speaking  the truth—  If you can cut free of impressions that cling to the mind,  free of the future and the past—can make yourself, as  Empedocles says, “a sphere rejoicing in its perfect  stillness,” and concentrate on living what can be lived  (which means the present) . . . then you can spend the time  you have left in tranquillity. And in kindness. And at peace  with the spirit within you. 
+</p>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org1bae296" class="outline-2">
+<h2 id="org1bae296">Marcus Aurelius Q&amp;A: ask the model absurd questions.</h2>
+<div class="outline-text-2" id="text-org1bae296">
+<p>
+Below, I try to toy with the model by asking questions that are either poorly stated or extremely irrelevant. 
+</p>
+</div>
+
+<div id="outline-container-org3c751e5" class="outline-3">
+<h3 id="org3c751e5">Should I have vanilla or strawberry ice cream today?</h3>
+<div class="outline-text-3" id="text-org3c751e5">
+<p>
+Cosine distance of best answer: 0.777 (from here on out, distances in the 0.7+ range are expected)
+</p>
+
+<p>
+Book 12:35
+</p>
+
+<p>
+If you make ripeness alone your good . . .  If a few actions more or less, governed by the right logos, are merely a few more or less . ..  If it makes no difference whether you look at the world for  this long or that long . . .  . . . then death shouldn’t scare you.
+</p>
+
+
+<p>
+Book 8:22a (Maybe "today" in the question lead to a today/tomorrow association)
+</p>
+
+<p>
+This is what you deserve. You could be good today. But  instead you choose tomorrow.
+</p>
+
+
+<p>
+Book 11:33 (I'm guessing "figs" was associated with "strawberry")
+</p>
+
+<p>
+Stupidity is expecting figs in winter, or children in old  age.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org857e40b" class="outline-3">
+<h3 id="org857e40b">If a tree falls in the forest and no one is around, does it make a sound?</h3>
+<div class="outline-text-3" id="text-org857e40b">
+<p>
+Cosine distance of best answer: 0.711
+</p>
+
+<p>
+Book 8:15
+</p>
+
+<p>
+Remember: you shouldn’t be surprised that a fig tree produces figs, nor the world what it produces. A good doctor  isn’t surprised when his patients have fevers, or a helmsman  when the wind blows against him. 
+</p>
+
+
+<p>
+Book 12:35 (Interesting&#x2026;repeat from the ice cream question)
+</p>
+
+<p>
+If you make ripeness alone your good . . .  If a few actions more or less, governed by the right logos,  are merely a few more or less . ..  If it makes no difference whether you look at the world for  this long or that long . . .  . . . then death shouldn’t scare you. 
+</p>
+
+
+<p>
+Book 7:43 (sound -&gt; hysterics?)
+</p>
+
+<p>
+No chorus of lamentation, no hysterics. 
+</p>
+</div>
+</div>
+
+<div id="outline-container-org9f242db" class="outline-3">
+<h3 id="org9f242db">Why?</h3>
+<div class="outline-text-3" id="text-org9f242db">
+<p>
+Cosine distance of best answer: 0.772
+</p>
+
+<p>
+(I really don't know what to make of the answers below. Perhaps they're in a "not contextually well defined" region of the vector space?)
+</p>
+
+<p>
+Book 6:52
+</p>
+
+<p>
+You don’t have to turn this into something. It doesn’t have to upset you. Things can’t shape our decisions by  themselves. 
+</p>
+
+<p>
+Book 6:56
+</p>
+
+<p>
+All those people who came into the world with me and have already left it. 
+</p>
+
+
+<p>
+Book 8:22a (repeat from the ice cream question)
+</p>
+
+<p>
+This is what you deserve. You could be good today. But instead you choose tomorrow. 
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgddb8309" class="outline-3">
+<h3 id="orgddb8309">ergoiejrg weofijwo wefoijw</h3>
+<div class="outline-text-3" id="text-orgddb8309">
+<p>
+Cosine distance of best answer: 0.722 (gibberish is lower than "Why?")
+</p>
+
+<p>
+Book 11:30
+</p>
+
+<p>
+“. . . For you/Are but a slave and have no claim to logos.” 
+</p>
+
+<p>
+Book 5:4
+</p>
+
+<p>
+I walk through what is natural, until the time comes to sink  down and rest. To entrust my last breath to the source of my  daily breathing, fall on the source of my father’s seed, of my  mother’s blood, of my nurse’s milk. Of my daily food and  drink through all these years. What sustains my footsteps, and  the use I make of it—the many uses. 
+</p>
+
+<p>
+Book 5:14
+</p>
+
+<p>
+The logos and its employment are forces sufficient for themselves and for their works. They start from their own  beginning, they proceed to the appointed end. We call such  activities ‘‘‘directed,” from the directness of their course.
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org63a4e08" class="outline-2">
+<h2 id="org63a4e08">Conclusions</h2>
+<div class="outline-text-2" id="text-org63a4e08">
+<p>
+We see in the first section of Q&amp;A that the model does bring forth relevant answers. I'll leave it to experts like Ryan Holiday to determine how relevant. Nonetheless, we see evidence of topic-based organization rather than just does-the-verse-have-the-same-words (aka bag of words) organization. For example, one answer to "What is the meaning of life" is "Everything is here for a purpose." This suggests that the model "knew" that meaning and purpose were of the same topic. Another great instance in support of this is the "fear of death" question. Some of the answers directly had "fear of death" built in (Marcus Aurelius talks about this a lot in the book). However, one of them, "Think of yourself as dead. You have lived your life. Now take what’s left and live it properly," does not contain the phrase "fear of death" or anything similar, but rather contains the related topic of imagining yourself as dead.
+</p>
+
+<p>
+The above paragraph could very well be wishful thinking on my part. I therefore added a section where I asked the model loads of nonsense. There, we could at least see evidence of an attempt to topic match. While I expected garbage in/garbage out, we saw things like "If you make ripeness alone your good&#x2026;" as part of an answer to "Should I have vanilla or straberry ice cream today?" where perhaps ripeness showed up as a result of the word "strawberry" in the question. Except that (not shown) the same "ripeness" answer comes up when I simply ask "Should I have ice cream today." Wishful thinking on my part. With the question "If a tree falls in the forest and no one is around, does it make a sound?" we see answers that contain the topic of trees and the topic of "hysterics" which may correspond to sound. But again, to really get at what's going on for these irrelevant questions, I'd have to do a series of ablation experiments (eg. remove "tree" and "forest," remove "sound") and for situations where the cosine distance of the best answer is high, this doesn't sound worthwhile. 
+</p>
+
+<p>
+What about when I ask the model pure gibberish? When the question is "ergoiejrg weofijwo wefoijw" it still maps to the model somehow. In this case, the cosine distance is high. Curiously, the cosine distance of the gibberish question is LOWER than the cosine distance of the simple question "why" and the ice cream question! This suggests that there is some threshold of cosine distance where the answer is going to be meaningless. We could use a gibberish question as a "gibberish answer" threshold accordingly. On the opposite end of the spectrum, remember that in the case of the question "How do I deal with fear of death?" the best answer has a cosine distance of 0.323. It might be that we can use cosine distance as a "relevance score." Care would have to be taken in each use case (other books) to figure out what the cosine distance of a relevant question is versus a gibberish question. 
+</p>
+
+<p>
+Overall, using AI-driven semantic search as a means to dig into Stoic philosophy seems promising. It does not replace reading the source material, but it definitely acts as a good supplement for these aphorism-centric books. Not to be Captain Obvious, but I could see this being useful in other aphorism-centric books, like the Bible, the Tao Te Ching, Nassim Taleb's Bed of Procrustes, and <a href="https://www.goodreads.com/shelf/show/aphorisms">many, many more</a>. 
+</p>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="creator"><a href="https://www.gnu.org/software/emacs/">Emacs</a> 28.1 (<a href="https://orgmode.org">Org</a> mode 9.5.2)</p>
+</div>
+</body>
+</html>
