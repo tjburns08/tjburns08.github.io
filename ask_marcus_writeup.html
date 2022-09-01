@@ -12,10 +12,13 @@
 <body>
 <div id="content" class="content">
 <h1 class="title">What would Marcus Aurelius say?</h1>
+<p>
+<a href="https://tjburns08.github.io">Home</a>
+</p>
 
-<div id="outline-container-org3ec878f" class="outline-2">
-<h2 id="org3ec878f">Introduction</h2>
-<div class="outline-text-2" id="text-org3ec878f">
+<div id="outline-container-org4705e9e" class="outline-2">
+<h2 id="org4705e9e">Introduction</h2>
+<div class="outline-text-2" id="text-org4705e9e">
 <p>
 This is a writeup for software I wrote that can be downloaded <a href="https://github.com/tjburns08/ask-marcus-aurelius">here</a>. Please follow the instructions in the link. 
 </p>
@@ -26,9 +29,9 @@ Stoicism is a philosophy that dates back to the 3rd century BC in Athens. It rev
 </div>
 </div>
 
-<div id="outline-container-orgac3225e" class="outline-2">
-<h2 id="orgac3225e">Marcus Aurelius and the Meditations</h2>
-<div class="outline-text-2" id="text-orgac3225e">
+<div id="outline-container-org18eeea8" class="outline-2">
+<h2 id="org18eeea8">Marcus Aurelius and the Meditations</h2>
+<div class="outline-text-2" id="text-org18eeea8">
 <p>
 One thing that is particularly interesting about stoic philospher is that one of the so-called main stoics was an emperor of Rome, Marcus Aurelius. There is an amazing <a href="https://www.youtube.com/watch?v=Auuk1y4DRgk">video lecture</a> on Marcus Aurelus and Stoicism by Professor Michael Sugrue that you should absolutely watch. He is described as a man who could have literally anything he wants during his 19 year rule as the leader of the most powerful empire in the world. Money, women, alcohol by the boatload, you name it. But he didn't have any of it, and focused only on his duty of ruling Rome. From the video: "Lord Acton said that power corrupts, and absolute power corrupts absolutely. And that's generally speaking, true. The difficulty with that generalization&#x2026; is Marcus Aurelius." And also:  He's not afraid of being dead. He's not afraid of being in pain. He's not afraid to have people laugh at him. He's only afraid of doing what's wrong. He's only afraid of making chaos of his soul." Marcus Aurelius wrote in a journal, where from my reading of it, he was trying to fire himself up for the day's upcoming challenges. He did not want the journals to be published. After he died, they were published anyway in a book called <a href="https://www.goodreads.com/book/show/30659.Meditations">Meditations</a>. It is now considered one of the main books on stoic philosophy, and one of my favorite books.
 </p>
@@ -40,9 +43,9 @@ Meditations reads like a series of aphorisms. It is divided into 12 books, and e
 </div>
 
 
-<div id="outline-container-org264162c" class="outline-2">
-<h2 id="org264162c">Semantic search</h2>
-<div class="outline-text-2" id="text-org264162c">
+<div id="outline-container-org9513701" class="outline-2">
+<h2 id="org9513701">Semantic search</h2>
+<div class="outline-text-2" id="text-org9513701">
 <p>
 It turns out that modern AI language models are very good at determining, at a topic/context level, whether two sentences are similar to each other, and how similar. There is a large subfield of Natural Languge Processing that revolves around what is called "semantic search." Given a particular sentence, find the nearest (most relevant) other sentence given a list. Another way to think of this is taking sentences and turning them into a map where sentences that are similar to each other are grouped near each other on a map. I have done this with <a href="https://tjburns08.github.io/scrolling_problem.html">news articles</a> and <a href="https://tjburns08.github.io/context_problem_bfx.html">GWAS associations</a>. Here, I do it with Meditations.
 </p>
@@ -57,24 +60,24 @@ Like any of these complicated models, one of the best things we can do is simply
 </div>
 </div>
 
-<div id="outline-container-org9b4ef3e" class="outline-2">
-<h2 id="org9b4ef3e">Marcus Aurelius Q&amp;A: Semantic search of Meditations</h2>
-<div class="outline-text-2" id="text-org9b4ef3e">
+<div id="outline-container-org0ab83d4" class="outline-2">
+<h2 id="org0ab83d4">Marcus Aurelius Q&amp;A: Semantic search of Meditations</h2>
+<div class="outline-text-2" id="text-org0ab83d4">
 <p>
 Below is an example of what the software looks like upon asking it the first question on the list. Note that there is a search bar, where you type your question in. The results are outputted as a table below that, in order of relevance. The cosine distance is given as well, to give the user intution around the relevance of each answer. I'll also note that the Marcus Aurelius picture was created with DALL-E 2. 
 </p>
 
 
-<div id="org30643b8" class="figure">
+<div id="org30d9e71" class="figure">
 <p><img src="./images/marcus_software_ui.png" alt="marcus_software_ui.png" />
 </p>
 </div>
 </div>
 
 
-<div id="outline-container-org3221d11" class="outline-3">
-<h3 id="org3221d11">What is the meaning of life?</h3>
-<div class="outline-text-3" id="text-org3221d11">
+<div id="outline-container-org838cb5c" class="outline-3">
+<h3 id="org838cb5c">What is the meaning of life?</h3>
+<div class="outline-text-3" id="text-org838cb5c">
 <p>
 Cosine distance of best answer: 0.488
 </p>
@@ -105,9 +108,9 @@ To see the causes of things stripped bare. The aim of  actions.  Pain. Pleasure.
 </div>
 </div>
 
-<div id="outline-container-orgfe2651d" class="outline-3">
-<h3 id="orgfe2651d">How do I pursue a life of virtue?</h3>
-<div class="outline-text-3" id="text-orgfe2651d">
+<div id="outline-container-org8161eee" class="outline-3">
+<h3 id="org8161eee">How do I pursue a life of virtue?</h3>
+<div class="outline-text-3" id="text-org8161eee">
 <p>
 Cosine distance of best answer: 0.374
 </p>
@@ -138,9 +141,9 @@ Concentrate every minute like a Roman—like a man—on  doing what’s in front
 </div>
 </div>
 
-<div id="outline-container-orgc7ea6fc" class="outline-3">
-<h3 id="orgc7ea6fc">How do I deal with fear of death?</h3>
-<div class="outline-text-3" id="text-orgc7ea6fc">
+<div id="outline-container-orgf9c500b" class="outline-3">
+<h3 id="orgf9c500b">How do I deal with fear of death?</h3>
+<div class="outline-text-3" id="text-orgf9c500b">
 <p>
 Cosine distance of best answer: 0.323 (quite low&#x2026;suggests that it's a relevant question)
 </p>
@@ -179,9 +182,9 @@ Think of yourself as dead. You have lived your life. Now take what’s left and 
 </div>
 </div>
 
-<div id="outline-container-org501b30e" class="outline-3">
-<h3 id="org501b30e">How do I become more courageous?</h3>
-<div class="outline-text-3" id="text-org501b30e">
+<div id="outline-container-org1eaf16e" class="outline-3">
+<h3 id="org1eaf16e">How do I become more courageous?</h3>
+<div class="outline-text-3" id="text-org1eaf16e">
 <p>
 Cosine distance of best answer: 0.442
 </p>
@@ -214,9 +217,9 @@ If an action or utterance is appropriate, then it’s appropriate for you. Don�
 </div>
 </div>
 
-<div id="outline-container-org0b1cff3" class="outline-3">
-<h3 id="org0b1cff3">How do I deal with pain and misfortune?</h3>
-<div class="outline-text-3" id="text-org0b1cff3">
+<div id="outline-container-orge6542bb" class="outline-3">
+<h3 id="orge6542bb">How do I deal with pain and misfortune?</h3>
+<div class="outline-text-3" id="text-orge6542bb">
 <p>
 Cosine distance of best answer: 0.339
 </p>
@@ -255,9 +258,9 @@ Keep reminding yourself of the way things are connected,  of their relatedness. 
 </div>
 </div>
 
-<div id="outline-container-orgb5ee2de" class="outline-3">
-<h3 id="orgb5ee2de">What is love?</h3>
-<div class="outline-text-3" id="text-orgb5ee2de">
+<div id="outline-container-org74e344d" class="outline-3">
+<h3 id="org74e344d">What is love?</h3>
+<div class="outline-text-3" id="text-org74e344d">
 <p>
 Cosine distance of best answer: 0.59 (Not great. Maybe Marcus Aurelius doesn't have much to say about love). 
 </p>
@@ -288,9 +291,9 @@ To see things as they are. Substance, cause and purpose.
 </div>
 </div>
 
-<div id="outline-container-org78b4e95" class="outline-3">
-<h3 id="org78b4e95">What are the most important things in life?</h3>
-<div class="outline-text-3" id="text-org78b4e95">
+<div id="outline-container-orgdb87af6" class="outline-3">
+<h3 id="orgdb87af6">What are the most important things in life?</h3>
+<div class="outline-text-3" id="text-orgdb87af6">
 <p>
 Cosine distance of best answer: 0.509
 </p>
@@ -323,17 +326,17 @@ Your three components: body, breath, mind. Two are yours in trust; to the third 
 </div>
 
 
-<div id="outline-container-org1bae296" class="outline-2">
-<h2 id="org1bae296">Marcus Aurelius Q&amp;A: ask the model absurd questions.</h2>
-<div class="outline-text-2" id="text-org1bae296">
+<div id="outline-container-orgaf82adc" class="outline-2">
+<h2 id="orgaf82adc">Marcus Aurelius Q&amp;A: ask the model absurd questions.</h2>
+<div class="outline-text-2" id="text-orgaf82adc">
 <p>
 Below, I try to toy with the model by asking questions that are either poorly stated or extremely irrelevant. 
 </p>
 </div>
 
-<div id="outline-container-org3c751e5" class="outline-3">
-<h3 id="org3c751e5">Should I have vanilla or strawberry ice cream today?</h3>
-<div class="outline-text-3" id="text-org3c751e5">
+<div id="outline-container-orgeed09eb" class="outline-3">
+<h3 id="orgeed09eb">Should I have vanilla or strawberry ice cream today?</h3>
+<div class="outline-text-3" id="text-orgeed09eb">
 <p>
 Cosine distance of best answer: 0.777 (from here on out, distances in the 0.7+ range are expected)
 </p>
@@ -366,9 +369,9 @@ Stupidity is expecting figs in winter, or children in old  age.
 </div>
 </div>
 
-<div id="outline-container-org857e40b" class="outline-3">
-<h3 id="org857e40b">If a tree falls in the forest and no one is around, does it make a sound?</h3>
-<div class="outline-text-3" id="text-org857e40b">
+<div id="outline-container-org8318776" class="outline-3">
+<h3 id="org8318776">If a tree falls in the forest and no one is around, does it make a sound?</h3>
+<div class="outline-text-3" id="text-org8318776">
 <p>
 Cosine distance of best answer: 0.711
 </p>
@@ -401,9 +404,9 @@ No chorus of lamentation, no hysterics.
 </div>
 </div>
 
-<div id="outline-container-org9f242db" class="outline-3">
-<h3 id="org9f242db">Why?</h3>
-<div class="outline-text-3" id="text-org9f242db">
+<div id="outline-container-orgea94a2c" class="outline-3">
+<h3 id="orgea94a2c">Why?</h3>
+<div class="outline-text-3" id="text-orgea94a2c">
 <p>
 Cosine distance of best answer: 0.772
 </p>
@@ -439,9 +442,9 @@ This is what you deserve. You could be good today. But instead you choose tomorr
 </div>
 </div>
 
-<div id="outline-container-orgddb8309" class="outline-3">
-<h3 id="orgddb8309">ergoiejrg weofijwo wefoijw</h3>
-<div class="outline-text-3" id="text-orgddb8309">
+<div id="outline-container-org8dcca65" class="outline-3">
+<h3 id="org8dcca65">ergoiejrg weofijwo wefoijw</h3>
+<div class="outline-text-3" id="text-org8dcca65">
 <p>
 Cosine distance of best answer: 0.722 (gibberish is lower than "Why?")
 </p>
@@ -473,9 +476,9 @@ The logos and its employment are forces sufficient for themselves and for their 
 </div>
 </div>
 
-<div id="outline-container-org63a4e08" class="outline-2">
-<h2 id="org63a4e08">Conclusions</h2>
-<div class="outline-text-2" id="text-org63a4e08">
+<div id="outline-container-org693132b" class="outline-2">
+<h2 id="org693132b">Conclusions</h2>
+<div class="outline-text-2" id="text-org693132b">
 <p>
 We see in the first section of Q&amp;A that the model does bring forth relevant answers. I'll leave it to experts like Ryan Holiday to determine how relevant. Nonetheless, we see evidence of topic-based organization rather than just does-the-verse-have-the-same-words (aka bag of words) organization. For example, one answer to "What is the meaning of life" is "Everything is here for a purpose." This suggests that the model "knew" that meaning and purpose were of the same topic. Another great instance in support of this is the "fear of death" question. Some of the answers directly had "fear of death" built in (Marcus Aurelius talks about this a lot in the book). However, one of them, "Think of yourself as dead. You have lived your life. Now take what’s left and live it properly," does not contain the phrase "fear of death" or anything similar, but rather contains the related topic of imagining yourself as dead.
 </p>
