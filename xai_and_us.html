@@ -5,22 +5,22 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Explainable AI and humanity</title>
+<title>Explainable AI and understanding ourselves</title>
 <meta name="generator" content="Org mode" />
 <link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css" />
 </head>
 <body>
 <div id="content">
-<h1 class="title">Explainable AI and humanity</h1>
+<h1 class="title">Explainable AI and understanding ourselves</h1>
 <p>
 <a href="./index.html">Home</a>
 </p>
 
-<div id="outline-container-org48b5fe8" class="outline-2">
-<h2 id="org48b5fe8">Explainable AI</h2>
-<div class="outline-text-2" id="text-org48b5fe8">
+<div id="outline-container-org146359c" class="outline-2">
+<h2 id="org146359c">Explainable AI</h2>
+<div class="outline-text-2" id="text-org146359c">
 <p>
-Modern AI relies heavily on optimized <a href="https://en.wikipedia.org/wiki/Artificial_neural_network">artificial neural networks</a> that these days do anything from generating <a href="https://www.gwern.net/GPT-3">creative fiction</a> to producing <a href="https://en.wikipedia.org/wiki/DALL-E">images from a verbal description</a>. A common criticism of these types of tools in <a href="https://en.wikipedia.org/wiki/Single-cell_analysis">my field</a> is that they are "black boxes." We can see what they did but we can't see why. We biologists are used to having maximal clarity at every step. Part of our training is is being able to critique prior research, which becomes much harder to do if you just know that some AI tool with some <a href="https://en.wikipedia.org/wiki/List_of_sequence_alignment_software">acronym</a> produced the answer.
+Modern AI (at the time of writing) relies heavily on optimized <a href="https://en.wikipedia.org/wiki/Artificial_neural_network">artificial neural networks</a> that these days do anything from generating <a href="https://www.gwern.net/GPT-3">creative fiction</a> to producing <a href="https://en.wikipedia.org/wiki/DALL-E">images from a verbal description</a>. A common criticism of these types of tools in <a href="https://en.wikipedia.org/wiki/Single-cell_analysis">my field</a> is that they are "black boxes." We can see what they did but we can't see why. We biologists are used to having maximal clarity at every step. Part of our training is is being able to critique prior research, which becomes much harder to do if you just know that some AI tool with some <a href="https://en.wikipedia.org/wiki/List_of_sequence_alignment_software">acronym</a> produced the answer.
 </p>
 
 <p>
@@ -32,18 +32,18 @@ A lot of the XAI tools are are highly visual. For example, a neural net that dis
 </p>
 
 <p>
-Another example is how I used <a href="./tjb_dimr_talk.pdf">visual tools</a> to give my colleagues intuition around how dimension reduction algorithms perform on their single-cell data. This is what got me interested in XAI at large. 
+Another example is how I used <a href="./tjb_dimr_talk.pdf">visual tools</a> to give my colleagues intuition around how dimension reduction algorithms perform on their single-cell data. This more generalized "explainable black box algorithms" pursuit is what got me interested in XAI at large. 
 </p>
 
 <p>
-Explainable AI, or more broadly speaking, explainable black box algorithms, is a particularly broad field, and each new tool depends heavily on the algorithm itself and the context in which the algorithm is being used. But the concepts are similar, in that you're enabling the user to "get to know" the algorithm in order to be more effective with it and have a more comfortable relationship with it.
+Explainable AI is a particularly broad field, and each new tool depends heavily on the algorithm itself and the context in which the algorithm is being used. But the concepts are similar, in that you're enabling the user to "get to know" the algorithm in order to be more effective with it and have a more comfortable relationship with it.
 </p>
 </div>
 </div>
 
-<div id="outline-container-org6117c5e" class="outline-2">
-<h2 id="org6117c5e">When the human is the algorithm</h2>
-<div class="outline-text-2" id="text-org6117c5e">
+<div id="outline-container-org2359b69" class="outline-2">
+<h2 id="org2359b69">When the human is the algorithm</h2>
+<div class="outline-text-2" id="text-org2359b69">
 <p>
 And that is what got me thinking in this context about&#x2026;us. Lets make the assumption for a moment that we are, or at least can be represented as, a set of evolutionarily optimized AI tools lumped together in an Artificial General Intelligence (AGI) we call a brain. This would mean that the chunk of tissue we have behind our eyes is really a set of interacting black box algorithms we're stuck with.
 </p>
@@ -74,15 +74,15 @@ My point here is that "knowing" is complicated, even if you are intelligent agen
 </div>
 </div>
 
-<div id="outline-container-org42ca938" class="outline-2">
-<h2 id="org42ca938">GPT-3 and prompt-based programming</h2>
-<div class="outline-text-2" id="text-org42ca938">
+<div id="outline-container-orge7bc4d9" class="outline-2">
+<h2 id="orge7bc4d9">GPT-3 and prompt-based programming</h2>
+<div class="outline-text-2" id="text-orge7bc4d9">
 <p>
 Asking oneself questions actually has an analogue in the field of AI: prompt-based programming. It is a concept that I came across when <a href="./gpt3_student.html">I got the chance to beta-test OpenAI's GPT-3</a> natural language model. You "program" it by giving it a task or asking it a question, similar to interacting with a chatbot. If you want it to generate a Shakespearean sonnet about grad school life, you lieterally just type in the request to do so. If that sounds crazy, here is a <a href="https://www.gwern.net/GPT-3">rabbit hole from tech writer Gwern</a>. Depending on how you prompt it, you get a feel for what the model is capable of doing and how it operates. There is an XAI layer on top of this, where every word that gets outputted is colored by the probability of that word being generated as opposed to the next word. My point here is that it might be that "explaining" the next generation of AI algorithms might become much closer to what we do every day, trying to explain ourselves and others.
 </p>
 
 <p>
-We can potentially use prompt-based programming to get an <a href="https://icml.cc/media/icml-2021/Slides/10835_k1sKQZy.pdf">AI to explain itself</a>. This is a subfield of XAI called Natural Language Explanations (NLE). In the slide decks I link to, you see (among many other things) a hypothetical example of a self-driving car. It stops at a crosswalk for a pedestrian. You ask it "why did you stop." It explains to you that it saw a person crossing. That style of explanation, human-machine communication, could very well be on the horizon. I say this as at the time of writing, <a href="https://arxiv.org/pdf/2204.13807.pdf">DALL-E2</a> has come out, which produces images based on word-based prompts. What does that have to do with natural language explanations? It shows that we are getting better at converting words into other mathematical objects and back (given enough training data), which allows us to make the hypothesis that for a given AI system, we will be able to convert the weights of the model(s) into words (or pictures) relevant to some question that is being "prompted".
+We can potentially use prompt-based programming to get an <a href="https://icml.cc/media/icml-2021/Slides/10835_k1sKQZy.pdf">AI to explain itself</a>. This is a subfield of XAI called Natural Language Explanations (NLE). In the slide decks I link to, you see (among many other things) a hypothetical example of a self-driving car. It stops at a crosswalk for a pedestrian. You ask it "why did you stop." It explains to you that it saw a person crossing. That style of explanation, human-machine communication, could very well be on the horizon. I say this as at the time of writing, <a href="https://arxiv.org/pdf/2204.13807.pdf">DALL-E 2</a> has come out, which produces images based on word-based prompts. What does that have to do with natural language explanations? It shows that we are getting better at converting words into other mathematical objects and back (given enough training data), which allows us to make the hypothesis that for a given AI system, we will be able to convert the weights of the model(s) into words (or pictures) relevant to some question that is being "prompted".
 </p>
 
 <p>
@@ -91,9 +91,9 @@ This gets to the point of this article. We do prompt-based queries of AI systems
 </div>
 </div>
 
-<div id="outline-container-orge9e943d" class="outline-2">
-<h2 id="orge9e943d">Conclusions</h2>
-<div class="outline-text-2" id="text-orge9e943d">
+<div id="outline-container-org39a7171" class="outline-2">
+<h2 id="org39a7171">Conclusions</h2>
+<div class="outline-text-2" id="text-org39a7171">
 <p>
 Art, music, moving about the world and experiencing new things, having relationships, all of these are the explainable AI tools of the network of black boxes we call humanity. We have been on this since our <a href="https://en.wikipedia.org/wiki/Timeline_of_human_evolution">emergence</a>. We know what to do here. Accordingly, I'm trying to get intuition around what these black box algorithms are doing by looking at how we get to know ourselves and others.
 </p>
@@ -105,7 +105,7 @@ I am still quite new to the field of XAI, but my best guess right now is that it
 </div>
 </div>
 <div id="postamble" class="status">
-<p class="date">Date: June 30, 2022 - July 15, 2022</p>
+<p class="date">Date: June 30, 2022 - October 15, 2022</p>
 <p class="creator"><a href="https://www.gnu.org/software/emacs/">Emacs</a> 26.3 (<a href="https://orgmode.org">Org</a> mode 9.1.9)</p>
 <p class="validation"></p>
 </div>
