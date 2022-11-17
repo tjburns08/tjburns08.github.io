@@ -94,7 +94,7 @@ Abstract: Due to the rise of high-dimensional single cell technologies in the pa
 ** [[./biorxiv_medrxiv_history.html][Preprint server archive]]
 A searchable and sortable table of every biorxiv and medrxiv pre-print to date ([2022-11-17 Thu 13:43]). Specifically, every time a paper is uploaded to one of these pre-print servers, it is automatically tweeted out from the respective twitter handle. As such, the table contains the paper title along with various tweet metadata (eg. likes) to allow users to understand which papers are potentialy important.
 
-** [[https://github.com/tjburns08/knn_sleepwalk][Knn_sleepwalk]]
+** [[https://github.com/tjburns08/knn_sleepwalk][Knn sleepwalk]]
 A wrapper I wrote around the [[https://anders-biostat.github.io/sleepwalk/][sleepwalk]] R package. Hover the cursor over any cell in your embedding, and it will show you the cell's k-nearest neighbors computed from the original feature space (as opposed to the embedding space). This allows you to test your assumptions around how exact a low-dimensional embedding (eg. t-SNE, UMAP) is. 
 
 ** [[https://www.bioconductor.org/packages/release/bioc/html/Sconify.html][Bioconductor package Sconify]]
