@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>The beauty is truth delusion</title>
+<meta name="generator" content="Org mode" />
+<link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css" />
+</head>
+<body>
+<div id="content">
+<h1 class="title">The beauty is truth delusion</h1>
+<p>
+<a href="./index.html">Home</a>
+</p>
+
+<p>
+<i>When old age shall this generation waste,</i>
+<i>Thou shalt remain, in midst of other woe</i>
+<i>Than ours, a friend to man, to whom thou say'st,</i>
+<i>"Beauty is truth, truth beauty,"—that is all</i>
+<i>Ye know on earth, and all ye need to know.</i>
+</p>
+<ul class="org-ul">
+<li>From "Ode on a Grecian Urn" by John Keats</li>
+</ul>
+
+<p>
+There is a recurring theme that I see in my field that I have talked about enough privately, but I haven't written down until now. It's an idea that long-time members of my field on the dry-lab side know very well. This is the idea that data visualizations that look prettier than others don't necessarily convey more truth. I call this the "beauty is truth" delusion.
+</p>
+
+<p>
+I first encountered (fell victim to) this delusion in 2013, when I saw my first <a href="https://pubmed.ncbi.nlm.nih.gov/23685480/">t-SNE</a> map. It was beautiful. It sub-setted different immune cell populations into different islands. You could color the map by different markers and see this for yourself. It was a lot of information in a single algorithmically generated infographic suitable for publications. Now at the time, I didn't know how to code and did not have much of a relevant quantitative background. Thus, I didn't have the toolkit to really question how exact these maps are, nor did I even think to do so. Hence the delusion.
+</p>
+
+<p>
+It wasn't until 2018 when I was working as a bioinformatican at the German Rheumatism Research Center in Berlin when my colleague was presenting a t-SNE map of his data that a very rigorous bioinformatics professor in the audience simply wasn't buying. At all. I was in the audience, as the bioinformatician who produced the visualization, and I turned around and started talking to him directly. The talk briefly turned into a productive discussion between two audience members, me and this professor. He had a point. While I had seen what a t-SNE map could provide at the "island" level, I had not questioned the exactitude of the map cell by cell. 
+</p>
+
+<p>
+This kicked off a series of projects that I later became known for, where I started interrogating these t-SNE maps with my bioinformatics skill set to get the t-SNE map to start visualizing its own performance. This culminated in <a href="./tjb_dimr_talk.pdf">talks</a> and <a href="https://github.com/tjburns08/knn_sleepwalk">tools</a> that I still add to and show today, as t-SNE and UMAP become more widely used within the bioinformatics community. The spoiler alert is that while the maps accurrately separate discrete cell types into distinct islands, the nearest neighbors of a given cell in the embedding space are not consistent with the nearest neighbors of that same cell in original feature space. It was then that I became aware of the beauty is truth delusion that I had been stuck in for several years. It was then that I was aware that others may have this delusion too, by no fault of their own: there are a lot of pretty data visualization tools out there, and not everyone has the time to do the necessary skeptical inquiries. 
+</p>
+
+<p>
+Regarding my findings with the t-SNE, this matters because there are members of the CyTOF community for example who partition directly on the maps, breaking the islands themselves into subsets. While I can't speak to each individual instance of this for each individual project, and I'm obviously not going to accuse them of having this delusion, my message is simply to be careful when working with these visualization tools. The beauty is truth delusion is waiting for you and wants to take hold. Or it's waiting for the editors of Cell, Science and Nature. But that's a topic for another day.  
+</p>
+
+<p>
+I'll give one more example. <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3196363/">SPADE</a>. This was the original visualization of choice for CyTOF data in the first set of papers from the Nolan lab and collaborators. It overclusters the data and then produces a minimum spanning tree where each node is a cluster. SPADE is a great visualization when the data happen to be tree-like (eg. bone marrow). However, all one has to do is produce a 30 dimensions of random gaussian noise and feed it into SPADE to see that SPADE will produce a tree-like structure (see my work <a href="./mass.cytometry.analysis.history.pdf">here</a>, slides 13-16). This does not invalidate SPADE and spanning trees in general for CyTOF data. The message is the same as it was with t-SNE. Be careful. 
+</p>
+
+<p>
+What I recommend for the bioinformatics community is the development of tools and strategies that show both the inner-workings and the performance of data visualization tools like SPADE, t-SNE and UMAP, in a way that the users (who may or may not understand the math and the code) will be able to understand. One way is to give these tools unexpected inputs, like random noise. This is something that you learn in any intro computer science class. You make the software, and then you try to break it. The other way is to get the tool to talk about itself, as I did with t-SNE. This one is a bit harder, but it is very helpful.
+</p>
+
+<p>
+It's not enough to say things like "be careful when you gate on a t-SNE map." I know plenty of people who have been saying that from the beginning. We have to produce material that show the users that they have to be careful. We have to produce material that allows the user to make the distinction between truth and beauty. 
+</p>
+</div>
+<div id="postamble" class="status">
+<p class="date">Date: November 29, 2022 - November 29, 2022</p>
+<p class="creator"><a href="https://www.gnu.org/software/emacs/">Emacs</a> 26.3 (<a href="https://orgmode.org">Org</a> mode 9.1.9)</p>
+<p class="validation"></p>
+</div>
+</body>
+</html>
