@@ -125,6 +125,8 @@ There are two potenital audiences here. The first are those with questions about
 
 Regardless of the reader's intent, I hope above all that the work below will encourage people to really tinker with text, numbers, and data. You can get surprisingly far if you get in the habit of it. 
 
+** [[./asinh_mean_vs_mean_asinh.html][asinh(mean(x)) vs mean(asinh(x))]]
+If you want the means of your markers per cluster, be careful how you export the data. If you export the means of the raw values per cluster, and take the asinh(x/5) transform of that, the values will be different than if you take the means of the asinh(x/5) transformed data per cluster. The latter is the right way to do it. But don't take my word for it. Look at the markdown yourself. 
 
 ** [[./cytof_data_transformations.html][Data transformations for CyTOF]]
 CyTOF data are transformed using the inverse hyperbolic sine (asinh) of the data divided by 5 (aka scale argument of 5). But does it have to be like that? What happens if we use a scale argument of 1? 500? What if we do a log transform? How does t-SNE look on untransformed CyTOF data?
