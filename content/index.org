@@ -123,7 +123,10 @@ These are primarily R and python markdowns exploring various topics. I apologize
 
 There are two potenital audiences here. The first are those with questions about any of the topics below that I cover. The second are those learning coding or data science who want to see examples of simple but insightful analyses.
 
-Regardless of the reader's intent, I hope above all that the work below will encourage people to really tinker with text, numbers, and data. You can get surprisingly far if you get in the habit of it. 
+Regardless of the reader's intent, I hope above all that the work below will encourage people to really tinker with text, numbers, and data. You can get surprisingly far if you get in the habit of it.
+
+** [[./logic_gates.html][Logic gates]]
+What are the fundamental units of a computer? Logic gates. I show what these are. I then show that they can be created with combinations of a single type of logic gate: NAND (Not AND). In other words, you can make a general-purpose computer if you had enough NAND gates and wires. In the spirit of this, I combine NAND gates to create a calculator that can add large numbers. One of the key points in this exercise is that it does not take much to get from NAND gates to complex computations. 
 
 ** [[./asinh_mean_vs_mean_asinh.html][asinh(mean(x)) vs mean(asinh(x))]]
 If you want the means of your markers per cluster, be careful how you export the data. If you export the means of the raw values per cluster, and take the asinh(x/5) transform of that, the values will be different than if you take the means of the asinh(x/5) transformed data per cluster. The latter is the right way to do it. But don't take my word for it. Look at the markdown yourself. 
