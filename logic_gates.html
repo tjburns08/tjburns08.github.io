@@ -795,12 +795,14 @@ test</code></pre>
 ## 15    14 1110        14
 ## 16    15 1111        15
 ## 17    16 10000       16</code></pre>
-<p>Ok, now we’re going to make a 16 bit adder stringing together 4 4-bit
-adders that we made previously. That will allow us to add numbers that
-sum up to 2^16, or 65536. You can see by the way this is set up, that we
-could in turn string together 4 16-bit adders to create a 64-bit adder,
-and so on for very large numbers. I’ll leave that as an exercise for the
-reader.</p>
+<p>Ok, now we’re going to make a 16 bit adder by stringing together 4
+4-bit adders that we made previously. That will allow us to add numbers
+that sum up to 2^16 - 1, or 65535. You can see by the way this is set
+up, that we could in turn string together 4 16-bit adders to create a
+64-bit adder, and so on for very large numbers. I’ll leave that as an
+exercise for the reader. Note that below, we have an extra function that
+converts a binary number to a sixteen bit representation for the adder
+In other words, the binary number 101 would become 0000000000000101.</p>
 <pre class="r"><code>ToSixteen &lt;- function(b) {
   while(length(b) &lt; 16) {
     b &lt;- c(0, b)
@@ -871,10 +873,11 @@ out</code></pre>
 ## 19 12452 23713    36165 36165
 ## 20 25475 13476    38951 38951</code></pre>
 <p>From here, there are many different directions you can go. You can
-use the adder to do subtraction. You can create an arithmetic logic unit
-that does a number of things. You can also use feedback loops to create
-RAM. From there, you can start thinking at the level of operating
-systems.</p>
+use the adder to do <a href="https://en.wikipedia.org/wiki/Two%27s_complement">subtraction</a>.
+You can create an <a href="https://en.wikipedia.org/wiki/Arithmetic_logic_unit">arithmetic
+logic unit</a> that does a number of things. You can also use feedback
+loops to create <a href="https://en.wikipedia.org/wiki/Random-access_memory">RAM</a>. From
+there, you can start thinking at the level of operating systems.</p>
 <p>The key points from this exercise I hope you got are:<br /> - It
 doesn’t take much to get to arithmetic from simple logic gates.<br /> -
 NAND gates can make all the logic gates we covered, and in turn do
