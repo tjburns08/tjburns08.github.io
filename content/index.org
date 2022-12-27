@@ -106,6 +106,8 @@ CYTO Conference; Prague, Czech Republic; May 2018.
 Abstract: Due to the rise of high-dimensional single cell technologies in the past few years, there has been an increasing number of both computational methods and workflows to analyze the new wealth of data. However, non-intuitive properties of high-dimensional space can give rise to analysis artifacts, collectively known of as the “curse of dimensionality.” Increasing dimensions differentially affect the performance of distance metrics, and there is no clear consensus about which distance metrics to use for which analysis strategies. While the influence of many tool-specific parameters has been evaluated, we study here the impact of commonly used distance metrics on the outcome of dimensionality reduction and clustering.
 
 * Software
+Note: the web apps below that are associated with Heroku are down for the time being. This is because Heroku, which is the go-to for deploying Dash-based apps, has introduced a paywall. For the time being, I am not willing to comply. 
+
 ** [[./biorxiv_medrxiv_history.html][Preprint server archive]]
 A searchable and sortable table of every biorxiv and medrxiv pre-print to date ([2022-11-17 Thu 13:43]). Specifically, every time a paper is uploaded to one of these pre-print servers, it is automatically tweeted out from the respective twitter handle. As such, the table contains the paper title along with various tweet metadata (eg. likes) to allow users to understand which papers are potentialy important.
 
