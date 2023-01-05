@@ -16,30 +16,35 @@
 <a href="./index.html">Home</a>
 </p>
 
-<div id="outline-container-orgaee2c0a" class="outline-2">
-<h2 id="orgaee2c0a">Introduction</h2>
-<div class="outline-text-2" id="text-orgaee2c0a">
+<hr />
 <p>
-We make the assumption every day that we have to scroll through our feeds. When we do a Google search, or a PubMed search if you're a biomedical researcher like me, we assume that the relevant results will be at the very top of the list. This might work for specific searches, but not broader ones. In other cases, like when we're checking the news or social media, we face an <a href="https://en.wiktionary.org/wiki/infinite_scroll">infinite, constantly updating feed</a>. We find ourselves mindlessly scrolling through a one-dimensional list, with little if any control over what hypernormal, outrage-inducing content will show up next. We do this because there is no alternative.
+<i>We’re training and conditioning a whole new generation of people that when we are uncomfortable or lonely or uncertain or afraid we have a digital pacifier for ourselves that is kind of atrophying our own ability to deal with that.”</i><br />
 </p>
 
 <p>
-I define the set of negative issues caused by the act of scrolling as the "scrolling problem." I am talking specifically about the act of scrolling through lists of things. This is not to be confused with scrolling through a single piece of writing, like an article or blog post. A lot of data are presented to us as lists of things, or feeds, and in order to "stay updated" we have no choice but to scroll through it. This leads us to be reactive if the content has a clickbait element to it (flashy, outrage-inducing). This leads us to be quickly overwhelmed as the feeds force us to rapidly engage in <a href="https://en.wikipedia.org/wiki/Task_switching_(psychology)">task switching</a> or simply pay a psychological price due to the negative stimuli in our feeds, both of which can lead to decreased cognitive performance. 
+— Tristan Harris, former design ethicist at Google and co-founder of Centre for Humane Technologies. From <i>The Social Dilemma</i>
+</p>
+<hr />
+<div id="outline-container-org520acd7" class="outline-2">
+<h2 id="org520acd7">Introduction</h2>
+<div class="outline-text-2" id="text-org520acd7">
+<p>
+We make the assumption every day that we have to scroll through our feeds. When we do a Google search, or a PubMed search if you're a biomedical researcher like me, we assume that the relevant results will be at the very top of the list. This might work for specific searches, but not broader ones. We run into big issues when we're checking the news or social media, where we face an <a href="https://en.wiktionary.org/wiki/infinite_scroll">infinite, constantly updating feed</a> that serves us. We find ourselves mindlessly scrolling through a one-dimensional list, with little if any control over what hypernormal, outrage-inducing content the AI algorithms controlling the feed will serve up next. This includes "recommended" content and tailored ads, an additional layer that takes away even more control over what we see. We do this because there is no alternative.
 </p>
 
 <p>
-The scrolling problem is a <a href="https://en.wikipedia.org/wiki/Wicked_problem">wicked problem</a>: it is not particularly well-defined, but you know it when you see it. My strategy for solving a wicked problem is to <a href="./just_paint.html">solve a simpler but related problem</a>, so I could get some momentum going. In my case, I solved the problem of how to group related texts together in a map. This doesn't remove the need to scroll, but it does allow us to start thinking about alternatives to scrolling.
+I define the set of negative issues caused by the act of scrolling, and especially scrolling through infinite feeds governed by algorithms we do not understand with incentives that may not align with ours, as the "scrolling problem." This is not to be confused with scrolling through a single piece of writing, like an article or blog post. A lot of data are presented to us as infinite feeds, and in order to "stay updated" we have no choice but to scroll through it. This leads us to be reactive if the content has a clickbait element to it (flashy, outrage-inducing). This leads us to be quickly overwhelmed as the feeds force us to rapidly engage in <a href="https://en.wikipedia.org/wiki/Task_switching_(psychology)">task switching</a> or simply pay a psychological price due to the negative stimuli in our feeds, both of which can lead to decreased cognitive performance. 
 </p>
 
 <p>
-Specifically, I take any one-dimensional list that you would otherwise scroll through, I use the BERT language model to convert each item on the list into a vector, and use UMAP to convert this vector into XY coordinates. I then use Plotly to view this XY plane as an interactive map. Similar items group near each other. I cluster the map, and then I extract keywords from the clusters, so the map is organized by topics. This allows the user to quickly zoom into or avoid particular topics. In sum, the user then has an interactive "map view" that can supplement the original list.
+The scrolling problem is a <a href="https://en.wikipedia.org/wiki/Wicked_problem">wicked problem</a>: it is not particularly well-defined, but you know it when you see it. My strategy for solving a wicked problem is to <a href="./just_paint.html">solve a simpler but related problem</a>, so I could get some momentum going. In my case, I have looked at avoidance and content curation as solutions where we can leverage pre-existing tools. In terms of tools that don't exist yet, I figured out how to view content as a map of topics rather than a feed, given the user additional control over what "regions" of a given feed they would like to look at. 
 </p>
 </div>
 </div>
 
-<div id="outline-container-orgc470aa6" class="outline-2">
-<h2 id="orgc470aa6">Current solutions to the scrolling problem</h2>
-<div class="outline-text-2" id="text-orgc470aa6">
+<div id="outline-container-org07eefd5" class="outline-2">
+<h2 id="org07eefd5">Why the scrolling problem matters</h2>
+<div class="outline-text-2" id="text-org07eefd5">
 <p>
 First question: is the scrolling problem really a societal problem affecting a large fraction of internet users? Or is it just specific to me and/or you? One can answer that by doing a quick Google search of the term "stop scrolling." If you want a more scientific bent to the scrolling problem, type "stop scrolling" into PubMed. And scroll scroll scroll through the results&#x2026;
 </p>
@@ -49,9 +54,9 @@ I first started really thinking of the scrolling problem after I watched <a href
 </p>
 </div>
 
-<div id="outline-container-org2ada77b" class="outline-3">
-<h3 id="org2ada77b">Context switching and productivity</h3>
-<div class="outline-text-3" id="text-org2ada77b">
+<div id="outline-container-orgd0f1a23" class="outline-3">
+<h3 id="orgd0f1a23">Context switching and productivity</h3>
+<div class="outline-text-3" id="text-orgd0f1a23">
 <p>
 I had an ADD diagnosis when I was a kid. My mom refused to put me on Ritalin, which was the first line of treatment at the time. I think it was one of the best decisions my mom ever made regarding my upbringing, as difficult as it was at the time. Without any meds, I had to figure out how to stay focused and productive in my own way. As a result, I like to think that now I became hypersensitive to things that de-rail focus and productivity, something I needed to get me through to the end of grad school. If this is true, then I have identified endless scrolling as one of them.
 </p>
@@ -70,9 +75,9 @@ Now all this being said, passive or active scrolling will lead to exposure to ne
 </div>
 </div>
 
-<div id="outline-container-org8bc89cf" class="outline-3">
-<h3 id="org8bc89cf">Doomscrolling and mean world syndrome</h3>
-<div class="outline-text-3" id="text-org8bc89cf">
+<div id="outline-container-org7c5f696" class="outline-3">
+<h3 id="org7c5f696">Doomscrolling and mean world syndrome</h3>
+<div class="outline-text-3" id="text-org7c5f696">
 <p>
 In my research into the scrolling problem, I came across the highly relevant term <a href="https://en.wikipedia.org/wiki/Doomscrolling">doomscrolling</a>. This is scrolling particularly through outrage-inducing content, leading one to fall into an increasingly bad mood, in which perhaps it feels like society faces impending doom. The wikipedia article I linked is very interesting, in that it puts into words a lot of issues that I have come across when I doomscroll. The first is <a href="https://en.wikipedia.org/wiki/Mean_world_syndrome">mean world syndrome</a>. This is a cognitive bias that arises from activities like doomscrolling can lead one to perceive the world as more dangerous than it actually is. One can see the gap between perceived danger and actual danger simply by looking at historical data. Steven Pinker does this in his book <a href="https://en.wikipedia.org/wiki/The_Better_Angels_of_Our_Nature">Better Angels of our Nature</a>, which allowed me to clearly see how I was falling into the "mean world syndrome" camp.
 </p>
@@ -82,23 +87,138 @@ We can't talk about mean world syndrome without talking more broadly about <a hr
 </p>
 </div>
 </div>
+</div>
 
-<div id="outline-container-org3cac795" class="outline-3">
-<h3 id="org3cac795">Current solutions: avoidance and curation</h3>
-<div class="outline-text-3" id="text-org3cac795">
+<div id="outline-container-org0708204" class="outline-2">
+<h2 id="org0708204">Solution 1: Restriction</h2>
+<div class="outline-text-2" id="text-org0708204">
+<hr />
 <p>
-Given that doomscrolling has been defined and is part of the current discussion, meaning that at least that part of the scrolling problem is being addressed, what are the current solutions ot the scrolling problem? One way is avoidance. Limited news and social media. Tim Ferriss coined the term <a href="https://tim.blog/category/low-information-diet-and-selective-ignorance/">The Low Information Diet</a> in his classic <a href="https://en.wikipedia.org/wiki/The_4-Hour_Workweek">The 4 Hour Workweek</a>. When I first learned about this concept, I brushed it off as absolutely preposterous. I was just out of undergrad and had a bit of a chip on my shoulder. "The internet is the future. Knowing everything is our moral duty. If I know exactly what is going on everywhere all the time, I will be a better person and make better decisions." Maybe that would be the case in a world where news was properly curated and served to us in a more controlled and unbiased manner (which is something I'm trying to take a stab at with this project), but if we fast forward to 2022, news has been optimized to maximize for clicks over information content. This means that outrage-inducing stimuli is fair game if you are only optimizing for clicks and you don't care about other things, like the collective psychological state of people who have keys to the nuclear arsenal and people who vote them into office. Furthermore, even before internet news and the incentive structure around it, there was enough negative news in the newspaper growing up to give me the idea that the news itself is overwhelmingly negative (which could possibly be my negative bias and mean world syndrome). You don't hear the news about all the people who had a perfectly average or even above average day. One exception to any negative bent on the news is a sub-reddit called <a href="https://www.reddit.com/r/UpliftingNews/">Uplifting News</a>, which literally finds and tells positive and feel-good current events.
+<i>“And if you don’t even take the things which are set before you, but are able even to reject them, then you will not only be a partner at the feasts of the gods, but also of their empire.”</i><br />
+— Epictetus, <i>The Enchiridion</i>
+</p>
+<hr />
+
+<p>
+Given that doomscrolling has been defined and is part of the current discussion, meaning that at least that part of the scrolling problem is being addressed, what are the current solutions ot the scrolling problem? One way is avoidance. Limited news and social media. Tim Ferriss coined the term <a href="https://tim.blog/category/low-information-diet-and-selective-ignorance/">The Low Information Diet</a> in his classic <a href="https://en.wikipedia.org/wiki/The_4-Hour_Workweek">The 4 Hour Workweek</a>. When I first learned about this concept, I brushed it off as absolutely preposterous. I was just out of undergrad and had a bit of a chip on my shoulder. "The internet is the future. Knowing everything is our moral duty. If I know exactly what is going on everywhere all the time, I will be a better person and make better decisions."
 </p>
 
 <p>
-In sum, there are two solutions to the scrolling problem I have come across so far. The first is limited or no scrolling. The second is to aggressively curate your feeds so they include a fair amount of feel-good content. Make sure you subscribe to subreddits like Uplifting News, and stay away from subreddits like Imatotalpieceofshit. Trust me.
+Maybe that would be the case in a world where news was properly curated and served to us in a more controlled and unbiased manner (which is something I'm trying to take a stab at with this project), but if we fast forward to 2022, news has been optimized to maximize for clicks over information content. This means that outrage-inducing stimuli is fair game if you are only optimizing for clicks and you don't care about other things, like the collective psychological state of people who have keys to the nuclear arsenal and people who vote them into office.
+</p>
+
+<p>
+Furthermore, even before internet news and the incentive structure around it, there was enough negative news in the newspaper growing up to give me the idea that the news itself is overwhelmingly negative (which could possibly be my negative bias and mean world syndrome). You don't hear the news about all the people who had a perfectly average or even above average day. One exception to any negative bent on the news is a sub-reddit called <a href="https://www.reddit.com/r/UpliftingNews/">Uplifting News</a>, which literally finds and tells positive and feel-good current events. I'll talk about this kind of thing in our next section: curating your feeds so you get the inputs you want to see.
+</p>
+
+<p>
+So then what are some good ways to practice avoidance of scrolling, and the low information diet?
+</p>
+</div>
+
+<div id="outline-container-org58d85a5" class="outline-3">
+<h3 id="org58d85a5">Method 1: set designated times for scrolling</h3>
+<div class="outline-text-3" id="text-org58d85a5">
+<p>
+This involves blocking out timeframes where scrolling is allowed. This might be a specific time or set of times every day, or only on specific days of the week. For me, I try not to engage in any scrolling before my lunch break, and ideally not until the evening after I'm done working. What I find is that when I successfully abstain from scrolling until the evening, it is easier for me to simply not so any of it at all. It's similar to my (limited) experience with fasting, where at first you're very hungry, but then at some point the hunger pains go away.
+</p>
+
+<p>
+When it comes time to scroll, what I try to do is block out a specific and short time window. 15 minutes, or whatever works for you. If I'm in a phase of my life where I'm actively posting to social media, what I try to do is log on with a specific objective in mind. I am only going to respond to comments on my post. If I don't do this, then I find myself mindlessly scrolling.
 </p>
 </div>
 </div>
 
-<div id="outline-container-org6cbce6b" class="outline-3">
-<h3 id="org6cbce6b">Motivation for maps, where my work begins</h3>
-<div class="outline-text-3" id="text-org6cbce6b">
+<div id="outline-container-org3a63417" class="outline-3">
+<h3 id="org3a63417">Method 2: use tools that limit your scrolling time</h3>
+<div class="outline-text-3" id="text-org3a63417">
+<p>
+There are various browser tools that help you from getting distracted. In grad school, I used a browser extension called StayFocused. How it worked, and how I'm guessing others work, is you list a set of websites that you absolutely do not want to visit during a designated time frame for designated days, that you also set. For me, it was news and social media, Monday-Friday 9am-6pm. How it worked was that between those hours, I had a total allotted time of 10 minutes with which I could do whatever I want on any of those sites. Every time I visited a site on the list, the timer would start ticking. The timer would stop ticking when I went to a site not on the list. This kind of thing can backfire, though. During my more vulnerable moments, when for example I was very sleep deprived, I found myself going into other browsers when the time ran out. So be careful. Your mind will figure out ways around it. 
+</p>
+
+<p>
+Another trick I use is on my phone. I take all the news, social media, and scroll-centric apps and I place them into a folder labeled "distractions." This gives me a little bit of a buffer, because every time I find myself going to one of those apps, I have to acknowledge that I am entering the distractions folder and therefore am distracted. If I really pay attention to my mannerisms, I realize that a handful of my moments where I pick up the phone and start scrolling are unconscious. It is the word "distractions" that allows me to snap back into focus and say "oh, I'm doing that thing that I'm really trying not to do."
+</p>
+
+<p>
+Here are some examples of tools that you can use to keep the scrolling at bay. This list is nowhere near exhaustive, but it is meant to give you an idea of the types of tools that already exist that you can start using today. 
+</p>
+
+<p>
+<a href="https://addons.mozilla.org/en-US/firefox/addon/distract-me-not/">Distract Me Not</a>: a Firefox add-on that blocks websites that you list, with day and time specifications possible. Similar to the one I've used.<br />
+<a href="https://addons.mozilla.org/en-US/firefox/addon/df-youtube/">DF YouTube</a>: a Firefox extension for YouTube that removes the feeds and disables autoplay. It essentially removes the scrolling problem from YouTube.<br />
+<a href="https://addons.mozilla.org/en-US/firefox/addon/grayscale-bro/">Grayscale Bro</a>: a Firefox extension that removes color from everything you're looking at. Shades of gray blunt a lot of the hypernormal stimuli that would otherwise get you to click on something on impulse.<br />
+<a href="https://addons.mozilla.org/en-US/firefox/addon/textise-it/">Textise-It</a>: A Firefox extension that allows for the viewing of websites in text-only mode. This means that no pictures are uploaded. This has helped me with respect to viewing news and social media, as it keeps me from being biased from any images associated with articles and posts.<br />
+<a href="https://en.wikipedia.org/wiki/Text-based_web_browser">Text-only browsers</a>: Related to Textise-It, there is a whole class of text only web browsers. From this list, I use Emacs/EWW.<br />
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org757a4ef" class="outline-2">
+<h2 id="org757a4ef">Solution 2: Curation</h2>
+<div class="outline-text-2" id="text-org757a4ef">
+<hr />
+<p>
+<i>“Garbage in, garbage out. Or rather more felicitously: the tree of nonsense is watered with error, and from its branches swing the pumpkins of disaster.”</i><br />
+— Nick Harkaway, <i>The Gone-Away World</i>
+</p>
+<hr />
+
+<p>
+There are plenty of sub-regions of the internet and social media that might be relevant to your goals, your career, your relationships, and so on. As such, for many people, it is not realistic to completely abstain from scrolling through feeds. For example, I try not to spend too much time on Twitter, but when new developments in AI happen that are relevant to my work, Twitter is the place where productive discussions at the leading edge are taking place. So I have to go on Twitter with a very narrow focus on learning something new about some new development in AI, and try not to get sucked into any of the other drama that I will naturally run into by the simple act of scrolling.
+</p>
+</div>
+
+<div id="outline-container-org884a0dd" class="outline-3">
+<h3 id="org884a0dd">Method 1: programmatic access to social media.</h3>
+<div class="outline-text-3" id="text-org884a0dd">
+<p>
+If we stick with Twitter for a moment, you can programatically access Twitter via its own API, or even with web scrapers. I have scripts that pull tweets from relevant users into tables that I view either in excel or via html. This allows me to get what I need from Twitter without being at the hands of its algorithm. One example of this is my <a href="https://github.com/tjburns08/preprint_history">preprint history archive</a> that I maintain. The preprint servers Biorxiv and Medrxiv automatically post to Twitter the instant a pre-print is uploaded. The tweet includes the title and a link. I pull these and the metadata (eg. likes, retweets) into a table so you can ask simple questions about what the most popular pre-prints within a particular timeframe pertaining to a particular subject were, in whatever order you'd like to see them. But you can extend this concept to any user or users, essentially creating your own "feed" without encountering the scrolling problem. 
+</p>
+</div>
+</div>
+
+<div id="outline-container-org012fa6c" class="outline-3">
+<h3 id="org012fa6c">Method 2: RSS feeds</h3>
+<div class="outline-text-3" id="text-org012fa6c">
+<p>
+RSS feeds are something that I'm only recently getting into. They used to be a common way of curating information on the internet relevant to you, but this has largely been replaced by social media. And RSS feed is a particular web format standard that would allow you to subscribe to specific websites, like blogs, or news sites. What you do on your end is get a RSS feed reader, which takes the RSS based content of the websites you're interested in and gives it to you as a list of content you can go through. It feels less like scrolling and more like checking your emails. 
+</p>
+
+<p>
+RSS feeds removes the algorithm-driven infinite scroll feature of the main social media platforms, prevents any recommended content or ads from showing up, and gives you more control over what you see. Of note: Google killed its RSS feed reader (called Google Reader) in 2013, suggesting that RSS is not exactly as popular as it used to be. But perhaps RSS feeds is a healthier way of getting information from the internet. You still wouldn't have control over whether a given news site would serve up something inflammatory that ruins your mood, but you would be able to easily unsubscribe to anything you don't like, and not worry about some algorithm serving up recommended content from feeds you're not subscribed to.
+</p>
+
+<p>
+Some RSS feed readers you can try:<br />
+</p>
+
+<p>
+<a href="https://play.google.com/store/apps/details?id=com.devhd.feedly&amp;pli=1">Feedly</a>: an Android based RSS feed reader that has over 5M downloads.<br />
+<a href="https://newsblur.com/">Newsblur</a>: an RSS feed reader for both Android and iOS that has many different interesting features. It can also get feeds from websites like Twitter and YouTube that don't have RSS.<br />
+<a href="https://github.com/skeeto/elfeed">Elfeed</a>: for Emacs users. This is the one I use. From the developer: "As far as I know, outside of Elfeed there does not exist an extensible, text-file configured, power-user web feed client that can handle a reasonable number of feeds. The existing clients I've tried are missing some important capability that limits its usefulness to me."<br />
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org702bb37" class="outline-2">
+<h2 id="org702bb37">Solution 3: Maps</h2>
+<div class="outline-text-2" id="text-org702bb37">
+<hr />
+<p>
+<i>"I was a few miles south of Louisville when I planned my journey. I spread out my map under a tree and made up my mind to go through Kentucky, Tennessee, and Georgia to Florida, thence to Cuba, thence to some part of South America; but it will be only a hasty walk. I am thankful, however, for so much."</i><br />
+</p>
+
+<p>
+— John Muir, <i>A Thousand-Mile Walk to the Gulf</i>
+</p>
+<hr />
+</div>
+<div id="outline-container-org6e9c9bd" class="outline-3">
+<h3 id="org6e9c9bd">Motivation for maps, where my work begins</h3>
+<div class="outline-text-3" id="text-org6e9c9bd">
 <p>
 My work on the scrolling problem aims to give the user a bit more control over the act of scrolling itself. The idea is we can't eliminate scrolling entirely. We have to know at least a little bit of what is going on in the world, so we don't get shell shocked when we get to the store and there is <a href="https://en.wikipedia.org/wiki/Shortages_related_to_the_COVID-19_pandemic">no toilet paper or hand sanitizer</a> on the shelves. Furthermore, even if we inundate our feeds with positive content, we still have little control over what the next item is going to be as we scroll. Every once in a while, something gets through. There was a time a few years ago where my Facebook feed filled up with heartbreaking stories of animals in shelters who had been abused, sometimes with graphic pictures. I can't tell you if this is a trend that everyone saw, or if a handful of my Facebook friends were sharing things like this. The point is, if you scroll long enough, you're going to get hit by something that drags down your mood, and perhaps with it your cognitive performance and productivity, for the rest of the day.
 </p>
@@ -108,11 +228,10 @@ This is one reason I am focused on turning my feeds into maps. If sensitive poli
 </p>
 </div>
 </div>
-</div>
 
-<div id="outline-container-orgdde4f8e" class="outline-2">
-<h2 id="orgdde4f8e">From feeds to maps</h2>
-<div class="outline-text-2" id="text-orgdde4f8e">
+<div id="outline-container-org1eef3d6" class="outline-3">
+<h3 id="org1eef3d6">From feeds to maps</h3>
+<div class="outline-text-3" id="text-org1eef3d6">
 <p>
 Here is what viewing your feed as a map would ideally like: rather than having an endless list of tweets, posts, news articles, search results, emails, TODOs, and things of that nature, you have a map. Passages that are similar to each other are near each other based on context. A tweet about dogs and another tweet about dogs would be near each other. A tweet about cats would be near the tweets about dogs because they are related in the context of "pets."
 </p>
@@ -127,9 +246,9 @@ Now imagine you're searching PubMed for every scientific paper for a particular 
 </div>
 </div>
 
-<div id="outline-container-org7518b71" class="outline-2">
-<h2 id="org7518b71">My text-to-map protocol</h2>
-<div class="outline-text-2" id="text-org7518b71">
+<div id="outline-container-org92902a1" class="outline-3">
+<h3 id="org92902a1">My text-to-map protocol</h3>
+<div class="outline-text-3" id="text-org92902a1">
 <p>
 The tools needed to convert text to maps are open source and readily avilable if you know how to code. My protocol revolves around the use of the BERT language model (there are alternatives, but this one works well enough and is open source). BERT is a pre-trained transformer that takes any text up to 512 words long and converts it into a 768 element vector. Broadly speaking, you can think of this high-dimensional "context space." Data scientists are used to operating with high-dimensional data like this. We know how to program computers to understand this type of data. However, for it to be human readable, we have to somehow turn these 768 dimensional coordinates into a simple XY plane that we're used to.
 </p>
@@ -152,17 +271,13 @@ The map must be interactive and clickable. I'll get into this later, but I'm usi
 </div>
 </div>
 
-<div id="outline-container-org9f355fe" class="outline-2">
-<h2 id="org9f355fe">A context map view of the news (web app is <a href="https://news2vecmap.herokuapp.com/">here</a>)</h2>
-<div class="outline-text-2" id="text-org9f355fe">
+<div id="outline-container-orga85e7c3" class="outline-3">
+<h3 id="orga85e7c3">A context map view of the news</h3>
+<div class="outline-text-3" id="text-orga85e7c3">
 <p>
 The news is a high-impact low hanging fruit for this type of analysis. I am often bombarded by too much information, as well as hypernormal clickbait. I decided to make a map based on the news article titles to create a "neterws space" that I could query from the map view. The easiest solution to doing this was to use twitter. The major news outlets have twitter accounts. These accounts tweet out articles as they come in, as part of the 24 hour news cycle. The text of the tweets is typically the title of the article in question, followed by a hyperlink. This means that I can get the text of the title of the article without having to click on the hyperlink. I just need the tweet itself. Thus, I can create a news map by means of collecting tweets and using the text as input. I collected twitter handles for the major news outlets, from AP to CNBC. I used the twitter API to collect as many tweets from each handle as I possibly could, in order to create a more nuanced "news space."
 </p>
-</div>
 
-<div id="outline-container-org1bc41f4" class="outline-3">
-<h3 id="org1bc41f4">Prior art: news mapped to location on Earth</h3>
-<div class="outline-text-3" id="text-org1bc41f4">
 <p>
 In researching what has been done to solve the scrolling problem with respect to the news, I found a handful of sites that take news articles and literally place them onto a world map. At the time of writing this sentence <span class="timestamp-wrapper"><span class="timestamp">[2022-07-16 Sat 11:52] </span></span> google has a Google News to Google Maps connection <a href="https://www.google.com/maps/d/embed?mid=1uHqXslGuzi1PEjYPM2eD-gfZWXg&amp;msa=0&amp;hl=en&amp;ie=UTF8&amp;t=m&amp;ll=19.973348999999963%2C64.33593799999997&amp;spn=141.785314%2C351.210938&amp;z=2&amp;output=embed">here</a> that achieves this aim. I like this because it allows the user to organize the news in terms of regions. Another one that is quite a bit more in-depth is this <a href="https://blog.gdeltproject.org/an-interactive-realtime-map-of-the-worlds-news/">interactive map of the world news</a>, by the <a href="https://www.gdeltproject.org/">Gdelt Project</a>, a beautiful undertaking to monitor everything that is taking place everywhere in the world, at the map level. It is a bit overwhelming (which is one of the issues with scrolling I'm trying to solve), but the user nonetheless gets control over which regions will be the area of focus for a given news search. Furthermore, it allows the user to (ideally) see how much of the news is concentrated in a particular country. For example, if there is an election in a particular country, there will be a significant increase in news focus on that particular country.
 </p>
@@ -170,26 +285,21 @@ In researching what has been done to solve the scrolling problem with respect to
 <p>
 What I am doing is similar in that the output is a map. However, it is different in that I'm using an abstract "similarity space" rather than a literal map. The benefit there is that articles about inflation will be mapped to a particular region. Articles about how inflation is affecting the price of Bitcoin will me adjacent to that. Articles about Bitcoin in general will be adjacent to that. Articles about Cryptocurrencies including but not limited to Bitcoin will be adjacent to that. So it is a map of how current events are related to each other in context rather than where they are located. I like to think of it in terms of how a conversation would go. Inflation -&gt; Speaking of which&#x2026;Bitcoin -&gt; Speaking of which&#x2026;Crypto. 
 </p>
-</div>
-</div>
 
-<div id="outline-container-org792f473" class="outline-3">
-<h3 id="org792f473">News space: similar news articles are grouped near each other</h3>
-<div class="outline-text-3" id="text-org792f473">
 <p>
 Let's dig into the web app. We'll go through various news sources, starting with AP, which I chose for broad, relatively <a href="https://my.lwv.org/california/torrance-area/article/how-reliable-your-news-source-understanding-media-bias-2022">unbiased reporting</a>. 
 </p>
 </div>
 
-<div id="outline-container-org2029cc7" class="outline-4">
-<h4 id="org2029cc7">AP</h4>
-<div class="outline-text-4" id="text-org2029cc7">
+<div id="outline-container-org8164e86" class="outline-4">
+<h4 id="org8164e86">AP</h4>
+<div class="outline-text-4" id="text-org8164e86">
 <p>
 Below we have a screen with the map in its current form.
 </p>
 
 
-<div id="orge44c0d7" class="figure">
+<div id="org396a36c" class="figure">
 <p><img src="./images/ap_image.png" alt="ap_image.png" />
 </p>
 </div>
@@ -207,7 +317,7 @@ On the desktop version, the user can hover onto each point and get information a
 </p>
 
 
-<div id="org3c95364" class="figure">
+<div id="org2a31f33" class="figure">
 <p><img src="./images/ap_hover_example.png" alt="ap_hover_example.png" />
 </p>
 </div>
@@ -222,15 +332,15 @@ Importantly, similar news articles are grouped near each other in terms of conte
 </div>
 </div>
 
-<div id="outline-container-org78d805c" class="outline-4">
-<h4 id="org78d805c">ESPN</h4>
-<div class="outline-text-4" id="text-org78d805c">
+<div id="outline-container-orgcb954b8" class="outline-4">
+<h4 id="orgcb954b8">ESPN</h4>
+<div class="outline-text-4" id="text-orgcb954b8">
 <p>
 For example, contrast the layout of AP, which is relatively broad across the map, with that of ESPN.
 </p>
 
 
-<div id="org55675b0" class="figure">
+<div id="orgaeff5c9" class="figure">
 <p><img src="./images/espn_image.png" alt="espn_image.png" />
 </p>
 </div>
@@ -240,7 +350,7 @@ You can see that the ESPN news (sports) occupies the northeast corner of the map
 </p>
 
 
-<div id="org0c958c9" class="figure">
+<div id="orgd3a9869" class="figure">
 <p><img src="./images/espn_llws.png" alt="espn_llws.png" />
 </p>
 </div>
@@ -250,22 +360,22 @@ You can see that the ESPN news (sports) occupies the northeast corner of the map
 </p>
 
 
-<div id="org6fa3fde" class="figure">
+<div id="org4959dbc" class="figure">
 <p><img src="./images/espn_wnba.png" alt="espn_wnba.png" />
 </p>
 </div>
 </div>
 </div>
 
-<div id="outline-container-org032e9ec" class="outline-4">
-<h4 id="org032e9ec">CNBC</h4>
-<div class="outline-text-4" id="text-org032e9ec">
+<div id="outline-container-org4ca6a7b" class="outline-4">
+<h4 id="org4ca6a7b">CNBC</h4>
+<div class="outline-text-4" id="text-org4ca6a7b">
 <p>
 Now if we switch gears and look at CNBC, we can get a feel for business and finance news.
 </p>
 
 
-<div id="org38793c3" class="figure">
+<div id="org2457eac" class="figure">
 <p><img src="./images/cnbc_example.png" alt="cnbc_example.png" />
 </p>
 </div>
@@ -275,7 +385,7 @@ Here, you can see that the news articles are a bit more sparse on the map. The n
 </p>
 
 
-<div id="org98a39b8" class="figure">
+<div id="org7fdff81" class="figure">
 <p><img src="./images/cnbc_euro_markets.png" alt="cnbc_euro_markets.png" />
 </p>
 </div>
@@ -285,7 +395,7 @@ Follow this "line" of articles west and you'll get to a small island that corres
 </p>
 
 
-<div id="org3e81235" class="figure">
+<div id="orgd082b8a" class="figure">
 <p><img src="./images/cnbc_dodge_electric.png" alt="cnbc_dodge_electric.png" />
 </p>
 </div>
@@ -295,23 +405,22 @@ I thought I would see news about Elon Musk and Tesla nearby, but I didn't. Rathe
 </p>
 
 
-<div id="org3631df8" class="figure">
+<div id="org349edbf" class="figure">
 <p><img src="./images/cnbc_flight.png" alt="cnbc_flight.png" />
 </p>
 </div>
 </div>
 </div>
 
-
-<div id="outline-container-org28c91b3" class="outline-4">
-<h4 id="org28c91b3">New Scientist</h4>
-<div class="outline-text-4" id="text-org28c91b3">
+<div id="outline-container-orgccad767" class="outline-4">
+<h4 id="orgccad767">New Scientist</h4>
+<div class="outline-text-4" id="text-orgccad767">
 <p>
 Finally, we will look at science news. This is from New Scientist, which is the most followed science news related twitter account at the time of writing. Below is a picture of the map. You can see that science covers the westrn half of the map. The very large points correspond to news about the James Webb Space Telescope, which was recently launched.
 </p>
 
 
-<div id="org48dee9e" class="figure">
+<div id="orgbaec423" class="figure">
 <p><img src="./images/newscientist_example.png" alt="newscientist_example.png" />
 </p>
 </div>
@@ -321,7 +430,7 @@ I'll focus for now on the small cluster of articles that is just east of the lar
 </p>
 
 
-<div id="orgec66e9e" class="figure">
+<div id="org41f6419" class="figure">
 <p><img src="./images/newscientist_flight_duration.png" alt="newscientist_flight_duration.png" />
 </p>
 </div>
@@ -331,7 +440,7 @@ Next door to that is an article about the strength of a robot hand.
 </p>
 
 
-<div id="org5ec47e5" class="figure">
+<div id="org8002545" class="figure">
 <p><img src="./images/newscientist_robot_strength.png" alt="newscientist_robot_strength.png" />
 </p>
 </div>
@@ -341,7 +450,7 @@ So far, we're looking at performance of technology. But here is the twist. Below
 </p>
 
 
-<div id="org8468438" class="figure">
+<div id="org74040d4" class="figure">
 <p><img src="./images/newscientist_thinking_exhausted.png" alt="newscientist_thinking_exhausted.png" />
 </p>
 </div>
@@ -352,33 +461,28 @@ So you can see that we're dealing with a "general performance" cluster, that lum
 </div>
 </div>
 </div>
-</div>
 
-<div id="outline-container-org70d926e" class="outline-2">
-<h2 id="org70d926e">Conclusions and future directions</h2>
-<div class="outline-text-2" id="text-org70d926e">
-</div>
-<div id="outline-container-org28f8d05" class="outline-3">
-<h3 id="org28f8d05">Additional optimizations</h3>
-<div class="outline-text-3" id="text-org28f8d05">
+<div id="outline-container-orgfa201ff" class="outline-3">
+<h3 id="orgfa201ff">Additional optimizations</h3>
+<div class="outline-text-3" id="text-orgfa201ff">
 <p>
 I am far from finished in terms of optimizing the map. Obvious functional things to be done include adding additional twitter handles into the dropdown at the top. Ideally, I'd want to simply have a blank text box where the user adds the twitter handle of interest to generate the map, so the user could get a map view of way more than just the news. The reason why I can't do that right now is because I'm using the twitter API, which only allows a limited number of tweets to be pulled per month. When I have a lot of different users pulling tweets all the time, I'll reach my monthly limit very fast. Another option that I might do is teach users how to create their own authorization codes for their own use of the twitter API. That could be a simple instructional page. But that will happen down the line.
 </p>
 </div>
 </div>
 
-<div id="outline-container-org3387251" class="outline-3">
-<h3 id="org3387251">Generalization of the map view solution</h3>
-<div class="outline-text-3" id="text-org3387251">
+<div id="outline-container-org489f833" class="outline-3">
+<h3 id="org489f833">Generalization of the map view solution</h3>
+<div class="outline-text-3" id="text-org489f833">
 <p>
 In terms of generalizing this map viewer, there are many additional use cases, ranging from competitive business intelligence to map-assisted Google searches. I'm currently working on many of these. I don't know if others are going to be interested in each of these use cases. At this point, I am merely scratching my own itch.
 </p>
 </div>
 </div>
 
-<div id="outline-container-orgbea12ca" class="outline-3">
-<h3 id="orgbea12ca">How I am using this web app in my everyday life</h3>
-<div class="outline-text-3" id="text-orgbea12ca">
+<div id="outline-container-orgd9250a9" class="outline-3">
+<h3 id="orgd9250a9">How I am using this web app in my everyday life</h3>
+<div class="outline-text-3" id="text-orgd9250a9">
 <p>
 Every morning, I update the app to include new news articles. I do check the news outside of the web app, but only to check the headlines. For a deeper dive into the news, I use the app. I generate the maps and I go through each of the news sources in the dropdown to get intuition around where each news type is. I note that at the time of writing, the news gets mapped differently every time I bring in new articles. I'm currently working on this with a few friends, but it is technically challenging. I generally start wit AP and CNN Breaking News. I look at what is newest in relation to the rest of the map. I then go into CNBC and the rest of them depending on what I am looking for that day.
 </p>
@@ -386,16 +490,33 @@ Every morning, I update the app to include new news articles. I do check the new
 <p>
 I am slowly getting feedback from others, and trying to emphasize form over function. I could spend hundreds of hours (or lots of money) making the site look sleek and professional. But it's going to give you the same information at the end of the day. If you have any feedback for me, don't hesitate to reach out.
 </p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org05ebc47" class="outline-2">
+<h2 id="org05ebc47">Conclusions and future directions</h2>
+<div class="outline-text-2" id="text-org05ebc47">
+<p>
+I've defined the scrolling problem as the set of problems associated with scrolling through infinite feeds controlled by algorithms we do not understand that have incentives that may not align with our own. I initially defined the scrolling problem for myself because I saw scrolling was starting to affect my mental health and the mental health of my peers.
+</p>
 
 <p>
-I'll end by saying that since I have been on this pursuit to solve the scrolling problem, my mental health and clarity of thinking have both improved. I attribute this both to less time spent scrolling and less stress from having more control over my information intake. I hope my work does the same for you, too. 
+One solution I defined was avoidance. This was at least restricting your scrolling to designated days and times. I also showed how the use of pre-existing tools could help you restrict scrolling. These tools could work either through restricting your access to particular sites, or through displaying the web in text only mode, which would remove images and videos that would otherwise tempt you to scroll. Another solution I defined was content curation. This was either using programmatic access to content to create your own finite feeds, or using pre-existing RSS feeds and a feed reader to turn what is otherwise scrolling into what feels like checking email.
+</p>
+
+<p>
+The third solution was the use of AI to turn a given feed into a topic map, giving the user control over what regions of the map they would like to visit. I spent some time explaining and showing the map solution to give the reader an idea of what exactly a topic map is like and just now news articles would be grouped in such a map format. I explain that this is a work in progress, but I'm already using it to great success for checking the news. 
+</p>
+
+<p>
+I'll end by saying that since I have been on this pursuit to solve the scrolling problem, my mental health and clarity of thinking have both improved. I attribute this both to less time spent scrolling and less stress from having more control over my information intake. I think what helps is being able to characterize the scrolling problem in your life. My guess is that the scrolling problem will be a little bit different for each person, based on their social media habits, information intake habits, work schedule, responsibilities, whether or not they're a content creator, and things of that nature. A problem well defined is half solved. If you can characterize the scrolling problem in your life to the best of your ability, then you'll have an idea of which of the solutions I've presented are most relevant to your situation. Overall, I hope my work helps you improve your mental health and clarity of thought as it did with me. 
 </p>
 </div>
 </div>
 </div>
-</div>
 <div id="postamble" class="status">
-<p class="date">Date: July 15, 2022 - July 16, 2022</p>
+<p class="date">Date: July 15, 2022 - January 5, 2023</p>
 <p class="creator"><a href="https://www.gnu.org/software/emacs/">Emacs</a> 28.1 (<a href="https://orgmode.org">Org</a> mode 9.5.2)</p>
 </div>
 </body>
