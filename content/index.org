@@ -116,8 +116,8 @@ A wrapper I wrote around the [[https://anders-biostat.github.io/sleepwalk/][slee
 ** [[https://www.bioconductor.org/packages/release/bioc/html/Sconify.html][Bioconductor package Sconify]]
 Official description: This package does k-nearest neighbor based statistics and visualizations with flow and mass cytometery data. This gives tSNE maps"fold change" functionality and provides a data quality metric by assessing manifold overlap between fcs files expected to be the same. Other applications using this package include imputation, marker redundancy, and testing the relative information loss of lower dimension embeddings compared to the original manifold.
 
-** [[https://news2vecmap.herokuapp.com/][Web app news2vecmap]]
-Associated with [[https://tjburns08.github.io/scrolling_problem.html][The Scrolling Problem]]. An app that converts news of the past few days into a semantic map where articles that are similar to each other in context are near each other on the map.
+** [[https://github.com/tjburns08/rss_map][RSS map]]
+Associated with [[https://tjburns08.github.io/scrolling_problem.html][The Scrolling Problem]]. An app that converts an RSS feed into a semantic map where articles that are similar to each other in context are near each other on the map.
 
 ** [[https://gwasmap.herokuapp.com/][Web app gwasmap]]
 Associated with my article [[https://tjburns08.github.io/context_problem_bfx.html][The Context Problem in Bioinformatics]]. Given one of more genes, what are the GWAS associations? These are placed onto a semantic map where associations that are similar to each other are grouped near each other on the map. Thus, if gene 1 is associated with Alzheimer's disease and gene 2 is associated with age-related cognitive decline (different but related disease) the associations for each gene (colored accordingly) will show up near each other.
@@ -170,7 +170,6 @@ Here, I write some code to produce Rule 110, a Class 4 1-D cellular automata. I 
 
 ** [[./question_graph_writeup.html][Question graph]]
 You are only as good as the questions you ask yourself and others. My uncle told me that many years ago when I was getting started with my career and it stuck. This has been relevant to me in terms of having and maintaining good friendships, being a good husband, being a good family member, being a good businessman, and when I was in graduate school, being a good scientist, and simply being an interesting person. I have a very large list of questions now that is very overwhelming. So I turned them into an embedding using the BERT language model, turned that into a nearest neighbor graph, and then derived insight from looking at the questions in terms of "communities." 
-
 
 * Other contributions
 **** Former computational biologist, now guest researcher, at the German Rheumatism Research Center in Berlin, Germany. I will always stay connected to my academic roots.
