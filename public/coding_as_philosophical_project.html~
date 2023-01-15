@@ -13,9 +13,9 @@
 <div id="content" class="content">
 <h1 class="title">The philosophical project of computer science</h1>
 
-<div id="outline-container-orgce5484f" class="outline-2">
-<h2 id="orgce5484f">From geometry to computer science</h2>
-<div class="outline-text-2" id="text-orgce5484f">
+<div id="outline-container-orgc081d3a" class="outline-2">
+<h2 id="orgc081d3a">From geometry to computer science</h2>
+<div class="outline-text-2" id="text-orgc081d3a">
 <hr />
 <p>
 <i>"The knowledge of which geometry aims is the knowledge of the eternal."</i><br />
@@ -33,9 +33,9 @@ In my life, I have found computer science to be the modern heir to geometry in t
 </div>
 </div>
 
-<div id="outline-container-org83aa630" class="outline-2">
-<h2 id="org83aa630">The scientific method</h2>
-<div class="outline-text-2" id="text-org83aa630">
+<div id="outline-container-orgb948b45" class="outline-2">
+<h2 id="orgb948b45">The scientific method</h2>
+<div class="outline-text-2" id="text-orgb948b45">
 <p>
 We all learned the scientific method in school.<br />
 </p>
@@ -68,13 +68,13 @@ There is a level above that of the rapid-fire experiments improving your ability
 </div>
 </div>
 
-<div id="outline-container-orgf2167a6" class="outline-2">
-<h2 id="orgf2167a6">An expanded language</h2>
-<div class="outline-text-2" id="text-orgf2167a6">
+<div id="outline-container-org688a1fe" class="outline-2">
+<h2 id="org688a1fe">An expanded language</h2>
+<div class="outline-text-2" id="text-org688a1fe">
 </div>
-<div id="outline-container-orgef46434" class="outline-3">
-<h3 id="orgef46434">Recursion</h3>
-<div class="outline-text-3" id="text-orgef46434">
+<div id="outline-container-org849b1f6" class="outline-3">
+<h3 id="org849b1f6">Recursion</h3>
+<div class="outline-text-3" id="text-org849b1f6">
 <p>
 Computer science gives us data structures and algorithms that don't come easy to standard spoken language. What is recursion? You're defining a function where the function is executed in the function definition. Ok, that's a mouthful. Let's try again. What is recursion?
 </p>
@@ -94,9 +94,9 @@ Still a bit mind-bending if you've never seen this before. If this is new to you
 </div>
 </div>
 
-<div id="outline-container-org4a46af3" class="outline-3">
-<h3 id="org4a46af3">Graphs</h3>
-<div class="outline-text-3" id="text-org4a46af3">
+<div id="outline-container-org21e52d6" class="outline-3">
+<h3 id="org21e52d6">Graphs</h3>
+<div class="outline-text-3" id="text-org21e52d6">
 <p>
 Ok, how about a practical example for biologists. What is a cell signaling pathway? Well, to massively oversimply, you have messages being passed from protein to protein all the way down to the DNA where some sort of effector (eg. a transcription factor) does a thing to the DNA. What if you wanted to model that? How would you do it? Well, in computer science (and discrete math) there is a data structure called a graph that allows for one to wire up a pathway <i>in silico.</i> This is a graph as in a mathematical abstraction of a network, not to be confused with a biaxial plot. 
 </p>
@@ -106,20 +106,20 @@ So let's wire one up. Ok, done. What do I get from that? Well, one very fundamen
 </p>
 
 <p>
-How do I know this? I spent three years doing just this for a client of mine. The use case is simple (though the implementation is complicated): can we find druggable regions of the network that will lead to the change that we want given the intent of the company? It would have been very hard, if not impossible, to do this kind of work without the intuition of a graph.
+How do I know this? I spent three years doing just this for a client of mine. The use case is simple (though the implementation is complicated): can we find druggable regions of the network that will lead to the change that we want given the intent of the company? It would have been very hard, if not impossible, to do this kind of work without the intuition and use of a graph.
 </p>
 </div>
 </div>
 
-<div id="outline-container-orgad1a286" class="outline-3">
-<h3 id="orgad1a286">Models</h3>
-<div class="outline-text-3" id="text-orgad1a286">
+<div id="outline-container-org7c5f109" class="outline-3">
+<h3 id="org7c5f109">Models</h3>
+<div class="outline-text-3" id="text-org7c5f109">
 <p>
 Socrates wants to know what virtue is. So he asks you "what is virtue?" In the stereotypical dialogues with Socrates, he asks you question after question until you contradict yourself, proving that you don't know what you're talking about nearly as well as you thought. Now, one interpretation of Socrates that I particularly like is that he did this for the purpose of inducing aporia. This is a state where you're not really talking or thinking verbally anymore because you doubt all of your words. What does this do? Well, what is left when verbal thinking is gone? Nonverbal thinking. So in this interpretation of Socrates, he's trying to get you to realize that there is a lot in this world that cannot be explained precisely by words.
 </p>
 
 <p>
-Now if you're AI leader Joscha Bach has an interesting angle to these big questions. He translates them into data structures and algorithms and then attempts to explain them through that lens. In his <a href="https://www.youtube.com/watch?v=P-2P3MSZrBM">podcast with Lex Fridman</a>, when he's explaining what he's read about Thomas Aquinus, he says:
+Now AI leader Joscha Bach has an interesting angle to these big questions. He translates them into data structures and algorithms and then attempts to explain them through that lens. In his <a href="https://www.youtube.com/watch?v=P-2P3MSZrBM">podcast with Lex Fridman</a>, when he's explaining what he's read about Thomas Aquinas's interpretation of virtue, he says:
 </p>
 
 <hr />
@@ -133,7 +133,7 @@ The key word here is "models." Going from computer science to machine learning y
 </p>
 
 <p>
-Now if you were programming an AI agent to understand and act virtuously, how would you do it? Well, you would have to build a set of reinforcement learning models trained on real word data that correspond to things like courage, temperance, justice, and wisdom. You'd have to define what's called a loss function for each of the virtues that would promote or penalize various things as the model optimizes with each new instance fed to the model of what may or may not be courage, for example. Is that how we work? It's obviously more complicated than that, but at least this allows us to start asking actionable questions: if these are models, are they pre-trained? Let's look at toddlers reacting to just and unjust actions. Are these models trainable? Let's examine human cognitive and emotional development across cultures that have different value systems. Are they centralized (remember centrality from the section on graphs)? Let's do a neuroimaging study where we show subjects instances of courage, cowardice, justice, injustice, etc, and see what regions of the brain light up. Socrates would get me to contradict myself nonetheless. I would concede defeat, but I would tell him that at least it's getting me to ask some good and testable questions. Socrates, who prototypically values asking questions, would probably understand.
+Now if you were programming an AI agent to understand and act virtuously, how would you do it? Well, you would have to build a set of reinforcement learning models trained on real word data that correspond to things like courage, temperance, justice, and wisdom. You'd have to define what's called a loss function for each of the virtues that would promote or penalize various things as the model optimizes with each new instance fed to the model of what may or may not be courage, for example. Is that how we work? It's obviously more complicated than that, but at least this allows us to start asking actionable questions: if these are models, are they pre-trained? Let's look at toddlers reacting to just and unjust actions. Are these models trainable? Let's examine human cognitive and emotional development across cultures that have different value systems. Are they centralized (remember centrality from the section on graphs)? Let's do a neuroimaging study where we show subjects instances of courage, cowardice, justice, injustice, etc, and see what regions of the brain light up. Do different regions light up, or are they roughly the same for each virtue or vice? Socrates would get me to contradict myself nonetheless. I would concede defeat, but I would tell him that at least it's getting me to ask some good and testable questions. Socrates, who prototypically values asking questions, would probably understand.
 </p>
 
 <p>
@@ -143,9 +143,9 @@ What computational definitions and analogies do is cut into the space of things 
 </div>
 </div>
 
-<div id="outline-container-orgcd8f786" class="outline-2">
-<h2 id="orgcd8f786">Conclusion</h2>
-<div class="outline-text-2" id="text-orgcd8f786">
+<div id="outline-container-org7506701" class="outline-2">
+<h2 id="org7506701">Conclusion</h2>
+<div class="outline-text-2" id="text-org7506701">
 <p>
 As I get older, I increasingly value the endless pursuit of wisdom. Cognitive scientist John Vervaeke likes to say that the child is to the adult as the adult is to the sage. I like that framing. Now at least for me, I use computer science along with the scientific method as a base for my thinking and sensemaking. We all know how to do the scientific method, but computer science is both a way to intensively put the scientific method into practice, and way to expand your lexicon to include things that are otherwise hard to put into words. As such, I see computer science as a solid foundation for modern philosophy, the way Plato saw geometry in his time.
 </p>
