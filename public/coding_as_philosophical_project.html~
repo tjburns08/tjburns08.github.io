@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>The philosophical project of computer science</title>
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css" />
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">The philosophical project of computer science</h1>
+
+<div id="outline-container-orgce5484f" class="outline-2">
+<h2 id="orgce5484f">From geometry to computer science</h2>
+<div class="outline-text-2" id="text-orgce5484f">
+<hr />
+<p>
+<i>"The knowledge of which geometry aims is the knowledge of the eternal."</i><br />
+Plato, The Republic, VII, 52.
+</p>
+<hr />
+
+<p>
+Plato highly valued geometry. But he was not a geometer. He did not use geometry for anything practical in his life. He saw it as a stepping stone to the study of philosophy. In fact, on the door to his Academy, there was a sign that said "let no one ignorant of geometry enter."
+</p>
+
+<p>
+In my life, I have found computer science to be the modern heir to geometry in terms of a stepping stone to living the philosophical life. Why does this matter? Because it could very well be that in the next few years, generative AI renders human-based coding obsolete at the practical level. If this is the case, I will continue coding and teaching people how to code. Why? Because through computer science I can truly engage in the philosophical life the way Plato did using geometry. Computer science taught me how to think. 
+</p>
+</div>
+</div>
+
+<div id="outline-container-org83aa630" class="outline-2">
+<h2 id="org83aa630">The scientific method</h2>
+<div class="outline-text-2" id="text-org83aa630">
+<p>
+We all learned the scientific method in school.<br />
+</p>
+
+<ol class="org-ol">
+<li>Ask a question<br /></li>
+<li>Do some research as to what is known already<br /></li>
+<li>Form a hypothesis<br /></li>
+<li>Run an experiment to test the hypothesis<br /></li>
+<li>Analyze the data<br /></li>
+<li>Form a conclusion<br /></li>
+<li>For each follow up question, go to step 1.<br /></li>
+</ol>
+
+<p>
+The conclusion leads to follow-up questions and you're at the top of the loop again. Importantly, in my experience, my hypothesis is partially or fully wrong quite often. Each time I'm wrong, my intuition around how the work works improves. Furthermore, I get a chance to do a mental stack trace to see if I can locate the fallacies in my thinking that led to the wrong hypothesis. Sometimes, it's simply that biology is complicated. Often, I didn't read up enough on Gene X, or some sort of cognitive bias (wishful thinking, because I want to get the high-end publication) clouds my judgment. In this regard, through repeated experiments, where I put my hypothesis on the line, I become a better thinker. 
+</p>
+
+<p>
+Now, in my little corner of biology, step 4 and step 5 would both take anywhere from days to months. If you're developing a mouse model from scratch, one experiment could take years. If one of your goals is to become better at thinking, then this can really slow you down.
+</p>
+
+<p>
+When I started pursuing computer science halfway through graduate school, I was surprised at how much this process sped up. When I was de-bugging code, I would run experiments at the rate of 1 or more per minute. Often for several hours. Again, each experiment where I was wrong, each error message, gave me the opportunity to become a better thinker. I learned early on to love the error message. You spend a huge chunk of time, upwards of half of your time, de-bugging code.
+</p>
+
+<p>
+There is a level above that of the rapid-fire experiments improving your ability to think via the scientific method. The higher level is the fact that you're not trying to understand billions of years of evolution. You're trying to understand code that you wrote. You converted your logical thoughts into computer language, and then the computer gave you an error message. Your mental model about how this was going to work was wrong. So when you find the bug, you have located an error in your thinking. Then you learn from it. Then you become a better thinker. 
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgf2167a6" class="outline-2">
+<h2 id="orgf2167a6">An expanded language</h2>
+<div class="outline-text-2" id="text-orgf2167a6">
+</div>
+<div id="outline-container-orgef46434" class="outline-3">
+<h3 id="orgef46434">Recursion</h3>
+<div class="outline-text-3" id="text-orgef46434">
+<p>
+Computer science gives us data structures and algorithms that don't come easy to standard spoken language. What is recursion? You're defining a function where the function is executed in the function definition. Ok, that's a mouthful. Let's try again. What is recursion?
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span style="font-weight: bold;">def</span> <span style="font-weight: bold;">factorial</span>(x):
+  <span style="font-weight: bold;">if</span> x &lt; 2:
+    <span style="font-weight: bold;">return</span> 1
+  <span style="font-weight: bold;">else</span>:
+    <span style="font-weight: bold;">return</span> x * factorial(x - 1)
+</pre>
+</div>
+
+<p>
+Still a bit mind-bending if you've never seen this before. If this is new to you, get out some paper and draw out the procedure for factorial(5), treating the above as a recipe. Recursion is much easier to explain, think through, and understand in code. There's a fantastic book called <i>Gödel, Escher, Bach</i> by Douglas Hofstadter. It happens to be largely about recursion: functions that talk about themselves. I've read it 3 times: once when I was 14, once when I was in my early 20s, and once when I was in my early 30s. It more or less went over my head the first two times, but I finally understood it the third time around. Why? Because knowing computer science, even at the rudimentary level, helped me understand what he was talking about.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org4a46af3" class="outline-3">
+<h3 id="org4a46af3">Graphs</h3>
+<div class="outline-text-3" id="text-org4a46af3">
+<p>
+Ok, how about a practical example for biologists. What is a cell signaling pathway? Well, to massively oversimply, you have messages being passed from protein to protein all the way down to the DNA where some sort of effector (eg. a transcription factor) does a thing to the DNA. What if you wanted to model that? How would you do it? Well, in computer science (and discrete math) there is a data structure called a graph that allows for one to wire up a pathway <i>in silico.</i> This is a graph as in a mathematical abstraction of a network, not to be confused with a biaxial plot. 
+</p>
+
+<p>
+So let's wire one up. Ok, done. What do I get from that? Well, one very fundamental question in graph theory is what are the "central" regions of a graph? This is called centrality. Degree centrality tells us how many friends each node has. Betweenness centrality tells us what regions in the network have the most shortest paths that run through them. Think of the Bay Bridge from Oakland to San Franscisco. Commuters know that, minus traffic, that is the quickest path to San Francisco for a lot of the East Bay and beyond. The Bay Bridge would have a high betweenness entrality. But with this metric you can quantify that and compare it to the San Mateo bridge to the south. Such is the same with signaling pathways. Assuming you have a good dataset, you can start interrogating these pathways in terms of regions that are relevant to whatever your intent is.
+</p>
+
+<p>
+How do I know this? I spent three years doing just this for a client of mine. The use case is simple (though the implementation is complicated): can we find druggable regions of the network that will lead to the change that we want given the intent of the company? It would have been very hard, if not impossible, to do this kind of work without the intuition of a graph.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgad1a286" class="outline-3">
+<h3 id="orgad1a286">Models</h3>
+<div class="outline-text-3" id="text-orgad1a286">
+<p>
+Socrates wants to know what virtue is. So he asks you "what is virtue?" In the stereotypical dialogues with Socrates, he asks you question after question until you contradict yourself, proving that you don't know what you're talking about nearly as well as you thought. Now, one interpretation of Socrates that I particularly like is that he did this for the purpose of inducing aporia. This is a state where you're not really talking or thinking verbally anymore because you doubt all of your words. What does this do? Well, what is left when verbal thinking is gone? Nonverbal thinking. So in this interpretation of Socrates, he's trying to get you to realize that there is a lot in this world that cannot be explained precisely by words.
+</p>
+
+<p>
+Now if you're AI leader Joscha Bach has an interesting angle to these big questions. He translates them into data structures and algorithms and then attempts to explain them through that lens. In his <a href="https://www.youtube.com/watch?v=P-2P3MSZrBM">podcast with Lex Fridman</a>, when he's explaining what he's read about Thomas Aquinus, he says:
+</p>
+
+<hr />
+<p>
+<i>And then he says that there are additional rational principles that humans can discover and everybody can discover them so there are universal. If you are sane you, should understand, you said to submit to them because you can rationally deduce them. And these principles are roughly: you should be willing to self-regulate correctly. You should be willing to do correct social regulation, inter-organismic. You should be willing to act on your models so you have skin in the game. And you should have goal rationality, you should be choosing the right goals to work on. And so basically these three rational principles, goal rationality he calls prudence or wisdom, social regulation is justice, the correct social one, and the internal regulation is temperance. And this thing, willingness to act on your models is courage.</i>
+</p>
+<hr />
+
+<p>
+The key word here is "models." Going from computer science to machine learning you end up with complicated functions that we call models that output a specific set of things given specific inputs. Models that distinguish between cats and dogs, predict housing prices given a set of features (like number of rooms), win at chess, or even generate art.
+</p>
+
+<p>
+Now if you were programming an AI agent to understand and act virtuously, how would you do it? Well, you would have to build a set of reinforcement learning models trained on real word data that correspond to things like courage, temperance, justice, and wisdom. You'd have to define what's called a loss function for each of the virtues that would promote or penalize various things as the model optimizes with each new instance fed to the model of what may or may not be courage, for example. Is that how we work? It's obviously more complicated than that, but at least this allows us to start asking actionable questions: if these are models, are they pre-trained? Let's look at toddlers reacting to just and unjust actions. Are these models trainable? Let's examine human cognitive and emotional development across cultures that have different value systems. Are they centralized (remember centrality from the section on graphs)? Let's do a neuroimaging study where we show subjects instances of courage, cowardice, justice, injustice, etc, and see what regions of the brain light up. Socrates would get me to contradict myself nonetheless. I would concede defeat, but I would tell him that at least it's getting me to ask some good and testable questions. Socrates, who prototypically values asking questions, would probably understand.
+</p>
+
+<p>
+What computational definitions and analogies do is cut into the space of things that are not verbal. To say that something might be a reinforcement learning model in our brain is a more satisfying and actionable hypothesis than just telling Socrates "you know it when you see it."
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgcd8f786" class="outline-2">
+<h2 id="orgcd8f786">Conclusion</h2>
+<div class="outline-text-2" id="text-orgcd8f786">
+<p>
+As I get older, I increasingly value the endless pursuit of wisdom. Cognitive scientist John Vervaeke likes to say that the child is to the adult as the adult is to the sage. I like that framing. Now at least for me, I use computer science along with the scientific method as a base for my thinking and sensemaking. We all know how to do the scientific method, but computer science is both a way to intensively put the scientific method into practice, and way to expand your lexicon to include things that are otherwise hard to put into words. As such, I see computer science as a solid foundation for modern philosophy, the way Plato saw geometry in his time.
+</p>
+
+<p>
+The actionable advice I would give is to gain a basic understanding of computer science, even if AI automates the whole thing. It doesn't take very long to learn how to think computationally. An intro course on python will teach you the basic data structures, algorithms and concepts that I still use today. Writing a couple of scripts that do things you care about will put the knowledge in practice, and you'll see what I mean about the intensive practice of the scientific method.
+</p>
+
+<p>
+In conclusion, I think if Plato lived today, the door to his Academy would read "let no one ignorant of computer science enter."
+</p>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="date">Date: January 15, 2023 - January 15, 2023</p>
+<p class="creator"><a href="https://www.gnu.org/software/emacs/">Emacs</a> 28.1 (<a href="https://orgmode.org">Org</a> mode 9.5.2)</p>
+</div>
+</body>
+</html>
