@@ -10,7 +10,8 @@
 Plato, The Republic, VII, 52.
 -----
 
-Plato valued geometry highly. But he was not a geometer. He did not use geometry for anything practical in his life. He saw it as a stepping stone to the study of philosophy. In fact, on the door to his Academy, there was a sign that said "let no one ignorant of geometry enter."
+Plato valued geometry highly. But he was not a geometer. He did not use geometry for anything practical in his life. He saw it as a stepping stone to the study of philosophy. In
+fact, on the door to his Academy, there was a sign that said "let no one ignorant of geometry enter."
 
 In my life, I have found computer science to be the modern heir to geometry in terms of a stepping stone to living the philosophical life. Why does this matter? Because it could very well be that in the next few years, generative AI renders human-based coding obsolete at the practical level. If this is the case, I will continue coding and teaching people how to code. Why? Because through computer science I can truly engage in the philosophical life the way Plato did using geometry. Computer science taught me how to think. 
 
@@ -35,6 +36,12 @@ There is a level above that of the rapid-fire experiments improving your ability
 
 * An expanded language
 ** Recursion
+-----
+/“I enjoy acronyms. Recursive Acronyms Crablike "RACRECIR" Especially Create Infinite Regress”/\\
+
+― Douglas Hofstadter, /Gödel, Escher, Bach: An Eternal Golden Braid/
+-----
+
 Computer science gives us data structures and algorithms that don't come easy to standard spoken language. What is recursion? You're defining a function where the function is executed in the function definition. Ok, that's a mouthful. Let's try again. What is recursion?
 
 #+begin_src python
@@ -45,7 +52,7 @@ def factorial(x):
     return x * factorial(x - 1)
 #+end_src
 
-Still a bit mind-bending if you've never seen this before. If this is new to you, get out some paper and draw out the procedure for factorial(5), treating the above as a recipe. Recursion is much easier to explain, think through, and understand in code. There's a fantastic book called /Gödel, Escher, Bach/ by Douglas Hofstadter. It happens to be largely about recursion: functions that talk about themselves. I've read it 3 times: once when I was 14, once when I was in my early 20s, and once when I was in my early 30s. It more or less went over my head the first two times, but I finally understood it the third time around. Why? Because knowing computer science, even at the rudimentary level, helped me understand what he was talking about.
+Still a bit mind-bending if you've never seen this before. If this is new to you, get out some paper and draw out the procedure for factorial(5), treating the above as a recipe. Recursion is much easier to explain, think through, and understand in code. There's a fantastic book called /Gödel, Escher, Bach/ by Douglas Hofstadter. It happens to be largely about recursion: these functions that talk about themselves. I've read it 3 times: once when I was 14, once when I was in my early 20s, and once when I was in my early 30s. It more or less went over my head the first two times, but I finally understood it the third time around. Why? Because knowing computer science, even at the rudimentary level, helped me understand what he was talking about.
 
 ** Graphs
 Ok, how about a practical example for biologists. What is a cell signaling pathway? Well, to massively oversimply, you have messages being passed from protein to protein all the way down to the DNA where some sort of effector (eg. a transcription factor) does a thing to the DNA. What if you wanted to model that? How would you do it? Well, in computer science (and discrete math) there is a data structure called a graph that allows for one to wire up a pathway /in silico./ This is a graph as in a mathematical abstraction of a network, not to be confused with a biaxial plot.
