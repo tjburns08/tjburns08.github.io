@@ -37,13 +37,13 @@ There is a level above that of the rapid-fire experiments improving your ability
 ** Recursion
 Computer science gives us data structures and algorithms that don't come easy to standard spoken language. What is recursion? You're defining a function where the function is executed in the function definition. Ok, that's a mouthful. Let's try again. What is recursion?
 
-#+begin_src python
+##+begin_src python
 def factorial(x):
   if x < 2:
     return 1
   else:
     return x * factorial(x - 1)
-#+end_src
+##+end_src
 
 Still a bit mind-bending if you've never seen this before. If this is new to you, get out some paper and draw out the procedure for factorial(5), treating the above as a recipe. Recursion is much easier to explain, think through, and understand in code. There's a fantastic book called /Gödel, Escher, Bach/ by Douglas Hofstadter. It happens to be largely about recursion: functions that talk about themselves. I've read it 3 times: once when I was 14, once when I was in my early 20s, and once when I was in my early 30s. It more or less went over my head the first two times, but I finally understood it the third time around. Why? Because knowing computer science, even at the rudimentary level, helped me understand what he was talking about.
 
