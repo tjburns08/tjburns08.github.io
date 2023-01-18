@@ -11,7 +11,7 @@ jobs:
     steps:
       - name: Check out
         uses: actions/checkout@v1
-
+      # Removing install emacs and build because of a bug on GitHub's side with respect to org babel.
       #- name: Install Emacs
       #  run: sudo apt install emacs-nox --yes
 
