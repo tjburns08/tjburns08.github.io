@@ -16,9 +16,9 @@
 <a href="./index.html">Home</a>
 </p>
 
-<div id="outline-container-org29bf730" class="outline-2">
-<h2 id="org29bf730">From geometry to computer science</h2>
-<div class="outline-text-2" id="text-org29bf730">
+<div id="outline-container-org53f7859" class="outline-2">
+<h2 id="org53f7859">From geometry to computer science</h2>
+<div class="outline-text-2" id="text-org53f7859">
 <hr />
 <p>
 <i>"The knowledge of which geometry aims is the knowledge of the eternal."</i><br />
@@ -36,9 +36,9 @@ In my life, I have found computer science to be the modern heir to geometry in t
 </div>
 </div>
 
-<div id="outline-container-org8154bb9" class="outline-2">
-<h2 id="org8154bb9">The scientific method</h2>
-<div class="outline-text-2" id="text-org8154bb9">
+<div id="outline-container-orgfef0220" class="outline-2">
+<h2 id="orgfef0220">The scientific method</h2>
+<div class="outline-text-2" id="text-orgfef0220">
 <p>
 We all learned the scientific method in school.<br />
 </p>
@@ -71,13 +71,13 @@ There is a level above that of the rapid-fire experiments improving your ability
 </div>
 </div>
 
-<div id="outline-container-orga17bee3" class="outline-2">
-<h2 id="orga17bee3">An expanded language</h2>
-<div class="outline-text-2" id="text-orga17bee3">
+<div id="outline-container-orge3ae341" class="outline-2">
+<h2 id="orge3ae341">An expanded language</h2>
+<div class="outline-text-2" id="text-orge3ae341">
 </div>
-<div id="outline-container-org89ae67c" class="outline-3">
-<h3 id="org89ae67c">Recursion</h3>
-<div class="outline-text-3" id="text-org89ae67c">
+<div id="outline-container-orgd20e09e" class="outline-3">
+<h3 id="orgd20e09e">Recursion</h3>
+<div class="outline-text-3" id="text-orgd20e09e">
 <p>
 Computer science gives us data structures and algorithms that don't come easy to standard spoken language. What is recursion? You're defining a function where the function is executed in the function definition. Ok, that's a mouthful. Let's try again. What is recursion?
 </p>
@@ -97,15 +97,29 @@ Still a bit mind-bending if you've never seen this before. If this is new to you
 </div>
 </div>
 
-<div id="outline-container-org8b67320" class="outline-3">
-<h3 id="org8b67320">Graphs</h3>
-<div class="outline-text-3" id="text-org8b67320">
+<div id="outline-container-orge24f564" class="outline-3">
+<h3 id="orge24f564">Graphs</h3>
+<div class="outline-text-3" id="text-orge24f564">
 <p>
-Ok, how about a practical example for biologists. What is a cell signaling pathway? Well, to massively oversimply, you have messages being passed from protein to protein all the way down to the DNA where some sort of effector (eg. a transcription factor) does a thing to the DNA. What if you wanted to model that? How would you do it? Well, in computer science (and discrete math) there is a data structure called a graph that allows for one to wire up a pathway <i>in silico.</i> This is a graph as in a mathematical abstraction of a network, not to be confused with a biaxial plot. 
+Ok, how about a practical example for biologists. What is a cell signaling pathway? Well, to massively oversimply, you have messages being passed from protein to protein all the way down to the DNA where some sort of effector (eg. a transcription factor) does a thing to the DNA. What if you wanted to model that? How would you do it? Well, in computer science (and discrete math) there is a data structure called a graph that allows for one to wire up a pathway <i>in silico.</i> This is a graph as in a mathematical abstraction of a network, not to be confused with a biaxial plot.
 </p>
 
 <p>
-So let's wire one up. Ok, done. What do I get from that? Well, one very fundamental question in graph theory is what are the "central" regions of a graph? This is called centrality. Degree centrality tells us how many friends each node has. Betweenness centrality tells us what regions in the network have the most shortest paths that run through them. Think of the Bay Bridge from Oakland to San Franscisco. Commuters know that, minus traffic, that is the quickest path to San Francisco for a lot of the East Bay and beyond. The Bay Bridge would have a high betweenness entrality. But with this metric you can quantify that and compare it to the San Mateo bridge to the south. Such is the same with signaling pathways. Assuming you have a good dataset, you can start interrogating these pathways in terms of regions that are relevant to whatever your intent is.
+Here's what the graph representation of a piece of a <a href="https://en.wikipedia.org/wiki/MAPK/ERK_pathway">pathway</a> looks like in base python, using a dictionary (again, confusing wording&#x2026;it's a look-up table):
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span style="font-weight: bold; font-style: italic;">graph</span> = {
+   <span style="font-style: italic;">'RAS'</span>:<span style="font-style: italic;">'RAF'</span>,
+   <span style="font-style: italic;">'RAF'</span>:<span style="font-style: italic;">'MEK'</span>,
+   <span style="font-style: italic;">'MEK'</span>:<span style="font-style: italic;">'MAPK'</span>,
+   <span style="font-style: italic;">'MAPK'</span>:[<span style="font-style: italic;">'MNK'</span>, <span style="font-style: italic;">'RSK'</span>, <span style="font-style: italic;">'MYC'</span>]
+}
+</pre>
+</div>
+
+<p>
+So now let's <a href="https://omnipathdb.org/">wire</a> <a href="https://reactome.org/">one</a> <a href="https://www.genome.jp/kegg/pathway.html">up</a>. Ok, done. What do I get from that? Well, one very fundamental question in graph theory is what are the "central" regions of a graph? This is called <a href="https://en.wikipedia.org/wiki/Centrality">centrality</a>. Degree centrality tells us how many friends each node has. Betweenness centrality tells us what regions in the network have the most shortest paths that run through them. Think of the Bay Bridge from Oakland to San Franscisco. Commuters know that, minus traffic, that is the quickest path to San Francisco for a lot of the East Bay and beyond. The Bay Bridge would have a high betweenness entrality. But with this metric you can quantify that and compare it to the San Mateo bridge to the south. Such is the same with signaling pathways. Assuming you have a good dataset, you can start interrogating these pathways in terms of regions that are relevant to whatever your intent is.
 </p>
 
 <p>
@@ -114,11 +128,11 @@ How do I know this? I spent three years doing just this for a client of mine. Th
 </div>
 </div>
 
-<div id="outline-container-orgda80fdd" class="outline-3">
-<h3 id="orgda80fdd">Models</h3>
-<div class="outline-text-3" id="text-orgda80fdd">
+<div id="outline-container-org345c097" class="outline-3">
+<h3 id="org345c097">Models</h3>
+<div class="outline-text-3" id="text-org345c097">
 <p>
-Socrates wants to know what virtue is. So he asks you "what is virtue?" In the stereotypical dialogues with Socrates, he asks you question after question until you contradict yourself, proving that you don't know what you're talking about nearly as well as you thought. Now, one interpretation of Socrates that I particularly like is that he did this for the purpose of inducing aporia. This is a state where you're not really talking or thinking verbally anymore because you doubt all of your words. What does this do? Well, what is left when verbal thinking is gone? Nonverbal thinking. So in this interpretation of Socrates, he's trying to get you to realize that there is a lot in this world that cannot be explained precisely by words.
+<a href="https://www.youtube.com/watch?v=Lhl51bZQlM8">Socrates wants to know what virtue is</a>. So he asks you "what is virtue?" In the stereotypical dialogues with Socrates, he asks you question after question until you contradict yourself, proving that you don't know what you're talking about nearly as well as you thought. Now, one interpretation of Socrates that I particularly like is that he did this for the purpose of inducing <a href="https://en.wikipedia.org/wiki/Aporia">aporia</a>. This is a state where you're not really talking or thinking verbally anymore because you doubt all of your words. What does this do? Well, what is left when verbal thinking is gone? Nonverbal thinking. So in this interpretation of Socrates, he's trying to get you to realize that there is a lot in this world that cannot be explained precisely by words.
 </p>
 
 <p>
@@ -137,7 +151,28 @@ The key word here is "models." Going from computer science to machine learning y
 </p>
 
 <p>
-Now if you were programming an AI agent to understand and act virtuously, how would you do it? Well, you would have to build a set of reinforcement learning models trained on real word data that correspond to things like courage, temperance, justice, and wisdom. You'd have to define what's called a loss function for each of the virtues that would promote or penalize various things as the model optimizes with each new instance fed to the model of what may or may not be courage, for example. Is that how we work? It's obviously more complicated than that, but at least this allows us to start asking actionable questions: if these are models, are they pre-trained? Let's look at toddlers reacting to just and unjust actions. Are these models trainable? Let's examine human cognitive and emotional development across cultures that have different value systems. Are they centralized (remember centrality from the section on graphs)? Let's do a neuroimaging study where we show subjects instances of courage, cowardice, justice, injustice, etc, and see what regions of the brain light up. Do different regions light up, or are they roughly the same for each virtue or vice? Socrates would get me to contradict myself nonetheless. I would concede defeat, but I would tell him that at least it's getting me to ask some good and testable questions. Socrates, who prototypically values asking questions, would probably understand.
+If we go with housing prices, a simple model will take on the y = mx + b form. But there will be a number of mx's. We'll use w rather than m, to denote weights, where the x will be some characteristic that is weighted based on how well it predicts housing prices.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span style="font-weight: bold; font-style: italic;">housing_prices</span> = w1*num_rooms + w2*square_footage + w3*distance_from_beach + w4*school_district + b
+</pre>
+</div>
+
+<p>
+If the school district mattered the most, then w4 would be really high. If the number of rooms didn't matter, then w1 would be really low. These models are trained on data, and that's how the weights are figured out that product the optimal predictions. This is well outside of the scope of the article. But just know that a lot of AI models are complicated versions of the above, trained on lots (upwards of billions) of data points.
+</p>
+
+<p>
+The last piece you need to understand the rest of this is that neural nets don't necessarily start with specific characteristics like number of rooms. They might just receive images of houses and the price of the house. They'll learn things over time, like size, number of floors, condition of the front yard, and things of that nature. So you have weights that are learned, but the characteristics that are being weighted are not known. Just w1*x1, w2*x2, w3*x3, etc. That's why they're often called black boxes. 
+</p>
+
+<p>
+Now if you were programming an AI agent to understand and act virtuously, how would you do it? You would have to build a set of <a href="https://www.youtube.com/watch?v=qv6UVOQ0F44">reinforcement learning models</a> trained on real word data (images, videos, stories) that correspond to things like courage, temperance, justice, and wisdom. You'd have to define what's called a loss function for each of the virtues that would promote or penalize various things as the model optimizes with each new instance fed to the model of what may or may not be courage, for example.
+</p>
+
+<p>
+Is that how our brains work? It's obviously <a href="./its_more_complicated_than_that.html">more complicated than that</a>, but at least this allows us to start asking actionable questions: if these are models, are they pre-trained? Let's look at toddlers reacting to just and unjust actions. Are these models trainable? Let's examine human cognitive and emotional development across cultures that have different value systems. Are they centralized (remember centrality from the section on graphs)? Let's do a neuroimaging study where we show subjects instances of courage, cowardice, justice, injustice, etc, and see what regions of the brain light up. Do different regions light up, or are they roughly the same for each virtue or vice? Socrates would get me to contradict myself nonetheless. I would concede defeat, but I would tell him that at least it's getting me to ask some good and testable questions. Socrates, who prototypically values asking questions, would probably understand.
 </p>
 
 <p>
@@ -147,9 +182,9 @@ What computational definitions and analogies do is cut into the space of things 
 </div>
 </div>
 
-<div id="outline-container-org8fa2096" class="outline-2">
-<h2 id="org8fa2096">Conclusion</h2>
-<div class="outline-text-2" id="text-org8fa2096">
+<div id="outline-container-org395e400" class="outline-2">
+<h2 id="org395e400">Conclusion</h2>
+<div class="outline-text-2" id="text-org395e400">
 <p>
 As I get older, I increasingly value the endless pursuit of wisdom. Cognitive scientist John Vervaeke likes to say that the child is to the adult as the adult is to the sage. I like that framing. Now at least for me, I use computer science along with the scientific method as a base for my thinking and sensemaking. We all know how to do the scientific method, but computer science is both a way to intensively put the scientific method into practice, and way to expand your lexicon to include things that are otherwise hard to put into words. As such, I see computer science as a solid foundation for modern philosophy, the way Plato saw geometry in his time.
 </p>
