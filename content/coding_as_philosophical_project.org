@@ -83,7 +83,7 @@ If we go with housing prices, a simple model will take on the y = mx + b form. B
 housing_prices = w1*num_rooms + w2*square_footage + w3*distance_from_beach + w4*school_district + b
 #+end_src
 
-If the school district mattered the most, then w4 would be really high. If the number of rooms didn't matter, then w1 would be really low. These models are trained on data, and that's how the weights are figured out that product the optimal predictions. This is well outside of the scope of the article. But just know that a lot of AI models are complicated versions of the above, trained on lots (upwards of billions) of data points.
+If the school district mattered the most, then w4 would be really high. If the number of rooms didn't matter, then w1 would be really low. These models are trained on data, and that's how the weights are figured out that predict the price of the house. This is well outside of the scope of the article. But just know that a lot of AI models are complicated versions of the above, trained on lots (upwards of billions) of data points.
 
 The last piece you need to understand the rest of this is that neural nets don't necessarily start with specific characteristics like number of rooms. They might just receive images of houses and the price of the house. They'll learn things over time, like size, number of floors, condition of the front yard, and things of that nature. So you have weights that are learned, but the characteristics that are being weighted are not known. Just w1*x1, w2*x2, w3*x3, etc. That's why they're often called black boxes. 
 
