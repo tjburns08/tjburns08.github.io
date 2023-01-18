@@ -75,16 +75,32 @@ How do I know this? I spent three years doing just this for a client of mine. Th
 ** Models
 [[https://www.youtube.com/watch?v=Lhl51bZQlM8][Socrates wants to know what virtue is]]. So he asks you "what is virtue?" In the stereotypical dialogues with Socrates, he asks you question after question until you contradict yourself, proving that you don't know what you're talking about nearly as well as you thought. Now, one interpretation of Socrates that I particularly like is that he did this for the purpose of inducing [[https://en.wikipedia.org/wiki/Aporia][aporia]]. This is a state where you're not really talking or thinking verbally anymore because you doubt all of your words. What does this do? Well, what is left when verbal thinking is gone? Nonverbal thinking. So in this interpretation of Socrates, he's trying to get you to realize that there is a lot in this world that cannot be explained precisely by words.
 
-AI leader Joscha Bach has an interesting angle to these big questions. He translates them into data structures and algorithms and then attempts to explain them through that lens. In his [[https://www.youtube.com/watch?v=P-2P3MSZrBM][podcast with Lex Fridman]], when he's explaining what he's read about Thomas Aquinas's interpretation of virtue, he says:
+AI leader Joscha Bach (yes, related to Bach the musician) has an interesting angle to these big questions. He translates them into data structures and algorithms and then attempts to explain them through that lens. Let me give you a simple example of how he thinks so you can get a feel for what this sounds like:
+\\
+\\
+-----
+/“An organism is not a collection of cells; it’s a function that tells cells how to behave. And this function is not implemented as some kind of supernatural thing, like some morphogenetic field, it is an emergent result of the interactions of each cell with each other cell.”/\\
+-----
+\\
+Now with his mindset in mind, let's move to the brain. In his [[https://www.youtube.com/watch?v=P-2P3MSZrBM][podcast with Lex Fridman]], when he's talking about the definition of intelligence, he says:
+-----
+\\
+\\
+/So intelligence, I think, is the ability to model. It's not necessarily goal directed rationality or something, many intelligent people are bad at this. But it's the ability to be presented with a number of patterns and see a structure in those patterns and be able to predict the next set of patterns, to make sense of things./
+-----
+\\
+Ok, so now we have this idea of intelligence as making relevant models of the world. We'll get into a technical definition of models in a minute. But we started off with virtue, so let's move back there with this foundation. Joscha Bach is later talking about [[https://en.wikipedia.org/wiki/Thomas_Aquinas][Thomas Aquinas]], and he says:
 \\
 \\
 -----
 /And then he says that there are additional rational principles that humans can discover and everybody can discover them so there are universal. If you are sane you, should understand, you said to submit to them because you can rationally deduce them. And these principles are roughly: you should be willing to self-regulate correctly. You should be willing to do correct social regulation, inter-organismic. You should be willing to act on your models so you have skin in the game. And you should have goal rationality, you should be choosing the right goals to work on. And so basically these three rational principles, goal rationality he calls prudence or wisdom, social regulation is justice, the correct social one, and the internal regulation is temperance. And this thing, willingness to act on your models is courage./
 -----
 \\
-The key word here is "models." Going from computer science to machine learning you end up with complicated functions that we call models that output a specific set of things given specific inputs. Models that distinguish between cats and dogs, predict housing prices given a set of features (like number of rooms), win at chess, or even generate art.
+Ok, so we have virtue through the framework of making relevant models of the world. If we can get to a computational definition of models and build up from that, maybe we can gain some further insights.
 
-If we go with housing prices, a simple model will take on the y = mx + b form. But there will be a number of mx's. We'll use w rather than m, to denote weights, where the x will be some characteristic that is weighted based on how well it predicts housing prices.
+Going from computer science to machine learning you end up with complicated functions that we call models that output a specific set of things given specific inputs. Models that distinguish between cats and dogs, predict housing prices given a set of features (like number of rooms), win at chess, or even generate art. Again, Joscha Bach thinks that intelligence is the ability to make relevant models of the world.
+
+Let's look at a simple model. If we go with housing prices, a simple model will take on the y = mx + b form. But there will be a number of mx's. We'll use w rather than m, to denote weights, where the x will be some characteristic that is weighted based on how well it predicts housing prices.
 
 #+begin_src python
 housing_prices = w1*num_rooms + w2*square_footage + w3*distance_from_beach + w4*school_district + b
@@ -92,11 +108,11 @@ housing_prices = w1*num_rooms + w2*square_footage + w3*distance_from_beach + w4*
 
 If the school district mattered the most, then w4 would be really high. If the number of rooms didn't matter, then w1 would be really low. These models are trained on data, and that's how the weights are figured out that predict the price of the house. This is well outside of the scope of the article. But just know that a lot of AI models are complicated versions of the above, trained on lots (upwards of billions) of data points.
 
-The last piece you need to understand the rest of this is that neural nets don't necessarily start with specific characteristics like number of rooms. They might just receive images of houses and the price of the house. They'll learn things over time, like size, number of floors, condition of the front yard, and things of that nature. So you have weights that are learned, but the characteristics that are being weighted are not known. Just w1*x1, w2*x2, w3*x3, etc. That's why they're often called black boxes. 
+The last piece you need to understand the rest of this is that neural nets (the basis of a lot of modern AI) don't necessarily start with specific characteristics like number of rooms. They might just receive images of houses and the price of the house. They'll learn things over time, like size, number of floors, condition of the front yard, and things of that nature. So you have weights that are learned, but the characteristics that are being weighted are not known. Just w1*x1, w2*x2, w3*x3, etc. That's why they're often called black boxes. 
 
 Now if you were programming an AI agent to understand and act virtuously, how would you do it? You would have to build a set of [[https://www.youtube.com/watch?v=qv6UVOQ0F44][reinforcement learning models]] trained on real word data (images, videos, stories) that correspond to things like courage, temperance, justice, and wisdom. You'd have to define what's called a loss function for each of the virtues that would promote or penalize various things as the model optimizes with each new instance fed to the model of what may or may not be courage, for example.
 
-Is that how our brains work? It's obviously [[./its_more_complicated_than_that.html][more complicated than that]], but at least this allows us to start asking actionable questions: if these are models, are they pre-trained? Let's look at toddlers reacting to just and unjust actions. Are these models trainable? Let's examine human cognitive and emotional development across cultures that have different value systems. Are they centralized (remember centrality from the section on graphs)? Let's do a neuroimaging study where we show subjects instances of courage, cowardice, justice, injustice, etc, and see what regions of the brain light up. Do different regions light up, or are they roughly the same for each virtue or vice? Socrates would get me to contradict myself nonetheless. I would concede defeat, but I would tell him that at least it's getting me to ask some good and testable questions. Socrates, who prototypically values asking questions, would probably understand.
+Is that how our brains work, when it comes to recognizing and generating virtue? It's obviously [[./its_more_complicated_than_that.html][more complicated than that]], but at least this allows us to start asking actionable questions: if these are models, are they pre-trained? Let's look at toddlers reacting to just and unjust actions. Are these models trainable? Let's examine human cognitive and emotional development across cultures that have different value systems. Are they centralized (remember centrality from the section on graphs)? Let's do a neuroimaging study where we show subjects instances of courage, cowardice, justice, injustice, etc, and see what regions of the brain light up. Do different regions light up, or are they roughly the same for each virtue or vice? Socrates would get me to contradict myself nonetheless. I would concede defeat, but I would tell him that at least it's getting me to ask some good and testable questions. Socrates, who prototypically values asking questions, would probably understand.
 
 What computational definitions and analogies do is cut into the space of things that are not verbal. To say that something might be a reinforcement learning model in our brain is a more satisfying and actionable hypothesis than just telling Socrates "you know it when you see it."
 
