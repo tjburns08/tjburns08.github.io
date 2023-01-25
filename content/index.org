@@ -138,8 +138,8 @@ There are two potenital audiences here. The first are those with questions about
 Regardless of the reader's intent, I hope above all that the work below will encourage people to really tinker with text, numbers, and data. You can get surprisingly far if you get in the habit of it.
 ** KNN sleepwalk examples
 Some examples of output for my [[https://github.com/tjburns08/knn_sleepwalk][KNN sleepwalk tool]]. These are interactive, and are here to give the user intuition around the nature of dimension reduction maps. From the README: "My wrapper allows for the visualization of a given cell's K-nearest (and K-farthest) neighbors. In other words, the cursor is on a given cell, and the cells on the map that change color correspond to a pre-specified number of nearest neighbors in the original high-dimensional space." See notebooks in my repo to see the data and code. What to do with the visuals below:
-- K-nearest neighbors (KNN) will give you intuition around how exact the embedding is. K-farthest neighbors
-- (KFN) will give you intuition around how well the embedding preserves global structure. 
+- K-nearest neighbors (KNN) will give you intuition around how exact the embedding is.
+- K-farthest neighbors (KFN) will give you intuition around how well the embedding preserves global structure. 
 *** CyTOF PBMCs
 The dataset is internal, from the German Rheumatism Research Center in Berlin. These take a bit to load after you click on them, but its worth the wait. 
 **** [[./knn_sleepwalk_cytof.html][KNN from original marker space]]
