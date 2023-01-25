@@ -136,7 +136,8 @@ These are primarily R and python markdowns exploring various topics. I apologize
 There are two potenital audiences here. The first are those with questions about any of the topics below that I cover. The second are those learning coding or data science who want to see examples of simple but insightful analyses.
 
 Regardless of the reader's intent, I hope above all that the work below will encourage people to really tinker with text, numbers, and data. You can get surprisingly far if you get in the habit of it.
-
+** [[./distance_matrix_correlation.html][Distance matrix metric correlations]]
+Which distance metrics are right for your data analysis. While I've created a poster on this [[https://tjburns08.github.io/final_distance.project.poster.pdf][here]], this is a stab at it from a different direction. I make synthetic CyTOF-like data, varying the dimensionality from 2 to 1000. I make a distance matrix for each distance metric used, and then correlate each one to that of the Euclidean distance matrix, which is often a default. The results are counter-intuitive. 
 ** [[./logic_gates.html][Logic gates]]
 What are the fundamental units of a computer? Logic gates. I show what these are. I then show that they can be created with combinations of a single type of logic gate: NAND (Not AND). In other words, you can make a general-purpose computer if you had enough NAND gates and wires. In the spirit of this, I combine NAND gates to create a calculator that can add large numbers. One of the key points in this exercise is that it does not take much to get from NAND gates to complex computations. 
 
