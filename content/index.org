@@ -110,7 +110,11 @@ CYTO Conference; Prague, Czech Republic; May 2018.
 Abstract: Due to the rise of high-dimensional single cell technologies in the past few years, there has been an increasing number of both computational methods and workflows to analyze the new wealth of data. However, non-intuitive properties of high-dimensional space can give rise to analysis artifacts, collectively known of as the “curse of dimensionality.” Increasing dimensions differentially affect the performance of distance metrics, and there is no clear consensus about which distance metrics to use for which analysis strategies. While the influence of many tool-specific parameters has been evaluated, we study here the impact of commonly used distance metrics on the outcome of dimensionality reduction and clustering.
 
 * Software
-Note: the web apps below that are associated with Heroku are down for the time being. This is because Heroku, which is the go-to for deploying Dash-based apps, has introduced a paywall. For the time being, I am not willing to comply. 
+Note: the web apps below that are associated with Heroku are down for the time being. This is because Heroku, which is the go-to for deploying Dash-based apps, has introduced a paywall. For the time being, I am not willing to comply.
+** [[https://github.com/tjburns08/twitter_archive_and_embed][Twitter archive and embed]]
+This is one of the main tools that I wrote and use to address the [[./scrolling_problem.html][scrolling problem]].
+
+A pipeline that takes as input a list of twitter user names that you supply. First, it scrapes the entire twitter history for the given names. Second, it uses BERT to make a topic-based high-dimensional embedding of every tweet per user name. If these two steps had already been done for a given user, it will update with the new tweets. Then, the user selects a subset of users to visualize. For these users, the BERT embeddings are converted into a UMAP, which is then clustered and annotated with extracted keywords per cluster. Finally, the results are visualized in an interactive user interface.
 ** [[https://huggingface.co/spaces/tjburns/duckduckgo_2d_search][DuckDuckGo 2-D Search]]
 For web searches of broad topics, where you need the first hundred results rather than the first page. Type in your search term of interest, and it will give you an interactive context map of search results and a results table with clickable links. 
 
