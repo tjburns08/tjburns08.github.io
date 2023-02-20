@@ -121,27 +121,20 @@ This is one of the main tools that I wrote and use to address the [[./scrolling_
 A pipeline that takes as input a list of twitter user names that you supply. First, it scrapes the entire twitter history for the given names. Second, it uses BERT to make a topic-based high-dimensional embedding of every tweet per user name. If these two steps had already been done for a given user, it will update with the new tweets. Then, the user selects a subset of users to visualize. For these users, the BERT embeddings are converted into a UMAP, which is then clustered and annotated with extracted keywords per cluster. Finally, the results are visualized in an interactive user interface.
 ** [[https://huggingface.co/spaces/tjburns/duckduckgo_2d_search][DuckDuckGo 2-D Search]]
 For web searches of broad topics, where you need the first hundred results rather than the first page. Type in your search term of interest, and it will give you an interactive context map of search results and a results table with clickable links. 
-
 ** [[./biorxiv_medrxiv_history.html][Preprint server archive]]
 A searchable and sortable table of every biorxiv and medrxiv pre-print to date ([2022-11-17 Thu 13:43]). Specifically, every time a paper is uploaded to one of these pre-print servers, it is automatically tweeted out from the respective twitter handle. As such, the table contains the paper title along with various tweet metadata (eg. likes) to allow users to understand which papers are potentialy important.
 ** [[https://github.com/tjburns08/knn_sleepwalk][Knn sleepwalk]]
 A wrapper I wrote around the [[https://anders-biostat.github.io/sleepwalk/][sleepwalk]] R package. Hover the cursor over any cell in your embedding, and it will show you the cell's k-nearest neighbors computed from the original feature space (as opposed to the embedding space). This allows you to test your assumptions around how exact a low-dimensional embedding (eg. t-SNE, UMAP) is. 
-
 ** [[https://www.bioconductor.org/packages/release/bioc/html/Sconify.html][Bioconductor package Sconify]]
 Official description: This package does k-nearest neighbor based statistics and visualizations with flow and mass cytometery data. This gives tSNE maps"fold change" functionality and provides a data quality metric by assessing manifold overlap between fcs files expected to be the same. Other applications using this package include imputation, marker redundancy, and testing the relative information loss of lower dimension embeddings compared to the original manifold.
-
 ** [[https://github.com/tjburns08/rss_map][RSS map]]
 Associated with [[https://tjburns08.github.io/scrolling_problem.html][The Scrolling Problem]]. An app that converts an RSS feed into a semantic map where articles that are similar to each other in context are near each other on the map.
-
 ** (temporarily suspended) [[https://gwasmap.herokuapp.com/][Gwasmap]]
 Associated with my article [[https://tjburns08.github.io/context_problem_bfx.html][The Context Problem in Bioinformatics]]. Given one of more genes, what are the GWAS associations? These are placed onto a semantic map where associations that are similar to each other are grouped near each other on the map. Thus, if gene 1 is associated with Alzheimer's disease and gene 2 is associated with age-related cognitive decline (different but related disease) the associations for each gene (colored accordingly) will show up near each other.
-
 ** [[https://huggingface.co/spaces/tjburns/ask_marcus_aurelius][Ask Marcus Aurelius]]
 Associated with [[https://tjburns08.github.io/ask_marcus_writeup.html][What Would Marcus Aurelius Say]]. This project turned the Meditaitons by Marcus Aurelius into a semantic map that can be queried, such that the user can ask a question, and the software will return the most relevant passages in the Meditations.
-
 ** [[https://huggingface.co/spaces/tjburns/find_your_biases][Find your biases]]
 Write your thoughts into the text box, and the app will give you a list of cognitive biases that match the thoughts. The app does this using an AI embedding model to embed both your input and Wikipedia's [[https://en.wikipedia.org/wiki/List_of_cognitive_biases][list of cognitive biases]], and then perform a nearest neighbor search. 
-
 * Markdowns
 These are primarily R and python markdowns exploring various topics. I apologize if the one you're reading is a bit messy. Most of these are instances of me just tinkering for the sake of tinkering. These often lead to interesting results that I don't have time to follow up on, but I figure that showing unpolished work is better than showing no work. If you have any questions or comments, please feel free to contact me. Anything that gets attention here will trigger me to work on it.
 
