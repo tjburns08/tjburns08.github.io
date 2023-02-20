@@ -111,6 +111,10 @@ Abstract: Due to the rise of high-dimensional single cell technologies in the pa
 
 * Software
 Note: the web apps below that are associated with Heroku are down for the time being. This is because Heroku, which is the go-to for deploying Dash-based apps, has introduced a paywall. For the time being, I am not willing to comply.
+** [[https://github.com/tjburns08/dimension_reduction_island_placement][Dimension reduction island placement]]
+This project asks the following question: if you run t-SNE or UMAP over and over for 100 times or more, how different does each map look from each other map? Is each map radically different? Is each map similar? Are there pockets of stability?
+
+The spoiler alert is that the island placement of UMAP appears to be more stable than that of t-SNE, but t-SNE does display pockets of stability. This can be more easily seen by ordering the t-SNE runs by similarity.
 ** [[https://github.com/tjburns08/twitter_archive_and_embed][Twitter archive and embed]]
 This is one of the main tools that I wrote and use to address the [[./scrolling_problem.html][scrolling problem]].
 
