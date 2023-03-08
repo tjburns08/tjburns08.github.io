@@ -114,11 +114,16 @@ Abstract: Due to the rise of high-dimensional single cell technologies in the pa
 
 * Software
 Note: the web apps below that are associated with Heroku are down for the time being. This is because Heroku, which is the go-to for deploying Dash-based apps, has introduced a paywall. For the time being, I am not willing to comply.
+** [[https://github.com/tjburns08/dimension_reduction_add_noise][Dimension reduction add noise]]
+If you have one or two bad markers in your panel (noise), does it completely ruin your t-SNE/UMAP visualizations? According to my analysis so far, no. I take whole blood CyTOF data (22 dimensions) and add extra dimensions of random normal distributions, running t-SNE after each new column has been added (I've done UMAP too). What I have found:
+1. A few dimensions of noise do not catastrophically affect the map. Lots of noise dimensions do.
+2. The embedding space shrinks with increased number of dimensions. You have to hold the xy ranges constant to see this.
+3. When you have many dimensions of noise, the map starts to look trajectory-like (look at the end of the gif), which could affect biological interpretation.
 ** [[https://github.com/tjburns08/dimension_reduction_island_placement][Dimension reduction island placement]]
 This project asks the following question: if you run t-SNE or UMAP over and over for 100 times or more, how different does each map look from each other map? Is each map radically different? Is each map similar? Are there pockets of stability?
 
 The spoiler alert is that the island placement of UMAP appears to be more stable than that of t-SNE, but t-SNE does display pockets of stability. This can be more easily seen by ordering the t-SNE runs by similarity.
-** [[https://github.com/tjburns08/twitter_archive_and_embed][Twitter archive and embed]]
+** Twitter archive and embed
 This is one of the main tools that I wrote and use to address the [[./scrolling_problem.html][scrolling problem]].
 
 A pipeline that takes as input a list of twitter user names that you supply. First, it scrapes the entire twitter history for the given names. Second, it uses BERT to make a topic-based high-dimensional embedding of every tweet per user name. If these two steps had already been done for a given user, it will update with the new tweets. Then, the user selects a subset of users to visualize. For these users, the BERT embeddings are converted into a UMAP, which is then clustered and annotated with extracted keywords per cluster. Finally, the results are visualized in an interactive user interface.
