@@ -86,7 +86,7 @@ In sum: I started by developing a method to enable flow and mass cytometry to de
 
 In parallel, I was taking computer science classes as a side hobby. I reached a point where I was trying to compare two t-SNE maps between unstimulated and simulated data, and I realized that there was a K-Nearest Neighbors based solution that I could implement with my newfoud computer science competencies. I therefore developed Sconify, a now BioConductor package that allows for these visualizations. There were many use cases, and I spent the remainder of my thesis developing this method further and doing various collaborations with it. 
 
-* Talks 
+* Talks
 ** [[./tjb_dimr_talk.pdf][A visual interrogation of dimension reduction tools for single-cell analysis]]
 German CyTOF User Forum; Berlin, Germany; January 2020.
 In this talk, I measured the accurracy of dimension reduction tools (PCA, t-SNE, and UMAP) in terms of their nearest neighbor overlap. This is the k-nearest neighbors of a given cell in the original high dimension space, in comparison to the k-nearest neighbors of a given cell in the embedding. I show that the overlap here is much lower than my audience expected. I've given this talk many times since then, for my clients.
@@ -149,6 +149,12 @@ These are primarily R and python markdowns exploring various topics. I apologize
 There are two potenital audiences here. The first are those with questions about any of the topics below that I cover. The second are those learning coding or data science who want to see examples of simple but insightful analyses.
 
 Regardless of the reader's intent, I hope above all that the work below will encourage people to really tinker with text, numbers, and data. You can get surprisingly far if you get in the habit of it.
+** Likes vs retweets
+*** [[./single cell sequencing OR single-cell sequencing.csv_likes_vs_retweets.html][Search term: single cell sequencing OR single-cell sequencing]]
+We find three regions:
+- High retweets/likes: open academic student and postdoc positions
+- Medium retweets/likes: papers, projects, data (the stuff you're probably looking for)
+- Low retweets/likes: memes, status updates, fun stuff
 ** KNN sleepwalk examples
 Some examples of output for my [[https://github.com/tjburns08/knn_sleepwalk][KNN sleepwalk tool]]. These are interactive, and are here to give the user intuition around the nature of dimension reduction maps. From the README: "My wrapper allows for the visualization of a given cell's K-nearest (and K-farthest) neighbors. In other words, the cursor is on a given cell, and the cells on the map that change color correspond to a pre-specified number of nearest neighbors in the original high-dimensional space." See notebooks in my repo to see the data and code. What to do with the visuals below:
 - K-nearest neighbors (KNN) will give you intuition around how exact the embedding is.
