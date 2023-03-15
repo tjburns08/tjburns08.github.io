@@ -14,14 +14,14 @@
 <h1 class="title">Hacking: examples of seeing through and unseeing in my life</h1>
 <hr />
 <p>
-<i>“Don’t mistake my generosity for generosity”</i><br />
+<i>“Don’t mistake my generosity for generosity.”</i><br />
 White Rose, from <i><a href="https://en.wikipedia.org/wiki/Mr._Robot">Mr. Robot</a></i>
 </p>
 <hr />
 
-<div id="outline-container-orgfebbe38" class="outline-2">
-<h2 id="orgfebbe38">Introduction: Royce Gracie and the hacker framework</h2>
-<div class="outline-text-2" id="text-orgfebbe38">
+<div id="outline-container-org41d8660" class="outline-2">
+<h2 id="org41d8660">Introduction: Royce Gracie and the hacker framework</h2>
+<div class="outline-text-2" id="text-org41d8660">
 <p>
 The Gracie family saw through combat sports. In the 90s, as a kid, we all wanted to know who would win: a karate or a kung-fu fighter? Either of those or a boxer? Or a wrestler? Our dreams came true at the advent of the Ultimate Fighting Championship (UFC). At the time, we called it bloodsport. It was banned in most states. <a href="https://en.wikipedia.org/wiki/UFC_1">UFC1</a> was a tournament of all kinds of fighters from different domains, from karate to sumo. There were few rules. The goal was either a knockout, submission, or one corner throwing in the towel.
 </p>
@@ -58,17 +58,17 @@ I'll note that now hand-to-hand combat has evolved to include groundfighting, so
 </div>
 </div>
 
-<div id="outline-container-orgf0bf8ba" class="outline-2">
-<h2 id="orgf0bf8ba">Examples of hacking that I've seen in my life</h2>
-<div class="outline-text-2" id="text-orgf0bf8ba">
+<div id="outline-container-org5c75527" class="outline-2">
+<h2 id="org5c75527">Examples of hacking that I've seen in my life</h2>
+<div class="outline-text-2" id="text-org5c75527">
 <p>
 Now that Gwern has given us this framework, I can go in and show you instances where I've either seen this, or experienced this first hand. I intend for this article to grow over time with more and more examples as I collect them. 
 </p>
 </div>
 
-<div id="outline-container-org7efa95e" class="outline-3">
-<h3 id="org7efa95e">Basketball: Dennis Rodman and rebounds</h3>
-<div class="outline-text-3" id="text-org7efa95e">
+<div id="outline-container-org8a61441" class="outline-3">
+<h3 id="org8a61441">Basketball: Dennis Rodman and rebounds</h3>
+<div class="outline-text-3" id="text-org8a61441">
 <p>
 In the 90s, we all followed Michael Jordan and the Chicago Bulls. He was untouchable. A best in a generation all-around player. Wait. Let's pause on all-around player.
 </p>
@@ -79,27 +79,27 @@ In the 90s, and to an extent now, basketball glory pretended to be about scoring
 </div>
 </div>
 
-<div id="outline-container-orgb8eebbe" class="outline-3">
-<h3 id="orgb8eebbe">Going to work: value transactions</h3>
-<div class="outline-text-3" id="text-orgb8eebbe">
+<div id="outline-container-orge7075d3" class="outline-3">
+<h3 id="orge7075d3">Going to work: value transactions</h3>
+<div class="outline-text-3" id="text-orge7075d3">
 <p>
 The concept of working to put food on the table pretends to be all about becoming competent at a thing, and getting a job. However, it is really about fulfilling a specific need in any sort of way, in any place, over any time horizon. This makes up part of a bigger system of value transactions, that include things like independent contracting or fixed consulting projects, for services or products, in exchange for cash, equity, new leads, new connections, visibility, and any number of things deemed "valuable." So by understanding the true nature of value transactions (especially what value actually is), I can do the same work I'd otherwise do at a job, but on a self-employment basis, with much more upside and freedom.
 </p>
 </div>
 </div>
 
-<div id="outline-container-org4e69278" class="outline-3">
-<h3 id="org4e69278">Postdocs: training vs employment</h3>
-<div class="outline-text-3" id="text-org4e69278">
+<div id="outline-container-org1e197bc" class="outline-3">
+<h3 id="org1e197bc">Postdocs: training vs employment</h3>
+<div class="outline-text-3" id="text-org1e197bc">
 <p>
 The concept of highly skilled employment pretends to be about training future employees until they are competent workers, and then placing them into employment positions, where they can command high salaries. But the words "training" and "employment" are rather arbitrary, making up a much larger system of "getting as much out of highly skilled people as possible for as little money as possible." If you study that system, you find that you can take postdoctoral "training," stretch it out to nearly the length of a PhD position, and then stack another one on top of it ad infinitum, until you have people in their 40s who have worked evenings and weekends their whole life, still making $60k per year with reduced benefits because they're still not employees. They're in training.
 </p>
 </div>
 </div>
 
-<div id="outline-container-orgb29a8ae" class="outline-3">
-<h3 id="orgb29a8ae">Black box algorithms: dimension reduction</h3>
-<div class="outline-text-3" id="text-orgb29a8ae">
+<div id="outline-container-org54fc5ec" class="outline-3">
+<h3 id="org54fc5ec">Black box algorithms: dimension reduction</h3>
+<div class="outline-text-3" id="text-org54fc5ec">
 <p>
 Dimension reduction visualization tools like t-SNE and UMAP pretend to be made up of your data, perfectly organized in a way that perfectly captures the high-dimensional data in every way. Or put differently, we pretend that this is the case, due to the <a href="https://tjburns08.github.io/the_beauty_is_truth_delusion.html">beauty is truth delusion</a>. When in reality, these dimension reduction tools are actually optimizations of a particular nearest-neighbor based loss function, which make up a much larger system of lossy (you lose some information) compression algorithms. So if we focus on revealing the lossiness, either through <a href="https://www.nature.com/articles/s41467-019-13055-y">manipulating the function's parameters</a>, or developing <a href="https://github.com/tjburns08/knn_sleepwalk">visual</a> <a href="https://tjburns08.github.io/tjb_dimr_talk.pdf">nearest neighbor-based evaluation metrics</a>, we can utilize what's being optimized to better understand the nature of t-SNE and UMAP.
 </p>
