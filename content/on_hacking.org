@@ -1,0 +1,40 @@
+#+Title: Hacking: examples of seeing through and unseeing in my life
+#+Author: Tyler Burns
+#+Date: March 15, 2023 - March 15, 2023
+
+* Introduction: Royce Gracie and the hacker framework
+The Gracie family saw through combat sports. In the 90s, as a kid, we all wanted to know who would win: a karate or a kung-fu fighter? Either of those or a boxer? Or a wrestler? Our dreams came true at the advent of the Ultimate Fighting Championship (UFC). At the time, we called it bloodsport. It was banned in most states. UFC1 was a tournament of all kinds of fighters from different domains, from karate to sumo. There were few rules. The goal was either a knockout, submission, or one corner throwing in the towel.
+
+I watched so many ninja movies as a kid that I was sure that the karate or kung-fu fighters would destroy the competition. That wasn't the case at all. The winner was Royce Gracie, a practitioner of a little-known (at the time) martial art called Brazilian Jiu Jitsu. Think of it as wrestling but the goal is not a pin, it's a submission or a choke that either makes the other person "tap out" or "go to sleep." No one was prepared for the fighting style. He [[https://www.youtube.com/watch?v=URK1-4s2m0k][dominated the competition]]. As mixed martial arts developed, it was clear that everyone needed to learn Brazilian Jiu Jitsu. I practice it now.
+
+I interpret Royce Gracie at UFC1 in the following way. Hand-to-hand combat, as shown to us by choreographed Hollywood films, pretended to be about striking (often accompanied by 'ha-yah'). But it really ultimately goes to the ground, part of a much larger system called groundfighting. So if you worked on your groundfighting, you could use chokes and submissions to control a hand-to-hand combat situation however you like.
+
+This is also known in my circles as hacking. You're exploiting a vulnerability. In this case, it was our Hollywood-induced bias as to what fighting was. The best article I've read about hacking comes from well-known blogger Gwern, where he details the structure of hacking in the following way:
+
+-----
+/In each case, the funda⁣men⁣tal prin⁣ci⁣ple is that the hacker asks: “here I have a sys⁣tem W, which pretends to be made out of a few Xs⁠; however, it is really made out of many Y, which form an entirely dif⁣fer⁣ent sys⁣tem, Z; I will now proceed to ig⁣nore the X and under⁣stand how Z works, so I may use the Y to thereby change W however I like”./
+-----
+
+Let's go back to Royce Gracie, and formulate it in this way.
+
+Here I have a system W (hand-to-hand combat), which pretends to be made up of striking moves (X's); however it's really made up of many grappling moves (Y's), which make up an entirely different system of groundfighting (Z); I will now proceed to ignore the striking (X) and understand how groundfighting (Z) works, so I may use groundfighting moves (Y) to control a hand-to-hand combat situation (W) however I may like.
+
+I'll note that now hand-to-hand combat has evolved to include groundfighting, so we can't go in like Royce Gracie and beat everyone up unexpectedly anymore. The vulnerability, the "pretending," is gone. I am illustrating this UFC1 situation because I know we all have seen instances like this before in our lives. My current work is dependent on having a hacker mindset, and looking for instances where Gwern's framework rings true. If I don't have a hacker mindset, [[https://slatestarcodex.com/2014/07/30/meditations-on-moloch/][the ones who do will run me over]]. 
+
+* Examples of hacking that I've seen in my life
+
+Now that Gwern has given us this framework, I can go in and show you instances where I've either seen this, or experienced this first hand. I intend for this article to grow over time with more and more examples as I collect them. 
+
+** Basketball: Dennis Rodman and rebounds
+In the 90s, we all followed Michael Jordan and the Chicago Bulls. He was untouchable. A best in a generation all-around player. Wait. Let's pause on all-around player.
+
+In the 90s, and to an extent now, basketball competence pretended to be about scoring as many points as possible. But Michael Jordan's teammate Dennis Rodman saw that competence is also about any other number of metrics, especially rebounds, that make up a much latter system called defensive game. If Rodman ignored scoring altogether and hyperfocused on defensive game, he could use a specialization in rebounds to be valuable to the team and therefore attain basketball competence. Arguably, he was so valuable to the team (watch his episode on the series [[https://en.wikipedia.org/wiki/The_Last_Dance_(miniseries)][The Last Dance]]) that he could get away with being an extremely controversial character off-court without being cut from the team.
+
+** Going to work: value transactions
+The concept of working to put food on the table pretends to be all about becoming competent at a thing, and getting a job. However, it is really about fulfilling a specific need in any sort of way, in any place, over any time horizon. This makes up part of a bigger system of value transactions, that include things like independent contracting or fixed consulting projects, for services or products, in exchange for cash, equity, new leads, new connections, visibility, and any number of things deemed "valuable." So by understanding the true nature of value transactions (especially what value actually is), I can do the same work I'd otherwise do at a job, but on a self-employment basis, with much more upside and freedom.
+
+** Postdocs: training vs employment
+The concept of highly skilled employment pretends to be about training future employees until they are competent workers, and then placing them into employment positions, where they can command high salaries. But the words "training" and "employment" are rather arbitrary, making up a much larger system of "getting as much out of highly skilled people as possible for as little money as possible." If you study that system, you find that you can take postdoctoral "training," stretch it out to nearly the length of a PhD position, and then stack another one on top of it ad infinitum, until you have people in their 40s who have worked evenings and weekends their whole life, still making $60k per year with reduced benefits because they're still not employees: they're in training.
+
+** Black box algorithms: dimension reduction
+Dimension reduction visualization tools like t-SNE and UMAP pretend to be made up of your data, perfectly organized in a way that perfectly captures the high-dimensional data in every way. Or put different, we pretend that this is the case, due to the [[https://tjburns08.github.io/the_beauty_is_truth_delusion.html][beauty is truth delusion]]. When in reality, these dimension reduction tools are actually optimizations of a particular nearest-neighbor based loss function, which make up a much larger system of lossy (you lose some information) compression algorithms. So if we focus on revealing the lossiness, either through [[https://www.nature.com/articles/s41467-019-13055-y][manipulating the function's parameters]], or developing [[https://github.com/tjburns08/knn_sleepwalk][visual]] [[https://tjburns08.github.io/tjb_dimr_talk.pdf][nearest neighbor-based evaluation metrics]], we can utilize what's being optimized to better understand the nature of t-SNE and UMAP.
