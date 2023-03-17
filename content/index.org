@@ -155,6 +155,8 @@ Regardless of the reader's intent, I hope above all that the work below will enc
 CyTOF analysis has come a long way. Along with single-cell sequencing analysis, a lot of it is high-level functions that do what needs to be done. I prefer a guts-level analysis, where I can see the low-level the details of how my data are being manipulated. This is important for understanding and innovation. 
 *** [[./cytof_pipeline_one_file.html][One fcs file]]
 Keeping it to one fcs file, we can focus on what happens when a fcs file is read into R, how it is transformed, and what the best practices of clustering, dimension reduction, and visualization are. These foundations can be built upon when looking at multiple fcs files to determine where there are differences in your control versus experiment group. 
+*** [[./cytof_pipeline_many_files.html][Multiple fcs files]]
+This markdown uses the [[https://www.bioconductor.org/packages/release/bioc/html/diffcyt.html][diffcyt]] package to help us do statistics between groups, though I show you how to do per-cluster statistics yourself. We make box plots group-level comparisons for clusters we care about. We also color our dimension reduction maps by the p-value information. This pipeline requires a sample metadata file, as well as a marker file. I show you what these look like directly in the pipeline. 
 ** Likes vs retweets
 *** [[./single cell sequencing OR single-cell sequencing.csv_likes_vs_retweets.html][Search term: single cell sequencing OR single-cell sequencing]]
 We find three regions:
