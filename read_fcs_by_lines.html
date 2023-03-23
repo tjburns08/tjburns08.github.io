@@ -357,52 +357,50 @@ display: none;
 
 <p><a href="https://tjburns08.github.io/">Home</a></p>
 <p>Here, we’re going to read in a fcs file line by line and see what’s
-there. This fcs file is the same one in my <a href="https://tjburns08.github.io/cytof_pipeline_one_file.html">CyTOF
-pipeline for one file</a>.</p>
-<p>From that markdown: “The data analyzed in this markdown is healthy
-PBMCs from the Stanford HIMC, and can be found <a href="https://flowrepository.org/experiments/1363/download_ziped_files">here</a>.
-Note the PDF at the bottom, which explains more about the dataset.”</p>
+there. We’re reading in Stanford HIMC data from <a href="https://flowrepository.org/id/FR-FCM-ZYAJ">here</a>.</p>
 <pre class="r"><code>setwd(&#39;/Users/tylerburns/Documents/projects/read_fcs_from_scratch&#39;)
-fcs_file &lt;- list.files(pattern = &quot;Center&quot;)
+fcs_file &lt;- &quot;081216-Mike-HIMC ctrls-001_01_normalized.fcs&quot;
 
 dat &lt;- readLines(fcs_file)</code></pre>
-<p>The first piece is a lot. But we’ll look at it piece by piece. It’s
-the HEADER segment and the TEXT segment. The DATA segment comes after
-that.</p>
+<p>The first line is the HEADER segment and the TEXT segment. The DATA
+segment makes up the subsequent lines. Those are the three segments that
+make up a FCS file.</p>
+<p>So starting with the HEADER and TEXT segment:</p>
 <pre class="r"><code>dat[1]</code></pre>
-<pre><code>## [1] &quot;FCS3.0          58    3399    340011261319       0       0\\$BEGINANALYSIS\\0\\$BEGINDATA\\3400\\$BEGINSTEXT\\0\\$BTIM\\11:56:48\\$BYTEORD\\4,3,2,1\\$CYT\\DVSSCIENCES-CYTOF-6.0.626\\$CYTSN\\cytof2\\$DATATYPE\\F\\$DATE\\14-Jul-2015\\$ENDANALYSIS\\0\\$ENDDATA\\11261319\\$ENDSTEXT\\0\\$ETIM\\12:20:14\\$MODE\\L\\$NEXTDATA\\0\\$P10B\\32\\$P10E\\0,0\\$P10G\\1\\$P10N\\Gd160Di\\$P10R\\549\\$P10S\\CD14\\$P11B\\32\\$P11E\\0,0\\$P11G\\1\\$P11N\\Ho165Di\\$P11R\\12000\\$P11S\\CD61\\$P12B\\32\\$P12E\\0,0\\$P12G\\1\\$P12N\\Ir191Di\\$P12R\\7468\\$P12S\\cells1\\$P13B\\32\\$P13E\\0,0\\$P13G\\1\\$P13N\\Ir193Di\\$P13R\\12000\\$P13S\\cells2\\$P14B\\32\\$P14E\\0,0\\$P14G\\1\\$P14N\\Lu175Di\\$P14R\\12000\\$P14S\\beads4\\$P15B\\32\\$P15E\\0,0\\$P15G\\1\\$P15N\\Lu176Di\\$P15R\\1348\\$P15S\\beads5\\$P16B\\32\\$P16E\\0,0\\$P16G\\1\\$P16N\\Nd142Di\\$P16R\\1509\\$P16S\\CD19\\$P17B\\32\\$P17E\\0,0\\$P17G\\1\\$P17N\\Nd145Di\\$P17R\\434\\$P17S\\CD4\\$P18B\\32\\$P18E\\0,0\\$P18G\\1\\$P18N\\Nd146Di\\$P18R\\1936\\$P18S\\CD8A\\$P19B\\32\\$P19E\\0,0\\$P19G\\1\\$P19N\\Nd148Di\\$P19R\\717\\$P19S\\CD16\\$P1B\\32\\$P1E\\0,0\\$P1G\\1\\$P1N\\Ce140Di\\$P1R\\2911\\$P1S\\beads1\\$P20B\\32\\$P20E\\0,0\\$P20G\\1\\$P20N\\Pr141Di\\$P20R\\925\\$P20S\\CD235\\$P21B\\32\\$P21E\\0,0\\$P21G\\1\\$P21N\\Pt195Di\\$P21R\\12000\\$P21S\\livedead\\$P22B\\32\\$P22E\\0,0\\$P22G\\1\\$P22N\\Sm147Di\\$P22R\\3249\\$P22S\\CD20\\$P23B\\32\\$P23E\\0,0\\$P23G\\1\\$P23N\\Sm149Di\\$P23R\\604\\$P23S\\CD66\\$P24B\\32\\$P24E\\0,0\\$P24G\\1\\$P24N\\Sm154Di\\$P24R\\7998\\$P24S\\CD45\\$P25B\\32\\$P25E\\0,0\\$P25G\\1\\$P25N\\Tb159Di\\$P25R\\10459\\$P25S\\CD11C\\$P26B\\32\\$P26E\\0,0\\$P26G\\1\\$P26N\\Tm169Di\\$P26R\\12000\\$P26S\\CD45RA\\$P27B\\32\\$P27E\\0,0\\$P27G\\1\\$P27N\\Yb172Di\\$P27R\\5629\\$P27S\\CD38\\$P28B\\32\\$P28E\\0,0\\$P28G\\1\\$P28N\\Yb174Di\\$P28R\\6990\\$P28S\\HLADR\\$P29B\\32\\$P29E\\0,0\\$P29G\\1\\$P29N\\Yb176Di\\$P29R\\1349\\$P29S\\CD56\\$P2B\\32\\$P2E\\0,0\\$P2G\\1\\$P2N\\Ce142Di\\$P2R\\1509\\$P2S\\beads2\\$P30B\\32\\$P30E\\0,0\\$P30G\\0.0010371\\$P30N\\Time\\$P30R\\0\\$P30S\\Time\\$P3B\\32\\$P3E\\0,0\\$P3G\\1\\$P3N\\Er167Di\\$P3R\\781\\$P3S\\CD27\\$P4B\\32\\$P4E\\0,0\\$P4G\\1\\$P4N\\Er170Di\\$P4R\\1664\\$P4S\\CD3\\$P5B\\32\\$P5E\\0,0\\$P5G\\1\\$P5N\\Eu151Di\\$P5R\\2814\\$P5S\\CD123\\$P6B\\32\\$P6E\\0,0\\$P6G\\1\\$P6N\\Eu153Di\\$P6R\\4194\\$P6S\\beads3\\$P7B\\32\\$P7E\\0,0\\$P7G\\1\\$P7N\\Event #\\$P7R\\240163\\$P7S\\Event #\\$P8B\\32\\$P8E\\0,0\\$P8G\\1\\$P8N\\Event_length\\$P8R\\87\\$P8S\\Event_length\\$P9B\\32\\$P9E\\0,0\\$P9G\\1\\$P9N\\Gd158Di\\$P9R\\930\\$P9S\\CD33\\$PAR\\30\\$TOT\\93816\\FCSversion\\3\\flowCore_$P10Rmax\\15\\flowCore_$P10Rmin\\1\\flowCore_$P11Rmax\\4\\flowCore_$P11Rmin\\1\\flowCore_$P12Rmax\\13\\flowCore_$P12Rmin\\1\\flowCore_$P13Rmax\\22\\flowCore_$P13Rmin\\1\\flowCore_$P14Rmax\\19\\flowCore_$P14Rmin\\1\\flowCore_$P15Rmax\\1\\flowCore_$P15Rmin\\1\\flowCore_$P16Rmax\\9\\flowCore_$P16Rmin\\1\\flowCore_$P17Rmax\\6\\flowCore_$P17Rmin\\1\\flowCore_$P18Rmax\\2\\flowCore_$P18Rmin\\1\\flowCore_$P19Rmax\\25\\flowCore_$P19Rmin\\1\\flowCore_$P1Rmax\\7\\flowCore_$P1Rmin\\1\\flowCore_$P20Rmax\\3\\flowCore_$P20Rmin\\1\\flowCore_$P21Rmax\\14\\flowCore_$P21Rmin\\1\\flowCore_$P22Rmax\\10\\flowCore_$P22Rmin\\1\\flowCore_$P23Rmax\\26\\flowCore_$P23Rmin\\1\\flowCore_$P24Rmax\\8\\flowCore_$P24Rmin\\1\\flowCore_$P25Rmax\\5\\flowCore_$P25Rmin\\1\\flowCore_$P26Rmax\\23\\flowCore_$P26Rmin\\1\\flowCore_$P27Rmax\\18\\flowCore_$P27Rmin\\1\\flowCore_$P28Rmax\\11\\flowCore_$P28Rmin\\1\\flowCore_$P29Rmax\\12\\flowCore_$P29Rmin\\1\\flowCore_$P2Rmax\\1\\flowCore_$P2Rmin\\1\\flowCore_$P30Rmax\\1\\flowCore_$P30Rmin\\1\\flowCore_$P3Rmax\\17\\flowCore_$P3Rmin\\1\\flowCore_$P4Rmax\\27\\flowCore_$P4Rmin\\1\\flowCore_$P5Rmax\\16\\flowCore_$P5Rmin\\1\\flowCore_$P6Rmax\\21\\flowCore_$P6Rmin\\1\\flowCore_$P7Rmax\\1\\flowCore_$P7Rmin\\1\\flowCore_$P8Rmax\\20\\flowCore_$P8Rmin\\1\\flowCore_$P9Rmax\\24\\flowCore_$P9Rmin\\1\\&quot;</code></pre>
-<p>Ok, so what do we have? We start with the HEADER segment. FCS3.0 58
-3399 340011261319 0 0</p>
+<pre><code>## [1] &quot;FCS3.0         100    3385    338549003385       0       0                                          \\$BEGINANALYSIS\\0\\$ENDANALYSIS\\0\\$BEGINSTEXT\\0\\$ENDSTEXT\\0\\$NEXTDATA\\0\\$TOT\\250000\\$PAR\\49\\FCSversion\\3\\CREATOR\\PengQiu FCS writer\\$COM\\PengQiu FCS writer\\FILENAME\\081216-Mike-HIMC ctrls-001_01_normalized.fcs\\GUID\\1.fcs\\ORIGINALGUID\\1.fcs\\$BYTEORD\\4,3,2,1\\$DATATYPE\\F\\$MODE\\L\\$BTIM\\10:44:05\\$ETIM\\11:03:20\\$CYT\\DVSSCIENCES-CYTOF-6.5.358\\$DATE\\12-Aug-2016\\$CYTSN\\Helios\\$P1B\\32\\$P1N\\Time\\$P1R\\1129870\\$P1E\\0,0\\$P2B\\32\\$P2N\\Event_length\\$P2R\\68\\$P2E\\0,0\\$P3B\\32\\$P3N\\In113Di\\$P3S\\113In_CD57\\$P3R\\7887\\$P3E\\0,0\\$P4B\\32\\$P4N\\In115Di\\$P4S\\115In_Dead\\$P4R\\7527\\$P4E\\0,0\\$P5B\\32\\$P5N\\Sn120Di\\$P5S\\120Sn\\$P5R\\16821\\$P5E\\0,0\\$P6B\\32\\$P6N\\I127Di\\$P6S\\127I\\$P6R\\10781\\$P6E\\0,0\\$P7B\\32\\$P7N\\Xe131Di\\$P7S\\131Xe\\$P7R\\665\\$P7E\\0,0\\$P8B\\32\\$P8N\\Ba138Di\\$P8S\\138Ba\\$P8R\\18370\\$P8E\\0,0\\$P9B\\32\\$P9N\\Ce140Di\\$P9S\\140Ce_Bead\\$P9R\\8547\\$P9E\\0,0\\$P10B\\32\\$P10N\\Nd142Di\\$P10S\\142Nd_CD19\\$P10R\\3094\\$P10E\\0,0\\$P11B\\32\\$P11N\\Nd143Di\\$P11S\\143Nd_CD4\\$P11R\\679\\$P11E\\0,0\\$P12B\\32\\$P12N\\Nd144Di\\$P12S\\144Nd_CD8\\$P12R\\1678\\$P12E\\0,0\\$P13B\\32\\$P13N\\Nd146Di\\$P13S\\146Nd_IgD\\$P13R\\1770\\$P13E\\0,0\\$P14B\\32\\$P14N\\Sm147Di\\$P14S\\147Sm_CD85j\\$P14R\\2155\\$P14E\\0,0\\$P15B\\32\\$P15N\\Nd148Di\\$P15S\\148Nd_CD11c\\$P15R\\1561\\$P15E\\0,0\\$P16B\\32\\$P16N\\Sm149Di\\$P16S\\149Sm_CD16\\$P16R\\3670\\$P16E\\0,0\\$P17B\\32\\$P17N\\Nd150Di\\$P17S\\150Nd_CD3\\$P17R\\1980\\$P17E\\0,0\\$P18B\\32\\$P18N\\Eu151Di\\$P18S\\151Eu_CD38\\$P18R\\7181\\$P18E\\0,0\\$P19B\\32\\$P19N\\Sm152Di\\$P19S\\152Sm_CD27\\$P19R\\1582\\$P19E\\0,0\\$P20B\\32\\$P20N\\Eu153Di\\$P20S\\153Eu_CD11b\\$P20R\\7941\\$P20E\\0,0\\$P21B\\32\\$P21N\\Sm154Di\\$P21S\\154Sm_CD14\\$P21R\\1910\\$P21E\\0,0\\$P22B\\32\\$P22N\\Gd155Di\\$P22S\\155Gd_CCR6\\$P22R\\8951\\$P22E\\0,0\\$P23B\\32\\$P23N\\Gd156Di\\$P23S\\156Gd_CD94\\$P23R\\2121\\$P23E\\0,0\\$P24B\\32\\$P24N\\Gd157Di\\$P24S\\157Gd_CD86\\$P24R\\5504\\$P24E\\0,0\\$P25B\\32\\$P25N\\Gd158Di\\$P25S\\158Gd_CXCR5\\$P25R\\1520\\$P25E\\0,0\\$P26B\\32\\$P26N\\Tb159Di\\$P26S\\159Tb_CXCR3\\$P26R\\641\\$P26E\\0,0\\$P27B\\32\\$P27N\\Gd160Di\\$P27S\\160Gd_CCR7\\$P27R\\673\\$P27E\\0,0\\$P28B\\32\\$P28N\\Dy162Di\\$P28S\\162Dy_CD45RA\\$P28R\\4259\\$P28E\\0,0\\$P29B\\32\\$P29N\\Dy164Di\\$P29S\\164Dy_CD20\\$P29R\\6982\\$P29E\\0,0\\$P30B\\32\\$P30N\\Ho165Di\\$P30S\\165Ho_CD127\\$P30R\\7787\\$P30E\\0,0\\$P31B\\32\\$P31N\\Er166Di\\$P31S\\166Er_CD33\\$P31R\\1067\\$P31E\\0,0\\$P32B\\32\\$P32N\\Er167Di\\$P32S\\167Er_CD28\\$P32R\\1653\\$P32E\\0,0\\$P33B\\32\\$P33N\\Er168Di\\$P33S\\168Er_CD24\\$P33R\\803\\$P33E\\0,0\\$P34B\\32\\$P34N\\Tm169Di\\$P34S\\169Tm_ICOS\\$P34R\\401\\$P34E\\0,0\\$P35B\\32\\$P35N\\Er170Di\\$P35S\\170Er_CD161\\$P35R\\498\\$P35E\\0,0\\$P36B\\32\\$P36N\\Yb171Di\\$P36S\\171Yb_TCRgd\\$P36R\\349\\$P36E\\0,0\\$P37B\\32\\$P37N\\Yb172Di\\$P37S\\172Yb_PD-1\\$P37R\\790\\$P37E\\0,0\\$P38B\\32\\$P38N\\Yb173Di\\$P38S\\173Yb_CD123\\$P38R\\1368\\$P38E\\0,0\\$P39B\\32\\$P39N\\Yb174Di\\$P39S\\174Yb_CD56\\$P39R\\1868\\$P39E\\0,0\\$P40B\\32\\$P40N\\Lu175Di\\$P40S\\175Lu_HLADR\\$P40R\\9669\\$P40E\\0,0\\$P41B\\32\\$P41N\\Yb176Di\\$P41S\\176Yb_CD25\\$P41R\\1271\\$P41E\\0,0\\$P42B\\32\\$P42N\\BCKG190Di\\$P42S\\190BCKG\\$P42R\\130\\$P42E\\0,0\\$P43B\\32\\$P43N\\Ir191Di\\$P43S\\191Ir_DNA1\\$P43R\\32196\\$P43E\\0,0\\$P44B\\32\\$P44N\\Ir193Di\\$P44S\\193Ir_DNA2\\$P44R\\35373\\$P44E\\0,0\\$P45B\\32\\$P45N\\Pb208Di\\$P45S\\208Pb\\$P45R\\30923\\$P45E\\0,0\\$P46B\\32\\$P46N\\Center\\$P46R\\4621\\$P46E\\0,0\\$P47B\\32\\$P47N\\Offset\\$P47R\\512\\$P47E\\0,0\\$P48B\\32\\$P48N\\Width\\$P48R\\229\\$P48E\\0,0\\$P49B\\32\\$P49N\\Residual\\$P49R\\580\\$P49E\\0,0\\$BEGINDATA\\3385\\$ENDDATA\\49003385\\                                                                 A\037\x95\x81A`&quot;</code></pre>
+<p>Ok, so what do we have? We start with the HEADER segment.</p>
+<pre><code>FCS3.0         100    3385    338549003385       0       0  </code></pre>
 <p>Then we have a TEXT segment. That starts with:</p>
-<pre><code>\\$BEGINANALYSIS\\0\\$BEGINDATA\\3400\\$BEGINSTEXT\\0\\$BTIM\\11:56:48\\$BYTEORD\\4,3,2,1\\$CYT\\DVSSCIENCES-CYTOF-6.0.626\\$CYTSN\\cytof2\\$DATATYPE</code></pre>
-<p>Note the DVSSCIENCES-CYTOF. This dataset is from after DVS sciences
-became Fluidigm and now Standard BioTools.</p>
-<p>What else do we have here? We know it’s a CyTOF 2:
-<code>CYTSN\\cytof2.</code> We know when the data were acquired:
-<code>$DATE\\14-Jul-2015</code></p>
+<pre><code>\\$BEGINANALYSIS\\0\\$ENDANALYSIS\\0\\$BEGINSTEXT\\0\\$ENDSTEXT\\0\\$NEXTDATA\\0\\$TOT\\250000\\$PAR\\49\\FCSversion\\3\\CREATOR\\PengQiu FCS writer\\$COM\\PengQiu FCS writer\\FILENAME\\081216-Mike-HIMC ctrls-001_01_normalized.fcs\</code></pre>
+<p>A bit later, we find:</p>
+<pre><code>$CYT\\DVSSCIENCES-CYTOF-6.5.358</code></pre>
+<p>DVS? They were <a href="https://investors.standardbio.com/news-releases/news-release-details/fluidigm-completes-acquisition-dvs-science">acquired
+by Fluidigm</a>, who is now StandardBioTools. All of this happened in
+2014.</p>
+<p>When was this file created?</p>
+<pre><code>$DATE\\12-Aug-2016</code></pre>
+<p>2 yearrs after the acquisition.</p>
+<p>What else do we have here? We know it’s a Helios:
+<code>$CYTSN\\Helios</code></p>
 <p>And then we have the parameter data, written as $P, followed by a
-number. For example, parameter 10 is CD14 on the Gd160 channel.</p>
-<pre><code>$P10B\\32\\$P10E\\0,0\\$P10G\\1\\$P10N\\Gd160Di\\$P10R\\549\\$P10S\\CD14\\</code></pre>
-<p>Then we have the version: <code>FCSversion\\3\\</code>. This
-corresponds to FCS 3.0. But note that was also at the very beginning of
-the header.</p>
-<p>After that, we have a bunch of weird text involving flowCore:</p>
-<pre><code>flowCore_$P10Rmax\\15\\flowCore_$P10Rmin\\1</code></pre>
-<p>This suggests that this file was processed and outputted again.</p>
+number. For example, parameter 1 is time.</p>
+<pre><code>$P1B\\32\\$P1N\\Time\\$P1R\\1129870\\$P1E\\0,0\\</code></pre>
+<p>Parameter 10 is CD19.</p>
+<pre><code>$P10B\\32\\$P10N\\Nd142Di\\$P10S\\142Nd_CD19\\$P10R\\3094\\$P10E\\0,0\\</code></pre>
 <p>Where does the DATA segment begin? Found it. In the above piece, it
-tells you <code>$BEGINDATA\\3400.</code> That means byte 3400.</p>
+tells you <code>$BEGINDATA\\3385.</code> That means byte 3385.</p>
 <p>We have to read that in as integers. Because it was read in as text
 here, it’s going to be illegible, but we’ll look at it anyway.</p>
 <pre class="r"><code>dat[2:10]</code></pre>
-<pre><code>## [1] &quot;@\0267\xcc@\006\002O&quot;                                         
-## [2] &quot;\xc4AU\b\xdd@\xef\xd0\xc8D\017D\xc0?\xdbt\xeaB\xb4LXB{Lr@\xc6&quot;
-## [3] &quot;\x87|A\xd8\v[A$&quot;                                              
-## [4] &quot;\xad&quot;                                                         
-## [5] &quot;\x9e&quot;                                                         
-## [6] &quot;\xe4B\xb7\xf2\031A\001\xd9\aA\v\x8f\xd3A\x82\xb0\&quot;&quot;           
-## [7] &quot;?#Z\xd5&quot;                                                      
-## [8] &quot;\xcf\b&quot;                                                       
-## [9] &quot;&quot;</code></pre>
+<pre><code>## [1] &quot;[#A\x80&quot;                                                                                         
+## [2] &quot;&quot;                                                                                                
+## [3] &quot;,&quot;                                                                                               
+## [4] &quot;`U@\x84d\003&quot;                                                                                    
+## [5] &quot;\a&quot;                                                                                              
+## [6] &quot;B\xd8\xe6\xe9Ap&quot;                                                                                 
+## [7] &quot;\017@[GF&quot;                                                                                        
+## [8] &quot;\xa1\xacC\b1\x87?\xb49\xc8&gt;oJ\xd2@\xb1h\xbdD\003\xf3\xaaA\003\xed$B\xfc/&#39;?\xba\x8d\xa1Ab\xfa\xca&quot;
+## [9] &quot;=\x89\x9c\xfbD\x9f\xe0\xd1E&quot;</code></pre>
 <p>This is binary that needs to be read in as numeric values, not text
 values, in order to be legible. We’ll do that in a later markdown
 because it’s <a href="https://github.com/RGLab/flowCore/blob/master/R/IO.R">complicated</a>.
