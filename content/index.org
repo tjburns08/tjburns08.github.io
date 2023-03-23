@@ -151,6 +151,8 @@ These are primarily R and python markdowns exploring various topics. I apologize
 There are two potenital audiences here. The first are those with questions about any of the topics below that I cover. The second are those learning coding or data science who want to see examples of simple but insightful analyses.
 
 Regardless of the reader's intent, I hope above all that the work below will encourage people to really tinker with text, numbers, and data. You can get surprisingly far if you get in the habit of it.
+** [[./read_fcs_by_lines.html][Anatomy of a fcs file]]
+I read in a fcs file line by line, rather than using the standard read.FCS from flowCore. We can't read the data directly this way, but we can read in the header and the text.
 ** CyTOF analysis pipeline
 CyTOF analysis has come a long way. Along with single-cell sequencing analysis, a lot of it is high-level functions that do what needs to be done. I prefer a guts-level analysis, where I can see the low-level the details of how my data are being manipulated. This is important for understanding and innovation. 
 *** [[./cytof_pipeline_one_file.html][One fcs file]]
