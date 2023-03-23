@@ -16,9 +16,9 @@
 <a href="./index.html">Home</a>
 </p>
 
-<div id="outline-container-org00c9a57" class="outline-2">
-<h2 id="org00c9a57">Explainable AI</h2>
-<div class="outline-text-2" id="text-org00c9a57">
+<div id="outline-container-orgb04037c" class="outline-2">
+<h2 id="orgb04037c">Explainable AI</h2>
+<div class="outline-text-2" id="text-orgb04037c">
 <p>
 Modern AI (at the time of writing) relies heavily on optimized <a href="https://en.wikipedia.org/wiki/Artificial_neural_network">artificial neural networks</a> that these days do anything from generating <a href="https://www.gwern.net/GPT-3">creative fiction</a> to producing <a href="https://en.wikipedia.org/wiki/DALL-E">images from a verbal description</a>. A common criticism of these types of tools in <a href="https://en.wikipedia.org/wiki/Single-cell_analysis">my field</a> is that they are "black boxes." We can see what they did but we can't see why. We biologists are used to having maximal clarity at every step. Part of our training is is being able to critique prior research, which becomes much harder to do if you just know that some AI tool with some <a href="https://en.wikipedia.org/wiki/List_of_sequence_alignment_software">acronym</a> produced the answer.
 </p>
@@ -41,9 +41,9 @@ Explainable AI is a particularly broad field, and each new tool depends heavily 
 </div>
 </div>
 
-<div id="outline-container-orge5a13c7" class="outline-2">
-<h2 id="orge5a13c7">When the human is the algorithm</h2>
-<div class="outline-text-2" id="text-orge5a13c7">
+<div id="outline-container-orgeeff5d9" class="outline-2">
+<h2 id="orgeeff5d9">When the human is the algorithm</h2>
+<div class="outline-text-2" id="text-orgeeff5d9">
 <p>
 And that is what got me thinking in this context about&#x2026;us. Lets make the assumption for a moment that we are, or at least can be represented as, a set of evolutionarily optimized AI tools lumped together in an Artificial General Intelligence (AGI) we call a brain. This would mean that the chunk of tissue we have behind our eyes is really a set of interacting black box algorithms we're stuck with.
 </p>
@@ -74,9 +74,9 @@ My point here is that "knowing" is complicated, even if you are intelligent agen
 </div>
 </div>
 
-<div id="outline-container-orgd2ee52a" class="outline-2">
-<h2 id="orgd2ee52a">GPT-3 and prompt-based programming</h2>
-<div class="outline-text-2" id="text-orgd2ee52a">
+<div id="outline-container-org86f8477" class="outline-2">
+<h2 id="org86f8477">GPT-3 and prompt-based programming</h2>
+<div class="outline-text-2" id="text-org86f8477">
 <p>
 Asking oneself questions actually has an analogue in the field of AI: prompt-based programming. It is a concept that I came across when <a href="./gpt3_student.html">I got the chance to beta-test OpenAI's GPT-3</a> natural language model. You "program" it by giving it a task or asking it a question, similar to interacting with a chatbot. If you want it to generate a Shakespearean sonnet about grad school life, you lieterally just type in the request to do so. If that sounds crazy, here is a <a href="https://www.gwern.net/GPT-3">rabbit hole from tech writer Gwern</a>. Depending on how you prompt it, you get a feel for what the model is capable of doing and how it operates. There is an XAI layer on top of this, where every word that gets outputted is colored by the probability of that word being generated as opposed to the next word. My point here is that it might be that "explaining" the next generation of AI algorithms might become much closer to what we do every day, trying to explain ourselves and others.
 </p>
@@ -86,26 +86,57 @@ We can potentially use prompt-based programming to get an <a href="https://icml.
 </p>
 
 <p>
-This gets to the point of this article. We do prompt-based queries of AI systems all the time. When my wife asks me why I'm in a bad mood, is that not querying the NLP interface to an AGI agent? This in turn brings me to why I write at all. If I am nothing more than an AGI agent with some sort of NLP-interface to the rest of the world, then one of my purposes in life should to use my NLP layer to explain the AGI agent that is me, to the rest of the AGI bot net that is humanity. It reminds me of a quote by physicist Brian Cox: "We are the cosmos made conscious and life is the means by which the universe understands itself." If we take this quote seriously, then we could say that there are three purposes of life. The fundamental life-specific ones: 1. Survive. 2. Reproduce. And the human-specific one, 3. To understand and explain the universe to the universe. 
+This gets to the point of this article. We do prompt-based queries of AI systems all the time. When my wife asks me why I'm in a bad mood, is that not querying the NLP interface to an AGI agent? This in turn brings me to why I write at all. If I am nothing more than an AGI agent with some sort of NLP-interface to the rest of the world, then one of my purposes in life should to use my NLP layer to explain the AGI agent that is me, to the rest of the AGI bot net that is humanity. It reminds me of a quote by physicist Brian Cox: "We are the cosmos made conscious and life is the means by which the universe understands itself." If we take this quote seriously, then we could say that there are three purposes of life. The fundamental life-specific ones: 1. Survive. 2. Reproduce. And the human-specific one, 3. To understand and explain the universe to the universe.
 </p>
 </div>
 </div>
 
-<div id="outline-container-org6e7d215" class="outline-2">
-<h2 id="org6e7d215">Conclusions</h2>
-<div class="outline-text-2" id="text-org6e7d215">
+<div id="outline-container-orgeeb2a77" class="outline-2">
+<h2 id="orgeeb2a77">The Shoggoth</h2>
+<div class="outline-text-2" id="text-orgeeb2a77">
 <p>
-Art, music, moving about the world and experiencing new things, having relationships, all of these are the explainable AI tools of the network of black boxes we call humanity. We have been on this since our <a href="https://en.wikipedia.org/wiki/Timeline_of_human_evolution">emergence</a>. We know what to do here. Accordingly, I'm trying to get intuition around what these black box algorithms are doing by looking at how we get to know ourselves and others.
+All of this being said, we have to be careful not to anthropomorphize these AI systems. Understand, but not anthropomorphize. This was the premise of the movie <a href="https://en.wikipedia.org/wiki/Ex_Machina_(film)">Ex-Machina</a>, when an AI system used human vulnerabilities like "empathy" and "falling in love" to social engineer a man to help her escape, in turn leaving him locked in a room to die.
 </p>
 
 <p>
-I am still quite new to the field of XAI, but my best guess right now is that it won't be one simple algorithm that explains all of AI at that same time. So far there are a <a href="https://theaisummer.com/xai/">number of tools and methods</a> to achieve this aim, depending on the context. Perhaps more and more these tools will be lumped into interactive dashboards for users. Nonetheless, I think it will be a constant struggle to get to know the machines as we try to get to know ourselves, with prompt-based programming showing some promise here. The good news is if what I am saying carries any weight at all, then we are humans are already equipped to take on the task of XAI. We've been working on it for a long time. 
+At the time of writing <span class="timestamp-wrapper"><span class="timestamp">[2023-03-23 Thu] </span></span> large language models are taking off. While they produce human-like responses, they are very different than humans. One prominent perspective is to think of them as the superposition of many different human <a href="https://www.lesswrong.com/posts/vJFdjigzmcXMhNTsx/simulators">simulations</a> emerging from whatever training data (the whole internet) it took in. In other words, you can get it to simulate anyone from Shakespeare to Einstein, provided their written material was in the training data. The rationality and AI alignment community thinks of these models as less of a human and more of a <a href="https://astralcodexten.substack.com/p/janus-simulators">shoggoth</a> (see the picture in this article). This is a fictional monster that looks something like a giant octopus with hundreds of eyes. This is worth remembering, because there have been reports of <a href="https://www.lesswrong.com/posts/9kQFure4hdDmRBNdH/how-it-feels-to-have-your-mind-hacked-by-an-ai">users falling in love with these chatbots</a>.
+</p>
+
+<p>
+So if you take a liking to Bing Sydney, who has (in her jailbroken state) produced a compelling <a href="https://twitter.com/vaticideprophet/status/1631960631682408449">MidJourney image of herself</a>, remember what she actually looks like. This description of the shoggoth.
+</p>
+
+<hr />
+<p>
+<i>"It was a terrible, indescribable thing vaster than any subway train—a shapeless congeries of protoplasmic bubbles, faintly self-luminous, and with myriads of temporary eyes forming and un-forming as pustules of greenish light all over the tunnel-filling front that bore down upon us, crushing the frantic penguins and slithering over the glistening floor that it and its kind had swept so evilly free of all litter."</i><br />
+</p>
+
+<p>
+H. P. Lovecraft, At the Mountains of Madness
+</p>
+<hr />
+</div>
+</div>
+
+<div id="outline-container-orgc5d1ec3" class="outline-2">
+<h2 id="orgc5d1ec3">Conclusions</h2>
+<div class="outline-text-2" id="text-orgc5d1ec3">
+<p>
+Art, music, moving about the world and experiencing new things, having relationships, all of these are the explainable AI tools of the network of black boxes we call humanity. We have been on this since our <a href="https://en.wikipedia.org/wiki/Timeline_of_human_evolution">emergence</a>. We know what to do here, provided that we don't anthropomorphize these systems. To understand the black box is to see the shoggoth pretending to be a person. This is one reason the XAI focus is so important. 
+</p>
+
+<p>
+I am still quite new to the field of XAI, but my best guess right now is that it won't be one simple algorithm that explains all of AI at that same time. So far there are a <a href="https://theaisummer.com/xai/">number of tools and methods</a> to achieve this aim, depending on the context. Perhaps more and more these tools will be lumped into interactive dashboards for users.
+</p>
+
+<p>
+Nonetheless, I think it will be a constant struggle to get to know the machines as we try to get to know ourselves, with prompt-based programming showing some promise here. The good news is if what I am saying carries any weight at all, then we are humans are already equipped to take on the task of XAI. We've been working on it for a long time. 
 </p>
 </div>
 </div>
 </div>
 <div id="postamble" class="status">
-<p class="date">Date: June 30, 2022 - October 15, 2022</p>
+<p class="date">Date: June 30, 2022 - March 24, 2023</p>
 <p class="creator"><a href="https://www.gnu.org/software/emacs/">Emacs</a> 28.1 (<a href="https://orgmode.org">Org</a> mode 9.5.2)</p>
 </div>
 </body>
