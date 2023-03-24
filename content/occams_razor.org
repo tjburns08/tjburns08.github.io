@@ -12,11 +12,11 @@ Claude Shannon, lecture: /Creative Thinking/
 
 I have a group chat of local friends we use to coordinate our weekend events among other things. One of the things we do is we wish each other happy birthday when these days roll around. My birthday is shared with another birthday, of a guy we call Nickel. Every year on my birthday, messages ring through the group chat, "Happy birthday Tyler and Nickel" (except in German). But this year, it was only "Happy birthday Nickel."
 
-What happened? Was the whole group mad at me for some reason? I haven't done anything different. None of the conditions have changed since last year. For any phenomenon, we got trained as scientists to find the simplest possible explanation. That would be the most likely hypothesis. This is known as Occam's Razor.
+What happened? Was the whole group mad at me for some reason? I haven't done anything different. None of the conditions have changed since last year. For any phenomenon, we got trained as scientists to find the simplest possible explanation. That would be the most likely hypothesis. This is known as Occam's Razor. 
 
 For example: where does lightning come from? One explanation is that it's electric discharges from the clouds, and another explanation is that it is a god of lightning in the sky who throws lightning bolts everywhere all the time. If we didn't do the Ben Franklin kite experiment, we would at least know that the second explanation requires validation of some superhuman supernatural being that no one has ever actually seen, which would require validation of the existence of a class of life form called "superhuman supernatural being" that no one has every seen. The first explanation requires only physics. So we would sift more weight to the physics based hypothesis as opposed to the Zeus based hypothesis. Do this at your own risk, depending on the ideology your culture is steeped in.
 
-But "forgetting" and "mad at me" is a bit more subtle. I've seen both. There's no supernatural component. We have to get a bit a bit more technical. 
+But "forgetting" and "mad at me" is a bit more subtle. I've seen both. There's no supernatural component. We have to get a bit a bit more technical. The spoiler alert is that they just forgot. But let's go into the details of the different scenarios and show why that is a simpler explanation.
 
 * The simplest computer program
 
@@ -35,15 +35,14 @@ For each person:
 Mad at me, individual level.\\
 #+begin_src
 For each person:
-    See that it's Nickel and Tyler's birthday
+    See that it's Nickel and Tyler's birthday.
     Be mad at Tyler.
     Decide to exclude him from birthday wishes.
-
 #+end_src
 
 Mad at me, group level.\\
 #+begin_src
-Everyone gets together, and decides that we're mad at Tyler. 
+Everyone gets together, and decides that we're all mad at Tyler. 
 
 Decide that they're just mad enough at Tyler to exclude him from the birthday wishes, after mulling over removal from the group and confrontation.
 
@@ -51,7 +50,7 @@ For each person:
     Follow the rules, and exclude Tyler from the birthday wishes.
 #+end_src
 
-We can see that high-level programs 2 and 3 require a lot of additional functions. Between being mad (not common with my group), planning a passive aggressive activity (not common with my group at all), or everyone being mad at me at the individual level for the same or different reasons. Forgetting because we're busy and two birthdays on the same day is a bit of an edge case is a much simpler computer program that would run on my social graph.
+We can see that high-level programs 2 and 3 require a lot of additional functions. Between being mad assuming not-mad as baseline (not common with my group), planning a passive aggressive activity (not common with my group at all), or everyone being mad at me at the individual level for the same or different reasons. Forgetting because we're busy and two birthdays on the same day is a bit of an edge case is a much simpler computer program that would run on my social graph.
 
 So far, we have made the assumption that we're dealing with a closed system. Me and my friends. But the reality is we're actually dealing with an open system. Your friends are connected to more people who are connected to more people and so on until [[https://en.wikipedia.org/wiki/Six_Degrees_of_Kevin_Bacon][Kevin Bacon]]. So it would be very hard to write the set of all computer programs across the broader social graph that could lead to the phenomenon you're observing. This is where figuring out [[https://fs.blog/probabilistic-thinking/][probabilities]] and doing [[https://www.youtube.com/watch?v=HZGCoVF3YvM][Bayesian updates]] as you gain more information comes in. This moves us into [[https://en.wikipedia.org/wiki/Bayesian_epistemology][Bayesian epistemology]], which is beyond the scope of this article, but worth knowing about.
 
@@ -78,7 +77,7 @@ print 4
 print 5
 #+end_src
 
-To understand this next piece, let's pretend that we're dealing with a sequence of [1, 2, 3, .... 1 billion]. We can compress this sequence using program 1, only 3 lines, which will output the sequence. Program 2 we cannot compress any further, at 1 billion lines. Program 1 is the simpler program, it is the most likely explanation by Solmonoff induction. Note that if we really wanted to be rigorous here, we'd have to look at a mathematical model of the implementation of each of these computer programs at the bit string level, but thinking in lines of code at least gives us some intuition here.
+To understand this next piece, let's pretend that we're dealing with a sequence of [1, 2, 3, .... 1 billion]. We can compress this sequence using program 1, only 4 lines, which will output the sequence. Program 2 we cannot compress any further, at 1 billion lines. Program 1 is the simpler program, it is the most likely explanation by Solmonoff induction. Note that if we really wanted to be rigorous here, we'd have to look at a mathematical model of the implementation of each of these computer programs at the bit string level, but thinking in lines of code at least gives us some intuition here.
 
 * The most complex sequence, a tie-in to cognition
 
