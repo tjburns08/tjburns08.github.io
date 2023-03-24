@@ -15,7 +15,7 @@ If you have quesitons or comments, or you're interested in working or collaborat
 First author publication.\\
 
 Abstract: In high-dimensional single cell data, comparing changes in functional markers between conditions is typically done across manual or algorithm-derived partitions based on population-defining markers. Visualizations of these partitions is commonly done on low-dimensional embeddings (eg. t-SNE), colored by per-partition changes. Here, we provide an analysis and visualization tool that performs these comparisons across overlapping k-nearest neighbor (KNN) groupings. This allows one to color low-dimensional embeddings by marker changes without hard boundaries imposed by partitioning. We devised an objective optimization of k based on minimizing functional marker KNN imputation error. Proof-of-concept work visualized the exact location of an IL-7 responsive subset in a B cell developmental trajectory on a t-SNE map independent of clustering. Per-condition cell frequency analysis revealed that KNN is sensitive to detecting artifacts due to marker shift, and therefore can also be valuable in a quality control pipeline. Overall, we found that KNN groupings lead to useful multiple condition visualizations and efficiently extract a large amount of information from mass cytometry data. Our software is publicly available through the Bioconductor package Sconify.
-
+ 
 ** [[https://pubmed.ncbi.nlm.nih.gov/28094900/][High Throughput Precision Measurement of Nuclear Localization in Subcellular Localization in Single Cells]]
 First author publication.\\
 
@@ -162,7 +162,8 @@ Software.\\
 
 Associated with [[https://tjburns08.github.io/scrolling_problem.html][The Scrolling Problem]]. An app that converts an RSS feed into a semantic map where articles that are similar to each other in context are near each other on the map.
 ** (temporarily suspended) [[https://gwasmap.herokuapp.com/][Gwasmap]]
-Software.
+Software.\\
+
 Associated with my article [[https://tjburns08.github.io/context_problem_bfx.html][The Context Problem in Bioinformatics]]. Given one of more genes, what are the GWAS associations? These are placed onto a semantic map where associations that are similar to each other are grouped near each other on the map. Thus, if gene 1 is associated with Alzheimer's disease and gene 2 is associated with age-related cognitive decline (different but related disease) the associations for each gene (colored accordingly) will show up near each other.
 ** [[https://huggingface.co/spaces/tjburns/ask_marcus_aurelius][Ask Marcus Aurelius]]
 Software.\\
@@ -254,7 +255,7 @@ Markdown.\\
 
 Here, I write some code to produce each of the 256 Wolfram cellular automata rules, and visualize the output. 
 ** [[./explore_rule_110.html][Explore Wolfram Rule 110]]
-Article.\\
+Markdown.\\
 
 Here, I write some code to produce Rule 110, a Class 4 1-D cellular automata. I then enhance the gliders to make them easier to see. I explore how the output changes if I make the rule probabilistic (eg. 99.99% chance the rule will be followed. 
 * Statistics
