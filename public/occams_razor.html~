@@ -22,15 +22,15 @@ Claude Shannon, lecture: <i>Creative Thinking</i>
 </p>
 <hr />
 
-<div id="outline-container-org789c089" class="outline-2">
-<h2 id="org789c089">The simplest explanation</h2>
-<div class="outline-text-2" id="text-org789c089">
+<div id="outline-container-orge1e80a8" class="outline-2">
+<h2 id="orge1e80a8">The simplest explanation</h2>
+<div class="outline-text-2" id="text-orge1e80a8">
 <p>
 I have a group chat of local friends we use to coordinate our weekend events among other things. One of the things we do is we wish each other happy birthday when these days roll around. My birthday is shared with another birthday, of a guy we call Nickel. Every year on my birthday, messages ring through the group chat, "Happy birthday Tyler and Nickel" (except in German). But this year, it was only "Happy birthday Nickel."
 </p>
 
 <p>
-What happened? Was the whole group mad at me for some reason? I haven't done anything different. None of the conditions have changed since last year. For any phenomenon, we got trained as scientists to find the simplest possible explanation. That would be the most likely hypothesis. This is known as Occam's Razor.
+What happened? Was the whole group mad at me for some reason? I haven't done anything different. None of the conditions have changed since last year. For any phenomenon, we got trained as scientists to find the simplest possible explanation. That would be the most likely hypothesis. This is known as Occam's Razor. 
 </p>
 
 <p>
@@ -38,14 +38,14 @@ For example: where does lightning come from? One explanation is that it's electr
 </p>
 
 <p>
-But "forgetting" and "mad at me" is a bit more subtle. I've seen both. There's no supernatural component. We have to get a bit a bit more technical. 
+But "forgetting" and "mad at me" is a bit more subtle. I've seen both. There's no supernatural component. We have to get a bit a bit more technical. The spoiler alert is that they just forgot. But let's go into the details of the different scenarios and show why that is a simpler explanation.
 </p>
 </div>
 </div>
 
-<div id="outline-container-org39db258" class="outline-2">
-<h2 id="org39db258">The simplest computer program</h2>
-<div class="outline-text-2" id="text-org39db258">
+<div id="outline-container-org60f0a0d" class="outline-2">
+<h2 id="org60f0a0d">The simplest computer program</h2>
+<div class="outline-text-2" id="text-org60f0a0d">
 <p>
 To formalize Occam's razor, we have to think <a href="./coding_as_philosophical_project.html">computationally</a>. Suppose we have a bunch of AGI agents in the same situation. Let's look at "mat at me" and "forgot" explanations in more detail. For now, we will think in python, as opposed to Turing machines, which we would have to do if we really wanted to formalize this.
 </p>
@@ -67,7 +67,7 @@ Mad at me, individual level.<br />
 </p>
 <pre class="example">
 For each person:
-    See that it's Nickel and Tyler's birthday
+    See that it's Nickel and Tyler's birthday.
     Be mad at Tyler.
     Decide to exclude him from birthday wishes.
 </pre>
@@ -76,7 +76,7 @@ For each person:
 Mad at me, group level.<br />
 </p>
 <pre class="example">
-Everyone gets together, and decides that we're mad at Tyler. 
+Everyone gets together, and decides that we're all mad at Tyler. 
 
 Decide that they're just mad enough at Tyler to exclude him from the birthday wishes, after mulling over removal from the group and confrontation.
 
@@ -85,7 +85,7 @@ For each person:
 </pre>
 
 <p>
-We can see that high-level programs 2 and 3 require a lot of additional functions. Between being mad (not common with my group), planning a passive aggressive activity (not common with my group at all), or everyone being mad at me at the individual level for the same or different reasons. Forgetting because we're busy and two birthdays on the same day is a bit of an edge case is a much simpler computer program that would run on my social graph.
+We can see that high-level programs 2 and 3 require a lot of additional functions. Between being mad assuming not-mad as baseline (not common with my group), planning a passive aggressive activity (not common with my group at all), or everyone being mad at me at the individual level for the same or different reasons. Forgetting because we're busy and two birthdays on the same day is a bit of an edge case is a much simpler computer program that would run on my social graph.
 </p>
 
 <p>
@@ -98,9 +98,9 @@ Anyway, the computational formalism of Occam's razor involves looking at a pheno
 </div>
 </div>
 
-<div id="outline-container-org1e4e1af" class="outline-2">
-<h2 id="org1e4e1af">The literal simplest computer program</h2>
-<div class="outline-text-2" id="text-org1e4e1af">
+<div id="outline-container-org89ca10f" class="outline-2">
+<h2 id="org89ca10f">The literal simplest computer program</h2>
+<div class="outline-text-2" id="text-org89ca10f">
 <p>
 Now probabilistic thinking and Solmonoff induction do intersect. To do this, consider the sequence [1, 2, 3, 4, 5]. Let's think of all the possible computer programs in existence that could produce each of these. Let's drill down into two of them.
 </p>
@@ -132,9 +132,9 @@ To understand this next piece, let's pretend that we're dealing with a sequence 
 </div>
 </div>
 
-<div id="outline-container-org978b76c" class="outline-2">
-<h2 id="org978b76c">The most complex sequence, a tie-in to cognition</h2>
-<div class="outline-text-2" id="text-org978b76c">
+<div id="outline-container-org08caa5f" class="outline-2">
+<h2 id="org08caa5f">The most complex sequence, a tie-in to cognition</h2>
+<div class="outline-text-2" id="text-org08caa5f">
 <p>
 Ok, here's where it gets interesting. Suppose I have a random string of bits, like [1, 0, 1, 1, 0, 0, 1, &#x2026;]. How random is that string? We can sample the set of all computer programs of a particular framework, eg. the <a href="https://en.wikipedia.org/wiki/Turing_machine">Turing machine</a>, and find all programs that produce this string. We can then take the Occam's razor / Solmonoff induction approach and ask what the shortest program is. Note again that a computer program itself is a string of bits. This is how we determine what computer programs are the shortest.
 </p>
@@ -153,9 +153,9 @@ There are obviously some interesting followups here that could be done. Like loo
 </div>
 </div>
 
-<div id="outline-container-orgdc955cc" class="outline-2">
-<h2 id="orgdc955cc">Conclusion</h2>
-<div class="outline-text-2" id="text-orgdc955cc">
+<div id="outline-container-org0b3f19c" class="outline-2">
+<h2 id="org0b3f19c">Conclusion</h2>
+<div class="outline-text-2" id="text-org0b3f19c">
 <p>
 We started with Occam's razor. But I'm a computational biologist by training and I see the world in code. Naturally, I discovered Solmonoff induction, the computational formulation of Occam's razor, and I have stuck with that. In studying Solmonoff induction, I ran into the work of Hector Zenil, who has been applying these principles in various ways, including the unexpected tie-in to human cognition. I hope you at least have a better feel for what Occam's razor actually is, or at least how I think about Occam's razor. 
 </p>
