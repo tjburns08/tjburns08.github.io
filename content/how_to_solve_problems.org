@@ -1,0 +1,95 @@
+#+Title: What I learned about problem solving from my thesis lab
+#+Author: Tyler Burns
+#+Date: March 24, 2023 - March 24, 2023
+
+* My thesis laboratory
+When I showed up to rotate at my thesis lab in 2012, I sat next to a guy named Jack (name anonymized). This was a biology lab, but he had a huge pile of circuit boards, tubes, and all kinds of other gizmos on his desk and adjacent lab bench. He was clearly building something big. So I chatted with him and he told me that he was automating some piece of his lab protocol that was too tedious and time consuming for him.
+
+Cool, I thought. An engineer rotating in a biology lab. So of course I asked him what his background was. Electrical? Mechanical? Software? He said he's an immunologist who studies Lupus, and he's never taken a single engineering course in his life. He's just figuring it out himself as he goes.
+
+What??? No classes? No exams? No engineering degree? No internship as an engineer in some company? No. He just wanted to automate some aspect of his protocol so he started figuring out how circuits work and started building from there.
+
+In my years in my thesis lab, I met lots of people just like this. People who defied all expectations and managed to do all kinds of things without any formal training. What did all these people have in common? They were great problem solvers. My PI, Garry Nolan, had a knack for finding great and independent problem solvers, and grooming them from great to excellent if not outstanding problem solvers. A lot of that was osmosis. Garry himself knows a thing or two about solving problems, to say the least. He seems to develop a new technology that changes the world every five years or so. 
+
+I became the guy who went from pure wet-lab biologist to dry-lab computational biologist on my own volition. I did not think such a thing was possible, or for that matter, being self employed doing that, before my exposure to the magic of my thesis lab.
+
+Seeing what I've seen in grad school, I will try to distill what I learned about how to solve problems. There is a lot here that goes beyond Garry explaining things. But I was around him and the Nolan Lab for half a decade, having to solve a few tough problems myself along the way, so I can try to put it into words. I'll note from the outset that what I'm about to write about runs counter to a lot of the mainstream advice about solving problems and getting things done in general.
+
+I talk a lot about this stuff over and over, and it's clear in my head. But memories fade, and I've been away from the lab for 5 years now. I need to get all of this on paper while it's all fresh, not just for you, but also (and mainly) for my future self. Let's get started.
+
+* Simplify
+The Nolan Lab had a lot of computational people. One of my former colleagues likes to joke that when I arrived in the Nolan Lab I barely knew what a t-test was. After being around enough of the dry-lab colleagues, and seeing them invent novel algorithms out of the blue, I decided that I want to try my hand at computer science too. 
+
+When I took an intro CS class halfway through my time in my thesis lab (Garry approved, because he sensed that it would pay off eventually), one of the first problem sets was to design Atari Breakout using a Java graphics library that Stanford provided. Altogether, this problem set was very complicated. How on Earth was I, a total beginner, supposed to make Atari breakout in a week?
+
+One of the standard ways to solve problems is to decompose it into many pieces, and decompose the pieces into pieces, etc, until you have steps that are actionable. I'm going to assume you've heard this before. My problem was that even the act of decomposing the problem was stressful because there were so many pieces that I totally didn't know how to do that it was still hard to look at it all at the same time.
+
+So I asked myself, could I make a ball bouncing around across the walls. No, too complicated. How about just the game window with nothing in it. Ok. That worked. How about the ball in the center of the screen, in place. Ok, that worked. How about if I could get the ball to move one pixel to the right and then stop? That worked too! Now I was getting some momentum.
+
+When I looked up, the sun had gone down, I couldn't tell you whether or not I had eaten dinner, and I have a ton of missed calls and texts. This was the [[./tao_of_problem_solving.html][flow state]], and I had been there for several hours. More importantly, I had a working prototype of Atari breakout sitting in front of me. All because I had simplified the problem as much as I possibly could, to the point where what I was solving looked nothing like breakout (ball on screen doing nothing), which gave me a foothold that allowed me to build in the rest of the pieces until it became clear that I was very much solving the Atari breakout problem.
+
+It turns out that this is the way [[https://en.wikipedia.org/wiki/Claude_Shannon][Claude Shannon]] liked to solve problems. He gave a lecture called Creative Thinking, in which he said the following, which perfectly recapitulates what I had discovered upon programming Atari breakout:
+
+-----
+/The first one that I might speak of is the idea of simplification. Suppose that you are given a problem to solve, I don’t care what kind of a problem—a machine to design, or a physical theory to develop, or a mathematical theorem to prove, or something of that kind – probably a very powerful approach to this is to attempt to eliminate everything from the problem except the essentials; that is, cut it down to size. Almost every problem that you come across is befuddled with all kinds of extraneous data of one sort or another; and if you can bring this problem down into the main issues, you can see more clearly what you’re trying to do and perhaps find a solution. Now, in so doing, you may have stripped away the problem that you’re after. You may have simplified it to a point that it doesn’t even resemble the problem that you started with; but very often if you can solve this simple problem, you can add refinements to the solution of this until you get back to the solution of the one you started with./
+-----
+
+If this is the way Claude Shannon approached his work, it's no wonder that the thing he stumbled across that he is known for today is a [[https://en.wikipedia.org/wiki/Information_theory][theory of information]] at large. That's the stuff that is left when you really simplify out all the essentials of everything around us.
+
+If you want to know more about how Claude Shannon approached problems, I encourage you to watch this [[https://www.youtube.com/watch?v=neA0NJNUEfM][lecture]], from Prof Emeritus Robert G. Gallager, who was a former colleague of Claude Shannon, who saw his approach in real time. 
+
+* Reinvent the wheel
+The next story I want to tell is one I have told many times, but I have not written down until now. If we go back to the early 2010s in the Nolan Lab, there was a technology taking off called MIBI. You can think of it is being able to do microscopy, but using 30 colors rather than the usual 3. This was a very complicated method involving a huge mass spectrometer with a ton of parts that needed lots of maintenance, with a price tag of north of half a million dollars. It has its place in very precise imaging, where you need high quality and high resolution. This is important, because the method I'm about to introduce is complimentary to it, with a different niche.
+
+Enter two colleagues, who I won't name here, but they are best described as literal mad scientists. One of them on the wet-lab side and one of them on the computational side. From my perspective, what I saw was not long after MIBI was doing its thing, they both switched to only speaking Russian in the lab. For six months. They were carrying around unlabeled bottles with who knows what liquid inside. Their lab benches were littered with little gizmos and wires where the unlabeled bottles weren't.
+
+Finally, after six months, they revealed their product in lab meeting. A fluorescent microscope connected to some tubes, and an Arduino chip (small computer), held together by legos and duck tape, that could also give you 30 colors, but at the 10,000 dollar price tag. It was for different tissue types and a different niche altogether, but they had essentially ignored that there was a big expensive "wheel" in the lab, and reinvented it.
+
+When you reinvent the wheel, your wheel is going to be different than whatever wheels are in place. And you're really going to know a thing or two about inventing wheels. Their "wheel" became a company that eventually got acquired by a bigger company, and led to a followup company based on some of the tech they developed when they were busy reinventing the wheel. Accordingly, these days I find myself coding up a solution by hand rather than looking for existing ones. I've hit a point where I have reinvented the wheel so many times in my domain that it's often faster to just code up what I need myself rather than looking for the perfect high-level software package that does exactly what I want (and it never does exactly what I want).
+
+* Play
+This next story involves how the final chapter of my thesis (what people actually remember me for) came to be. I was in lab one day and one of the summer students came to me and asked me a simple question about whether we could color a t-SNE map (data visualization) by a comparison metric between two datasets, rather than looking at two t-SNE maps from two respective datasets. This was an unsolved problem at the time, which I called the t-SNE comparison problem. This was totally unrelated to anything I was doing at the time, but I sat down with her and brainstormed a bunch of wild solutions just for fun.
+
+I was talking with a colleague later about some of the best solutions we had brainstormed. He had developed an algorithm that involved k-nearest neighbors, and he suggested taking one of the more promising options and use k-nearest neighbors to implement it. A lightbulb went off and I saw the full path. This was the moment in which my computer science classes, that I had been taking for fun, were finally going to get put to work. I ran home on Friday and after who knows how many cups of coffee, I had a working prototype on Monday morning.
+
+I sent an email to my PI, with the subject heading "I solved the t-SNE comparison problem!" with some images of my solution in action. He wrote back "That's amazing!" He never used the word "amazing" to me in the five years prior to that. That suggested that I should probably pursue this path to completion. And I did. This led to clearance to defend my thesis, a trip to Hawaii for a biocomputing project, and enough momentum and reputation to start building my consulting operation on the side. 
+
+But the key point here is that a lot of this came from just playing around, seeing where I could take a summer student's question about an unsolved problem. She's in the acknowledgments in the [[https://www.biorxiv.org/content/10.1101/337485v1][manuscript]] accordingly.
+
+But I'm not the only one who has experienced success as a result of play. Richard Feynman's Nobel Price work apparently came from simply playing. The following excerpt is from his book /Surely You're Joking, Mr. Feynman./
+
+-----
+/Within a week I was in the cafeteria and some guy, fooling around, throws a plate in the air. As the plate went up in the air I saw it wobble, and I noticed the red medallion of Cornell on the plate going around. It was pretty obvious to me that the medallion went around faster than the wobbling./
+
+/I had nothing to do, so I start to figure out the motion of the rotating plate. I discover that when the angle is very slight, the medallion rotates twice as fast as the wobble rate—two to one. It came out of a complicated equation! Then I thought, “Is there some way I can see in a more fundamental way, by looking at the forces or the dynamics, why it’s two to one?”/
+
+/I don’t remember how I did it, but I ultimately worked out what the motion of the mass particles is, and how all the accelerations balance to make it come out two to one./
+
+/I still remember going to Hans Bethe and saying, “Hey, Hans! I noticed something interesting. Here the plate goes around so, and the reason it’s two to one is. . .” and I showed him the accelerations./
+
+/He says, “Feynman, that’s pretty interesting, but what’s the importance of it? Why are you doing it?”/
+
+/“Hah!” I say. “There’s no importance whatsoever. I’m just doing it for the fun of it.” His reaction didn’t discourage me; I had made up my mind I was going to enjoy physics and do whatever I liked./
+
+/I went on to work out equations of wobbles. Then I thought about how electron orbits start to move in relativity. Then there’s the Dirac Equation in electrodynamics. And then quantum electrodynamics. And before I knew it (it was a very short time) I was “playing”—working, really with the same old problem that I loved so much, that I had stopped working on when I went to Los Alamos: my thesis‑type problems; all those old‑fashioned, wonderful things./
+
+/It was effortless. It was easy to play with these things. It was like uncorking a bottle: Everything flowed out effortlessly. I almost tried to resist it! There was no importance to what I was doing, but ultimately there was. The diagrams and the whole business that I got the Nobel Prize for came from that piddling around with the wobbling plate.”/
+-----
+
+What's the moral of the story? A lot of good can come out of just playing and being playful when you really should be working.
+
+* Leverage what you know
+The final story I'll tell comes from a little addictive habit that I had in my thesis lab that continued with me after I graduated: endless, mindless scrolling. I have written extensively about this [[./scrolling_problem.html][elsewhere]], but in sum, the inflammatory content in my feeds acts as malware, leading to a distorted perception of the world.
+
+I realized at some point that my day job doing single-cell data analysis, a continuation of my thesis lab work, involves curating a huge stream of data rather than scrolling down an excel sheet. I cluster it, I annotate the clusters, I do dimension reduction, and I do various visualizations. I produce insights. How is my scrolling problem any different than single-cell data before I analyze it? I was fresh out of the Nolan Lab, and I could still channel the energy of that place at will (and one of the reasons I'm writing this article is so I can do that for the rest of my life, with these stories). So leveraging my training, how do I solve the scrolling problem?
+
+Enter Natural Language Processing, or NLP (which you might know of as large language models like ChatGPT and all of its friends). While the generative aspect of these language models is popular right now, one thing that is overlooked at the moment is that we can turn the content of my scrolls into coordinate points on an XY coordinate plane, where similar titles/tweets/etc are grouped near each other. This is because these language models can also judge whether two sentences are similar to each other or different, and how much so. Then you get a map instead of a feed. At the same time, we can sort and pull out relevant articles either from the map or from the content metadata (eg. likes, retweets). Then we can pull out the insights we need and not get stuck in the infinite scrolling loop.
+
+Having seen what I saw in the Nolan Lab, I knew that I probably didn't have to take a bunch of NLP classes to get started. I had the confidence to know that if I just went for it I could probably get somewhere meaningful. What I did accordingly is leverage my single-cell analysis workflow to take on my bad habit of mindless scrolling by figuring out how to take my feed and make that data look as similar as possible as the data I'm used to processing. This is to say that in your life, with the skills you have, there might be problems that unknown to you, you are fully capable of solving. So always be on the lookout. 
+* Conclusion
+It was the moment where Jack told me that he knew nothing about engineering and was just figuring things out as he went, where I realized that I was in a special place. So much of what I saw and experienced, I didn't know was possible. From being able to learn computer science later in life while working as a busy wet-lab biology grad student, to my two colleagues completely reinventing a complicated device, complete with legos and duck tape, to the final chapter of my thesis coming from just playing around, to being able to work as a consultant. All of these things have the same element in common: just going for it, and figuring things out as they come.
+
+But within the space of figuring things out as they come, high-velocity problem solving, there are several themes that come up. Problems, especially problems outside your comfort zone, are stressful. So simplifying as much as you can, even to the point where what you're solving looks nothing like the original problem, is perfectly fine. There is advice out there that goes something like "simplify but not too much." I would say simplify as much as you want and don't worry about whether you simplify too much. What matters is you get started on /something/ even remotely related to the problem. Then we have reinventing the wheel, which flies in the face of standard advice. You do lose a lot of time if you do it like this, but the understanding you gain, if you don't come up with something groundbreaking, pays it back in the long run. You have the element of play. I would guess it has something to do with simply being more open minded and free allowing you to better explore the solution space of whatever you're working on. And finally, leveraging what you know (to solve problems in other domains), which flies in the face of any of the conventional advice of "stay in your lane."
+
+I hope you are able to take some of these stories and run with them. I hope that I can still conjure the Nolan Lab energy decades from now, when I re-read this article. I've barely scratched the surface. There are plenty more stories to tell. But I simply hope that the reader of this document can capture some of the Nolan Lab energy too. 
+

@@ -26,9 +26,9 @@ Claude Shannon, lecture: <i>Creative Thinking</i>
 </p>
 <hr />
 
-<div id="outline-container-org20fc5a0" class="outline-2">
-<h2 id="org20fc5a0">The simplest explanation</h2>
-<div class="outline-text-2" id="text-org20fc5a0">
+<div id="outline-container-org5200692" class="outline-2">
+<h2 id="org5200692">The simplest explanation</h2>
+<div class="outline-text-2" id="text-org5200692">
 <p>
 I have a group chat of local friends we use to coordinate our weekend events among other things. One of the things we do is we wish each other happy birthday when these days roll around. My birthday is shared with another birthday, of a guy we'll call Nick (not his real name). Every year on my birthday, messages ring through the group chat, "Happy birthday Tyler and Nick" (except in German). But this year, it was only "Happy birthday Nick."
 </p>
@@ -47,9 +47,9 @@ But "forgetting" and "mad at me" is a bit more subtle. I've seen both. There's n
 </div>
 </div>
 
-<div id="outline-container-orge3372af" class="outline-2">
-<h2 id="orge3372af">The simplest computer program</h2>
-<div class="outline-text-2" id="text-orge3372af">
+<div id="outline-container-orgf5961eb" class="outline-2">
+<h2 id="orgf5961eb">The simplest computer program</h2>
+<div class="outline-text-2" id="text-orgf5961eb">
 <p>
 To formalize Occam's razor, we have to think <a href="./coding_as_philosophical_project.html">computationally</a>. Let's look at "mat at me" and "forgot" explanations in more detail. For now, we will think at the level of python, as opposed to the level of Turing machines, which we would have to do if we really wanted to formalize this.
 </p>
@@ -102,11 +102,11 @@ Anyway, the computational formalism of Occam's razor involves looking at a pheno
 </div>
 </div>
 
-<div id="outline-container-org8e4f833" class="outline-2">
-<h2 id="org8e4f833">The literal simplest computer program</h2>
-<div class="outline-text-2" id="text-org8e4f833">
+<div id="outline-container-org8212f4b" class="outline-2">
+<h2 id="org8212f4b">The literal simplest computer program</h2>
+<div class="outline-text-2" id="text-org8212f4b">
 <p>
-Now probabilistic thinking and Solmonoff induction do intersect. To do this, consider the sequence [1, 2, 3, 4, 5]. Let's think of all the possible computer programs in existence that could produce each of these. Let's drill down into two of them.
+Probabilistic thinking and Solomonoff induction do intersect. To do this, consider the sequence [1, 2, 3, 4, 5]. Let's think of all the possible computer programs in existence that could produce this sequence. Let's drill down into two of them.
 </p>
 
 <p>
@@ -131,14 +131,14 @@ print 5
 </pre>
 
 <p>
-But let's pretend that we're dealing with a sequence of [1, 2, 3, &#x2026;. 1 billion]. We can compress this sequence using program 1, only 4 lines, which will output the sequence. Program 2 we cannot compress any further, at 1 billion lines. Program 1 is the simpler program, it is the most likely explanation by Solomonoff induction. Note that if we really wanted to be rigorous here, we'd have to look at a mathematical model of the implementation of each of these computer programs at the bit string level, but thinking in lines of code at least gives us some intuition here.
+But let's pretend that we're dealing with a sequence of [1, 2, 3, &#x2026;. 1 billion]. We can compress this sequence using program 1, only 4 lines, which will output the sequence. Program 2 we cannot compress any further, at 1 billion lines. Program 1 is the simpler program, it is the most likely explanation by Solomonoff induction. But importantly, we can now think in terms of how much simpler program 1 (4 lines) is from program 2 (1 billion lines). Note that if we really wanted to be rigorous here, we'd have to look at a mathematical model of the implementation of each of these computer programs at the bit string level, but thinking in lines of code at least gives us some intuition here.
 </p>
 </div>
 </div>
 
-<div id="outline-container-org7881662" class="outline-2">
-<h2 id="org7881662">Conclusion</h2>
-<div class="outline-text-2" id="text-org7881662">
+<div id="outline-container-orgb9bd3f9" class="outline-2">
+<h2 id="orgb9bd3f9">Conclusion</h2>
+<div class="outline-text-2" id="text-orgb9bd3f9">
 <p>
 We started with Occam's razor. But I'm a computational biologist by training and these days I see the world in code. Naturally, I discovered and took kindly to Solmonoff induction, the computational formulation of Occam's razor, and I have stuck with that ever since. What it has done for me is help me think computationally about what Occam's razor really is, and especially what a simple explanation really is. What I find is if I'm trying to weigh explanations for a particular thing in my life, what helps is if I try to turn the explanations into computer programs, even if it's lines of pseudo-code as I did in this article, and to up-weight the smaller programs in terms of the probability of being true. Hopefully you'll be able to approach Occam's razor through a computational lens too the next time you have to figure something out in your life. 
 </p>
