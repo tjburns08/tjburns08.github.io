@@ -12,7 +12,7 @@ Claude Shannon, lecture: /Creative Thinking/
 
 * The simplest explanation
 
-I have a group chat of local friends we use to coordinate our weekend events among other things. One of the things we do is we wish each other happy birthday when these days roll around. My birthday is shared with another birthday, of a guy we call Nickel. Every year on my birthday, messages ring through the group chat, "Happy birthday Tyler and Nickel" (except in German). But this year, it was only "Happy birthday Nickel."
+I have a group chat of local friends we use to coordinate our weekend events among other things. One of the things we do is we wish each other happy birthday when these days roll around. My birthday is shared with another birthday, of a guy we'll call Nick (not his real name). Every year on my birthday, messages ring through the group chat, "Happy birthday Tyler and Nick" (except in German). But this year, it was only "Happy birthday Nick."
 
 What happened? Was the whole group mad at me for some reason? I haven't done anything different. None of the conditions have changed since last year. At baseline, they are not mad at me. For any phenomenon, we got trained as scientists to find the simplest possible explanation. That would be the most likely hypothesis. This is known as [[https://en.wikipedia.org/wiki/Occam%27s_razor][Occam's Razor]]. 
 
@@ -26,18 +26,18 @@ To formalize Occam's razor, we have to think [[./coding_as_philosophical_project
 
 Forgetting.\\
 #+begin_src
-Someone remembers it's Nickel's birthday. Says happy birthday to Nickel.
+Someone remembers it's Nick's birthday. Says happy birthday to Nick.
 
 For each person:
-    See that it's Nickel's birthday given the group chat birthday wishes.
+    See that it's Nick's birthday given the group chat birthday wishes.
     Don't cross check.
-    Say happy birthday to Nickel.
+    Say happy birthday to Nick.
 #+end_src
 
 Mad at me, individual level.\\
 #+begin_src
 For each person:
-    See that it's Nickel and Tyler's birthday.
+    See that it's Nick and Tyler's birthday.
     Be mad at Tyler.
     Decide to exclude him from birthday wishes.
 #+end_src
@@ -79,18 +79,8 @@ print 4
 print 5
 #+end_src
 
-To understand this next piece, let's pretend that we're dealing with a sequence of [1, 2, 3, .... 1 billion]. We can compress this sequence using program 1, only 4 lines, which will output the sequence. Program 2 we cannot compress any further, at 1 billion lines. Program 1 is the simpler program, it is the most likely explanation by Solomonoff induction. Note that if we really wanted to be rigorous here, we'd have to look at a mathematical model of the implementation of each of these computer programs at the bit string level, but thinking in lines of code at least gives us some intuition here.
-
-* The most complex bit string, a tie-in to cognition
-
-Ok, here's where it gets interesting. Suppose I have a random string of bits, like [1, 0, 1, 1, 0, 0, 1, ...]. How random is that string? We can sample the set of all computer programs of a particular framework, eg. the [[https://en.wikipedia.org/wiki/Turing_machine][Turing machine]], and find all programs that produce this string. We can then take the Occam's razor / Solmonoff induction approach and ask what the shortest program is. Note again that a computer program itself is a string of bits. This is how we determine what computer programs are the shortest.
-
-A truly random sequence would not be compressible beyond our print item 1, print item 2, etc, framework that we made above. A nonrandom sequence would have a shorter computer program than that.
-
-Let's suppose I asked you to write out a random string of bits of length 20, and I had access to every Turing machine that would produce any bit string of that length. I could literally tell you how random that string is. Let's suppose I had a group of people of various ages from young to old, and I told them to write out the most random bit string possible of length 20. Who can write the more random strings? [[https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1005408][Hector Zenil and colleagues]], who are expert researchers in the subject matter of this article, did that experiment. He found that you can actually see a drop-off of the ability to produce random sequences after the age of 25, which ties in with a lot of work on cognition as a function of age.
-
-There are obviously some interesting followups here that could be done. Like looking at random string production as a function of career (artist vs scientist), and IQ. Or even looking at production of random strings in large language models (you never know what these things can [[https://www.lesswrong.com/posts/N6WM6hs7RQMKDhYjB/a-mechanistic-interpretability-analysis-of-grokking][grok]]). 
+But let's pretend that we're dealing with a sequence of [1, 2, 3, .... 1 billion]. We can compress this sequence using program 1, only 4 lines, which will output the sequence. Program 2 we cannot compress any further, at 1 billion lines. Program 1 is the simpler program, it is the most likely explanation by Solomonoff induction. Note that if we really wanted to be rigorous here, we'd have to look at a mathematical model of the implementation of each of these computer programs at the bit string level, but thinking in lines of code at least gives us some intuition here.
 
 * Conclusion
 
-We started with Occam's razor. But I'm a computational biologist by training and I see the world in code. Naturally, I discovered Solmonoff induction, the computational formulation of Occam's razor, and I have stuck with that. In studying Solmonoff induction, I ran into the work of Hector Zenil, who has been applying these principles in various ways, including the unexpected tie-in to human cognition. I hope you at least have a better feel for what Occam's razor actually is, or at least how I think about Occam's razor. 
+We started with Occam's razor. But I'm a computational biologist by training and these days I see the world in code. Naturally, I discovered and took kindly to Solmonoff induction, the computational formulation of Occam's razor, and I have stuck with that ever since. What it has done for me is help me think computationally about what Occam's razor really is, and especially what a simple explanation really is. What I find is if I'm trying to weigh explanations for a particular thing in my life, what helps is if I try to turn the explanations into computer programs, even if it's lines of pseudo-code as I did in this article, and to up-weight the smaller programs in terms of the probability of being true. Hopefully you'll be able to approach Occam's razor through a computational lens too the next time you have to figure something out in your life. 
