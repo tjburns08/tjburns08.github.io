@@ -12,78 +12,95 @@ If you have quesitons or comments, or you're interested in working or collaborat
 
 * Single-cell analysis
 ** [[https://www.biorxiv.org/content/10.1101/337485v1][Continuous Visualization of Multiple Biological Conditions In Single-Cell Data]]
-First author publication.
+First author publication.\\
+
 Abstract: In high-dimensional single cell data, comparing changes in functional markers between conditions is typically done across manual or algorithm-derived partitions based on population-defining markers. Visualizations of these partitions is commonly done on low-dimensional embeddings (eg. t-SNE), colored by per-partition changes. Here, we provide an analysis and visualization tool that performs these comparisons across overlapping k-nearest neighbor (KNN) groupings. This allows one to color low-dimensional embeddings by marker changes without hard boundaries imposed by partitioning. We devised an objective optimization of k based on minimizing functional marker KNN imputation error. Proof-of-concept work visualized the exact location of an IL-7 responsive subset in a B cell developmental trajectory on a t-SNE map independent of clustering. Per-condition cell frequency analysis revealed that KNN is sensitive to detecting artifacts due to marker shift, and therefore can also be valuable in a quality control pipeline. Overall, we found that KNN groupings lead to useful multiple condition visualizations and efficiently extract a large amount of information from mass cytometry data. Our software is publicly available through the Bioconductor package Sconify.
 
 ** [[https://pubmed.ncbi.nlm.nih.gov/28094900/][High Throughput Precision Measurement of Nuclear Localization in Subcellular Localization in Single Cells]]
-First author publication.
+First author publication.\\
+
 Abstract: To quantify visual and spatial information in single cells with a throughput of thousands of cells per second, we developed Subcellular Localization Assay (SLA). This adaptation of Proximity Ligation Assay expands the capabilities of flow cytometry to include data relating to localization of proteins to and within organelles. We used SLA to detect the nuclear import of transcription factors across cell subsets in complex samples. We further measured intranuclear re-localization of target proteins across the cell cycle and upon DNA damage induction. SLA combines multiple single-cell methods to bring about a new dimension of inquiry and analysis in complex cell populations. © 2017 International Society for Advancement of Cytometry.
 
 My summer students are co-authors on this paper! Undergrads and high school students. They worked very hard and learned a lot. I am proud of each and every one of them. 
 ** [[./Burns.Dissertation.Final.pdf][Expanding the Capabilities of Mass Cytometry Data Acquisition and Analysis]]
-PhD Thesis.
-My dissertation, from the laboratory of Garry P. Nolan at Stanford University School of Medicine. 
+PhD Thesis.\\
+
+My PhD thesis dissertation, from the laboratory of Garry P. Nolan at Stanford University School of Medicine. 
 
 In sum: I started by developing a method to enable flow and mass cytometry to detect and quantify nuclear localization, called Subcellular Localization Assay (SLA), which came out of a collaboration with the lab of Ola Soederberg at University of Uppsala, Sweden.
 
 In parallel, I was taking computer science classes as a side hobby. I reached a point where I was trying to compare two t-SNE maps between unstimulated and simulated data, and I realized that there was a K-Nearest Neighbors based solution that I could implement with my newfoud computer science competencies. I therefore developed Sconify, a now BioConductor package that allows for these visualizations. There were many use cases, and I spent the remainder of my thesis developing this method further and doing various collaborations with it.
 ** [[./tjb_dimr_talk.pdf][A visual interrogation of dimension reduction tools for single-cell analysis]]
-Slide deck.
+Slide deck.\\
+
 German CyTOF User Forum; Berlin, Germany; January 2020.
 In this talk, I measured the accurracy of dimension reduction tools (PCA, t-SNE, and UMAP) in terms of their nearest neighbor overlap. This is the k-nearest neighbors of a given cell in the original high dimension space, in comparison to the k-nearest neighbors of a given cell in the embedding. I show that the overlap here is much lower than my audience expected. I've given this talk many times since then, for my clients.
 ** [[./visual_capabilities_of_som.pdf][Neighborhood-based analysis of self-organizing maps]]
-Slide deck.
+Slide deck.\\
+
 [[https://vib.be/labs/saeys-lab][Laboratory of Yvan Saeys]], VIB Ghent, Belgium. June 2018.
 This slide deck summarizes some work I did with Sofie Van Gassen, developer of [[https://bioconductor.org/packages/release/bioc/html/FlowSOM.html][FlowSOM]] and all-around awesome person. We were looking at what is called the U-Matrix, a way to visualize the self organizing maps that FlowSOM produces. The question was what insights could we derive from using the U-Matrix to visualize the output of very large FlowSOM clusterings (eg. a 100 x 100 grid rather than the default 10 x 10). So far as I know, this is not explored in any major CyTOF publication, so any CyTOF users who use FlowSOM (most people at the time of writing) should have a look at this. There are visualizations in here that are useful but remain unpublished.
 ** [[./mass.cytometry.analysis.history.pdf][A history of mass cytometry data analysis, and where the field is going]]
-Slide deck.
+Slide deck.\\
+
 [[https://www.drfz.de/en/aktuelles/veranstaltungen/cytof-forum-2020/][German Rheumatism Research Center]]; Berlin, Germany; March 2019.
 I talk about how CyTOF data analysis developed from its inception at the beginning of 2010 to now. In doing so, I provide a template for proper CyTOF data analysis in terms of how we got there. In doing so, I test various assumptions: I show visualizations of data transformations other than asinh(x/5), and I show what a SPADE tree looks like with completely random inputs. I like to show these slides to people new to CyTOF data analysis to properly orient them. 
 ** [[./drfz_tsne_interrogation_talk_final.pdf][A comprehensive interrogation of the t-SNE algorithm for mass cytometry analysis]]
-Slide deck.
+Slide deck.\\
+
 German Rheumatism Research Center; Berlin, Germany; May 2018.
 This talk was a response to a member of the research institue who was simply not convinced that t-SNE was providing the accurracy that the avearge CyTOF user thought. In this talk, I show that he was right. This being said, I provide recommendations for how to properly use t-SNE for CyTOF analysis.
 ** [[./burns_cytof_user_forum_talk_for_pdf.pdf][Nearest neighborhood comparisons across biological conditions in single cell data]]
-Slide deck.
+Slide deck.\\
+
 Invited Speaker, German CyTOF User Forum; Berlin, Germany; February 2018.
 This is the talk version of my 2018 Sconify paper, that ended up being the final chapter of my PhD thesis. There are two aspects to this talk. The first is making visual comparisons of unstimulated and stimulated CyTOF data when looking at measurements of phosphoproteins. This was easily done on SPADE trees, but not t-SNE maps, until I started making k-nearest neighbor based comparisons. The second aspect of this talk is using the same nearest neighbor based comparisons to investigate batch effects in CyTOF data. I note that batch effects were only heavily discussed among CyTOF users starting near 2020 (in my circles), and this work goes back to 2016.
 ** [[./final_distance.project.poster.pdf][Determining which distance metrics are ideal within a mass cytometry data analysis pipeline]]
-Poster.
+Poster.\\
+
 CYTO Conference; Prague, Czech Republic; May 2018.
 Abstract: Due to the rise of high-dimensional single cell technologies in the past few years, there has been an increasing number of both computational methods and workflows to analyze the new wealth of data. However, non-intuitive properties of high-dimensional space can give rise to analysis artifacts, collectively known of as the “curse of dimensionality.” Increasing dimensions differentially affect the performance of distance metrics, and there is no clear consensus about which distance metrics to use for which analysis strategies. While the influence of many tool-specific parameters has been evaluated, we study here the impact of commonly used distance metrics on the outcome of dimensionality reduction and clustering.
 
 ** [[./0117TylerCytobankBlog.pdf][Fine-Tune viSNE to Get the Most of Your Single-Cell Data Analysis]]
-Guest blog post.
+Guest blog post.\\
+
 This is a guest blog post I wrote for Cytobank. The formatting of the post has since been messed up (image links are broken) since Beckman acquired Cytobank and moved all the web content over. Until it gets fixed, I'm linking you to the original PDF. At the time of writing, there was still a lot of work to be done in terms of really understanding dimension reduction for CyTOF data. As such, I spent a lot of time adjusting inputs (eg. number of cells) and parameters (eg. perplexity) to understand how that affects the resulting map. 
 ** [[https://github.com/tjburns08/dimension_reduction_add_noise][Dimension reduction add noise]]
-Software.
+Software.\\
+
 If you have one or two bad markers in your panel (noise), does it completely ruin your t-SNE/UMAP visualizations? According to my analysis so far, no. I take whole blood CyTOF data (22 dimensions) and add extra dimensions of random normal distributions, running t-SNE after each new column has been added (I've done UMAP too). What I have found:
 1. A few dimensions of noise do not catastrophically affect the map. Lots of noise dimensions do.
 2. The embedding space shrinks with increased number of dimensions. You have to hold the xy ranges constant to see this.
 3. When you have many dimensions of noise, the map starts to look trajectory-like (look at the end of the gif), which could affect biological interpretation.
 ** [[https://github.com/tjburns08/dimension_reduction_island_placement][Dimension reduction island placement]]
-Software.
+Software.\\
+
 This project asks the following question: if you run t-SNE or UMAP over and over for 100 times or more, how different does each map look from each other map? Is each map radically different? Is each map similar? Are there pockets of stability?
 
 The spoiler alert is that the island placement of UMAP appears to be more stable than that of t-SNE, but t-SNE does display pockets of stability. This can be more easily seen by ordering the t-SNE runs by similarity.
 ** [[https://github.com/tjburns08/knn_sleepwalk][Knn sleepwalk]]
-Software.
+Software.\\
+
 A wrapper I wrote around the [[https://anders-biostat.github.io/sleepwalk/][sleepwalk]] R package. Hover the cursor over any cell in your embedding, and it will show you the cell's k-nearest neighbors computed from the original feature space (as opposed to the embedding space). This allows you to test your assumptions around how exact a low-dimensional embedding (eg. t-SNE, UMAP) is. 
 ** [[https://www.bioconductor.org/packages/release/bioc/html/Sconify.html][Bioconductor package Sconify]]
-Software.
+Software.\\
+
 Official description: This package does k-nearest neighbor based statistics and visualizations with flow and mass cytometery data. This gives tSNE maps"fold change" functionality and provides a data quality metric by assessing manifold overlap between fcs files expected to be the same. Other applications using this package include imputation, marker redundancy, and testing the relative information loss of lower dimension embeddings compared to the original manifold.
 ** [[./read_fcs_by_lines.html][Anatomy of a fcs file]]
-Markdown.
+Markdown.\\
+
 I read in a fcs file line by line, rather than using the standard read.FCS from flowCore. We can't read the data directly this way, but we can read in the header and the text.
 ** CyTOF analysis pipeline
-Markdowns.
+Markdowns.\\
+
 CyTOF analysis has come a long way. Along with single-cell sequencing analysis, a lot of it is high-level functions that do what needs to be done. I prefer a guts-level analysis, where I can see the low-level the details of how my data are being manipulated. This is important for understanding and innovation. 
 *** [[./cytof_pipeline_one_file.html][One fcs file]]
 Keeping it to one fcs file, we can focus on what happens when a fcs file is read into R, how it is transformed, and what the best practices of clustering, dimension reduction, and visualization are. These foundations can be built upon when looking at multiple fcs files to determine where there are differences in your control versus experiment group. 
 *** [[./cytof_pipeline_many_files.html][Multiple fcs files]]
 This markdown uses the [[https://www.bioconductor.org/packages/release/bioc/html/diffcyt.html][diffcyt]] package to help us do statistics between groups, though I show you how to do per-cluster statistics yourself. We make box plots group-level comparisons for clusters we care about. We also color our dimension reduction maps by the p-value information. This pipeline requires a sample metadata file, as well as a marker file. I show you what these look like directly in the pipeline.
 ** KNN sleepwalk examples
-Software.
+Software.\\
+
 Some examples of output for my [[https://github.com/tjburns08/knn_sleepwalk][KNN sleepwalk tool]]. These are interactive, and are here to give the user intuition around the nature of dimension reduction maps. From the README: "My wrapper allows for the visualization of a given cell's K-nearest (and K-farthest) neighbors. In other words, the cursor is on a given cell, and the cells on the map that change color correspond to a pre-specified number of nearest neighbors in the original high-dimensional space." See notebooks in my repo to see the data and code. What to do with the visuals below:
 - K-nearest neighbors (KNN) will give you intuition around how exact the embedding is.
 - K-farthest neighbors (KFN) will give you intuition around how well the embedding preserves global structure. 
@@ -99,143 +116,184 @@ The dataset is from [[https://satijalab.org/seurat/articles/pbmc3k_tutorial.html
 **** [[./kfn_sleepwalk_scrna_seq_var_genes.html][KFN from variable genes space]]
 
 ** [[./distance_matrix_correlation.html][Distance matrix metric correlations]]
-Markdown.
+Markdown.\\
+
 Which distance metrics are right for your data analysis. While I've created a poster on this [[https://tjburns08.github.io/final_distance.project.poster.pdf][here]], this is a stab at it from a different direction. I make synthetic CyTOF-like data, varying the dimensionality from 2 to 1000. I make a distance matrix for each distance metric used, and then correlate each one to that of the Euclidean distance matrix, which is often a default. The results are counter-intuitive.
 ** [[./asinh_mean_vs_mean_asinh.html][asinh(mean(x)) vs mean(asinh(x))]]
-Markdown.
+Markdown.\\
+
 If you want the means of your markers per cluster, be careful how you export the data. If you export the means of the raw values per cluster, and take the asinh(x/5) transform of that, the values will be different than if you take the means of the asinh(x/5) transformed data per cluster. The latter is the right way to do it. But don't take my word for it. Look at the markdown yourself. 
 ** [[./cytof_data_transformations.html][Data transformations for CyTOF]]
-Markdown.
+Markdown.\\
+
 CyTOF data are transformed using the inverse hyperbolic sine (asinh) of the data divided by 5 (aka scale argument of 5). But does it have to be like that? What happens if we use a scale argument of 1? 500? What if we do a log transform? How does t-SNE look on untransformed CyTOF data?
 
 * Natural language processing
 ** [[./scrolling_problem.org][The Scrolling Problem]]
-Article.
+Article.\\
+
 We spend a large fraction of our lives endlessly scrolling through our feeds, with no control over what hypernormal, outrage-inducing content will appear next. I call this the scrolling problem. I define it, and I have a crack at it by viewing my news feed as map with the help of an AI language model based on BERT. 
 ** [[./gpt3_student.org][GPT-3 simulating students]]
-Article.
+Article.\\
+
 This is a report I wrote for my uncle, who is a professor at the University of Michigan Ross School of Business. The concern was that generative language models would be able to simulate student's responses to essay questions good enough that tech-savvy students would simply offload their homework to GPT-3. I explore this option using my early access to GPT-3, with a conclusion heavily inspired by an article by [[https://www.gwern.net/GPT-3#weaknesses][Gwern]]. You pretty much have to at this point. 
 ** [[./context_problem_bfx.html][The Context Problem in Bioinformatics]]
-Article.
+Article.\\
+
 In the age of big data, my bioinformatics analyses often lead to output that is still too much for a human to extract insight from. My use case here, common in my work: what GWAS traits do two or more genes have in common? I produce a context map of GWAS traits using an AI language model based on BERT. I then subset the map by traits associated with the genes the user inputs, coloring the points accordingly. One can quickly know what contexts, rather than traits, the genes share. 
 ** [[./ask_marcus_writeup.html][What would Marcus Aurelius say?]]
-Article.
+Article.\\
+
 I turn the Meditations by Marcus Aurelius into a semantic search based language model, where I ask a question and it returns the most relevant passages in the book as answers. This helps me with the study of stoic philosophy, but this approach can be used in any sort of book that is structured as aphorisms. 
 ** [[https://medium.com/@tjburns_72591/how-to-utilize-scientific-literature-trends-to-gain-intuition-about-a-topic-b5c554e3d280][How to utilize scientific literature trends to gain intuition around a topic]]
-Medium post.
+Medium post.\\
+
 The scientific literature is overwhelming, and knowing how to utilize text mining and analytic tools can help you efficiently get what you want out of a literature search. Here, I utilize the PubMed API to find publication rates for particular topics. I show that among other things, single-cell sequencing began out-pacing mass cytometry in 2016. Insight like this helps you see how crowded a field is and especially identify trends.
 ** [[https://medium.com/coinmonks/how-to-identify-thought-leaders-and-visualize-their-influence-c01aa218090e][How to identify thought leaders and visualize their influence]]
-Medium post.
+Medium post.\\
+
 Understanding how authors of a given field are connected can help you identify key individuals to pay attention to. Here is how I utilize the PubMed API to build co-author networks, which lead me to identify thought leaders in a given domain. In this article, focusing on mass cytometry, I identify two types of thought leaders: one exclusive to a particular sub-domain, and one who spans across multiple sub-domains. It is important to know both types when approaching a new topic.
 ** [[https://medium.com/@tjburns_72591/using-and-mining-pre-prints-to-stay-ahead-of-your-field-with-the-help-of-twitter-50d5bdc528de][Using and mining pre-prints to stay ahead of your field, with the help of Twitter]]
-Medium post.
+Medium post.\\
+
 I explain why pre-prints are important to staying ahead of the technology and general paradigms in your field, with single-cell analysis as an example. I then show how I utilize the Twitter API to harvest and rank tweets from automated pre-print linking bots from bioRxiv to determine what pre-print articles are being talked about (and therefore what you should probably pay attention to).
 ** [[https://github.com/tjburns08/rss_map][RSS map]]
-Software.
+Software.\\
+
 Associated with [[https://tjburns08.github.io/scrolling_problem.html][The Scrolling Problem]]. An app that converts an RSS feed into a semantic map where articles that are similar to each other in context are near each other on the map.
 ** (temporarily suspended) [[https://gwasmap.herokuapp.com/][Gwasmap]]
 Software.
 Associated with my article [[https://tjburns08.github.io/context_problem_bfx.html][The Context Problem in Bioinformatics]]. Given one of more genes, what are the GWAS associations? These are placed onto a semantic map where associations that are similar to each other are grouped near each other on the map. Thus, if gene 1 is associated with Alzheimer's disease and gene 2 is associated with age-related cognitive decline (different but related disease) the associations for each gene (colored accordingly) will show up near each other.
 ** [[https://huggingface.co/spaces/tjburns/ask_marcus_aurelius][Ask Marcus Aurelius]]
-Software.
+Software.\\
+
 Associated with [[https://tjburns08.github.io/ask_marcus_writeup.html][What Would Marcus Aurelius Say]]. This project turned the Meditaitons by Marcus Aurelius into a semantic map that can be queried, such that the user can ask a question, and the software will return the most relevant passages in the Meditations.
 ** [[https://huggingface.co/spaces/tjburns/find_your_biases][Find your biases]]
-Software.
+Software.\\
+
 Write your thoughts into the text box, and the app will give you a list of cognitive biases that match the thoughts. The app does this using an AI embedding model to embed both your input and Wikipedia's [[https://en.wikipedia.org/wiki/List_of_cognitive_biases][list of cognitive biases]], and then perform a nearest neighbor search. 
 ** Twitter archive and embed
-Software.
+Software.\\
+
 This is one of the main tools that I wrote and use to address the [[./scrolling_problem.html][scrolling problem]].
 
 A pipeline that takes as input a list of twitter user names that you supply. First, it scrapes the entire twitter history for the given names. Second, it uses BERT to make a topic-based high-dimensional embedding of every tweet per user name. If these two steps had already been done for a given user, it will update with the new tweets. Then, the user selects a subset of users to visualize. For these users, the BERT embeddings are converted into a UMAP, which is then clustered and annotated with extracted keywords per cluster. Finally, the results are visualized in an interactive user interface.
 ** [[https://huggingface.co/spaces/tjburns/duckduckgo_2d_search][DuckDuckGo 2-D Search]]
-Software.
+Software.\\
+
 For web searches of broad topics, where you need the first hundred results rather than the first page. Type in your search term of interest, and it will give you an interactive context map of search results and a results table with clickable links. 
 ** [[./biorxiv_medrxiv_history.html][Preprint server archive]]
-Software.
+Software.\\
+
 A searchable and sortable table of every biorxiv and medrxiv pre-print to date ([2022-11-17 Thu 13:43]). Specifically, every time a paper is uploaded to one of these pre-print servers, it is automatically tweeted out from the respective twitter handle. As such, the table contains the paper title along with various tweet metadata (eg. likes) to allow users to understand which papers are potentialy important.
 ** Likes vs retweets
-Markdown.
+Markdown.\\
+
 *** [[./single cell sequencing OR single-cell sequencing.csv_likes_vs_retweets.html][Search term: single cell sequencing OR single-cell sequencing]]
 We find three regions:
 - High retweets/likes: open academic student and postdoc positions
 - Medium retweets/likes: papers, projects, data (the stuff you're probably looking for)
 - Low retweets/likes: memes, status updates, fun stuff
 ** [[./question_graph_writeup.html][Question graph]]
-Markdown.
+Markdown.\\
+
 You are only as good as the questions you ask yourself and others. My uncle told me that many years ago when I was getting started with my career and it stuck. This has been relevant to me in terms of having and maintaining good friendships, being a good husband, being a good family member, being a good businessman, and when I was in graduate school, being a good scientist, and simply being an interesting person. I have a very large list of questions now that is very overwhelming. So I turned them into an embedding using the BERT language model, turned that into a nearest neighbor graph, and then derived insight from looking at the questions in terms of "communities." 
 * Philosophy and rationality
 ** [[./occams_razor.html][But what is Occam's razor really?]]
-Article.
+Article.\\
+
 Occam's razor states that for a given phenomenon, the simplest explanation is the most likely explanation. I explore this with a fun example from my life. I then look at a computational formalization of this, with interesting ties to behavioral science.
 ** [[./on_hacking.html][Hacking: examples of seeing through and unseeing in my life]]
-Article.
+Article.\\
+
 A lot of hacking is seeing through and unseeing the everyday abstractions we pretend to be true. Hacking is sometimes malicious (the Hollywood stereotype), and sometimes it is productive (known as innovation or ingenuity). It is not limited to computers, and it is definitely not limited to coding. Here, I lay out my favorite framework for what hacking is, and I provide examples that range from business to sports to computing.
 ** [[./coding_as_philosophical_project.html][If Plato lived today, he'd be coding]]
-Article.
+Article.\\
+
 Plato and the Greek philosophers valued learning geometry as a means to understand and think about the world, despite not using it for practical purposes (like engineering). I see computer science as geometry for modern philosophy. This matters because I think one should still learn the basics of how to code even if AI automates all of it in the future. Even the first few months of computer science drastically helped me improve my thinking.
 ** [[./its_more_complicated_than_that.html][It's more complicated than that]]
-Article.
+Article.\\
+
 This is the observation I run into with just about every line of scientific inquiry. This is despite a revolution of new technologies that allow us to look at much more data, and new algorithms to make sense of these huge datasets. I repeat this phrase every time I start to feel like I've figured it all out.
 ** [[./purpose_driven_vs_purposeless.html][The way is the way]]
-Article.
+Article.\\
+
 I spent a large portion of my life being goal-driven. I have realized more recently that being focused on the process rather than the goal is more beneficial in many respects. This essay is about my journey to that realization.
 ** [[./dialectic.html][Making sense of the (messy) real world]]
-Article.
+Article.\\
+
 Finding truth in the real world is much different than finding truth in grad school. Grad school had me working on non-controversial, dry topics that few people in the world worked on. The real world is a lot messier. I talk about the idea of collecting opposing perspectives, steelmanning them, and putting them in dielectic to find higher truth. It's simple in theory, but hard in practice.
 ** [[./tao_of_problem_solving.html][The Tao of problem solving]]
-Article.
+Article.\\
+
 One of the key components to my method of solving problems is to get into the flow state. When I'm there, some or all of the problem at hand solves itself. And it feels great. I show examples of me doing this. I talk about Taoism as an ancient philosophy built around flow state, but at the macro level rather than the "within-game" level. This is the ideal of being in a perpetual flow state that lasts one's entire lifetime. 
 
 ** [[./the_beauty_is_truth_delusion.html][The beauty is truth delusion]]
-Article.
+Article.\\
+
 This is the idea that data visualizations that look prettier than others don't necessarily convey more truth. I use SPADE and t-SNE as examples that can produce this delusion. This article serves as a call to action for the bioinformatics community to help users distinguish between truth and beauty as data visualization tools come out and become widely used. 
 ** [[./stick_shift_mindset.html][The stick shift mindset]]
-Article.
+Article.\\
+
 A heuristic that helps me innovate by being more connected to the internals of what I'm doing. Pick an endeavor. Complete the analogy: automatic transmission is to your endeavor as manual transmission is to X. If you know how to do X, do it when you can. If you don't know how to do X, then learn it. I give several examples of this in my life, and I conclude by encouraging others to embody this mindset.
 ** [[./minimize_and_sustain.html][Sustainability for value]]
-Article.
+Article.\\
+
 My current plan for coming economic uncertainty we face in the near term due to the recession, and for uncertainty that wil persist beyond the recession (eg. AI disruption). I talk about re-framing my goals as minimizing rather than maximizing something, and about the systems thinking and sustainability based mindset that one sees in subjects like permaculture. This is helping me be more effective, and figure out unique new ways I can add value to the world. 
 * Computing
 ** [[./xai_and_us.org][Explainable AI and understanding ourselves]]
-Article.
+Article.\\
+
 I make the connection between understanding a black box AI algorithm (a hot topic) and understanding ourselves. I make the argument that accordingly, we as humans are prepared to take on this task. I discuss natural language explanations, which is what happens when you attach a language model to an AI system. Ideally, you can ask it why it did what it did.  
 ** [[./logic_gates.html][Logic gates]]
-Markdown.
+Markdown.\\
+
 What are the fundamental units of a computer? Logic gates. I show what these are. I then show that they can be created with combinations of a single type of logic gate: NAND (Not AND). In other words, you can make a general-purpose computer if you had enough NAND gates and wires. In the spirit of this, I combine NAND gates to create a calculator that can add large numbers. One of the key points in this exercise is that it does not take much to get from NAND gates to complex computations.
 ** [[./1d_ca.html][1-D Cellular Automata]]
-Markdown.
+Markdown.\\
+
 Here, I write some code to produce each of the 256 Wolfram cellular automata rules, and visualize the output. 
 ** [[./explore_rule_110.html][Explore Wolfram Rule 110]]
-Article.
+Article.\\
+
 Here, I write some code to produce Rule 110, a Class 4 1-D cellular automata. I then enhance the gliders to make them easier to see. I explore how the output changes if I make the rule probabilistic (eg. 99.99% chance the rule will be followed. 
 * Statistics
 ** [[./1_law_large_numbers_central_limit_theorem.html][Coin toss series 1: The law of large numbers and the central limit theorem]]
-Markdown.
+Markdown.\\
+
 I taught one of my high school summer students the basics of probability by simulating coin tosses in R. Here, we "discover" the law of large numbers and the central limit theorem using simulated coin tosses. 
 ** [[./2_runs_of_luck.html][Coin toss series 2: Runs of luck]]
-Markdown.
+Markdown.\\
+
 Here, we build on the initial piece in the series by looking at the properties of runs of luck. If we flip a coin a million times, how often will we get 10 heads in a row? How many times do we need to flip a coin to get 20 heads in a row on average? Related to sports. How often, statistically, would you expect Steph Curry to make 10 three pointers in a row given his 3-point shot percentage? 
 ** [[./3_fair_vs_unfair_coins.html][Coin toss series 3: Fair versus unfair coins]]
-Markdown.
+Markdown.\\
+
 Here, we examine the properties of unfair coins, where the odds of getting heads or tails does not equal 50%. Can we figure out whether a coin is a fair coin? 
 ** [[./4_random_walk.html][Coin toss series 4: Random walks]]
-Markdown.
+Markdown.\\
+
 Here, we show that if we simulate flipping coins, but we keep a record of the number of heads and the number of tails, we end up doing a random walk. We visualize these walks (they look somewhat like stock market data), and ask questions like how often a random walker crosses zero.  
 ** [[./5_dice_roll.html][Coin toss series 5: Dice rolls]]
-Markdown.
+Markdown.\\
+
 Here, we do an abstraction of the coin tosses we have been simulating, by coinsidering dice of three or more faces. We simulate these dice rolls and examine their properties. How often does a six sided dice land on the number 3? We can figure that out with simple math, but if you roll a dice 1000 times, and you do that again, and you do that again, what will be the standard deviation of the number of times the dice lands on 3? 
 ** [[./6_is_this_sequence_random.html][Coin toss series 6: Is this sequence random?]]
-Markdown.
+Markdown.\\
+
 Here, we look at fair coin tosses, unfair coin tosses, and random walks, and explore the randomness of the sequences by doing convolutions on the sequences with kernel size 2.
 * Health
 ** [[./how_to_get_fit_long_term.html][How to get fit in 20 years]]
-Article.
+Article.\\
+
 Over the years, I have seen people who want to get in shape develop fitness goals that are too much over too little time, which leads to burnout. Here, I provide the opposite perspective, which has worked for me in my adult life. Take your fitness goals and ask: if I had a year to achieve this rather than a month, how would I do it?
 ** [[./psychotherapy_and_fitness.html][Psychotherapy should be as normal as going to the gym]]
-Article.
+Article.\\
+
 There is a renewed interest in Stoic philosophy as of late. It's a great set of tools that I have used for dealing with hardship. But it's 2000 years old. Where are the modern Stoics? They exist, but under a different name: psychotherapists. If psychotherapy was the successor to Stoicism, and there is so much interest in Stoicism, then shouldn't there be an equal amount of interest in clinical psychology and how it can help us? Shouldn't it be something we learn early, and make these tools part of our daily routine, as the Stoics do?
 ** [[./just_paint.org][Just paint]]
-Article.
+Article.\\
+
 An anecdote from my aunt evolves into a motivational article (mainly written for myself). I describe the art and science of how to start a project and how to keep it going. I talk about how I build psychological momentum. I discuss the concept of Long Content, and how it relates to the neuroscience of dopamine optimization.
 * Other contributions
 **** Former computational biologist, now guest researcher, at the German Rheumatism Research Center in Berlin, Germany. I will always stay connected to my academic roots.
