@@ -26,42 +26,42 @@ Claude Shannon, lecture: <i>Creative Thinking</i>
 </p>
 <hr />
 
-<div id="outline-container-org6cc0cbb" class="outline-2">
-<h2 id="org6cc0cbb">The simplest explanation</h2>
-<div class="outline-text-2" id="text-org6cc0cbb">
+<div id="outline-container-orgdecbbaf" class="outline-2">
+<h2 id="orgdecbbaf">The simplest explanation</h2>
+<div class="outline-text-2" id="text-orgdecbbaf">
 <p>
 I have a group chat of local friends we use to coordinate our weekend events among other things. One of the things we do is we wish each other happy birthday when these days roll around. My birthday is shared with another birthday, of a guy we call Nickel. Every year on my birthday, messages ring through the group chat, "Happy birthday Tyler and Nickel" (except in German). But this year, it was only "Happy birthday Nickel."
 </p>
 
 <p>
-What happened? Was the whole group mad at me for some reason? I haven't done anything different. None of the conditions have changed since last year. For any phenomenon, we got trained as scientists to find the simplest possible explanation. That would be the most likely hypothesis. This is known as Occam's Razor. 
+What happened? Was the whole group mad at me for some reason? I haven't done anything different. None of the conditions have changed since last year. At baseline, they are not mad at me. For any phenomenon, we got trained as scientists to find the simplest possible explanation. That would be the most likely hypothesis. This is known as <a href="https://en.wikipedia.org/wiki/Occam%27s_razor">Occam's Razor</a>. 
 </p>
 
 <p>
-For example: where does lightning come from? One explanation is that it's electric discharges from the clouds, and another explanation is that it is a god of lightning in the sky who throws lightning bolts everywhere all the time. If we didn't do the Ben Franklin kite experiment, we would at least know that the second explanation requires validation of some superhuman supernatural being that no one has ever actually seen, which would require validation of the existence of a class of life form called "superhuman supernatural being" that no one has every seen. The first explanation requires only physics. So we would sift more weight to the physics based hypothesis as opposed to the Zeus based hypothesis. Do this at your own risk, depending on the ideology your culture is steeped in.
+For example: where does lightning come from? One explanation is that it's electric discharges from the clouds, and another explanation is that it is a god of lightning in the sky who throws lightning bolts everywhere all the time. If we didn't do the Ben Franklin kite experiment, we would at least know that the second explanation requires validation of some superhuman supernatural being that no one has ever actually seen, which would require validation of the existence of a class of life form called "superhuman supernatural being" that no one has ever seen. The first explanation requires only known physics. So we would sift more weight to the known physics based hypothesis as opposed to the superhuman supernatural being based hypothesis. Do this at your own risk, depending on the ideology your culture is steeped in.
 </p>
 
 <p>
-But "forgetting" and "mad at me" is a bit more subtle. I've seen both. There's no supernatural component. We have to get a bit a bit more technical. The spoiler alert is that they just forgot. But let's go into the details of the different scenarios and show why that is a simpler explanation.
+But "forgetting" and "mad at me" is a bit more subtle. I've seen both. There's no supernatural component. We have to get a bit a bit more technical. The spoiler alert is that they just forgot, and remembered later. But let's go into the details of the different scenarios and show why that is a simpler explanation.
 </p>
 </div>
 </div>
 
-<div id="outline-container-org043e628" class="outline-2">
-<h2 id="org043e628">The simplest computer program</h2>
-<div class="outline-text-2" id="text-org043e628">
+<div id="outline-container-orga51b7fd" class="outline-2">
+<h2 id="orga51b7fd">The simplest computer program</h2>
+<div class="outline-text-2" id="text-orga51b7fd">
 <p>
 To formalize Occam's razor, we have to think <a href="./coding_as_philosophical_project.html">computationally</a>. Suppose we have a bunch of AGI agents in the same situation. Let's look at "mat at me" and "forgot" explanations in more detail. For now, we will think in python, as opposed to Turing machines, which we would have to do if we really wanted to formalize this.
 </p>
 
 <p>
-Forgetting<br />
+Forgetting.<br />
 </p>
 <pre class="example">
 Someone remembers it's Nickel's birthday. Says happy birthday to Nickel.
 
 For each person:
-    See that it's Nickel's birthday.
+    See that it's Nickel's birthday given the group chat birthday wishes.
     Don't cross check.
     Say happy birthday to Nickel.
 </pre>
@@ -93,7 +93,7 @@ We can see that high-level programs 2 and 3 require a lot of additional function
 </p>
 
 <p>
-So far, we have made the assumption that we're dealing with a closed system. Me and my friends. But the reality is we're actually dealing with an open system. Your friends are connected to more people who are connected to more people and so on until <a href="https://en.wikipedia.org/wiki/Six_Degrees_of_Kevin_Bacon">Kevin Bacon</a>. So it would be very hard to write the set of all computer programs across the broader social graph that could lead to the phenomenon you're observing. This is where figuring out <a href="https://fs.blog/probabilistic-thinking/">probabilities</a> and doing <a href="https://www.youtube.com/watch?v=HZGCoVF3YvM">Bayesian updates</a> as you gain more information comes in. This moves us into <a href="https://en.wikipedia.org/wiki/Bayesian_epistemology">Bayesian epistemology</a>, which is beyond the scope of this article, but worth knowing about.
+So far, for the sake of simplifying the problem, we have made the assumption that we're dealing with a closed system. Me and my friends. But the reality is we're actually dealing with an open system. Your friends are connected to more people who are connected to more people and so on until <a href="https://en.wikipedia.org/wiki/Six_Degrees_of_Kevin_Bacon">Kevin Bacon</a>. So it would be very hard to write the set of all computer programs across the broader social graph that could lead to the phenomenon you're observing. This is where figuring out <a href="https://fs.blog/probabilistic-thinking/">probabilities</a> and doing <a href="https://www.youtube.com/watch?v=HZGCoVF3YvM">Bayesian updates</a> as you gain more information comes in. This moves us into <a href="https://en.wikipedia.org/wiki/Bayesian_epistemology">Bayesian epistemology</a>, which is beyond the scope of this article, but worth knowing about.
 </p>
 
 <p>
@@ -102,9 +102,9 @@ Anyway, the computational formalism of Occam's razor involves looking at a pheno
 </div>
 </div>
 
-<div id="outline-container-org8d6ebfa" class="outline-2">
-<h2 id="org8d6ebfa">The literal simplest computer program</h2>
-<div class="outline-text-2" id="text-org8d6ebfa">
+<div id="outline-container-orgff11de7" class="outline-2">
+<h2 id="orgff11de7">The literal simplest computer program</h2>
+<div class="outline-text-2" id="text-orgff11de7">
 <p>
 Now probabilistic thinking and Solmonoff induction do intersect. To do this, consider the sequence [1, 2, 3, 4, 5]. Let's think of all the possible computer programs in existence that could produce each of these. Let's drill down into two of them.
 </p>
@@ -131,14 +131,14 @@ print 5
 </pre>
 
 <p>
-To understand this next piece, let's pretend that we're dealing with a sequence of [1, 2, 3, &#x2026;. 1 billion]. We can compress this sequence using program 1, only 4 lines, which will output the sequence. Program 2 we cannot compress any further, at 1 billion lines. Program 1 is the simpler program, it is the most likely explanation by Solmonoff induction. Note that if we really wanted to be rigorous here, we'd have to look at a mathematical model of the implementation of each of these computer programs at the bit string level, but thinking in lines of code at least gives us some intuition here.
+To understand this next piece, let's pretend that we're dealing with a sequence of [1, 2, 3, &#x2026;. 1 billion]. We can compress this sequence using program 1, only 4 lines, which will output the sequence. Program 2 we cannot compress any further, at 1 billion lines. Program 1 is the simpler program, it is the most likely explanation by Solomonoff induction. Note that if we really wanted to be rigorous here, we'd have to look at a mathematical model of the implementation of each of these computer programs at the bit string level, but thinking in lines of code at least gives us some intuition here.
 </p>
 </div>
 </div>
 
-<div id="outline-container-org26405a0" class="outline-2">
-<h2 id="org26405a0">The most complex sequence, a tie-in to cognition</h2>
-<div class="outline-text-2" id="text-org26405a0">
+<div id="outline-container-org714e096" class="outline-2">
+<h2 id="org714e096">The most complex sequence, a tie-in to cognition</h2>
+<div class="outline-text-2" id="text-org714e096">
 <p>
 Ok, here's where it gets interesting. Suppose I have a random string of bits, like [1, 0, 1, 1, 0, 0, 1, &#x2026;]. How random is that string? We can sample the set of all computer programs of a particular framework, eg. the <a href="https://en.wikipedia.org/wiki/Turing_machine">Turing machine</a>, and find all programs that produce this string. We can then take the Occam's razor / Solmonoff induction approach and ask what the shortest program is. Note again that a computer program itself is a string of bits. This is how we determine what computer programs are the shortest.
 </p>
@@ -157,9 +157,9 @@ There are obviously some interesting followups here that could be done. Like loo
 </div>
 </div>
 
-<div id="outline-container-org490fd24" class="outline-2">
-<h2 id="org490fd24">Conclusion</h2>
-<div class="outline-text-2" id="text-org490fd24">
+<div id="outline-container-orgea01520" class="outline-2">
+<h2 id="orgea01520">Conclusion</h2>
+<div class="outline-text-2" id="text-orgea01520">
 <p>
 We started with Occam's razor. But I'm a computational biologist by training and I see the world in code. Naturally, I discovered Solmonoff induction, the computational formulation of Occam's razor, and I have stuck with that. In studying Solmonoff induction, I ran into the work of Hector Zenil, who has been applying these principles in various ways, including the unexpected tie-in to human cognition. I hope you at least have a better feel for what Occam's razor actually is, or at least how I think about Occam's razor. 
 </p>
