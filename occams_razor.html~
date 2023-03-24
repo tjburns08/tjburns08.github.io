@@ -12,6 +12,10 @@
 <body>
 <div id="content" class="content">
 <h1 class="title">But what is Occam's Razor really?</h1>
+<p>
+<a href="./index.html">Home</a>
+</p>
+
 <hr />
 <p>
 <i>Almost every problem that you come across is befuddled with all kinds of extraneous data of one sort or another; and if you can bring this problem down into the main issues, you can see more clearly what you are trying to do an perhaps find a solution. Now in so doing you may have stripped away the problem you're after. You may have simplified it to the point that it doesn't even resemble the problem that you started with; but very often if you can solve this simple problem, you can add refinements to the solution of this until you get back to the solution of the one you started with.”</i>
@@ -22,9 +26,9 @@ Claude Shannon, lecture: <i>Creative Thinking</i>
 </p>
 <hr />
 
-<div id="outline-container-org9984eae" class="outline-2">
-<h2 id="org9984eae">The simplest explanation</h2>
-<div class="outline-text-2" id="text-org9984eae">
+<div id="outline-container-org6cc0cbb" class="outline-2">
+<h2 id="org6cc0cbb">The simplest explanation</h2>
+<div class="outline-text-2" id="text-org6cc0cbb">
 <p>
 I have a group chat of local friends we use to coordinate our weekend events among other things. One of the things we do is we wish each other happy birthday when these days roll around. My birthday is shared with another birthday, of a guy we call Nickel. Every year on my birthday, messages ring through the group chat, "Happy birthday Tyler and Nickel" (except in German). But this year, it was only "Happy birthday Nickel."
 </p>
@@ -43,9 +47,9 @@ But "forgetting" and "mad at me" is a bit more subtle. I've seen both. There's n
 </div>
 </div>
 
-<div id="outline-container-orga916d67" class="outline-2">
-<h2 id="orga916d67">The simplest computer program</h2>
-<div class="outline-text-2" id="text-orga916d67">
+<div id="outline-container-org043e628" class="outline-2">
+<h2 id="org043e628">The simplest computer program</h2>
+<div class="outline-text-2" id="text-org043e628">
 <p>
 To formalize Occam's razor, we have to think <a href="./coding_as_philosophical_project.html">computationally</a>. Suppose we have a bunch of AGI agents in the same situation. Let's look at "mat at me" and "forgot" explanations in more detail. For now, we will think in python, as opposed to Turing machines, which we would have to do if we really wanted to formalize this.
 </p>
@@ -98,9 +102,9 @@ Anyway, the computational formalism of Occam's razor involves looking at a pheno
 </div>
 </div>
 
-<div id="outline-container-orgb6fe2e0" class="outline-2">
-<h2 id="orgb6fe2e0">The literal simplest computer program</h2>
-<div class="outline-text-2" id="text-orgb6fe2e0">
+<div id="outline-container-org8d6ebfa" class="outline-2">
+<h2 id="org8d6ebfa">The literal simplest computer program</h2>
+<div class="outline-text-2" id="text-org8d6ebfa">
 <p>
 Now probabilistic thinking and Solmonoff induction do intersect. To do this, consider the sequence [1, 2, 3, 4, 5]. Let's think of all the possible computer programs in existence that could produce each of these. Let's drill down into two of them.
 </p>
@@ -132,9 +136,9 @@ To understand this next piece, let's pretend that we're dealing with a sequence 
 </div>
 </div>
 
-<div id="outline-container-orga271878" class="outline-2">
-<h2 id="orga271878">The most complex sequence, a tie-in to cognition</h2>
-<div class="outline-text-2" id="text-orga271878">
+<div id="outline-container-org26405a0" class="outline-2">
+<h2 id="org26405a0">The most complex sequence, a tie-in to cognition</h2>
+<div class="outline-text-2" id="text-org26405a0">
 <p>
 Ok, here's where it gets interesting. Suppose I have a random string of bits, like [1, 0, 1, 1, 0, 0, 1, &#x2026;]. How random is that string? We can sample the set of all computer programs of a particular framework, eg. the <a href="https://en.wikipedia.org/wiki/Turing_machine">Turing machine</a>, and find all programs that produce this string. We can then take the Occam's razor / Solmonoff induction approach and ask what the shortest program is. Note again that a computer program itself is a string of bits. This is how we determine what computer programs are the shortest.
 </p>
@@ -153,9 +157,9 @@ There are obviously some interesting followups here that could be done. Like loo
 </div>
 </div>
 
-<div id="outline-container-org69c8f41" class="outline-2">
-<h2 id="org69c8f41">Conclusion</h2>
-<div class="outline-text-2" id="text-org69c8f41">
+<div id="outline-container-org490fd24" class="outline-2">
+<h2 id="org490fd24">Conclusion</h2>
+<div class="outline-text-2" id="text-org490fd24">
 <p>
 We started with Occam's razor. But I'm a computational biologist by training and I see the world in code. Naturally, I discovered Solmonoff induction, the computational formulation of Occam's razor, and I have stuck with that. In studying Solmonoff induction, I ran into the work of Hector Zenil, who has been applying these principles in various ways, including the unexpected tie-in to human cognition. I hope you at least have a better feel for what Occam's razor actually is, or at least how I think about Occam's razor. 
 </p>
