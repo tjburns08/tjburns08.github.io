@@ -60,7 +60,7 @@ Anyway, the computational formalism of Occam's razor involves looking at a pheno
 
 * The literal simplest computer program
 
-Now probabilistic thinking and Solmonoff induction do intersect. To do this, consider the sequence [1, 2, 3, 4, 5]. Let's think of all the possible computer programs in existence that could produce each of these. Let's drill down into two of them.
+Probabilistic thinking and Solomonoff induction do intersect. To do this, consider the sequence [1, 2, 3, 4, 5]. Let's think of all the possible computer programs in existence that could produce this sequence. Let's drill down into two of them.
 
 Computer program 1:
 #+begin_src
@@ -79,7 +79,7 @@ print 4
 print 5
 #+end_src
 
-But let's pretend that we're dealing with a sequence of [1, 2, 3, .... 1 billion]. We can compress this sequence using program 1, only 4 lines, which will output the sequence. Program 2 we cannot compress any further, at 1 billion lines. Program 1 is the simpler program, it is the most likely explanation by Solomonoff induction. Note that if we really wanted to be rigorous here, we'd have to look at a mathematical model of the implementation of each of these computer programs at the bit string level, but thinking in lines of code at least gives us some intuition here.
+But let's pretend that we're dealing with a sequence of [1, 2, 3, .... 1 billion]. We can compress this sequence using program 1, only 4 lines, which will output the sequence. Program 2 we cannot compress any further, at 1 billion lines. Program 1 is the simpler program, it is the most likely explanation by Solomonoff induction. But importantly, we can now think in terms of how much simpler program 1 (4 lines) is from program 2 (1 billion lines). Note that if we really wanted to be rigorous here, we'd have to look at a mathematical model of the implementation of each of these computer programs at the bit string level, but thinking in lines of code at least gives us some intuition here.
 
 * Conclusion
 
