@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>But what is Occam's Razor really?</title>
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css" />
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">But what is Occam's Razor really?</h1>
+<hr />
+<p>
+<i>Almost every problem that you come across is befuddled with all kinds of extraneous data of one sort or another; and if you can bring this problem down into the main issues, you can see more clearly what you are trying to do an perhaps find a solution. Now in so doing you may have stripped away the problem you're after. You may have simplified it to the point that it doesn't even resemble the problem that you started with; but very often if you can solve this simple problem, you can add refinements to the solution of this until you get back to the solution of the one you started with.”</i>
+</p>
+
+<p>
+Claude Shannon, lecture: <i>Creative Thinking</i>
+</p>
+<hr />
+
+<div id="outline-container-orgf0ec701" class="outline-2">
+<h2 id="orgf0ec701">The simplest explanation</h2>
+<div class="outline-text-2" id="text-orgf0ec701">
+<p>
+I have a group chat of local friends we use to coordinate our weekend events among other things. One of the things we do is we wish each other happy birthday when these days roll around. My birthday is shared with another birthday, of a guy we call Nickel. Every year on my birthday, messages ring through the group chat, "Happy birthday Tyler and Nickel" (except in German). But this year, it was only "Happy birthday Nickel."
+</p>
+
+<p>
+What happened? Was the whole group mad at me for some reason? I haven't done anything different. None of the conditions have changed since last year. For any phenomenon, we got trained as scientists to find the simplest possible explanation. That would be the most likely hypothesis. This is known as Occam's Razor.
+</p>
+
+<p>
+For example: where does lightning come from? One explanation is that it's electric discharges from the clouds, and another explanation is that it is a god of lightning in the sky who throws lightning bolts everywhere all the time. If we didn't do the Ben Franklin kite experiment, we would at least know that the second explanation requires validation of some superhuman supernatural being that no one has ever actually seen, which would require validation of the existence of a class of life form called "superhuman supernatural being" that no one has every seen. The first explanation requires only physics. So we would sift more weight to the physics based hypothesis as opposed to the Zeus based hypothesis. Do this at your own risk, depending on the ideology your culture is steeped in.
+</p>
+
+<p>
+But "forgetting" and "mad at me" is a bit more subtle. I've seen both. There's no supernatural component. We have to get a bit a bit more technical. 
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgfe18805" class="outline-2">
+<h2 id="orgfe18805">The simplest computer program</h2>
+<div class="outline-text-2" id="text-orgfe18805">
+<p>
+To formalize Occam's razor, we have to think <a href="./coding_as_philosophical_project.html">computationally</a>. Suppose we have a bunch of AGI agents in the same situation. Let's look at "mat at me" and "forgot" explanations in more detail. For now, we will think in python, as opposed to Turing machines, which we would have to do if we really wanted to formalize this.
+</p>
+
+<p>
+Forgetting<br />
+</p>
+<pre class="example">
+Someone remembers it's Nickel's birthday. Says "happy birthday Nickel.
+
+For each person:
+    See that it's Nickel's birthday.
+    Don't cross check.
+    Say happy birthday to Nickel.
+</pre>
+
+<p>
+Mad at me, individual level.<br />
+</p>
+<pre class="example">
+For each person:
+    See that it's Nickel and Tyler's birthday
+    Be mad at Tyler.
+    Decide to exclude him from birthday wishes.
+
+</pre>
+
+<p>
+Mad at me, group level.<br />
+</p>
+<pre class="example">
+Everyone gets together, and decides that we're mad at Tyler. 
+
+Decide that they're just mad enough at Tyler to exclude him from the birthday wishes, after mulling over removal from the group and confrontation.
+
+For each person:
+    Follow the rules, and exclude Tyler from the birthday wishes.
+</pre>
+
+<p>
+We can see that high-level programs 2 and 3 require a lot of additional functions. Between being mad (not common with my group), planning a passive aggressive activity (not common with my group at all), or everyone being mad at me at the individual level for the same or different reasons. Forgetting because we're busy and two birthdays on the same day is a bit of an edge case is a much simpler computer program that would run on my social graph.
+</p>
+
+<p>
+So far, we have made the assumption that we're dealing with a closed system. Me and my friends. But the reality is we're actually dealing with an open system. Your friends are connected to more people who are connected to more people and so on until <a href="https://en.wikipedia.org/wiki/Six_Degrees_of_Kevin_Bacon">Kevin Bacon</a>. So it would be very hard to write the set of all computer programs across the broader social graph that could lead to the phenomenon you're observing. This is where figuring out <a href="https://fs.blog/probabilistic-thinking/">probabilities</a> and doing <a href="https://www.youtube.com/watch?v=HZGCoVF3YvM">Bayesian updates</a> as you gain more information comes in. This moves us into <a href="https://en.wikipedia.org/wiki/Bayesian_epistemology">Bayesian epistemology</a>, which is beyond the scope of this article, but worth knowing about.
+</p>
+
+<p>
+Anyway, the computational formalism of Occam's razor involves looking at a phenomenon and all computer programs that could produce the phenomenon, and choosing the simplest one as the most probable. This is also known as <a href="https://en.wikipedia.org/wiki/Solomonoff%27s_theory_of_inductive_inference">Solomonoff induction</a>. As I've said earlier, this is intractable, especially if we start thinking about literal Turing machines producing bits that represent whatever phenomenon we're looking at. But it's still a nice way to think a bit more rigorously about Occam's razor, a mental model to add to your epistemic toolkit.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org8eafcec" class="outline-2">
+<h2 id="org8eafcec">The literal simplest computer program</h2>
+<div class="outline-text-2" id="text-org8eafcec">
+<p>
+Now probabilistic thinking and Solmonoff induction do intersect. To do this, consider the sequence [1, 2, 3, 4, 5]. Let's think of all the possible computer programs in existence that could produce each of these. Let's drill down into two of them.
+</p>
+
+<p>
+Computer program 1:
+</p>
+<pre class="example">
+Set x to 1.
+loop, 5 times:
+    add 1 to x.
+    print x.
+</pre>
+
+<p>
+Computer program 2:
+</p>
+<pre class="example">
+print 1
+print 2
+print 3
+print 4
+print 5
+</pre>
+
+<p>
+To understand this next piece, let's pretend that we're dealing with a sequence of [1, 2, 3, &#x2026;. 1 billion]. We can compress this sequence using program 1, only 3 lines, which will output the sequence. Program 2 we cannot compress any further, at 1 billion lines. Program 1 is the simpler program, it is the most likely explanation by Solmonoff induction. Note that if we really wanted to be rigorous here, we'd have to look at a mathematical model of the implementation of each of these computer programs at the bit string level, but thinking in lines of code at least gives us some intuition here.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgd1a0ffb" class="outline-2">
+<h2 id="orgd1a0ffb">The most complex sequence, a tie-in to cognition</h2>
+<div class="outline-text-2" id="text-orgd1a0ffb">
+<p>
+Ok, here's where it gets interesting. Suppose I have a random string of bits, like [1, 0, 1, 1, 0, 0, 1, &#x2026;]. How random is that string? We can sample the set of all computer programs of a particular framework, eg. the <a href="https://en.wikipedia.org/wiki/Turing_machine">Turing machine</a>, and find all programs that produce this string. We can then take the Occam's razor / Solmonoff induction approach and ask what the shortest program is. Note again that a computer program itself is a string of bits. This is how we determine what computer programs are the shortest.
+</p>
+
+<p>
+A truly random sequence would not be compressible beyond our print item 1, print item 2, etc, framework that we made above. A nonrandom sequence would have a shorter computer program than that.
+</p>
+
+<p>
+Let's suppose I asked you to write out a random string of bits of length 20, and I had access to every Turing machine that would produce any bit string of that length. I could literally tell you how random that string is. Let's suppose I had a group of people of various ages from young to old, and I told them to write out the most random bit string possible of length 20. Who can write the more random strings? <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1005408">Hector Zenil and colleagues</a>, who have been researching the subject matter of this article for his whole career, did that experiment. He found that you can actually see a drop-off of the ability to produce random sequences after the age of 25, which ties in with a lot of work on cognition as a function of age.
+</p>
+
+<p>
+There are obviously some interesting followups here that could be done. Like looking at random string production as a function of career (artist vs scientist), and IQ. Or even looking at production of random strings in large language models (you never know what these things can <a href="https://www.lesswrong.com/posts/N6WM6hs7RQMKDhYjB/a-mechanistic-interpretability-analysis-of-grokking">grok</a>). 
+</p>
+</div>
+</div>
+
+<div id="outline-container-org0501526" class="outline-2">
+<h2 id="org0501526">Conclusion</h2>
+<div class="outline-text-2" id="text-org0501526">
+<p>
+We started with Occam's razor. But I'm a computational biologist by training and I see the world in code. Naturally, I discovered Solmonoff induction, the computational formulation of Occam's razor, and I have stuck with that. In studying Solmonoff induction, I ran into the work of Hector Zenil, who has been applying these principles in various ways, including the unexpected tie-in to human cognition. I hope you at least have a better feel for what Occam's razor actually is, or at least how I think about Occam's razor. 
+</p>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="date">Date: March 24, 2023 - March 24, 2023</p>
+<p class="creator"><a href="https://www.gnu.org/software/emacs/">Emacs</a> 28.1 (<a href="https://orgmode.org">Org</a> mode 9.5.2)</p>
+</div>
+</body>
+</html>
