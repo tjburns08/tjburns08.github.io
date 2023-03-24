@@ -22,7 +22,7 @@ But "forgetting" and "mad at me" is a bit more subtle. I've seen both. There's n
 
 * The simplest computer program
 
-To formalize Occam's razor, we have to think [[./coding_as_philosophical_project.html][computationally]]. Suppose we have a bunch of AGI agents in the same situation. Let's look at "mat at me" and "forgot" explanations in more detail. For now, we will think in python, as opposed to Turing machines, which we would have to do if we really wanted to formalize this.
+To formalize Occam's razor, we have to think [[./coding_as_philosophical_project.html][computationally]]. Let's look at "mat at me" and "forgot" explanations in more detail. For now, we will think at the level of python, as opposed to the level of Turing machines, which we would have to do if we really wanted to formalize this.
 
 Forgetting.\\
 #+begin_src
@@ -81,7 +81,7 @@ print 5
 
 To understand this next piece, let's pretend that we're dealing with a sequence of [1, 2, 3, .... 1 billion]. We can compress this sequence using program 1, only 4 lines, which will output the sequence. Program 2 we cannot compress any further, at 1 billion lines. Program 1 is the simpler program, it is the most likely explanation by Solomonoff induction. Note that if we really wanted to be rigorous here, we'd have to look at a mathematical model of the implementation of each of these computer programs at the bit string level, but thinking in lines of code at least gives us some intuition here.
 
-* The most complex sequence, a tie-in to cognition
+* The most complex bit string, a tie-in to cognition
 
 Ok, here's where it gets interesting. Suppose I have a random string of bits, like [1, 0, 1, 1, 0, 0, 1, ...]. How random is that string? We can sample the set of all computer programs of a particular framework, eg. the [[https://en.wikipedia.org/wiki/Turing_machine][Turing machine]], and find all programs that produce this string. We can then take the Occam's razor / Solmonoff induction approach and ask what the shortest program is. Note again that a computer program itself is a string of bits. This is how we determine what computer programs are the shortest.
 
