@@ -23,15 +23,35 @@
   .dark-mode video {
     opacity: 0.8;
   }
+  .toggle-theme-btn {
+      width: 1/2;
+      opacity: 0.5;
+      transition: opacity 0.2s;
+    }
+    .toggle-theme-btn:hover {
+      opacity: 1;
+    }
 </style>
 <script>
-  function toggleDarkMode() {
+ function toggleDarkMode() {
     const body = document.body;
     body.classList.toggle("dark-mode");
+    // Save the user's theme preference to localStorage
+    if (body.classList.contains("dark-mode")) {
+      localStorage.setItem("theme", "dark");
+    } else {
+      localStorage.setItem("theme", "light");
+    }
   }
 
   function setDefaultDarkMode() {
-    document.body.classList.add("dark-mode");
+    // Retrieve the user's theme preference from localStorage
+    const storedTheme = localStorage.getItem("theme");
+
+    // If the stored theme is light, do nothing; otherwise, set it to dark
+    if (storedTheme !== "light") {
+      document.body.classList.add("dark-mode");
+    }
   }
 
   // Set the default mode to dark when the DOM is fully loaded
@@ -41,7 +61,7 @@
 <body>
 <div id="preamble" class="status">
 <div style="position: fixed; top: 10px; right: 10px;">
-         <button onclick="toggleDarkMode()">Light/Dark</button>
+         <button class="toggle-theme-btn" onclick="toggleDarkMode()">Light/Dark</button>
        </div>
 </div>
 <div id="content" class="content">
@@ -50,9 +70,9 @@
 <a href="./index.html">Home</a>
 </p>
 
-<div id="outline-container-org07e900f" class="outline-2">
-<h2 id="org07e900f">The goal <del>is</del> was the way</h2>
-<div class="outline-text-2" id="text-org07e900f">
+<div id="outline-container-orgafb24de" class="outline-2">
+<h2 id="orgafb24de">The goal <del>is</del> was the way</h2>
+<div class="outline-text-2" id="text-orgafb24de">
 <hr />
 <p>
 <i>Because if you’re willing to go through all the battling you got to go through to get where you want to get, who’s got the right to stop you?</i><br />
@@ -85,9 +105,9 @@ Wait, what??
 </div>
 </div>
 
-<div id="outline-container-org13123ed" class="outline-2">
-<h2 id="org13123ed">At the end of the tunnel is&#x2026;more tunnels</h2>
-<div class="outline-text-2" id="text-org13123ed">
+<div id="outline-container-org8fbffed" class="outline-2">
+<h2 id="org8fbffed">At the end of the tunnel is&#x2026;more tunnels</h2>
+<div class="outline-text-2" id="text-org8fbffed">
 <p>
 The key thing here was that getting a PhD was a bit of a let-down. I want to emphasize that I don't regret it. I was very fortunate to have found a great thesis lab at a fantastic research institution, and I am doing work that I enjoy right now, and making a more livable wage than the academic track would offer me.
 </p>
@@ -110,9 +130,9 @@ This has been studied by psychologists. It's called the <a href="https://en.wiki
 </div>
 </div>
 
-<div id="outline-container-org22896e1" class="outline-2">
-<h2 id="org22896e1">Older than my father</h2>
-<div class="outline-text-2" id="text-org22896e1">
+<div id="outline-container-org0e3a8d0" class="outline-2">
+<h2 id="org0e3a8d0">Older than my father</h2>
+<div class="outline-text-2" id="text-org0e3a8d0">
 <p>
 In light of seeing that the end of the tunnel is a hedonic treadmill of more tunnels, I have learned that being ambitious, purpose-driven, and goal-oriented has a huge failure mode. It's called middle age.
 </p>
@@ -131,9 +151,9 @@ My legacy code of spending every waking moment on the next big goal or the next 
 </div>
 </div>
 
-<div id="outline-container-org9720539" class="outline-2">
-<h2 id="org9720539">From the point to the way</h2>
-<div class="outline-text-2" id="text-org9720539">
+<div id="outline-container-org855c0e4" class="outline-2">
+<h2 id="org855c0e4">From the point to the way</h2>
+<div class="outline-text-2" id="text-org855c0e4">
 <hr />
 <p>
 <i>Other people have purpose;</i><br />

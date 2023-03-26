@@ -23,21 +23,45 @@
   .dark-mode video {
     opacity: 0.8;
   }
+  .toggle-theme-btn {
+      width: 2/3;
+      opacity: 0.5;
+      transition: opacity 0.2s;
+    }
+    .toggle-theme-btn:hover {
+      opacity: 1;
+    }
 </style>
 <script>
-  function toggleDarkMode() {
+ function toggleDarkMode() {
     const body = document.body;
     body.classList.toggle("dark-mode");
+    // Save the user's theme preference to localStorage
+    if (body.classList.contains("dark-mode")) {
+      localStorage.setItem("theme", "dark");
+    } else {
+      localStorage.setItem("theme", "light");
+    }
   }
 
-  // Set the default mode to dark
-  document.body.classList.add("dark-mode");
+  function setDefaultDarkMode() {
+    // Retrieve the user's theme preference from localStorage
+    const storedTheme = localStorage.getItem("theme");
+
+    // If the stored theme is light, do nothing; otherwise, set it to dark
+    if (storedTheme !== "light") {
+      document.body.classList.add("dark-mode");
+    }
+  }
+
+  // Set the default mode to dark when the DOM is fully loaded
+  document.addEventListener('DOMContentLoaded', setDefaultDarkMode);
 </script>
 </head>
 <body>
 <div id="preamble" class="status">
 <div style="position: fixed; top: 10px; right: 10px;">
-         <button onclick="toggleDarkMode()">Light/Dark</button>
+         <button class="toggle-theme-btn" onclick="toggleDarkMode()">Light/Dark</button>
        </div>
 </div>
 <div id="content" class="content">
@@ -56,9 +80,9 @@ Socrates, in Plato's <i>The Republic</i>
 </p>
 <hr />
 
-<div id="outline-container-orga748341" class="outline-2">
-<h2 id="orga748341">I'm just as biased as the next guy (but I don't want to be)</h2>
-<div class="outline-text-2" id="text-orga748341">
+<div id="outline-container-org198229d" class="outline-2">
+<h2 id="org198229d">I'm just as biased as the next guy (but I don't want to be)</h2>
+<div class="outline-text-2" id="text-org198229d">
 <p>
 When I was a kid, I was taught to handle conflict. I was told to put myself in the other person's shoes. I was taught to look at both sides of the story. I think most people know this to the point where they are empty platitudes. We know these things, but have we really internalized them? Do we actively practice them in the modern world?
 </p>
@@ -77,9 +101,9 @@ In my pursuit of truth, how do I make sense of this increasingly divided and ide
 </div>
 </div>
 
-<div id="outline-container-orgf18757a" class="outline-2">
-<h2 id="orgf18757a">Steelmanning</h2>
-<div class="outline-text-2" id="text-orgf18757a">
+<div id="outline-container-orgc323433" class="outline-2">
+<h2 id="orgc323433">Steelmanning</h2>
+<div class="outline-text-2" id="text-orgc323433">
 <p>
 I first came across the idea of "steelmanning" from investor Peter Thiel. The idea is the opposite of the straw man. Strawmanning an argument would be to re-phrase it in a way that is easiest as possible to take down. In other words, make the argument sound weak. Steelmanning is to re-phrase an opposing argument as if I myself am defending it. The idea would be that I word the argument in a way that is more compelling than the way the person I'm debating worded it. Want an example? <a href="https://www.youtube.com/watch?v=zi5-90TnI3Y">Here</a> (go to 25 minutes in) is philosopher Daniel Schmachtenberger steelmanning the pro-wait-till-marriage argument (which he does not necessarily agree with) to a room full of people who outwardly laughed at the end of it, to give you an idea of what their views were.
 </p>
@@ -98,9 +122,9 @@ Once I have these steelmanned perspectives, what do I do with them?
 </div>
 </div>
 
-<div id="outline-container-org38a23d5" class="outline-2">
-<h2 id="org38a23d5">Dialectics</h2>
-<div class="outline-text-2" id="text-org38a23d5">
+<div id="outline-container-org0538e2b" class="outline-2">
+<h2 id="org0538e2b">Dialectics</h2>
+<div class="outline-text-2" id="text-org0538e2b">
 <p>
 I was talking to my aunt once about big life decisions I had to make at that time. She told me to stop talking, think of the opposing decisions, and "put them into dialogue" for a while. There was something very profound in those words that I'll elaborate on here. 
 </p>
@@ -119,9 +143,9 @@ So then what do you do with your steelmanned arguments? You make your thesis-ant
 </div>
 </div>
 
-<div id="outline-container-orgc67d4f8" class="outline-2">
-<h2 id="orgc67d4f8">Conclusion</h2>
-<div class="outline-text-2" id="text-orgc67d4f8">
+<div id="outline-container-orgc2ca43b" class="outline-2">
+<h2 id="orgc2ca43b">Conclusion</h2>
+<div class="outline-text-2" id="text-orgc2ca43b">
 <p>
 My PhD in Cancer Biology taught me a lot about how to seek truth, particularly around a single dry non-controversial non-politicized topic that a small number of people in the world work on. But it didn't teach me the rest of it. I struggled just as much as everyone else when the pandemic hit, in terms of figuring out what is objectively true. Ironically, I turned to philosophy much more after I received my doctor of philosophy than during the pursuit of it. 
 </p>

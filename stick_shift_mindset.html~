@@ -23,21 +23,45 @@
   .dark-mode video {
     opacity: 0.8;
   }
+  .toggle-theme-btn {
+      width: 2/3;
+      opacity: 0.5;
+      transition: opacity 0.2s;
+    }
+    .toggle-theme-btn:hover {
+      opacity: 1;
+    }
 </style>
 <script>
-  function toggleDarkMode() {
+ function toggleDarkMode() {
     const body = document.body;
     body.classList.toggle("dark-mode");
+    // Save the user's theme preference to localStorage
+    if (body.classList.contains("dark-mode")) {
+      localStorage.setItem("theme", "dark");
+    } else {
+      localStorage.setItem("theme", "light");
+    }
   }
 
-  // Set the default mode to dark
-  document.body.classList.add("dark-mode");
+  function setDefaultDarkMode() {
+    // Retrieve the user's theme preference from localStorage
+    const storedTheme = localStorage.getItem("theme");
+
+    // If the stored theme is light, do nothing; otherwise, set it to dark
+    if (storedTheme !== "light") {
+      document.body.classList.add("dark-mode");
+    }
+  }
+
+  // Set the default mode to dark when the DOM is fully loaded
+  document.addEventListener('DOMContentLoaded', setDefaultDarkMode);
 </script>
 </head>
 <body>
 <div id="preamble" class="status">
 <div style="position: fixed; top: 10px; right: 10px;">
-         <button onclick="toggleDarkMode()">Light/Dark</button>
+         <button class="toggle-theme-btn" onclick="toggleDarkMode()">Light/Dark</button>
        </div>
 </div>
 <div id="content" class="content">
@@ -56,9 +80,9 @@ Robert Pirsig, <i>Zen and the Art of Motorcycle Maintenance</i>
 </p>
 <hr />
 
-<div id="outline-container-org31c053f" class="outline-2">
-<h2 id="org31c053f">Introduction</h2>
-<div class="outline-text-2" id="text-org31c053f">
+<div id="outline-container-org0735a41" class="outline-2">
+<h2 id="org0735a41">Introduction</h2>
+<div class="outline-text-2" id="text-org0735a41">
 <p>
 When I moved to Berlin, I was no longer legally allowed to use my American driver's license after six months. What happens next depends on what state you have your driver's license in. For some states, you can simply trade your license in for a German one. For some states, you have to take the German written test. For some states (like California, where I'm from), you have to take both the written and practical test again. This meant I had to go to German driving school and do the whole process, as if I was 16 again. While this was annoying, I took this as an opportunity to do something I had always wanted to do: learn how to drive stick.
 </p>
@@ -77,9 +101,9 @@ From a practical standpoint, automatics get the job done and are often more envi
 </div>
 </div>
 
-<div id="outline-container-org9162a26" class="outline-2">
-<h2 id="org9162a26">Zen and the art of driving stick</h2>
-<div class="outline-text-2" id="text-org9162a26">
+<div id="outline-container-org35385ac" class="outline-2">
+<h2 id="org35385ac">Zen and the art of driving stick</h2>
+<div class="outline-text-2" id="text-org35385ac">
 <p>
 What exactly does it mean to go from automatic to manual transmission? I think of it is going down one or more layers of convenience and/or technology. Doing this often requires a lot more active engagement in the task at hand. While it is less convenient, unless you're under time pressure, it can be much more rewarding. Robert Pirsig talks about this in his masterpiece <a href="https://en.wikipedia.org/wiki/Zen_and_the_Art_of_Motorcycle_Maintenance">Zen and the Art of Motorcycle Maintenance</a> (if you haven't read it, watch <a href="https://www.youtube.com/watch?v=ENeYNqwK_8g">this</a>). He talks specifically about finding Zen in the connection with technology, as opposed to meditating along in the mountains. When he talks about technology, he's talking about his old motorcycle, which he understands like its another of his limbs, and he can repair himself.
 </p>
@@ -94,17 +118,17 @@ The best way to get at what I'm talking about is to simply provide examples from
 </div>
 </div>
 
-<div id="outline-container-orgabb6fd2" class="outline-2">
-<h2 id="orgabb6fd2">Examples</h2>
-<div class="outline-text-2" id="text-orgabb6fd2">
+<div id="outline-container-org1f29510" class="outline-2">
+<h2 id="org1f29510">Examples</h2>
+<div class="outline-text-2" id="text-org1f29510">
 <p>
 This said, below is a list of examples that highlight what I mean by Stick Shift Mindset. My plan is to simply add to this list over time as I acquire or realize more and more examples. 
 </p>
 </div>
 
-<div id="outline-container-org8762963" class="outline-4">
-<h4 id="org8762963">Windows/OSX versus the command line</h4>
-<div class="outline-text-4" id="text-org8762963">
+<div id="outline-container-orgeb99479" class="outline-4">
+<h4 id="orgeb99479">Windows/OSX versus the command line</h4>
+<div class="outline-text-4" id="text-orgeb99479">
 <p>
 I have a Mac, and I've been using Macs since 2009 or so. Prior to that, I was on Windows machines. I spend a lot of my time clicking around to get where I want to be.
 </p>
@@ -115,9 +139,9 @@ However, when I started learning programming in the mid-2010s, I started using t
 </div>
 </div>
 
-<div id="outline-container-orgd9ea58e" class="outline-4">
-<h4 id="orgd9ea58e">MS Word versus Emacs Org Mode</h4>
-<div class="outline-text-4" id="text-orgd9ea58e">
+<div id="outline-container-org6234855" class="outline-4">
+<h4 id="org6234855">MS Word versus Emacs Org Mode</h4>
+<div class="outline-text-4" id="text-org6234855">
 <p>
 I used to write most of my files in Microsoft Word. It's simple, and it gets the job done. I wrote my PhD thesis and my manuscripts in grad school all in Word. I had also written my journal entires in Word since 2009.
 </p>
@@ -132,9 +156,9 @@ As a caveat, I often need to write something with a very tight deadline or I nee
 </div>
 </div>
 
-<div id="outline-container-org46f3d63" class="outline-4">
-<h4 id="org46f3d63">IDE versus Vim and Emacs</h4>
-<div class="outline-text-4" id="text-org46f3d63">
+<div id="outline-container-org1241372" class="outline-4">
+<h4 id="org1241372">IDE versus Vim and Emacs</h4>
+<div class="outline-text-4" id="text-org1241372">
 <p>
 This is a tricky one. When it comes to complex tasks and group projects, I code in Visual Studio. This might be because I simply haven't gotten good enough at Vim and Emacs to justify its full time use.
 </p>
@@ -145,9 +169,9 @@ However, I find myself coding in Emacs when I'm doing hobby projects and Vim whe
 </div>
 </div>
 
-<div id="outline-container-org12b0cd0" class="outline-4">
-<h4 id="org12b0cd0">Restaurant/ordering versus cooking</h4>
-<div class="outline-text-4" id="text-org12b0cd0">
+<div id="outline-container-org0d19732" class="outline-4">
+<h4 id="org0d19732">Restaurant/ordering versus cooking</h4>
+<div class="outline-text-4" id="text-org0d19732">
 <p>
 Now for something that is more relatable to non-tech people. When I was in grad school, I often ate at a restaurant next door to my apartment for the sake of efficiency. There was always something I had to do with some tough deadline that I was behind on. So Ray's Grill at Stanford was the lowest hanging fruit.
 </p>
@@ -162,9 +186,9 @@ Importantly, when I see all the ingredients of my dinner on the kitchen counter 
 </div>
 </div>
 
-<div id="outline-container-orgc2c6187" class="outline-4">
-<h4 id="orgc2c6187">Playing music versus improvising music</h4>
-<div class="outline-text-4" id="text-orgc2c6187">
+<div id="outline-container-org770c92c" class="outline-4">
+<h4 id="org770c92c">Playing music versus improvising music</h4>
+<div class="outline-text-4" id="text-org770c92c">
 <p>
 I have always been a fan of music. In particular, I like jazz. One of the main reasons for this is because I played bass in jazz bands and jazz combos from junior high school through college. Now, I'm learning jazz piano.
 </p>
@@ -179,9 +203,9 @@ When I improvise over a song, be it on the bass or on the piano, I feel more con
 </div>
 </div>
 
-<div id="outline-container-orgb1207a8" class="outline-4">
-<h4 id="orgb1207a8">Being employed versus being self employed</h4>
-<div class="outline-text-4" id="text-orgb1207a8">
+<div id="outline-container-org7f7f45a" class="outline-4">
+<h4 id="org7f7f45a">Being employed versus being self employed</h4>
+<div class="outline-text-4" id="text-org7f7f45a">
 <p>
 At the end of graduate school, I started consulting for biotech companies to make a bit of extra money. After I graduated, I was employed half time as a computational biologist and I was consulting half time. I was successful enough with the latter that I made the rational decision to do consulting full time. A few years after that, I turned my freelance operation into a GmbH (German LLC, but with shares and no pass-through income).
 </p>
@@ -197,9 +221,9 @@ However, being self employed has made me feel more connected to the economy and 
 </div>
 </div>
 
-<div id="outline-container-orgb037150" class="outline-2">
-<h2 id="orgb037150">Conclusion</h2>
-<div class="outline-text-2" id="text-orgb037150">
+<div id="outline-container-org4906a2a" class="outline-2">
+<h2 id="org4906a2a">Conclusion</h2>
+<div class="outline-text-2" id="text-org4906a2a">
 <p>
 Each of the examples in this article highlight a particular process, that goes something like this:
 </p>
