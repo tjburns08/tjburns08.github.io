@@ -17,11 +17,53 @@
 (require 'ox-publish)
 
 ;; Customize the HTML output
-(setq org-html-validation-link nil            ;; Don't show validation link
-      org-html-head-include-scripts nil       ;; Use our own scripts
-      org-html-head-include-default-style nil ;; Use our own styles
-      org-html-head "<link rel=\"stylesheet\" href=\"simple.css\" />") ;; links to local css
+;;(setq org-html-validation-link nil            ;; Don't show validation link
+;;      org-html-head-include-scripts nil       ;; Use our own scripts
+;;      org-html-head-include-default-style nil ;; Use our own styles
+;;      org-html-head "<link rel=\"stylesheet\" href=\"simple.css\" />") ;; links to local css
       ;; org-html-head "<link rel=\"stylesheet\" href=\"https://cdn.simplecss.org/simple.min.css\" />")
+
+;; Dev: Toggle dark mode
+(setq org-html-validation-link nil
+      org-html-head-include-scripts nil
+      org-html-head-include-default-style nil
+      org-html-head "<link rel=\"stylesheet\" href=\"simple.css\" />
+<style>
+  .dark-mode {
+    --bg: #212121;
+    --accent-bg: #2b2b2b;
+    --text: #dcdcdc;
+    --text-light: #ababab;
+    --accent: #ffb300;
+    --code: #f06292;
+    --preformatted: #ccc;
+    --disabled: #111;
+  }
+  .dark-mode img,
+  .dark-mode video {
+    opacity: 0.8;
+  }
+</style>
+<script>
+  function toggleDarkMode() {
+    const body = document.body;
+    body.classList.toggle(\"dark-mode\");
+  }
+
+  function setDefaultDarkMode() {
+    document.body.classList.add(\"dark-mode\");
+  }
+
+  // Set the default mode to dark when the DOM is fully loaded
+  document.addEventListener('DOMContentLoaded', setDefaultDarkMode);
+</script>")
+
+;; Dev: The light/dark mode button
+(setq org-html-preamble
+      "<div style=\"position: fixed; top: 10px; right: 10px;\">
+         <button onclick=\"toggleDarkMode()\">Light/Dark</button>
+       </div>")
+
 
 ;; Define the publishing project
 (setq org-publish-project-alist

@@ -7,18 +7,48 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>The way is the way</title>
 <meta name="generator" content="Org Mode" />
-<link rel="stylesheet" href="styles.css" />
+<link rel="stylesheet" href="simple.css" />
+<style>
+  .dark-mode {
+    --bg: #212121;
+    --accent-bg: #2b2b2b;
+    --text: #dcdcdc;
+    --text-light: #ababab;
+    --accent: #ffb300;
+    --code: #f06292;
+    --preformatted: #ccc;
+    --disabled: #111;
+  }
+  .dark-mode img,
+  .dark-mode video {
+    opacity: 0.8;
+  }
+</style>
+<script>
+  function toggleDarkMode() {
+    const body = document.body;
+    body.classList.toggle("dark-mode");
+  }
+
+  // Set the default mode to dark
+  document.body.classList.add("dark-mode");
+</script>
 </head>
 <body>
+<div id="preamble" class="status">
+<div style="position: fixed; top: 10px; right: 10px;">
+         <button onclick="toggleDarkMode()">Light/Dark</button>
+       </div>
+</div>
 <div id="content" class="content">
 <h1 class="title">The way is the way</h1>
 <p>
 <a href="./index.html">Home</a>
 </p>
 
-<div id="outline-container-orgc526457" class="outline-2">
-<h2 id="orgc526457">The goal <del>is</del> was the way</h2>
-<div class="outline-text-2" id="text-orgc526457">
+<div id="outline-container-org7a1c8fb" class="outline-2">
+<h2 id="org7a1c8fb">The goal <del>is</del> was the way</h2>
+<div class="outline-text-2" id="text-org7a1c8fb">
 <hr />
 <p>
 <i>Because if you’re willing to go through all the battling you got to go through to get where you want to get, who’s got the right to stop you?</i><br />
@@ -51,9 +81,9 @@ Wait, what??
 </div>
 </div>
 
-<div id="outline-container-org9875e02" class="outline-2">
-<h2 id="org9875e02">At the end of the tunnel is&#x2026;more tunnels</h2>
-<div class="outline-text-2" id="text-org9875e02">
+<div id="outline-container-orgef83912" class="outline-2">
+<h2 id="orgef83912">At the end of the tunnel is&#x2026;more tunnels</h2>
+<div class="outline-text-2" id="text-orgef83912">
 <p>
 The key thing here was that getting a PhD was a bit of a let-down. I want to emphasize that I don't regret it. I was very fortunate to have found a great thesis lab at a fantastic research institution, and I am doing work that I enjoy right now, and making a more livable wage than the academic track would offer me.
 </p>
@@ -76,9 +106,9 @@ This has been studied by psychologists. It's called the <a href="https://en.wiki
 </div>
 </div>
 
-<div id="outline-container-orga409b51" class="outline-2">
-<h2 id="orga409b51">Older than my father</h2>
-<div class="outline-text-2" id="text-orga409b51">
+<div id="outline-container-org41e5e7d" class="outline-2">
+<h2 id="org41e5e7d">Older than my father</h2>
+<div class="outline-text-2" id="text-org41e5e7d">
 <p>
 In light of seeing that the end of the tunnel is a hedonic treadmill of more tunnels, I have learned that being ambitious, purpose-driven, and goal-oriented has a huge failure mode. It's called middle age.
 </p>
@@ -97,9 +127,9 @@ My legacy code of spending every waking moment on the next big goal or the next 
 </div>
 </div>
 
-<div id="outline-container-org042ff30" class="outline-2">
-<h2 id="org042ff30">From the point to the way</h2>
-<div class="outline-text-2" id="text-org042ff30">
+<div id="outline-container-org3a5089c" class="outline-2">
+<h2 id="org3a5089c">From the point to the way</h2>
+<div class="outline-text-2" id="text-org3a5089c">
 <hr />
 <p>
 <i>Other people have purpose;</i><br />
