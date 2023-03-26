@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>But what is Occam's razor really?</title>
 <meta name="generator" content="Org Mode" />
-<link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css" />
+<link rel="stylesheet" href="styles.css" />
 </head>
 <body>
 <div id="content" class="content">
@@ -26,9 +26,9 @@ Claude Shannon, lecture: <i>Creative Thinking</i>
 </p>
 <hr />
 
-<div id="outline-container-org8949718" class="outline-2">
-<h2 id="org8949718">The simplest explanation</h2>
-<div class="outline-text-2" id="text-org8949718">
+<div id="outline-container-orga578072" class="outline-2">
+<h2 id="orga578072">The simplest explanation</h2>
+<div class="outline-text-2" id="text-orga578072">
 <p>
 I have a group chat of local friends we use to coordinate our weekend events among other things. One of the things we do is we wish each other happy birthday when these days roll around. My birthday is shared with another birthday, of a guy we'll call Nick (not his real name). Every year on my birthday, messages ring through the group chat, "Happy birthday Tyler and Nick" (except in German). But this year, it was only "Happy birthday Nick."
 </p>
@@ -42,14 +42,14 @@ For example: where does lightning come from? One explanation is that it's electr
 </p>
 
 <p>
-But "forgetting" and "mad at me" is a bit more subtle. I've seen both. There's no supernatural component. We have to get a bit a bit more technical. The spoiler alert is that they just forgot, and remembered later. But let's go into the details of the different scenarios and show why that is a simpler explanation.
+But "forgetting" and "mad at me" is a bit more subtle. I've seen both. There's no supernatural component. We have to get a bit a bit more technical. The spoiler alert is that they just forgot, and remembered later. I'm at an age now where I would rather forget my birthday when it rolls around, too. But this being said, let's go into the details of the different scenarios and show why forgetting is a simpler explanation, so you can get some intuition around Occam's razor.
 </p>
 </div>
 </div>
 
-<div id="outline-container-orgf8412c8" class="outline-2">
-<h2 id="orgf8412c8">The simplest computer program</h2>
-<div class="outline-text-2" id="text-orgf8412c8">
+<div id="outline-container-orga575a3d" class="outline-2">
+<h2 id="orga575a3d">The simplest computer program</h2>
+<div class="outline-text-2" id="text-orga575a3d">
 <p>
 To formalize Occam's razor, we have to think <a href="./coding_as_philosophical_project.html">computationally</a>. Let's look at "mat at me" and "forgot" explanations in more detail. For now, we will think at the level of python, as opposed to the level of Turing machines, which we would have to do if we really wanted to formalize this.
 </p>
@@ -93,7 +93,7 @@ We can see that high-level programs 2 and 3 require a lot of additional function
 </p>
 
 <p>
-So far, for the sake of simplifying the problem, we have made the assumption that we're dealing with a closed system. Me and my friends. But the reality is we're actually dealing with an open system. Your friends are connected to more people who are connected to more people and so on until <a href="https://en.wikipedia.org/wiki/Six_Degrees_of_Kevin_Bacon">Kevin Bacon</a>. So it would be very hard to write the set of all computer programs across the broader social graph that could lead to the phenomenon you're observing. This is where figuring out <a href="https://fs.blog/probabilistic-thinking/">probabilities</a> and doing <a href="https://www.youtube.com/watch?v=HZGCoVF3YvM">Bayesian updates</a> as you gain more information comes in. This moves us into <a href="https://en.wikipedia.org/wiki/Bayesian_epistemology">Bayesian epistemology</a>, which is beyond the scope of this article, but worth knowing about.
+So far, for the sake of simplifying the problem, we have made the assumption that we're dealing with a closed system. Me and my friends. But the reality is we're actually dealing with an open system. Your friends are connected to more people who are connected to more people and so on until <a href="https://en.wikipedia.org/wiki/Six_Degrees_of_Kevin_Bacon">Kevin Bacon</a>. So it would be very hard to write the set of all computer programs across the broader social graph that could lead to the phenomenon you're observing. This is where figuring out <a href="https://fs.blog/probabilistic-thinking/">probabilities</a> and doing <a href="https://www.youtube.com/watch?v=HZGCoVF3YvM">Bayesian updates</a> as you gain more information comes in. While we'll talk about probabilities here, the topic of <a href="https://en.wikipedia.org/wiki/Bayesian_epistemology">Bayesian epistemology</a> will be for another time.
 </p>
 
 <p>
@@ -101,10 +101,9 @@ Anyway, the computational formalism of Occam's razor involves looking at a pheno
 </p>
 </div>
 </div>
-
-<div id="outline-container-org5178ac0" class="outline-2">
-<h2 id="org5178ac0">The literal simplest computer program</h2>
-<div class="outline-text-2" id="text-org5178ac0">
+<div id="outline-container-orged5e794" class="outline-2">
+<h2 id="orged5e794">How simple = how much can you compress it</h2>
+<div class="outline-text-2" id="text-orged5e794">
 <p>
 Probabilistic thinking and Solomonoff induction do intersect. To do this, consider the sequence [1, 2, 3, 4, 5]. Let's think of all the possible computer programs in existence that could produce this sequence. Let's drill down into two of them.
 </p>
@@ -136,11 +135,81 @@ But let's pretend that we're dealing with a sequence of [1, 2, 3, &#x2026;. 1 bi
 </div>
 </div>
 
-<div id="outline-container-orgb272272" class="outline-2">
-<h2 id="orgb272272">Conclusion</h2>
-<div class="outline-text-2" id="text-orgb272272">
+<div id="outline-container-orgbd23f5a" class="outline-2">
+<h2 id="orgbd23f5a">Probabilities and the conjunction fallacy</h2>
+<div class="outline-text-2" id="text-orgbd23f5a">
 <p>
-We started with Occam's razor. But I'm a computational biologist by training and these days I see the world in code. Naturally, I discovered and took kindly to Solmonoff induction, the computational formulation of Occam's razor, and I have stuck with that ever since. What it has done for me is help me think computationally about what Occam's razor really is, and especially what a simple explanation really is. What I find is if I'm trying to weigh explanations for a particular thing in my life, what helps is if I try to turn the explanations into computer programs, even if it's lines of pseudo-code as I did in this article, and to up-weight the smaller programs in terms of the probability of being true. Hopefully you'll be able to approach Occam's razor through a computational lens too the next time you have to figure something out in your life. 
+Ok, so we have an idea that the simplest explanation is most likely true, and a formulation that says that the simplest possible computer program that can output the phenomenon is most likely true. But that doesn't tell us why this is the case. Why are simpler explanations more likely to be true than complex explanations? To understand why, we next have to think in probabilities.
+</p>
+
+<p>
+Let's think back to my friends again. We will simplify so we're only talking about one friend. We have two scenarios.
+</p>
+<ol class="org-ol">
+<li>My friend didn't say happy birthday to me.<br /></li>
+<li>My friend is mad at me and didn't say happy birthday to me.<br /></li>
+</ol>
+
+<p>
+Which of these is more likely? If we simplify further, we have:
+</p>
+<ol class="org-ol">
+<li>A.<br /></li>
+<li>A and B.<br /></li>
+</ol>
+
+<p>
+Let's look at it from a more sinister angle so you can see where Occam's razor, as a heuristic, comes in. We're going to look at a related problem. Consider the following description:
+</p>
+
+<p>
+Description: Steve is a physically fit person in his 30s who did cross country in high school and college. He likes working out, and in particular doing endurance sports. He doesn't eat dessert and he doesn't drink alcohol. He gets up at 5am every morning to run at least 8 miles.
+</p>
+
+<p>
+What is more likely?
+</p>
+
+<ol class="org-ol">
+<li>Steve is a personal trainer.<br /></li>
+<li>Steve is a personal trainer who has run at least one marathon.<br /></li>
+</ol>
+
+<p>
+If you said 2, then you experienced the <a href="https://en.wikipedia.org/wiki/Conjunction_fallacy">conjunction fallacy</a>. What is this? Again, let's simplify.
+</p>
+
+<p>
+Description: Blah blah blah.
+</p>
+
+<p>
+What is more likely?
+</p>
+
+<ol class="org-ol">
+<li>A.<br /></li>
+<li>A and B.<br /></li>
+</ol>
+
+<p>
+Even if the probability of Steve being a personal trainer is 0.9, and the probability of Steve having run at least one marathon 0.9, the combined probabilities are A*B, or 0.81, or less than just being a personal trainer. This will always be the case if the probabilities are both less than 1. 
+</p>
+
+<p>
+Going back to the initial case my birthday, we have one thing (not saying happy birthday) versus two things (not saying happy birthday and being mad at me). The one with the fewest conjunctions is the most likely because every conjunction decreases the probability assuming the conjunction has a probability of less than one.
+</p>
+
+<p>
+Of course, we can make it more complicated if we start thinking in terms of not saying happy birthday GIVEN being mad at me. But this moves us toward Bayes Theorem, which needs another article altogether.
+</p>
+</div>
+</div>
+<div id="outline-container-orgca1cec0" class="outline-2">
+<h2 id="orgca1cec0">Conclusion</h2>
+<div class="outline-text-2" id="text-orgca1cec0">
+<p>
+We started with Occam's razor. But I'm a computational biologist by training and these days I see the world in code. Naturally, I discovered and took kindly to Solmonoff induction, the computational formulation of Occam's razor, and I have stuck with that ever since. What it has done for me is help me think computationally about what Occam's razor really is, and especially what a simple explanation really is. What I find is if I'm trying to weigh explanations for a particular thing in my life, what helps is if I try to turn the explanations into computer programs, even if it's lines of pseudo-code as I did in this article, and to up-weight the smaller programs in terms of the probability of being true. I then used the conjunction fallacy to connect "simple" with "probable." In sum, I hope you'll be able to approach Occam's razor through a computational and probabilistic lens too the next time you have to make sense of something. 
 </p>
 </div>
 </div>
