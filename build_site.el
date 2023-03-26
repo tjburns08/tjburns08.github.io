@@ -44,8 +44,8 @@
     opacity: 0.8;
   }
   .toggle-theme-btn {
-      width: 2/3;
-      opacity: 0.5;
+      transform: scale(0.7);
+      opacity: 0.4;
       transition: opacity 0.2s;
     }
     .toggle-theme-btn:hover {
