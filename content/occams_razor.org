@@ -80,7 +80,7 @@ print 5
 
 But let's pretend that we're dealing with a sequence of [1, 2, 3, .... 1 billion]. We can compress this sequence using program 1, only 4 lines, which will output the sequence. Program 2 we cannot compress any further, at 1 billion lines. Program 1 is the simpler program, it is the most likely explanation by Solomonoff induction. But importantly, we can now think in terms of how much simpler program 1 (4 lines) is from program 2 (1 billion lines). Note that if we really wanted to be rigorous here, we'd have to look at a mathematical model of the implementation of each of these computer programs at the bit string level, but thinking in lines of code at least gives us some intuition here.
 
-* Probabilities and the conjunction fallacy
+* Probabilities, assumptions, and the conjunction fallacy
 Ok, so we have an idea that the simplest explanation is most likely true, and a formulation that says that the simplest possible computer program that can output the phenomenon is most likely true. But that doesn't tell us why this is the case. Why are simpler explanations more likely to be true than complex explanations? To understand why, we next have to think in probabilities.
 
 Let's think back to my friends again. We will simplify so we're only talking about one friend. We have two scenarios.
@@ -113,6 +113,8 @@ Even if the probability of Steve being a personal trainer is 0.9, and the probab
 
 Going back to the initial case my birthday, we have one thing (not saying happy birthday) versus two things (not saying happy birthday and being mad at me). The one with the fewest conjunctions is the most likely because every conjunction decreases the probability assuming the conjunction has a probability of less than one.
 
-Of course, we can make it more complicated if we start thinking in terms of not saying happy birthday GIVEN being mad at me. But this moves us toward Bayes Theorem, which needs another article altogether.
+A practical way to think of Occam's razor in light of the conjunction fallacy, is the idea that the simplest explanation makes the fewest assumptions. Each assumption has some probability of being true. Fewer assumptions have fewer probabilities being multiplied together, and therefore fewer opportunities to decrease the probability of being true. So I'm going to go with the explanation that has one embedded assumption as opposed to the one that has ten embedded assumptions.
+
+Of course, we can make all of this more complicated if we start thinking in terms of not saying happy birthday GIVEN being mad at me. But this moves us toward Bayes Theorem, which needs another article altogether.
 * Conclusion
 We started with Occam's razor. But I'm a computational biologist by training and these days I see the world in code. Naturally, I discovered and took kindly to Solmonoff induction, the computational formulation of Occam's razor, and I have stuck with that ever since. What it has done for me is help me think computationally about what Occam's razor really is, and especially what a simple explanation really is. What I find is if I'm trying to weigh explanations for a particular thing in my life, what helps is if I try to turn the explanations into computer programs, even if it's lines of pseudo-code as I did in this article, and to up-weight the smaller programs in terms of the probability of being true. I then used the conjunction fallacy to connect "simple" with "probable." In sum, I hope you'll be able to approach Occam's razor through a computational and probabilistic lens too the next time you have to make sense of something. 
