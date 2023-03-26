@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mandelbrot Set</title>
+  <style>
+    canvas {
+      display: block;
+      margin: auto;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="mandelbrot" width="800" height="800"></canvas>
+  <script>
+    const canvas = document.getElementById('mandelbrot');
+    const ctx = canvas.getContext('2d');
+
+    let realMin = -2;
+    let realMax = 1;
+    let imagMin = -1.5;
+    let imagMax = 1.5;
+    const maxIter = 1000;
+
+    function mandelbrot(cReal, cImag) {
+      let zReal = 0;
+      let zImag = 0;
+      let iterations = 0;
+
+      while (iterations < maxIter && zReal * zReal + zImag * zImag < 4) {
+        const zRealTemp = zReal * zReal - zImag * zImag + cReal;
+        zImag = 2 * zReal * zImag + cImag;
+        zReal = zRealTemp;
+        iterations++;
+      }
+
+      return iterations;
+    }
+
+    function drawMandelbrot() {
+      for (let x = 0; x < canvas.width; x++) {
+        for (let y = 0; y < canvas.height; y++) {
+          const real = realMin + (x / canvas.width) * (realMax - realMin);
+          const imag = imagMin + (y / canvas.height) * (imagMax - imagMin);
+          const value = mandelbrot(real, imag);
+
+          const color = value === maxIter ? 0 : (value % 256);
+
+          ctx.fillStyle = 'rgb(' + color + ', ' + color + ', ' + color + ')';
+          ctx.fillRect(x, y, 1, 1);
+        }
+      }
+    }
+
+    drawMandelbrot();
+
+    canvas.addEventListener('click', function (event) {
+      const rect = canvas.getBoundingClientRect();
+      const x = event.clientX - rect.left;
+      const y = event.clientY - rect.top;
+
+      const realClick = realMin + (x / canvas.width) * (realMax - realMin);
+      const imagClick = imagMin + (y / canvas.height) * (imagMax - imagMin);
+
+      const zoomFactor = 2;
+
+      realMin = realClick - (realMax - realMin) / (2 * zoomFactor);
+      realMax = realClick + (realMax - realMin) / (2 * zoomFactor);
+      imagMin = imagClick - (imagMax - imagMin) / (2 * zoomFactor);
+      imagMax = imagClick + (imagMax - imagMin) / (2 * zoomFactor);
+
+      drawMandelbrot();
+    });
+  </script>
+</body>
+</html>
