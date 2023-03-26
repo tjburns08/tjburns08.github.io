@@ -1,4 +1,5 @@
 #+TITLE: Tyler Burns's Website
+#+HTML: <div id="top"></div>
 #+TOC: headlines 1
 
 * About me
@@ -9,8 +10,8 @@ I run a company called [[https://burnslsc.com/][Burns Life Sciences Consulting, 
 This website is a place where I can openly share my ideas and non-client work, regardless of how "finished" it is. I have uploaded written work, code, posters and powerpoint slides of various projects I have driven or contributed to. I intend for a lot of my work here to be "long content" slowly evolving over years if not decades. What matters most is that my thoughts and the work I do that I find meaningful is uploaded here, so when I die (hopefully way down the line) others can easily build off of any worthwhile groundwork I have laid out. 
 
 If you have quesitons or comments, or you're interested in working or collaborating with me, just send me a message (see contact info below). I'm always happy to help. 
-
 * New
+#+HTML: <a href="#top">Back to top</a>
 ** [[./how_to_solve_problems.html][What I learned about problem solving from my thesis lab]]
 Article.\\
 
@@ -20,6 +21,7 @@ Article.\\
 
 Occam's razor states that for a given phenomenon, the simplest explanation is the most likely explanation. I explore this with a fun example from my life. I then look at a computational formalization of this, which I use today for sensemaking.
 * Single-cell analysis
+#+HTML: <a href="#top">Back to top</a>
 ** [[https://www.biorxiv.org/content/10.1101/337485v1][Continuous Visualization of Multiple Biological Conditions In Single-Cell Data]]
 First author publication.\\
 
@@ -138,6 +140,7 @@ Markdown.\\
 CyTOF data are transformed using the inverse hyperbolic sine (asinh) of the data divided by 5 (aka scale argument of 5). But does it have to be like that? What happens if we use a scale argument of 1? 500? What if we do a log transform? How does t-SNE look on untransformed CyTOF data?
 
 * Natural language processing
+#+HTML: <a href="#top">Back to top</a>
 ** [[./scrolling_problem.org][The Scrolling Problem]]
 Article.\\
 
@@ -209,6 +212,7 @@ Markdown.\\
 
 You are only as good as the questions you ask yourself and others. My uncle told me that many years ago when I was getting started with my career and it stuck. This has been relevant to me in terms of having and maintaining good friendships, being a good husband, being a good family member, being a good businessman, and when I was in graduate school, being a good scientist, and simply being an interesting person. I have a very large list of questions now that is very overwhelming. So I turned them into an embedding using the BERT language model, turned that into a nearest neighbor graph, and then derived insight from looking at the questions in terms of "communities." 
 * Philosophy and rationality
+#+HTML: <a href="#top">Back to top</a>
 ** [[./on_hacking.html][Hacking: examples of seeing through and unseeing in my life]]
 Article.\\
 
@@ -247,6 +251,7 @@ Article.\\
 
 My current plan for coming economic uncertainty we face in the near term due to the recession, and for uncertainty that wil persist beyond the recession (eg. AI disruption). I talk about re-framing my goals as minimizing rather than maximizing something, and about the systems thinking and sustainability based mindset that one sees in subjects like permaculture. This is helping me be more effective, and figure out unique new ways I can add value to the world. 
 * Computing
+#+HTML: <a href="#top">Back to top</a>
 ** [[./xai_and_us.org][Explainable AI and understanding ourselves]]
 Article.\\
 
@@ -264,6 +269,7 @@ Markdown.\\
 
 Here, I write some code to produce Rule 110, a Class 4 1-D cellular automata. I then enhance the gliders to make them easier to see. I explore how the output changes if I make the rule probabilistic (eg. 99.99% chance the rule will be followed. 
 * Statistics
+#+HTML: <a href="#top">Back to top</a>
 ** [[./1_law_large_numbers_central_limit_theorem.html][Coin toss series 1: The law of large numbers and the central limit theorem]]
 Markdown.\\
 
@@ -289,6 +295,7 @@ Markdown.\\
 
 Here, we look at fair coin tosses, unfair coin tosses, and random walks, and explore the randomness of the sequences by doing convolutions on the sequences with kernel size 2.
 * Health
+#+HTML: <a href="#top">Back to top</a>
 ** [[./how_to_get_fit_long_term.html][How to get fit in 20 years]]
 Article.\\
 
@@ -302,6 +309,7 @@ Article.\\
 
 An anecdote from my aunt evolves into a motivational article (mainly written for myself). I describe the art and science of how to start a project and how to keep it going. I talk about how I build psychological momentum. I discuss the concept of Long Content, and how it relates to the neuroscience of dopamine optimization.
 * Other contributions
+#+HTML: <a href="#top">Back to top</a>
 **** Former computational biologist, now guest researcher, at the German Rheumatism Research Center in Berlin, Germany. I will always stay connected to my academic roots.
 **** Developing software to interrogate and visualize the local similarities between original manifolds and lower dimensional embeddings. Important for anyone wanting to determine which of these methods is the right tool for the job.
 **** Solved a long-standing data visualization problem for mass cytometry, and developed a Bioconductor package for it, with a visual description here, and this publication...
@@ -312,6 +320,7 @@ An anecdote from my aunt evolves into a motivational article (mainly written for
 **** Built a website for my PhD program using HTML, JavaScript, and SQL, that helped first year students connect with current and previous members of a given research laboratory (I'd link it but you have to be a Stanford student to view it).
 
 * Fun stuff
+#+HTML: <a href="#top">Back to top</a>
 ** [[./breakout.html][Breakout]]
 A game that will always be of significance to me, because it was the assignment in my intro CS class that made me realize that I really enjoy coding. A simple implementation of breakout that runs on a single html page.
 ** [[./conways_gol.html][Conway's Game of Life]]
@@ -326,9 +335,9 @@ Rules for the grid:\\
 I add a "rule probability" box, that sets the probability that a given rule will proceed for a given cell in the grid at a given iteration. I don't see this in standard game of life implementations, but biological life has a bit of randomness involved, so why not do the same for this?
 ** [[./mandelbrot_set.html][Mandelbrot Set]]
 I first came across this in one of my old math books, perhaps in middle school. I just thought of it as a strange cool looking thing at the time, but what I didn't appreciate until later was how simple it was to implement. This is a single html page, under 80 lines in total. Click on any point on the screen to zoom. Note that you do lose resolution if you zoom in long enough.
-* [[./tyler_burns_resume.pdf][Resume]]
-I keep it short and sweet. This website and the links below will give you the rest of the details of what I'm like as a person, scientist, and businessman. 
 * Links and contact info
+#+HTML: <a href="#top">Back to top</a>
+*** [[./tyler_burns_resume.pdf][Resume]]
 *** [[https://www.linkedin.com/in/tylerjburns/][LinkedIn]]
 *** [[https://twitter.com/tjburns08][Twitter]]
 *** [[https://github.com/tjburns08][GitHub]]
