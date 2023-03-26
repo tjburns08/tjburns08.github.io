@@ -49,7 +49,7 @@
       transition: opacity 0.2s;
     }
     .toggle-theme-btn:hover {
-      opacity: 1;
+      opacity: 0.4;
     }
 </style>
 <script>
