@@ -43,15 +43,35 @@
   .dark-mode video {
     opacity: 0.8;
   }
+  .toggle-theme-btn {
+      width: 2/3;
+      opacity: 0.5;
+      transition: opacity 0.2s;
+    }
+    .toggle-theme-btn:hover {
+      opacity: 1;
+    }
 </style>
 <script>
-  function toggleDarkMode() {
+ function toggleDarkMode() {
     const body = document.body;
     body.classList.toggle(\"dark-mode\");
+    // Save the user's theme preference to localStorage
+    if (body.classList.contains(\"dark-mode\")) {
+      localStorage.setItem(\"theme\", \"dark\");
+    } else {
+      localStorage.setItem(\"theme\", \"light\");
+    }
   }
 
   function setDefaultDarkMode() {
-    document.body.classList.add(\"dark-mode\");
+    // Retrieve the user's theme preference from localStorage
+    const storedTheme = localStorage.getItem(\"theme\");
+
+    // If the stored theme is light, do nothing; otherwise, set it to dark
+    if (storedTheme !== \"light\") {
+      document.body.classList.add(\"dark-mode\");
+    }
   }
 
   // Set the default mode to dark when the DOM is fully loaded
@@ -61,7 +81,7 @@
 ;; Dev: The light/dark mode button
 (setq org-html-preamble
       "<div style=\"position: fixed; top: 10px; right: 10px;\">
-         <button onclick=\"toggleDarkMode()\">Light/Dark</button>
+         <button class=\"toggle-theme-btn\" onclick=\"toggleDarkMode()\">Light/Dark</button>
        </div>")
 
 
