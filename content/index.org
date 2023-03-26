@@ -315,7 +315,15 @@ An anecdote from my aunt evolves into a motivational article (mainly written for
 ** [[./breakout.html][Breakout]]
 A game that will always be of significance to me, because it was the assignment in my intro CS class that made me realize that I really enjoy coding. A simple implementation of breakout that runs on a single html page.
 ** [[./conways_gol.html][Conway's Game of Life]]
-I first came across Conway's Game of Life when I was 16. It completely changed the way I think about how the world works. Or, it helped me realize the way I inherently think about the world. One of those. I consider this the first major event that moved me into the world of computer science later in life. 
+I first came across Conway's Game of Life when I was 16. It completely changed the way I think about how the world works. Or, it helped me realize the way I inherently think about the world. One of those. I consider this the first major event that moved me into the world of computer science later in life. I was above to program this up for the first time in my second intro CS class (Stanford CS106B, C++).
+
+Rules for the grid:\\
+1. If one cell is alive, and it has 2 or 3 live neighbors, it stays alive.
+2. If one cell is alive, and it has fewer than 2 live neighbors, it dies as if by starvation.
+3. If one cell is alive, and it has greater than 3 live neighbors, it dies as if by overpopulation.
+4. If one cell is dead, then it becomes alive if it has exactly 3 live neighbors, as if by reproduction.
+
+I add a "rule probability" box, that sets the probability that a given rule will proceed for a given cell in the grid at a given iteration. I don't see this in standard game of life implementations, but biological life has a bit of randomness involved, so why not do the same for this?
 * [[./tyler_burns_resume.pdf][Resume]]
 I keep it short and sweet. This website and the links below will give you the rest of the details of what I'm like as a person, scientist, and businessman. 
 * Links and contact info
