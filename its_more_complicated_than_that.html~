@@ -7,9 +7,39 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>It's more complicated than that</title>
 <meta name="generator" content="Org Mode" />
-<link rel="stylesheet" href="styles.css" />
+<link rel="stylesheet" href="simple.css" />
+<style>
+  .dark-mode {
+    --bg: #212121;
+    --accent-bg: #2b2b2b;
+    --text: #dcdcdc;
+    --text-light: #ababab;
+    --accent: #ffb300;
+    --code: #f06292;
+    --preformatted: #ccc;
+    --disabled: #111;
+  }
+  .dark-mode img,
+  .dark-mode video {
+    opacity: 0.8;
+  }
+</style>
+<script>
+  function toggleDarkMode() {
+    const body = document.body;
+    body.classList.toggle("dark-mode");
+  }
+
+  // Set the default mode to dark
+  document.body.classList.add("dark-mode");
+</script>
 </head>
 <body>
+<div id="preamble" class="status">
+<div style="position: fixed; top: 10px; right: 10px;">
+         <button onclick="toggleDarkMode()">Light/Dark</button>
+       </div>
+</div>
 <div id="content" class="content">
 <h1 class="title">It's more complicated than that</h1>
 <p>
