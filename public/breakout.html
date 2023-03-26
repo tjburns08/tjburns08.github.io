@@ -30,13 +30,39 @@
         const brickPadding = 10;
         const brickOffsetTop = 30;
         const brickOffsetLeft = 30;
-        let x = canvas.width / 2;
-        let y = canvas.height - 30;
+        let x = ballRadius + Math.random() * (canvas.width - 2 * ballRadius);
+        let y = canvas.height / 2 + Math.random() * (canvas.height / 2 - ballRadius);
         let dx = 2;
         let dy = -2;
         let paddleX = (canvas.width - paddleWidth) / 2;
         let rightPressed = false;
         let leftPressed = false;
+        let level = 1;
+        const speedFactor = 1.1;
+
+        function startNewLevel(isGameOver) {
+            x = ballRadius + Math.random() * (canvas.width - 2 * ballRadius);
+            y = canvas.height / 2 + Math.random() * (canvas.height / 2 - ballRadius);
+
+            if (!isGameOver) {
+                dx *= speedFactor;
+                dy *= -speedFactor;
+            } else {
+                dx = (dx > 0 ? 1 : -1) * 2;
+                dy = -2;
+            }
+
+            // Reset the bricks
+            for (let c = 0; c < brickColumnCount; c++) {
+                for (let r = 0; r < brickRowCount; r++) {
+                bricks[c][r].status = 1;
+                }
+            }
+
+            // Reset the brickBrokenCount
+            brickBrokenCount = 0;
+        }
+
         
         // Bricks
         const bricks = [];
@@ -50,6 +76,8 @@
         // Event listeners
         document.addEventListener('keydown', keyDownHandler);
         document.addEventListener('keyup', keyUpHandler);
+        canvas.addEventListener('mousemove', mouseMoveHandler);
+
         
         // Key handlers
         function keyDownHandler(e) {
@@ -67,31 +95,38 @@
                 leftPressed = false;
             }
         }
+
+        function mouseMoveHandler(e) {
+            let relativeX = e.clientX - canvas.offsetLeft;
+            if (relativeX > paddleWidth / 2 && relativeX < canvas.width - paddleWidth / 2) {
+                paddleX = relativeX - paddleWidth / 2;
+            }
+        }
         
         // Collision detection
-            let brickBrokenCount = 0; // Add this line to track the number of broken bricks
+        let brickBrokenCount = 0; // Add this line to track the number of broken bricks
 
         function collisionDetection() {
             for (let c = 0; c < brickColumnCount; c++) {
                 for (let r = 0; r < brickRowCount; r++) {
-                    let b = bricks[c][r];
-                    if (b.status == 1) {
-                        if (x > b.x && x < b.x + brickWidth && y > b.y && y < b.y + brickHeight) {
-                            dy = -dy;
-                            b.status = 0;
-                            brickBrokenCount++; // Increment the broken bricks count
+                let b = bricks[c][r];
+                if (b.status == 1) {
+                    if (x > b.x && x < b.x + brickWidth && y > b.y && y < b.y + brickHeight) {
+                    dy = -dy;
+                    b.status = 0;
+                    brickBrokenCount++;
 
-                            if (brickBrokenCount == brickRowCount * brickColumnCount) { // Check if all bricks are broken
-                                alert('You Win!');
-                                document.location.reload();
-                                clearInterval(interval);
-                            }
-                        }
+                    if (brickBrokenCount == brickRowCount * brickColumnCount) {
+                        alert("Level " + level + " complete!");
+                        level++;
+                        startNewLevel();
                     }
+                    }
+                }
                 }
             }
         }
-            
+                            
         // Draw functions
         function drawBall() {
             ctx.beginPath();
@@ -145,8 +180,8 @@
                 dy = -dy;
             } else {
                 alert('GAME OVER');
-                document.location.reload();
-                clearInterval(interval);
+                level = 1;
+                startNewLevel(true);
             }
         }
 
