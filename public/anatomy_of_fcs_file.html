@@ -356,6 +356,8 @@ display: none;
 
 
 <p><a href="https://tjburns08.github.io/">Home</a></p>
+<div id="read-the-fcs-file-line-by-line" class="section level2">
+<h2>Read the fcs file line by line</h2>
 <p>Here, we’re going to read in a fcs file line by line and see what’s
 there. We’re reading in Stanford HIMC data from <a href="https://flowrepository.org/id/FR-FCM-ZYAJ">here</a>.</p>
 <pre class="r"><code>setwd(&#39;/Users/tylerburns/Documents/projects/read_fcs_from_scratch&#39;)
@@ -374,12 +376,12 @@ make up a FCS file.</p>
 <pre><code>\\$BEGINANALYSIS\\0\\$ENDANALYSIS\\0\\$BEGINSTEXT\\0\\$ENDSTEXT\\0\\$NEXTDATA\\0\\$TOT\\250000\\$PAR\\49\\FCSversion\\3\\CREATOR\\PengQiu FCS writer\\$COM\\PengQiu FCS writer\\FILENAME\\081216-Mike-HIMC ctrls-001_01_normalized.fcs\</code></pre>
 <p>A bit later, we find:</p>
 <pre><code>$CYT\\DVSSCIENCES-CYTOF-6.5.358</code></pre>
-<p>DVS? They were <a href="https://investors.standardbio.com/news-releases/news-release-details/fluidigm-completes-acquisition-dvs-science">acquired
+<p>DVS? The original company that made CyTOF. They were <a href="https://investors.standardbio.com/news-releases/news-release-details/fluidigm-completes-acquisition-dvs-science">acquired
 by Fluidigm</a>, who is now StandardBioTools. All of this happened in
 2014.</p>
 <p>When was this file created?</p>
 <pre><code>$DATE\\12-Aug-2016</code></pre>
-<p>2 yearrs after the acquisition.</p>
+<p>2 years after the acquisition.</p>
 <p>What else do we have here? We know it’s a Helios:
 <code>$CYTSN\\Helios</code></p>
 <p>And then we have the parameter data, written as $P, followed by a
@@ -402,12 +404,253 @@ here, it’s going to be illegible, but we’ll look at it anyway.</p>
 ## [8] &quot;\xa1\xacC\b1\x87?\xb49\xc8&gt;oJ\xd2@\xb1h\xbdD\003\xf3\xaaA\003\xed$B\xfc/&#39;?\xba\x8d\xa1Ab\xfa\xca&quot;
 ## [9] &quot;=\x89\x9c\xfbD\x9f\xe0\xd1E&quot;</code></pre>
 <p>This is binary that needs to be read in as numeric values, not text
-values, in order to be legible. We’ll do that in a later markdown
-because it’s <a href="https://github.com/RGLab/flowCore/blob/master/R/IO.R">complicated</a>.
+values, in order to be legible. But let’s try to read in the binary
+ourselves.</p>
+</div>
+<div id="read-the-data-segment-parse-the-binary" class="section level2">
+<h2>Read the DATA segment, parse the binary</h2>
+<p>We have to start at byte 3385. Let’s look at the relevant data
+information, which we have already read in.</p>
+<p><code>$BYTEORD\\4,3,2,1\\</code> This is the byte order called <a href="https://en.wikipedia.org/wiki/Endianness">big endian</a>. This is
+the byte order of the data we’re going to look at. If we were to think
+of a byte in terms of a 8-digit (analogy here) number, big endian stores
+the 1s place on the left side rather than the right side. So the number
+is flipped. Little endian stores the 1s place on the right side.</p>
+<p>Of note, GPT-4 told me that this is little endian, but the flowCore
+codebase suggests otherwise. I would guess that there is some confusion
+in the field for how endien-ness of byte order is specified.</p>
+<p><code>$DATATYPE\\F\\</code> This says that the data type is a float.
+For all practical purposes, think of this as a number that can include
+decimal points. An integer, by comparison, cannot.</p>
+<p><code>$MODE\\L</code> This means that the data are stored as a big
+continuous list.</p>
+<pre class="r"><code># Make the file connection.
+file_con &lt;- file(fcs_file, &quot;rb&quot;)
+
+# Move the file connection pointer to the start of the data segment
+data_start &lt;- 3385
+seek(file_con, data_start, origin = &quot;start&quot;)</code></pre>
+<pre><code>## [1] 0</code></pre>
+<pre class="r"><code>bin &lt;- readBin(file_con, what = &quot;raw&quot;, 1000000000) # read it to the end, for later
+bin[1:10]</code></pre>
+<pre><code>##  [1] 41 1f 95 81 41 60 00 00 00 00</code></pre>
+<p>The numbers (and letters) you’re seeing are the values of each byte
+(8 bits, or 8 of the number 0 or 1) stored what is known as hexidecimal,
+or hex. What is hex? It’s base 16. What does that look like? We’ll count
+upward in the different numbering systems, starting with binary (which
+you’ve probably at least seen before), move to decimal (what we are used
+to), and then to hex.</p>
+<p>Here’s binary. 0, 1, 10, 11, 100, 101, 111..</p>
+<p>Here’s decimal. 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11…</p>
+<p>Here’s hex. 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, a, b, c, d, e, f, 10,
+11…</p>
+<p>It turns out that a string of 8 bits (one byte), from 00000000 to
+11111111 can be stored in hex as a single number between 0 and 255, or 0
+and ff That’s why you see the hex values in pairs of 2. So it’s a
+convenient way to store it, especially when you’re looking at many
+strings of 8 bits (many bytes) at the same time.</p>
+<p>So let’s read them as numbers, based on the info we have from the
+header. Data type float corresponds to type “numeric” and size of 4. We
+specify endian. So let’s look at the numbers.</p>
+<pre class="r"><code>data_values &lt;- readBin(con = rawConnection(bin), 
+                       what = &quot;numeric&quot;, 
+                       size = 4, 
+                       n = 49000000, 
+                       endian = &quot;big&quot;, 
+                       signed = FALSE)</code></pre>
+<pre><code>## Warning in readBin(con = rawConnection(bin), what = &quot;numeric&quot;, size = 4, :
+## &#39;signed = FALSE&#39; is only valid for integers of sizes 1 and 2</code></pre>
+<pre class="r"><code>data_values[1:10]</code></pre>
+<pre><code>##  [1]   9.974000  14.000000   0.000000   8.036703   0.000000 226.799026
+##  [7]   0.000000  11.316442   0.000000   0.000000</code></pre>
+<p>Ok, so we have numbers that seem to be within the range of CyTOF
+data. Can we find these respective values in our file? We’ll read it in
+as a flow frame as a control.</p>
+<pre class="r"><code>library(flowCore)
+ff &lt;- flowCore::read.FCS(fcs_file)</code></pre>
+<pre><code>## uneven number of tokens: 525
+## The last keyword is dropped.
+## uneven number of tokens: 525
+## The last keyword is dropped.</code></pre>
+<pre class="r"><code>exp &lt;- exprs(ff)
+head(exp)</code></pre>
+<pre><code>##        Time Event_length    In113Di   In115Di  Sn120Di     I127Di  Xe131Di
+## [1,]  9.974           14  0.0000000 8.0367031 0.000000 226.799026 0.000000
+## [2,] 10.469           24  0.0000000 0.0000000 0.000000   0.000000 0.000000
+## [3,] 15.143           16  0.5145568 7.5084190 0.000000   6.662100 0.729067
+## [4,] 35.339           16 16.4438553 0.0000000 3.729181   1.179855 0.000000
+## [5,] 47.435           17  0.0000000 0.0000000 0.000000   7.391151 0.000000
+## [6,] 58.477           17  0.0000000 0.3225487 0.000000 140.800934 0.000000
+##        Ba138Di  Ce140Di     Nd142Di     Nd143Di    Nd144Di  Nd146Di    Sm147Di
+## [1,] 11.316442    0.000   0.0000000  14.0439272   8.326587 0.000000 115.311111
+## [2,]  1.706828 3553.608 450.7016602   0.6088966   2.823561 2.354746   0.000000
+## [3,] 47.998772    0.000   1.0432056   3.6501691 339.169403 0.000000   0.000000
+## [4,] 62.383766    0.000   0.0000000   0.0000000   7.539814 0.000000   9.050664
+## [5,] 19.445116    0.000   3.4858465 121.4924698  10.237396 1.924217   0.000000
+## [6,] 16.954496    0.000   0.4329208   7.5059586   4.288917 0.000000 116.587341
+##         Nd148Di   Sm149Di    Nd150Di    Eu151Di      Sm152Di     Eu153Di
+## [1,] 92.4819946 2.6855114   0.000000  118.25839   3.85027409  364.892303
+## [2,]  0.0000000 0.9591464   3.309369 2974.36621   2.48620296 3749.466553
+## [3,]  0.8043697 0.2971367 178.258209    0.00000  11.93834400    0.000000
+## [4,]  0.0000000 3.0236046   0.000000  102.07199   0.01330179    1.039183
+## [5,]  0.0000000 0.0000000 131.106201   45.62723 179.25703430    0.000000
+## [6,] 87.0736313 0.3768456   0.000000  171.27834   0.72490025    8.707788
+##         Sm154Di  Gd155Di     Gd156Di     Gd157Di   Gd158Di    Tb159Di
+## [1,] 72.9170074 1.557252   0.0000000  64.4974213 0.1141828  0.0000000
+## [2,]  0.5006996 1.562974  35.7167282   0.0000000 4.6698203  0.1269188
+## [3,]  0.0000000 1.677551 171.0736694   2.0096011 0.0000000 54.1909065
+## [4,]  0.6175294 0.000000 118.2227173   1.2124252 0.3072502  0.0000000
+## [5,]  0.3943402 0.000000   0.1050521   0.6307476 0.8010152  5.9334769
+## [6,] 14.1738214 0.397190   2.4590282 126.2724686 6.8257523  0.0000000
+##         Gd160Di      Dy162Di   Dy164Di    Ho165Di    Er166Di     Er167Di
+## [1,]   0.000000   0.09437896 0.0000000    0.00000 159.287155   0.9581637
+## [2,]   0.000000   0.00000000 0.0000000 3566.91602   2.497736   2.7491443
+## [3,]   6.429448   0.00000000 1.6976601   13.65625   3.002327 176.1483154
+## [4,]   0.000000 158.91073608 0.2398935    0.00000   0.000000   0.0000000
+## [5,] 101.591438  84.61638641 0.0000000   17.55208   1.347812 112.9404984
+## [6,]   0.000000   1.10217929 2.0162458    0.00000 279.289337  12.3298969
+##        Er168Di  Tm169Di    Er170Di   Yb171Di  Yb172Di   Yb173Di     Yb174Di
+## [1,] 0.5559384 0.000000  0.0000000 0.0000000 1.492987 3.4290566  0.82368094
+## [2,] 0.8139601 0.000000  0.0000000 0.5873441 0.000000 0.7412859  0.00000000
+## [3,] 8.9375687 0.000000  0.6352956 0.0000000 8.507373 0.0000000  0.00000000
+## [4,] 0.0000000 0.000000 28.3594170 0.0000000 0.000000 0.0000000 17.49743652
+## [5,] 2.3422778 7.284369  0.0000000 0.0000000 0.000000 0.0000000  0.00000000
+## [6,] 0.0000000 0.000000  0.0000000 0.3184899 1.066509 8.2221928  0.05851584
+##          Lu175Di    Yb176Di BCKG190Di   Ir191Di  Ir193Di Pb208Di   Center
+## [1,]  151.935501  0.9181435 0.0000000 1800.2378 3246.300       0 491.1563
+## [2,] 3539.489014 36.7945709 0.0000000    0.0000    0.000       0 710.2842
+## [3,]    0.623376  0.0000000 0.6726175 1612.4308 2854.078       0 547.6981
+## [4,]    0.000000  0.3830891 3.4977818  927.3303 1805.964       0 550.8316
+## [5,]    0.000000  0.0000000 1.1105798 1270.4244 2148.269       0 557.1343
+## [6,]  518.293762 10.5734234 0.0000000 1565.4546 2757.719       0 559.6838
+##        Offset    Width Residual
+## [1,] 75.38984 30.92957 33.27013
+## [2,] 66.95893 45.69018 63.57212
+## [3,] 75.96170 35.72036 52.15306
+## [4,] 82.48290 39.00098 52.18004
+## [5,] 88.54017 44.38193 46.69464
+## [6,] 84.81390 42.38083 40.17693</code></pre>
+<p>Did you find our stream of numbers? It seems to be reading row by
+row. I’ll show you.</p>
+<pre class="r"><code>data_values[1:10]</code></pre>
+<pre><code>##  [1]   9.974000  14.000000   0.000000   8.036703   0.000000 226.799026
+##  [7]   0.000000  11.316442   0.000000   0.000000</code></pre>
+<pre class="r"><code>exp[1,1:10]</code></pre>
+<pre><code>##         Time Event_length      In113Di      In115Di      Sn120Di       I127Di 
+##     9.974000    14.000000     0.000000     8.036703     0.000000   226.799026 
+##      Xe131Di      Ba138Di      Ce140Di      Nd142Di 
+##     0.000000    11.316442     0.000000     0.000000</code></pre>
+</div>
+<div id="build-the-expression-matrix" class="section level2">
+<h2>Build the expression matrix</h2>
+<p>Ok, now for the big challenge. Can we make the expression matrix
+ourselves? First, we know that the data are being read in row by row. So
+we need the parameter names. They were stored in the TEXT segment. Let’s
+pull them out. We have the P, a number, and then a letter. P1N is the
+name (channel), P1S is the marker name (eg. CD14).</p>
+<p>Let’s pull out the PnS’s from the TEXT segment.</p>
+<pre class="r"><code>library(tidyverse)</code></pre>
+<pre><code>## ── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+## ✔ dplyr     1.1.0     ✔ readr     2.1.4
+## ✔ forcats   1.0.0     ✔ stringr   1.5.0
+## ✔ ggplot2   3.4.1     ✔ tibble    3.2.0
+## ✔ lubridate 1.9.2     ✔ tidyr     1.3.0
+## ✔ purrr     1.0.1     
+## ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+## ✖ dplyr::filter() masks flowCore::filter(), stats::filter()
+## ✖ dplyr::lag()    masks stats::lag()
+## ℹ Use the ]8;;http://conflicted.r-lib.org/conflicted package]8;; to force all conflicts to become errors</code></pre>
+<pre class="r"><code>markers &lt;- dat[[1]] %&gt;% str_split(&quot;\\\\&quot;) %&gt;% .[[1]] %&gt;% .[grep(&quot;P\\d+N&quot;, .) + 1]
+markers</code></pre>
+<pre><code>##  [1] &quot;Time&quot;         &quot;Event_length&quot; &quot;In113Di&quot;      &quot;In115Di&quot;      &quot;Sn120Di&quot;     
+##  [6] &quot;I127Di&quot;       &quot;Xe131Di&quot;      &quot;Ba138Di&quot;      &quot;Ce140Di&quot;      &quot;Nd142Di&quot;     
+## [11] &quot;Nd143Di&quot;      &quot;Nd144Di&quot;      &quot;Nd146Di&quot;      &quot;Sm147Di&quot;      &quot;Nd148Di&quot;     
+## [16] &quot;Sm149Di&quot;      &quot;Nd150Di&quot;      &quot;Eu151Di&quot;      &quot;Sm152Di&quot;      &quot;Eu153Di&quot;     
+## [21] &quot;Sm154Di&quot;      &quot;Gd155Di&quot;      &quot;Gd156Di&quot;      &quot;Gd157Di&quot;      &quot;Gd158Di&quot;     
+## [26] &quot;Tb159Di&quot;      &quot;Gd160Di&quot;      &quot;Dy162Di&quot;      &quot;Dy164Di&quot;      &quot;Ho165Di&quot;     
+## [31] &quot;Er166Di&quot;      &quot;Er167Di&quot;      &quot;Er168Di&quot;      &quot;Tm169Di&quot;      &quot;Er170Di&quot;     
+## [36] &quot;Yb171Di&quot;      &quot;Yb172Di&quot;      &quot;Yb173Di&quot;      &quot;Yb174Di&quot;      &quot;Lu175Di&quot;     
+## [41] &quot;Yb176Di&quot;      &quot;BCKG190Di&quot;    &quot;Ir191Di&quot;      &quot;Ir193Di&quot;      &quot;Pb208Di&quot;     
+## [46] &quot;Center&quot;       &quot;Offset&quot;       &quot;Width&quot;        &quot;Residual&quot;</code></pre>
+<p>Ok, now for the values. If each cell is 49 elements, then we can set
+a matrix for the entire data segment specifying 49 columns. Then we can
+name it using the markers param that we use fished out.</p>
+<pre class="r"><code>my_exp &lt;- matrix(data_values, nrow = 49) %&gt;% t()
+colnames(my_exp) &lt;- markers
+head(my_exp)</code></pre>
+<pre><code>##        Time Event_length    In113Di   In115Di  Sn120Di     I127Di  Xe131Di
+## [1,]  9.974           14  0.0000000 8.0367031 0.000000 226.799026 0.000000
+## [2,] 10.469           24  0.0000000 0.0000000 0.000000   0.000000 0.000000
+## [3,] 15.143           16  0.5145568 7.5084190 0.000000   6.662100 0.729067
+## [4,] 35.339           16 16.4438553 0.0000000 3.729181   1.179855 0.000000
+## [5,] 47.435           17  0.0000000 0.0000000 0.000000   7.391151 0.000000
+## [6,] 58.477           17  0.0000000 0.3225487 0.000000 140.800934 0.000000
+##        Ba138Di  Ce140Di     Nd142Di     Nd143Di    Nd144Di  Nd146Di    Sm147Di
+## [1,] 11.316442    0.000   0.0000000  14.0439272   8.326587 0.000000 115.311111
+## [2,]  1.706828 3553.608 450.7016602   0.6088966   2.823561 2.354746   0.000000
+## [3,] 47.998772    0.000   1.0432056   3.6501691 339.169403 0.000000   0.000000
+## [4,] 62.383766    0.000   0.0000000   0.0000000   7.539814 0.000000   9.050664
+## [5,] 19.445116    0.000   3.4858465 121.4924698  10.237396 1.924217   0.000000
+## [6,] 16.954496    0.000   0.4329208   7.5059586   4.288917 0.000000 116.587341
+##         Nd148Di   Sm149Di    Nd150Di    Eu151Di      Sm152Di     Eu153Di
+## [1,] 92.4819946 2.6855114   0.000000  118.25839   3.85027409  364.892303
+## [2,]  0.0000000 0.9591464   3.309369 2974.36621   2.48620296 3749.466553
+## [3,]  0.8043697 0.2971367 178.258209    0.00000  11.93834400    0.000000
+## [4,]  0.0000000 3.0236046   0.000000  102.07199   0.01330179    1.039183
+## [5,]  0.0000000 0.0000000 131.106201   45.62723 179.25703430    0.000000
+## [6,] 87.0736313 0.3768456   0.000000  171.27834   0.72490025    8.707788
+##         Sm154Di  Gd155Di     Gd156Di     Gd157Di   Gd158Di    Tb159Di
+## [1,] 72.9170074 1.557252   0.0000000  64.4974213 0.1141828  0.0000000
+## [2,]  0.5006996 1.562974  35.7167282   0.0000000 4.6698203  0.1269188
+## [3,]  0.0000000 1.677551 171.0736694   2.0096011 0.0000000 54.1909065
+## [4,]  0.6175294 0.000000 118.2227173   1.2124252 0.3072502  0.0000000
+## [5,]  0.3943402 0.000000   0.1050521   0.6307476 0.8010152  5.9334769
+## [6,] 14.1738214 0.397190   2.4590282 126.2724686 6.8257523  0.0000000
+##         Gd160Di      Dy162Di   Dy164Di    Ho165Di    Er166Di     Er167Di
+## [1,]   0.000000   0.09437896 0.0000000    0.00000 159.287155   0.9581637
+## [2,]   0.000000   0.00000000 0.0000000 3566.91602   2.497736   2.7491443
+## [3,]   6.429448   0.00000000 1.6976601   13.65625   3.002327 176.1483154
+## [4,]   0.000000 158.91073608 0.2398935    0.00000   0.000000   0.0000000
+## [5,] 101.591438  84.61638641 0.0000000   17.55208   1.347812 112.9404984
+## [6,]   0.000000   1.10217929 2.0162458    0.00000 279.289337  12.3298969
+##        Er168Di  Tm169Di    Er170Di   Yb171Di  Yb172Di   Yb173Di     Yb174Di
+## [1,] 0.5559384 0.000000  0.0000000 0.0000000 1.492987 3.4290566  0.82368094
+## [2,] 0.8139601 0.000000  0.0000000 0.5873441 0.000000 0.7412859  0.00000000
+## [3,] 8.9375687 0.000000  0.6352956 0.0000000 8.507373 0.0000000  0.00000000
+## [4,] 0.0000000 0.000000 28.3594170 0.0000000 0.000000 0.0000000 17.49743652
+## [5,] 2.3422778 7.284369  0.0000000 0.0000000 0.000000 0.0000000  0.00000000
+## [6,] 0.0000000 0.000000  0.0000000 0.3184899 1.066509 8.2221928  0.05851584
+##          Lu175Di    Yb176Di BCKG190Di   Ir191Di  Ir193Di Pb208Di   Center
+## [1,]  151.935501  0.9181435 0.0000000 1800.2378 3246.300       0 491.1563
+## [2,] 3539.489014 36.7945709 0.0000000    0.0000    0.000       0 710.2842
+## [3,]    0.623376  0.0000000 0.6726175 1612.4308 2854.078       0 547.6981
+## [4,]    0.000000  0.3830891 3.4977818  927.3303 1805.964       0 550.8316
+## [5,]    0.000000  0.0000000 1.1105798 1270.4244 2148.269       0 557.1343
+## [6,]  518.293762 10.5734234 0.0000000 1565.4546 2757.719       0 559.6838
+##        Offset    Width Residual
+## [1,] 75.38984 30.92957 33.27013
+## [2,] 66.95893 45.69018 63.57212
+## [3,] 75.96170 35.72036 52.15306
+## [4,] 82.48290 39.00098 52.18004
+## [5,] 88.54017 44.38193 46.69464
+## [6,] 84.81390 42.38083 40.17693</code></pre>
+<p>And now for the final test. Does my expression matrix equal the
+expression matrix of the flow frame we read in using flowCore?</p>
+<pre class="r"><code>all(exp == my_exp)</code></pre>
+<pre><code>## [1] TRUE</code></pre>
+<p>Yes! We have successfully pulled out the expression matrix from a fcs
+file from scratch.</p>
+<p>What can you do with all of this? Well, if you have to debug anything
+from flowCore, because perhaps you have a fcs file from a new machine
+that might be in some different format, you now have the intuition to do
+so. You can also write your own fcs parser if you need to solve
+particular problems that flowCore can’t help you with.</p>
+<p>Note that generalizing this to all possible types of fcs files is <a href="https://github.com/RGLab/flowCore/blob/master/R/IO.R">complicated</a>.
 I have lots of respect for the contributors of the <a href="https://www.bioconductor.org/packages/release/bioc/html/flowCore.html">flowCore</a>
 package for dealing with all the different conditions and edge cases
 that comes with the different files from the different machines.</p>
 <p>For further reading on the anatomy of a fcs file, please go <a href="https://www.bioconductor.org/packages/devel/bioc/vignettes/flowCore/inst/doc/fcs3.html">here</a>.</p>
+</div>
 
 
 
