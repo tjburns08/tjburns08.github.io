@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>March 2023</title>
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" href="simple.css" />
+<style>
+  .dark-mode {
+    --bg: #212121;
+    --accent-bg: #2b2b2b;
+    --text: #dcdcdc;
+    --text-light: #ababab;
+    --accent: #ffb300;
+    --code: #f06292;
+    --preformatted: #ccc;
+    --disabled: #111;
+  }
+  .dark-mode img,
+  .dark-mode video {
+    opacity: 0.8;
+  }
+  .toggle-theme-btn {
+      transform: scale(0.7);
+      opacity: 0.4;
+      transition: opacity 0.2s;
+    }
+    .toggle-theme-btn:hover {
+      opacity: 0.4;
+    }
+</style>
+<script>
+ function toggleDarkMode() {
+    const body = document.body;
+    body.classList.toggle("dark-mode");
+    // Save the user's theme preference to localStorage
+    if (body.classList.contains("dark-mode")) {
+      localStorage.setItem("theme", "dark");
+    } else {
+      localStorage.setItem("theme", "light");
+    }
+  }
+
+  function setDefaultDarkMode() {
+    // Retrieve the user's theme preference from localStorage
+    const storedTheme = localStorage.getItem("theme");
+
+    // If the stored theme is light, do nothing; otherwise, set it to dark
+    if (storedTheme !== "light") {
+      document.body.classList.add("dark-mode");
+    }
+  }
+
+  // Set the default mode to dark when the DOM is fully loaded
+  document.addEventListener('DOMContentLoaded', setDefaultDarkMode);
+</script>
+</head>
+<body>
+<div id="preamble" class="status">
+<div style="position: fixed; top: 10px; right: 10px;">
+         <button class="toggle-theme-btn" onclick="toggleDarkMode()">Light/Dark</button>
+       </div>
+</div>
+<div id="content" class="content">
+<h1 class="title">March 2023</h1>
+<p>
+The current subjective state of the month of March, 2023. I am writing this for the sake of those reading this in the near or distant future. To the readers reading this as a news digest, here is what I have seen in my little corner of the physical and digital world in the month of March. To readers reading this in 2030 or after, here is how things were going before the AIs destroyed the world (I'm joking&#x2026;kinda).
+</p>
+
+<ul class="org-ul">
+<li>As we struggle to understand large language models, AI guru Andrej Karpathy has created a <a href="https://karpathy.ai/zero-to-hero.html">completely free online class</a> that takes you from the basics of deep learning all the way to how to build a GPT from scratch. From my perspective, I like to learn how things work from the ground up, so this class is a gold mine.</li>
+
+<li>ChatGPT, the large language model interface causing quite a stir in the past six months or so, was <a href="https://www.bbc.co.uk/news/technology-65139406">banned in Italy</a>. This was due to a possible lack of compliance with the EU's <a href="https://en.wikipedia.org/wiki/General_Data_Protection_Regulation">GDPR</a> regulations. This is a data protection directive that on my end has simply led to paranoia about anything I put on this website. This matters for me because I live next door in Germany. If there is some conflict between these large language models and the GDPR regulations, then I'll be at a huge disadvantage against my competitors outside of Europe. But hey, free healthcare.</li>
+
+<li>In this period of our history, we are going through a time of so-called wokeness. This can be thought of as left-learning measures to enforce equality of outcome and tolerance into every nook and cranny of society. This is primarily non-violent but can be aggressive, and manifests as things like diversity training at work and pressure to list your gender pronouns on LinkedIn. A series of <a href="https://musaalgharbi.com/2023/02/08/great-awokening-ending/">charts I came across</a> suggests that the intensity of this movement has peaked and is decreasing. Whether it completely goes away or stays ever-present, like Christianity, is yet to be determined. I predict the latter.</li>
+
+<li>COVID introduced new pro-vs-anti things to argue over. Things like whether or not we should wear masks, or get the vaccine, and whether there should be legal mandates around each. Now, in the age of ChatGPT, we have a new and rather surprising one: whether or not we should continue AI research. An <a href="https://futureoflife.org/open-letter/pause-giant-ai-experiments/">open letter</a> was written urging for a pause AI research for six months so we can catch up with alignment (AI-doesn't-kill-us-all) research.</li>
+</ul>
+
+<p>
+<i>"Therefore, we call on all AI labs to immediately pause for at least 6 months the training of AI systems more powerful than GPT-4. This pause should be public and verifiable, and include all key actors. If such a pause cannot be enacted quickly, governments should step in and institute a moratorium."</i>
+</p>
+
+<p>
+Eliezer Yudkowsky, prominent AI alignment researcher known also for his writing on the art of rationality, thinks we should permanently <a href="https://time.com/6266923/ai-eliezer-yudkowsky-open-letter-not-enough/">stop all AI research</a>. He's been thinking about this longer than I have, and he has started an entire <a href="https://www.lesswrong.com/">blog/forum/movement on how to think properly</a>, so we should probably at least listen and carefully consider what he has to say.
+</p>
+
+<p>
+This said, Twitter (which we all still use, to distant future readers) seems to be dividing, loudly, between pro and anti-AI research, depending on who thinks we're all going to die. I was influenced by a recent podcast between <a href="https://www.youtube.com/watch?v=KCSsKV5F4xc">Daniel Schmachtenberger and Liv Boeree</a> talking about AI in terms of <a href="https://slatestarcodex.com/2014/07/30/meditations-on-moloch/">Moloch</a>, or negative sum games. This gets us into game theoretical considerations (if we pause, will China pause?), and societal considerations (AI beauty filters giving teens body dysmorphia). So the problem is much bigger than pro/anti AI research. Schmachtenberger calls it the metacrisis.
+</p>
+
+<p>
+So do I think we're all going to die because of a metacrisis accelerated by AI? Well, yes. But when? It could be next year, or it could be in 100 years. Or we pull through. I wouldn't be writing this for distant future readers if I thought we were goners in a year. But I don't know. 
+</p>
+
+<ul class="org-ul">
+<li>Every generation has its oracles. People who seem to have an idea of what's coming next. For us, in these times, with respect to AI, it's <a href="https://gwern.net/">Gwern</a>. The mysterious internet writer, whose real name and face are unknown, but whose reputation precedes him, is very similar to <a href="https://en.wikipedia.org/wiki/L_(Death_Note)">L from Death Note</a>.</li>
+</ul>
+
+<p>
+He was tinkering with large language models before GPT-3. He was the first I saw to write about <a href="https://gwern.net/gpt-3#prompts-as-programming">prompt programming</a> and how to do it, long (on AI time scales) before anyone was thinking about it.
+</p>
+
+<p>
+He wrote about the <a href="https://gwern.net/scaling-hypothesis">scaling hypothesis</a>, long before ChatGPT. The idea that the secret to AGI is stacking neural nets on top of each other and adding lots of training data. Nothing more elaborate than that. The opposite view would be that you need something more elaborate. New algorithms, and/or something more modular like the human brain. The way things are looking with GPT-4, it looks like Gwern was right.
+</p>
+
+<p>
+And finally, when Bing Chat came out, it was Gwern who, in a <a href="https://www.lesswrong.com/posts/jtoPawEhLNXNxvgTT/bing-chat-is-blatantly-aggressively-misaligned">very long comment on a LessWrong post</a> (scroll to bottom, first one), predicted that Bing was using an early version of GPT-4.
+</p>
+
+<p>
+How goes Gwern see things going when AGI finally happens? Have a look at this <a href="https://gwern.net/fiction/clippy">fictional story he wrote</a> to get a feel for how he thinks things could potentially go.
+</p>
+
+<ul class="org-ul">
+<li>We are just on the heels of the Silicon Valley Bank failure. This is outside of my domain, but it is being covered by independent journalist Balaji Srinivasen. I'm putting it in this newsletter because he predicts hyperinflation, to the point where he made a million dollar bet that 1 BTC would be worth 1 million dollars roughly 90 days after the banking crisis started. I note he's pro-bitcoin, so there's a potential perverse incentive here. This said, many more banks are apparently insolvent, due to the Fed raising interest rates after the banks had invested in bonds. Here is a relevant <a href="https://twitter.com/balajis/status/1640019286902321158">Twitter thread</a>. As I link this, I am reminded that a lot of the most up to date news I get these days comes from Twitter. Second place is blogs. For science, it's pre-prints. News media and peer-reviewed publications are too slow these days, especially in fast moving fields like AI.</li>
+</ul>
+
+<p>
+What matters for this newsletter is that he thinks we're going to enter hyperinflation soon. We're talking 100% or more, as opposed to the 10% rate we were in the US (and Germany) recently. It will be interesting for future readers to look at this either way, because if there are serious issues with the banks, something is probably going to have to give, somewhere.
+</p>
+</div>
+<div id="postamble" class="status">
+<p class="creator"><a href="https://www.gnu.org/software/emacs/">Emacs</a> 28.1 (<a href="https://orgmode.org">Org</a> mode 9.5.2)</p>
+</div>
+</body>
+</html>
