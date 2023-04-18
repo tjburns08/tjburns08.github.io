@@ -12,6 +12,10 @@ This website is a place where I can openly share my ideas and non-client work, r
 If you have quesitons or comments, or you're interested in working or collaborating with me, just send me a message (see contact info below). I'm always happy to help. 
 * New
 #+HTML: <a href="#top">Back to top</a>
+** [[./julia_cytof_pipeline_one_file.html][CyTOF UMAP with Julia: an experiment]]
+Markdown.\\
+
+Here, we compare the UMAP implementation from R with the UMAP implementation from Julia. The Julia programming language is a much faster programming language, so I expected that we might be able to speed UMAP up. Accordingly, it did. Here, I show you how to import your data into R, move in into Julia, run UMAP, get it back into R, and plot it. All in a single R markdown.
 ** [[./run_cytof_with_seurat.html][Run CyTOF analysis with Seurat]]
 Markdown.\\
 
