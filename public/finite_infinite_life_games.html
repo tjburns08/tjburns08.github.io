@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Finite and infinite-life games</title>
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" href="simple.css" />
+<style>
+  .dark-mode {
+    --bg: #212121;
+    --accent-bg: #2b2b2b;
+    --text: #dcdcdc;
+    --text-light: #ababab;
+    --accent: #ffb300;
+    --code: #f06292;
+    --preformatted: #ccc;
+    --disabled: #111;
+  }
+  .dark-mode img,
+  .dark-mode video {
+    opacity: 0.8;
+  }
+  .toggle-theme-btn {
+      transform: scale(0.7);
+      opacity: 0.4;
+      transition: opacity 0.2s;
+    }
+    .toggle-theme-btn:hover {
+      opacity: 0.4;
+    }
+</style>
+<script>
+ function toggleDarkMode() {
+    const body = document.body;
+    body.classList.toggle("dark-mode");
+    // Save the user's theme preference to localStorage
+    if (body.classList.contains("dark-mode")) {
+      localStorage.setItem("theme", "dark");
+    } else {
+      localStorage.setItem("theme", "light");
+    }
+  }
+
+  function setDefaultDarkMode() {
+    // Retrieve the user's theme preference from localStorage
+    const storedTheme = localStorage.getItem("theme");
+
+    // If the stored theme is light, do nothing; otherwise, set it to dark
+    if (storedTheme !== "light") {
+      document.body.classList.add("dark-mode");
+    }
+  }
+
+  // Set the default mode to dark when the DOM is fully loaded
+  document.addEventListener('DOMContentLoaded', setDefaultDarkMode);
+</script>
+</head>
+<body>
+<div id="preamble" class="status">
+<div style="position: fixed; top: 10px; right: 10px;">
+         <button class="toggle-theme-btn" onclick="toggleDarkMode()">Light/Dark</button>
+       </div>
+</div>
+<div id="content" class="content">
+<h1 class="title">Finite and infinite-life games</h1>
+<p>
+<a href="./index.html">Home</a>
+</p>
+
+<div id="outline-container-org0fd28e5" class="outline-2">
+<h2 id="org0fd28e5">The older platformers vs Celeste</h2>
+<div class="outline-text-2" id="text-org0fd28e5">
+<p>
+If you have played basic platformer games, especially if you are old enough to remember playing the 2-D (16-bit and earlier) era games, you know the general structure. You have a finite number of lives to begin with, with the opportunity of getting extra lives in the game. If you run out of lives, it's "game over" and you have to start over. You have to get through some set of challenges in each level. In select areas and/or levels, there are sub-bosses and bosses. The levels get progressively harder. The last level is particularly challenging, but still doable. Then you "beat the game." 
+</p>
+
+<p>
+I grew up initially playing Mario 1 and 3 on NES, then Sonic 1, 2, and 3&amp;k on Sega Genesis, and there is a particular place in my heart for a lesser known Sega game called <a href="https://en.wikipedia.org/wiki/Rocket_Knight_Adventures">Rocket Knight Adventures</a>. Each of these games had the aforementioned structure.
+</p>
+
+<p>
+Now I have a PlayStation 4 (PS4), and despite all the extra compute power, I still go back to these types of games. PS4 has a collection of Sonic games that I can play when I'm feeling nostalgic. But that's not what I want to talk about today. Today I want to talk about a relatively new (2018) 2-D platformer game that has a cult following, and a different structure, called <a href="https://en.wikipedia.org/wiki/Celeste_(video_game)">Celeste</a>.
+</p>
+
+<p>
+The biggest difference between the structure of Celeste and the structure of pretty much every other 2-D platformer I grew up with, is that you have infinite lives. Why? Because the game is incredibly difficult. As in, you die hundreds of times each level. Each level is organized as rooms (rather than a continuous scroll). When you die, you start at the beginning of the room you died in.
+</p>
+
+<p>
+So the big question for me was, what's the point of playing a game where you have infinite lives? The fear of "game over" and having to start all over was a huge motivating driver for playing the game well. It turns out, upon playing it for a few days, the answer became clear at least for me: the flow state.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org8faa278" class="outline-2">
+<h2 id="org8faa278">Infinite lives as an efficient path to flow state</h2>
+<div class="outline-text-2" id="text-org8faa278">
+<p>
+I have talked about the <a href="./tao_of_problem_solving.html">flow state</a> before, but I'll give you a quick model. There is a delicate balance between <a href="https://en.wikipedia.org/wiki/Flow_(psychology)">our competence and whatever problem we're solving</a>. If the problem is too hard for us, we have anxiety. If the problem is too easy for us, we have boredom. But if the problem is slightly above our competence, we experience flow, where we lose ourselves in the moment, and perform at our best. It is very satisfying.
+</p>
+
+<p>
+The older platformer games would start out easy, but then get progressively harder. At some point, I would be at a level that was slightly above my competence, and then I would enter the flow state. If the game was too easy, I could adjust the global difficulty level in the menu at the start of the game. But the genius of the Celeste model is that in a given platforming room that is way above your general competence, with infinite lives, you slowly chisel away at each problem, and you don't have the anxiety that these difficulty levels would otherwise give you. For a problem that is way above your competence, you can rapidly iterate, trying new things, until you are just competent enough to solve it. In this way, you spend much more time in the difficulty-to-competence zone that is conducive to flow.
+</p>
+
+<p>
+Of course, I'm speaking about my first person experience. Not necessarily that of others. I think for this to work, you have to be cool with the idea that you spend a ton of time repeatedly dying as you iterate. If you're cool with that, then I would say that based on the model and my experience, Celeste is a fantastic way to get into the flow state.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org2c8311d" class="outline-2">
+<h2 id="org2c8311d">Infinite life games in the real world</h2>
+<div class="outline-text-2" id="text-org2c8311d">
+<p>
+The other thing that I found striking about the Celestian flow state strategy is that it mirrors a lot of my favorite type of work that I do in my professional life as a computational biologist. When I'm solving a new problem where there are few if any best practices and pre-made libraries for it, I find myself in a Celeste-like situation. I can break the problem down into pieces. But each sub-piece is still very difficult, and I spend a lot of time being flat-out wrong. Either I have to de-bug something, or I find that the method I'm using doesn't quite do what I wanted it to do, or my mental model of the problem or solution itself was wrong. Like each room in Celeste, I have to chisel away at each piece. Like dying in Celeste, I'm wrong over and over again. And like Celeste, I get through what I initially thought would be impossible. And like Celeste, I'm in the flow state for just about all of it.
+</p>
+
+<p>
+What this suggests is that I should be seeking out these infinite-life games. If you vibe with this and/or have experienced what I'm talking about, then you should too. The two major benefits are that you get efficiently pushed into the flow state, and you end up doing things that you previously thought were impossible. In other words, you do good for yourself and you do good for the world.
+</p>
+
+<p>
+I like this <a href="https://fs.blog/mental-models/">mental model</a> because it is very empowering. It gets me to do things that are outside my competence and my comfort zone. It basically says: whatever it is, just start chiseling away at it, in such a way that you can rapidly fail (with minimal cost/damage) and iterate. If these conditions are met, then you don't have to worry about difficulty level. Want to climb Everest? Get started with a hill nearby. Assume you'll get tired and maybe not make it to the top the first few times. Want to become a painter? <a href="./just_paint.html">Go paint</a>. Assume you'll be bad at it or a while. Want to start a business? Try selling something. Anything. Assume that you'll get the door slammed on your face (so to speak) hundreds of times before you get your first deal. I have direct experience with this last one.
+</p>
+
+<p>
+For you to really understand what I'm talking about, you need to see what gameplay in Celeste looks like. If you haven't played Celeste before, go to 1 hour and 56 minutes into <a href="https://www.youtube.com/watch?v=cX9NJPwseIQ">this video</a> to see the rapid iteration through a challenging room. This is one minute of dying over and over again in the same room, but this can go on and on for upwards of an hour in some room.
+</p>
+
+<p>
+The more difficult problems in my professional life feel like these rooms in Celeste. They feel impossible. I'm wrong over and over again. But I keep going. I keep being wrong. Then at some point, I realize that I'm pretty far along. So as a mental model for whatever you want to do, if you can turn it into something that looks like one of these Celeste rooms, you're going to do things you didn't think were possible, and you're going to have fun in the process.
+</p>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="date">Date: April 20, 2023 - April 20, 2023</p>
+<p class="creator"><a href="https://www.gnu.org/software/emacs/">Emacs</a> 28.1 (<a href="https://orgmode.org">Org</a> mode 9.5.2)</p>
+</div>
+</body>
+</html>
