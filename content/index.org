@@ -12,6 +12,10 @@ This website is a place where I can openly share my ideas and non-client work, r
 If you have quesitons or comments, or you're interested in working or collaborating with me, just send me a message (see contact info below). I'm always happy to help. 
 * New
 #+HTML: <a href="#top">Back to top</a>
+** [[./gol_navigate.html][Conway's Game of Life Navigator]]
+Game.\\
+
+A game within Conway's Game of Life. You are a blue square that you can move (with arrows), and your goal is to make contact with a "goal" square, colored green, while avoiding all the squares in the Game of Life automata that come at you. Each level up leads to a denser game board. You get five seconds of invincibility (you're colored red) in the beginning of each level, that allows you to get out of the way of any Game of Life objects near you.
 ** [[./finite_infinite_life_games.html][Finite and infinite-life games]]
 Article.\\
 
