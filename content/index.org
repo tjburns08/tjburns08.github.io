@@ -29,24 +29,12 @@ I make a comparison between the older 2-D platforming games from the 16-bit era 
 Markdown.\\
 
 Here, we compare the UMAP implementation from R with the UMAP implementation from Julia. The Julia programming language is a much faster programming language, so I expected that we might be able to speed UMAP up. Accordingly, it did. Here, I show you how to import your data into R, move in into Julia, run UMAP, get it back into R, and plot it. All in a single R markdown.
+* Single-cell analysis
+#+HTML: <a href="#top">Back to top</a>
 ** [[./run_cytof_with_seurat.html][Run CyTOF analysis with Seurat]]
 Markdown.\\
 
 Seurat is an R package that runs single-cell sequencing and related data. Here, I trick Seurat into thinking my CyTOF PBMC data is single-cell sequencing data. I find out that the effective dimensionality of my CyTOF data (5-10) appears to be much less than the surface markers I am using (15). This is a counter-intuitive result because our features are carefully curated before the experiment is done.
-** [[./ca_rule_space.html][Elementary cellular automata rule space]]
-Markdown.\\
-
-I lay out the rule space of elementary cellular automata as an eight dimensional dataset. I perform UMAP on rule space and color by complexity measures, the most interesting being the labeled Wolfram class of each rule. Class 3, the most chaotic behavior, shows up as little pockets in rule space. Class 4, where things like Turing completeness happen, shows up at or near these pockets, surrounded by Class 2 (repetitive, orderly). This supports the idea of Class 4 being "at the edge of chaos."
-** [[./cnn_fox_ap_map.html][CNN, FoxNews, and AP: a News Space study]]
-Markdown.\\
-
-In this study, we take news articles that correspond to CNN, FoxNews, and AP, from their Twitter handles, and their BERT embeddings, and produce a map of news space. We figure out what areas of news space are heavy in one news source or the other (perhaps corresponding to political bias). We find that Fox News in general reports heavily on the topic of politics in comparison to CNN and AP, and that while AP is supposed to be neutral, there are still regions of news space that are heavy in AP content. Interactive maps are included for the user to explore.
-** [[./occams_razor.html][But what is Occam's razor really?]]
-Article.\\
-
-Occam's razor states that for a given phenomenon, the simplest explanation is the most likely explanation. I explore this with a fun example from my life. I then look at a computational formalization of this, which I use today for sensemaking.
-* Single-cell analysis
-#+HTML: <a href="#top">Back to top</a>
 ** [[./anatomy_of_fcs_file.html][Anatomy of a fcs file]]
 Markdown.\\
 
@@ -166,6 +154,10 @@ CyTOF data are transformed using the inverse hyperbolic sine (asinh) of the data
 
 * Natural language processing
 #+HTML: <a href="#top">Back to top</a>
+** [[./cnn_fox_ap_map.html][CNN, FoxNews, and AP: a News Space study]]
+Markdown.\\
+
+In this study, we take news articles that correspond to CNN, FoxNews, and AP, from their Twitter handles, and their BERT embeddings, and produce a map of news space. We figure out what areas of news space are heavy in one news source or the other (perhaps corresponding to political bias). We find that Fox News in general reports heavily on the topic of politics in comparison to CNN and AP, and that while AP is supposed to be neutral, there are still regions of news space that are heavy in AP content. Interactive maps are included for the user to explore.
 ** [[./how_i_curate_content.html][How I curate content]]
 Article.\\
 
@@ -246,6 +238,10 @@ You are only as good as the questions you ask yourself and others. My uncle told
 Article.\\
 
 It starts as a lament. In the real world I'm pulled many more directions than in graduate school. As such, I cannot always go deep with respect to whatever I'm doing. In my longing for depth, I can describe what depth is to me. The way the modern world is set up, I think a lot of us are missing depth in our lives. In this regard, I argue that depth should be a virtue that we strive for.
+** [[./occams_razor.html][But what is Occam's razor really?]]
+Article.\\
+
+Occam's razor states that for a given phenomenon, the simplest explanation is the most likely explanation. I explore this with a fun example from my life. I then look at a computational formalization of this, which I use today for sensemaking.
 ** [[./how_to_solve_problems.html][What I learned about problem solving from my thesis lab]]
 Article.\\
 
@@ -289,6 +285,10 @@ Article.\\
 My current plan for coming economic uncertainty we face in the near term due to the recession, and for uncertainty that wil persist beyond the recession (eg. AI disruption). I talk about re-framing my goals as minimizing rather than maximizing something, and about the systems thinking and sustainability based mindset that one sees in subjects like permaculture. This is helping me be more effective, and figure out unique new ways I can add value to the world. 
 * Computing
 #+HTML: <a href="#top">Back to top</a>
+** [[./ca_rule_space.html][Elementary cellular automata rule space]]
+Markdown.\\
+
+I lay out the rule space of elementary cellular automata as an eight dimensional dataset. I perform UMAP on rule space and color by complexity measures, the most interesting being the labeled Wolfram class of each rule. Class 3, the most chaotic behavior, shows up as little pockets in rule space. Class 4, where things like Turing completeness happen, shows up at or near these pockets, surrounded by Class 2 (repetitive, orderly). This supports the idea of Class 4 being "at the edge of chaos."
 ** [[./xai_and_us.org][Explainable AI and understanding ourselves]]
 Article.\\
 
