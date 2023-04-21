@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Mono&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conway's Game of Life - Survival</title>
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Roboto Mono', monospace;
+            background: linear-gradient(135deg, #b0b0b0 0%, #808080 100%);
+            color: white;
+        }
+    
+        .container {
+            margin-top: 20px; /* Add spacing between game instructions and the grid */
+        }
+
+        .game-info {
+            text-align: center;
+            margin-bottom: 20px;
+            max-width: 800px;
+        }
+    
+        h1 {
+            font-size: 1.75rem; /* Adjusted font size */
+            margin-bottom: 1rem;
+        }
+
+        p {
+            font-size: 0.9rem; /* Adjusted font size */
+            line-height: 1.5;
+        }
+
+        h2 {
+            font-size: 1.25rem; /* Adjusted font size */
+            margin-top: 1rem;
+        }
+    
+        canvas {
+            border: 1px solid white;
+            box-shadow: 0 0 5px rgba(255, 255, 255, 0.3); 
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <canvas id="gameCanvas" width="800" height="500"></canvas>
+    </div>
+    <div class="game-info">
+        <p>
+            A game within Conway's Game of Life. You are a blue square that you can move (with arrows), and your goal is to make contact with a "goal" square, colored green, while avoiding all the squares in the Game of Life automata that come at you. Each level up leads to a denser game board. You get five seconds of invincibility (you're colored red) in the beginning of each level, that allows you to get out of the way of any Game of Life objects near you.
+        </p>
+        <h2 id="level-info">Level: 1</h2>
+    </div>
+    <script>
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+        const cellSize = 20;
+        const gridSize = canvas.width / cellSize;
+        let player = {x: Math.floor(gridSize / 2), y: Math.floor(gridSize / 2)};
+        let gameGrid = [];
+        let gameOver = false;
+        let invincible = false;
+
+        // Goal is a random cell on the grid
+        let goal = {x: Math.floor(Math.random() * gridSize), y: Math.floor(Math.random() * gridSize)};
+        let level = 1;
+
+        function initGrid() {
+            for (let y = 0; y < gridSize; y++) {
+                gameGrid[y] = [];
+                for (let x = 0; x < gridSize; x++) {
+                    gameGrid[y][x] = Math.random() < 0.2 + (level * 0.02) ? 1 : 0;
+                }
+            }
+        }
+
+        function drawGrid() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = 'green';
+            ctx.fillRect(goal.x * cellSize, goal.y * cellSize, cellSize, cellSize);
+
+            for (let y = 0; y < gridSize; y++) {
+                for (let x = 0; x < gridSize; x++) {
+                    if (gameGrid[y][x]) {
+                        ctx.fillStyle = 'black';
+                        ctx.fillRect(x * cellSize, y * cellSize, cellSize, cellSize);
+                    }
+                }
+            }
+
+            ctx.fillStyle = invincible ? 'red' : 'blue';
+            ctx.fillRect(player.x * cellSize, player.y * cellSize, cellSize, cellSize);
+        }
+
+        function updateGrid() {
+            let newGrid = JSON.parse(JSON.stringify(gameGrid));
+
+            for (let y = 0; y < gridSize; y++) {
+                for (let x = 0; x < gridSize; x++) {
+                    let aliveNeighbors = 0;
+
+                    for (let j = -1; j <= 1; j++) {
+                        for (let i = -1; i <= 1; i++) {
+                            if (i === 0 && j === 0) continue;
+                            let nx = x + i;
+                            let ny = y + j;
+                            if (nx >= 0 && nx < gridSize && ny >= 0 && ny < gridSize && gameGrid[ny][nx]) {
+                                aliveNeighbors++;
+                            }
+                        }
+                    }
+
+                    if (gameGrid[y][x] && (aliveNeighbors < 2 || aliveNeighbors > 3)) {
+                        newGrid[y][x] = 0;
+                    } else if (!gameGrid[y][x] && aliveNeighbors === 3) {
+                        newGrid[y][x] = 1;
+                    }
+                }
+            }
+
+            gameGrid = newGrid;
+        }
+
+        function checkCollision() {
+            if (!invincible && gameGrid[player.y][player.x]) {
+                gameOver = true;
+            }
+        }
+
+        function gameLoop() {
+            if (!gameOver) {
+                updateGrid();
+                checkCollision();
+                checkWin();
+                drawGrid();
+                setTimeout(gameLoop, 500);
+            } else {
+                alert('Game Over!');
+            }
+        }
+
+        function handleKeydown(event) {
+            const oldPlayerPosition = { ...player };
+
+            switch (event.key) {
+                case 'ArrowUp':
+                case 'w':
+                    player.y = Math.max(0, player.y - 1);
+                    break;
+                case 'ArrowDown':
+                case 's':
+                    player.y = Math.min(gridSize - 1, player.y + 1);
+                    break;
+                case 'ArrowLeft':
+                case 'a':
+                    player.x = Math.max(0, player.x - 1);
+                    break;
+                case 'ArrowRight':
+                case 'd':
+                    player.x = Math.min(gridSize - 1, player.x + 1);
+                    break;
+            }
+
+            if (gameGrid[player.y][player.x]) {
+                player = oldPlayerPosition;
+            }
+        }
+
+        function checkWin() {
+            if (player.x === goal.x && player.y === goal.y) {
+                alert(`Level ${level} passed!`);
+                level++;
+                document.getElementById('level-info').innerText = `Level: ${level}`; // Add this line
+                player = {x: Math.floor(gridSize / 2), y: Math.floor(gridSize / 2)};
+                goal = {x: Math.floor(Math.random() * gridSize), y: Math.floor(Math.random() * gridSize)};
+                startLevel();
+            }
+        }
+
+        function startLevel() {
+            initGrid();
+            invincible = true;
+            setTimeout(() => {
+                invincible = false;
+            }, 5000);
+        }
+
+        document.addEventListener('keydown', handleKeydown);
+        startLevel(); // Add this line
+        gameLoop();
+    </script>
+</body>
+</html>
