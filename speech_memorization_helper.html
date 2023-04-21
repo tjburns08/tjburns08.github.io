@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Speech Memorization Tool</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        textarea {
+            width: 100%;
+            height: 150px;
+            resize: none;
+            margin-bottom: 10px;
+        }
+
+        button {
+            margin-bottom: 10px;
+        }
+
+        .sentence {
+            font-size: 1.5em;
+            line-height: 1.6;
+            background-color: #f0f0f0;
+            padding: 15px;
+            display: none;
+        }
+
+        .sentence.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <h1>Speech Memorization Helper</h1>
+    <p>Paste your speech text in the box below:</p>
+    <textarea id="speech-input"></textarea><br>
+    <button id="split-speech">Split Speech</button>
+    <button id="previous-sentence" style="display:none;">Previous Sentence</button>
+    <button id="next-sentence" style="display:none;">Next Sentence</button>
+    <div id="sentence-container"></div>
+
+    <script>
+        const speechInput = document.getElementById('speech-input');
+        const splitSpeechButton = document.getElementById('split-speech');
+        const nextSentenceButton = document.getElementById('next-sentence');
+        const sentenceContainer = document.getElementById('sentence-container');
+        const previousSentenceButton = document.getElementById('previous-sentence');
+
+
+        let sentences = [];
+        let currentSentenceIndex = 0;
+
+        function splitSpeech() {
+            const speechText = speechInput.value;
+            sentences = speechText.match(/[^.!?]+[.!?]+/g).map(sentence => sentence.trim()).filter(sentence => sentence.length > 0);
+            currentSentenceIndex = 0;
+            displaySentences();
+            nextSentenceButton.style.display = 'inline-block';
+            previousSentenceButton.style.display = 'inline-block'; // Show "Previous Sentence" button
+        }
+
+
+        function displaySentences() {
+            sentenceContainer.innerHTML = '';
+            sentences.forEach((sentence, index) => {
+                const sentenceElement = document.createElement('div');
+                sentenceElement.classList.add('sentence');
+                if (index === currentSentenceIndex) {
+                    sentenceElement.classList.add('active');
+                }
+                sentenceElement.textContent = sentence;
+                sentenceContainer.appendChild(sentenceElement);
+            });
+        }
+
+        function showNextSentence() {
+            currentSentenceIndex++;
+            if (currentSentenceIndex >= sentences.length) {
+                currentSentenceIndex = 0;
+            }
+            displaySentences();
+        }
+
+        function showPreviousSentence() {
+            currentSentenceIndex--;
+            if (currentSentenceIndex < 0) {
+                currentSentenceIndex = sentences.length - 1;
+            }
+            displaySentences();
+        }
+
+
+        splitSpeechButton.addEventListener('click', splitSpeech);
+        previousSentenceButton.addEventListener('click', showPreviousSentence);
+        nextSentenceButton.addEventListener('click', showNextSentence);
+    </script>
+</body>
+</html>
