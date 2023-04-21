@@ -377,7 +377,11 @@ Rules for the grid:\\
 3. If one cell is alive, and it has greater than 3 live neighbors, it dies as if by overpopulation.
 4. If one cell is dead, then it becomes alive if it has exactly 3 live neighbors, as if by reproduction.
 
-I add a "rule probability" box, that sets the probability that a given rule will proceed for a given cell in the grid at a given iteration. I don't see this in standard game of life implementations, but biological life has a bit of randomness involved, so why not do the same for this?
+I added a "rule probability" box, that sets the probability that a given rule will proceed for a given cell in the grid at a given iteration. I don't see this in standard game of life implementations, but biological life has a bit of randomness involved, so why not do the same for this?
+
+Aside from that, I have added the ability to modify the rules for the grid. This includes the ability to determine how may layers out you look for nearest neighbors. Note that when you tinker with these settings, most of the automata you get will either be too orderly or too chaotic. The Game of Life rules are a delicate balance between the two.
+
+I have also added the ability to modify the size of the grid.
 ** [[./mandelbrot_set.html][Mandelbrot Set]]
 Web page.\\
 
