@@ -12,6 +12,10 @@ This website is a place where I can openly share my ideas and non-client work, r
 If you have quesitons or comments, or you're interested in working or collaborating with me, just send me a message (see contact info below). I'm always happy to help. 
 * New
 #+HTML: <a href="#top">Back to top</a>
+** [[./add_beauty.html][Replace the word "value" with "beauty"]]
+Article.\\
+
+A dialectic between my rational and my emotional/spiritual side that took a while to build up. In my professional life, I think in terms of value (value-add, ROI, etc). But if we get rid of the word "value" in all my rational calculations and replace it with "beauty," it solves a much larger swath of problems and helps me make decisions that allow for, well, a beautiful life lived.
 ** [[./speech_memorization_helper.html][Speech memorization helper]]
 Web page.\\
 
@@ -378,7 +382,6 @@ Rules for the grid:\\
 4. If one cell is dead, then it becomes alive if it has exactly 3 live neighbors, as if by reproduction.
 
 I added a "rule probability" box, that sets the probability that a given rule will proceed for a given cell in the grid at a given iteration. I don't see this in standard game of life implementations, but biological life has a bit of randomness involved, so why not do the same for this?
-
 Aside from that, I have added the ability to modify the rules for the grid. This includes the ability to determine how may layers out you look for nearest neighbors. Note that when you tinker with these settings, most of the automata you get will either be too orderly or too chaotic. The Game of Life rules are a delicate balance between the two.
 
 I have also added the ability to modify the size of the grid.
