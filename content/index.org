@@ -47,7 +47,7 @@ Here, we compare the UMAP implementation from R with the UMAP implementation fro
 ** [[./run_cytof_with_seurat.html][Run CyTOF analysis with Seurat]]
 Markdown.\\
 
-Seurat is an R package that runs single-cell sequencing and related data. Here, I trick Seurat into thinking my CyTOF PBMC data is single-cell sequencing data. I find out that the effective dimensionality of my CyTOF data (5-10) appears to be much less than the surface markers I am using (15). This is a counter-intuitive result because our features are carefully curated before the experiment is done.
+Seurat is an R package that runs single-cell sequencing and related data. Here, I trick Seurat into thinking my CyTOF PBMC data is single-cell sequencing data. I find out that the effective dimensionality of my CyTOF data appears to be much less than the surface markers I am using (15). This is a counter-intuitive result because our features are carefully curated before the experiment is done.
 ** [[./anatomy_of_fcs_file.html][Anatomy of a fcs file]]
 Markdown.\\
 
