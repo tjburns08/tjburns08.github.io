@@ -43,15 +43,16 @@
     <button id="split-speech">Split Speech</button>
     <button id="previous-sentence" style="display:none;">Previous Sentence</button>
     <button id="next-sentence" style="display:none;">Next Sentence</button>
+    <button id="random-sentence" style="display:none;">Random Sentence</button>
     <div id="sentence-container"></div>
 
     <script>
         const speechInput = document.getElementById('speech-input');
         const splitSpeechButton = document.getElementById('split-speech');
         const nextSentenceButton = document.getElementById('next-sentence');
-        const sentenceContainer = document.getElementById('sentence-container');
         const previousSentenceButton = document.getElementById('previous-sentence');
-
+        const randomSentenceButton = document.getElementById('random-sentence');
+        const sentenceContainer = document.getElementById('sentence-container');
 
         let sentences = [];
         let currentSentenceIndex = 0;
@@ -62,9 +63,9 @@
             currentSentenceIndex = 0;
             displaySentences();
             nextSentenceButton.style.display = 'inline-block';
-            previousSentenceButton.style.display = 'inline-block'; // Show "Previous Sentence" button
+            previousSentenceButton.style.display = 'inline-block';
+            randomSentenceButton.style.display = 'inline-block'; // Show "Random Sentence" button
         }
-
 
         function displaySentences() {
             sentenceContainer.innerHTML = '';
@@ -95,10 +96,15 @@
             displaySentences();
         }
 
+        function showRandomSentence() {
+            currentSentenceIndex = Math.floor(Math.random() * sentences.length);
+            displaySentences();
+        }
 
         splitSpeechButton.addEventListener('click', splitSpeech);
         previousSentenceButton.addEventListener('click', showPreviousSentence);
         nextSentenceButton.addEventListener('click', showNextSentence);
+        randomSentenceButton.addEventListener('click', showRandomSentence);
     </script>
 </body>
 </html>
