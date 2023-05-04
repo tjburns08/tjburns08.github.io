@@ -12,6 +12,10 @@ This website is a place where I can openly share my ideas and non-client work, r
 If you have quesitons or comments, or you're interested in working or collaborating with me, just send me a message (see contact info below). I'm always happy to help. 
 * New
 #+HTML: <a href="#top">Back to top</a>
+** [[https://rseng.github.io/devstories/2023/tyler-burns-part-1/][Developer Stories Podcast: Heavenly light emanating from line 37]]
+Guest on a podcast.\\
+
+I talk with software developer Vanessa Sochat about my time in graduate school. I started out as a wet-lab biologist. But after taking an intro CS class for fun, I realized that I really enjoyed the dry-lab side of things, and my career trajectory changed accordingly. Have a listen for more details. This is part 1 of 2. 
 ** [[./life_and_love_during_coronazeit.pdf][Life and love in Berlin during the Coronazeit]]
 Feature.\\
 
@@ -21,29 +25,21 @@ An article I wrote in 2020 for the annual Krupp Internship e-newsletter. It was 
 Feature.\\
 
 "Im" is short for "in dem" in German. Not a typo. An article I did for the Stanford Krupp Internship Program, which had huge impact on my life and career trajectory. In a nutshell, I was pre-med prior to my medical internship at the Charite Hospital in Berlin in 2007. Through the internship, I realized that I wanted to do research rather than clinical work. I got my PhD and came back to Berlin to work on the Charite Hospital campus once again, this time as a researcher! I will be forever grateful for the Krupp Internship program and Stanford's Bing Overseas Study Program.
-** [[./add_beauty.html][Replace the word "value" with "beauty"]]
-Article.\\
-
-A dialectic between my rational and my emotional/spiritual side that took a while to build up. In my professional life, I think in terms of value (value-add, ROI, etc). But if we get rid of the word "value" in all my rational calculations and replace it with "beauty," it solves a much larger swath of problems and helps me make decisions that allow for, well, a beautiful life lived.
 ** [[./speech_memorization_helper.html][Speech memorization helper]]
 Web page.\\
 
 Take the text you want to memorize and paste it into the box. The text will be split up into individual sentences. The first sentence will be displayed. Recite as much of the subsequent sentences as you can from memory. Buttons will allow you to move to the next sentence or the previous sentence all the way to the end of the text.
 
-** [[./gol_navigate.html][Conway's Game of Life Cellvivor]]
-Game.\\
-
-A game within Conway's Game of Life. You are a blue square that you can move (with arrows), and your goal is to make contact with a "goal" square, colored green, while avoiding all the squares in the Game of Life automata that come at you. Each level up leads to a denser game board. You get five seconds of invincibility (you're colored red) in the beginning of each level, that allows you to get out of the way of any Game of Life objects near you.
 ** [[./finite_infinite_life_games.html][Finite and infinite-life games]]
 Article.\\
 
 I make a comparison between the older 2-D platforming games from the 16-bit era and a newer game called Celeste. The key difference is that in Celeste, the gameplay is incredibly difficult, but you have infinite lives. I argue that this type of gameplay is an efficient route to flow state. I describe how this type of gameplay mirrors a lot of problem solving in my professional life. I end by saying that Celeste gameplay is an empowering mental model for doing things outside your competence and comfort zone.
+* Single-cell analysis
+#+HTML: <a href="#top">Back to top</a>
 ** [[./julia_cytof_pipeline_one_file.html][CyTOF UMAP with Julia: an experiment]]
 Markdown.\\
 
 Here, we compare the UMAP implementation from R with the UMAP implementation from Julia. The Julia programming language is a much faster programming language, so I expected that we might be able to speed UMAP up. Accordingly, it did. Here, I show you how to import your data into R, move in into Julia, run UMAP, get it back into R, and plot it. All in a single R markdown.
-* Single-cell analysis
-#+HTML: <a href="#top">Back to top</a>
 ** [[./run_cytof_with_seurat.html][Run CyTOF analysis with Seurat]]
 Markdown.\\
 
@@ -247,6 +243,10 @@ Markdown.\\
 You are only as good as the questions you ask yourself and others. My uncle told me that many years ago when I was getting started with my career and it stuck. This has been relevant to me in terms of having and maintaining good friendships, being a good husband, being a good family member, being a good businessman, and when I was in graduate school, being a good scientist, and simply being an interesting person. I have a very large list of questions now that is very overwhelming. So I turned them into an embedding using the BERT language model, turned that into a nearest neighbor graph, and then derived insight from looking at the questions in terms of "communities." 
 * Philosophy and rationality
 #+HTML: <a href="#top">Back to top</a>
+** [[./add_beauty.html][Replace the word "value" with "beauty"]]
+Article.\\
+
+A dialectic between my rational and my emotional/spiritual side that took a while to build up. In my professional life, I think in terms of value (value-add, ROI, etc). But if we get rid of the word "value" in all my rational calculations and replace it with "beauty," it solves a much larger swath of problems and helps me make decisions that allow for, well, a beautiful life lived.
 ** [[./virtue_of_depth.html][The virtue of depth]]
 Article.\\
 
@@ -376,6 +376,10 @@ Think of these as both newsletters and time capsules. They are not exhaustive, b
 
 * Fun stuff
 #+HTML: <a href="#top">Back to top</a>
+** [[./gol_navigate.html][Conway's Game of Life Cellvivor]]
+Game.\\
+
+A game within Conway's Game of Life. You are a blue square that you can move (with arrows), and your goal is to make contact with a "goal" square, colored green, while avoiding all the squares in the Game of Life automata that come at you. Each level up leads to a denser game board. You get five seconds of invincibility (you're colored red) in the beginning of each level, that allows you to get out of the way of any Game of Life objects near you.
 ** [[./breakout.html][Breakout]]
 Game.\\
 
