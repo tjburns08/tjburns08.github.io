@@ -1,6 +1,6 @@
-#+Title: The stick shift mindset
+#+Title: Zen and the art of driving stick
 #+Author: Tyler Burns
-#+Date: October 9, 2022 - March 24, 2023
+#+Date: October 9, 2022 - May 15, 2023
 
 [[https://tjburns08.github.io/][Home]]
 
@@ -16,17 +16,19 @@ When I moved to Berlin, I was no longer legally allowed to use my American drive
 
 Driving stick is a very different experience than automatic. I was learning on an old car that did not have any special features (eg. to make hill starts easier). It was just me, the engine, and the controls. This on top of driving in one of Europe's biggest cities. For reference I originally learned in the suburbs of Sacramento, California.
 
-All this being said, I ended up loving driving stick. I felt like I had more control over the car. I felt more connected to the engine and the inner workings. There were more things I had to track. I had to be more engaged at all times. This in turn made me a better driver on the road, perhaps because I was more focused on the task of driving as opposed to whatever else is on the day's checklist.
+All this being said, I ended up loving driving stick. I felt like I had more control over the car. I felt more connected to the engine and the inner workings. There were more things I had to track. I had to be more engaged at all times. I would say that I was in more of a [[./tao_of_problem_solving.html][flow state]]. This in turn made me a better driver on the road, perhaps because I was more focused on the task of driving as opposed to whatever else is on the day's checklist.
 
 From a practical standpoint, automatics get the job done and are often more environmentally friendly (eg. hybrids, electrics). But manual transmission crystalized a mindset that is going to be the subject of this post. In short: for a lot of things I do, there is the "automatic" version and the "stick" version. The automatic version is what I use when I need to get the job done on some deadline. The stick version is what I use when I have a bit more time and I want to invest in improving my craft, innovating, or when I just want the feeling of self-reliance and connectedness to my craft that I crave increasingly as I get older. 
 
-* Zen and the art of driving stick
+* Being connected through technology, not in spite of it
 
-What exactly does it mean to go from automatic to manual transmission? I think of it is going down one or more layers of convenience and/or technology. Doing this often requires a lot more active engagement in the task at hand. While it is less convenient, unless you're under time pressure, it can be much more rewarding. Robert Pirsig talks about this in his masterpiece [[https://en.wikipedia.org/wiki/Zen_and_the_Art_of_Motorcycle_Maintenance][Zen and the Art of Motorcycle Maintenance]] (if you haven't read it, watch [[https://www.youtube.com/watch?v=ENeYNqwK_8g][this]]). He talks specifically about finding Zen in the connection with technology, as opposed to meditating along in the mountains. When he talks about technology, he's talking about his old motorcycle, which he understands like its another of his limbs, and he can repair himself.
+What exactly does it mean to go from automatic to manual transmission? I think of it is going down one or more layers of convenience and/or technology and/or abstraction. Doing this often requires a lot more active engagement in the task at hand. While it is less convenient, unless you're under time pressure, it can be much more rewarding.
+
+Robert Pirsig talks about this in his masterpiece [[https://en.wikipedia.org/wiki/Zen_and_the_Art_of_Motorcycle_Maintenance][Zen and the Art of Motorcycle Maintenance]] (if you haven't read it, watch [[https://www.youtube.com/watch?v=ENeYNqwK_8g][this]]). This was a book that I read in the first COVID lockdown, that really resonated with me, and I didn't know why at first. At some point, I realized that he was talking about what I discovered independently through doing things like driving stick. He talks specifically about finding Zen in the connection with technology, as opposed to meditating along in the mountains. When he talks about technology, he's talking about his old motorcycle, which he understands like its another of his limbs, and he can repair himself.
 
 His point is that you need to be able to connect with the technology with you're using, so the dualism between the tech and the user goes away and you are one with the machine. You find your Zen through technology, not in spite of it. My point is that there seems to be a sweet spot on the "convenience" scale where this is possible. I'm not going to feel connected to a self-driving car. I'm only going to feel somewhat connected to an automatic. I will definitely feel connected to a manual.
 
-The best way to get at what I'm talking about is to simply provide examples from my life. There is a lot of overlap with other concepts, like do-it-yourself (DIY), and producing rather than consuming. But it took me a while to realize that a lot of my way of doing things has a bit of a "Zen" bent to it, as Robert Pirsig talked about. In many cases, it's things that put me in the [[./tao_of_problem_solving.html][flow state]].
+The best way to get at what I'm talking about is to simply provide examples from my life. There is a lot of overlap with other concepts, like do-it-yourself (DIY), and producing rather than consuming. But it took me a while to realize that a lot of my way of doing things has a bit of a "Zen" bent to it, as Robert Pirsig talked about. 
 
 * Examples
 
@@ -42,39 +44,45 @@ However, when I started learning programming in the mid-2010s, I started using t
 
 I used to write most of my files in Microsoft Word. It's simple, and it gets the job done. I wrote my PhD thesis and my manuscripts in grad school all in Word. I had also written my journal entires in Word since 2009.
 
-However, I discovered Emacs in the past two years. In particular, Emacs [[https://orgmode.org/index.html][Org Mode]] (now available on other platforms), which most of my writing is in these days, is plain text with a ton of additional features written in Lisp. All of it is open source and fully customizable. If you're not satisfied with something, then you can write an extension yourself and contribute to the community accordingly. People talk about the steep learning curve, but if you just focus on the thing you need it to do right now, then it's not that bad. Accordingly, I found that I was able to do a lot more with my writing in Org. Importantly, I felt like I was one layer more connected to my work by using Org than I was when I was using Word. I moved all my journal entries over, wrote my website in Org, and even code in Org from time to time.
+However, I discovered Emacs in the past several years. In particular, Emacs [[https://orgmode.org/index.html][Org Mode]] (now available on other platforms), which most of my writing is in these days, is plain text with a ton of additional features written in Lisp. All of it is open source and fully customizable. If you're not satisfied with something, then you can write an extension yourself and contribute to the community accordingly. People talk about the steep learning curve, but if you just focus on the thing you need it to do right now, then it's not that bad. Accordingly, I found that I was able to do a lot more with my writing in Org. Importantly, I felt like I was one layer more connected to my work by using Org than I was when I was using Word. I moved all my journal entries over, wrote my website in Org, and even code in Org from time to time (it's great for literate programming).
 
 As a caveat, I often need to write something with a very tight deadline or I need to do a group project or something where Word, Google Docs, Notion, or something like that is simply the better choice. That's fine. But if there are no major constraints, I'm going to use Org Mode.
 
 *** IDE versus Vim and Emacs
 
-This is a tricky one. When it comes to complex tasks and group projects, I code in Visual Studio. This might be because I simply haven't gotten good enough at Vim and Emacs to justify its full time use.
+This is a tricky one. When it comes to complex tasks and group projects, I use Visual Studio Code. This might be because I simply haven't gotten good enough at Vim and Emacs to justify its full time use (though I'm getting there...the key is to [[./how_to_get_fit_long_term.org][pace yourself]]).
 
-However, I find myself coding in Emacs when I'm doing hobby projects and Vim when I'm on the command line and need to quickly go into a file. When I'm using Vim and Emacs, I feel more connected to the computer and even if I'm not as productive, it seems to get me into the right mindset for innovation and creativity.
+However, I find myself coding in Emacs when I'm doing hobby projects and/or when I'm not on a tight deadline, and Vim when I'm on the command line and need to quickly go into a file. When I'm using Vim and Emacs, I feel more connected to the computer and even if I'm not as productive, it seems to get me into the right mindset for innovation and creativity. This is similar to how driving stick makes me a better driver in general.
+
+Another thing worth saying here, is that some of the older, less convenient tools are easier to customize to your exact liking, which makes them that much more addictive. Emacs is like asking for an operating system and getting a bucket of legos dumped onto your desk. But after a bit of tinkering, you have a version and use-case for Emacs (and your digital life in general) that no one else in the world has. In theory, you can customize Emacs to do [[https://xkcd.com/378/][just about anything]].
+
+It is similar to cooking your own food from scratch versus eating something that the chef made.
 
 *** Restaurant/ordering versus cooking
 
 Now for something that is more relatable to non-tech people. When I was in grad school, I often ate at a restaurant next door to my apartment for the sake of efficiency. There was always something I had to do with some tough deadline that I was behind on. So Ray's Grill at Stanford was the lowest hanging fruit.
 
-However, in the second half of grad school, I started working on my culinary skills. It didn't take long before I had a handful of dishes that I could make. Especially now, when I eat at a restaurant or order food, I can notice the sheer volume of salt, fat and sugar added to the food to optimize taste sufficient to maximize profit. I notice this only because I go for long periods of time where I just cook at home, and my semi-cynical capitalist take comes from the fact that I own a business so I understand the mindset.
+However, in the second half of grad school, I started working on my culinary skills. It didn't take long before I had a handful of dishes that I could make. Especially now, when I eat at a restaurant or order food, I can notice the sheer volume of salt, fat and sugar added to the food to optimize taste sufficient to [[https://slatestarcodex.com/2014/07/30/meditations-on-moloch/][maximize profit relative to competitors]]. I notice this only because I go for long periods of time where I just cook at home, and my semi-cynical capitalist take comes from the fact that I own a business so I understand the mindset.
 
-Importantly, when I see all the ingredients of my dinner on the kitchen counter and I know how they're going to combine and be modified at what temperatures for how long, I feel more connected to what I eat and drink. I think this is very important as I get older and it gets easier to gain weight and harder to lose weight.
+Importantly, when I see all the ingredients of my dinner on the kitchen counter and I know how they're going to combine and be modified at what temperatures for how long, I feel more connected to what I eat and drink. The act of eating and drinking in this context is much more satisfying than the majority of what a restaurant can provide (aside from the socializing). I think this is very important as I get older and it gets easier to gain weight and harder to lose weight.
 
 *** Playing music versus improvising music
 
-I have always been a fan of music. In particular, I like jazz. One of the main reasons for this is because I played bass in jazz bands and jazz combos from junior high school through college. Now, I'm learning jazz piano.
+I have always been a fan of music. In particular, I like jazz. One of the main reasons for this is because I played bass in jazz bands and [[https://open.spotify.com/artist/07SgRzTetn2P7ZXymzR8Ss][jazz combos]] from junior high school through college. Now, I'm learning jazz piano.
 
 What is important about jazz music is that it's not enough to play the right notes for a given song. You have to embody the spirit of the song sufficient to play new music in the style of the song, on the fly. That's what solos are.
 
 When I improvise over a song, be it on the bass or on the piano, I feel more connected to the music and the instrument. This is one reason why I love jazz music. Yes, it sounds great. Yes, it's fun to play. But it completely changes your mindset too. You look at a song not as a thing to be memorized, but as a spirit to be embodied. I'll probably write an article on just this topic at some point down the line.
 
+Of note here, I saw the benefit of knowing how to improvise recently when I gave a TED talk. My talk was memorized word-for-word, and fine-tuned for months, something that is standard for TED but very different than the [[https://rseng.github.io/devstories/2023/tyler-burns-part-1/][improvisational type of public speaking]] that I'm used to. But what gave me confidence in the moment was simply knowing that if I did stumble on a word, I would have the "jazz" to seamlessly find my flow again.
+
 *** Being employed versus being self employed
 
 At the end of graduate school, I started consulting for biotech companies to make a bit of extra money. After I graduated, I was employed half time as a computational biologist and I was consulting half time. I was successful enough with the latter that I made the rational decision to do consulting full time. A few years after that, I turned my freelance operation into a GmbH (German LLC, but with shares and no pass-through income).
 
-Being self employed is hard. There is no guarantee you're going to get paid next month. I've gone through phases where my profits are through the roof, and phases where I'm making pennies. These two modes, feast and famine, can switch at the drop of a hat. The market moves, and some of my products and services become outdated, automated, crowded, or any number of things that force me to adapt. There are no severence packages. Clients can terminate the agreement with a few days notice.
+Being self employed is hard. In a bad economy, it can be brutal. There is no guarantee you're going to get paid next month. I've gone through phases where my profits are through the roof, and phases where I'm making pennies. These two modes, feast and famine, can switch at the drop of a hat. The market moves, and some of my products and services become outdated, automated, crowded, or any number of things that force me to adapt. There are no severence packages. Clients can terminate the agreement with a few days notice (and so can I).
 
-However, being self employed has made me feel more connected to the economy and capitalism in general. This has been very valuable in terms of understanding things like how markets work, what value actually is, what my value actually is (either they buy or they don't), and what incentive structures are moving us around. The last one comes with a warning. Without going too far into it, my self employed friends and I really do not want to go back into employment. When you see employment from an external perspective, you'll know what I mean.  
+However, being self employed has made me feel more connected to the economy and capitalism in general. This has been very valuable in terms of understanding things like how markets work, what value actually is, what my value actually is (either they buy or they don't), and what incentive structures are moving us around. The last one comes with a warning. Without going too far into it, my self employed friends and I really do not want to go back into employment. When you see employment from an [[https://www.youtube.com/watch?v=jsLUidiYm0w][external perspective]], you'll know what I mean.  
 
 * Conclusion
 
@@ -88,10 +96,12 @@ Automatic transmission is to your endeavor as manual transmission is to X.
 
 Step 3. If you know how to do X, do it when you can. If you don't know how to do X, learn it.
 
-I'm not going to pretend I am perfect at this process. Like many of the things I write, this article is a way to remind me to adhere to this process and to embody the Stick Shift Mindset when I can.
+I'm not going to pretend I am perfect at this process. Like many of the things I write, this article is a way to remind my future self of this process and to embody the stick shift mindset when I can.
 
-In today's world, I can't cook every meal, most cars down the line will be hybrid or electric (automatic transmission), Visual Studio is easier and faster than Emacs (at least for me), tools like Notion have a lot of advantages over tools like Org Mode, and I might come across employment opportunities down the line that I can't refuse. Things will only get more convenient. At some point very soon [2023-03-24 Fri] there will be AI models that will be able to write a better version of this article than I can.
+In today's world, I can't cook every meal, most cars down the line will be hybrid or electric (automatic transmission), Visual Studio is easier and faster than Emacs (at least for me), tools like Notion have a lot of advantages over tools like Org Mode, and I might come across employment opportunities down the line that I can't refuse. Things will only get more convenient. At some point very soon [2023-03-24 Fri] there will be AI models that will be able to write a better version of this article than I can, in a few milliseconds (though a lot of why I write is for the sake of self-expression...ChatGPT can write the boring stuff).
 
-However, the general concept of being more connected to all my endeavors has made me more competent, self-reliant, creative, innovative, interesting, has led to more friendships, and has made my life more meaningful in general. Importantly, it has allowed me to spend a lot of time in the flow state. If you want to join in on the fun, call up your car enthusiast friend with the manual transmission, go to an empty parking lot, and get in gear. 
+What I'm trying to do now is to adapt a [[https://en.wikipedia.org/wiki/Barbell_strategy][barbell strategy]] toward my use of tech. This is where my tech stack consists of very high tech and very low tech tools. This is the equivalent of my garage having a new self-driving sedan, and a sports car from the 80s that I've been customizing by hand for the last decade to fit my needs exactly. I always have an instance of ChatGPT running, which helps me write and debug code much more efficiently. But then I'll take the suggested code and paste it into my old Emacs editor where I'll do my work. Then, I'll use ChatGPT to help me write [[https://xkcd.com/297/][Lisp code]] (much older than python) to further configure Emacs to my liking, rather than simply going on Visual Studio Code and looking for a plugin.
+
+The general concept of being more connected to all my endeavors has made me more competent, self-reliant, creative, innovative, interesting, has led to more friendships, and has made my life more meaningful in general. Importantly, it has allowed me to spend a lot of time in the flow state. If you want to join in on the fun, call up your car enthusiast friend with the manual transmission, go to an empty parking lot, and get in gear. 
 
 
