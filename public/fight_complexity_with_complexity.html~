@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Fight complexity with complexity</title>
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" href="simple.css" />
+<style>
+  .dark-mode {
+    --bg: #212121;
+    --accent-bg: #2b2b2b;
+    --text: #dcdcdc;
+    --text-light: #ababab;
+    --accent: #ffb300;
+    --code: #f06292;
+    --preformatted: #ccc;
+    --disabled: #111;
+  }
+  .dark-mode img,
+  .dark-mode video {
+    opacity: 0.8;
+  }
+  .toggle-theme-btn {
+      transform: scale(0.7);
+      opacity: 0.4;
+      transition: opacity 0.2s;
+    }
+    .toggle-theme-btn:hover {
+      opacity: 0.4;
+    }
+</style>
+<script>
+ function toggleDarkMode() {
+    const body = document.body;
+    body.classList.toggle("dark-mode");
+    // Save the user's theme preference to localStorage
+    if (body.classList.contains("dark-mode")) {
+      localStorage.setItem("theme", "dark");
+    } else {
+      localStorage.setItem("theme", "light");
+    }
+  }
+
+  function setDefaultDarkMode() {
+    // Retrieve the user's theme preference from localStorage
+    const storedTheme = localStorage.getItem("theme");
+
+    // If the stored theme is light, do nothing; otherwise, set it to dark
+    if (storedTheme !== "light") {
+      document.body.classList.add("dark-mode");
+    }
+  }
+
+  // Set the default mode to dark when the DOM is fully loaded
+  document.addEventListener('DOMContentLoaded', setDefaultDarkMode);
+</script>
+</head>
+<body>
+<div id="preamble" class="status">
+<div style="position: fixed; top: 10px; right: 10px;">
+         <button class="toggle-theme-btn" onclick="toggleDarkMode()">Light/Dark</button>
+       </div>
+</div>
+<div id="content" class="content">
+<h1 class="title">Fight complexity with complexity</h1>
+<hr />
+<p>
+<i>The Sage sees without looking, finds without searching, and arrives without going anywhere.</i>
+</p>
+
+<p>
+Lao Tzu, <i>Tao Te Ching</i>
+</p>
+<hr />
+
+<p>
+When I joined my thesis lab in 2012, we were working with a new kind of "big data" from a new kind of single-cell technology. The data were not human-readable. Think of an excel sheet of 50 columns by 100,000+ rows. As such, many methods were developed around sub-setting and visualizing the data, so humans could actually read this. One class of these methods is non-linear dimensionality reduction, like t-SNE and UMAP. These are black box algorithms. Their output can give us high-level intuition of what's there. But it's hard to interpret how accurate they are in relation to how accurate we think they are, given that <a href="./the_beauty_is_truth_delusion.html">they look very nice</a>. The way I approached this problem was to <a href="./drfz_tsne_interrogation_talk_final.pdf">use the algorithm itself</a> to try to explain the algorithm's accuracy, but coloring and <a href="https://github.com/tjburns08/knn_sleepwalk">labeling</a> these maps by their own performance. I was using a black box algorithm to explain a black box algorithm. I was using complexity (t-SNE and UMAP) to interpret complexity (t-SNE and UMAP).
+</p>
+
+<p>
+Fast forward to 2023. ChatGPT has brought forth an interest in (and fear of) AI that we have never seen before. But there is something interesting happening here that is relevant to this article. These language models are black box algorithms. We have intuition from an input and output perspective of what's going on, but we can't explain what's going on at the neuron to neuron level. But OpenAI is now experimenting with using GPT models to explain the neurons of GPT models. Specifically, it's using <a href="https://openai.com/research/language-models-can-explain-neurons-in-language-models">GPT-4 to interpret GPT-2</a>. While I can't evaluate the merit of this approach at this time, it points to the same theme: using complexity (GPT-4) to interpret complexity (GPT-2).
+</p>
+
+<p>
+Now let's look at the human brain. When I was in undergrad learning basic neuroscience as part of my major, I learned about the grandmother neuron hypothesis. This was the idea that there would be a group of neurons that fired when I saw my grandma, and a smaller group of neurons that fired when she was in a rocking chair. And eventually a single neuron that would be associated with grandma in the rocking chair at a particular angle. This hypothesis turned out to be wrong. The cortex stores information in a decentralized manner. Ablating a piece of the cortex doesn't ablate a specific childhood memory, because that memory is stored all over. At this point, the undergrad version of me got the idea that the human brain was irreducibly complex. The idea that we could put on a helmet that would interpret our thoughts was science fiction and that's that.
+</p>
+
+<p>
+Enter GPT based language models. Again, a series of studies I can't perfectly evaluate the merit of just yet, but we have these models <a href="https://www.nature.com/articles/s41593-023-01304-9">converting fMRI data to interpretable words</a> associated with what the subject was seeing. A similar study out of Cold Spring Harbor apparently <a href="https://www.biorxiv.org/content/10.1101/2022.11.18.517004v1">reconstructed images</a> that the subject was perceiving using fMRI data. Now, I've been doing biology long enough that I will approach this kind of work with a healthy level of skepticism for a few years, but we're dealing with a similar theme as before: using complexity (AI models) to interpret complexity (the human brain).
+</p>
+
+<p>
+Now let's shift from computation, my second love, to wet-lab biology, my first love. At the start of graduate school, in the early 2010s, the trendy thing was to use systems biology to finally understand biology enough that we can develop individualized cocktails of drugs for cancer patients depending on the exact nature of their tumor. I joined a systems immunology lab as a cancer biology PhD student, thinking that we'd be able to de-code biological networks both in normal and cancerous tissue enough to make this a reality. While it turns out that <a href="./its_more_complicated_than_that.html">it's more complicated than that</a>, what did happen was a revolution in cancer immunotherapy: CAR T cells.
+</p>
+
+<p>
+The idea here is that the immune system leverages its own complexity to fight the complexity of the rapidly evolving world of pathogens in our environment. So why not train the immune system to recognize and fight cancer? It's not a new idea, but unlike AI, ideas in biology take a long time to develop. CAR T cell therapy is one great example of how you might get it done. You take the patient's T cells, add an antigen to them that targets the cancer, and reintroduce these engineered T cells back into the patient.
+</p>
+
+<p>
+But notice the philosophical difference between this approach and the targeted therapy approach. Targeted therapy contained this embedded mental model that we would have a perfect molecular wiring diagram of a cancer patient on a computer, and we would be able to use all kinds of <i>in-silico</i> modeling tools to figure out what drugs were needed, and generate the cocktail of drugs, curing the cancer. CAR T cells (and note that I don't do CAR T research, so correct me if I'm wrong) contains an embedded mental model that biology is complicated, cancer is complicated, and the immune system handles this pretty well, so let's fight a cancer's complexity with the immune system's complexity. In a way, cancer immunotherapy contains an embedded admission of ignorance, which in my opinion is a good thing.
+</p>
+
+<p>
+I'll conclude by re-introducing a word into the biological lexicon that I hear largely from the environmentalists: hyperobjects. A hyperobject is a high-dimensional shape and/or cloud and/or network and/or data structure that we cannot possibly perceive all at once. One prototypical example of this is the ocean. When I think about the ocean, I think about a big vast blue body of water, the setting sun, the sound of the waves, and light surf rock music (in case you wanted to know about my hobbies in grad school). But in reality, the ocean is a huge network of the chemical properties of the seawater, its interaction with the dynamics single-cell and multi-cell life, sunlight, gas exchange with the atmosphere, geothermal vents, coral reefs, ocean currents, and of course, all of this interacting with human pollutants.
+</p>
+
+<p>
+How do you understand a hyperobject? You can't. But what you can do is slice it in as many ways as you can until you get some intuition around it, while acknoledging that your intution around it will be incomplete. Examples of this range from creating Hegelian dialectics between opposing views rather than taking a side, to studying something like the ocean from as many different angles as you can. To admit that something is a hyperobject is to admit one's ignorance. But it's not just that. The subtletly here is that the admission of a hyperobject is a call to action. It tells you that it's time to start peering into slices of that hyperobject so you can start to get actionable intution around it (eg. stop polluting the ocean).
+</p>
+
+<p>
+But the advent of the "fight complexity with complexity" paradigm gives us a new approach. You get another hyperobject to grok the hyperobject in question, and then tell the human what it needs to know. When we have an AI model that can synthesize all possible ways a protein can fold with every study and dataset ever published about cell signaling, will we be able to re-visit the old dream of targeted therapy? Maybe. If not, then maybe we can get really good at tweaking the immune system to work in our favor. Either way, "fight complexity with complexity" is worth thinking about, because this wave isn't dying down any time soon.
+</p>
+</div>
+<div id="postamble" class="status">
+<p class="date">Date: May 16, 2023 - May 16, 2023</p>
+<p class="creator"><a href="https://www.gnu.org/software/emacs/">Emacs</a> 28.1 (<a href="https://orgmode.org">Org</a> mode 9.5.2)</p>
+</div>
+</body>
+</html>
