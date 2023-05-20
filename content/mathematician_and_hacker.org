@@ -1,14 +1,26 @@
 #+Title: The mathematician and the hacker
 #+Author: Tyler Burns
-#+Date: May 19, 2023 - May 19, 2023
+#+Date: May 19, 2023 - May 20, 2023
 
 [[./index.html][Home]]
 
 A mathematician and a hacker go into a bar in the college town they're in. They just started working together on a cybersecurity research project, and they're still getting to know each other and their respective worlds. They sit at the front, beers in hand.
 
-M: Nice bar. Similar in nature to the other one we went to last week, though the barstools are a bit more comfy. And there are a different set of beers on tap, though about half of them overlap.
+M: Nice bar. You have good taste in choice of bars. Similar in nature to the other one we went to last week, though the barstools are a bit more comfy. And there are a different set of beers on tap, though about half of them overlap.
 
 H: This bar is completely different. It's in another neighborhood. The patrons are completely different in character. The bartender is different, and gives off a different vibe. The beer selection is more IPA-heavy. This bar has more food options. There is a billiards table and some dart boards. And plus in that last bar, we were a few drinks in on arrival, and here we're sober, just getting started. So our perception of our previous location is different than now, if not less trustworthy.
+
+M: Ah, just like our discussion last week. I'm looking at something and building out a logical strucutre. You're looking at structure and breaking it.
+
+H: This is intro CS stuff. Remember how the problem sets went? You build the thing. Factorial in C++ or whatever. Then you try to break it in as many ways as possible. Then you make the program robust to all the ways you can break it. You add some logic that says, for example, if the user tries to calculate Factorial of a symbol that is not a number, to throw an error message that says "please only input numbers." That's what I'm doing. I look for edge cases. Things that don't add up.
+
+M: That would drive me crazy. Coherence and beauty is what drives me. I was the kid who would hyperfocus on building the biggest bestest tower out of the building blocks.
+
+H: I was the kid who would kick over the other kid's tower of building blocks.
+
+M: Then I'm glad I met you as an adult.
+
+H: Anyway, the two bars are very different. In most ways...
 
 M: Yes, but you could easily think of the set of all differences as a transformation between the two bars. [gets out a napkin] Bar1 --> Bar2, with the arrow being a set of things that change: {beer selection 1 -> beer selection 2; bartender 1 -> bartender 2; neighborhood 1 -> neighborhood 2, etc}.
 
@@ -18,33 +30,57 @@ M: But "Bar" is in the title of the both places. They have been labeled "bar." T
 
 H: Labels. Abstractions. They cloud base reality. This place could easily be a restaurant but if it pretends to be a bar with food, it will attract more college students on Friday night, along with the families it will attract during the day. Labels are pointers that can be useful, but they are not necessarily true. Especially in a world of perverse incentives rotting out our social system.
 
-M: Base reality is math itself. Maybe we just call it "enclosed space for people to consume stuff and chat." E1 --> E2. Then the transformations apply just as they did in my first construction.
+M: Base reality is math itself. There are abstractions that give instances of everything we call base reality. I want to find them. I want to merge with the world of Platonic forms behind all of this.
 
-H: Not so fast. In your rush to make everything into a coherent "theory of bar" in order to conform to the notion that math is base reality, you failed to notice that both establishments have the same owner. A simple google search. Didn't even need AI. So anyway the overlap, or the "transformations" are going to be more deliberate, in a way that maximizes profit in both locations, based on the experience and competence of the owner. The transformations are really part of a "theory of how to make people give you money." You know the thing that powers the world and will eventually lead to its self termination.
+H: The problem with the Platonic worldview in this regard is that there are plenty of things out there that pretend to be abstractions that in turn pretend to be beauty. Your groups's postdoc positions pretend to be academic training for the American ideal of "do what you love," but they are really high-skilled labor exploitation for bus driver salaries, after losing your 20s to study. In other words "do what you love, and the money lies fallow."
+
+M: Don't remind me. If my colleagues and I didn't love math so much, we would be burning down the Ivory Tower as we speak. There's also a bit of a survivorship bias. I got tenure. A lot of my colleagues didn't. So I'm doing pretty ok now in middle age, though I spent the best years of my life in absolutely squalid conditions while my friends were traveling, buying houses, getting married and having kids...living life. But anyway don't blame me for the postdoc situation. It's part of the much bigger system I'm stuck in. If I had the money to pay my postdocs six figures, and for that matter give my PhD students bigger stipends, I would.
+
+H: I get it. The rest of the world is not interested in the long-term rewards that come out of pure academic research for its own sake. It's all about what can be monetized right now, so I can sell the company to Google in five years, so I can afford to do things like self-fund a retirement in the face of pension payments that will maybe buy me a meal per month.
+
+M: Sure, but again, I can't really see myself doing anything but math, from now until I die. People like me plan to die at our desk, much to the annoyance of postdocs around the world waiting to take my position.
+
+H: Wishing death upon you. How many voodoo dolls out there have needles through the hearts of emeritus professors?
+
+M: Stop. I get it. We all get it. Anyway, this cybersecurity project is only interesting because it leverages things I do in fact work on for their own sake.
+
+H: That's how they get you. In business, they call it "nerd sniping." Frame something as an intellectually exciting solvable problem and the nerds will swarm it like moths to a light. In hacker terms, this is a vulnerability of the nerd psyche that you exploit.
+
+M: Fair point. Ok, maybe we just call our "bar" an "enclosed space for people to consume stuff and chat." E1 --> E2. Then the transformations apply just as they did in my first construction.
+
+H: Not so fast. Another thing you missed. In your rush to make everything into a coherent "theory of bar" in order to see the Platonic forms behind it, you failed to notice that both establishments have the same owner.
+
+M: Suddenly, you're talking about similarities between the two bars. After leading off with "these bars are completely different."
+
+H: There's a relevant reason for that, and I'll get to it. So anyway the overlap, or the "transformations" are going to be more deliberate, in a way that maximizes profit in both locations, based on the experience and competence of the owner. Psychology rather than math. Furthermore, the transformations are really part of a "theory of how to make people give you money." The same theory that gives rise to the postdoc exploitation protocol.
 
 M: Ok, but that's one little detail, that I can put into my grand theory of bar. I have the mathematical structures set up, and all I have to do now is populate it with the nit picky details that you're pointing out to me.
 
-H: A very important nit picky detail. You see, you're interested in creating these grand unified theories that explain all of the things. The foundations of the mathematical notation of all things bar with in turn maps to the mathematical notation of all of the things. In complete contrast, I create a new hyperfocused metaphysics with every problem that I'm trying to solve. Similar to meta-programming in Lisp.
+H: A very important nit picky detail. Back to fundamental differences between us: you're interested in creating these grand unified theories that explain all of the things. The foundations of the mathematical notation of all things bar with in turn maps to the mathematical notation of all of the things. The journey from this world into the world of Platonic forms. In complete contrast, I disregard Plato entirely and create a new hyperfocused metaphysics with every problem that I'm trying to solve, where this little detail fits in. All of this is similar to meta-programming in Lisp.
 
-M: How so? I prefer Haskell, by the way, as so much of it is founded in category theory, which is more or less how I think about the world these days. Haskell is powered and inspired by the very foundations of mathematics.
+M: How so? I prefer Haskell, by the way, as so much of it is founded in category theory, which is more or less how I think about the world these days. Category theory of course can be thought of as the mathematics of relationships. Similar to, but much, much richer than thinking of the world as a network. Haskell is powered and inspired by this, the very foundations of mathematics. So tell me about Lisp. I couldn't get past all the parentheases. Doesn't conform to my notion of beauty.
 
-H: You would be into that. In Lisp, rather than solving the problem using the language at hand, the first thing you do is you reject the language as is. You say "this language is not adequate to solve my problem." Then you start defining macros that change the language itself to solve the problem in something that evolves from Lisp to a language that you invented that works specifically for this problem or class of problems.
+H: You would be into category theory and Haskell. In Lisp, rather than solving the problem using the language at hand, the first thing you do is you reject the language as is. You say "this language is not adequate to solve my problem." Then you start defining macros that change the language itself to solve the problem in something that evolves from Lisp to a language that you invented that works specifically for this problem or class of problems. Realizing this is close as people like me get to Enlightenment.
 
-M: That sounds like a lot of work. Why not just use a language that doesn't need that kind of thing. Haskell is such an elegant functional language that I've never had to even think about changing the language itself, aside from defining new functions. But that's standard functional programming.
+M: Cool, but that sounds like a lot of work. I have a similar mindset when I'm with pen and paper, developing novel mathematical structures and their properties. But why not just use a language that doesn't need that kind of thing. Haskell is such an elegant functional language that I've never had to even think about changing the language itself, aside from defining new functions. But that's standard functional programming.
 
 H: The mindset that Lisp gives me allows me to see the whitespace. For example, English is pretty good, but it's missing formal and informal "you." Tú and usted in Spanish. Du and Sie in German. This kind of thing helps if you're recounting a conversation in a mixed group of, say, friends and supervisors. It's also missing a modular ability to develop new words. For example, in German, new words are invented all the time. A flagship example of this is "Schadenfreude." Schaden in this context means "misfortunes" and "Freude" in this context means joy. So the joy at other's misfortunes. Very German. So you just combine multiple relevant words into a new word to express something where there there does not yet exist a word. Anyway it would be nice to have such compoundingfunctionality in English. Though unlike German, I would prefer to have the words be separated by an underscore. =Compounding_functionality=. Then of course, we shorten it. Compfunct.
 
 M: Very interesting. I'm not really a spoken language kind of person. That's my sister. She has the language brain, and I have the math brain. I'll have to ask her about that. But anyway I think I see where you're coming from. But do you really have to change the language every single time? No one I know does this. No one in this bar is updating English in real time to convey what they want to convey. English is a pretty robust language. I mean, it has imported Schadenfreude from German. Plenty of English speakers use that word these days. Same with plenty of other words from plenty of other languages. That's why preparing to compete in a spelling bee is such a time commitment. That's why the contestants almost always ask for the language of origin when they are given the word.
 
-H: Ok, so maybe we don't need to update English all the time, in real time. I haven't had to do that during this conversation. But in general, once you see the whitespace, and you train yourself to see the whitespace in formal systems, you can't unsee it. I'm no longer satisfied with any one language, from English prose to German poetry to python. And to be honest, there might be an ego component to it too. Winning the game by being different.
+H: Ok, so maybe we don't need to update English all the time, in real time. I haven't had to do that during this conversation. But in general, once you see the whitespace, and you train yourself to see the whitespace in formal systems, you can't unsee it. I've been doing this since I was a kid. When I started learning other landuages, I couldn't unsee the aspects that English doesn't have. I wanted to modify English to better express myself. I'm no longer satisfied with any one language, from English prose to German poetry to python. And to be honest, there might be an ego component to it too. Winning the game by being different. I was branded "weird" as a kid, and at some point, I realized that weirdness is actually a superpower.
 
-M: Regarding your point on whitespace, the Gödel in me empathizes with that. I can also vibe with that last point, about winning the game by being different. That's the very essence of the PhD, as compered to undergrad. In undergrad, you win by getting higher scores on the test than the next person. In grad school, you win by going down a line of intellectual inquiry that is different than everyone else's. The more different, the better, both in terms of finding something groundbreaking, and in terms of removing competition.
+M: Regarding your point on whitespace, the Gödel in me empathizes with that. I can also vibe with that last point, about winning the game by being different. I too was branded "weird" as a kid, and chose to lean into it. Leveraging your weirdness is the very essence of the PhD, as compered to undergrad. In undergrad, you win by getting higher scores on the test than the next person. In grad school, you win by going down a line of intellectual inquiry that is different than everyone else's. The more different, the better, both in terms of finding something groundbreaking, and in terms of removing competition.
 
-H: We might not be so different afterall, at least in this respect. But that said, I'm still going to be biased in favor of looking for differences, inadequacies, and whitespace for insight, as opposed to building up these grand theories rooted in abstractions like categories.
+H: We might not be so different afterall relative to each other, at least in this respect. But that said, I'm still going to be biased in favor of looking for differences, inadequacies, and whitespace for insight, as opposed to building up these grand theories rooted in abstractions like categories.
 
-M: ...And this helps you break into or secure computer systems?
+M: So was hacking an escape for you, for dealing with being weird? For me, the world of math was a place where I wasn't weird. Where I didn't have to pretend to be normal.
 
-H: That's a very limited and more Hollywood definition of hacking. See, hacking originally meant ingenuity leveraged toward solving a problem, and especially re-purposing a tool, typically but not limited to software. It's supposed to be the fundamental unit of open source development. That's it. Find some open source project on GitHub or wherever. Commit some change to it that allows it to do something new or better. Now you're hacking.
+H: Not for me. I coped by being defiant and simply rejecting the social systems I was stuck in. By virtue of being defiant, I was never really picked on, because if anything, I was the opposite of the teacher's pet. But once I started using computers, my family didn't see much more of me after that. So I guess that counts as an escape.
+
+M: So your defiance and rejection of formal systems helps you break into or secure computer systems?
+
+H: While I know my way around cybersecurity, that's a very limited and more Hollywood definition of hacking. See, hacking originally meant ingenuity leveraged toward solving a problem, and especially re-purposing a tool, typically but not limited to software. It's supposed to be the fundamental unit of open source development. That's it. Find some open source project on GitHub or wherever. Commit some change to it that allows it to do something new or better. Now you're hacking.
 
 M: That's it? That's hacking??
 
@@ -52,7 +88,7 @@ H: It's a rabbit hole, if you think about how clever you have to be to take some
 
 M: Fair. Ok, so tell me the current hyperfocused metaphysics you're on now. I'm all ears.
 
-H: It's bar sign theory.
+H: It's called bar sign theory.
 
 M: Bar what??
 
