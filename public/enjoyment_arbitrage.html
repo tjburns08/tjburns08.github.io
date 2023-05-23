@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Enjoyment arbitrage</title>
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" href="simple.css" />
+<style>
+  .dark-mode {
+    --bg: #212121;
+    --accent-bg: #2b2b2b;
+    --text: #dcdcdc;
+    --text-light: #ababab;
+    --accent: #ffb300;
+    --code: #f06292;
+    --preformatted: #ccc;
+    --disabled: #111;
+  }
+  .dark-mode img,
+  .dark-mode video {
+    opacity: 0.8;
+  }
+  .toggle-theme-btn {
+      transform: scale(0.7);
+      opacity: 0.4;
+      transition: opacity 0.2s;
+    }
+    .toggle-theme-btn:hover {
+      opacity: 0.4;
+    }
+</style>
+<script>
+ function toggleDarkMode() {
+    const body = document.body;
+    body.classList.toggle("dark-mode");
+    // Save the user's theme preference to localStorage
+    if (body.classList.contains("dark-mode")) {
+      localStorage.setItem("theme", "dark");
+    } else {
+      localStorage.setItem("theme", "light");
+    }
+  }
+
+  function setDefaultDarkMode() {
+    // Retrieve the user's theme preference from localStorage
+    const storedTheme = localStorage.getItem("theme");
+
+    // If the stored theme is light, do nothing; otherwise, set it to dark
+    if (storedTheme !== "light") {
+      document.body.classList.add("dark-mode");
+    }
+  }
+
+  // Set the default mode to dark when the DOM is fully loaded
+  document.addEventListener('DOMContentLoaded', setDefaultDarkMode);
+</script>
+</head>
+<body>
+<div id="preamble" class="status">
+<div style="position: fixed; top: 10px; right: 10px;">
+         <button class="toggle-theme-btn" onclick="toggleDarkMode()">Light/Dark</button>
+       </div>
+</div>
+<div id="content" class="content">
+<h1 class="title">Enjoyment arbitrage</h1>
+<hr />
+<p>
+<i>When people see some things as beautiful,</i><br />
+<i>other things become ugly.</i><br />
+<i>When people see some things as good,</i><br />
+<i>other things become bad.</i><br />
+</p>
+
+<p>
+Lao Tzu, <i><a href="https://www.organism.earth/library/document/tao-te-ching">Tao Te Ching</a></i>
+</p>
+<hr />
+
+<div id="outline-container-org1220e12" class="outline-2">
+<h2 id="org1220e12">Code-philic and code-phobic</h2>
+<div class="outline-text-2" id="text-org1220e12">
+<p>
+After I got my PhD in 2017, I worked half time as a bioinformatician and half time as a bioinformatics consultant. At the time, I was thinking of my value to the work place in terms of my specialized skills and knowledge. Yes, this is a huge piece of it, but there is something else going on here too.
+</p>
+
+<p>
+Pretty early on, I started teaching the biologists in the lab and adjacent labs (where I met my wife) how to do what I do. The idea was simple: if people can do what I do now, then I can focus on harder and more interesting problems, as opposed to solving the same problems over and over. I realized very quickly that most biologists are fully capable of learning how to do what I do. It is hard work, but not impossible if they committed themselves for a few years. But the key thing I realized was that there are simply a lot of people who <i>don't want to do what I do.</i>
+</p>
+
+<p>
+I was on a data analysis discussion panel at a local conference in 2018 along with bioinformatics heavyweight Yvan Saeys, and he defined three categories in terms of the spectrum of willingness to do bioinformatics:
+</p>
+
+<p>
+There are people who really enjoy doing bioinformatics analysis and the relevant software engineering, and would love to do it full time and go really deep into it. For shorthand, we'll call these people code-philic. They have to develop a new tool because it's a new type of data and there are no libraries for whatever it is? Great. They see an error message that leads to a de-bugging rabbit hole? Awesome. These people exist. I know this because I am one of them.
+</p>
+
+<p>
+Then there are people who are code-tolerant. They are willing to run the high-level commands and scripts in R or python, relevant to whatever they need to do, for the sake of getting the analysis done, but that is where there interest ends. Generally, these are biologists who simply want their data in an analyzed format so they can deeply contemplate the biology of it all, design the next experiment, read relevant papers, and so on. My wife is like this. She's perfectly competent and comfortable at this level, but she cares about the biology first and foremost, so as soon as there is an error message or a clear need for something beyond the given tools, she finds me.
+</p>
+
+<p>
+Then there are people who are completely code-phobic. They don't want a thing to do with a single line with code, use of the command line, and anything that is not clicky user interfaces, like Prism and Excel. I know a guy from my thesis lab, who went through great lengths to hack together a complex heatmap without using a single line of code. It took him several hours. He was very proud of it. I was impressed by the sheer ingenuity that went into it. But again, it would have been a few lines of code max to get the same result. The point is these people exist, and they are very common.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org0f8ae72" class="outline-2">
+<h2 id="org0f8ae72">Actually do what you love</h2>
+<div class="outline-text-2" id="text-org0f8ae72">
+<p>
+All of this said, I want to revitalize the adage "do what you love" in a new light. Of course, we learn at an early age that what you love won't necessarily put food on the table. Dreams of playing professional trombone turn into law school or whatever else. But what I'm trying to point to here is the idea that there are things that people enjoy doing and things that people don't enjoy doing, and one person's heaven is another person's hell.
+</p>
+
+<p>
+So I'm going to call this enjoyment arbitrage. The idea is you leave your bubble, where people enjoy the thing you do, go to a world of people who really don't enjoy that thing, and offer to do that thing. My bioinformatics client base are typically groups of people who are code tolerant or code phobic, in a workplace where there are a lack of code-philic people. This is in contrast to my nerdy circles of people just like me.
+</p>
+
+<p>
+I am going to guess that the enjoyment arbitrage landscape is going to be in constant flux, and needs to be closely monitored. Coding in general has gotten easier and more accessable, leading to the possibility of more people enjoying it. My aunt likes to talk about how her computer science class in college was using <a href="https://en.wikipedia.org/wiki/Computer_programming_in_the_punched_card_era">punched cards</a>, where errors were much harder to find, and you couldn't just rapidly try a bunch of things. Even after that, there was a time when Stack Overflow didn't exist, and you couldn't just type your error messages into Google and figure out if others have experienced the same thing. And now I'm going to be able to rant about how in my day, we couldn't just get a large language model to generate code for us, or clearly explain error messages, and that kind of thing.
+</p>
+
+<p>
+Furthermore, there is an enjoyment arbitrage landscape within code-philic circles too. I was on a project once in 2019 or so, where I was turning some scripts into a software package. My colleagues were fully capable of doing this many times over, but through a combination of them not having time and me actually being more interested in this particular software development space than them, I ended up being a good fit for the job.
+</p>
+
+<p>
+So regardless of what happens, there are going to be things that I enjoy doing that others don't. As the work landscape changes, and as I change, aside from the standard arbitrage that we think about (skills, information, etc), I'm going to always have enjoyment arbitrage in mind too. I'm constantly going to be looking for things that I enjoy that others don't and simply focusing there.
+</p>
+
+<p>
+Do what you love (and others detest), and the money will follow.
+</p>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="date">Date: May 23, 2023 - May 23, 2023</p>
+<p class="creator"><a href="https://www.gnu.org/software/emacs/">Emacs</a> 28.1 (<a href="https://orgmode.org">Org</a> mode 9.5.2)</p>
+</div>
+</body>
+</html>
