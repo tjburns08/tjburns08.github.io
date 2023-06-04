@@ -17,6 +17,16 @@ Markdown.\\
 
 When I started learning Lisp, I learned of the concept of metaprogramming. This means using code to change the programming language itself. A practical example of this in English is using "they/them" to denote gender-neutral singular pronouns, overriding the plural default. Here, I show you how to change the syntax of R to fit your fancy. I show you how to change the "+" operator in ggplot2, and to zero-index vectors, as they're done in many other programming languages. The goal of this markdown is to get you to see through and unsee the arbitrary constraints that any language, spoken/written or programming, will give you.
 
+** [[https://rseng.github.io/devstories/2023/tyler-burns-part-2/][Developer Stories Podcast: Part 2: Be the flame, not the moth]]
+Guest on a Podcast.\\
+
+Here is part 2 of my appearance on the Developer Stories podcast. In part 1, I talked about my transition from biology to programming and bioinformatics in graduate school. In this podcast, I talk about my life after graduation, which started with a big move from Palo Alto, California to Berlin, Germany. I talk about life out here, projects I'm working on, being self-employed, and starting my own company.
+
+** [[https://rseng.github.io/devstories/2023/tyler-burns-part-1/][Developer Stories Podcast: Part 1: Heavenly light emanating from line 37]]
+Guest on a podcast.\\
+
+I talk with software developer Vanessa Sochat about my time in graduate school. I started out as a wet-lab biologist. But after taking an intro CS class for fun, I realized that I really enjoyed the dry-lab side of things, and my career trajectory changed accordingly. Have a listen for more details. This is part 1 of 2.
+
 ** [[./enjoyment_arbitrage.html][Enjoyment arbitrage]]
 Article.\\
 
@@ -40,28 +50,6 @@ A new paradigm that seems to be emerging from the bottom up, linking my work on 
 Work of art.\\
 
 While I was giving my TED talk, unbeknownst to me an artist in the audience was drawing it out in real time, complete with pen and watercolor. He did this for each of the speakers. I was extremely impressed with what he was able to do given the very limited time. My talk is not yet on YouTube, but if you want the gist of it, have a look at this picture.
-** [[https://rseng.github.io/devstories/2023/tyler-burns-part-1/][Developer Stories Podcast: Heavenly light emanating from line 37]]
-Guest on a podcast.\\
-
-I talk with software developer Vanessa Sochat about my time in graduate school. I started out as a wet-lab biologist. But after taking an intro CS class for fun, I realized that I really enjoyed the dry-lab side of things, and my career trajectory changed accordingly. Have a listen for more details. This is part 1 of 2. 
-** [[./life_and_love_during_coronazeit.pdf][Life and love in Berlin during the Coronazeit]]
-Feature.\\
-
-An article I wrote in 2020 for the annual Krupp Internship e-newsletter. It was written just after the first wave of the COVID-19 pandemic. It serves as a time capsule for that period, in which many of our basic assumptions about the stability and the future of the modern world were upended. I enjoy looking at it again now and then, as it captures a very unique state of mind. It also captures my wedding, which took place the day before the first lockdown, and included toilet paper as a wedding present.
-
-** [[./tyler_alumni_im_portrait.pdf][Tyler Alumni Im Portrait]]
-Feature.\\
-
-"Im" is short for "in dem" in German. Not a typo. An article I did for the Stanford Krupp Internship Program, which had huge impact on my life and career trajectory. In a nutshell, I was pre-med prior to my medical internship at the Charite Hospital in Berlin in 2007. Through the internship, I realized that I wanted to do research rather than clinical work. I got my PhD and came back to Berlin to work on the Charite Hospital campus once again, this time as a researcher! I will be forever grateful for the Krupp Internship program and Stanford's Bing Overseas Study Program.
-** [[./speech_memorization_helper.html][Speech memorization helper]]
-Web page.\\
-
-Take the text you want to memorize and paste it into the box. The text will be split up into individual sentences. The first sentence will be displayed. Recite as much of the subsequent sentences as you can from memory. Buttons will allow you to move to the next sentence or the previous sentence all the way to the end of the text.
-
-** [[./finite_infinite_life_games.html][Finite and infinite-life games]]
-Article.\\
-
-I make a comparison between the older 2-D platforming games from the 16-bit era and a newer game called Celeste. The key difference is that in Celeste, the gameplay is incredibly difficult, but you have infinite lives. I argue that this type of gameplay is an efficient route to flow state. I describe how this type of gameplay mirrors a lot of problem solving in my professional life. I end by saying that Celeste gameplay is an empowering mental model for doing things outside your competence and comfort zone.
 * Single-cell analysis
 #+HTML: <a href="#top">Back to top</a>
 ** [[./julia_cytof_pipeline_one_file.html][CyTOF UMAP with Julia: an experiment]]
@@ -271,6 +259,11 @@ Markdown.\\
 You are only as good as the questions you ask yourself and others. My uncle told me that many years ago when I was getting started with my career and it stuck. This has been relevant to me in terms of having and maintaining good friendships, being a good husband, being a good family member, being a good businessman, and when I was in graduate school, being a good scientist, and simply being an interesting person. I have a very large list of questions now that is very overwhelming. So I turned them into an embedding using the BERT language model, turned that into a nearest neighbor graph, and then derived insight from looking at the questions in terms of "communities." 
 * Philosophy and rationality
 #+HTML: <a href="#top">Back to top</a>
+** [[./finite_infinite_life_games.html][Finite and infinite-life games]]
+Article.\\
+
+I make a comparison between the older 2-D platforming games from the 16-bit era and a newer game called Celeste. The key difference is that in Celeste, the gameplay is incredibly difficult, but you have infinite lives. I argue that this type of gameplay is an efficient route to flow state. I describe how this type of gameplay mirrors a lot of problem solving in my professional life. I end by saying that Celeste gameplay is an empowering mental model for doing things outside your competence and comfort zone.
+
 ** [[./add_beauty.html][Replace the word "value" with "beauty"]]
 Article.\\
 
@@ -404,6 +397,21 @@ Think of these as both newsletters and time capsules. They are not exhaustive, b
 
 * Fun stuff
 #+HTML: <a href="#top">Back to top</a>
+** [[./life_and_love_during_coronazeit.pdf][Life and love in Berlin during the Coronazeit]]
+Feature.\\
+
+An article I wrote in 2020 for the annual Krupp Internship e-newsletter. It was written just after the first wave of the COVID-19 pandemic. It serves as a time capsule for that period, in which many of our basic assumptions about the stability and the future of the modern world were upended. I enjoy looking at it again now and then, as it captures a very unique state of mind. It also captures my wedding, which took place the day before the first lockdown, and included toilet paper as a wedding present.
+
+** [[./tyler_alumni_im_portrait.pdf][Tyler Alumni Im Portrait]]
+Feature.\\
+
+"Im" is short for "in dem" in German. Not a typo. An article I did for the Stanford Krupp Internship Program, which had huge impact on my life and career trajectory. In a nutshell, I was pre-med prior to my medical internship at the Charite Hospital in Berlin in 2007. Through the internship, I realized that I wanted to do research rather than clinical work. I got my PhD and came back to Berlin to work on the Charite Hospital campus once again, this time as a researcher! I will be forever grateful for the Krupp Internship program and Stanford's Bing Overseas Study Program.
+
+** [[./speech_memorization_helper.html][Speech memorization helper]]
+Web page.\\
+
+Take the text you want to memorize and paste it into the box. The text will be split up into individual sentences. The first sentence will be displayed. Recite as much of the subsequent sentences as you can from memory. Buttons will allow you to move to the next sentence or the previous sentence all the way to the end of the text.
+
 ** [[./gol_navigate.html][Conway's Game of Life Cellvivor]]
 Game.\\
 
