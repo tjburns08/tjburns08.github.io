@@ -421,7 +421,7 @@ overwriting the “+” operator that is built into ggplot2 with the
 ##             i = &quot;Did you forget to add this object to a {.cls ggplot} object?&quot;))
 ##     }
 ## }
-## &lt;bytecode: 0x152b25238&gt;
+## &lt;bytecode: 0x1204acf68&gt;
 ## &lt;environment: namespace:ggplot2&gt;</code></pre>
 <p>Now let’s see it in action.</p>
 <pre class="r"><code>ggplot(mtcars, aes(mpg, disp)) %&gt;% geom_point() %&gt;% ggtitle(&quot;Mtcars plot example&quot;)</code></pre>
@@ -475,7 +475,7 @@ instead of + for ggplot2?</p>
 ##             i = &quot;Did you forget to add this object to a {.cls ggplot} object?&quot;))
 ##     }
 ## }
-## &lt;bytecode: 0x152b25238&gt;
+## &lt;bytecode: 0x1204acf68&gt;
 ## &lt;environment: namespace:ggplot2&gt;</code></pre>
 <p>And now let’s build the expression with the new syntax.</p>
 <pre class="r"><code>mtcars %&gt;%
@@ -531,8 +531,9 @@ x[1]</code></pre>
 <pre class="r"><code>x[3]</code></pre>
 <pre><code>## [1] 4</code></pre>
 <p>Now that the vector is zero-indexed, we’re getting the second, third,
-and fourth element. The following would produce an error normally, but
-the first element in a zero-indexed language.</p>
+and fourth element. The following would normally produce an error in
+1-indexed R, but now it produces the first element of the vector as it
+would in a zero-indexed language.</p>
 <pre class="r"><code>x[0]</code></pre>
 <pre><code>## [1] 1</code></pre>
 <p>Now this is just for vectors. Note that for lists, we’re still
