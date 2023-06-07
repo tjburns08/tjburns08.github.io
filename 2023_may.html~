@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>May 2023</title>
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" href="simple.css" />
+<style>
+  .dark-mode {
+    --bg: #212121;
+    --accent-bg: #2b2b2b;
+    --text: #dcdcdc;
+    --text-light: #ababab;
+    --accent: #ffb300;
+    --code: #f06292;
+    --preformatted: #ccc;
+    --disabled: #111;
+  }
+  .dark-mode img,
+  .dark-mode video {
+    opacity: 0.8;
+  }
+  .toggle-theme-btn {
+      transform: scale(0.7);
+      opacity: 0.4;
+      transition: opacity 0.2s;
+    }
+    .toggle-theme-btn:hover {
+      opacity: 0.4;
+    }
+</style>
+<script>
+ function toggleDarkMode() {
+    const body = document.body;
+    body.classList.toggle("dark-mode");
+    // Save the user's theme preference to localStorage
+    if (body.classList.contains("dark-mode")) {
+      localStorage.setItem("theme", "dark");
+    } else {
+      localStorage.setItem("theme", "light");
+    }
+  }
+
+  function setDefaultDarkMode() {
+    // Retrieve the user's theme preference from localStorage
+    const storedTheme = localStorage.getItem("theme");
+
+    // If the stored theme is light, do nothing; otherwise, set it to dark
+    if (storedTheme !== "light") {
+      document.body.classList.add("dark-mode");
+    }
+  }
+
+  // Set the default mode to dark when the DOM is fully loaded
+  document.addEventListener('DOMContentLoaded', setDefaultDarkMode);
+</script>
+</head>
+<body>
+<div id="preamble" class="status">
+<div style="position: fixed; top: 10px; right: 10px;">
+         <button class="toggle-theme-btn" onclick="toggleDarkMode()">Light/Dark</button>
+       </div>
+</div>
+<div id="content" class="content">
+<h1 class="title">May 2023</h1>
+<p>
+<a href="./index.html">Home</a>
+</p>
+
+<p>
+What came into my life in the month of May 2023, that is worth re-hashing, so I don't forget, and so others can benefit.
+</p>
+
+<hr />
+
+<p>
+My mom's side of the family comes from Guyana. It's rare that Guyana makes the news, but it did recently due to an <a href="https://apnews.com/article/guyana-oil-discovery-money-14c23a72c6d7c13675493ede42ed1000">oil boom</a> in the country that could potentially tranform the economy. Obviously, I am hoping for the best.
+</p>
+
+<hr />
+
+<p>
+I learned of a new brilliant word in the tech world: enshittification. In other words, the decline of quality of a particular product, due to business decisions, until it is complete shit. Want to see an example? Have a look at <a href="https://digg.com/">digg</a>, which used to be just like <a href="https://old.reddit.com/">reddit</a>. Now it's just clickbaitey junk. And how about <a href="https://myspace.com/discover/featured">myspace</a>? It was a music-oriented rival to facebook, and now it has the same format as modern digg. It's as if enshittification has a formula to it. <a href="https://pluralistic.net/2023/01/21/potemkin-ai/">This article</a> talks about the enshittification of TikTok.
+</p>
+
+<p>
+I'll just quote the first paragraph that sums up the mental model:
+</p>
+
+<p>
+"Here is how platforms die: first, they are good to their users; then they abuse their users to make things better for their business customers; finally, they abuse those business customers to claw back all the value for themselves. Then, they die."
+</p>
+
+<hr />
+
+<p>
+Another interesting phrase I learned, when it comes to measures of cognition: cognitive endurance. This is the ability to sustain cognitive effort for long periods of time. An example of this might be how many math problems (at your level) you can do before you fatigue and start to see declines in performance. We all have needed feats of cognitive endurance, for example when we had to take standardized tests in high school and college to get to the next thing.
+</p>
+
+<p>
+This <a href="https://marginalrevolution.com/marginalrevolution/2023/05/the-importance-of-cognitive-endurance.html?utm_source=rss&amp;utm_medium=rss&amp;utm_campaign=the-importance-of-cognitive-endurance">blog post</a> suggests that cognitive endurance is one of the core attributes that we acquire in school, provided that the quality of the school in question is high enough.
+</p>
+
+<hr />
+
+<p>
+I value ingenuity very highly. This is often known in my circles as "hack value." I found an example that takes the cake. <a href="https://github.com/mmulet">Michael Mulet</a> created a <a href="https://www.coderelay.io/fontemon.html">pokemon-like game</a>, entirely within a font. No extra code. Just a single <a href="https://en.wikipedia.org/wiki/OpenType">.otf</a> (font) file. This is something I would have never thought to do, and I can't imagine just how much work went into re-purposing a font file to run a game.
+</p>
+
+<hr />
+
+<p>
+A lecture in a CS class at Stanford turned into a relationship advice session (business partners, friends, romance, the rest of it). Professor John Ousterhout said <a href="https://gist.github.com/gtallen1187/27a585fcf36d6e657db2">here</a> (written on GitHub gists of all places) that relationships die because of scar tissue. Little resentments here and there that build up over time.
+</p>
+
+<p>
+To quote him:
+</p>
+
+<p>
+"You have to ask yourself, "Are you really, completely, 100% over this? You're giving in? No animosity? You're not secretly hoping that maybe they'll do something for you in return or a little behavior change here or there?" Because if there's anything at all when you're giving in that you can feel bad about later, you're nuking the relationship - you're creating scar tissue with yourself, and that will build up to the point where you wreck the relationship"
+</p>
+
+<p>
+I never thought of it like that, but it makes sense. Glad I learned this now and not later.
+</p>
+
+<hr />
+
+<p>
+A sci-fi level biological finding, that I came across recently was a paper where a dish of biological neurons <a href="https://www.cell.com/neuron/fulltext/S0896-6273(22)00806-6">learned how to play pong</a>.
+</p>
+
+<p>
+I am putting this here because one of my potential grad school rotation projects back in 2011 that I was really excited about was assaying dishes of neurons like these, which started to synchronize and form their own networks. It's nice to see a decade later that these dishes of neurons can in fact learn to do interesting things.
+</p>
+
+<hr />
+
+<p>
+I am a jazz bassist by training, so I like to think I know a thing or two about music. This said, I came across a concept in music that I've overlooked over the years: shifting the beat juuuust a little bit. There are two instances of this that I found last month.
+</p>
+
+<p>
+The first is from a <a href="https://metalintheory.com/metallica-master-of-puppets/">critical analysis</a> of <a href="https://www.youtube.com/watch?v=E0ozmU9cJDg">Master of Puppets</a> by Metallica, in which the 5/8 measure of the verse has eighth notes 2 and 3 that are slightly slower combined (by 0.05 seconds) than eighth notes 4 and 5. If you want to know what I'm talking about, go to 0:55-0:56 in the YouTube video I link. That part. It gives the song a slightly different feel, that makes the tabs to the song seem like they're missing something, which is what prompted the analysis in the first place.
+</p>
+
+<p>
+The second is a <a href="https://pudding.cool/2023/06/groove/">piece</a> from a visual essay publication called The Pudding, which explores grooves that "break the rules." Scroll down to "shift" and shift the snare. The snare drum comes in slightly before the start of each measure rather than directly on the beat. It gives the snare a sound that I've heard before many times, but didn't appreciate what was going on.
+</p>
+</div>
+<div id="postamble" class="status">
+<p class="creator"><a href="https://www.gnu.org/software/emacs/">Emacs</a> 28.1 (<a href="https://orgmode.org">Org</a> mode 9.5.2)</p>
+</div>
+</body>
+</html>
