@@ -80,9 +80,9 @@ Claude Shannon, lecture: <i>Creative Thinking</i>
 </p>
 <hr />
 
-<div id="outline-container-orge21a6a4" class="outline-2">
-<h2 id="orge21a6a4">The simplest explanation</h2>
-<div class="outline-text-2" id="text-orge21a6a4">
+<div id="outline-container-org01afcd6" class="outline-2">
+<h2 id="org01afcd6">The simplest explanation</h2>
+<div class="outline-text-2" id="text-org01afcd6">
 <p>
 I have a group chat of local friends we use to coordinate our weekend events among other things. One of the things we do is we wish each other happy birthday when these days roll around. My birthday is shared with another birthday, of a guy we'll call Nick (not his real name). Every year on my birthday, messages ring through the group chat, "Happy birthday Tyler and Nick" (except in German). But this year, it was only "Happy birthday Nick."
 </p>
@@ -101,9 +101,9 @@ But "forgetting" and "mad at me" is a bit more subtle. I've seen both. There's n
 </div>
 </div>
 
-<div id="outline-container-org6d7fbfd" class="outline-2">
-<h2 id="org6d7fbfd">The simplest computer program</h2>
-<div class="outline-text-2" id="text-org6d7fbfd">
+<div id="outline-container-orge241bd1" class="outline-2">
+<h2 id="orge241bd1">The simplest computer program</h2>
+<div class="outline-text-2" id="text-orge241bd1">
 <p>
 To formalize Occam's razor, we have to think <a href="./coding_as_philosophical_project.html">computationally</a>. Let's look at "mat at me" and "forgot" explanations in more detail. For now, we will think at the level of python, as opposed to the level of Turing machines, which we would have to do if we really wanted to formalize this.
 </p>
@@ -155,9 +155,9 @@ Anyway, the computational formalism of Occam's razor involves looking at a pheno
 </p>
 </div>
 </div>
-<div id="outline-container-orga16b1ca" class="outline-2">
-<h2 id="orga16b1ca">How simple = how much can you compress it</h2>
-<div class="outline-text-2" id="text-orga16b1ca">
+<div id="outline-container-org8037212" class="outline-2">
+<h2 id="org8037212">How simple = how much can you compress it</h2>
+<div class="outline-text-2" id="text-org8037212">
 <p>
 Probabilistic thinking and Solomonoff induction do intersect. To do this, consider the sequence [1, 2, 3, 4, 5]. Let's think of all the possible computer programs in existence that could produce this sequence. Let's drill down into two of them.
 </p>
@@ -189,9 +189,9 @@ But let's pretend that we're dealing with a sequence of [1, 2, 3, &#x2026;. 1 bi
 </div>
 </div>
 
-<div id="outline-container-orgbe3786c" class="outline-2">
-<h2 id="orgbe3786c">Probabilities, assumptions, and the conjunction fallacy</h2>
-<div class="outline-text-2" id="text-orgbe3786c">
+<div id="outline-container-org0f7a516" class="outline-2">
+<h2 id="org0f7a516">Probabilities, assumptions, and the conjunction fallacy</h2>
+<div class="outline-text-2" id="text-org0f7a516">
 <p>
 Ok, so we have an idea that the simplest explanation is most likely true, and a formulation that says that the simplest possible computer program that can output the phenomenon is most likely true. But that doesn't tell us why this is the case. Why are simpler explanations more likely to be true than complex explanations? To understand why, we next have to think in probabilities.
 </p>
@@ -263,9 +263,9 @@ Of course, we can make all of this more complicated if we start thinking in term
 </p>
 </div>
 </div>
-<div id="outline-container-orge05e256" class="outline-2">
-<h2 id="orge05e256">Conclusion</h2>
-<div class="outline-text-2" id="text-orge05e256">
+<div id="outline-container-org834a1eb" class="outline-2">
+<h2 id="org834a1eb">Conclusion</h2>
+<div class="outline-text-2" id="text-org834a1eb">
 <p>
 We started with Occam's razor. But I'm a computational biologist by training and these days I see the world in code. Naturally, I discovered and took kindly to Solmonoff induction, the computational formulation of Occam's razor, and I have stuck with that ever since. What it has done for me is help me think computationally about what Occam's razor really is, and especially what a simple explanation really is. What I find is if I'm trying to weigh explanations for a particular thing in my life, what helps is if I try to turn the explanations into computer programs, even if it's lines of pseudo-code as I did in this article, and to up-weight the smaller programs in terms of the probability of being true. I then used the conjunction fallacy to connect "simple" with "probable." In sum, I hope you'll be able to approach Occam's razor through a computational and probabilistic lens too the next time you have to make sense of something. 
 </p>
