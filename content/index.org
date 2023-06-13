@@ -16,7 +16,7 @@ If you have quesitons or comments, or you're interested in working or collaborat
 Markdown.\\
 
 In this markdown, I take a Seurat object provided by the aforementioned paper, and I use it to do perform visualizations, which include box and whisker plots. This markdown is an example of what kinds of things a single-cell sequencing bioinoformatics workflow might entail.
-** [[./scrna_seq_piepline_one_file.html][Single-cell sequencing pipeline, PBMC 3k in depth]]
+** [[./scrna_seq_piepline_pbmc_3k.html][Single-cell sequencing pipeline, PBMC 3k in depth]]
 Markdown.\\
 
 I use the classic Seurat PBMC 3k vignette as a foundation to explore the guts of the high-level Seurat functions within. This includes normalizing and scaling the data myself, and reverse engineering the "Seurat" clustering algorithm. Regarding the latter, I show you how to visualize the KNN graph that serves as the basis for the Louvain clustering Seurat uses.
