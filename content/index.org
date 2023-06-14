@@ -12,6 +12,11 @@ This website is a place where I can openly share my ideas and non-client work, r
 If you have quesitons or comments, or you're interested in working or collaborating with me, just send me a message (see contact info below). I'm always happy to help. 
 * New
 #+HTML: <a href="#top">Back to top</a>
+** [[./cytof_mnn_experiment.html][CyTOF mutual nearest neighbors experiment]]
+Markdown.\\
+
+Phenograph is one of the oldest clustering algorithms, which is really Louvain community detection of a K-Nearest Neighbor (KNN) graph. Here, I make the KNN graph myself, and contrast it with the mutual nearest neighbor (MNN) graph, where Cell 1 is connected to Cell 2 if and only if they both are part of each other's respective KNN. I find that clustering the MNN graph might provide a little more resolution than the KNN graph, if properly optimized.
+
 ** [[./charite_covid_figure_2.html][Single-cell sequencing: Schulte-Schrepping et al. Cell 2020]]
 Markdown.\\
 
