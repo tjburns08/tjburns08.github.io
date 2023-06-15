@@ -370,8 +370,8 @@ we see.</p>
 <div id="data-preprocessing" class="section level2">
 <h2>Data preprocessing</h2>
 <p>First, we read in and process CyTOF data. The data analyzed in this
-markdown is healthy PBMCs from the Stanford HIMC, and can be found <a href="https://flowrepository.org/experiments/1363/download_ziped_files">here</a>.
-Note the PDF at the bottom, which explains more about the dataset.</p>
+markdown is healthy PBMCs from a Stanford HIMC multicenter study, and
+can be found <a href="http://flowrepository.org/id/FR-FCM-ZY3Z">here</a>.</p>
 <p>I’m going to breeze through the data processing part, but if you want
 a more in-depth look at this, please go <a href="https://tjburns08.github.io/cytof_pipeline_one_file.html">here</a>.</p>
 <pre class="r"><code>library(flowCore)
@@ -519,8 +519,8 @@ know whether 1 -&gt; 2 AND 2 -&gt; 1.</p>
 ##     union</code></pre>
 <pre class="r"><code>g &lt;- graph.adjacency(adj_matrix, mode = &quot;directed&quot;)
 g</code></pre>
-<pre><code>## IGRAPH 032f5e4 D--- 20000 4e+05 -- 
-## + edges from 032f5e4:
+<pre><code>## IGRAPH 682e590 D--- 20000 4e+05 -- 
+## + edges from 682e590:
 ##  [1] 1-&gt;    1 1-&gt; 1718 1-&gt; 3087 1-&gt; 4562 1-&gt; 6764 1-&gt; 6860 1-&gt; 7126 1-&gt; 7346
 ##  [9] 1-&gt; 7795 1-&gt; 7800 1-&gt; 7965 1-&gt;10666 1-&gt;10890 1-&gt;11014 1-&gt;11282 1-&gt;12069
 ## [17] 1-&gt;13380 1-&gt;14545 1-&gt;14593 1-&gt;19939 2-&gt;    2 2-&gt;  656 2-&gt; 1020 2-&gt; 2629
@@ -551,7 +551,7 @@ mnn_edges[1:5]</code></pre>
 <pre><code>## [1]  TRUE FALSE FALSE FALSE FALSE</code></pre>
 <pre class="r"><code># What&#39;s the edge
 E(g)[1:5]</code></pre>
-<pre><code>## + 5/4e+05 edges from 032f5e4:
+<pre><code>## + 5/4e+05 edges from 682e590:
 ## [1] 1-&gt;   1 1-&gt;1718 1-&gt;3087 1-&gt;4562 1-&gt;6764</code></pre>
 <p>Ok, now we have to somehow turn this into node information that we
 can color. How are we going to do this?</p>
@@ -561,8 +561,8 @@ mutual. We can color a UMAP by that.</p>
 <p>So let’s first make a subgraph of only mutual edges.</p>
 <pre class="r"><code>g_mutual &lt;- igraph::subgraph.edges(g, E(g)[mnn_edges])
 g_mutual</code></pre>
-<pre><code>## IGRAPH b3fc6b6 D--- 20000 218508 -- 
-## + edges from b3fc6b6:
+<pre><code>## IGRAPH 63bb269 D--- 20000 218508 -- 
+## + edges from 63bb269:
 ##  [1] 1-&gt;    1 1-&gt; 7965 1-&gt;10890 1-&gt;11014 1-&gt;12069 2-&gt;    2 2-&gt;  656 2-&gt; 5079
 ##  [9] 2-&gt;10871 3-&gt;    3 3-&gt;  170 3-&gt;  296 3-&gt; 1967 3-&gt; 2750 3-&gt; 3300 3-&gt; 5825
 ## [17] 3-&gt; 6403 3-&gt;11799 3-&gt;13159 3-&gt;16755 3-&gt;16884 3-&gt;17746 4-&gt;    4 4-&gt;  858
