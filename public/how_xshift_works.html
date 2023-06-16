@@ -585,8 +585,8 @@ know whether 1 -&gt; 2 AND 2 -&gt; 1.</p>
 ##     union</code></pre>
 <pre class="r"><code>g &lt;- graph.adjacency(adj_matrix, mode = &quot;directed&quot;)
 g</code></pre>
-<pre><code>## IGRAPH 23064e1 D--- 20000 6e+05 -- 
-## + edges from 23064e1:
+<pre><code>## IGRAPH 29679a3 D--- 20000 6e+05 -- 
+## + edges from 29679a3:
 ##  [1] 1-&gt;    1 1-&gt; 1718 1-&gt; 3087 1-&gt; 3860 1-&gt; 4562 1-&gt; 5198 1-&gt; 5625 1-&gt; 5810
 ##  [9] 1-&gt; 6374 1-&gt; 6764 1-&gt; 6784 1-&gt; 6860 1-&gt; 7126 1-&gt; 7346 1-&gt; 7795 1-&gt; 7800
 ## [17] 1-&gt; 7965 1-&gt;10666 1-&gt;10890 1-&gt;10982 1-&gt;11014 1-&gt;11282 1-&gt;12069 1-&gt;13380
@@ -603,9 +603,9 @@ and walk it up density until its at a peak.</p>
 <p>First, let’s add density as a node attribute of the graph.</p>
 <pre class="r"><code>V(g)$density &lt;- dens
 g</code></pre>
-<pre><code>## IGRAPH 23064e1 D--- 20000 6e+05 -- 
+<pre><code>## IGRAPH 29679a3 D--- 20000 6e+05 -- 
 ## + attr: density (v/n)
-## + edges from 23064e1:
+## + edges from 29679a3:
 ##  [1] 1-&gt;    1 1-&gt; 1718 1-&gt; 3087 1-&gt; 3860 1-&gt; 4562 1-&gt; 5198 1-&gt; 5625 1-&gt; 5810
 ##  [9] 1-&gt; 6374 1-&gt; 6764 1-&gt; 6784 1-&gt; 6860 1-&gt; 7126 1-&gt; 7346 1-&gt; 7795 1-&gt; 7800
 ## [17] 1-&gt; 7965 1-&gt;10666 1-&gt;10890 1-&gt;10982 1-&gt;11014 1-&gt;11282 1-&gt;12069 1-&gt;13380
@@ -641,11 +641,11 @@ g</code></pre>
 }</code></pre>
 <p>And now we test it.</p>
 <pre class="r"><code># Call the function with the start node
-peak_node &lt;- FindPeak(g, start_node = 1, verbose = TRUE)</code></pre>
-<pre><code>## [1] 1</code></pre>
+peak_node &lt;- FindPeak(g, start_node = 10, verbose = TRUE)</code></pre>
+<pre><code>## [1] 10</code></pre>
 <pre class="r"><code>peak_node</code></pre>
-<pre><code>## + 1/20000 vertex, from 23064e1:
-## [1] 5625</code></pre>
+<pre><code>## + 1/20000 vertex, from 29679a3:
+## [1] 1923</code></pre>
 <p>Ok, now you can see what it’s doing. We’re walking along the graph
 until we get to a peak. I note that with a lower k, the landscape is
 more rugged, so there are more peaks (which means more clusters
