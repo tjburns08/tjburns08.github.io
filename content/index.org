@@ -36,15 +36,6 @@ Fiction.\\
 
 I am learning Lisp at the moment. In learning about the history of the language, I realized that the story of Lisp is analogous to the Tower of Babel. I am not the first person to realize this by any means, but I saw it in a way that I haven't seen anywhere else. So I decided to put it into words here.
 
-** [[./cytof_analysis_language_tour.html][CyTOF analysis langauge tour in R Markdown]]
-Markdown.\\
-
-I typically analyze CyTOF data in R. However, there are plenty of reasons why one might want to analyze CyTOF data in other languages as well. Here, I show that you can use python, julia, C++, and SQL directly in R Markdown. I do most of my work in R Markdown these days, but I like the flexibility of being able to switch from one language to the other and back, all in the same literate programming environement.
-** [[./metaprogramming_in_R.html][Metaprogramming in R]]
-Markdown.\\
-
-When I started learning Lisp, I learned of the concept of metaprogramming. This means using code to change the programming language itself. A practical example of this in English is using "they/them" to denote gender-neutral singular pronouns, overriding the plural default. Here, I show you how to change the syntax of R to fit your fancy. I show you how to change the "+" operator in ggplot2, and to zero-index vectors, as they're done in many other programming languages. The goal of this markdown is to get you to see through and unsee the arbitrary constraints that any language, spoken/written or programming, will give you.
-
 ** [[https://rseng.github.io/devstories/2023/tyler-burns-part-2/][Developer Stories Podcast: Part 2: Be the flame, not the moth]]
 Guest on a Podcast.\\
 
@@ -55,31 +46,13 @@ Guest on a podcast.\\
 
 I talk with software developer Vanessa Sochat about my time in graduate school. I started out as a wet-lab biologist. But after taking an intro CS class for fun, I realized that I really enjoyed the dry-lab side of things, and my career trajectory changed accordingly. Have a listen for more details. This is part 1 of 2.
 
-** [[./enjoyment_arbitrage.html][Enjoyment arbitrage]]
-Article.\\
-
-I think it is possible to do what you love, if you put yourself into an environment where others simply don't want to do what you do. I show how this works in my world, where many people are simply not interested in learning or doing bioinformatics at my level of depth and involvement.
-
-** [[./pursuit_of_health.html][The pursuit of health]]
-Article.\\
-
-A collection of aphorisms that speak to what I've learned over the past several decades of pursuing health and fitness, from my own workouts and diet to my work as a personal trainer. Everyone is different, and there is no cookie cutter approach. So by speaking in aphorism, I hope to speak to the truths that underlie everyone's unique pursuit.
-
-** [[./mathematician_and_hacker.html][The mathematician and the hacker]]
-Fiction.\\
-
-Rated PG-13 for language and people being not so nice. A conversation between a hacker and a mathematician that explores the contrast between these worldviews. The mathematician wants to create elegant theories and abstractions that the world fits into. The hacker is more interested in finding and leaning into the things that don't add up. The whitespace.
-** [[./fight_complexity_with_complexity.html][Fight complexity with complexity]]
-Article.\\
-
-A new paradigm that seems to be emerging from the bottom up, linking my work on dimensionality reduction interpretation with GPT-based interpretations of the human brain and cancer immunotherapy. We use something complex to understand or fight something complex. This is opposed to the older ideal of having perfect mechanistic understanding of what we're doing.
-
-** [[./burns_tedx_caricature.pdf][TEDx Basel: caricature of my talk]]
-Work of art.\\
-
-While I was giving my TED talk, unbeknownst to me an artist in the audience was drawing it out in real time, complete with pen and watercolor. He did this for each of the speakers. I was extremely impressed with what he was able to do given the very limited time. My talk is not yet on YouTube, but if you want the gist of it, have a look at this picture.
 * Single-cell analysis
 #+HTML: <a href="#top">Back to top</a>
+** [[./cytof_analysis_language_tour.html][CyTOF analysis langauge tour in R Markdown]]
+Markdown.\\
+
+I typically analyze CyTOF data in R. However, there are plenty of reasons why one might want to analyze CyTOF data in other languages as well. Here, I show that you can use python, julia, C++, and SQL directly in R Markdown. I do most of my work in R Markdown these days, but I like the flexibility of being able to switch from one language to the other and back, all in the same literate programming environement.
+
 ** [[./julia_cytof_pipeline_one_file.html][CyTOF UMAP with Julia: an experiment]]
 Markdown.\\
 
@@ -287,6 +260,16 @@ Markdown.\\
 You are only as good as the questions you ask yourself and others. My uncle told me that many years ago when I was getting started with my career and it stuck. This has been relevant to me in terms of having and maintaining good friendships, being a good husband, being a good family member, being a good businessman, and when I was in graduate school, being a good scientist, and simply being an interesting person. I have a very large list of questions now that is very overwhelming. So I turned them into an embedding using the BERT language model, turned that into a nearest neighbor graph, and then derived insight from looking at the questions in terms of "communities." 
 * Philosophy and rationality
 #+HTML: <a href="#top">Back to top</a>
+** [[./enjoyment_arbitrage.html][Enjoyment arbitrage]]
+Article.\\
+
+I think it is possible to do what you love, if you put yourself into an environment where others simply don't want to do what you do. I show how this works in my world, where many people are simply not interested in learning or doing bioinformatics at my level of depth and involvement.
+
+** [[./fight_complexity_with_complexity.html][Fight complexity with complexity]]
+Article.\\
+
+A new paradigm that seems to be emerging from the bottom up, linking my work on dimensionality reduction interpretation with GPT-based interpretations of the human brain and cancer immunotherapy. We use something complex to understand or fight something complex. This is opposed to the older ideal of having perfect mechanistic understanding of what we're doing.
+
 ** [[./finite_infinite_life_games.html][Finite and infinite-life games]]
 Article.\\
 
@@ -347,6 +330,16 @@ Article.\\
 My current plan for coming economic uncertainty we face in the near term due to the recession, and for uncertainty that wil persist beyond the recession (eg. AI disruption). I talk about re-framing my goals as minimizing rather than maximizing something, and about the systems thinking and sustainability based mindset that one sees in subjects like permaculture. This is helping me be more effective, and figure out unique new ways I can add value to the world. 
 * Computing
 #+HTML: <a href="#top">Back to top</a>
+** [[./metaprogramming_in_R.html][Metaprogramming in R]]
+Markdown.\\
+
+When I started learning Lisp, I learned of the concept of metaprogramming. This means using code to change the programming language itself. A practical example of this in English is using "they/them" to denote gender-neutral singular pronouns, overriding the plural default. Here, I show you how to change the syntax of R to fit your fancy. I show you how to change the "+" operator in ggplot2, and to zero-index vectors, as they're done in many other programming languages. The goal of this markdown is to get you to see through and unsee the arbitrary constraints that any language, spoken/written or programming, will give you.
+
+** [[./mathematician_and_hacker.html][The mathematician and the hacker]]
+Fiction.\\
+
+Rated PG-13 for language and people being not so nice. A conversation between a hacker and a mathematician that explores the contrast between these worldviews. The mathematician wants to create elegant theories and abstractions that the world fits into. The hacker is more interested in finding and leaning into the things that don't add up. The whitespace.
+
 ** [[./ca_rule_space.html][Elementary cellular automata rule space]]
 Markdown.\\
 
@@ -395,6 +388,11 @@ Markdown.\\
 Here, we look at fair coin tosses, unfair coin tosses, and random walks, and explore the randomness of the sequences by doing convolutions on the sequences with kernel size 2.
 * Health
 #+HTML: <a href="#top">Back to top</a>
+** [[./pursuit_of_health.html][The pursuit of health]]
+Article.\\
+
+A collection of aphorisms that speak to what I've learned over the past several decades of pursuing health and fitness, from my own workouts and diet to my work as a personal trainer. Everyone is different, and there is no cookie cutter approach. So by speaking in aphorism, I hope to speak to the truths that underlie everyone's unique pursuit.
+
 ** [[./how_to_get_fit_long_term.html][How to get fit in 20 years]]
 Article.\\
 
@@ -424,8 +422,12 @@ Think of these as both newsletters and time capsules. They are not exhaustive, b
 **** Mentored several high school students and undergraduates throughout my thesis work, teaching them biology, computer science, statistics, and importantly how to integrate these fields.
 **** Built a website for my PhD program using HTML, JavaScript, and SQL, that helped first year students connect with current and previous members of a given research laboratory (I'd link it but you have to be a Stanford student to view it).
 
-* Fun stuff
+* Misc featured
 #+HTML: <a href="#top">Back to top</a>
+** [[./burns_tedx_caricature.pdf][TEDx Basel: caricature of my talk]]
+Work of art.\\
+
+While I was giving my TED talk, unbeknownst to me an artist in the audience was drawing it out in real time, complete with pen and watercolor. He did this for each of the speakers. I was extremely impressed with what he was able to do given the very limited time. My talk is not yet on YouTube, but if you want the gist of it, have a look at this picture.
 ** [[./life_and_love_during_coronazeit.pdf][Life and love in Berlin during the Coronazeit]]
 Feature.\\
 
@@ -435,7 +437,8 @@ An article I wrote in 2020 for the annual Krupp Internship e-newsletter. It was 
 Feature.\\
 
 "Im" is short for "in dem" in German. Not a typo. An article I did for the Stanford Krupp Internship Program, which had huge impact on my life and career trajectory. In a nutshell, I was pre-med prior to my medical internship at the Charite Hospital in Berlin in 2007. Through the internship, I realized that I wanted to do research rather than clinical work. I got my PhD and came back to Berlin to work on the Charite Hospital campus once again, this time as a researcher! I will be forever grateful for the Krupp Internship program and Stanford's Bing Overseas Study Program.
-
+* Fun stuff
+#+HTML: <a href="#top">Back to top</a>
 ** [[./speech_memorization_helper.html][Speech memorization helper]]
 Web page.\\
 
