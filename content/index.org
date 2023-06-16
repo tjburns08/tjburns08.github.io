@@ -12,6 +12,11 @@ This website is a place where I can openly share my ideas and non-client work, r
 If you have quesitons or comments, or you're interested in working or collaborating with me, just send me a message (see contact info below). I'm always happy to help. 
 * New
 #+HTML: <a href="#top">Back to top</a>
+** [[./how_xshift_works.html][How X-shift works]]
+Markdown.\\
+
+X-shift is a popular clustering algorithm for CyTOF and related high-dimensional data that is related to mean-shift clustering. It is especially good for the detection of rare cell subsets. While X-shift is computationally intensive and written in java to overcome several engineering hurdles accordingly, here I show you a simplified version of X-shift written in R that leverages the igraph package. The purpose of this markdown is to show you how X-shift works in a language that is less verbose and more familiar to the average CyTOF user than java.
+
 ** [[./cytof_mnn_experiment.html][CyTOF mutual nearest neighbors experiment]]
 Markdown.\\
 
