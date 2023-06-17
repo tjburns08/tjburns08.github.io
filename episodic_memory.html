@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Episodic memory is the new declarative memory</title>
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" href="simple.css" />
+<style>
+  .dark-mode {
+    --bg: #212121;
+    --accent-bg: #2b2b2b;
+    --text: #dcdcdc;
+    --text-light: #ababab;
+    --accent: #ffb300;
+    --code: #f06292;
+    --preformatted: #ccc;
+    --disabled: #111;
+  }
+  .dark-mode img,
+  .dark-mode video {
+    opacity: 0.8;
+  }
+  .toggle-theme-btn {
+      transform: scale(0.7);
+      opacity: 0.4;
+      transition: opacity 0.2s;
+    }
+    .toggle-theme-btn:hover {
+      opacity: 0.4;
+    }
+</style>
+<script>
+ function toggleDarkMode() {
+    const body = document.body;
+    body.classList.toggle("dark-mode");
+    // Save the user's theme preference to localStorage
+    if (body.classList.contains("dark-mode")) {
+      localStorage.setItem("theme", "dark");
+    } else {
+      localStorage.setItem("theme", "light");
+    }
+  }
+
+  function setDefaultDarkMode() {
+    // Retrieve the user's theme preference from localStorage
+    const storedTheme = localStorage.getItem("theme");
+
+    // If the stored theme is light, do nothing; otherwise, set it to dark
+    if (storedTheme !== "light") {
+      document.body.classList.add("dark-mode");
+    }
+  }
+
+  // Set the default mode to dark when the DOM is fully loaded
+  document.addEventListener('DOMContentLoaded', setDefaultDarkMode);
+</script>
+</head>
+<body>
+<div id="preamble" class="status">
+<div style="position: fixed; top: 10px; right: 10px;">
+         <button class="toggle-theme-btn" onclick="toggleDarkMode()">Light/Dark</button>
+       </div>
+</div>
+<div id="content" class="content">
+<h1 class="title">Episodic memory is the new declarative memory</h1>
+<p>
+<a href="./index.html">Home</a>
+</p>
+
+<hr />
+<p>
+<i>“The past can hurt. But the way I see it, you can either run from it or learn from it.”</i>
+</p>
+
+<p>
+Rafiki, <i>The Lion King</i>
+</p>
+<hr />
+
+<p>
+In my fourth year of undergrad (2007), my roommate was literally a "once in a generation" investor. Starting from scratch at the age of 12, he had enough money at the end of high school to pay for Stanford in full. In short, when he opened his mouth, we all listened. He talked to us more than once about the idea that having lots of infomration used to be highly valuable, but with the advent of the internet and search engines, now it's synthesizing information that is highly valuable.
+</p>
+
+<p>
+Fast forward to now <span class="timestamp-wrapper"><span class="timestamp">[2023-06-17 Sat]</span></span>, we have large language models that are able to syntheize disparate information from a huge chunk of the internet into a five bullet point guide for whatever your question is. Prior to that of course, places like WikiHow, r/AskReddit, and StackOverflow did the same job. So the question from here is, given that we can store information outside of our memory, and given that we can synthesize infromation outside of our pre-frontal cortex, what role does the human play in knowledge-based activities now?
+</p>
+
+<p>
+One thing I think about in this regard is that when I used to ask my grandma a question, the answer would often involve a story ("well, here is how we did it in Guyana in the 40s"). Whether I agreed with my grandma on this and that, I at least respected her perspective when it was grounded in her direct experience. Until brain-computer interface tools have perfect access to every memory trace in the brain (which might take a while), the best AI models will not have your direct experience in its training data. If we ignore all the rifraf on social media about how whatever new AI model is inadequate for doing this and that, and assume that at some point, AI will be able to do the thing (poetry, art, coding, writing business reports, writing novels, playing strategy game X) much, much better than humans, it still won't have what is stored directly in your brain.
+</p>
+
+<p>
+In this regard, I am doubling down on my direct subjective experience as a way to give value to the world. The simplest example of this is a podcast (<a href="https://rseng.github.io/devstories/2023/tyler-burns-part-1/">part 1</a>, <a href="https://rseng.github.io/devstories/2023/tyler-burns-part-2/">part 2</a>) that I recently did where I simply talked about how I got to where I am both in work and life, from a pure episodic memory standpoint. In my writings on this site, you can see that I try to weave in episodic memory as much as I can to make the points that I make. While I'm going for epistemic rigor, I am also coming from the standpoint of allowing you to embody my perspective on the thing. There is a big difference between "do it like this" and "here is a story from my life that shows you how I came to the conclusion that you should do it like this." The former is an assertion that invites debate, and the latter is a perspective that invites discussion and dialectic.
+</p>
+
+<p>
+When I gave a TED talk last May, for a while the script wasn't really relatable outside of nerds who understand the basics of single-cell analysis, dimensionality reduction, and word embeddings (packed into seven minutes, so no time for a gentle introduction). For a while I couldn't figure out how I was going to make it relatable to everyone else. What glued it all together was episodic memory. The reason those nerdy topics mattered was because the combination of them was key to building a tool that helped me deal with the attention deficit disorder that I've had since I was a little kid, something that is not compatible with the modern attention-for-profit digital world. The talk wasn't about fancy new tools at all. The talk was about "if you have ADD or similar things, and you feel like you're going through great lengths to adapt your brain to a world it wasn't exactly designed for, know that you're not alone, and know that it is not your fault." The people who came up to me after the talk weren't the nerds who were into natrual language processing. It was the ADD kids and adults who have ADD kids. There was a beauty in it, really.
+</p>
+
+<p>
+I recently went on a trip to Essen to celebrate the 40 year anniversary of what is called the Krupp Internship, a Stanford study-abroad internship that I took part in during the summer of 2007, where I was able to shadow and even particpate in clinical work here in Berlin. This allowed me to figure out that I wanted to pursue a PhD rather than a MD, a life-changing realization. I was able to go and talk to other Krupp alumni, and hang out with current students who were just about to start this internship. The interesting thing was that while I don't feel wise (and I'm not, for sure), when I opened my mouth and talked about random stuff in my internship, life after graduating, graduate school, life post-PhD, life in Berlin, major decisions, regrets, and things of that nature, I was able to help them. It didn't feel like much, but it's taking three decades of experience and summarizing it into little bite-sized story-laden perspectives that you otherwise wouldn't get from a smartphone, because it's my unique experience. The other alumni were doing the same thing for the students. The older alumni were doing the same thing to me, which helped me out quite a bit.
+</p>
+
+<p>
+And this brings us back to my roommate from undergrad and his advice. In the 2000s, the world moved from valuing having lots of information to being able to synthesize lots of information. Now, the world is moving into a phase where relevant information can be synthesized for you instantly. Now, I posit that the value of carbon-based AGIs (us) is synthesizing information specifically from our episodic memory, which includes what we saw, what we experienced, what it was like, how it felt when it happened, how it feels now in comparison, how we wished it had gone, and things of this subjective nature.
+</p>
+
+<p>
+One who has studied <a href="https://en.wikipedia.org/wiki/Thinking,_Fast_and_Slow">Kahneman and Tversky</a> can easily argue that our memories are imperfect, we see things through rose-colored glasses, we have nostalgia for the good old days (I look favorably on the 90s, though I know now that the 90s had all kinds of problems), and other <a href="https://en.wikipedia.org/wiki/Cognitive_bias">cognitive biases</a>. To counter this, I write in a journal. This is usually typed, but is sometimes handwritten. Sometimes it includes pictures. Sometimes, I force myself to only write in poetic form. Something where I'm expressing myself a little bit every day. What does this do? Well, when I look back at things I wrote in the "good old days," I often remember that during that year, I was actually quite unhappy. Or I'll be reminded of things that I had simply forgotten. Pictures and social media posts can obviously store information, but what the journal does is capture my unfiltered subjective state. What it was like in February of 2014 in my corner of the world.
+</p>
+
+<p>
+While I've been journaling since I was in college, I'm doubling down on it now, and I'm doubling down on my episodic memory in general. Again, it might be that brain-computer interfaces get solved at some point, and then all my memories are preserved as weights in a large language model. I'll cross that bridge when I get there. But until then, a lot of my contribution to humanity is going to be in the stories I tell.
+</p>
+</div>
+<div id="postamble" class="status">
+<p class="date">Date: June 17, 2023</p>
+<p class="creator"><a href="https://www.gnu.org/software/emacs/">Emacs</a> 28.1 (<a href="https://orgmode.org">Org</a> mode 9.5.2)</p>
+</div>
+</body>
+</html>
