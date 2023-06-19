@@ -761,19 +761,102 @@ print(result)</code></pre>
 ## 5 5.576879 4.148261 3.4024757 1.12120975
 ## 6 6.091201 3.417513 0.8275273 0.23711468
 ## 7 5.344108 1.254631 0.3267140 0.22950380</code></pre>
+<div id="rust" class="section level2">
+<h2>Rust</h2>
+<p>A programmer friend of mine recommended that I look into Rust, so
+here we are. Rust is an exciting new low-level programming language that
+emphasizes performance. Thus, Rust is a nice alternative to think about
+if there’s something in R that you were going to offload to C++. <a href="https://towardsdatascience.com/rust-the-next-big-thing-in-data-science-319a03305883">Here</a>
+is an article saying that Rust is going to become a thing in data
+science, so I’m keeping my eyes open.</p>
+<p>Let’s how we process our CyTOF data using Rust, in the R
+Markdown.</p>
+<p>We’re going to use <a href="https://extendr.github.io/rextendr/index.html">this
+tutorial</a>.</p>
+<p>First, we install the package rextendr. Let’s make sure rust actually
+works. Here’s a simple example from the tutorial. Note that we’re still
+using R, but we’re using a rust function that is called within R.</p>
+<pre class="r"><code>library(rextendr)
+
+# create a Rust function
+rextendr::rust_function(&quot;fn add(a:f64, b:f64) -&gt; f64 { a + b }&quot;)</code></pre>
+<pre><code>## ℹ build directory: &#39;/private/var/folders/6y/qgvrbn_j2v35vfy946hlhh9c0000gn/T/RtmpqsrY1a/file3ad71afe3605&#39;</code></pre>
+<pre><code>## ✔ Writing &#39;/private/var/folders/6y/qgvrbn_j2v35vfy946hlhh9c0000gn/T/RtmpqsrY1a/file3ad71afe3605/target/extendr_wrappers.R&#39;</code></pre>
+<pre class="r"><code># call it from R
+add(2.5, 4.7)</code></pre>
+<pre><code>## [1] 7.2</code></pre>
+<p>And as another way of doing it, let’s use a direct Rust code block.
+You can’t see this, but I’m using {extendr} as the name. Again, this
+block is directly from the tutorial.</p>
+<pre class="rust"><code>rprintln!(&quot;Hello from Rust!&quot;);
+
+let x = 5;
+let y = 7;
+let z = x*y;
+
+z</code></pre>
+<pre><code>## Hello from Rust!
+## [1] 35</code></pre>
+<p>Ok, now let’s do something with our CyTOF data. Say I want to do
+something to each column. Here is a function rust_get_sum from the
+tutorial that takes the sum of either integers or doubles (essentially
+numbers with decimal points).</p>
+<p>I tried to get the whole CyTOF matrix into Rust, but that turned out
+to be more trouble than it was worth, so the easier path is to just
+leverage Rust in the things you otherwise were going to do in R.</p>
+<p>Anyway, here’s the function, and this is an R code block.</p>
+<pre class="r"><code>rust_function(
+  &quot;fn rust_get_sum(x : Either&lt;Integers, Doubles&gt;) -&gt; Either&lt;Rint, Rfloat&gt; {
+      match x {
+          Either::Left(x) =&gt; Either::Left(x.iter().sum()),
+          Either::Right(x) =&gt; Either::Right(x.iter().sum()),
+      }
+  }&quot;,
+  use_dev_extendr = TRUE,                        # Use development version of extendr from GitHub
+  features = &quot;either&quot;,                           # Enable support for Either crate
+  extendr_fn_options = list(use_try_from = TRUE) # Enable advanced type conversion
+)</code></pre>
+<pre><code>## ℹ build directory: &#39;/private/var/folders/6y/qgvrbn_j2v35vfy946hlhh9c0000gn/T/RtmpqsrY1a/file3ad71afe3605&#39;</code></pre>
+<pre><code>## ✔ Writing &#39;/private/var/folders/6y/qgvrbn_j2v35vfy946hlhh9c0000gn/T/RtmpqsrY1a/file3ad71afe3605/target/extendr_wrappers.R&#39;</code></pre>
+<p>So here, we get the sums of each column of our dataset.</p>
+<pre class="r"><code>dat_sums &lt;- purrr::map(dat, rust_get_sum) %&gt;% unlist()</code></pre>
+<p>So out of curiosity, given I haven’t worked with Rust, let’s compare
+how long it took.</p>
+<pre class="r"><code>start_time &lt;- Sys.time()
+dat_sums &lt;- purrr::map(dat, rust_get_sum) %&gt;% unlist()
+end_time &lt;- Sys.time()
+time_taken &lt;- end_time - start_time
+time_taken</code></pre>
+<pre><code>## Time difference of 0.01427388 secs</code></pre>
+<pre class="r"><code>start_time &lt;- Sys.time()
+dat_sums &lt;- purrr::map(dat, sum)
+end_time &lt;- Sys.time()
+time_taken &lt;- end_time - start_time
+time_taken</code></pre>
+<pre><code>## Time difference of 0.002159119 secs</code></pre>
+<p>Ok, it looks like the R implementation is faster. Note that a lot of
+these functions interface with C++, so I’m guessing this is why.</p>
+<p>As I learn Rust, I’ll update the document as I find better use cases
+for using Rust for CyTOF and related data.</p>
+</div>
+<div id="conclusing-remarks" class="section level2">
+<h2>Conclusing remarks</h2>
 <p>There are a few other things you can do within R Markdown, like run
 bash scripts. I tried getting R Markdown to run other languages like
 fortran and Lisp, just for fun. What I found was that you can execute
 external scripts within R Markdown, but you can’t make code chunks
 specifically for those languages.</p>
-<p>There are other literate programming environments, like Emacs Org
-Mode, that allows for a much more robust selection of languages. But
-that is for another time. In my experience, most of my CyTOF analysis is
-done in R, with the occasional python, and increasingly Julia to speed
-up code. C++ has been used only for imaging datasets for now, but it’s
-nice to know that I have it in the toolkit. I have not used SQL yet with
-my CyTOF projects, but I have worked with large databases, and it’s nice
-to know that it’s possible to use those commands as needed.</p>
+<p>There are other literate programming environments, like Jupyter
+notebooks and Emacs Org Mode, that allow for a much more robust
+selection of languages. But that is for another time. In my experience,
+most of my CyTOF analysis is done in R, with the occasional python, and
+increasingly Julia to speed up code. C++ has been used only for imaging
+datasets for now, but it’s nice to know that I have it in the toolkit. I
+have not used SQL yet with my CyTOF projects, but I have worked with
+large databases, and it’s nice to know that it’s possible to use those
+commands as needed. Rust is an interesting case, that could become a
+thing for data science down the line, so I’m paying attention to it.</p>
+</div>
 </div>
 
 
