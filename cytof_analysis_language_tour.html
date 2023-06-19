@@ -780,8 +780,8 @@ using R, but we’re using a rust function that is called within R.</p>
 
 # create a Rust function
 rextendr::rust_function(&quot;fn add(a:f64, b:f64) -&gt; f64 { a + b }&quot;)</code></pre>
-<pre><code>## ℹ build directory: &#39;/private/var/folders/6y/qgvrbn_j2v35vfy946hlhh9c0000gn/T/RtmpqsrY1a/file3ad71afe3605&#39;</code></pre>
-<pre><code>## ✔ Writing &#39;/private/var/folders/6y/qgvrbn_j2v35vfy946hlhh9c0000gn/T/RtmpqsrY1a/file3ad71afe3605/target/extendr_wrappers.R&#39;</code></pre>
+<pre><code>## ℹ build directory: &#39;/private/var/folders/6y/qgvrbn_j2v35vfy946hlhh9c0000gn/T/Rtmp1enwYP/file45e46ab0dc32&#39;</code></pre>
+<pre><code>## ✔ Writing &#39;/private/var/folders/6y/qgvrbn_j2v35vfy946hlhh9c0000gn/T/Rtmp1enwYP/file45e46ab0dc32/target/extendr_wrappers.R&#39;</code></pre>
 <pre class="r"><code># call it from R
 add(2.5, 4.7)</code></pre>
 <pre><code>## [1] 7.2</code></pre>
@@ -816,10 +816,17 @@ leverage Rust in the things you otherwise were going to do in R.</p>
   features = &quot;either&quot;,                           # Enable support for Either crate
   extendr_fn_options = list(use_try_from = TRUE) # Enable advanced type conversion
 )</code></pre>
-<pre><code>## ℹ build directory: &#39;/private/var/folders/6y/qgvrbn_j2v35vfy946hlhh9c0000gn/T/RtmpqsrY1a/file3ad71afe3605&#39;</code></pre>
-<pre><code>## ✔ Writing &#39;/private/var/folders/6y/qgvrbn_j2v35vfy946hlhh9c0000gn/T/RtmpqsrY1a/file3ad71afe3605/target/extendr_wrappers.R&#39;</code></pre>
+<pre><code>## ℹ build directory: &#39;/private/var/folders/6y/qgvrbn_j2v35vfy946hlhh9c0000gn/T/Rtmp1enwYP/file45e46ab0dc32&#39;</code></pre>
+<pre><code>## ✔ Writing &#39;/private/var/folders/6y/qgvrbn_j2v35vfy946hlhh9c0000gn/T/Rtmp1enwYP/file45e46ab0dc32/target/extendr_wrappers.R&#39;</code></pre>
 <p>So here, we get the sums of each column of our dataset.</p>
-<pre class="r"><code>dat_sums &lt;- purrr::map(dat, rust_get_sum) %&gt;% unlist()</code></pre>
+<pre class="r"><code>dat_sums &lt;- purrr::map(dat, rust_get_sum) %&gt;% unlist()
+dat_sums</code></pre>
+<pre><code>##      CD27       CD3     CD123      CD33      CD14      CD61      CD19       CD4 
+## 14423.692 26452.568  6687.240  7560.231 11253.725  3224.887  5598.934 16612.703 
+##      CD8A      CD16     CD235      CD20      CD66      CD45     CD11C    CD45RA 
+## 23923.903 22982.456 18212.965 18450.185 14112.381 48206.362 10295.189 29021.748 
+##      CD38      CD56     HLADR 
+## 21722.920 10319.074 11859.311</code></pre>
 <p>So out of curiosity, given I haven’t worked with Rust, let’s compare
 how long it took.</p>
 <pre class="r"><code>start_time &lt;- Sys.time()
@@ -827,13 +834,13 @@ dat_sums &lt;- purrr::map(dat, rust_get_sum) %&gt;% unlist()
 end_time &lt;- Sys.time()
 time_taken &lt;- end_time - start_time
 time_taken</code></pre>
-<pre><code>## Time difference of 0.01427388 secs</code></pre>
+<pre><code>## Time difference of 0.01321387 secs</code></pre>
 <pre class="r"><code>start_time &lt;- Sys.time()
 dat_sums &lt;- purrr::map(dat, sum)
 end_time &lt;- Sys.time()
 time_taken &lt;- end_time - start_time
 time_taken</code></pre>
-<pre><code>## Time difference of 0.002159119 secs</code></pre>
+<pre><code>## Time difference of 0.001747847 secs</code></pre>
 <p>Ok, it looks like the R implementation is faster. Note that a lot of
 these functions interface with C++, so I’m guessing this is why.</p>
 <p>As I learn Rust, I’ll update the document as I find better use cases
