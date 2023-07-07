@@ -1,0 +1,74 @@
+#+Title: Sconify peer review
+#+Author: Tyler Burns
+#+Date: July 7, 2023
+
+* Commentary
+The following is a peer review (November 17, 2017) for [[https://www.biorxiv.org/content/10.1101/337485v1][a bioinformatics pre-print]] that I wrote in graduate school, and submitted to /Cytometry Part A/. We went through one round of revise and resubmit, where we addressed reviewer comments. When the reviews came back, reviewers 2 and 3 had favorable responses, but reviewer 1 had a negative response, and it was difficult to determine if any revision could change that.
+
+When I got these comments back, I had already gotten my PhD, I was moving to Germany as an American, starting a new job, and starting a freelance consulting operation. I did not want to deal with reviewer 1 while juggling all of this. The comments below were addressed in a manuscript that I eventually submitted as a pre-print to /BiorXiv/ but I did not have the energy to submit it again. I even turned this into a [[https://www.bioconductor.org/packages/release/bioc/html/Sconify.html][BioConductor package]] as the reviewers suggested. I'm salty about this point, only because I have seen plenty of really bad code and obfuscated or missing data make it into high-end publications in my field.
+
+The paper could be better. You'll see in the reviewer comments. I started this project toward the very end of my grad school having moved into bioinformatics in the last few years. I spent the first five years on a wet-lab biochemical assay. I think if I started at year one with this project, I would have been able to transform it into what it could have been. But I'm happy with how far I got with it.
+
+Since this paper has been out, [[https://pubmed.ncbi.nlm.nih.gov/34594043/][other KNN based methods]] have surfaced in single-cell analysis, suggesting that this approach is valid. My pre-print was actually cited in a very nice [[https://elifesciences.org/articles/64653][eLife paper]] from the lab of John Irish, as a method that motivated their approach. Citing pre-prints is not common practice so far as I understand. So taken together, I am comfortable with the contribution my KNN-based work has made.
+
+When you read the reviwer comments below, note the difference in length and valence between reviewer 1 (long, negative) and reviewers 2 and 3 (short, positive). If I am correct in terms of who the reviewers are, they are all heavyweights in the single-cell field, and their opinions should be taken seriously. But again, I think if reviewer 1 wasn't there, I'd perhaps have submitted it again. This is not a unique situation, by the way. It's pretty standard to have one reviewer who is a bit tougher than the others.
+
+The last point is any academic will tell you that the story of every project is you put your evenings and weekends into a manuscript for very little pay, only to have three experts tear it apart. We are used to it, but when I moved into bioinformatics consulting, I was continually shocked not only at the high pay, but the continuous expression of gratitude that my clients expressed toward me all the time. This is not specific to bioinformatics. A good friend of mine in political science experienced the same thing when he transitioned into international relations consulting. Everyone appreciates him now all the time.
+
+So then as much as I love academia, the question is whether I would ever go back and be a postdoc and try to become a tenured professor, after experiencing what I've experienced outside of academia. The answer is I don't think so. The middle ground I have hit has been to do bioinformatics consulting and teaching for academic labs doing good work. I help people address reviewer's comments. But it's a hard life to be directly in it. I'm happy in that it helped me fully realized the type of work I like to do (computational biology), but I will never have those years back.
+
+* Reviewer comments
+** Reviewer 1
+Comments to the Author
+Burns et al. provide a revised manuscript describing their SCONE (or sconify?) method.  While I acknowledge that the method and manuscript have drastically improved (statistics used, comparisons across conditions of the markers used for kNN, explicit normalisation steps described), I still have serious concerns on the validity of the method and on the quality of the software provided.
+
+The serious concerns are:
+
+1. It does not appear that the authors are taking their software seriously.  The GitHub repo is no longer mentioned in the paper and despite their claims in the rebuttal of "we intend to submit to Bioconductor during this second round of reviewing", this goal appears to be a long way off.  There is no documentation, the repo has not been updated recently and the vignette assumes you have files in your local directory.  Why even submit the manuscript when the software is in such terrible shape?  So, as in the first round of review, we are well below the standard for the field.
+
+2. The authors make claims that are not supported by the analyses presented.  In the Discussion, the authors state "we show that the statistical power of such comparison decreases as the number of clusters increases".  But, this was not actually shown.  This statement is in the context of comparing SCONE with k-means clustering across the range of the number of clusters.  At least three things should be noted about this comparison:  i) k-means is not a particular good clustering algorithm for cytometry data [1]; ii) they optimized the k of the k-NN for the dataset, while no optimization has been done for k-means; iii) while they discuss statistical power, they have never actually calculated sensitivity anywhere; their claims on statistical power are based on looking at a tSNE plot where the ground truth is not known!  If the authors want to make blanket statements like this, they should do a formal comparison.  I would actually hypothesise that having overlapping clusters is not critical and that actually, SCONE suffers from limited statistical power because it does so many tests -- one for each cell -- thus having to pay a large price for multiple testing.  In contrast, my hypothesis is: a good clustering algorithm (so, FlowSOM, X-shift, PhenoGraph, Rclusterpp, flowMeans, according to [1]) that over-clusters into 50-200 clusters (exact number is probably dataset-dependent and would require optimization similar to their optimisation of k), computes statistics for each cluster, would actually achieve better statistical power as it gets a good tradeoff between resolution and sensitivity (not an excess number of statistical tests).  With fast algorithms, this could be computed in a couple of minutes even for a large dataset, whereas 100k cells with SCONE would take 80 minutes.  So, what is the value of SCONE?  Overall, this is just a hypothesis and one needs a proper benchmark (independent truth, ROC curves, etc.) for these statements to be made and this was not done here.
+
+[1] https://www.ncbi.nlm.nih.gov/pubmed/27992111
+
+Some minor points are:
+
+1. This is my bias, but in the Introduction the authors discuss dim. reduction plots based on single cells.  I would argue that this is not at all what you want to visualise if the goal is "differences between biological samples".  The data analysis should target the goals of the analysis.  My current view would be heat maps of the clusters (after confirmation that the channels used for clustering do not differ across conditions) of the channel of interest across clusters and samples would be the most valuable to look at.  Cell-based tSNE maps also require that you look at a collection of them to figure out what cell types there are and then look at another one to show where the differences of interest are (e.g. Fig 1).  I think Figure 2 is also a good argument for just using the heatmaps and doing away with the tSNE plots altogether.  My view is that two heatmaps (total) would relay that information in a much more compact and accessible way.
+
+2. In the Intro, the authors state "researchers routinely resort to .. for each subset performing sample-to-sample comparisons of markers that are expected to change (functional markers)".  In statistics, this is a classical selection bias.  You perform statistics on a subset where you expect changes. I really hope that this isn't what people routinely do, because it would invalidate P-values.  Perhaps I have misunderstood the context.
+
+3. I appreciate that the authors have already extended their introduction to include some of the relevant literature.  But, as someone who works in this area and as someone who appreciates fully spelling out the full literature in the Introduction of a manuscript, I feel that the referencing is still quite sparse.  Here are a list of methods that are directly relevant:
+MIMOSA: https://www.ncbi.nlm.nih.gov/pubmed/23887981
+MASC: http://www.biorxiv.org/content/early/2017/08/04/172403
+workflow: https://www.ncbi.nlm.nih.gov/pubmed/28663787
+COMPASS: https://www.ncbi.nlm.nih.gov/pubmed/26006008
+
+1. When authors mention "Per-replicate comparisons", I think they probably mean per-pair?  Replicate is a general term and you could have a case-control situation where there is no relationship between the untreated and treated samples.  I think they are referring to the situation where the same patients cells are stimulated or not, where they can indeed look at per-pair or per-individual changes.  This could be clarified.
+
+2. I like the discussion about normalisation as I think this is an under-developed topic.  However, without any plots of the data, it is a little bit hard to conclude whether quantile normalisation and Z-score transformation is actually what should be applied.  Also, I didn't fully understand the \alpha_n (x_i, x_b) formula.  alpha should only be near 0.5 only in a balanced situation (n_1 = n_2 = n).  What if you have a situation comparing 10 controls to 20 cases?  Also, because we are talking about counts of cells, what happens when cell populations change in abundance between case and control?
+
+3. Although the authors have substantially reduced rhetoric and perhaps I am just sensitive to it, in the sentence "The aforementioned B/D/A dataset was from a study on B cell development .. and a novel computational approach called Wanderlust to infer .." .. the important part is about B cell development and the responsiveness to IL-7.  The part about Wanderlust as novel is just patting themselves on the back and add nothing to the scientific context (i.e., rhetoric).
+
+4. As related to my point above about selection, I also worry about the statement "SCONE as a complementary method .. initially highlight functional changes .. be used as input for downstream ..".  This also sounds like data snooping and I could not support that.  Perhaps the authors can reword this to make clear where they think SCONE fits into a data analysis pipeline.
+** Reviewer 2
+Comments to the Author
+The article was originally written as a general methodology that would work with any dimension reduction algorithm (page 4, line 27 - original manuscript), and one that addressed the biases of clustering algorithms (page 5, line 11 - original manuscript). In fact, it was presented as “the next logical step to the clustering paradigm” (page 4, line 25 - original manuscript) and a tool for functional categorization (page 4 line 45 - original manuscript). We suggested that these claims should be scientifically verified. We suggested comparison with current state-of-the-art algorithms, on a number of different datasets, and using quantitative and objective tests. The authors have responded by removing these claims and have focused the text on visualization. The manuscript now also includes a visual comparison with kmeans using one sample, and the authors suggest that further evaluation is not needed because the purpose of the article is to facilitate visualization. We will defer to the editorial board in this regard. We suggest that at a minimum, the need for proper quantitative evaluation should be discussed in the limitations and future work section.
+
+Our comments regarding technical effects and the free parameter of KNN were addressed properly. The web functionality of the software has been removed. This reduces accessibility for those without a programming background.
+
+Minor comments:
+1) The manuscript currently does not include a discussion of the method, the software, or the study’s limitations.
+
+2) In the revised manuscript, the link to the software has been removed and I was unable to access the package on Bioconductor. I suggest fixing this and also including the code that was used to generate the figures to enable readers to repeat the analysis.
+
+3) In Figure 2, the authors should include plots of STAT5 for both basal and IL7 conditions.
+** Reviewer 3
+Comments to the Author
+I appreciate the effort of the authors in improving the quality of the manuscript, which I think is now substantially higher than the original submission.  Most importantly, the authors have toned down some of the original claims that were not backed up by any data, and for others have provided more rigorous ways of parameter tuning and making the method more useable for real-world applications.  These improvements include making better use of statistics, pre-processing and normalisation that all contribute to, in the end, a better tool that will be much more useful for the scientific community.
+
+I have one remaining major comment, and just a few additional detailed comments:
+I appreciate the more quantitative way of determining the k-parameter, but I find it quite hard to believe that the fact that the loss function is convex (parabolic) with a global minimum, would be a general trend over markers (within a dataset) and over datasets.  If I understood correctly, the authors assessed this trend in just two Cytof datasets.  I would like the authors to explain a bit more in detail how this procedure exactly works when obtaining different values of k for the different markers of a particular dataset, and I would like to know if they have a logical explanation for the convexity of the loss function.  Is it maybe an artifact of this particular loss function ?  Does this generalise beyond the 2 Cytof datasets they tested it on ?  In my experience, optimising the value of k for KNN seldomly results in a convex function, so any insight in why this would be the case on these data would be appreciated.
+
+Details:
+- Good to learn something about arcsinh and arsinh, just make sure you are consistent in the manuscript (sometimes arcshinh, sometimes arsinh)
+- Please mention the code availability in the manuscript
+- Some more documentation and examples of the R-package would be very useful
