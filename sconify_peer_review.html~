@@ -70,9 +70,9 @@
 <a href="./index.html">Home</a>
 </p>
 
-<div id="outline-container-orged58a51" class="outline-2">
-<h2 id="orged58a51">Commentary</h2>
-<div class="outline-text-2" id="text-orged58a51">
+<div id="outline-container-orgb3b7ae8" class="outline-2">
+<h2 id="orgb3b7ae8">Commentary</h2>
+<div class="outline-text-2" id="text-orgb3b7ae8">
 <p>
 The following is a peer review (November 17, 2017) for <a href="https://www.biorxiv.org/content/10.1101/337485v1">a bioinformatics pre-print</a> that I wrote in graduate school, and submitted to <i>Cytometry Part A</i>. We went through one round of revise and resubmit, where we addressed reviewer comments. When the reviews came back, reviewers 2 and 3 had favorable responses, but reviewer 1 had a negative response, and it was difficult to determine if any revision could change that.
 </p>
@@ -94,22 +94,42 @@ When you read the reviwer comments below, note the difference in length and vale
 </p>
 
 <p>
-The last point is any academic will tell you that the story of every project is you put your evenings and weekends into a manuscript for very little pay, only to have three experts tear it apart. We are used to it, but when I moved into bioinformatics consulting, I was continually shocked not only at the high pay, but the continuous expression of gratitude that my clients expressed toward me all the time. This is not specific to bioinformatics. A good friend of mine in political science experienced the same thing when he transitioned into international relations consulting. Everyone appreciates him now all the time.
+One important point is that any academic will tell you that the story of every project is you put your evenings and weekends into a manuscript for very little pay, only to have three experts tear it apart. We are used to it, but when I moved into bioinformatics consulting, I was continually shocked not only at the high pay, but the continuous expression of gratitude that my clients expressed toward me all the time. This is not specific to bioinformatics. A good friend of mine in political science experienced the same thing when he transitioned into international relations consulting. Everyone appreciates him now all the time.
 </p>
 
 <p>
-So then as much as I love academia, the question is whether I would ever go back and be a postdoc and try to become a tenured professor, after experiencing what I've experienced outside of academia. The answer is I don't think so. The middle ground I have hit has been to do bioinformatics consulting and teaching for academic labs doing good work. I help people address reviewer's comments. But it's a hard life to be directly in it. I'm happy in that it helped me fully realized the type of work I like to do (computational biology), but I will never have those years back.
+These days, a lot of my ideas immediately get written or coded up and uploaded to my website. Then, I post that to social media. It's a lot quicker than the academic publication process. Furthermore, a lot of my ideas are not necessarily academic publication level things (eg. full-time, multi-year projects), but make contributions to my field nonetheless. A lot of my work on <a href="https://github.com/tjburns08/knn_sleepwalk">visual intutition</a> around the limits of dimension reduction algorithms (stemming from the bespoke pre-print) falls into this category, for example.
+</p>
+
+<p>
+Taken together, as much as I love academia, one question is whether I would ever go back and be a postdoc and try to become a tenured professor, after experiencing what I've experienced outside of academia. The answer is I don't think so. And I have a lot of respect for those who stick to the academic track. The middle ground I have hit has been to do bioinformatics consulting and teaching for academic labs doing good work. It's fun to be associated with academia, but it's a hard life to be directly in it. I'm happy in that it helped me fully realized the type of work I like to do (computational biology), but I will never have those years back.
+</p>
+
+<p>
+Zooming out, academia is facing some serious issues right now, especially given the increase in the cost of living. PhD student and postdoc stipends were low when I was in academia, but this was before the cost of living got really out of hand.
+</p>
+
+<p>
+There are other issues not as much talked about around the intersection between academia and social media (eg. the dependence on Twitter) that have changed the game for current students and postdocs. The pervasiveness of "big data" in the biomedical sciences has changed what it means to do science. We're not dealing with 2-color immunofluorescence and western blots anymore. It's more complicated than simply following the scientific method. An -omics study could test thousands of hypotheses at the same time, and the scientific method only teaches us what to do with one. How much statistics should a biologist know these days? Should all biologists be trained bioinformaticians? Should we move toward a division of labor model, with the fundamental unit being the biologist-bioinformatician pair?
+</p>
+
+<p>
+Moreover, what keeps me in business is that there is often a lack of adequate bioinformatics support. Given the explosion of new technologies, what it means to do bioinformatics changes rapidly as well. For all of these problems, the short term solution for me was to leave academia, but we need good academic research if we want to solve the problems of today and tomorrow (for example, preventing the next pandemic). So the world cannot afford a mass exodus from academia, which will be a second order effect of the current situation if we don't do something about it. Addressing reviewer comments is hard enough without all of these issues. I want our scientists to spend their time thinking about science, and not how they're going to make rent next month.
+</p>
+
+<p>
+So all of that said, here are the reviewer comments for my pre-print.
 </p>
 </div>
 </div>
 
-<div id="outline-container-org91e96ef" class="outline-2">
-<h2 id="org91e96ef">Reviewer comments</h2>
-<div class="outline-text-2" id="text-org91e96ef">
+<div id="outline-container-org714251a" class="outline-2">
+<h2 id="org714251a">Reviewer comments</h2>
+<div class="outline-text-2" id="text-org714251a">
 </div>
-<div id="outline-container-org4f661f7" class="outline-3">
-<h3 id="org4f661f7">Reviewer 1</h3>
-<div class="outline-text-3" id="text-org4f661f7">
+<div id="outline-container-orgdc84c51" class="outline-3">
+<h3 id="orgdc84c51">Reviewer 1</h3>
+<div class="outline-text-3" id="text-orgdc84c51">
 <p>
 Comments to the Author
 Burns et al. provide a revised manuscript describing their SCONE (or sconify?) method.  While I acknowledge that the method and manuscript have drastically improved (statistics used, comparisons across conditions of the markers used for kNN, explicit normalisation steps described), I still have serious concerns on the validity of the method and on the quality of the software provided.
@@ -158,9 +178,9 @@ COMPASS: <a href="https://www.ncbi.nlm.nih.gov/pubmed/26006008">https://www.ncbi
 </ol>
 </div>
 </div>
-<div id="outline-container-org2acea9e" class="outline-3">
-<h3 id="org2acea9e">Reviewer 2</h3>
-<div class="outline-text-3" id="text-org2acea9e">
+<div id="outline-container-org1ec83bd" class="outline-3">
+<h3 id="org1ec83bd">Reviewer 2</h3>
+<div class="outline-text-3" id="text-org1ec83bd">
 <p>
 Comments to the Author
 The article was originally written as a general methodology that would work with any dimension reduction algorithm (page 4, line 27 - original manuscript), and one that addressed the biases of clustering algorithms (page 5, line 11 - original manuscript). In fact, it was presented as “the next logical step to the clustering paradigm” (page 4, line 25 - original manuscript) and a tool for functional categorization (page 4 line 45 - original manuscript). We suggested that these claims should be scientifically verified. We suggested comparison with current state-of-the-art algorithms, on a number of different datasets, and using quantitative and objective tests. The authors have responded by removing these claims and have focused the text on visualization. The manuscript now also includes a visual comparison with kmeans using one sample, and the authors suggest that further evaluation is not needed because the purpose of the article is to facilitate visualization. We will defer to the editorial board in this regard. We suggest that at a minimum, the need for proper quantitative evaluation should be discussed in the limitations and future work section.
@@ -182,9 +202,9 @@ Minor comments:
 </ol>
 </div>
 </div>
-<div id="outline-container-orgcd9f5e8" class="outline-3">
-<h3 id="orgcd9f5e8">Reviewer 3</h3>
-<div class="outline-text-3" id="text-orgcd9f5e8">
+<div id="outline-container-org988306e" class="outline-3">
+<h3 id="org988306e">Reviewer 3</h3>
+<div class="outline-text-3" id="text-org988306e">
 <p>
 Comments to the Author
 I appreciate the effort of the authors in improving the quality of the manuscript, which I think is now substantially higher than the original submission.  Most importantly, the authors have toned down some of the original claims that were not backed up by any data, and for others have provided more rigorous ways of parameter tuning and making the method more useable for real-world applications.  These improvements include making better use of statistics, pre-processing and normalisation that all contribute to, in the end, a better tool that will be much more useful for the scientific community.
