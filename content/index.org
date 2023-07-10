@@ -12,6 +12,10 @@ This website is a place where I can openly share my ideas and non-client work, r
 If you have quesitons or comments, or you're interested in working or collaborating with me, just send me a message (see contact info below). I'm always happy to help. 
 * New
 #+HTML: <a href="#top">Back to top</a>
+** [[https://www.youtube.com/watch?v=U35T-KzfeLk][TEDx Basel talk: my scrolling problem, and how I fixed it]]
+YouTube video of TED talk.\\
+
+In this talk, I introduce the idea of the Scrolling Problem, which is the incompatiblity of my ADD brain and modern technology built around the infinite scroll. I talk about some work I'm doing to counteract that, which can be found [[https://github.com/tjburns08/twitter_archive_and_embed][here]]. It was originally Twitter, but I switched to RSS mapping, [[https://github.com/tjburns08/rss_map][here]], after Twitter started blocking scrapers.
 ** [[./boring_diet.html][The boring diet: combating our addiction to hyper-yummy food]]
 Article.\\
 
@@ -247,10 +251,10 @@ Associated with [[https://tjburns08.github.io/ask_marcus_writeup.html][What Woul
 Software.\\
 
 Write your thoughts into the text box, and the app will give you a list of cognitive biases that match the thoughts. The app does this using an AI embedding model to embed both your input and Wikipedia's [[https://en.wikipedia.org/wiki/List_of_cognitive_biases][list of cognitive biases]], and then perform a nearest neighbor search. 
-** Twitter archive and embed
+** [[https://github.com/tjburns08/twitter_archive_and_embed][Twitter archive and embed]]
 Software.\\
 
-This is one of the main tools that I wrote and use to address the [[./scrolling_problem.html][scrolling problem]].
+This is one of the main tools that I wrote and use to address the [[./scrolling_problem.html][scrolling problem]]. I gave a [[https://www.youtube.com/watch?v=U35T-KzfeLk][TED talk]] on this project, and in progress of preparation, Twitter decimated my ability to get data. But here is what I've got.
 
 A pipeline that takes as input a list of twitter user names that you supply. First, it scrapes the entire twitter history for the given names. Second, it uses BERT to make a topic-based high-dimensional embedding of every tweet per user name. If these two steps had already been done for a given user, it will update with the new tweets. Then, the user selects a subset of users to visualize. For these users, the BERT embeddings are converted into a UMAP, which is then clustered and annotated with extracted keywords per cluster. Finally, the results are visualized in an interactive user interface.
 ** [[https://huggingface.co/spaces/tjburns/duckduckgo_2d_search][DuckDuckGo 2-D Search]]
