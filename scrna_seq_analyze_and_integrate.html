@@ -358,8 +358,8 @@ versus not integrated</h1>
 
 <p><a href="https://tjburns08.github.io/">Home</a></p>
 <hr />
-<p>Rocky: <em>I see three of him!</em> Duke: <em>Right! Hit the one in
-the middle.</em></p>
+<p>Rocky: <em>I see three of him!</em><br> Duke: <em>Right! Hit the one
+in the middle.</em></p>
 <p>Rocky 4, <a href="https://www.youtube.com/watch?v=qorFS7X1i4Q">boxing
 match versus Drago</a>.</p>
 <hr />
@@ -387,7 +387,7 @@ biologists, and leaders alike.</p>
 Seurat vignette</a> on data integration, where I show that the analysis
 of the un-integrated data look like.</p>
 <p>First, we import the data. Let’s get started with the relevant
-libraries. Notice we’re not importing data from files Rather, we’re
+libraries. Notice we’re not importing data from files. Rather, we’re
 using the <a href="https://github.com/satijalab/seurat-data">SeuratData
 package</a>.</p>
 <pre class="r"><code>library(tidyverse)</code></pre>
@@ -419,8 +419,10 @@ package</a>.</p>
 ## ✔ Dataset loaded successfully
 ## ❯ Dataset built with a newer version of Seurat than installed
 ## ❓ Unknown version of Seurat installed</code></pre>
-<p>The dataset is one that the Seurat ecosystem gives you with a few
-simple commands.</p>
+<p>There were some issues with getting the “ifnb” dataset of interest
+from the SeuratData package as specified in the vignette. This was
+discussed <a href="https://github.com/satijalab/seurat-data/issues/15">here</a>,
+where the following solution was found.</p>
 <pre class="r"><code>install.packages(&quot;https://seurat.nygenome.org/src/contrib/ifnb.SeuratData_3.0.0.tar.gz&quot;, repos = NULL, type = &quot;source&quot;) 
 
 library(ifnb.SeuratData)</code></pre>
@@ -475,20 +477,20 @@ immune.combined &lt;- RunUMAP(immune.combined, reduction = &quot;pca&quot;, dims
 <pre><code>## Warning: The default method for RunUMAP has changed from calling Python UMAP via reticulate to the R-native UWOT using the cosine metric
 ## To use Python UMAP via reticulate, set umap.method to &#39;umap-learn&#39; and metric to &#39;correlation&#39;
 ## This message will be shown once per session</code></pre>
-<pre><code>## 11:44:01 UMAP embedding parameters a = 0.9922 b = 1.112</code></pre>
-<pre><code>## 11:44:01 Read 13999 rows and found 30 numeric columns</code></pre>
-<pre><code>## 11:44:01 Using Annoy for neighbor search, n_neighbors = 30</code></pre>
-<pre><code>## 11:44:01 Building Annoy index with metric = cosine, n_trees = 50</code></pre>
+<pre><code>## 12:02:37 UMAP embedding parameters a = 0.9922 b = 1.112</code></pre>
+<pre><code>## 12:02:37 Read 13999 rows and found 30 numeric columns</code></pre>
+<pre><code>## 12:02:37 Using Annoy for neighbor search, n_neighbors = 30</code></pre>
+<pre><code>## 12:02:37 Building Annoy index with metric = cosine, n_trees = 50</code></pre>
 <pre><code>## 0%   10   20   30   40   50   60   70   80   90   100%</code></pre>
 <pre><code>## [----|----|----|----|----|----|----|----|----|----|</code></pre>
 <pre><code>## **************************************************|
-## 11:44:02 Writing NN index file to temp file /var/folders/6y/qgvrbn_j2v35vfy946hlhh9c0000gn/T//RtmpnUgkLK/file1162c5a786f02
-## 11:44:02 Searching Annoy index using 1 thread, search_k = 3000
-## 11:44:05 Annoy recall = 100%
-## 11:44:05 Commencing smooth kNN distance calibration using 1 thread with target n_neighbors = 30
-## 11:44:05 Initializing from normalized Laplacian + noise (using irlba)
-## 11:44:06 Commencing optimization for 200 epochs, with 617778 positive edges
-## 11:44:11 Optimization finished</code></pre>
+## 12:02:37 Writing NN index file to temp file /var/folders/6y/qgvrbn_j2v35vfy946hlhh9c0000gn/T//RtmpYY7g9p/file121917fb8953f
+## 12:02:37 Searching Annoy index using 1 thread, search_k = 3000
+## 12:02:40 Annoy recall = 100%
+## 12:02:40 Commencing smooth kNN distance calibration using 1 thread with target n_neighbors = 30
+## 12:02:41 Initializing from normalized Laplacian + noise (using irlba)
+## 12:02:41 Commencing optimization for 200 epochs, with 617778 positive edges
+## 12:02:46 Optimization finished</code></pre>
 <pre class="r"><code>immune.combined &lt;- FindNeighbors(immune.combined, reduction = &quot;pca&quot;, dims = 1:30)</code></pre>
 <pre><code>## Computing nearest neighbor graph
 ## Computing SNN</code></pre>
@@ -501,7 +503,7 @@ immune.combined &lt;- RunUMAP(immune.combined, reduction = &quot;pca&quot;, dims
 ## Running Louvain algorithm...
 ## Maximum modularity in 10 random starts: 0.9055
 ## Number of communities: 15
-## Elapsed time: 1 seconds</code></pre>
+## Elapsed time: 2 seconds</code></pre>
 <p>And we visualize.</p>
 <pre class="r"><code># Visualization
 p1 &lt;- DimPlot(immune.combined, reduction = &quot;umap&quot;, group.by = &quot;stim&quot;)
@@ -525,20 +527,20 @@ immune.combined &lt;- ScaleData(immune.combined, verbose = FALSE)
 immune.combined &lt;- FindVariableFeatures(immune.combined, selection.method = &quot;vst&quot;, nfeatures = 2000) # Had to add this
 immune.combined &lt;- RunPCA(immune.combined, npcs = 30, verbose = FALSE)
 immune.combined &lt;- RunUMAP(immune.combined, reduction = &quot;pca&quot;, dims = 1:30)</code></pre>
-<pre><code>## 11:44:27 UMAP embedding parameters a = 0.9922 b = 1.112</code></pre>
-<pre><code>## 11:44:27 Read 13999 rows and found 30 numeric columns</code></pre>
-<pre><code>## 11:44:27 Using Annoy for neighbor search, n_neighbors = 30</code></pre>
-<pre><code>## 11:44:27 Building Annoy index with metric = cosine, n_trees = 50</code></pre>
+<pre><code>## 12:03:03 UMAP embedding parameters a = 0.9922 b = 1.112</code></pre>
+<pre><code>## 12:03:03 Read 13999 rows and found 30 numeric columns</code></pre>
+<pre><code>## 12:03:03 Using Annoy for neighbor search, n_neighbors = 30</code></pre>
+<pre><code>## 12:03:03 Building Annoy index with metric = cosine, n_trees = 50</code></pre>
 <pre><code>## 0%   10   20   30   40   50   60   70   80   90   100%</code></pre>
 <pre><code>## [----|----|----|----|----|----|----|----|----|----|</code></pre>
 <pre><code>## **************************************************|
-## 11:44:28 Writing NN index file to temp file /var/folders/6y/qgvrbn_j2v35vfy946hlhh9c0000gn/T//RtmpnUgkLK/file1162c7975964d
-## 11:44:28 Searching Annoy index using 1 thread, search_k = 3000
-## 11:44:31 Annoy recall = 100%
-## 11:44:31 Commencing smooth kNN distance calibration using 1 thread with target n_neighbors = 30
-## 11:44:31 Initializing from normalized Laplacian + noise (using irlba)
-## 11:44:31 Commencing optimization for 200 epochs, with 614408 positive edges
-## 11:44:36 Optimization finished</code></pre>
+## 12:03:04 Writing NN index file to temp file /var/folders/6y/qgvrbn_j2v35vfy946hlhh9c0000gn/T//RtmpYY7g9p/file1219178478cb4
+## 12:03:04 Searching Annoy index using 1 thread, search_k = 3000
+## 12:03:06 Annoy recall = 100%
+## 12:03:06 Commencing smooth kNN distance calibration using 1 thread with target n_neighbors = 30
+## 12:03:07 Initializing from normalized Laplacian + noise (using irlba)
+## 12:03:07 Commencing optimization for 200 epochs, with 614408 positive edges
+## 12:03:12 Optimization finished</code></pre>
 <pre class="r"><code>immune.combined &lt;- FindNeighbors(immune.combined, reduction = &quot;pca&quot;, dims = 1:30)</code></pre>
 <pre><code>## Computing nearest neighbor graph
 ## Computing SNN</code></pre>
