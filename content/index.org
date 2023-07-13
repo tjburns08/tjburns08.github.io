@@ -12,6 +12,11 @@ This website is a place where I can openly share my ideas and non-client work, r
 If you have quesitons or comments, or you're interested in working or collaborating with me, just send me a message (see contact info below). I'm always happy to help. 
 * New
 #+HTML: <a href="#top">Back to top</a>
+
+** [[./scrna_seq_analyze_and_integrate.html][Single-cell sequencing: analyze and integrate]]
+Markdown.\\
+
+In flow cytometry and CyTOF analysis, we distinguish between "type" and "state" markers, so we can cluster on the former and analyze per-cluster expression changes in the latter. For single-cell RNA sequencing, we cannot make this distinguishment. Thus, we have to rely on data integration algorithms when we are analyzing pre-treatment and post-treatment datasets. I show how this is done, and I show how failure to do so can lead research teams to falsely interpret the data, and make false conclusions. Thus, understanding data integration is critical to keeping research teams on track.
 ** [[https://www.youtube.com/watch?v=U35T-KzfeLk][TEDx Basel talk: my scrolling problem, and how I fixed it]]
 YouTube video of my TED talk.\\
 
@@ -34,6 +39,8 @@ Markdown.\\
 
 X-shift is a popular clustering algorithm for CyTOF and related high-dimensional data that is related to mean-shift clustering. It is especially good for the detection of rare cell subsets. While X-shift is computationally intensive and written in java to overcome several engineering hurdles accordingly, here I show you a simplified version of X-shift written in R that leverages the igraph package. The purpose of this markdown is to show you how X-shift works in a language that is less verbose and more familiar to the average CyTOF user than java.
 
+* Single-cell analysis
+#+HTML: <a href="#top">Back to top</a>
 ** [[./cytof_mnn_experiment.html][CyTOF mutual nearest neighbors experiment]]
 Markdown.\\
 
@@ -48,23 +55,6 @@ Markdown.\\
 
 I use the classic Seurat PBMC 3k vignette as a foundation to explore the guts of the high-level Seurat functions within. This includes normalizing and scaling the data myself, and reverse engineering the "Seurat" clustering algorithm. Regarding the latter, I show you how to visualize the KNN graph that serves as the basis for the Louvain clustering Seurat uses.
 
-** [[./lisp_machine_of_babel.html][The Lisp machine of Babel]]
-Fiction.\\
-
-I am learning Lisp at the moment. In learning about the history of the language, I realized that the story of Lisp is analogous to the Tower of Babel. I am not the first person to realize this by any means, but I saw it in a way that I haven't seen anywhere else. So I decided to put it into words here.
-
-** [[https://rseng.github.io/devstories/2023/tyler-burns-part-2/][Developer Stories Podcast: Part 2: Be the flame, not the moth]]
-Guest on a Podcast.\\
-
-Here is part 2 of my appearance on the Developer Stories podcast. In part 1, I talked about my transition from biology to programming and bioinformatics in graduate school. In this podcast, I talk about my life after graduation, which started with a big move from Palo Alto, California to Berlin, Germany. I talk about life out here, projects I'm working on, being self-employed, and starting my own company.
-
-** [[https://rseng.github.io/devstories/2023/tyler-burns-part-1/][Developer Stories Podcast: Part 1: Heavenly light emanating from line 37]]
-Guest on a podcast.\\
-
-I talk with software developer Vanessa Sochat about my time in graduate school. I started out as a wet-lab biologist. But after taking an intro CS class for fun, I realized that I really enjoyed the dry-lab side of things, and my career trajectory changed accordingly. Have a listen for more details. This is part 1 of 2.
-
-* Single-cell analysis
-#+HTML: <a href="#top">Back to top</a>
 ** [[./cytof_analysis_language_tour.html][CyTOF analysis langauge tour in R Markdown]]
 Markdown.\\
 
@@ -349,6 +339,11 @@ Article.\\
 My current plan for coming economic uncertainty we face in the near term due to the recession, and for uncertainty that wil persist beyond the recession (eg. AI disruption). I talk about re-framing my goals as minimizing rather than maximizing something, and about the systems thinking and sustainability based mindset that one sees in subjects like permaculture. This is helping me be more effective, and figure out unique new ways I can add value to the world. 
 * Computing
 #+HTML: <a href="#top">Back to top</a>
+** [[./lisp_machine_of_babel.html][The Lisp machine of Babel]]
+Fiction.\\
+
+I am learning Lisp at the moment. In learning about the history of the language, I realized that the story of Lisp is analogous to the Tower of Babel. I am not the first person to realize this by any means, but I saw it in a way that I haven't seen anywhere else. So I decided to put it into words here.
+
 ** [[./metaprogramming_in_R.html][Metaprogramming in R]]
 Markdown.\\
 
@@ -432,6 +427,15 @@ Think of these as both newsletters and time capsules. They are not exhaustive, b
 ** [[./2023_march.html][March 2023]]
 * Misc featured
 #+HTML: <a href="#top">Back to top</a>
+** [[https://rseng.github.io/devstories/2023/tyler-burns-part-2/][Developer Stories Podcast: Part 2: Be the flame, not the moth]]
+Guest on a Podcast.\\
+
+Here is part 2 of my appearance on the Developer Stories podcast. In part 1, I talked about my transition from biology to programming and bioinformatics in graduate school. In this podcast, I talk about my life after graduation, which started with a big move from Palo Alto, California to Berlin, Germany. I talk about life out here, projects I'm working on, being self-employed, and starting my own company.
+
+** [[https://rseng.github.io/devstories/2023/tyler-burns-part-1/][Developer Stories Podcast: Part 1: Heavenly light emanating from line 37]]
+Guest on a podcast.\\
+
+I talk with software developer Vanessa Sochat about my time in graduate school. I started out as a wet-lab biologist. But after taking an intro CS class for fun, I realized that I really enjoyed the dry-lab side of things, and my career trajectory changed accordingly. Have a listen for more details. This is part 1 of 2.
 ** [[./burns_tedx_caricature.pdf][TEDx Basel: caricature of my talk]]
 Work of art.\\
 
