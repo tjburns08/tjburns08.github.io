@@ -12,7 +12,7 @@ This website is a place where I can openly share my ideas and non-client work, r
 If you have quesitons or comments, or you're interested in working or collaborating with me, just send me a message (see contact info below). I'm always happy to help. 
 * New
 #+HTML: <a href="#top">Back to top</a>
-** [[./scrna_seq_analyze_and_integrate.html][Single-cell sequencing: analyze and integrate]]
+** [[./scrna_seq_analyze_and_integrate.html][Single-cell sequencing: integrated vs not integrated]]
 Markdown.\\
 
 In flow cytometry and CyTOF analysis, we distinguish between "type" and "state" markers, so we can cluster on the former and analyze per-cluster expression changes in the latter. For single-cell RNA sequencing, we cannot make this distinguishment. Thus, we have to rely on data integration algorithms when we are analyzing pre-treatment and post-treatment datasets. I show how this is done, and I show how failure to do so can lead research teams to falsely interpret the data, and make false conclusions. Thus, understanding data integration is critical to keeping research teams on track.
@@ -24,22 +24,39 @@ In this talk, I introduce the idea of the Scrolling Problem, which is the incomp
 Article.\\
 
 I talk about the hypothesis that the existence and wide availability really good-tasting food is a contributor to the obesity epidemic. I talk about experiences where I've had food that tastes so good that it makes me feel uneasy, like I'm going to become addicted. I call this hyper-yummy food. From this comes the idea of making your diet more boring, less yummy, as a first step to taking control of your nutrition, as opposed to cutting calories.
-** [[./zelda.html][Zelda, the hero instinct, and narratives]]
-Article.\\
-
-I take the classic game Zelda: A Link to the Past, and draw parallels between the gameplay and many aspects of my life. I talk especially about our "hero instinct," in terms of how we really vibe with hero-centric games like Zelda, and I go into the general concept of narratives. How do these mesh with the complex, interconnected modern world, in the workplace and beyond?
-
-** [[./episodic_memory.html][Episodic memory is the new semantic memory]]
-Article.\\
-
-First, we valued having information. After the rise of the internet and search engines, we valued synthesizing information. After the rise of AI, I think our value as humans will be increasingly in having and synthesizing information from our episodic memory, our personal experience.
 ** [[./how_xshift_works.html][How X-shift works]]
 Markdown.\\
 
 X-shift is a popular clustering algorithm for CyTOF and related high-dimensional data that is related to mean-shift clustering. It is especially good for the detection of rare cell subsets. While X-shift is computationally intensive and written in java to overcome several engineering hurdles accordingly, here I show you a simplified version of X-shift written in R that leverages the igraph package. The purpose of this markdown is to show you how X-shift works in a language that is less verbose and more familiar to the average CyTOF user than java.
+* Popular
+#+HTML: <a href="#top">Back to top</a>
+** [[./its_more_complicated_than_that.html][It's more complicated than that]]
+Article.\\
 
+This is the observation I run into with just about every line of scientific inquiry. This is despite a revolution of new technologies that allow us to look at much more data, and new algorithms to make sense of these huge datasets. I repeat this phrase every time I start to feel like I've figured it all out.
+
+** [[./run_cytof_with_seurat.html][Run CyTOF analysis with Seurat]]
+Markdown.\\
+
+Seurat is an R package that runs single-cell sequencing and related data. Here, I trick Seurat into thinking my CyTOF PBMC data is single-cell sequencing data. I find out that the effective dimensionality of my CyTOF data appears to be much less than the surface markers I am using (15). This is a counter-intuitive result because our features are carefully curated before the experiment is done.
+** [[https://github.com/tjburns08/knn_sleepwalk][Knn sleepwalk]]
+Software.\\
+
+A wrapper I wrote around the [[https://anders-biostat.github.io/sleepwalk/][sleepwalk]] R package. Hover the cursor over any cell in your embedding, and it will show you the cell's k-nearest neighbors computed from the original feature space (as opposed to the embedding space). This allows you to test your assumptions around how exact a low-dimensional embedding (eg. t-SNE, UMAP) is.
+** [[./scrolling_problem.org][The Scrolling Problem]]
+Article.\\
+
+The article behind my [[https://www.youtube.com/watch?v=U35T-KzfeLk][TEDx Basel talk]]. We spend a large fraction of our lives endlessly scrolling through our feeds, with no control over what hypernormal, outrage-inducing content will appear next. I call this the scrolling problem. I define it, and I have a crack at it by viewing my news feed as map with the help of an AI language model based on BERT.
 * Single-cell analysis
 #+HTML: <a href="#top">Back to top</a>
+** [[./how_xshift_works.html][How X-shift works]]
+Markdown.\\
+
+X-shift is a popular clustering algorithm for CyTOF and related high-dimensional data that is related to mean-shift clustering. It is especially good for the detection of rare cell subsets. While X-shift is computationally intensive and written in java to overcome several engineering hurdles accordingly, here I show you a simplified version of X-shift written in R that leverages the igraph package. The purpose of this markdown is to show you how X-shift works in a language that is less verbose and more familiar to the average CyTOF user than java.
+** [[./scrna_seq_analyze_and_integrate.html][Single-cell sequencing: integrated vs not integrated]]
+Markdown.\\
+
+In flow cytometry and CyTOF analysis, we distinguish between "type" and "state" markers, so we can cluster on the former and analyze per-cluster expression changes in the latter. For single-cell RNA sequencing, we cannot make this distinguishment. Thus, we have to rely on data integration algorithms when we are analyzing pre-treatment and post-treatment datasets. I show how this is done, and I show how failure to do so can lead research teams to falsely interpret the data, and make false conclusions. Thus, understanding data integration is critical to keeping research teams on track.
 ** [[./cytof_mnn_experiment.html][CyTOF mutual nearest neighbors experiment]]
 Markdown.\\
 
@@ -199,7 +216,7 @@ We should all be active content curators. We should all be actively discussing h
 ** [[./scrolling_problem.org][The Scrolling Problem]]
 Article.\\
 
-We spend a large fraction of our lives endlessly scrolling through our feeds, with no control over what hypernormal, outrage-inducing content will appear next. I call this the scrolling problem. I define it, and I have a crack at it by viewing my news feed as map with the help of an AI language model based on BERT. 
+The article behind my [[https://www.youtube.com/watch?v=U35T-KzfeLk][TEDx Basel talk]]. We spend a large fraction of our lives endlessly scrolling through our feeds, with no control over what hypernormal, outrage-inducing content will appear next. I call this the scrolling problem. I define it, and I have a crack at it by viewing my news feed as map with the help of an AI language model based on BERT.
 ** [[./gpt3_student.org][GPT-3 simulating students]]
 Article.\\
 
@@ -268,6 +285,15 @@ Markdown.\\
 You are only as good as the questions you ask yourself and others. My uncle told me that many years ago when I was getting started with my career and it stuck. This has been relevant to me in terms of having and maintaining good friendships, being a good husband, being a good family member, being a good businessman, and when I was in graduate school, being a good scientist, and simply being an interesting person. I have a very large list of questions now that is very overwhelming. So I turned them into an embedding using the BERT language model, turned that into a nearest neighbor graph, and then derived insight from looking at the questions in terms of "communities." 
 * Philosophy and rationality
 #+HTML: <a href="#top">Back to top</a>
+** [[./episodic_memory.html][Episodic memory is the new semantic memory]]
+Article.\\
+
+First, we valued having information. After the rise of the internet and search engines, we valued synthesizing information. After the rise of AI, I think our value as humans will be increasingly in having and synthesizing information from our episodic memory, our personal experience.
+** [[./zelda.html][Zelda, the hero instinct, and narratives]]
+Article.\\
+
+I take the classic game Zelda: A Link to the Past, and draw parallels between the gameplay and many aspects of my life. I talk especially about our "hero instinct," in terms of how we really vibe with hero-centric games like Zelda, and I go into the general concept of narratives. How do these mesh with the complex, interconnected modern world, in the workplace and beyond?
+
 ** [[./enjoyment_arbitrage.html][Enjoyment arbitrage]]
 Article.\\
 
@@ -401,6 +427,11 @@ Markdown.\\
 Here, we look at fair coin tosses, unfair coin tosses, and random walks, and explore the randomness of the sequences by doing convolutions on the sequences with kernel size 2.
 * Health
 #+HTML: <a href="#top">Back to top</a>
+** [[./boring_diet.html][The boring diet: combating our addiction to hyper-yummy food]]
+Article.\\
+
+I talk about the hypothesis that the existence and wide availability really good-tasting food is a contributor to the obesity epidemic. I talk about experiences where I've had food that tastes so good that it makes me feel uneasy, like I'm going to become addicted. I call this hyper-yummy food. From this comes the idea of making your diet more boring, less yummy, as a first step to taking control of your nutrition, as opposed to cutting calories.
+
 ** [[./pursuit_of_health.html][The pursuit of health]]
 Article.\\
 
@@ -435,6 +466,10 @@ Here is part 2 of my appearance on the Developer Stories podcast. In part 1, I t
 Guest on a podcast.\\
 
 I talk with software developer Vanessa Sochat about my time in graduate school. I started out as a wet-lab biologist. But after taking an intro CS class for fun, I realized that I really enjoyed the dry-lab side of things, and my career trajectory changed accordingly. Have a listen for more details. This is part 1 of 2.
+** [[https://www.youtube.com/watch?v=U35T-KzfeLk][TEDx Basel talk: my scrolling problem, and how I fixed it]]
+YouTube video of my TED talk.\\
+
+In this talk, I introduce the idea of the Scrolling Problem, which is the incompatiblity of my ADD brain and modern technology built around the infinite scroll. I talk about some work I'm doing to counteract that, which can be found [[https://github.com/tjburns08/twitter_archive_and_embed][here]]. It was originally Twitter, but I switched to RSS mapping, [[https://github.com/tjburns08/rss_map][here]], after Twitter started blocking scrapers.
 ** [[./burns_tedx_caricature.pdf][TEDx Basel: caricature of my talk]]
 Work of art.\\
 
@@ -500,8 +535,3 @@ I first came across this in one of my old math books, perhaps in middle school. 
 *** [[https://twitter.com/tjburns08][Twitter]]
 *** [[https://github.com/tjburns08][GitHub]]
 *** [[https://burnslsc.com/][Company Website]]
-
-
-
-
-
