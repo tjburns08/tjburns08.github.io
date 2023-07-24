@@ -12,7 +12,11 @@ This website is a place where I can openly share my ideas and non-client work, r
 If you have quesitons or comments, or you're interested in working or collaborating with me, just send me a message (see contact info below). I'm always happy to help. 
 * New
 #+HTML: <a href="#top">Back to top</a>
-** [[./scrna_seq_analyze_and_integrate.html][Single-cell sequencing: integrated vs not integrated]]
+** [[./learn_bioinformatics.html][How I transitioned from biologist to biology-leveraged bioinformatician]]
+Article.\\
+
+In this article, I summarize my journey from biologist at the beginning of grad school to bioinformatician at the end. On top of that, I show you some of the key insights that empowered me to get to where I am now. I link out to a number of references in bioinformatics and computer science that I find meaningful. In short, I hope that anyone in the life sciences reading this article can use it as a resource on their journey to learn bioinformatics.
+** [[./scrna_seq_analyze_and_integrate.html][Single-cell sequencing analysis: the importance of data integration]]
 Markdown.\\
 
 In flow cytometry and CyTOF analysis, we distinguish between "type" and "state" markers, so we can cluster on the former and analyze per-cluster expression changes in the latter. For single-cell RNA sequencing, we cannot make this distinguishment. Thus, we have to rely on data integration algorithms when we are analyzing pre-treatment and post-treatment datasets. I show how this is done, and I show how failure to do so can lead research teams to falsely interpret the data, and make false conclusions. Thus, understanding data integration is critical to keeping research teams on track.
@@ -20,7 +24,7 @@ In flow cytometry and CyTOF analysis, we distinguish between "type" and "state" 
 YouTube video of my TED talk.\\
 
 In this talk, I introduce the idea of the Scrolling Problem, which is the incompatiblity of my ADD brain and modern technology built around the infinite scroll. I talk about some work I'm doing to counteract that, which can be found [[https://github.com/tjburns08/twitter_archive_and_embed][here]]. It was originally Twitter, but I switched to RSS mapping, [[https://github.com/tjburns08/rss_map][here]], after Twitter started blocking scrapers.
-** [[./boring_diet.html][The boring diet: combating our addiction to hyper-yummy food]]
+** [[./boring_diet.html][The boring diet: how I prevent food addiction]]
 Article.\\
 
 I talk about the hypothesis that the existence and wide availability really good-tasting food is a contributor to the obesity epidemic. I talk about experiences where I've had food that tastes so good that it makes me feel uneasy, like I'm going to become addicted. I call this hyper-yummy food. From this comes the idea of making your diet more boring, less yummy, as a first step to taking control of your nutrition, as opposed to cutting calories.
