@@ -12,7 +12,7 @@
 
 <meta name="date" content="2023-07-11" />
 
-<title>Single-cell sequencing data: integrated versus not integrated</title>
+<title>Single-cell sequencing analysis: the importance of data integration</title>
 
 <script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
 // be compatible with the behavior of Pandoc < 2.8).
@@ -349,8 +349,8 @@ display: none;
 
 
 
-<h1 class="title toc-ignore">Single-cell sequencing data: integrated
-versus not integrated</h1>
+<h1 class="title toc-ignore">Single-cell sequencing analysis: the
+importance of data integration</h1>
 <h4 class="date">2023-07-11</h4>
 
 </div>
@@ -477,20 +477,20 @@ immune.combined &lt;- RunUMAP(immune.combined, reduction = &quot;pca&quot;, dims
 <pre><code>## Warning: The default method for RunUMAP has changed from calling Python UMAP via reticulate to the R-native UWOT using the cosine metric
 ## To use Python UMAP via reticulate, set umap.method to &#39;umap-learn&#39; and metric to &#39;correlation&#39;
 ## This message will be shown once per session</code></pre>
-<pre><code>## 12:02:37 UMAP embedding parameters a = 0.9922 b = 1.112</code></pre>
-<pre><code>## 12:02:37 Read 13999 rows and found 30 numeric columns</code></pre>
-<pre><code>## 12:02:37 Using Annoy for neighbor search, n_neighbors = 30</code></pre>
-<pre><code>## 12:02:37 Building Annoy index with metric = cosine, n_trees = 50</code></pre>
+<pre><code>## 10:19:52 UMAP embedding parameters a = 0.9922 b = 1.112</code></pre>
+<pre><code>## 10:19:52 Read 13999 rows and found 30 numeric columns</code></pre>
+<pre><code>## 10:19:52 Using Annoy for neighbor search, n_neighbors = 30</code></pre>
+<pre><code>## 10:19:52 Building Annoy index with metric = cosine, n_trees = 50</code></pre>
 <pre><code>## 0%   10   20   30   40   50   60   70   80   90   100%</code></pre>
 <pre><code>## [----|----|----|----|----|----|----|----|----|----|</code></pre>
 <pre><code>## **************************************************|
-## 12:02:37 Writing NN index file to temp file /var/folders/6y/qgvrbn_j2v35vfy946hlhh9c0000gn/T//RtmpYY7g9p/file121917fb8953f
-## 12:02:37 Searching Annoy index using 1 thread, search_k = 3000
-## 12:02:40 Annoy recall = 100%
-## 12:02:40 Commencing smooth kNN distance calibration using 1 thread with target n_neighbors = 30
-## 12:02:41 Initializing from normalized Laplacian + noise (using irlba)
-## 12:02:41 Commencing optimization for 200 epochs, with 617778 positive edges
-## 12:02:46 Optimization finished</code></pre>
+## 10:19:53 Writing NN index file to temp file /var/folders/6y/qgvrbn_j2v35vfy946hlhh9c0000gn/T//RtmpI68ehB/filee30a659a0b45
+## 10:19:53 Searching Annoy index using 1 thread, search_k = 3000
+## 10:19:56 Annoy recall = 100%
+## 10:19:56 Commencing smooth kNN distance calibration using 1 thread with target n_neighbors = 30
+## 10:19:56 Initializing from normalized Laplacian + noise (using irlba)
+## 10:19:57 Commencing optimization for 200 epochs, with 617778 positive edges
+## 10:20:02 Optimization finished</code></pre>
 <pre class="r"><code>immune.combined &lt;- FindNeighbors(immune.combined, reduction = &quot;pca&quot;, dims = 1:30)</code></pre>
 <pre><code>## Computing nearest neighbor graph
 ## Computing SNN</code></pre>
@@ -527,20 +527,20 @@ immune.combined &lt;- ScaleData(immune.combined, verbose = FALSE)
 immune.combined &lt;- FindVariableFeatures(immune.combined, selection.method = &quot;vst&quot;, nfeatures = 2000) # Had to add this
 immune.combined &lt;- RunPCA(immune.combined, npcs = 30, verbose = FALSE)
 immune.combined &lt;- RunUMAP(immune.combined, reduction = &quot;pca&quot;, dims = 1:30)</code></pre>
-<pre><code>## 12:03:03 UMAP embedding parameters a = 0.9922 b = 1.112</code></pre>
-<pre><code>## 12:03:03 Read 13999 rows and found 30 numeric columns</code></pre>
-<pre><code>## 12:03:03 Using Annoy for neighbor search, n_neighbors = 30</code></pre>
-<pre><code>## 12:03:03 Building Annoy index with metric = cosine, n_trees = 50</code></pre>
+<pre><code>## 10:20:19 UMAP embedding parameters a = 0.9922 b = 1.112</code></pre>
+<pre><code>## 10:20:19 Read 13999 rows and found 30 numeric columns</code></pre>
+<pre><code>## 10:20:19 Using Annoy for neighbor search, n_neighbors = 30</code></pre>
+<pre><code>## 10:20:19 Building Annoy index with metric = cosine, n_trees = 50</code></pre>
 <pre><code>## 0%   10   20   30   40   50   60   70   80   90   100%</code></pre>
 <pre><code>## [----|----|----|----|----|----|----|----|----|----|</code></pre>
 <pre><code>## **************************************************|
-## 12:03:04 Writing NN index file to temp file /var/folders/6y/qgvrbn_j2v35vfy946hlhh9c0000gn/T//RtmpYY7g9p/file1219178478cb4
-## 12:03:04 Searching Annoy index using 1 thread, search_k = 3000
-## 12:03:06 Annoy recall = 100%
-## 12:03:06 Commencing smooth kNN distance calibration using 1 thread with target n_neighbors = 30
-## 12:03:07 Initializing from normalized Laplacian + noise (using irlba)
-## 12:03:07 Commencing optimization for 200 epochs, with 614408 positive edges
-## 12:03:12 Optimization finished</code></pre>
+## 10:20:20 Writing NN index file to temp file /var/folders/6y/qgvrbn_j2v35vfy946hlhh9c0000gn/T//RtmpI68ehB/filee30a5a3e3d60
+## 10:20:20 Searching Annoy index using 1 thread, search_k = 3000
+## 10:20:23 Annoy recall = 100%
+## 10:20:23 Commencing smooth kNN distance calibration using 1 thread with target n_neighbors = 30
+## 10:20:23 Initializing from normalized Laplacian + noise (using irlba)
+## 10:20:23 Commencing optimization for 200 epochs, with 614408 positive edges
+## 10:20:29 Optimization finished</code></pre>
 <pre class="r"><code>immune.combined &lt;- FindNeighbors(immune.combined, reduction = &quot;pca&quot;, dims = 1:30)</code></pre>
 <pre><code>## Computing nearest neighbor graph
 ## Computing SNN</code></pre>

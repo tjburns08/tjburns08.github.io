@@ -1,0 +1,388 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>How I transitioned from biologist to biology-leveraged bioinformatician</title>
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css" />
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">How I transitioned from biologist to biology-leveraged bioinformatician</h1>
+<p>
+<a href="./index.html">Home</a>
+</p>
+
+<hr />
+<p>
+<i>I can’t be as confident about computer science as I can about biology. Biology easily has 500 years of exciting problems to work on. It’s at that level.</i>
+</p>
+
+<p>
+<a href="https://en.wikipedia.org/wiki/Donald_Knuth">Donald E. Knuth</a>. Computer Literacy Bookshops <a href="http://www.literateprogramming.com/clb93.html">interview</a>, 1993
+</p>
+<hr />
+
+<div id="outline-container-org2be00ff" class="outline-2">
+<h2 id="org2be00ff">Introduction</h2>
+<div class="outline-text-2" id="text-org2be00ff">
+<p>
+This article is written for biologists and research team directors with a biology background. If you are a bioinformatician, then perhaps you can be entertained by my perspective, here. Everyone has a slightly or massively different path, afterall.
+</p>
+
+<p>
+The purpose of this article is to give you a foundation of what it is like to go from thinking like a biologist to thinking like a bioinformatician (or computational biologist, or data scientist). I do this by summarizing my journey from biologist to biology-leveraged bioinformatician, introducing basic concepts that were real "aha!" moments along the way. Since this transition, I have been able to provide bioinformatics-based services on a self-employed basis, dating back to 2016. Hopefully in reading this, you will see that you can do this too.
+</p>
+
+<p>
+For an audio version of my journey from biologist to bioinformatician, plus some added goodies about my path to self employment, please listen to my guest appearance on the Developer Stories podcast, <a href="https://rseng.github.io/devstories/2023/tyler-burns-part-1/">part 1</a> and <a href="https://rseng.github.io/devstories/2023/tyler-burns-part-2/">part 2</a>.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org7f05a52" class="outline-2">
+<h2 id="org7f05a52">Learning how to code</h2>
+<div class="outline-text-2" id="text-org7f05a52">
+<p>
+I had two attempts at learning how to code. The first was a genomics class in 2012, done in <a href="https://xkcd.com/224/">Perl</a>. The class was too much too fast. I had to learn the basics of genomics (it wasn't my background), I had to learn how to code, and I had to learn how to analyze genomics datasets. The whole thing was a big blur of cortisol. So I'm not going to talk about it except for here, only to say that if you've had a similar experience, know that you might have simply been in the wrong environment.
+</p>
+
+<p>
+My second attempt was in 2015, when I took Stanford's <a href="https://web.stanford.edu/class/cs106a/">CS106A</a> class along with the undergrads (I was 28). This was a completely different experience. One thing that helped was I started studying the material about a month prior to the class starting, so I could start ahead rather than falling behind. Another thing that helped was that the class was much more focused. I just had to learn how to code, and that's it.
+</p>
+</div>
+
+<div id="outline-container-orgaccea57" class="outline-3">
+<h3 id="orgaccea57">Karel the Robot</h3>
+<div class="outline-text-3" id="text-orgaccea57">
+<p>
+We started with <a href="https://en.wikipedia.org/wiki/Karel_(programming_language)">Karel the Robot</a>, available to the public <a href="https://compedu.stanford.edu/karel-reader/docs/python/en/chapter1.html">here</a>. It's such a simple concept, but was surprisingly deep in terms of just how much it taught me, and how much confidence it gave me. Let me try to distill some of the magic here. Have a look at the image below, so you can get a feel for what Karel is.
+</p>
+
+
+<div id="org2bc7410" class="figure">
+<p><img src="images/karel1.png" alt="karel1.png" width="500px" />
+</p>
+</div>
+
+<p>
+We have a robot facing east. In front of him is a beeper. He runs in python. Your python code consists of commands. The built-in ones are move, pick<sub>beeper</sub> (pick up the blue diamond), and put<sub>beeper</sub>, and turn<sub>left</sub>. So if you have code (taken from <a href="https://compedu.stanford.edu/karel-reader/docs/python/en/chapter2.html">here</a>) that looks like this:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span style="font-weight: bold;">from</span> karel.stanfordkarel <span style="font-weight: bold;">import</span> *
+
+<span style="font-weight: bold;">def</span> <span style="font-weight: bold;">main</span>():
+   move()
+   pick_beeper()
+   move()
+</pre>
+</div>
+
+<p>
+Then Karel ends up here:
+</p>
+
+
+<div id="orge07173f" class="figure">
+<p><img src="images/karel2.png" alt="karel2.png" width="500px" />
+</p>
+</div>
+
+<p>
+The beeper is gone because Karel has it now. He moved twice, so he is two spaces to the right. That line is a wall.
+</p>
+
+<p>
+And that was coding! You gave Karel a set of instructions, written in a particular syntax, that allowed the computer to <a href="https://en.wikipedia.org/wiki/Interpreter_(computing)">interpret the language</a>, which got Karel to do the things. Alright, let's do some more of that.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org3a22e4b" class="outline-3">
+<h3 id="org3a22e4b">Functions</h3>
+<div class="outline-text-3" id="text-org3a22e4b">
+<p>
+Ok, here is where it gets interesting. We're going to look at functions, which one can think of as a fundamental unit of innovation. Suppose Karel wants to walk along that wall, and end up at xy position (4, 2). What does he have to do?
+</p>
+
+<ol class="org-ol">
+<li>Turn left.</li>
+<li>Move.</li>
+<li>Turn right.</li>
+<li>Move.</li>
+</ol>
+
+<p>
+But we have a problem. Karel only knows how to turn left. So to make Karel turn right, we have to write turn<sub>left</sub> three times. So we end up writing the following:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span style="font-weight: bold;">from</span> karel.stanfordkarel <span style="font-weight: bold;">import</span> *
+
+<span style="font-weight: bold;">def</span> <span style="font-weight: bold;">main</span>():
+   turn_left()
+   move()
+   turn_left()
+   turn_left()
+   turn_left()
+   move()
+</pre>
+</div>
+
+<p>
+And maybe that's a bit more unsightly and inconvenient than we wanted. So it's time to innovate. We're going to make a function that teaches Karel how to turn right. Then we can use it over and over again forever, as long as it's written in.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span style="font-weight: bold;">from</span> karel.stanfordkarel <span style="font-weight: bold;">import</span> *
+
+<span style="font-weight: bold;">def</span> <span style="font-weight: bold;">turn_right</span>():
+    turn_left()
+    turn_left()
+    turn_left()
+
+<span style="font-weight: bold;">def</span> <span style="font-weight: bold;">main</span>():
+    turn_left()
+    move()
+    turn_right()
+    move()
+</pre>
+</div>
+
+<p>
+And this brings me to my big point. You've heard of the phrase "we're standing on the shoulders of giants." This is it. People who use our code above will be standing on our shoulders. The shoulders of the highly innovative creation of the function turn<sub>right</sub>. For every invocation, we use one command instead of three. You can turn anything into a function. Any number of commands that do a thing that you want, that you anticipate doing more than twice. You turn it into a function. This is a huge part of learning how to code, and learning what programming actually is.
+</p>
+
+<p>
+Final point: you'll hear the phrase "don't <a href="https://en.wikipedia.org/wiki/Reinventing_the_wheel">reinvent the wheel</a>" throughout your journey. While this does matter when you're providing timely bioinformatics services for clients, I take the opposite approach when I'm innovating. I literally reinvent the wheel, or at least stop caring about whether I'm doing so. If I reinvent a wheel, it's probably going to be a bit different than the existing ones. Maybe in a way that serves as a contribution to the field. I have seen this happen many times in my <a href="http://web.stanford.edu/group/nolan/">thesis lab</a>, one of the most innovative environments (if not the most) I have ever been in. To read more about that, please go <a href="https://tjburns08.github.io/how_to_solve_problems.html">here</a>.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgabba178" class="outline-3">
+<h3 id="orgabba178">Problem decomposition</h3>
+<div class="outline-text-3" id="text-orgabba178">
+<p>
+Another key concept embedded in here is <a href="https://en.wikipedia.org/wiki/Decomposition_(computer_science)">problem decomposition</a>. This is the idea that when you're dealing with a complex problem, you break it down into pieces. Here, we were initially using high-level abstractions like turning right, prior to even thinking about how we're going to implement turn<sub>right</sub> in python. Perhaps thinking about how we're going to implement turn<sub>right</sub> would make us nervous because it's just too much to think about. Problems are hard. Even today, I will get overwhelmed if I don't properly decompose these problems prior to attacking.
+</p>
+
+<p>
+Any biologist understands problem decomposition when thinking about complex <a href="https://en.wikipedia.org/wiki/Design_of_experiments">experimental design</a>, where this is no shortage of controls, replicates, confounds, late night time points, pre-made buffers, and the like to consider before the experiment begins. Any director understands problem decomposition in terms of the <a href="https://www.mbacrystalball.com/blog/strategy/mece-framework/">MECE</a> trees that McKinsey teaches you.
+</p>
+
+<p>
+A variant of problem decomposition is something I use quite a bit, and something <a href="https://en.wikipedia.org/wiki/Claude_Shannon">Claude Shannon</a> used quite a bit: <a href="https://www.youtube.com/watch?v=neA0NJNUEfM">solve a simpler but related problem</a>. If the problem I'm facing is overwhelming to the point where I don't even know how to decompose it, I just simplify and find a little corner of the problem domain that I can start working on, even if it's not the same problem but a related one. This at least gets the psychological momentum going, which moves me into the flow state, which eventually moves me right into the core of the problem. I write extensively about this, and especially the flow state, <a href="https://tjburns08.github.io/tao_of_problem_solving.html">here</a>.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org8c95174" class="outline-3">
+<h3 id="org8c95174">Loops</h3>
+<div class="outline-text-3" id="text-org8c95174">
+<p>
+Ok, now let's introduce one more concept. <a href="https://en.wikipedia.org/wiki/Control_flow#Loops">Loops</a>.
+</p>
+
+<p>
+Let's suppose you have Karel in the following 8x8 grid:
+</p>
+
+
+<div id="org7769a16" class="figure">
+<p><img src="images/karel4.png" alt="karel4.png" width="500px" />
+</p>
+</div>
+
+<p>
+Ok. Let's say we want Karel to move across the grid from one side to the other. How would we do that? We would have to type move() 7 times.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span style="font-weight: bold;">from</span> karel.stanfordkarel <span style="font-weight: bold;">import</span> *
+
+<span style="font-weight: bold;">def</span> <span style="font-weight: bold;">main</span>():
+    move()
+    move()
+    move()
+    move()
+    move()
+    move()
+    move()
+</pre>
+</div>
+
+<p>
+Ok, that was a bit convenient, but we got through it. But wait. What if the grid were a <a href="https://en.wikipedia.org/wiki/Hashlife">million by a million</a>, and Karel had to get all the way across. That's typing move() 999,999 times. And we're busy. Who has the time for that? What if there was a way we could create some sort of loop that would tell Karel to move 999,999 times?
+</p>
+
+<p>
+Well&#x2026;
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span style="font-weight: bold;">from</span> karel.stanfordkarel <span style="font-weight: bold;">import</span> *
+
+<span style="font-weight: bold;">def</span> <span style="font-weight: bold;">main</span>():
+    <span style="font-weight: bold;">for</span> i <span style="font-weight: bold;">in</span> <span style="font-weight: bold;">range</span>(999999):
+        move()
+</pre>
+</div>
+
+<p>
+Done. We just saved ourselves quite a lot of time. If you know what you're doing, between loops and functions, you can make code that runs very efficiently, and save people a lot of time. A lot of what I do in bioinformatics involves getting things done fast. That means having a good menu of relevant functions that I wrote, and using loops liberally, given that a lot of my data involves iterating across matrices that can be millions of rows or columns.
+</p>
+
+<p>
+But it goes without saying that a lot of computing is iterating (looping). Video games operate in a so-called <a href="https://en.wikipedia.org/wiki/Video_game_programming">game loop</a>. Processes from cellular automata to turing machines are loops executing a specific rule set. Vector and matrix operations are often iterators, which can take the form of loops, or <a href="http://adv-r.had.co.nz/Functionals.html">higher level functions</a> that are loops under the hood. And zooming all the way out now, philosophers like <a href="https://www.youtube.com/watch?v=P-2P3MSZrBM">Joscha Bach</a>, who interpret the universe as a <a href="https://en.wikipedia.org/wiki/Digital_physics">discrete process</a>, think of it as a loop over very small time increments, where basic rules are followed among subatomic particles iterating through space.
+</p>
+
+<p>
+Ok, I'll stop here, as going further is beside the point (as much as I'd enjoy doing so). What matters is you're giving the computer a menu of instructions. The computer will inerpret what you do literally. When things are inconvenient, you create new functions or use things like loops to allow fewer lines of code to do more things.
+</p>
+
+<p>
+I encourage you to play around with Karel the Robot. I did so for 3 weeks in CS106A, and I had the foundation to get through the rest of the class without hitting any fundamental road blocks. Because all the building blocks were there for me to build off of. It was a huge time commitment, but it was more than doable. It was immensely enjoyable and empowering. It's hard to describe the feeling of being able to literaly program anything you want on the computer, and having the confidence that you could learn whatever you don't know, to get the thing done. The digital world becomes your oyster.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org901e618" class="outline-3">
+<h3 id="org901e618">On languages</h3>
+<div class="outline-text-3" id="text-org901e618">
+<p>
+I remember having the misconception that after learning my first programming language, the next one would be just as hard and take just as long. This is not true. When you learn python, learning R will simply be a matter of learning the syntax and learning the specific quirks of the language itself. This is because within python, and within Karel, you will have learned many of the core concepts in computer science. These concepts are used in every language, in higher and lower level abstractions. It will be work to learn a new programming language, but it won't be like learning German after learning Spanish (I speak from literal experience).
+</p>
+
+<p>
+The next section, on mass cytometry analysis, initially involved <a href="https://en.wikipedia.org/wiki/MATLAB">MATLAB</a>, and then moved more toward <a href="https://en.wikipedia.org/wiki/R_(programming_language)">R</a>. But if you know python, you'd be able to at least read the code and get what's going on. And on that note: please write code as if others are going to read it when you're not there. This will save many people headache down the line, including future version of yourself reading code you wrote however many years ago
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org1f9279a" class="outline-2">
+<h2 id="org1f9279a">Mass cytometry and the first principles of bioinformatics</h2>
+<div class="outline-text-2" id="text-org1f9279a">
+<p>
+Let's talk about <a href="https://en.wikipedia.org/wiki/Mass_cytometry">mass cytometry</a>, also known as CyTOF. This was a tool developed in the late 2000s by Scott Tanner at University of Toronto, but whose potential was fully realized by <a href="https://www.youtube.com/watch?v=uTCc2-1tbBQ">Garry Nolan</a>, my thesis advisor. The landmark <a href="https://pubmed.ncbi.nlm.nih.gov/21551058/">mass cytometry for immunology</a> paper came out in 2011, and I joined the lab in 2012. The technology was still new, and there were no best practices for analyzing this type of data in biology aside from those developed by the lab and its collaborators.
+</p>
+
+<p>
+What does this <i>feel</i> like? It felt like the world was our oyster. Whatever it is, try it! Imagine that all the stuff you do with Karel the Robot above is completely new, and you're one of the few people in the world who have played around with Karel the Robot, and all the stuff you do with Karel is highly relevant to BioPharma. What would you do in such an environment?
+</p>
+
+<p>
+Try things!
+</p>
+
+<p>
+Unlike single-cell sequencing frameworks like <a href="https://satijalab.org/seurat/">Seurat</a>, we were dealing with the raw data matrices. A typical CyTOF dataset was not a high-level object. It looked something like this:
+</p>
+
+
+<div id="orgfb5d92f" class="figure">
+<p><img src="images/cytof_matrix.png" alt="cytof_matrix.png" width="800px" />
+</p>
+</div>
+
+<p>
+Somehow, this had to get converted into something that was human-readable. One of the critical aspects of CyTOF analysis back then, that still shows now, is that it was highly visual. Why? One reason is because data visualization allows bioinformaticians and biologists to properly communicate, and for scientists to properly <a href="https://www.youtube.com/watch?v=7Rt8sgt7gNE">communicate with non-scientists</a>. Another reason is visualizing everything provides plenty of opportunity to run sanity checks. Does the output make sense?
+</p>
+
+<p>
+Biologists, this is where <a href="https://www.youtube.com/watch?v=AVsfIU3zpvM&amp;t=210s">you will shine</a>. CyTOF then and now, along with single-cell sequencing and high-dimensional imaging datasets that are taking off now, require the eyes of people who know biology deeply. Let me show you what I mean.
+</p>
+
+<p>
+If we roll the clock back to 2011, one of the images that arguably sold the immunology community on the utility of CyTOF was this:
+</p>
+
+
+<div id="org2ac418f" class="figure">
+<p><img src="images/spade_trees.png" alt="spade_trees.png" width="800px" />
+</p>
+</div>
+
+<p>
+Ok, let's unpack what this is. This is mouse bone marrow data run through what is called SPADE, and it's from <a href="https://www.nature.com/articles/nbt.1991">this paper</a>, from a collaboration between the labs of Garry Nolan and Sylvia Plevritis (one of my thesis committee members and an awesome person).
+</p>
+
+<p>
+The spots you're seeing are so-called "clusters." These are clumps of cells that are grouped together. Then these clusters are strung together algorithmically into what's called a <a href="https://en.wikipedia.org/wiki/Minimum_spanning_tree">minimum spanning tree</a>. Ok, but putting our biology hats on, what we see is a classic <a href="https://en.wikipedia.org/wiki/Haematopoiesis">hematopoietic tree</a>. But this data was constructed algorithmically, using CyTOF bone marrow data as input. There was no biologist building the tree.
+</p>
+
+<p>
+In other words, the right algorithm applied to the right data from the right technology was able to recapitulate decades of research in a single go. Contrary to popular belief, Garry Nolan didn't "invent" the CyTOF. Rather, he had the acumen to see that such a technology and the proper data analysis would be able to have such an impact on the immunology community. This was borne, at least in part, out of having both a deep immunology background and a deep bioinformatics background, along with the drive to take action. In other words, I think you can develop this acumen too, and this is a large part of my motivation to write this article for all of you.
+</p>
+
+<p>
+Acumen and all, you can imagine what was going through the minds of the immunologists at the major cytometry conference CYTO 2012 in Leipzig, Germany (I was in the audience) when Garry, the keynote speaker, was showing these images to a packed audience. What will this reveal about immunological diseases? Cancer? What will it show with <i>my</i> stuff? The future was full of possibility[1].
+</p>
+
+<p>
+Again, it was so new that literally you could do anything with it, and it would be new. On the bioinformatics side, there were no R and python CyTOF libraries or any of that. Just the bioinformaticians (I wasn't one yet), working closely with the biologists (me at the time). If you're ok with this, it's exciting. If you're used to high-level frameworks and well-established best practices, this can be stressful. I enjoy this type of work, so if I go to an environemnt where people don't enjoy this type of work, then <a href="https://tjburns08.github.io/enjoyment_arbitrage.html">I can get paid to do what I love</a>.
+</p>
+
+<p>
+Why am I lingering so much on this? Because when you're using modern frameworks like Seurat, or some of the new CyTOF frameworks like <a href="https://www.nature.com/articles/s42003-019-0415-5">diffcyt</a> or <a href="https://immunedynamics.io/spectre/">SPECTRE</a>, I would encorage you to peel as much of it back as possible and play around with the innards. If you do it like this, weird bugs that come from lower levels of abstraction won't bother you so much. I can't imagine learning bioinformatics at the depth I did without having one that.
+</p>
+
+<p>
+Want an example? Consider <a href="https://tjburns08.github.io/scrna_seq_piepline_pbmc_3k.html">my version</a> of the <a href="https://satijalab.org/seurat/articles/pbmc3k_tutorial.html">PBMC 3k</a> vignette from Seurat. In there, I go through many of the major commands, and try to build each one up myself. Want an example of bioinformatics done without any major frameworks? Have a look at this CyTOF analysis <a href="https://tjburns08.github.io/cytof_pipeline_one_file.html">vignette</a> I wrote. What happens when you operate closer to the metal for long enough? You find <a href="http://www.catb.org/~esr/faqs/hacker-howto.html">hacks</a> that can take you in a new direction. Have a look at how I <a href="https://tjburns08.github.io/run_cytof_with_seurat.html">tricked Seurat</a> to analyze CyTOF data.
+</p>
+
+<p>
+What's my point here? Try to operate from first principles as much as you can. Even if you're using high-level abstractions, understand what's going on under the hood. This will slow you down intially, but will greatly benefit you down the line. There are all kinds of issues you run into when you encounter "real world" data, that will rely on how well you understand the fundamental concepts. Furthermore, you will have to rely on first principles if you are analyzing data from any new methods that are being developed or utilized in your research.
+</p>
+
+<p>
+What if you're a biologist who is not going to go deep into the weeds? Understand the concepts at a level where you can get some intuition. One example is a <a href="https://www.linkedin.com/feed/update/urn:li:activity:7085200486697443330/">LinkedIn post</a> that I made a while back, where I warn biologists and research team leaders to watch out for single-cell sequencing data that hasn't been integrated. I made this post after I came across this exact thing with one of my clients. They didn't see it, and their collaborators didn't see it. And <i>the reviewers of the paper</i> didn't see it. This led me to understand what is really needed here: intuition.
+</p>
+
+<p>
+Bioinformaticians, biologists, and research team leaders need to be able to look at an analyzed dataset and say "no&#x2026;that doesn't look right." How do you get to the level where you have a spidey-sense around bioinformatics? Again, by understanding your corner of biology, bioinformatics, and their relationship as deep as you can.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org99d4e88" class="outline-2">
+<h2 id="org99d4e88">Summary and conclusions</h2>
+<div class="outline-text-2" id="text-org99d4e88">
+<p>
+To learn bioinformatics, you have to learn the basics of code. Luckily, programs like Karel the Robot can teach you the core concepts in a matter of weeks. A basic class like Stanford's CS106A will give you this and more. You can find old <a href="https://www.youtube.com/watch?v=KkMDCCdjyW8&amp;list=PL84A56BC7F4A1F852">lectures on YouTube</a> that are perfectly relevant today (though they are in Java, the core concepts are the same). If you don't plan to actually code, you should at least learn it to the point where you can run scripts if you're a biologist, or effectively communicate to comp bio teams if you're a biologist or a research team leader.
+</p>
+
+<p>
+To learn bioinformatics, you need to understand whatever you're doing as close to first principles as possible. You might be working with a sophisticated framework where you don't need to deal with the innards of whatever it is. If that's the case, I am arguing here that it would still help to understand as much of what's going on there as possible, even if it initially slows you down.
+</p>
+
+<p>
+Finally, I'm betting that your strong biology background, your understanding of computer science, and your understanding of bioinformatic tools, and your ability to effectively communicate with bioinformaticians will give you a gut instinct that few actually have. A gut instinct that could very well save you and your team from all kinds of issues down the line, and lead to both high quality science and groundbreaking innovations. Remember, I've seen this first hand.
+</p>
+
+<p>
+Best of luck!
+</p>
+
+<hr />
+
+<p>
+Footnotes:
+</p>
+
+<p>
+[1] I remember feeling like the cures for cancer and major immunological diseases were right around the corner. But of course, it's more than ten years out and we have a long way to go. Why? Because with every new innovation (high-dimensional imaging is all the rage at the time of writing), we remember that biology is <a href="https://tjburns08.github.io/its_more_complicated_than_that.html">complicated</a>.
+</p>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="date">Date: July 23, 2023</p>
+<p class="creator"><a href="https://www.gnu.org/software/emacs/">Emacs</a> 28.1 (<a href="https://orgmode.org">Org</a> mode 9.5.2)</p>
+</div>
+</body>
+</html>
