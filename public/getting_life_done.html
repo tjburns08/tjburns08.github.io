@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Getting life done</title>
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" href="simple.css" />
+<style>
+  .dark-mode {
+    --bg: #212121;
+    --accent-bg: #2b2b2b;
+    --text: #dcdcdc;
+    --text-light: #ababab;
+    --accent: #ffb300;
+    --code: #f06292;
+    --preformatted: #ccc;
+    --disabled: #111;
+  }
+  .dark-mode img,
+  .dark-mode video {
+    opacity: 0.8;
+  }
+  .toggle-theme-btn {
+      transform: scale(0.7);
+      opacity: 0.4;
+      transition: opacity 0.2s;
+    }
+    .toggle-theme-btn:hover {
+      opacity: 0.4;
+    }
+</style>
+<script>
+ function toggleDarkMode() {
+    const body = document.body;
+    body.classList.toggle("dark-mode");
+    // Save the user's theme preference to localStorage
+    if (body.classList.contains("dark-mode")) {
+      localStorage.setItem("theme", "dark");
+    } else {
+      localStorage.setItem("theme", "light");
+    }
+  }
+
+  function setDefaultDarkMode() {
+    // Retrieve the user's theme preference from localStorage
+    const storedTheme = localStorage.getItem("theme");
+
+    // If the stored theme is light, do nothing; otherwise, set it to dark
+    if (storedTheme !== "light") {
+      document.body.classList.add("dark-mode");
+    }
+  }
+
+  // Set the default mode to dark when the DOM is fully loaded
+  document.addEventListener('DOMContentLoaded', setDefaultDarkMode);
+</script>
+</head>
+<body>
+<div id="preamble" class="status">
+<div style="position: fixed; top: 10px; right: 10px;">
+         <button class="toggle-theme-btn" onclick="toggleDarkMode()">Light/Dark</button>
+       </div>
+</div>
+<div id="content" class="content">
+<h1 class="title">Getting life done</h1>
+<hr />
+<p>
+<i>Cook Ting laid down his knife and replied, "What I care about is the Way, which goes beyond skill. When I first began cutting up oxen, all I could see was the ox itself. After three years I no longer saw the whole ox. And now - now I go at it by spirit and don't look with my eyes.</i>
+</p>
+
+<p>
+<a href="https://terebess.hu/english/chuangtzu.html#1">Zhuangzi</a>
+</p>
+<hr />
+
+<p>
+When I work out, I do the workout. I do every set. I do every rep. I record it all in a pen and paper notebook. There is a specific set of songs that I'll listen to. It's a <a href="https://tjburns08.github.io/pursuit_of_health.html">ritualistic process</a>, if not a religious process. This runs counter to what I see a lot of people do: get the workout done. To many, it's something that you have to get through in the morning so you can achieve some weight loss goal or whatever. So you go to the gym when you don't want to. Run when you don't want to. There is something to be said about <a href="https://www.youtube.com/watch?v=5xrd48rUhkY">discipline</a>, in terms of doing what you don't want to do, but I think it's much easier to be disciplined when you are focused on doing, as opposed to getting done.
+</p>
+
+<p>
+I have realized that there are two major modes in life. There is the doing mode, and there is the getting done mode. The doing mode is something like a hike. Where there is a destination (eg. the top of a mountain, the end of a loop), but a lot of the hike is done for the sake of the hike itself. Let's compare that with another point A to point B task: commuting. When you commute, you're just trying to deal with traffic and whatever else so you can get to work. You get the commute done, so you can go to a workplace where you spend 8+ hours getting more things done, so you can get another commute done. So when you get home, you're too exhausted to actually <i>do</i> anything.
+</p>
+
+<p>
+I think that, like yin and yang, you need to have both the doing mode and the getting-done mode. But I think modern society is wrestling away the doing mode and has put us square into the getting-done mode, and I think that this is a problem if not a tragedy. I have come at this from many different angles in the past. I've talked about the <a href="https://tjburns08.github.io/stick_shift_mindset.html">joy of driving stick</a>, and the generalization thereof. I've talked about shifting my focus from the goal to the way, when I realized that <a href="https://tjburns08.github.io/purpose_driven_vs_purposeless.html">the way is the way</a>. And of course, the doing mode is conducive to the sought-after <a href="https://tjburns08.github.io/tao_of_problem_solving.html">flow state</a>.
+</p>
+
+<p>
+In modern society, <a href="https://en.wikipedia.org/wiki/Getting_Things_Done">getting things done</a> is king. No one seems to question it. Productivity is now a virtue. Even though however productive you are now, AI tools are going to make the laziest person a year from now more productive than you would be right now if you worked 100 hours a week. So should you really be working evenings and weekends? Furthermore, is productivity really a virtue if it's driven by tools that are outside of your control? Is it really a virtue if you're just helping companies figure out how to get you to buy stuff you don't need? Is this really what we've come to?
+</p>
+
+<p>
+The getting-done mode does not work for me. With its goals and its sub-goals and its checklists and its KPIs and quarterly reviews. You are no longer in the moment. Eyes on the prize. What kind of a bullshit saying is that anyway? It's literally "eyes off the moment." Don't stop and smell the roses because you have to get to that thing over there <a href="https://slatestarcodex.com/2014/07/30/meditations-on-moloch/">faster than your competitors do</a>. The prize is a let-down. That's what no one wants to admit. This is how our brain works. We get to the prize. We feel good. We normalize back to where we were before we had the prize. And then we have to put our eyes on the next prize. It's called the <a href="https://en.wikipedia.org/wiki/Hedonic_treadmill">hedonic treadmill</a>. When the Buddhists talk about how all life is suffering, they are referring to this in a sense. Consider the Wikipedia article on <a href="https://en.wikipedia.org/wiki/Du%E1%B8%A5kha">dukkha</a> (their word for suffering). A subset of dukkha is:
+</p>
+
+<p>
+"<i>Sankhara-dukkha, the unsatisfactoriness of changing and impermanent "things" - the incapability of conditioned things to give us lasting happiness. This includes "a basic unsatisfactoriness pervading all existence, all forms of life, because all forms of life are changing, impermanent and without any inner core or substance." On this level, the term indicates a lack of lasting satisfaction, or a sense that things never measure up to our expectations or standards.</i>"
+</p>
+
+<p>
+There is no lasting happiness, at least in terms of buying the next thing or achieving the next goal. As much as it feels like acquiring the next thing will give you that lasting happiness. Those who are not aware of the hedonic treadmill can be psychologically hacked.
+</p>
+
+<p>
+The getting-done mode puts the hedonic treadmill front and center. Because that's all there is. There is this checklist of things. You do them as fast as you possibly can, because they are completely unpleasant. You get nothing out of them. But someone else above you does. You do this for at least 40 hours a week for your entire life. If you add the commute, and thinking about work when you're home, the hours go up. Not to mention that showing up to the office is some checklist that managers in getting-done mode have added arbitrarily after COVID, as we all know that working from home during the pandemic didn't grind the economy to a halt. Moreover, child-rearing gets outsourced to daycare, school, and after-school activities, where taking care of the kids are reduced to KPI-laden checklists (must teach this list of math concepts such that they average this test score so that our school looks good).
+</p>
+
+<p>
+AI tools like ChatGPT are great&#x2026;at wrestling away the doing mode. I am writing this article in the doing mode. But I could make bullet points and have GPT-4 fill out the paragraphs. The article would get done, as per the getting-done mode. And I would feel empty inside. In the doing mode, I am actively participating in reality. In the getting-done mode, I am treating reality as this annoying thing I have to contend with for the sake of the checklist.
+</p>
+
+<p>
+Automation and convenience, the modern economy at large, is great&#x2026;at wrestling away the doing mode. Hungry? Just get out your phone and press a few buttons. That's getting food done. As opposed to cooking. The elaborate practice of figuring out what you're going to make given the ingredients you've got. Or the process of finding a recipe, getting the ingredients, and putting it all together. Cooking is the doing mode. Ordering with an app is the getting-done mode.
+</p>
+
+<p>
+We are so busy these days (in a world where automation and AI was supposed to give us more free time) that we only have time to be in the getting-done mode. Everything is an annoying burden on a checklist. Everything is an barrier to get through as opposed to a participation with the beauty of the world. We are desecrating the sanctity of existence with our checklists and our KPIs.
+</p>
+
+<p>
+And so one day, you're going to wake up at the age of 70 and realize that you did it! You got life done. Congratulations. All of those completed checklists. Flimsy pieces of paper blowing in the wind along with the autumn leaves, a mosaic of rich and deep hues, that you never really got a chance to enjoy. Those autumn leaves of your life, only a few of them left, beckoning you back into the doing mode.
+</p>
+</div>
+<div id="postamble" class="status">
+<p class="date">Date: September 14, 2023 - September 14, 2023</p>
+<p class="creator"><a href="https://www.gnu.org/software/emacs/">Emacs</a> 28.1 (<a href="https://orgmode.org">Org</a> mode 9.5.2)</p>
+</div>
+</body>
+</html>
