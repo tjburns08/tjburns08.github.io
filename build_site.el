@@ -78,12 +78,11 @@
   document.addEventListener('DOMContentLoaded', setDefaultDarkMode);
 </script>")
 
-;; Dev: The light/dark mode button
+;; Dev: The light/dark mode button, others
 (setq org-html-preamble
       "<div style=\"position: fixed; top: 10px; right: 10px;\">
          <button class=\"toggle-theme-btn\" onclick=\"toggleDarkMode()\">Light/Dark</button>
        </div>")
-
 
 ;; Define the publishing project
 (setq org-publish-project-alist

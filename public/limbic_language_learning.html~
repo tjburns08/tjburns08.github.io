@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Limbic language learning</title>
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" href="simple.css" />
+<style>
+  .dark-mode {
+    --bg: #212121;
+    --accent-bg: #2b2b2b;
+    --text: #dcdcdc;
+    --text-light: #ababab;
+    --accent: #ffb300;
+    --code: #f06292;
+    --preformatted: #ccc;
+    --disabled: #111;
+  }
+  .dark-mode img,
+  .dark-mode video {
+    opacity: 0.8;
+  }
+  .toggle-theme-btn {
+      transform: scale(0.7);
+      opacity: 0.4;
+      transition: opacity 0.2s;
+    }
+    .toggle-theme-btn:hover {
+      opacity: 0.4;
+    }
+</style>
+<script>
+ function toggleDarkMode() {
+    const body = document.body;
+    body.classList.toggle("dark-mode");
+    // Save the user's theme preference to localStorage
+    if (body.classList.contains("dark-mode")) {
+      localStorage.setItem("theme", "dark");
+    } else {
+      localStorage.setItem("theme", "light");
+    }
+  }
+
+  function setDefaultDarkMode() {
+    // Retrieve the user's theme preference from localStorage
+    const storedTheme = localStorage.getItem("theme");
+
+    // If the stored theme is light, do nothing; otherwise, set it to dark
+    if (storedTheme !== "light") {
+      document.body.classList.add("dark-mode");
+    }
+  }
+
+  // Set the default mode to dark when the DOM is fully loaded
+  document.addEventListener('DOMContentLoaded', setDefaultDarkMode);
+</script>
+</head>
+<body>
+<div id="preamble" class="status">
+<div style="position: fixed; top: 10px; right: 10px;">
+         <button class="toggle-theme-btn" onclick="toggleDarkMode()">Light/Dark</button>
+       </div>
+</div>
+<div id="content" class="content">
+<h1 class="title">Limbic language learning</h1>
+<p>
+<a href="./index.html">Home</a>
+</p>
+
+<hr />
+
+<p>
+<i>My brother asked the birds to forgive him; that sounds senseless, but it is right; for all is like an ocean, all is flowing and blending; a touch in one place sets up movement at the other end of the earth..</i><br />
+Fyodor Dostoevsky, <i>The Brothers Karamazov</i>
+</p>
+
+<hr />
+
+<p>
+I am an American born and raised, who at the time of writing, has been living in Germany for the past six years. I recently got permanent residence (the German equivalent of a Green Card), which involved an appointment at the Foreigner's Office. One of the requirements for permanent residence was German at the level of B1 (basic conversational ability). There is an exam that I can take in order to get a B1 certificate, that I can present to the Foreigner's Office to prove that I'm B1. But I didn't have this certificate in time for the appointment. The person I was speaking with at the Foreigner's Office saw this, and began quizzing me on my German. I told her, in German, that my wife's family doesn't speak English so I had to learn the language in order to communicate with them. I was speaking with passion, because it's been one heck of a process. It was no more than a few sentences in total, and she said "ok, you clearly have B1." And that was it. A few minutes later, I was out of there, with unconditional permanent residence in Germany.
+</p>
+
+<p>
+There are a million and one resources for learning foreign languages, from online speaking partners, to apps like Duolingo. There are blog posts by life-hackers like Tim Ferriss who teach you how to learn a language in <a href="https://tim.blog/2014/03/21/how-to-learn-a-foreign-language-2/">record time</a>. Nonetheless, after learning the language and having to use it in my day-to-day life, there is advice I have been giving people over and over that I don't hear emphasized anywhere else, so it's time to write it down.
+</p>
+
+<p>
+You've heard about total immersion (eg. going to a country speaking that language) as a way of learning a foreign language, and that is something that I will not dispute here. But one question is what aspects of the "total immersion" matter, aside from pure repetition? What I have found is that connecting my brain's language center with my brain's emotion center (limbic system) is one of those things. I can see this now in people out here who are learning German. When they speak it, it sounds rather robotic. Dry. Like they're simply trying to output the words and get the grammar right and all of that. That's fine. You have to start somewhere. But what I'm saying here is that you should start getting emotional in your foreign language sooner than later. Out here, I call it <i>limbic German</i> with the general case being <i>limbic language learning.</i>
+</p>
+
+<p>
+What does limbic language learning look like? Back when I decided that I wanted to propose to my now wife, I decided to do the traditional thing and ask her parents for permission to marry their daughter. Her parents had memorized a few English words back in high school, but not much more because this was East Germany, and the narrative at the time was that the future was going to be Russian. So this convresation was going to be in German. Anyway, it's hard enough to ask such a big question in your mother tongue. Now try asking it in a foreign language. You can imagine what happened. Her parents got emotional (in a good way). Started speaking faster. In a stronger dialect. I was emotional. Still had to stick to German. Don't get me wrong: I prepared for this conversation, with anticipated questions, making sure I knew the words, all of that. But it was the act of fusing all of this with my limbic system in this moment that made it all stick. And after it was all said and done, I was a much better German speaker. I was speaking limbic German. I think this is where the old saying comes from: want to learn a foreign language? Fall in love with a local.
+</p>
+
+<p>
+What are some practical things you can do if you're not busy asking someone's parents for permission to marry their daughter? I'll give you one. My wife and I go to visit her family from time to time. Now if you don't know this about Germans, they love to sit around and complain about stuff. I don't mean that in a pejorative way. It's more like venting about life (as Americans do) but also the fact that the trains aren't showing up on time so often these days, traffic is getting worse, etc (note: any American would kill to have German infrastructure in their city). So what I learned is one way to fuse the limbic system with the language center is to complain in German, which I get the chance to do whenever we're visiting my wife's family. This is a really low hanging fruit, because if there is anything I've learned in life, it's that there is always <i>something</i> you can complain about at any given time.
+</p>
+
+<p>
+Ever been to a foreign country where you start speaking in their language and they respond in English? It happens out here in Germany all the time. It still happens to me. But one thing I have found that helps is not getting the grammar right or speaking with a richer vocabulary (I could still improve quite a bit in both of those), but rather speaking with emotion. I have found that if I'm really speaking with passion about something, but I'm making all kinds of grammatical mistakes and speaking with limited vocabulary, those I'm speaking with will respond in German, provided that I understand what they're saying. The key insight here is that speaking is not just information exchange via spoken word. It is actually a conveying of emotional state. That means tone of voice, body language, vibe, all of that. So it's less about getting the words out and more about conveying how you're feeling, with the help of whatever words and grammar you got. In other words, if you're in another country and you know how to say the equivalent of "My&#x2026;boss&#x2026;mean&#x2026;me&#x2026;angry!" then squeeze out those words with all passion in your heart and don't worry about it being totally broken. This is what people want: emotional connection. It's a conversation, not a test.
+</p>
+
+<p>
+Anyway, I hope I have emotionally conveyed my point. I know that this kind of thing has been said before elsewhere, but I don't think that it is emphasized enough. It took me half a decade of living in a non-English country to realize these things. I am almost certain that any European reader will read this and say that it is obvious, because just about all of them are fluent in 2 or more languages. But this is something I think my American readers will be able to benefit from, as this is typically not emphasized in the schools, in my experience. The last thing I'll say is that all of this gives you a future to be excited about, through the good and the bad. Every new experience, especially the negative ones, are wonderful opportunities for limbic language learning. Good luck and have fun.
+</p>
+</div>
+<div id="postamble" class="status">
+<p class="date">Date: December 2, 2023 - December 2, 2023</p>
+<p class="creator"><a href="https://www.gnu.org/software/emacs/">Emacs</a> 28.1 (<a href="https://orgmode.org">Org</a> mode 9.5.2)</p>
+</div>
+</body>
+</html>
