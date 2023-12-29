@@ -27,10 +27,6 @@ Article.\\
 
 There are two modes that we operate in: the doing mode and the getting-done mode. The doing mode is like a hike, where the focus is on the hike itself and not point A to point B. The is opposed to a commute, the getting-done mode, where you're focused on getting from point A to point B. Here, I argue that the doing mode is being wrestled away from us, and we are wasting our lives in the getting-done mode. We are going to deeply regret this.
 
-** [[./pursuit_of_health.html][Flowing your way into good health]]
-Article.\\
-
-My approach to health and fitness is not the goal-directed approach that seems to be prevalent everywhere these days. Rather, it's more of a flow-based approach rooted in Taoism, and taking elements from modern books like James Clear's Atomic Habits. This has worked for me for decades, and allows me to get my dopamine from the process of working out rather than the outcome. This is a highly sought after place to be, so I want to share my method in case this helps anyone else find that place too.
 ** [[./website_internal_link_graph.html][Graph visualization of my website]]
 Visualization.\\
 
@@ -40,22 +36,6 @@ My website functions a bit like a personal wiki, with content linking internally
 Article.\\
 
 In this article, I summarize my journey from biologist at the beginning of grad school to bioinformatician at the end. On top of that, I show you some of the key insights that empowered me to get to where I am now. I link out to a number of references in bioinformatics and computer science that I find meaningful. In short, I hope that anyone in the life sciences reading this article can use it as a resource on their journey to learn bioinformatics.
-** [[./scrna_seq_analyze_and_integrate.html][Single-cell sequencing analysis: the importance of data integration]]
-Markdown.\\
-
-In flow cytometry and CyTOF analysis, we distinguish between "type" and "state" markers, so we can cluster on the former and analyze per-cluster expression changes in the latter. For single-cell RNA sequencing, we cannot make this distinguishment. Thus, we have to rely on data integration algorithms when we are analyzing pre-treatment and post-treatment datasets. I show how this is done, and I show how failure to do so can lead research teams to falsely interpret the data, and make false conclusions. Thus, understanding data integration is critical to keeping research teams on track.
-** [[https://www.youtube.com/watch?v=U35T-KzfeLk][TEDx Basel talk: my scrolling problem, and how I fixed it]]
-YouTube video of my TED talk.\\
-
-In this talk, I introduce the idea of the Scrolling Problem, which is the incompatiblity of my ADD brain and modern technology built around the infinite scroll. I talk about some work I'm doing to counteract that, which can be found [[https://github.com/tjburns08/twitter_archive_and_embed][here]]. It was originally Twitter, but I switched to RSS mapping, [[https://github.com/tjburns08/rss_map][here]], after Twitter started blocking scrapers.
-** [[./boring_diet.html][The boring diet: how I prevent food addiction]]
-Article.\\
-
-I talk about the hypothesis that the existence and wide availability really good-tasting food is a contributor to the obesity epidemic. I talk about experiences where I've had food that tastes so good that it makes me feel uneasy, like I'm going to become addicted. I call this hyper-yummy food. From this comes the idea of making your diet more boring, less yummy, as a first step to taking control of your nutrition, as opposed to cutting calories.
-** [[./how_xshift_works.html][How X-shift works]]
-Markdown.\\
-
-X-shift is a popular clustering algorithm for CyTOF and related high-dimensional data that is related to mean-shift clustering. It is especially good for the detection of rare cell subsets. While X-shift is computationally intensive and written in java to overcome several engineering hurdles accordingly, here I show you a simplified version of X-shift written in R that leverages the igraph package. The purpose of this markdown is to show you how X-shift works in a language that is less verbose and more familiar to the average CyTOF user than java.
 * Popular
 #+HTML: <a href="#top">Back to top</a>
 ** [[./its_more_complicated_than_that.html][It's more complicated than that]]
@@ -71,10 +51,18 @@ Seurat is an R package that runs single-cell sequencing and related data. Here, 
 Software.\\
 
 A wrapper I wrote around the [[https://anders-biostat.github.io/sleepwalk/][sleepwalk]] R package. Hover the cursor over any cell in your embedding, and it will show you the cell's k-nearest neighbors computed from the original feature space (as opposed to the embedding space). This allows you to test your assumptions around how exact a low-dimensional embedding (eg. t-SNE, UMAP) is.
+** [[https://www.youtube.com/watch?v=U35T-KzfeLk][TEDx Basel talk: my scrolling problem, and how I fixed it]]
+YouTube video of my TED talk.\\
+
+In this talk, I introduce the idea of the Scrolling Problem, which is the incompatiblity of my ADD brain and modern technology built around the infinite scroll. I talk about some work I'm doing to counteract that, which can be found [[https://github.com/tjburns08/twitter_archive_and_embed][here]]. It was originally Twitter, but I switched to RSS mapping, [[https://github.com/tjburns08/rss_map][here]], after Twitter started blocking scrapers.
 ** [[./scrolling_problem.org][The Scrolling Problem]]
 Article.\\
 
 The article behind my [[https://www.youtube.com/watch?v=U35T-KzfeLk][TEDx Basel talk]]. We spend a large fraction of our lives endlessly scrolling through our feeds, with no control over what hypernormal, outrage-inducing content will appear next. I call this the scrolling problem. I define it, and I have a crack at it by viewing my news feed as map with the help of an AI language model based on BERT.
+** [[./scrna_seq_analyze_and_integrate.html][Single-cell sequencing analysis: the importance of data integration]]
+Markdown.\\
+
+In flow cytometry and CyTOF analysis, we distinguish between "type" and "state" markers, so we can cluster on the former and analyze per-cluster expression changes in the latter. For single-cell RNA sequencing, we cannot make this distinguishment. Thus, we have to rely on data integration algorithms when we are analyzing pre-treatment and post-treatment datasets. I show how this is done, and I show how failure to do so can lead research teams to falsely interpret the data, and make false conclusions. Thus, understanding data integration is critical to keeping research teams on track.
 * Single-cell analysis
 #+HTML: <a href="#top">Back to top</a>
 ** [[./how_xshift_works.html][How X-shift works]]
@@ -396,17 +384,10 @@ My current plan for coming economic uncertainty we face in the near term due to 
 Fiction.\\
 
 I am learning Lisp at the moment. In learning about the history of the language, I realized that the story of Lisp is analogous to the Tower of Babel. I am not the first person to realize this by any means, but I saw it in a way that I haven't seen anywhere else. So I decided to put it into words here.
-
 ** [[./metaprogramming_in_R.html][Metaprogramming in R]]
 Markdown.\\
 
 When I started learning Lisp, I learned of the concept of metaprogramming. This means using code to change the programming language itself. A practical example of this in English is using "they/them" to denote gender-neutral singular pronouns, overriding the plural default. Here, I show you how to change the syntax of R to fit your fancy. I show you how to change the "+" operator in ggplot2, and to zero-index vectors, as they're done in many other programming languages. The goal of this markdown is to get you to see through and unsee the arbitrary constraints that any language, spoken/written or programming, will give you.
-
-** [[./mathematician_and_hacker.html][The mathematician and the hacker]]
-Fiction.\\
-
-Rated PG-13 for language and people being not so nice. A conversation between a hacker and a mathematician that explores the contrast between these worldviews. The mathematician wants to create elegant theories and abstractions that the world fits into. The hacker is more interested in finding and leaning into the things that don't add up. The whitespace.
-
 ** [[./ca_rule_space.html][Elementary cellular automata rule space]]
 Markdown.\\
 
@@ -414,7 +395,7 @@ I lay out the rule space of elementary cellular automata as an eight dimensional
 ** [[./xai_and_us.org][Explainable AI and understanding ourselves]]
 Article.\\
 
-I make the connection between understanding a black box AI algorithm (a hot topic) and understanding ourselves. I make the argument that accordingly, we as humans are prepared to take on this task. I discuss natural language explanations, which is what happens when you attach a language model to an AI system. Ideally, you can ask it why it did what it did.  
+I make the connection between understanding a black box AI algorithm (a hot topic) and understanding ourselves. I make the argument that accordingly, we as humans are prepared to take on this task. I discuss natural language explanations, which is what happens when you attach a language model to an AI system. Ideally, you can ask it why it did what it did.
 ** [[./logic_gates.html][Logic gates]]
 Markdown.\\
 
@@ -422,7 +403,7 @@ What are the fundamental units of a computer? Logic gates. I show what these are
 ** [[./1d_ca.html][1-D Cellular Automata]]
 Markdown.\\
 
-Here, I write some code to produce each of the 256 Wolfram cellular automata rules, and visualize the output. 
+Here, I write some code to produce each of the 256 Wolfram cellular automata rules, and visualize the output.
 ** [[./explore_rule_110.html][Explore Wolfram Rule 110]]
 Markdown.\\
 
