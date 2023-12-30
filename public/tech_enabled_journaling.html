@@ -1,0 +1,514 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>One million words: a tech-enabled review of 15 years of journaling</title>
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" href="simple.css" />
+<style>
+  .dark-mode {
+    --bg: #212121;
+    --accent-bg: #2b2b2b;
+    --text: #dcdcdc;
+    --text-light: #ababab;
+    --accent: #ffb300;
+    --code: #f06292;
+    --preformatted: #ccc;
+    --disabled: #111;
+  }
+  .dark-mode img,
+  .dark-mode video {
+    opacity: 0.8;
+  }
+  .toggle-theme-btn {
+      transform: scale(0.7);
+      opacity: 0.4;
+      transition: opacity 0.2s;
+    }
+    .toggle-theme-btn:hover {
+      opacity: 0.4;
+    }
+</style>
+<script>
+ function toggleDarkMode() {
+    const body = document.body;
+    body.classList.toggle("dark-mode");
+    // Save the user's theme preference to localStorage
+    if (body.classList.contains("dark-mode")) {
+      localStorage.setItem("theme", "dark");
+    } else {
+      localStorage.setItem("theme", "light");
+    }
+  }
+
+  function setDefaultDarkMode() {
+    // Retrieve the user's theme preference from localStorage
+    const storedTheme = localStorage.getItem("theme");
+
+    // If the stored theme is light, do nothing; otherwise, set it to dark
+    if (storedTheme !== "light") {
+      document.body.classList.add("dark-mode");
+    }
+  }
+
+  // Set the default mode to dark when the DOM is fully loaded
+  document.addEventListener('DOMContentLoaded', setDefaultDarkMode);
+</script>
+</head>
+<body>
+<div id="preamble" class="status">
+<div style="position: fixed; top: 10px; right: 10px;">
+         <button class="toggle-theme-btn" onclick="toggleDarkMode()">Light/Dark</button>
+       </div>
+</div>
+<div id="content" class="content">
+<h1 class="title">One million words: a tech-enabled review of 15 years of journaling</h1>
+<p>
+<a href="./index.html">Home</a>
+</p>
+
+<hr />
+<p>
+<i>Understanding both the power of compound interest and the difficulty of getting it is the heart and soul of understanding a lot of things.</i><br />
+</p>
+
+<p>
+Charlie Munger
+</p>
+<hr />
+
+<div id="outline-container-orgdb9370e" class="outline-2">
+<h2 id="orgdb9370e">Introduction</h2>
+<div class="outline-text-2" id="text-orgdb9370e">
+<p>
+One day, back in 2009, I decided to start a typed journal. I called it "the one sentence journal." The idea was that I would write at least one sentence per day for as long as possible. I had a hand-written journal for a few years prior, but because I was always in front of a computer, a typed journal would be an easier thing to do.
+</p>
+
+<p>
+This journal started as one or a few sentences per day, but then expanded into longer entries as the years passed. I kept it through my time as a lab tech at Michigan, on into graduate school at Stanford and then in my next life here in Berlin. My entries got much larger when the COVID-19 pandemic started, where I really started to question the state of the world and my place in it.
+</p>
+
+<p>
+In the past year, my journal reached the one million word mark. That is roughly the length of the entire Harry Potter <a href="https://wordcounter.net/blog/2015/11/23/10922_how-many-words-harry-potter.html#:~:text=When%20added%20all%20together%2C%20the,There%20are%2076%2C944%20words.">series</a>. I am writing this essay at the end of 2023, where one of my projects is to review every journal entry from this past year. However, given the sheer number of words I wrote this year, doing so is no easy task. Thus, I re-purposed some of the <a href="https://tjburns08.github.io/scrolling_problem.html">AI-based tools</a> I had developed in the past couple of years to help me.
+</p>
+
+<p>
+This essay is a reflection of what one million words looks like, and what you can do with it. If you were to write one million words over the same length of time, what subjects would show up? What ideas would develop over that time. How would your memory of ten years ago compare to what was written? Are there things you completely forgot? Do you remember things as better or worse than they actually were? Did you have any predictions of the future that you can revisit (and were you right or wrong)?
+</p>
+
+<p>
+In this essay, I will talk about my million word introspection, and I will also share the tools that I used to help me review these entries, which have use cases in any sort of note taking. My goal is to both inspire the reader to start a journal and/or double down on journaling, review it regularly, and to take a similar tool-based approach to help analyze their journal over time. Like investing, the benefits of keeping a journal compounds the longer you have it.
+</p>
+</div>
+</div>
+<div id="outline-container-orgeaff25d" class="outline-2">
+<h2 id="orgeaff25d">Anatomy of the journal</h2>
+<div class="outline-text-2" id="text-orgeaff25d">
+<p>
+My journal was originally typed out in Microsoft Word. At some point, it got so bulky that even Word could not handle its size (it would take a long time to load all the pages so I could start writing). Furthermore, it was simply difficult to scroll through all of it, as it was expanding to hundreds of pages. Initially, I started breaking the document up into chunks with date ranges. Then, I discovered org mode.
+</p>
+
+<p>
+<a href="https://orgmode.org/">Org mode</a> is a major mode within the <a href="https://www.gnu.org/software/emacs/">Emacs</a> text editor (the latter has a bit of a <a href="https://www.youtube.com/watch?v=urcL86UpqZc">cult following</a>). If you have not seen org mode before, you can think of it as an older, less clicky, fully open source version of Notion. Org mode is therefore fully mine. Furthermore, the files double up as plain text files, as opposed to having a more complex and obscure format. This means that they will likely still be readable down the line.
+</p>
+
+<p>
+But the reason why org mode is applicable to journaling is the use of collapsable bullet points. In other words, I can have a bullet point that is the year, another bullet point level that is month, another that is date, and another that is time. Then I can collapse all of it so we can only see year. Thus, I can jump to any entry anywhere at any time without scrolling through hundreds of pages. Here is a picture of what this looks like:
+</p>
+
+
+<div id="orgf0396fc" class="figure">
+<p><img src="images/2023-12-30_12-15-10_Screenshot 2023-12-30 at 12.15.04.png" alt="2023-12-30_12-15-10_Screenshot 2023-12-30 at 12.15.04.png" />
+</p>
+</div>
+
+<p>
+So you can see that I opened up to the July 4, 2023 entry from 10:22pm. The plain text shows up after time time-based bullet points. Then there is a keyboard shortcut (shift + tab) which closes everything up again so you're just back at the year. This is one million words, neatly organized, on a single page, and searchable.
+</p>
+
+<p>
+All this being said, there are ways to add inline images to these journals. This is for another time, but if you're an org mode user, check out <a href="https://github.com/abo-abo/org-download">org-download</a>. I often drop in hand-written stuff (either scanning pen and paper or using my iPad), or photos I took, or screen shots. In other words, it's one million words and then some. But again, this is for another time. This is just to say that there is a lot more you can do when you're using org mode as opposed to plain text, and if you're journaling, you want to capture as much of your life through as many mediums as possible. I've also uploaded little snippets of music I played on my piano, and voice recordings too. Whatever I can do to capture my subjective state in a way that my older self will be able to understand.
+</p>
+
+<p>
+But anyway, back to the journal. What happens when you have written all this stuff? I can't just go back and read a million words from top to bottom every year. Or even the more than hundred thousand that I wrote in 2023. This is where you need help from natural language processing. I'll say right now that I'm not talking about chat bots. The use case here is to be able to go back and quickly see the relevant thing you wrote and when you wrote it, and to look for themes and throughlines. This requires a different approach.
+</p>
+</div>
+</div>
+<div id="outline-container-org1c8680a" class="outline-2">
+<h2 id="org1c8680a">Tools for exploration: mapper and nearest neighbor Search</h2>
+<div class="outline-text-2" id="text-org1c8680a">
+<p>
+Here, we're going to talk about the tools that I have used to review one million words of journaling. I'll give you the general structure here. If you're not interested in the technical details, then please skip to the next section where you'll be able to see the results.
+</p>
+</div>
+<div id="outline-container-org7932d81" class="outline-3">
+<h3 id="org7932d81">Reading in the org mode file</h3>
+<div class="outline-text-3" id="text-org7932d81">
+<p>
+In short, I read the org mode file line by line. I have the journal set up such that each paragraph is a single line, separated by an empty line, similar to the way I wrote this essay (which was also written in org mode). To get rid of the year/date/time lines, I exclude anything that starts with an asterisk (which is how you do a bullet point in org mode).
+</p>
+
+<p>
+The year is preceeded by one asterisk (* 2023). The day is preceeded by three asterisks (<b>*</b> July 4). Note that the "day" also contains the "month" information, so there is no need to include month (<b>* July) in the code below. The time is preceeded by four asterisks (<b>*</b></b> 10:22pm). Here is the relevant snippet:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">Function to read and process the org file</span>
+<span style="font-weight: bold;">def</span> <span style="font-weight: bold;">read_org_file</span>(file_path):
+    <span style="font-weight: bold;">with</span> <span style="font-weight: bold;">open</span>(file_path, <span style="font-style: italic;">'r'</span>, encoding=<span style="font-style: italic;">'utf-8'</span>) <span style="font-weight: bold;">as</span> <span style="font-weight: bold;">file</span>:
+        content = <span style="font-weight: bold;">file</span>.readlines()
+
+    <span style="font-weight: bold; font-style: italic;">year</span>, <span style="font-weight: bold; font-style: italic;">day</span>, <span style="font-weight: bold; font-style: italic;">time</span> = <span style="font-weight: bold; text-decoration: underline;">None</span>, <span style="font-weight: bold; text-decoration: underline;">None</span>, <span style="font-weight: bold; text-decoration: underline;">None</span>
+    paragraphs = []
+    paragraph_details = []  <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">To store year, day, and time</span>
+
+    <span style="font-weight: bold;">for</span> line <span style="font-weight: bold;">in</span> content:
+        line = line.strip()
+        <span style="font-weight: bold;">if</span> line.startswith(<span style="font-style: italic;">'**** '</span>):
+            time = line.strip(<span style="font-style: italic;">'* '</span>)
+        <span style="font-weight: bold;">elif</span> line.startswith(<span style="font-style: italic;">'*** '</span>):
+            day = line.strip(<span style="font-style: italic;">'* '</span>)
+        <span style="font-weight: bold;">elif</span> line.startswith(<span style="font-style: italic;">'* 20'</span>):
+            year = line.strip(<span style="font-style: italic;">'* '</span>)
+        <span style="font-weight: bold;">elif</span> line <span style="font-weight: bold;">and</span> <span style="font-weight: bold;">not</span> line.isspace():  <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">Check if line is a non-empty paragraph</span>
+            paragraphs.append(line)
+            paragraph_details.append({<span style="font-style: italic;">'year'</span>: year, <span style="font-style: italic;">'day'</span>: day, <span style="font-style: italic;">'time'</span>: time})
+    <span style="font-weight: bold;">return</span> paragraphs, paragraph_details
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgd80a136" class="outline-3">
+<h3 id="orgd80a136">Create word embeddings</h3>
+<div class="outline-text-3" id="text-orgd80a136">
+<p>
+The word embeddings are created using the BERT language model. This has been around for a while, but it differs from the GPT-based models in a very important way. While the GPTs function as chatbots, BERT simply takes the strings (words/sentences/paragraphs) its given and embeds them into a high-dimensional vector space, where strings that are similar to each other in context will be physically nearer to each other in this vector space. In other words, the sentence "I played fetch with my dog" will in theory be located nearer to "I walked my dog" than "The clown rode the unicycle." The first two sentences involve things you do with your dog, so they're grouped together.
+</p>
+
+<p>
+Specifically, the model I've been using is called <a href="https://huggingface.co/sentence-transformers/all-mpnet-base-v2">all-mpnet-base-v2</a> from the sentence transformers python package. Once the paragraphs (lines) are extracted from the org mode file, you just have to feed it into this model for it to output the vector space. Because my journal is so large, it helps to have some code in there that saves the embeddings. I was saving them as csv files for the past year or so, but when I was refactoring, ChatGPT recommended the use of a .npy file, or numpy array specific file. I didn't know I could do that, so I went with it. Here is the code for the function, so you can see what it looks like:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span style="font-weight: bold;">from</span> sentence_transformers <span style="font-weight: bold;">import</span> SentenceTransformer
+<span style="font-weight: bold;">import</span> numpy <span style="font-weight: bold;">as</span> np
+
+<span style="font-weight: bold; font-style: italic;">model</span> = SentenceTransformer(<span style="font-style: italic;">'all-mpnet-base-v2'</span>)
+
+<span style="font-weight: bold;">def</span> <span style="font-weight: bold;">embed_paragraphs</span>(paragraphs, embeddings_file=<span style="font-style: italic;">'embeddings.npy'</span>):
+    <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">Check if embeddings file exists</span>
+    <span style="font-weight: bold;">if</span> os.path.exists(embeddings_file):
+        <span style="font-weight: bold;">print</span>(<span style="font-style: italic;">"Loading embeddings from file..."</span>)
+        <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">Load embeddings</span>
+        embeddings = np.load(embeddings_file, allow_pickle=<span style="font-weight: bold; text-decoration: underline;">True</span>)
+    <span style="font-weight: bold;">else</span>:
+        <span style="font-weight: bold;">print</span>(<span style="font-style: italic;">"Embedding paragraphs..."</span>)
+        <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">Compute embeddings</span>
+        embeddings = model.encode(paragraphs, show_progress_bar=<span style="font-weight: bold; text-decoration: underline;">True</span>)
+        <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">Save embeddings</span>
+        np.save(embeddings_file, embeddings)
+    <span style="font-weight: bold;">return</span> embeddings
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org6476b9e" class="outline-3">
+<h3 id="org6476b9e">Reduce the embedding to 2 dimensions using UMAP</h3>
+<div class="outline-text-3" id="text-org6476b9e">
+<p>
+So now you have a two dimensional array of 768-dimensional vectors that correspond to each paragraph that you upladed. What happens now? Well, my PhD thesis was in high-dimensional single-cell analysis (CyTOF), which is a very visual field. We used nonlinear dimension reduction to visualize our outputs to quickly get a feel for what's there. If you want to see some of my work on that, go <a href="https://tjburns08.github.io/tjb_dimr_talk.pdf">here</a>. Anyway, as critical as I am about these tools (if you look at the previous link), I am still all for the narrow use case of quickly getting a feel for what's there. In the context of creating a map of journal entries, where each entry is a point, you can think of it as "thought space."
+</p>
+
+<p>
+Here, we are using <a href="https://www.youtube.com/watch?v=eN0wFzBA4Sc">UMAP</a> to achieve this end. Implementing this is simple in python, and its just a matter of feeding your vectors into the model. Each 768-dimensional vector now becomes a 2-dimensional vector (xy coordinates) when you can visualize on a simple biaxial plot. If two points are near each other in the 768-dimensional space, they will in theory be near each other in the 2-dimensional UMAP space.
+</p>
+
+<p>
+The code for doing such a thing is below. Note that we're also saving the umap embeddings as a separate file, so we don't have to compute them over and over (which could very well produce different maps as well if we don't take care to set the seed). You'll also see that I'm using cosine distance. This is one of the standard metrics for dealing with high-dimensional space (as compared to Euclidean distance). If you want to experiment with different metrics, by all means do so. Here is some <a href="https://tjburns08.github.io/final_distance.project.poster.pdf">work I did</a> to that end, to give you some motivation.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span style="font-weight: bold;">def</span> <span style="font-weight: bold;">compute_and_save_umap_embeddings</span>(embeddings, umap_file=<span style="font-style: italic;">'umap_embeddings.npy'</span>):
+    <span style="font-weight: bold;">print</span>(<span style="font-style: italic;">"Applying UMAP..."</span>)
+    umap_reducer = umap.UMAP(n_neighbors=15, n_components=2, min_dist=0.1, metric=<span style="font-style: italic;">'cosine'</span>)
+    umap_embeddings = umap_reducer.fit_transform(embeddings)
+    np.save(umap_file, umap_embeddings)
+    <span style="font-weight: bold;">return</span> umap_embeddings
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org1ac344c" class="outline-3">
+<h3 id="org1ac344c">Nearest neighbor searches</h3>
+<div class="outline-text-3" id="text-org1ac344c">
+<p>
+We also want to be able to do nearest neighbor searches on a given journal entry (or new text entrely) that allows us to see if we have written similar things in the past. This allows me to track ideas from their inception to the present moment. This work builds off of some previous work that I did <a href="https://tjburns08.github.io/ask_marcus_writeup.html">here</a>, involving nearest neighbor searches between new text and the Meditations by Marcus Aurelius (when I first started reading the Stoic texts a few years ago). This is in turn built off of my <a href="https://www.biorxiv.org/content/10.1101/337485v1">second publication</a>, which remained a pre-print due to a combination of "reviewer number 3" and just being busy with moving to another country and starting my business. Anyway, my paper used k-nearest neighbors to analyze CyTOF data in many ways, while the rest of the field at the time was fixated on clustering.
+</p>
+
+<p>
+Here, I'm taking a given text, and returning the k-nearest neighbor entries from the original 768-dimensional vector space. Why not from UMAP? Because when you compress high-dimensional space into two dimensions, you lose a lot of information, so you'll see inaccuracies between the orignal high-dimensional space and the UMAP space. To explicitly see this, have a look at my <a href="https://github.com/tjburns08/knn_sleepwalk">KNN Sleepwalk</a> project (scroll to the bottom for a gif). Again, we are using cosine distance as our metric, just as we did with UMAP. The code for implementing a nearest neighbor search is below. In this example, we are setting the k to 10, but you can set it to whatever number you want.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span style="font-weight: bold;">from</span> sklearn.metrics.pairwise <span style="font-weight: bold;">import</span> cosine_similarity
+<span style="font-weight: bold;">import</span> numpy <span style="font-weight: bold;">as</span> np
+
+<span style="font-weight: bold;">def</span> <span style="font-weight: bold;">find_nearest_neighbors</span>(query_embedding, all_embeddings, top_k=10):
+    similarities = cosine_similarity(query_embedding, all_embeddings)[0]
+    top_indices = np.argsort(similarities)[-top_k:][::-1]
+    <span style="font-weight: bold;">return</span> top_indices
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org2106910" class="outline-3">
+<h3 id="org2106910">Web interface</h3>
+<div class="outline-text-3" id="text-org2106910">
+<p>
+In order to make these tools easy to use, I built web interface around them. I made two web interfaces. One for the map-based analysis and one for the nearest neighbor search. I did these both using the <a href="https://github.com/plotly/dash">Plotly Dash</a> framework. It was originally quite some work to figure out how everything tied together (here is a <a href="https://dash.plotly.com/layout">tutorial</a> that I used), but now ChatGPT allows me to quickly change the UI/UX to fit my needs. Accordingly, I'll avoid the details here, but you can go the source code that I provide so you can see what the back end looks like. The next section will show you what the front end looks like as a side effect of the main point: the analysis.
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-orgdf90863" class="outline-2">
+<h2 id="orgdf90863">Deep dives into the self</h2>
+<div class="outline-text-2" id="text-orgdf90863">
+</div>
+<div id="outline-container-orgda54b8d" class="outline-3">
+<h3 id="orgda54b8d">Thought space</h3>
+<div class="outline-text-3" id="text-orgda54b8d">
+<p>
+So what we end up with is a map of thought space. The UI is shown below. Each point corresponds to a paragraph of any given journal entry. Notice that this is just the map for 2023:
+</p>
+
+
+<div id="org3c5122f" class="figure">
+<p><img src="images/2023-12-30_14-11-24_Screenshot 2023-12-30 at 14.11.21.png" alt="2023-12-30_14-11-24_Screenshot 2023-12-30 at 14.11.21.png" />
+</p>
+</div>
+
+<p>
+We can look at other years too. Here is the thought space of 2021, for comparison.
+</p>
+
+
+<div id="org37c21ff" class="figure">
+<p><img src="images/2023-12-30_14-13-15_Screenshot 2023-12-30 at 14.13.09.png" alt="2023-12-30_14-13-15_Screenshot 2023-12-30 at 14.13.09.png" />
+</p>
+</div>
+
+<p>
+So what do we do with this? Well, the text shows up in two ways. If you hover over the map, you get a pop-up of the first 100 characters of the text (a preview) and if you click on the point, the text shows up under the map, like this.
+</p>
+
+
+<div id="org97e68bf" class="figure">
+<p><img src="images/2023-12-30_14-15-27_Screenshot 2023-12-30 at 14.15.23.png" alt="2023-12-30_14-15-27_Screenshot 2023-12-30 at 14.15.23.png" />
+</p>
+</div>
+
+<p>
+Ok, now where it gets interesting is when you add search terms to this, which is what that search bar is all about. Let's go back to 2023 and type something in. How about science.
+</p>
+
+
+<div id="orge4f610d" class="figure">
+<p><img src="images/2023-12-30_14-17-02_Screenshot 2023-12-30 at 14.16.58.png" alt="2023-12-30_14-17-02_Screenshot 2023-12-30 at 14.16.58.png" />
+</p>
+</div>
+
+<p>
+You can see that the paragraphs that contain the word "science" cluster together on the east side of the map. Because we're using plotly, we can zoom in, so let's do that now.
+</p>
+
+
+<div id="orga9f1bbb" class="figure">
+<p><img src="images/2023-12-30_14-18-33_Screenshot 2023-12-30 at 14.18.30.png" alt="2023-12-30_14-18-33_Screenshot 2023-12-30 at 14.18.30.png" />
+</p>
+</div>
+
+<p>
+Here, I was talking about issues with science in general. But you can start to click around and see what I was talking about within the topic of science in 2023.
+</p>
+
+<p>
+Now let's look at something completely different. I talk a lot about Taoism in my journal, so let's see where that shows up.
+</p>
+
+
+<div id="org7eb56af" class="figure">
+<p><img src="images/2023-12-30_14-21-59_Screenshot 2023-12-30 at 14.21.57.png" alt="2023-12-30_14-21-59_Screenshot 2023-12-30 at 14.21.57.png" />
+</p>
+</div>
+
+<p>
+Somewhere in the center. Let's zoom in and have a closer look.
+</p>
+
+
+<div id="orge66976c" class="figure">
+<p><img src="images/2023-12-30_14-23-09_Screenshot 2023-12-30 at 14.23.06.png" alt="2023-12-30_14-23-09_Screenshot 2023-12-30 at 14.23.06.png" />
+</p>
+</div>
+
+<p>
+It forms a particular island in this general region, which seems to make up a broader wisdom cluster. If I literally type in the word "wisdom" and zoom into that particular region again, I get:
+</p>
+
+
+<div id="org8b9d0b0" class="figure">
+<p><img src="images/2023-12-30_14-24-42_Screenshot 2023-12-30 at 14.24.39.png" alt="2023-12-30_14-24-42_Screenshot 2023-12-30 at 14.24.39.png" />
+</p>
+</div>
+
+<p>
+Similar regions light up in the area when I search for things like "god" and "philosophy." I'm only looking at 2023 at the moment because its cleaner, but for the next one we're going to switch to all years.
+</p>
+
+<p>
+Earlier years had more emotional journal entries, so we can do things like type in "laugh" to check out any laugh clusters. For example (I'm zoomed in on the west now):
+</p>
+
+
+<div id="orgfdbeac4" class="figure">
+<p><img src="images/2023-12-30_14-28-28_Screenshot 2023-12-30 at 14.28.26.png" alt="2023-12-30_14-28-28_Screenshot 2023-12-30 at 14.28.26.png" />
+</p>
+</div>
+
+<p>
+In this instance, I found that little island on the west end of the map that had more paragraphs that contain the word "laugh" than not. After clicking around, one of the paragraphs coincidentally had me talking about "laugh space" and "cry space" so I included it above. Anyway, let's look at "cry."
+</p>
+
+
+<div id="org0327b00" class="figure">
+<p><img src="images/2023-12-30_14-31-36_Screenshot 2023-12-30 at 14.31.32.png" alt="2023-12-30_14-31-36_Screenshot 2023-12-30 at 14.31.32.png" />
+</p>
+</div>
+
+<p>
+These are paragraphs that contained the word "cry." Curiously, they are not far from the "laugh" region of the map, and they form this interesting band that extends outward from the center.
+</p>
+
+<p>
+Anyway, you get the procedure. Type in a keyword of interest, and then click around and see what you see. For me, thought space seems to be divided between feelings (to the west) and science/business/money to the east. Interestingly, wisdom/philosophy paragraphs are between the two.
+</p>
+
+<p>
+Overall, the map-based procedure has allowed me to very quickly grok what I've been writing about over a given period of time and how the contents of thought space has changed year by year.
+</p>
+
+<p>
+But there are two problems. The first is that as I have said, UMAP space is not going to be as accurate as the original 768 dimensional vector space. The second is what happens when I make a new journal entry that is not in the embedding, and I want to test whether I have written about similar things in the past. For each of these, we use the nearest neighbor search.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org018d674" class="outline-3">
+<h3 id="org018d674">You've written about this before</h3>
+<div class="outline-text-3" id="text-org018d674">
+<p>
+In reviewing my entries, I have noticed that there are ideas that I think are new, but I find that I actually wrote about it in the past, sometimes years ago. I also find particular "moods" that I stumble into where I write a particular way about particular things. I want to be able to see these kinds of things in real time. This is where the nearest neighbor search comes in.
+</p>
+
+<p>
+I'll show you what it looks like and what you can do with it. You start out with a basic search bar, and you enter something into it. Let's go with something wisdom themed. How about a random passage from the <a href="https://www.organism.earth/library/document/tao-te-ching">Tao Te Ching</a>. How about:
+</p>
+
+<p>
+<i>When people see some things as beautiful,</i><br />
+<i>other things become ugly.</i><br />
+<i>people see some things as good,</i><br />
+<i>other things become bad.</i><br />
+</p>
+
+<p>
+Ok, place that into the search bar and we get:
+</p>
+
+<div id="org06ea698" class="figure">
+<p><img src="images/2023-12-30_14-52-11_Screenshot 2023-12-30 at 14.52.06.png" alt="2023-12-30_14-52-11_Screenshot 2023-12-30 at 14.52.06.png" width="80%" />
+</p>
+</div>
+
+<p>
+The nearest thing is the exact quote, from November 4, 2023. The backslashes make it <i>italic</i> which is how I distinguish quotes in my journal. Then we have opposites: negative and positive, good and bad. From there, we have a typo-laden quote from September 9, 2023. What's that from? <a href="https://biblehub.com/ecclesiastes/9-3.htm">Ecclesiastes 9:3</a> and <a href="https://biblehub.com/ecclesiastes/9-4.htm">9:4</a>. Perhaps its a combination of the "evil" them, and the oppostes talk between live dog and dead lion. Then we have a weird one that is mainly the word "philosophy." So it seems like the model directly picks up that we're in some sort of philosophy space. Then we have the "if we must use curve and plumb line&#x2026;" quote. This is from <a href="https://www.26reads.com/library/92138-zhuangzi/8">Zhuangzi</a>, chapter 8, a Taoist text. The quote at the bottom is also from <a href="https://www.26reads.com/library/92138-zhuangzi/4">Zhuangzi</a>, chapter 4.
+</p>
+
+<p>
+So interestingly, this 10 paragraph neighborhood contains quotes from Taoist books the Tao Te Ching (the center) and Zhuangzi, but also the book of Ecclesiastes from the Old Testament of the Bible. I am going to guess that it is a combination of the coincidence of opposites as well as the topic of good and evil (or good and bad, as in the original quote). Anyway, one thing I like to do is pick a quote from a wisdom/philosophy text and riff on it. I am guessing that this makes up a good chunk of the wisdom cluster: quotes and quote-riffs.
+</p>
+
+<p>
+Note that the same way you can go down rabbit holes on YouTube by simply clicking the recommended videos over and over, you can do similar things here by taking any search result you find interesting and placing that into the search bar and running it again. This allows you to find relevant regions of thought space (and interesting regions you simply haven't explored yet) very efficiently. I'll note that I did that just now with the above results and ended up in an existential risk / end of the world rabbit hole. I have seen similar philosophy -&gt; doomsday discussion patterns play out on the internet before. Hmmm.
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org1f57e4f" class="outline-2">
+<h2 id="org1f57e4f">Conclusions</h2>
+<div class="outline-text-2" id="text-org1f57e4f">
+</div>
+<div id="outline-container-org007eea7" class="outline-3">
+<h3 id="org007eea7">Journaling is good</h3>
+<div class="outline-text-3" id="text-org007eea7">
+<p>
+The most important thing that I want to convey in this article is that keeping a journal for a long time is a very good thing to do. Aside from the benefits of daily journaling, it makes it easier to live an examined life. It is very interesting, and very fun to look at where I was at a decade ago, both in terms of what I was up to, and what I was feeling at the time. There are often contrasts between what I remember and what I actually wrote down. I anticipate that this will continue to become more interesting, beneficial, and fun as time goes by and my journal continues to grow.
+</p>
+
+<p>
+The use of plain text and the use of org mode in particular has made it much easier to have and maintain such a large journal. I can collapse a million words into a nicely laid out series of bullet points that correspond to year, date, and time. I can go to any time period with a couple of clicks, and search the entire document for keywords. With the size of the joural now, my natural language processing tools are helping me dive into it.
+</p>
+</div>
+</div>
+<div id="outline-container-orgec02401" class="outline-3">
+<h3 id="orgec02401">An automated Zettelkasten</h3>
+<div class="outline-text-3" id="text-orgec02401">
+<p>
+At the time of writing <span class="timestamp-wrapper"><span class="timestamp">[2023-12-30 Sat] </span></span> there are tools that are making a particular type of linked note taking popular. This is known as the <a href="https://en.wikipedia.org/wiki/Zettelkasten">Zettelkasten</a> (German for slip box) style of note taking. The easiest way to understand what this is would be to browse Obsidian's <a href="https://obsidian.md/">note taking system</a>. You take notes and you link them until you have a personal wiki that you can either click through (like hyperlinks on Wikipedia) or view the entire network.
+</p>
+
+<p>
+I have tried this before in org mode with a tool called <a href="https://www.orgroam.com/">org-roam</a> and it just didn't stick. You end up with a ton of little one-page notes and you have to go through and link them to each other yourself based on what you think is relevant. I just didn't have the motivation to put that much work into my notes. But I did want to be able to "link" the contents of my journal somehow and be able to visualize it.
+</p>
+
+<p>
+Thus, the use of BERT embeddings was able to turn the contents of my journal into so-called thought space, grouping similar paragraphs physically near each other. From there, I had the ability to either view thought space as a searchable interactive map that I could browse, or to view my journal in terms of nearest neighbors to any piece of text I input into a search bar. The latter with the recursive "put the result in the search bar" method that I was talking about allowed for the equivalent of the "clicking through" that you'd otherwise get with a Zettelkasten tool like Obsidian.
+</p>
+
+<p>
+Of course, the use case that I'm talking about here is my journal. However, if this is indeed more like an automated Zettelkasten, then there are use cases that go well beyond the simple act of analyzing a journal.
+</p>
+</div>
+</div>
+<div id="outline-container-org77a1c48" class="outline-3">
+<h3 id="org77a1c48">Additional use cases and future directions</h3>
+<div class="outline-text-3" id="text-org77a1c48">
+<p>
+I take a lot of notes on the computer. I used to keep everything in Evernote, but now I'm keeping everything in org mode files that are orgnized in a way that is similar to my journal: by year/date/time. I use <a href="https://orgmode.org/manual/Tags.html">tags</a> if I want to drill into particular subjects, but otherwise I can use the same software to organize things automatically.
+</p>
+
+<p>
+One place I'm limited at the moment is that, as I have said before, my journal (and the rest of the notes I take) have many different modalities of information: typed, hand-drawn pictures, screen shots, handwritten notes, voice memos, music, etc. The BERT embeddings work only for the typed text at the moment. So far as I'm aware, there are tools that allow for the conversion of handwritten notes to typed text. The same goes for sound recordings. I have yet to add this, in terms of producing the data that get embedded. Even if I do have this, there are still pictures and diagrams that are otherwise difficult to put into words, though perhaps down the line I'll figure out how to include them into a multi-modal embedding.
+</p>
+
+<p>
+Either way, I have been iterating on this concept for a few years now, and it's finally at a point where it's really starting to pay off in terms of staying on top of all of my writing. I can imagine similar tools benefiting writers, researchers, and students down the line. Until Obsidian and whoever else adapts this into their system, I'm going to leave the software publically available for anyone who wants to do this on any of their stuff.
+</p>
+
+<p>
+Happy journaling!
+</p>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="date">Date: December 30, 2023 - December 30, 2023</p>
+<p class="creator"><a href="https://www.gnu.org/software/emacs/">Emacs</a> 28.1 (<a href="https://orgmode.org">Org</a> mode 9.5.2)</p>
+</div>
+</body>
+</html>
