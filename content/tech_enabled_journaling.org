@@ -43,7 +43,7 @@ Here, we're going to talk about the tools that I have used to review one million
 ** Reading in the org mode file
 In short, I read the org mode file line by line. I have the journal set up such that each paragraph is a single line, separated by an empty line, similar to the way I wrote this essay (which was also written in org mode). To get rid of the year/date/time lines, I exclude anything that starts with an asterisk (which is how you do a bullet point in org mode).
 
-The year is preceeded by one asterisk (* 2023). The day is preceeded by three asterisks (*** July 4). Note that the "day" also contains the "month" information, so there is no need to include month (** July) in the code below. The time is preceeded by four asterisks (**** 10:22pm). Here is the relevant snippet:
+The year is preceeded by one asterisk (\* 2023). The day is preceeded by three asterisks (\*\*\* July 4). Note that the "day" also contains the "month" information, so there is no need to include month (\*\* July) in the code below. The time is preceeded by four asterisks (\*\*\*\* 10:22pm). Here is the relevant snippet:
 
 #+begin_src python :eval no
 # Function to read and process the org file
