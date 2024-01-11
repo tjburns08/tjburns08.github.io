@@ -128,62 +128,44 @@ def find_nearest_neighbors(query_embedding, all_embeddings, top_k=10):
 In order to make these tools easy to use, I built web interface around them. I made two web interfaces. One for the map-based analysis and one for the nearest neighbor search. I did these both using the [[https://github.com/plotly/dash][Plotly Dash]] framework. It was originally quite some work to figure out how everything tied together (here is a [[https://dash.plotly.com/layout][tutorial]] that I used), but now ChatGPT allows me to quickly change the UI/UX to fit my needs. Accordingly, I'll avoid the details here, but you can go the source code that I provide so you can see what the back end looks like. The next section will show you what the front end looks like as a side effect of the main point: the analysis.
 * Deep dives into the self
 ** Thought space
-So what we end up with is a map of thought space. The UI is shown below. Each point corresponds to a paragraph of any given journal entry. Notice that this is just the map for 2023:
+The transformed sentences compressed into a UMAP representation present an approximation of what I call thought space. I have a UI that allows for the querying of this thought space, in which paragraphs that are similar to each other in context will physically group near each other. The UI looks like this:
 
-[[file:images/2023-12-30_14-11-24_Screenshot 2023-12-30 at 14.11.21.png]]
+[[file:images/2024-01-11_17-05-38_Screenshot 2024-01-11 at 17.05.35.png]]
 
-We can look at other years too. Here is the thought space of 2021, for comparison.
+There is additional functionality that allows you to click on points and see what was written, as well as a dropdown as you can see, that allows you to select the years you want displayed on the map.
 
-[[file:images/2023-12-30_14-13-15_Screenshot 2023-12-30 at 14.13.09.png]]
+When I saw this map, which runs until the end of 2023, the big question on my mind what my journal entries in general are about? I can recall by memory the kinds of things I write, but my memory is not good enough for me to recall exactly what I was thinking about in November of 2014, or relevant to this analysis, how often I write about science versus family, and so on. The search bar in the UI allows for the map to be colored by any string of interest. Accordingly, I typed a number of things in, and I found a set of four words that appear to take up the majority of thought space: science, business, family, and philosophy. You can see this below:
 
-So what do we do with this? Well, the text shows up in two ways. If you hover over the map, you get a pop-up of the first 100 characters of the text (a preview) and if you click on the point, the text shows up under the map, like this.
 
-[[file:images/2023-12-30_14-15-27_Screenshot 2023-12-30 at 14.15.23.png]]
+[[file:images/2024-01-11_17-10-09_Screenshot 2024-01-11 at 17.10.06.png]]
 
-Ok, now where it gets interesting is when you add search terms to this, which is what that search bar is all about. Let's go back to 2023 and type something in. How about science.
+I like how each of these subjects more or less occupies a particular swath of thought space. There are zoom-in capabilities limited only by the bounds of plotly that has allowed me to dig into each of these a bit more and see exactly what I was writing about and when. But most of that is a private thing. It's my journal afterall.
 
-[[file:images/2023-12-30_14-17-02_Screenshot 2023-12-30 at 14.16.58.png]]
+But for the sake of my readers, let's delve a bit into science, as it is a large amount of my public facing persona, and clearly a large swath of thought space. Let's use some additional keywords that I expect to be nestled in this science cluster, the content of my scientific inquiries. Eight key terms are presented below, with "science" being in the upper left as our positive control:
 
-You can see that the paragraphs that contain the word "science" cluster together on the east side of the map. Because we're using plotly, we can zoom in, so let's do that now.
+[[file:images/2024-01-11_17-31-42_Screenshot 2024-01-11 at 17.31.36.png]]
 
-[[file:images/2023-12-30_14-18-33_Screenshot 2023-12-30 at 14.18.30.png]]
+You can start to see subclusters within the "science" umbrella of thought space. One of these encompasses single-cell, CyTOF, and bioinformatic. This describes my PhD work with Garry Nolan, along with a large chunk of the work I do in my bioinformatic consulting business. You can also see a cluster farther to the right that encompasses code, AI, and GPT. This more technical cluster describes my journal entries around technical development that I in turn use to improve my data analysis work. Furthermore, more recent client work is in the domain of biosecurity, in which I research things like how AI will impact the ease of a malicious actor producing a pandemic-grade virus. Hence, I expect this cluster to grow relative to the others into 2024.
 
-Here, I was talking about issues with science in general. But you can start to click around and see what I was talking about within the topic of science in 2023.
+The last observation I'll note is that there are certain keywords that bridge the four major clusters that I originally characterized. For example, the word "cancer" seems to sit between the family cluster and the science cluster within thought space. This is likely because cancer has my scientific focus (my PhD was in cancer biology, and some of my client work is cancer-based projects), and is borne out of family tragedy. Hence, it exists somewhere in between the family and the science cluster. You can see this in the image below:
 
-Now let's look at something completely different. I talk a lot about Taoism in my journal, so let's see where that shows up.
+[[file:images/2024-01-11_17-44-40_Screenshot 2024-01-11 at 17.44.38.png]]
 
-[[file:images/2023-12-30_14-21-59_Screenshot 2023-12-30 at 14.21.57.png]]
+Mapping out thought space has turned out to be an elightening exercise made possible by advances in natural language processing and their availability as relatively easy-to-use python packages. There is a whole lot more I'm not showing because its my private journal, but I can assure you that this is a gift that keeps on giving.
 
-Somewhere in the center. Let's zoom in and have a closer look.
+For the external observer, I am comfortable letting the world know that a large majority of my brain's thought space, at least the fraction I write down in my private journal, encompasses these four domains: science, business, family, and philosophy. Let's see what this does to the tailored ads that show up on my feeds.
 
-[[file:images/2023-12-30_14-23-09_Screenshot 2023-12-30 at 14.23.06.png]]
+But those who know me well will know that I'm also obsessed with all things health and fitness. Where does that sit in thought space? The answer: everywhere. This is despite having a separate health/fitness log. The result for the keyword "health" is below. It appears to cover the science, family, and philosophy regions, but not the business region of thought space. This more or less makes sense. I was once a certified personal trainer, but at the moment, I am not interested in turning my sacred gym time into a job.
 
-It forms a particular island in this general region, which seems to make up a broader wisdom cluster. If I literally type in the word "wisdom" and zoom into that particular region again, I get:
+[[file:images/2024-01-11_17-51-18_Screenshot 2024-01-11 at 17.51.15.png]]
 
-[[file:images/2023-12-30_14-24-42_Screenshot 2023-12-30 at 14.24.39.png]]
-
-Similar regions light up in the area when I search for things like "god" and "philosophy." I'm only looking at 2023 at the moment because its cleaner, but for the next one we're going to switch to all years.
-
-Earlier years had more emotional journal entries, so we can do things like type in "laugh" to check out any laugh clusters. For example (I'm zoomed in on the west now):
-
-    [[file:images/2023-12-30_14-28-28_Screenshot 2023-12-30 at 14.28.26.png]]
-
-In this instance, I found that little island on the west end of the map that had more paragraphs that contain the word "laugh" than not. After clicking around, one of the paragraphs coincidentally had me talking about "laugh space" and "cry space" so I included it above. Anyway, let's look at "cry."
-
-[[file:images/2023-12-30_14-31-36_Screenshot 2023-12-30 at 14.31.32.png]]
-
-These are paragraphs that contained the word "cry." Curiously, they are not far from the "laugh" region of the map, and they form this interesting band that extends outward from the center.
-
-Anyway, you get the procedure. Type in a keyword of interest, and then click around and see what you see. For me, thought space seems to be divided between feelings (to the west) and science/business/money to the east. Interestingly, wisdom/philosophy paragraphs are between the two.
-
-Overall, the map-based procedure has allowed me to very quickly grok what I've been writing about over a given period of time and how the contents of thought space has changed year by year.
-
-But there are two problems. The first is that as I have said, UMAP space is not going to be as accurate as the original 768 dimensional vector space. The second is what happens when I make a new journal entry that is not in the embedding, and I want to test whether I have written about similar things in the past. For each of these, we use the nearest neighbor search.
 
 ** You've written about this before
 In reviewing my entries, I have noticed that there are ideas that I think are new, but I find that I actually wrote about it in the past, sometimes years ago. I also find particular "moods" that I stumble into where I write a particular way about particular things. I want to be able to see these kinds of things in real time. This is where the nearest neighbor search comes in.
 
-I'll show you what it looks like and what you can do with it. You start out with a basic search bar, and you enter something into it. Let's go with something wisdom themed. How about a random passage from the [[https://www.organism.earth/library/document/tao-te-ching][Tao Te Ching]]. How about:
+I'll show you what it looks like and what you can do with it. You start out with a basic search bar, and you enter something into it.
+
+Given that we explored the science cluster in thought space in the previous section, let's explore the philosophy cluster here. A lot of my philosophical reading and writing centers on very old works, like the Stoic texts or the Taoist texts. Accordingly, we will start our inquiry with a passage from one of my favorite pieces of written material, the [[https://www.organism.earth/library/document/tao-te-ching][Tao Te Ching]].
 
 /When people see some things as beautiful,/\\
 /other things become ugly./\\
@@ -212,6 +194,12 @@ I have tried this before in org mode with a tool called [[https://www.orgroam.co
 Thus, the use of BERT embeddings was able to turn the contents of my journal into so-called thought space, grouping similar paragraphs physically near each other. From there, I had the ability to either view thought space as a searchable interactive map that I could browse, or to view my journal in terms of nearest neighbors to any piece of text I input into a search bar. The latter with the recursive "put the result in the search bar" method that I was talking about allowed for the equivalent of the "clicking through" that you'd otherwise get with a Zettelkasten tool like Obsidian.
 
 Of course, the use case that I'm talking about here is my journal. However, if this is indeed more like an automated Zettelkasten, then there are use cases that go well beyond the simple act of analyzing a journal.
+** Who am I?
+I am assuming that everyone asks the question "who am I" from time to time. This is a particularly difficult question, as the passage of life makes the self concept rather dynamic. However, a million words of written journal over 15 years can start to get at this question a little bit. Looking each paragraph of my journal entries in a map form, thought space, and later interrogation of what was written in each region of thought space, allowed me to test my self concept against what I actually have been writing down over the years. Doing such a thing only really works if your journal entries are faily unfiltered. Doing this on your social media posts probably will not provide very much insight into who you actually are, though it may offer utility when coloring it by engagement metrics.
+
+Not shown in this article is the ability to look at how thought space changes over the years. The content of my journal entries from 2010 is quite a bit different from the content of my journal entries now. One can get a bird's eye view of this by comparing thought space from 2010 and 2020, for example.
+
+So who am I? My tech-enabled journal review suggests that I am a lot of things. There is a concept in cognitive science around just this known as the [[https://en.wikipedia.org/wiki/Dialogical_self][dialogical self]], that makes sense in the light of revealing my journal entries. It's the idea that the self is actually a lot of sub-selves (based both on internal self-concepts and external roles) in "dialgogue" with each other, that leads to your actions. The best way to grok this idea is to watch the movie [[https://en.wikipedia.org/wiki/Inside_Out_(2015_film)][Inside Out]]. Or at least watch the [[https://www.youtube.com/watch?v=yRUAzGQ3nSY][trailer]]. Anyway, lots of different versions of me have written into this journal, and I am not just one thing. It's kinda refreshing to realize that, really.
 ** Additional use cases and future directions
 I take a lot of notes on the computer. I used to keep everything in Evernote, but now I'm keeping everything in org mode files that are orgnized in a way that is similar to my journal: by year/date/time. I use [[https://orgmode.org/manual/Tags.html][tags]] if I want to drill into particular subjects, but otherwise I can use the same software to organize things automatically.
 
