@@ -80,9 +80,9 @@ Charlie Munger
 </p>
 <hr />
 
-<div id="outline-container-org16d3f19" class="outline-2">
-<h2 id="org16d3f19">Introduction</h2>
-<div class="outline-text-2" id="text-org16d3f19">
+<div id="outline-container-org6f32768" class="outline-2">
+<h2 id="org6f32768">Introduction</h2>
+<div class="outline-text-2" id="text-org6f32768">
 <p>
 One day, back in 2009, I decided to start a typed journal. I called it "the one sentence journal." The idea was that I would write at least one sentence per day for as long as possible. I had a hand-written journal for a few years prior, but because I was always in front of a computer, a typed journal would be an easier thing to do.
 </p>
@@ -100,7 +100,7 @@ Here is the word count up through the beginning of December:
 </p>
 
 
-<div id="orgf3e4cde" class="figure">
+<div id="orged68003" class="figure">
 <p><img src="images/2023-12-31_12-15-00_Screenshot 2023-12-31 at 12.13.17.png" alt="2023-12-31_12-15-00_Screenshot 2023-12-31 at 12.13.17.png" />
 </p>
 </div>
@@ -118,9 +118,9 @@ In this essay, I will talk about my million word introspection, and I will also 
 </p>
 </div>
 </div>
-<div id="outline-container-orgb8d3254" class="outline-2">
-<h2 id="orgb8d3254">Anatomy of the journal</h2>
-<div class="outline-text-2" id="text-orgb8d3254">
+<div id="outline-container-orgdf5ea7b" class="outline-2">
+<h2 id="orgdf5ea7b">Anatomy of the journal</h2>
+<div class="outline-text-2" id="text-orgdf5ea7b">
 <p>
 My journal was originally typed out in Microsoft Word. At some point, it got so bulky that even Word could not handle its size (it would take a long time to load all the pages so I could start writing). Furthermore, it was simply difficult to scroll through all of it, as it was expanding to hundreds of pages. Initially, I started breaking the document up into chunks with date ranges. Then, I discovered org mode.
 </p>
@@ -134,7 +134,7 @@ But the reason why org mode is applicable to journaling is the use of collapsabl
 </p>
 
 
-<div id="orge81b011" class="figure">
+<div id="org3b85a41" class="figure">
 <p><img src="images/2023-12-30_12-15-10_Screenshot 2023-12-30 at 12.15.04.png" alt="2023-12-30_12-15-10_Screenshot 2023-12-30 at 12.15.04.png" />
 </p>
 </div>
@@ -152,16 +152,16 @@ But anyway, back to the journal. What happens when you have written all this stu
 </p>
 </div>
 </div>
-<div id="outline-container-orgae25158" class="outline-2">
-<h2 id="orgae25158">Tools for exploration: mapper and nearest neighbor Search</h2>
-<div class="outline-text-2" id="text-orgae25158">
+<div id="outline-container-org5fa4d17" class="outline-2">
+<h2 id="org5fa4d17">Tools for exploration: mapper and nearest neighbor Search</h2>
+<div class="outline-text-2" id="text-org5fa4d17">
 <p>
 Here, we're going to talk about the tools that I have used to review one million words of journaling. I'll give you the general structure here. If you're not interested in the technical details, then please skip to the next section where you'll be able to see the results.
 </p>
 </div>
-<div id="outline-container-org9592ea3" class="outline-3">
-<h3 id="org9592ea3">Reading in the org mode file</h3>
-<div class="outline-text-3" id="text-org9592ea3">
+<div id="outline-container-org23c0fda" class="outline-3">
+<h3 id="org23c0fda">Reading in the org mode file</h3>
+<div class="outline-text-3" id="text-org23c0fda">
 <p>
 In short, I read the org mode file line by line. I have the journal set up such that each paragraph is a single line, separated by an empty line, similar to the way I wrote this essay (which was also written in org mode). To get rid of the year/date/time lines, I exclude anything that starts with an asterisk (which is how you do a bullet point in org mode).
 </p>
@@ -196,9 +196,9 @@ The year is preceeded by one asterisk (<code>* 2023</code>). The day is preceede
 </div>
 </div>
 </div>
-<div id="outline-container-org6f7cbf7" class="outline-3">
-<h3 id="org6f7cbf7">Create word embeddings</h3>
-<div class="outline-text-3" id="text-org6f7cbf7">
+<div id="outline-container-org2b09784" class="outline-3">
+<h3 id="org2b09784">Create word embeddings</h3>
+<div class="outline-text-3" id="text-org2b09784">
 <p>
 The word embeddings are created using the BERT language model. This has been around for a while, but it differs from the GPT-based models in a very important way. While the GPTs function as chatbots, BERT simply takes the strings (words/sentences/paragraphs) its given and embeds them into a high-dimensional vector space, where strings that are similar to each other in context will be physically nearer to each other in this vector space. In other words, the sentence "I played fetch with my dog" will in theory be located nearer to "I walked my dog" than "The clown rode the unicycle." The first two sentences involve things you do with your dog, so they're grouped together.
 </p>
@@ -230,9 +230,9 @@ Specifically, the model I've been using is called <a href="https://huggingface.c
 </div>
 </div>
 </div>
-<div id="outline-container-orgdcf8b88" class="outline-3">
-<h3 id="orgdcf8b88">Reduce the embedding to 2 dimensions using UMAP</h3>
-<div class="outline-text-3" id="text-orgdcf8b88">
+<div id="outline-container-orgc7e308d" class="outline-3">
+<h3 id="orgc7e308d">Reduce the embedding to 2 dimensions using UMAP</h3>
+<div class="outline-text-3" id="text-orgc7e308d">
 <p>
 So now you have a two dimensional array of 768-dimensional vectors that correspond to each paragraph that you upladed. What happens now? Well, my PhD thesis was in high-dimensional single-cell analysis (CyTOF), which is a very visual field. We used nonlinear dimension reduction to visualize our outputs to quickly get a feel for what's there. If you want to see some of my work on that, go <a href="https://tjburns08.github.io/tjb_dimr_talk.pdf">here</a>. Anyway, as critical as I am about these tools (if you look at the previous link), I am still all for the narrow use case of quickly getting a feel for what's there. In the context of creating a map of journal entries, where each entry is a point, you can think of it as "thought space."
 </p>
@@ -256,9 +256,9 @@ The code for doing such a thing is below. Note that we're also saving the umap e
 </div>
 </div>
 </div>
-<div id="outline-container-org260e778" class="outline-3">
-<h3 id="org260e778">Nearest neighbor searches</h3>
-<div class="outline-text-3" id="text-org260e778">
+<div id="outline-container-org2f3298d" class="outline-3">
+<h3 id="org2f3298d">Nearest neighbor searches</h3>
+<div class="outline-text-3" id="text-org2f3298d">
 <p>
 We also want to be able to do nearest neighbor searches on a given journal entry (or new text entrely) that allows us to see if we have written similar things in the past. This allows me to track ideas from their inception to the present moment. This work builds off of some previous work that I did <a href="https://tjburns08.github.io/ask_marcus_writeup.html">here</a>, involving nearest neighbor searches between new text and the Meditations by Marcus Aurelius (when I first started reading the Stoic texts a few years ago). This is in turn built off of my <a href="https://www.biorxiv.org/content/10.1101/337485v1">second publication</a>, which remained a pre-print due to a combination of "reviewer number 3" and just being busy with moving to another country and starting my business. Anyway, my paper used k-nearest neighbors to analyze CyTOF data in many ways, while the rest of the field at the time was fixated on clustering.
 </p>
@@ -279,157 +279,109 @@ Here, I'm taking a given text, and returning the k-nearest neighbor entries from
 </div>
 </div>
 </div>
-<div id="outline-container-org9430ec3" class="outline-3">
-<h3 id="org9430ec3">Web interface</h3>
-<div class="outline-text-3" id="text-org9430ec3">
+<div id="outline-container-orge06b9c6" class="outline-3">
+<h3 id="orge06b9c6">Web interface</h3>
+<div class="outline-text-3" id="text-orge06b9c6">
 <p>
 In order to make these tools easy to use, I built web interface around them. I made two web interfaces. One for the map-based analysis and one for the nearest neighbor search. I did these both using the <a href="https://github.com/plotly/dash">Plotly Dash</a> framework. It was originally quite some work to figure out how everything tied together (here is a <a href="https://dash.plotly.com/layout">tutorial</a> that I used), but now ChatGPT allows me to quickly change the UI/UX to fit my needs. Accordingly, I'll avoid the details here, but you can go the source code that I provide so you can see what the back end looks like. The next section will show you what the front end looks like as a side effect of the main point: the analysis.
 </p>
 </div>
 </div>
 </div>
-<div id="outline-container-org73d9cd5" class="outline-2">
-<h2 id="org73d9cd5">Deep dives into the self</h2>
-<div class="outline-text-2" id="text-org73d9cd5">
+<div id="outline-container-orgad20cf2" class="outline-2">
+<h2 id="orgad20cf2">Deep dives into the self</h2>
+<div class="outline-text-2" id="text-orgad20cf2">
 </div>
-<div id="outline-container-orge906708" class="outline-3">
-<h3 id="orge906708">Thought space</h3>
-<div class="outline-text-3" id="text-orge906708">
+<div id="outline-container-orged335cf" class="outline-3">
+<h3 id="orged335cf">Thought space</h3>
+<div class="outline-text-3" id="text-orged335cf">
 <p>
-So what we end up with is a map of thought space. The UI is shown below. Each point corresponds to a paragraph of any given journal entry. Notice that this is just the map for 2023:
+The transformed sentences compressed into a UMAP representation present an approximation of what I call thought space. I have a UI that allows for the querying of this thought space, in which paragraphs that are similar to each other in context will physically group near each other. The UI looks like this:
 </p>
 
 
-<div id="org1622b74" class="figure">
-<p><img src="images/2023-12-30_14-11-24_Screenshot 2023-12-30 at 14.11.21.png" alt="2023-12-30_14-11-24_Screenshot 2023-12-30 at 14.11.21.png" />
-</p>
-</div>
-
-<p>
-We can look at other years too. Here is the thought space of 2021, for comparison.
-</p>
-
-
-<div id="org3f2d020" class="figure">
-<p><img src="images/2023-12-30_14-13-15_Screenshot 2023-12-30 at 14.13.09.png" alt="2023-12-30_14-13-15_Screenshot 2023-12-30 at 14.13.09.png" />
+<div id="orgf61180c" class="figure">
+<p><img src="images/2024-01-11_17-05-38_Screenshot 2024-01-11 at 17.05.35.png" alt="2024-01-11_17-05-38_Screenshot 2024-01-11 at 17.05.35.png" />
 </p>
 </div>
 
 <p>
-So what do we do with this? Well, the text shows up in two ways. If you hover over the map, you get a pop-up of the first 100 characters of the text (a preview) and if you click on the point, the text shows up under the map, like this.
+There is additional functionality that allows you to click on points and see what was written, as well as a dropdown as you can see, that allows you to select the years you want displayed on the map.
+</p>
+
+<p>
+When I saw this map, which runs until the end of 2023, the big question on my mind what my journal entries in general are about? I can recall by memory the kinds of things I write, but my memory is not good enough for me to recall exactly what I was thinking about in November of 2014, or relevant to this analysis, how often I write about science versus family, and so on. The search bar in the UI allows for the map to be colored by any string of interest. Accordingly, I typed a number of things in, and I found a set of four words that appear to take up the majority of thought space: science, business, family, and philosophy. You can see this below:
 </p>
 
 
-<div id="orgbf661ae" class="figure">
-<p><img src="images/2023-12-30_14-15-27_Screenshot 2023-12-30 at 14.15.23.png" alt="2023-12-30_14-15-27_Screenshot 2023-12-30 at 14.15.23.png" />
+
+<div id="org33baf13" class="figure">
+<p><img src="images/2024-01-11_17-10-09_Screenshot 2024-01-11 at 17.10.06.png" alt="2024-01-11_17-10-09_Screenshot 2024-01-11 at 17.10.06.png" />
 </p>
 </div>
 
 <p>
-Ok, now where it gets interesting is when you add search terms to this, which is what that search bar is all about. Let's go back to 2023 and type something in. How about science.
+I like how each of these subjects more or less occupies a particular swath of thought space. There are zoom-in capabilities limited only by the bounds of plotly that has allowed me to dig into each of these a bit more and see exactly what I was writing about and when. But most of that is a private thing. It's my journal afterall.
+</p>
+
+<p>
+But for the sake of my readers, let's delve a bit into science, as it is a large amount of my public facing persona, and clearly a large swath of thought space. Let's use some additional keywords that I expect to be nestled in this science cluster, the content of my scientific inquiries. Eight key terms are presented below, with "science" being in the upper left as our positive control:
 </p>
 
 
-<div id="org2bbc34f" class="figure">
-<p><img src="images/2023-12-30_14-17-02_Screenshot 2023-12-30 at 14.16.58.png" alt="2023-12-30_14-17-02_Screenshot 2023-12-30 at 14.16.58.png" />
+<div id="orgac427b8" class="figure">
+<p><img src="images/2024-01-11_17-31-42_Screenshot 2024-01-11 at 17.31.36.png" alt="2024-01-11_17-31-42_Screenshot 2024-01-11 at 17.31.36.png" />
 </p>
 </div>
 
 <p>
-You can see that the paragraphs that contain the word "science" cluster together on the east side of the map. Because we're using plotly, we can zoom in, so let's do that now.
+You can start to see subclusters within the "science" umbrella of thought space. One of these encompasses single-cell, CyTOF, and bioinformatic. This describes my PhD work with Garry Nolan, along with a large chunk of the work I do in my bioinformatic consulting business. You can also see a cluster farther to the right that encompasses code, AI, and GPT. This more technical cluster describes my journal entries around technical development that I in turn use to improve my data analysis work. Furthermore, more recent client work is in the domain of biosecurity, in which I research things like how AI will impact the ease of a malicious actor producing a pandemic-grade virus. Hence, I expect this cluster to grow relative to the others into 2024.
+</p>
+
+<p>
+The last observation I'll note is that there are certain keywords that bridge the four major clusters that I originally characterized. For example, the word "cancer" seems to sit between the family cluster and the science cluster within thought space. This is likely because cancer has my scientific focus (my PhD was in cancer biology, and some of my client work is cancer-based projects), and is borne out of family tragedy. Hence, it exists somewhere in between the family and the science cluster. You can see this in the image below:
 </p>
 
 
-<div id="org1b1d69a" class="figure">
-<p><img src="images/2023-12-30_14-18-33_Screenshot 2023-12-30 at 14.18.30.png" alt="2023-12-30_14-18-33_Screenshot 2023-12-30 at 14.18.30.png" />
+<div id="org19391f8" class="figure">
+<p><img src="images/2024-01-11_17-44-40_Screenshot 2024-01-11 at 17.44.38.png" alt="2024-01-11_17-44-40_Screenshot 2024-01-11 at 17.44.38.png" />
 </p>
 </div>
 
 <p>
-Here, I was talking about issues with science in general. But you can start to click around and see what I was talking about within the topic of science in 2023.
+Mapping out thought space has turned out to be an elightening exercise made possible by advances in natural language processing and their availability as relatively easy-to-use python packages. There is a whole lot more I'm not showing because its my private journal, but I can assure you that this is a gift that keeps on giving.
 </p>
 
 <p>
-Now let's look at something completely different. I talk a lot about Taoism in my journal, so let's see where that shows up.
-</p>
-
-
-<div id="orgdeb8fe5" class="figure">
-<p><img src="images/2023-12-30_14-21-59_Screenshot 2023-12-30 at 14.21.57.png" alt="2023-12-30_14-21-59_Screenshot 2023-12-30 at 14.21.57.png" />
-</p>
-</div>
-
-<p>
-Somewhere in the center. Let's zoom in and have a closer look.
-</p>
-
-
-<div id="org265a141" class="figure">
-<p><img src="images/2023-12-30_14-23-09_Screenshot 2023-12-30 at 14.23.06.png" alt="2023-12-30_14-23-09_Screenshot 2023-12-30 at 14.23.06.png" />
-</p>
-</div>
-
-<p>
-It forms a particular island in this general region, which seems to make up a broader wisdom cluster. If I literally type in the word "wisdom" and zoom into that particular region again, I get:
-</p>
-
-
-<div id="org8cc84a8" class="figure">
-<p><img src="images/2023-12-30_14-24-42_Screenshot 2023-12-30 at 14.24.39.png" alt="2023-12-30_14-24-42_Screenshot 2023-12-30 at 14.24.39.png" />
-</p>
-</div>
-
-<p>
-Similar regions light up in the area when I search for things like "god" and "philosophy." I'm only looking at 2023 at the moment because its cleaner, but for the next one we're going to switch to all years.
+For the external observer, I am comfortable letting the world know that a large majority of my brain's thought space, at least the fraction I write down in my private journal, encompasses these four domains: science, business, family, and philosophy. Let's see what this does to the tailored ads that show up on my feeds.
 </p>
 
 <p>
-Earlier years had more emotional journal entries, so we can do things like type in "laugh" to check out any laugh clusters. For example (I'm zoomed in on the west now):
+But those who know me well will know that I'm also obsessed with all things health and fitness. Where does that sit in thought space? The answer: everywhere. This is despite having a separate health/fitness log. The result for the keyword "health" is below. It appears to cover the science, family, and philosophy regions, but not the business region of thought space. This more or less makes sense. I was once a certified personal trainer, but at the moment, I am not interested in turning my sacred gym time into a job.
 </p>
 
 
-<div id="org85e30fb" class="figure">
-<p><img src="images/2023-12-30_14-28-28_Screenshot 2023-12-30 at 14.28.26.png" alt="2023-12-30_14-28-28_Screenshot 2023-12-30 at 14.28.26.png" />
-</p>
-</div>
-
-<p>
-In this instance, I found that little island on the west end of the map that had more paragraphs that contain the word "laugh" than not. After clicking around, one of the paragraphs coincidentally had me talking about "laugh space" and "cry space" so I included it above. Anyway, let's look at "cry."
-</p>
-
-
-<div id="org1496ccb" class="figure">
-<p><img src="images/2023-12-30_14-31-36_Screenshot 2023-12-30 at 14.31.32.png" alt="2023-12-30_14-31-36_Screenshot 2023-12-30 at 14.31.32.png" />
-</p>
-</div>
-
-<p>
-These are paragraphs that contained the word "cry." Curiously, they are not far from the "laugh" region of the map, and they form this interesting band that extends outward from the center.
-</p>
-
-<p>
-Anyway, you get the procedure. Type in a keyword of interest, and then click around and see what you see. For me, thought space seems to be divided between feelings (to the west) and science/business/money to the east. Interestingly, wisdom/philosophy paragraphs are between the two.
-</p>
-
-<p>
-Overall, the map-based procedure has allowed me to very quickly grok what I've been writing about over a given period of time and how the contents of thought space has changed year by year.
-</p>
-
-<p>
-But there are two problems. The first is that as I have said, UMAP space is not going to be as accurate as the original 768 dimensional vector space. The second is what happens when I make a new journal entry that is not in the embedding, and I want to test whether I have written about similar things in the past. For each of these, we use the nearest neighbor search.
+<div id="orgf55dddb" class="figure">
+<p><img src="images/2024-01-11_17-51-18_Screenshot 2024-01-11 at 17.51.15.png" alt="2024-01-11_17-51-18_Screenshot 2024-01-11 at 17.51.15.png" />
 </p>
 </div>
 </div>
+</div>
 
-<div id="outline-container-orgd5b5e42" class="outline-3">
-<h3 id="orgd5b5e42">You've written about this before</h3>
-<div class="outline-text-3" id="text-orgd5b5e42">
+
+<div id="outline-container-orgea4a226" class="outline-3">
+<h3 id="orgea4a226">You've written about this before</h3>
+<div class="outline-text-3" id="text-orgea4a226">
 <p>
 In reviewing my entries, I have noticed that there are ideas that I think are new, but I find that I actually wrote about it in the past, sometimes years ago. I also find particular "moods" that I stumble into where I write a particular way about particular things. I want to be able to see these kinds of things in real time. This is where the nearest neighbor search comes in.
 </p>
 
 <p>
-I'll show you what it looks like and what you can do with it. You start out with a basic search bar, and you enter something into it. Let's go with something wisdom themed. How about a random passage from the <a href="https://www.organism.earth/library/document/tao-te-ching">Tao Te Ching</a>. How about:
+I'll show you what it looks like and what you can do with it. You start out with a basic search bar, and you enter something into it.
+</p>
+
+<p>
+Given that we explored the science cluster in thought space in the previous section, let's explore the philosophy cluster here. A lot of my philosophical reading and writing centers on very old works, like the Stoic texts or the Taoist texts. Accordingly, we will start our inquiry with a passage from one of my favorite pieces of written material, the <a href="https://www.organism.earth/library/document/tao-te-ching">Tao Te Ching</a>.
 </p>
 
 <p>
@@ -444,7 +396,7 @@ Ok, place that into the search bar and we get (the text is small, so I'll explai
 </p>
 
 
-<div id="orgf459073" class="figure">
+<div id="orgb0e90bf" class="figure">
 <p><img src="images/2023-12-30_14-52-11_Screenshot 2023-12-30 at 14.52.06.png" alt="2023-12-30_14-52-11_Screenshot 2023-12-30 at 14.52.06.png" />
 </p>
 </div>
@@ -463,13 +415,13 @@ Note that the same way you can go down rabbit holes on YouTube by simply clickin
 </div>
 </div>
 </div>
-<div id="outline-container-org1872c3a" class="outline-2">
-<h2 id="org1872c3a">Conclusions</h2>
-<div class="outline-text-2" id="text-org1872c3a">
+<div id="outline-container-orgb3b0c48" class="outline-2">
+<h2 id="orgb3b0c48">Conclusions</h2>
+<div class="outline-text-2" id="text-orgb3b0c48">
 </div>
-<div id="outline-container-org7e165bd" class="outline-3">
-<h3 id="org7e165bd">Journaling is good</h3>
-<div class="outline-text-3" id="text-org7e165bd">
+<div id="outline-container-orga1d277a" class="outline-3">
+<h3 id="orga1d277a">Journaling is good</h3>
+<div class="outline-text-3" id="text-orga1d277a">
 <p>
 The most important thing that I want to convey in this article is that keeping a journal for a long time is a very good thing to do. Aside from the benefits of daily journaling, it makes it easier to live an examined life. It is very interesting, and very fun to look at where I was at a decade ago, both in terms of what I was up to, and what I was feeling at the time. There are often contrasts between what I remember and what I actually wrote down. I anticipate that this will continue to become more interesting, beneficial, and fun as time goes by and my journal continues to grow.
 </p>
@@ -479,9 +431,9 @@ The use of plain text and the use of org mode in particular has made it much eas
 </p>
 </div>
 </div>
-<div id="outline-container-org41edcc5" class="outline-3">
-<h3 id="org41edcc5">An automated Zettelkasten</h3>
-<div class="outline-text-3" id="text-org41edcc5">
+<div id="outline-container-org61d083c" class="outline-3">
+<h3 id="org61d083c">An automated Zettelkasten</h3>
+<div class="outline-text-3" id="text-org61d083c">
 <p>
 At the time of writing <span class="timestamp-wrapper"><span class="timestamp">[2023-12-30 Sat] </span></span> there are tools that are making a particular type of linked note taking popular. This is known as the <a href="https://en.wikipedia.org/wiki/Zettelkasten">Zettelkasten</a> (German for slip box) style of note taking. The easiest way to understand what this is would be to browse Obsidian's <a href="https://obsidian.md/">note taking system</a>. You take notes and you link them until you have a personal wiki that you can either click through (like hyperlinks on Wikipedia) or view the entire network.
 </p>
@@ -499,9 +451,25 @@ Of course, the use case that I'm talking about here is my journal. However, if t
 </p>
 </div>
 </div>
-<div id="outline-container-org621fe07" class="outline-3">
-<h3 id="org621fe07">Additional use cases and future directions</h3>
-<div class="outline-text-3" id="text-org621fe07">
+<div id="outline-container-orga731d9d" class="outline-3">
+<h3 id="orga731d9d">Who am I?</h3>
+<div class="outline-text-3" id="text-orga731d9d">
+<p>
+I am assuming that everyone asks the question "who am I" from time to time. This is a particularly difficult question, as the passage of life makes the self concept rather dynamic. However, a million words of written journal over 15 years can start to get at this question a little bit. Looking each paragraph of my journal entries in a map form, thought space, and later interrogation of what was written in each region of thought space, allowed me to test my self concept against what I actually have been writing down over the years. Doing such a thing only really works if your journal entries are faily unfiltered. Doing this on your social media posts probably will not provide very much insight into who you actually are, though it may offer utility when coloring it by engagement metrics.
+</p>
+
+<p>
+Not shown in this article is the ability to look at how thought space changes over the years. The content of my journal entries from 2010 is quite a bit different from the content of my journal entries now. One can get a bird's eye view of this by comparing thought space from 2010 and 2020, for example.
+</p>
+
+<p>
+So who am I? My tech-enabled journal review suggests that I am a lot of things. There is a concept in cognitive science around just this known as the <a href="https://en.wikipedia.org/wiki/Dialogical_self">dialogical self</a>, that makes sense in the light of revealing my journal entries. It's the idea that the self is actually a lot of sub-selves (based both on internal self-concepts and external roles) in "dialgogue" with each other, that leads to your actions. The best way to grok this idea is to watch the movie <a href="https://en.wikipedia.org/wiki/Inside_Out_(2015_film)">Inside Out</a>. Or at least watch the <a href="https://www.youtube.com/watch?v=yRUAzGQ3nSY">trailer</a>. Anyway, lots of different versions of me have written into this journal, and I am not just one thing. It's kinda refreshing to realize that, really.
+</p>
+</div>
+</div>
+<div id="outline-container-orgd9abef8" class="outline-3">
+<h3 id="orgd9abef8">Additional use cases and future directions</h3>
+<div class="outline-text-3" id="text-orgd9abef8">
 <p>
 I take a lot of notes on the computer. I used to keep everything in Evernote, but now I'm keeping everything in org mode files that are orgnized in a way that is similar to my journal: by year/date/time. I use <a href="https://orgmode.org/manual/Tags.html">tags</a> if I want to drill into particular subjects, but otherwise I can use the same software to organize things automatically.
 </p>
