@@ -1,8 +1,16 @@
 #+Title: Finite and infinite-life games
 #+Author: Tyler Burns
-#+Date: April 20, 2023 - April 20, 2023
+#+Date: April 20, 2023 - January 20, 2024
 
 [[./index.html][Home]]
+
+-----
+
+/Oh my god! They killed Kenny!/
+
+Stan, pretty much every [[https://en.wikipedia.org/wiki/Kenny_McCormick#][episode of South Park]] seasons 1-5.
+
+-----
 
 ** The older platformers vs Celeste
 If you have played basic platformer games, especially if you are old enough to remember playing the 2-D (16-bit and earlier) era games, you know the general structure. You have a finite number of lives to begin with, with the opportunity of getting extra lives in the game. If you run out of lives, it's "game over" and you have to start over. You have to get through some set of challenges in each level. In select areas and/or levels, there are sub-bosses and bosses. The levels get progressively harder. The last level is particularly challenging, but still doable. Then you "beat the game." 
@@ -13,10 +21,17 @@ Now I have a PlayStation 4 (PS4), and despite all the extra compute power, I sti
 
 The biggest difference between the structure of Celeste and the structure of pretty much every other 2-D platformer I grew up with, is that you have infinite lives. Why? Because the game is incredibly difficult. As in, you die hundreds of times each level. Each level is organized as rooms (rather than a continuous scroll). When you die, you start at the beginning of the room you died in.
 
+Below is a typical room in Celeste, taken from the Wikipedia article on the game. You start on the left and your goal is to get to the next room, presumably on the right (though I'm pretty sure there's a hidden room behind that brownish section of wall just to the right of the lower spikes). This is one of the earlier levels, but even here it's not uncommon to die over and over in a room like this. You'd simply and quickly re-spawn on the left where you started. No death theme song like Super Mario to rub it in. You just re-spawn and you're at it again, almost to the point where you barely notice that you died.
+
+[[file:images/2024-01-20_21-08-23_Screenshot 2024-01-20 at 21.08.17.png]]
+
+
 So the big question for me was, what's the point of playing a game where you have infinite lives? The fear of "game over" and having to start all over was a huge motivating driver for playing the game well. It turns out, upon playing it for a few days, the answer became clear at least for me: the flow state.
 
 ** Infinite lives as an efficient path to the flow state
-I have talked about the [[./tao_of_problem_solving.html][flow state]] before, but I'll give you a quick model. There is a delicate balance between [[https://en.wikipedia.org/wiki/Flow_(psychology)][our competence and whatever problem we're solving]]. If the problem is too hard for us, we have anxiety. If the problem is too easy for us, we have boredom. But if the problem is slightly above our competence, we experience flow, where we lose ourselves in the moment, and perform at our best. It is very satisfying.
+I have talked about the [[./tao_of_problem_solving.html][flow state]] before, but I'll give you a quick model. There is a delicate balance between [[https://en.wikipedia.org/wiki/Flow_(psychology)][our competence and whatever problem we're solving]]. If the problem is too hard for us, we have anxiety. If the problem is too easy for us, we have boredom. But if the problem is slightly above our competence, we experience flow, where we lose ourselves in the moment, and perform at our best. It is very satisfying. Below is an picture of this model, originally developed by psychologist [[https://en.wikipedia.org/wiki/Mihaly_Csikszentmihalyi][Mihaly Csikszentmihalyi]].
+
+[[file:images/2024-01-20_21-01-35_Screenshot 2024-01-20 at 21.01.29.png]]
 
 The older platformer games would start out easy, but then get progressively harder. At some point, I would be at a level that was slightly above my competence, and then I would enter the flow state. If the game was too easy, I could adjust the global difficulty level in the menu at the start of the game. But the genius of the Celeste model is that in a given platforming room that is way above your general competence, with infinite lives, you slowly chisel away at each problem, and you don't have the anxiety that these difficulty levels would otherwise give you. For a problem that is way above your competence, you can rapidly iterate, trying new things, until you are just competent enough to solve it. In this way, you spend much more time in the difficulty-to-competence zone that is conducive to flow.
 
@@ -24,6 +39,10 @@ Of course, I'm speaking about my first person experience. Not necessarily that o
 
 ** Infinite-life games in the real world
 The other thing that I found striking about the Celestian flow state strategy is that it mirrors a lot of my favorite type of work that I do in my professional life as a computational biologist. When I'm solving a new problem where there are few if any best practices and pre-made libraries for it, I find myself in a Celeste-like situation. I can break the problem down into pieces. But each sub-piece is still very difficult, and I spend a lot of time being flat-out wrong. Either I have to de-bug something, or I find that the method I'm using doesn't quite do what I wanted it to do, or my mental model of the problem or solution itself was wrong. Like each room in Celeste, I have to chisel away at each piece. Like dying in Celeste, I'm wrong over and over again. And like Celeste, I get through what I initially thought would be impossible. And like Celeste, I'm in the flow state for just about all of it.
+
+This is not a new thing for me. My time in grad school was very much like a game of Celeste. The [[https://web.stanford.edu/group/nolan/][Nolan Lab]] was full of (amazing) version 0 prototypes that we were all chiseling away at. If you were ok with whatever it is failing over and over again before you finally get it to work, be it a new laboratory machine or a new algorithm, then you could find yourself in the flow state all day and get a paper out of it in the end. Below is a picture of me standing next to a typical verion 0 device at the time ([[https://www.nature.com/articles/nm.3488][MIBI]], developed by a guy literally named [[https://profiles.stanford.edu/robert-angelo][Michael Angelo]]) somewhere in my second half of graduate school. In other words, the Nolan Lab was playing Celeste in spirit before Celeste came out.
+
+[[file:images/2024-01-20_21-21-24_IMG_1299.jpg]]
 
 What this suggests is that I should be seeking out these infinite-life games. If you vibe with this and/or have experienced what I'm talking about, then you should too. The two major benefits are that you get efficiently pushed into the flow state, and you end up doing things that you previously thought were impossible. In other words, you do good for yourself and you do good for the world.
 
