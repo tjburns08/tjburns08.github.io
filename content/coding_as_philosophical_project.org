@@ -1,15 +1,22 @@
 #+Title: If Plato lived today, he'd be coding
 #+Author: Tyler Burns
-#+Date: January 15, 2023 - January 18, 2023
+#+Date: January 15, 2023 - January 20, 2024
 
 [[./index.html][Home]]
 
-* From geometry to computer science
 -----
-/"The knowledge of which geometry aims is the knowledge of the eternal."/\\
-Plato, The Republic, VII, 52.
+/The knowledge of which geometry aims is the knowledge of the eternal./\\
+
+Plato, /[[https://www.gutenberg.org/files/1497/1497-h/1497-h.htm][The Republic]]/, Book VII, 52.
 -----
 
+-----
+/The purpose of computing is insight, not numbers./\\
+
+Richard Hamming, /[[https://safari.ethz.ch/digitaltechnik/spring2019/lib/exe/fetch.php?media=numerical.methods.for.scientists.and.engineers_2ed_hamming_0486652416.pdf][Numerical Methods for Scientists and Engineers]]/
+-----
+
+* From geometry to computer science
 Plato valued geometry highly. But he was not a geometer. He did not use geometry for anything practical in his life. He saw it as a stepping stone to the study of philosophy. In
 fact, on the door to his Academy, there was a sign that said "let no one ignorant of geometry enter."
 
@@ -32,7 +39,27 @@ Now, in my little corner of biology, step 4 and step 5 would both take anywhere 
 
 When I started pursuing computer science halfway through graduate school, I was surprised at how much this process sped up. When I was de-bugging code, I would run experiments at the rate of 1 or more per minute. Often for several hours. Again, each experiment where I was wrong, each error message, gave me the opportunity to become a better thinker. I learned early on to love the error message. You spend a huge chunk of time, upwards of half of your time, de-bugging code.
 
-There is a level above that of the rapid-fire experiments improving your ability to think via the scientific method. The higher level is the fact that you're not trying to understand billions of years of evolution. You're trying to understand code that you wrote. You converted your logical thoughts into computer language, and then the computer gave you an error message. Your mental model about how this was going to work was wrong. So when you find the bug, you have located an error in your thinking. Then you learn from it. Then you become a better thinker. 
+There is a level above that of the rapid-fire experiments improving your ability to think via the scientific method. The higher level is the fact that you're not trying to understand billions of years of evolution. You're trying to understand code that you wrote. You converted your logical thoughts into computer language, and then the computer gave you an error message. Your mental model about how this was going to work was wrong. So when you find the bug, you have located an error in your thinking. Then you learn from it. Then you become a better thinker.
+
+* Platonic forms
+Plato believed that for all things, there was an ideal platonic form of the thing. The example used when I was learning this was a chair. Each chair was imbued with some amount of chair-ness. In theory, there would be a chair out there that would have the maximum amount of chairness. It would be as much of a chair as anything could be. It would be the platonic form of a chair.
+
+Coding, and computation in general, gives me a similar feeling as staring at a Platonic form. Specifically, there is something very special about cellular automata. This is where you take a simple set of rules and run them, which produces emergent complexity. Some cellular automata are more elaborate than others despite having a rule set of similar complexity. Want an example: how about [[https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life][Conway's Game of Life]]. Take a grid. Each square on the grid can either be live or dead. For each square in the grid, follow these rules:
+
+1. Any live cell with fewer than two neighbors dies.
+2. Any live cell with two or three neighbors lives.
+3. Any live cell with more than three neighbors dies.
+4. Any dead cell with three neighbors becomes a live cell.
+
+That's it. Run it and you can get [[https://www.youtube.com/watch?v=cTZkEAYeRis][incredible patterns]]. Including a [[https://en.wikipedia.org/wiki/Turing_machine][Turing machine]], a common model for a computer used in theoretical computer science. The picture below is from the respective page in [[https://conwaylife.com/wiki/Turing_machine][Life Wiki]].
+
+[[file:images/2024-01-20_22-17-35_Screenshot 2024-01-20 at 22.17.16.png]]
+
+In other words, Conway's game of life is [[https://en.wikipedia.org/wiki/Turing_completeness][Turing complete]], meaning that any form of computation that exists, from Tetris to ChatGPT, is theoretically implementable using only Conway's game of life patterns (inefficient, but possible).
+
+Ok, so what does this have to do with Platonic forms? Well for me, when I first came across Conway's Game of Life when I was 16, there was a sort of universe-ness that was totally maxed out. It was the first time where I could conceive of our universe being made up of something like this at the very bottom. Even if it wasn't, I got the idea in my head that emergent complexity (which is perhaps the -ness that is being maxed out here) could give rise to way more than I had ever thought.
+
+So it was perhaps with Conway's game of life that I found the Platonic form of emergence, or perhaps what Stuart Kauffman might call [[https://www.amazon.de/-/en/Stuart-Kauffman/dp/0195079515][the Origins of Order]]. It wasn't until I was 28 and was learning how to code that I had this feeling again, and I knew I was going to pursue it for as long as I possibly could.
 
 * An expanded language
 ** Recursion
@@ -72,7 +99,7 @@ So now let's [[https://omnipathdb.org/][wire]] [[https://reactome.org/][one]] [[
 
 How do I know this? I spent three years doing just this for a client of mine. The use case is simple (though the implementation is complicated): can we find druggable regions of the network that will lead to the change that we want given the intent of the company? It would have been very hard, if not impossible, to do this kind of work without the intuition and use of a graph.
 
-** Models
+** Models and intelligence
 [[https://www.youtube.com/watch?v=Lhl51bZQlM8][Socrates wants to know what virtue is]]. So he asks you "what is virtue?" In the stereotypical dialogues with Socrates, he asks you question after question until you contradict yourself, proving that you don't know what you're talking about nearly as well as you thought. Now, one interpretation of Socrates that I particularly like is that he did this for the purpose of inducing [[https://en.wikipedia.org/wiki/Aporia][aporia]]. This is a state where you're not really talking or thinking verbally anymore because you doubt all of your words. What does this do? Well, what is left when verbal thinking is gone? Nonverbal thinking. So in this interpretation of Socrates, he's trying to get you to realize that there is a lot in this world that cannot be explained precisely by words.
 
 AI leader Joscha Bach (yes, related to Bach the musician) has an interesting angle to these big questions. He translates them into data structures and algorithms and then attempts to explain them through that lens. Let me give you a simple example of how he thinks so you can get a feel for what this sounds like:
@@ -96,9 +123,8 @@ Ok, so now we have this idea of intelligence as making relevant models of the wo
 /And then he says that there are additional rational principles that humans can discover and everybody can discover them so there are universal. If you are sane you, should understand, you said to submit to them because you can rationally deduce them. And these principles are roughly: you should be willing to self-regulate correctly. You should be willing to do correct social regulation, inter-organismic. You should be willing to act on your models so you have skin in the game. And you should have goal rationality, you should be choosing the right goals to work on. And so basically these three rational principles, goal rationality he calls prudence or wisdom, social regulation is justice, the correct social one, and the internal regulation is temperance. And this thing, willingness to act on your models is courage./
 -----
 \\
-Ok, so we have virtue through the framework of making relevant models of the world, and importantly the willingness to act on them. If we can get to a computational definition of models and build up from that, maybe we can gain some further insights or at least come up with interesting questions and hypotheses we wouldn't have otherwise thought of.
-
-Going from computer science to machine learning you end up with complicated functions that we call models that output a specific set of things given specific inputs. Models that distinguish between cats and dogs, predict housing prices given a set of features (like number of rooms), win at chess, or even generate art. Again, Joscha Bach thinks that intelligence is the ability to make relevant models of the world.
+** Programming...virtue?
+Ok, so back to the original question about what is virtue? Here, we have virtue through the framework of making relevant models of the world, and importantly the willingness to act on them. If we can get to a computational definition of models and build up from that, maybe we can gain some further insights or at least come up with interesting questions and hypotheses we wouldn't have otherwise thought of.
 
 Let's look at a simple model. If we go with housing prices, a simple model will take on the y = mx + b form. But there will be a number of mx's. We'll use w rather than m, to denote weights, where the x will be some characteristic that is weighted based on how well it predicts housing prices.
 
@@ -110,17 +136,16 @@ If the school district mattered the most, then w4 would be really high. If the n
 
 The last piece you need to understand the rest of this is that neural nets (the basis of a lot of modern AI) don't necessarily start with specific characteristics like number of rooms. They might just receive images of houses and the price of the house. They'll learn things over time, like size, number of floors, condition of the front yard, and things of that nature. So you have weights that are learned, but the characteristics that are being weighted are not known. Just w1*x1, w2*x2, w3*x3, etc. That's why they're often called black boxes. 
 
-Now if you were programming an AI agent to understand and act virtuously, how would you do it? You would have to build a set of [[https://www.youtube.com/watch?v=qv6UVOQ0F44][reinforcement learning models]] trained on real word data (images, videos, stories) that correspond to things like courage, temperance, justice, and wisdom. You'd have to define what's called a loss function for each of the virtues that would promote or penalize various things as the model optimizes with each new instance fed to the model of what may or may not be courage, for example.
+Now if you were programming an AI agent to understand and act virtuously, how would you do it? One way would be to build a set of [[https://www.youtube.com/watch?v=qv6UVOQ0F44][reinforcement learning models]] trained on real word data (images, videos, stories) that correspond to things like courage, temperance, justice, and wisdom. Another way that is currently en vogue is to assume the [[https://gwern.net/scaling-hypothesis][scaling hypothesis]] and throw as much data as you possibly can at a [[https://arxiv.org/abs/1706.03762][transformer]]. This gives us large language models that can potentially answer questions as if they were Socrates by virtue of grokking it from the sheer volume of data in its training set. At the time of writing [2024-01-20 Sat] we have yet to see whether or not this strategy will scale all the way to AGI.
 
-Is that how our brains work, when it comes to recognizing and generating virtue? It's obviously [[./its_more_complicated_than_that.html][more complicated than that]], but at least this allows us to start asking actionable questions: if these are models, are they pre-trained? Let's look at toddlers reacting to just and unjust actions. Are these models trainable? Let's examine human cognitive and emotional development across cultures that have different value systems. Are they centralized (remember centrality from the section on graphs)? Let's do a neuroimaging study where we show subjects instances of courage, cowardice, justice, injustice, etc, and see what regions of the brain light up. Do different regions light up, or are they roughly the same for each virtue or vice? Socrates would get me to contradict myself nonetheless. I would concede defeat, but I would tell him that at least it's getting me to ask some good and testable questions. Socrates, who prototypically values asking questions, would probably understand.
+So do our brains work like this? It's obviously [[./its_more_complicated_than_that.html][more complicated than that]], but at least this allows us to start asking actionable questions: if these are models, are they pre-trained? Let's look at toddlers reacting to just and unjust actions. Are these models trainable? Let's examine human cognitive and emotional development across cultures that have different value systems. Are they centralized (remember centrality from the section on graphs)? Let's do a neuroimaging study where we show subjects instances of courage, cowardice, justice, injustice, etc, and see what regions of the brain light up. Do different regions light up, or are they roughly the same for each virtue or vice? Socrates would get me to contradict myself nonetheless. I would concede defeat, but I would tell him that at least it's getting me to ask some good and testable questions. Socrates, who prototypically values asking questions, would probably understand.
 
-What computational definitions and analogies do is cut into the space of things that are not verbal. To say that something might be a reinforcement learning model in our brain is a more satisfying and actionable hypothesis than just telling Socrates "you know it when you see it."
+What computational definitions and analogies do is cut into the space of things that are [[./fear_the_unword.html][hard to put into words]]. To say that something might be a reinforcement learning model in our brain is a more satisfying and actionable hypothesis than just telling Socrates "you know it when you see it."
 
 * Conclusion
 
-As I get older, I increasingly value the endless pursuit of wisdom. Cognitive scientist John Vervaeke likes to say that the child is to the adult as the adult is to the sage. I like that framing. Now at least for me, I use computer science along with the scientific method as a base for my thinking and sensemaking. We all know how to do the scientific method, but computer science is both a way to intensively put the scientific method into practice, and way to expand your lexicon to include things that are otherwise hard to put into words. As such, I see computer science as a solid foundation for modern philosophy, the way Plato saw geometry in his time.
+As I get older, I increasingly value the endless pursuit of wisdom. Cognitive scientist John Vervaeke likes to say that the child is to the adult as the adult is to the sage. I like that framing. Now at least for me, I use computer science along with the scientific method as a base for my thinking and [[./dialectic.html][sensemaking]]. We all know how to do the scientific method, but computer science is both a way to intensively put the scientific method into practice, and way to expand your lexicon to include things that are otherwise hard to put into words. As such, I see computer science as a solid foundation for modern philosophy, the way Plato saw geometry in his time.
 
-The actionable advice I would give is to gain a basic understanding of computer science, even if AI automates the whole thing. It doesn't take very long to learn how to think computationally. An intro course on python will teach you the basic data structures, algorithms and concepts that I still use today. Writing a couple of scripts that do things you care about will put the knowledge in practice, and you'll see what I mean about the intensive practice of the scientific method.
+The actionable advice I would give is to gain a basic understanding of computer science, even if AI automates the whole thing. It doesn't take very long to [[./learn_bioinformatics.html][learn how to think computationally]]. An intro course on python will teach you the basic data structures, algorithms and concepts that I still use today. Writing a couple of scripts that do things you care about will put the knowledge in practice, and you'll see what I mean about the intensive practice of the scientific method.
 
-In conclusion, I think if Plato lived today, the door to his Academy would read "let no one ignorant of computer science enter."
-
+Now all of this being said, I have to concede that there is more to philosophy to thinking computationally. Iain McGilchrist argues that a lot of philosophy comes out of really contemplating on, meditating on, and cultivating a sense of awe and wonder and the sacred.  However, when it comes time to put those insights to paper, computer science is the modern way to train one to think rigorous as geometry was in Plato's time. In conclusion, I think if Plato lived today, the door to his Academy would read "let no one ignorant of computer science enter."
