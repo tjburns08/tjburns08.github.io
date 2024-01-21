@@ -88,9 +88,9 @@ Richard Hamming, <i><a href="https://safari.ethz.ch/digitaltechnik/spring2019/li
 </p>
 <hr />
 
-<div id="outline-container-orgceeb609" class="outline-2">
-<h2 id="orgceeb609">From geometry to computer science</h2>
-<div class="outline-text-2" id="text-orgceeb609">
+<div id="outline-container-org400733b" class="outline-2">
+<h2 id="org400733b">From geometry to computer science</h2>
+<div class="outline-text-2" id="text-org400733b">
 <p>
 Plato valued geometry highly. But he was not a geometer. He did not use geometry for anything practical in his life. He saw it as a stepping stone to the study of philosophy. In
 fact, on the door to his Academy, there was a sign that said "let no one ignorant of geometry enter."
@@ -102,9 +102,9 @@ In my life, I have found computer science to be the modern heir to geometry in t
 </div>
 </div>
 
-<div id="outline-container-org9696c45" class="outline-2">
-<h2 id="org9696c45">The scientific method</h2>
-<div class="outline-text-2" id="text-org9696c45">
+<div id="outline-container-org7c06fdc" class="outline-2">
+<h2 id="org7c06fdc">The scientific method</h2>
+<div class="outline-text-2" id="text-org7c06fdc">
 <p>
 We all learned the scientific method in school.<br />
 </p>
@@ -137,9 +137,9 @@ There is a level above that of the rapid-fire experiments improving your ability
 </div>
 </div>
 
-<div id="outline-container-orgd9483e9" class="outline-2">
-<h2 id="orgd9483e9">Platonic forms</h2>
-<div class="outline-text-2" id="text-orgd9483e9">
+<div id="outline-container-org4f8302a" class="outline-2">
+<h2 id="org4f8302a">Platonic forms</h2>
+<div class="outline-text-2" id="text-org4f8302a">
 <p>
 Plato believed that for all things, there was an ideal platonic form of the thing. The example used when I was learning this was a chair. Each chair was imbued with some amount of chair-ness. In theory, there would be a chair out there that would have the maximum amount of chairness. It would be as much of a chair as anything could be. It would be the platonic form of a chair.
 </p>
@@ -160,7 +160,7 @@ That's it. Run it and you can get <a href="https://www.youtube.com/watch?v=cTZkE
 </p>
 
 
-<div id="org8007424" class="figure">
+<div id="org8a93b3d" class="figure">
 <p><img src="images/2024-01-20_22-17-35_Screenshot 2024-01-20 at 22.17.16.png" alt="2024-01-20_22-17-35_Screenshot 2024-01-20 at 22.17.16.png" />
 </p>
 </div>
@@ -179,13 +179,23 @@ So it was perhaps with Conway's game of life that I found the Platonic form of e
 </div>
 </div>
 
-<div id="outline-container-org24b13f8" class="outline-2">
-<h2 id="org24b13f8">An expanded language</h2>
-<div class="outline-text-2" id="text-org24b13f8">
+<div id="outline-container-org864f94c" class="outline-2">
+<h2 id="org864f94c">An expanded language</h2>
+<div class="outline-text-2" id="text-org864f94c">
 </div>
-<div id="outline-container-org9f50587" class="outline-3">
-<h3 id="org9f50587">Levels of analysis</h3>
-<div class="outline-text-3" id="text-org9f50587">
+<div id="outline-container-org4a1885c" class="outline-3">
+<h3 id="org4a1885c">Levels of analysis</h3>
+<div class="outline-text-3" id="text-org4a1885c">
+<hr />
+<p>
+<i>Email is a wonderful thing for people whose role in life is to be on top of things. But not for me; my role is to be on the bottom of things.</i>
+</p>
+
+<p>
+<a href="https://en.wikipedia.org/wiki/Donald_Knuth">Donald Knuth</a>, from <i><a href="https://www-cs-faculty.stanford.edu/~knuth/email.html">Email (let's drop the hyphen)</a></i>
+</p>
+<hr />
+
 <p>
 My first computer science class was in Java. My second one was in C++. These are lower-level langugaes as compred to R and Python, the two languages that I use these days. It was through programming that I really solidified the concept of levels of analysis. We all have a general idea of what it is, like the xkcd comic <a href="https://xkcd.com/435/">here</a>. That pschology is just applied biology is just applied chemistry is just applied physics, etc. I'll add that that by saying that as a biologist, the best biologists I know are actually chemists in disguise.
 </p>
@@ -262,7 +272,7 @@ Ok, so what is going on here? Now we're giving that computer direct, low-level c
 </p>
 
 <p>
-We first have to prepare the computer to output "hello world." In the _printf function, we're going to set the output stream (stdout) in the register (CPU memory slot) X0. Then we're going to create a memory address for our string, which we're naming "helloworld" and store <i><a href="https://en.wikipedia.org/wiki/Memory_address">the address</a></i> (not the string, just the place in memory that will hold the string) in register X1. Then we're going to tell the computer the length of our string of interest (count the number of characters, including whitespace, plus the newline character), which is 12, and store that in register X2. In X16, we're going to place the instruction to write to stdout. Then we call svc 0, which actually requests the operating system to execute _printf.
+We first have to prepare the computer to output "hello world." In the _printf function, we're going to set the output stream (stdout) in the register (CPU memory slot) X0. Then we're going to create a memory address for our string, which we're naming "helloworld" and store <i><a href="https://en.wikipedia.org/wiki/Memory_address">the address</a></i> (not the string, just the place in memory that will hold the string) in register X1. Then we're going to tell the computer the length of our string of interest (count the number of characters, including whitespace, plus the newline character), which is 12 characters, which is 12 <a href="https://en.wikipedia.org/wiki/Byte">bytes</a>, and store that in register X2. In X16, we're going to place the instruction to write to stdout. Then we call svc 0, which actually requests the operating system to execute _printf.
 </p>
 
 <p>
@@ -320,9 +330,9 @@ Taken together, in terms of being a better thinker, it's good to know how things
 </div>
 </div>
 
-<div id="outline-container-org102111f" class="outline-3">
-<h3 id="org102111f">Recursion</h3>
-<div class="outline-text-3" id="text-org102111f">
+<div id="outline-container-org737e7d9" class="outline-3">
+<h3 id="org737e7d9">Recursion</h3>
+<div class="outline-text-3" id="text-org737e7d9">
 <hr />
 <p>
 <i>“I enjoy acronyms. Recursive Acronyms Crablike "RACRECIR" Especially Create Infinite Regress”</i><br />
@@ -352,9 +362,9 @@ Still a bit mind-bending if you've never seen this before. If this is new to you
 </div>
 </div>
 
-<div id="outline-container-org96e53d8" class="outline-3">
-<h3 id="org96e53d8">Graphs</h3>
-<div class="outline-text-3" id="text-org96e53d8">
+<div id="outline-container-org9ab71c9" class="outline-3">
+<h3 id="org9ab71c9">Graphs</h3>
+<div class="outline-text-3" id="text-org9ab71c9">
 <p>
 Ok, how about a practical example for biologists. What is a cell signaling pathway? Well, to massively oversimply, you have messages being passed from protein to protein all the way down to the DNA where some sort of effector (eg. a transcription factor) does a thing to the DNA. What if you wanted to model that? How would you do it? Well, in computer science (and discrete math) there is a data structure called a graph that allows for one to wire up a pathway <i>in silico.</i> This is a graph as in a mathematical abstraction of a network, not to be confused with a biaxial plot.
 </p>
@@ -383,9 +393,9 @@ How do I know this? I spent three years doing just this for a client of mine. Th
 </div>
 </div>
 
-<div id="outline-container-org6c7a0bc" class="outline-3">
-<h3 id="org6c7a0bc">Models and intelligence</h3>
-<div class="outline-text-3" id="text-org6c7a0bc">
+<div id="outline-container-orgb904579" class="outline-3">
+<h3 id="orgb904579">Models and intelligence</h3>
+<div class="outline-text-3" id="text-orgb904579">
 <p>
 <a href="https://www.youtube.com/watch?v=Lhl51bZQlM8">Socrates wants to know what virtue is</a>. So he asks you "what is virtue?" In the stereotypical dialogues with Socrates, he asks you question after question until you contradict yourself, proving that you don't know what you're talking about nearly as well as you thought. Now, one interpretation of Socrates that I particularly like is that he did this for the purpose of inducing <a href="https://en.wikipedia.org/wiki/Aporia">aporia</a>. This is a state where you're not really talking or thinking verbally anymore because you doubt all of your words. What does this do? Well, what is left when verbal thinking is gone? Nonverbal thinking. So in this interpretation of Socrates, he's trying to get you to realize that there is a lot in this world that cannot be explained precisely by words.
 </p>
@@ -425,9 +435,9 @@ Ok, so now we have this idea of intelligence as making relevant models of the wo
 </div>
 </div>
 
-<div id="outline-container-org9f4e5da" class="outline-3">
-<h3 id="org9f4e5da">Models lead to questions</h3>
-<div class="outline-text-3" id="text-org9f4e5da">
+<div id="outline-container-org859237c" class="outline-3">
+<h3 id="org859237c">Models lead to questions</h3>
+<div class="outline-text-3" id="text-org859237c">
 <p>
 Ok, so back to the original question about what is virtue? Here, we have virtue through the framework of making relevant models of the world, and importantly the willingness to act on them. If we can get to a computational definition of models and build up from that, maybe we can gain some further insights or at least come up with interesting questions and hypotheses we wouldn't have otherwise thought of.
 </p>
@@ -464,9 +474,9 @@ What computational definitions and analogies do is cut into the space of things 
 </div>
 </div>
 
-<div id="outline-container-org73965a6" class="outline-2">
-<h2 id="org73965a6">Conclusion</h2>
-<div class="outline-text-2" id="text-org73965a6">
+<div id="outline-container-orgac19fa5" class="outline-2">
+<h2 id="orgac19fa5">Conclusion</h2>
+<div class="outline-text-2" id="text-orgac19fa5">
 <p>
 As I get older, I increasingly value the endless pursuit of wisdom. Cognitive scientist John Vervaeke likes to say that the child is to the adult as the adult is to the sage. I like that framing. Now at least for me, I use computer science along with the scientific method as a base for my thinking and <a href="./dialectic.html">sensemaking</a>. We all know how to do the scientific method, but computer science is both a way to intensively put the scientific method into practice, and way to expand your lexicon to include things that are otherwise hard to put into words. As such, I see computer science as a solid foundation for modern philosophy, the way Plato saw geometry in his time.
 </p>
@@ -482,7 +492,7 @@ Now all of this being said, I have to concede that there is more to philosophy t
 </div>
 </div>
 <div id="postamble" class="status">
-<p class="date">Date: January 15, 2023 - January 20, 2024</p>
+<p class="date">Date: January 15, 2023 - January 21, 2024</p>
 <p class="creator"><a href="https://www.gnu.org/software/emacs/">Emacs</a> 28.1 (<a href="https://orgmode.org">Org</a> mode 9.5.2)</p>
 </div>
 </body>
