@@ -49,17 +49,103 @@ Coding, and computation in general, gives me a similar feeling as staring at a P
 3. Any live cell with more than three neighbors dies.
 4. Any dead cell with three neighbors becomes a live cell.
 
-That's it. Run it and you can get [[https://www.youtube.com/watch?v=cTZkEAYeRis][incredible patterns]]. Including a [[https://en.wikipedia.org/wiki/Turing_machine][Turing machine]], a common model for a computer used in theoretical computer science. The picture below is from the respective page in [[https://conwaylife.com/wiki/Turing_machine][Life Wiki]].
+That's it. Run it and you can get [[https://www.youtube.com/watch?v=cTZkEAYeRis][incredible patterns]]. If you're curious, have a look here in the Life Wiki at the [[https://conwaylife.com/wiki/Category:Patterns][various patterns]] that have been found. Running Conway's Game of Life is the computational equivalent of looking at a drop of pondwater under the microscope. Included in these patterns is a [[https://en.wikipedia.org/wiki/Turing_machine][Turing machine]], a common model for a computer used in theoretical computer science. The picture of a Turing machine below, implemented in Conway's Game of Life, is from the respective page in [[https://conwaylife.com/wiki/Turing_machine][Life Wiki]].
 
 [[file:images/2024-01-20_22-17-35_Screenshot 2024-01-20 at 22.17.16.png]]
 
 In other words, Conway's game of life is [[https://en.wikipedia.org/wiki/Turing_completeness][Turing complete]], meaning that any form of computation that exists, from Tetris to ChatGPT, is theoretically implementable using only Conway's game of life patterns (inefficient, but possible).
 
-Ok, so what does this have to do with Platonic forms? Well for me, when I first came across Conway's Game of Life when I was 16, there was a sort of universe-ness that was totally maxed out. It was the first time where I could conceive of our universe being made up of something like this at the very bottom. Even if it wasn't, I got the idea in my head that emergent complexity (which is perhaps the -ness that is being maxed out here) could give rise to way more than I had ever thought.
+Ok, so what does this have to do with Platonic forms? Well for me, when I first came across Conway's Game of Life when I was 16, there was a sort of universe-ness that was totally maxed out. It was the first time where I could conceive of our universe being made up of something like this at the very bottom. Even if it wasn't, I got the idea in my head that [[https://en.wikipedia.org/wiki/Emergence][emergent complexity]] (which is perhaps the -ness that is being maxed out here) could give rise to way more than I had ever thought.
 
 So it was perhaps with Conway's game of life that I found the Platonic form of emergence, or perhaps what Stuart Kauffman might call [[https://www.amazon.de/-/en/Stuart-Kauffman/dp/0195079515][the Origins of Order]]. It wasn't until I was 28 and was learning how to code that I had this feeling again, and I knew I was going to pursue it for as long as I possibly could.
 
 * An expanded language
+** Levels of analysis
+My first computer science class was in Java. My second one was in C++. These are lower-level langugaes as compred to R and Python, the two languages that I use these days. It was through programming that I really solidified the concept of levels of analysis. We all have a general idea of what it is, like the xkcd comic [[https://xkcd.com/435/][here]]. That pschology is just applied biology is just applied chemistry is just applied physics, etc. I'll add that that by saying that as a biologist, the best biologists I know are actually chemists in disguise.
+
+In terms of computer science, we have what are broadly called low-level languages and high-level languages. These terms are relative to your programming language of choice. If we look at the printing of "hello world" in Python for example, it looks like this:
+
+#+begin_src python
+print("hello world")
+#+end_src
+
+That's it. A single command. Then you run it. Then you get "hello world" on the console. But there's a ton of stuff that happens under the surface. To give you an idea of what that looks like, let's go with a lower level language. C.
+
+#+begin_src c
+#include <stdio.h>
+int main() {
+    printf("hello world");
+    return 0;
+}
+#+end_src
+
+So here, we need to include a library that allows us to do input/output things, which gives us the function printf. It's not just built into the language. We have to end each line with a semicolon. We have int main() which is our main function that must be called to run the thing. We're declaring the type of thing that the function returns. In this case an integer.
+
+This brings us to the point that in C (and many other languages) you have to declare the type of object you're using. So if you have a variable x you want to set to 5, you have to say int x = 5, whereas in python you'd say x = 5. And you need a statement that the function returns. In this case 0, which by convention terminates the program. So you're also telling the computer when it terminates. It doesn't just figure it out. So there's a lot more you have to keep track of. And if you're just trying to analyze some data, it's way more convenient for the computer to sweep it under the rug.
+
+There's a whole other piece here that I'm not going to talk about for the sake of brevity: while R and python are interactive, where you can simply type things in and they run automatically, C and other lower level languages are entirely compiled. Rather than programming interactively, you have to [[https://en.wikipedia.org/wiki/Compiler][compile]] it first, or convert it into the binary machine code that will be understood by the computer's hardware. This requires the use of a compiler to turn your C file into an executable binary file, which is then read by the computer, which only then produces "hello world."
+
+But this is just the top of the rabbit hole. If you /really/ want to know what's going on, let's look at an even lower level language: Assembly. This is the language underneath C and everything else (save machine code). If you code in python, then C is a lower level language. If you code in assembly (which is very rare these days), then C is a higher level language. So I'm going to give you the Assembly code for printing out hello world for the ARM64 chip, which my current computer runs. This is the first point: when you're coding in Assembly, you're dealing with a different language for each chip. Now, there's a lot going on below, so if you want a better explanation from someone who actually codes in assembly, please watch this [[https://www.youtube.com/watch?v=d0OXp0zqIo0][video by Chris Hay]], which gets credit for the code and the explanation below.
+
+#+begin_src assembly
+// hello world
+
+.global _start
+.align 2
+
+// main
+_start:
+    b _printf
+    b _terminate
+
+_printf:
+    mov X0, #1      // stdout
+    adr X1, helloworld      // address of hello world string
+    mov X2, #12     // length of hello world
+    mov X16, #4      // write to stdout
+    svc 0           // syscall
+
+_terminate:
+    mov X0, #0      // return 0
+    mov X16, #1     // terminate
+    svc 0           // syscall
+
+// Hello world string
+helloworld: .ascii "hello world\n"
+#+end_src
+
+Ok, so what is going on here? Now we're giving that computer direct, low-level commands to the processor. Let's focus on what's going on underneath my comment "//main." Without going into a larger discussion around computer architecture, we'll summarize the procedure. You are in no way supposed to fully get what's going on here. You're just supposed to understand that there's a lot that happens under the hood. With that in mind, read on.
+
+We first have to prepare the computer to output "hello world." In the _printf function, we're going to set the output stream (stdout) in the register (CPU memory slot) X0. Then we're going to create a memory address for our string, which we're naming "helloworld" and store /[[https://en.wikipedia.org/wiki/Memory_address][the address]]/ (not the string, just the place in memory that will hold the string) in register X1. Then we're going to tell the computer the length of our string of interest (count the number of characters, including whitespace, plus the newline character), which is 12, and store that in register X2. In X16, we're going to place the instruction to write to stdout. Then we call svc 0, which actually requests the operating system to execute _printf.
+
+Then, we have to tell the computer to terminate the program, which is the _terminate function that we define. The equivalent of return 0 from C is moving the NULL command into register X0. This means that the program executed successfully. Then we move the exit command into X16, where we previously were holding the "write to stdout" command. Then we call svc 0 again, which requests the operating system execuite _terminate after displaying "hello world."
+
+Then, like C, there's a song and dance that converts this instruction set into binary machine code that the computer can read, and then it can actually output "hello world." And then we're done.
+
+So I'm going to cut and paste the python code from above to remind you the sheer volume of things that are swept under the rug:
+
+#+begin_src python
+print("hello world")
+#+end_src
+
+Ok, so how the heck does this relate to philosophy? Well, we started with a discussion of levels of analysis from psychology to physics. Then we moved to the equivalent in computer science. What you learn in computer science in real time is that understanding what's going on at least one level below what you're doing makes you a much better programmer.
+
+How do I mean? If I run into a bug in python or R, the issue could very well be a lower level issue, the same way that treating disease has you working with chemistry to treat a problem in biology. Quite a lot of so-called hacking (both security hacking and innovation) works by means of understanding things one or more levels underneath what you're doing. A much larger discussion of this can be found from this amazing [[https://gwern.net/unseeing][article]] written by Gwern that I've read many times. But let me paste the punchline, as food for thought:
+
+/In each case, the fundamental principle is that the hacker asks: “here I have a system W, which pretends to be made out of a few Xs; however, it is really made out of many Y, which form an entirely different system, Z; I will now proceed to ignore the X and understand how Z works, so I may use the Y to thereby change W however I like”./
+
+In other words, the hacker looks at a thing, and realizes that the thing is merely an abstraction made out of atoms or bits or whatever other low-level object, and it's just a matter of moving those bits/atoms around in a particular way, and they get what they want. I'll paste another bit from Gwern's article to really solidify this.
+
+/In hacking, a computer pretends to be made out of things like ‘buffers’ and ‘lists’ and ‘objects’ with rich meaningful semantics, but really, it’s just made out of bits which mean nothing and only accidentally can be interpreted as things like ‘web browsers’ or ‘passwords’, and if you move some bits around and rewrite these other bits in a particular order and read one string of bits in a different way, now you have bypassed the password./
+
+There is one more insight here that I have to continually remind myself over and over. This comes from the analogy to speedrunning, which is a hobby in video gaming where you try to beat a game as fast as possible. In speedrunning, you have to know both how to hack the game, and you have to be maximally skilled. You can't just do a hack and call it a day (everyone is looking for the "hack" these days). From Gwern:
+
+/In speed running (particularly TASes), a video game pretends to be made out of things like ‘walls’ and ‘speed limits’ and ‘levels which must be completed in a particular order’, but it’s really again just made out of bits and memory locations, and messing with them in particular ways, such as deliberately overloading the RAM to cause memory allocation errors, can give you infinite ‘velocity’ or shift you into alternate coordinate systems in the true physics, allowing enormous movements in the supposed map, giving shortcuts to the ‘end’ of the game./
+
+To get a feel for this, have a look at this history of [[https://www.youtube.com/watch?v=WNgJCe3HSGY][Mario Wonder speedrunning]] (which includes info about speed runs in other video games). Someone learns some exploit that the game designers did not anticipate, then everyone is doing that exploit with maximal skill with the character, and then someone learns a new exploit, and the cycle continues. So you have to know both the hacks (be able to operate at lower levels) /and/ have maximum talent (be able to operate at higher levels). Put differently, a biologist needs to know chemistry, but also needs to be a biologist.
+
+Taken together, in terms of being a better thinker, it's good to know how things work at least one level under whatever you're doing. I'm not the first to say this by any means. Are you a biologist, at least be familiar with if not competent in chemistry. Are you a python programmer, at least be familiar with if not competent in C. Broadly learn how things work (which is really just another way of saying to look at a thing at a level of analysis below wherever you're at). Coding really solidifies this concept and teaches you what it feels like to think at a high level (program in python) versus to think at a low level (program in C or Assembly), and the value of both. Again, I primarily use R and python, but being familiar with the lower level languages, and the thinking habits they have taught me, has paid off many times over.
+
 ** Recursion
 -----
 /“I enjoy acronyms. Recursive Acronyms Crablike "RACRECIR" Especially Create Infinite Regress”/\\
@@ -121,7 +207,7 @@ Ok, so now we have this idea of intelligence as making relevant models of the wo
 /And then he says that there are additional rational principles that humans can discover and everybody can discover them so there are universal. If you are sane you, should understand, you said to submit to them because you can rationally deduce them. And these principles are roughly: you should be willing to self-regulate correctly. You should be willing to do correct social regulation, inter-organismic. You should be willing to act on your models so you have skin in the game. And you should have goal rationality, you should be choosing the right goals to work on. And so basically these three rational principles, goal rationality he calls prudence or wisdom, social regulation is justice, the correct social one, and the internal regulation is temperance. And this thing, willingness to act on your models is courage./
 -----
 
-** Programming...virtue?
+** Models lead to questions
 Ok, so back to the original question about what is virtue? Here, we have virtue through the framework of making relevant models of the world, and importantly the willingness to act on them. If we can get to a computational definition of models and build up from that, maybe we can gain some further insights or at least come up with interesting questions and hypotheses we wouldn't have otherwise thought of.
 
 Let's look at a simple model. If we go with housing prices, a simple model will take on the y = mx + b form. But there will be a number of mx's. We'll use w rather than m, to denote weights, where the x will be some characteristic that is weighted based on how well it predicts housing prices.
@@ -141,7 +227,6 @@ So do our brains work like this? It's obviously [[./its_more_complicated_than_th
 What computational definitions and analogies do is cut into the space of things that are [[./fear_the_unword.html][hard to put into words]]. To say that something might be a reinforcement learning model in our brain is a more satisfying and actionable hypothesis than just telling Socrates "you know it when you see it."
 
 * Conclusion
-
 As I get older, I increasingly value the endless pursuit of wisdom. Cognitive scientist John Vervaeke likes to say that the child is to the adult as the adult is to the sage. I like that framing. Now at least for me, I use computer science along with the scientific method as a base for my thinking and [[./dialectic.html][sensemaking]]. We all know how to do the scientific method, but computer science is both a way to intensively put the scientific method into practice, and way to expand your lexicon to include things that are otherwise hard to put into words. As such, I see computer science as a solid foundation for modern philosophy, the way Plato saw geometry in his time.
 
 The actionable advice I would give is to gain a basic understanding of computer science, even if AI automates the whole thing. It doesn't take very long to [[./learn_bioinformatics.html][learn how to think computationally]]. An intro course on python will teach you the basic data structures, algorithms and concepts that I still use today. Writing a couple of scripts that do things you care about will put the knowledge in practice, and you'll see what I mean about the intensive practice of the scientific method.
