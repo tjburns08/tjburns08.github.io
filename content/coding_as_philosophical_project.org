@@ -1,6 +1,6 @@
 #+Title: If Plato lived today, he'd be coding
 #+Author: Tyler Burns
-#+Date: January 15, 2023 - January 20, 2024
+#+Date: January 15, 2023 - January 21, 2024
 
 [[./index.html][Home]]
 
@@ -117,7 +117,7 @@ helloworld: .ascii "hello world\n"
 
 Ok, so what is going on here? Now we're giving that computer direct, low-level commands to the processor. Let's focus on what's going on underneath my comment "//main." Without going into a larger discussion around computer architecture, we'll summarize the procedure. You are in no way supposed to fully get what's going on here. You're just supposed to understand that there's a lot that happens under the hood. With that in mind, read on.
 
-We first have to prepare the computer to output "hello world." In the _printf function, we're going to set the output stream (stdout) in the register (CPU memory slot) X0. Then we're going to create a memory address for our string, which we're naming "helloworld" and store /[[https://en.wikipedia.org/wiki/Memory_address][the address]]/ (not the string, just the place in memory that will hold the string) in register X1. Then we're going to tell the computer the length of our string of interest (count the number of characters, including whitespace, plus the newline character), which is 12, and store that in register X2. In X16, we're going to place the instruction to write to stdout. Then we call svc 0, which actually requests the operating system to execute _printf.
+We first have to prepare the computer to output "hello world." In the _printf function, we're going to set the output stream (stdout) in the register (CPU memory slot) X0. Then we're going to create a memory address for our string, which we're naming "helloworld" and store /[[https://en.wikipedia.org/wiki/Memory_address][the address]]/ (not the string, just the place in memory that will hold the string) in register X1. Then we're going to tell the computer the length of our string of interest (count the number of characters, including whitespace, plus the newline character), which is 12 characters, which is 12 [[https://en.wikipedia.org/wiki/Byte][bytes]], and store that in register X2. In X16, we're going to place the instruction to write to stdout. Then we call svc 0, which actually requests the operating system to execute _printf.
 
 Then, we have to tell the computer to terminate the program, which is the _terminate function that we define. The equivalent of return 0 from C is moving the NULL command into register X0. This means that the program executed successfully. Then we move the exit command into X16, where we previously were holding the "write to stdout" command. Then we call svc 0 again, which requests the operating system execuite _terminate after displaying "hello world."
 
