@@ -73,6 +73,7 @@ That's it. A single command. Then you run it. Then you get "hello world" on the 
 
 #+begin_src c
 #include <stdio.h>
+
 int main() {
     printf("hello world");
     return 0;
