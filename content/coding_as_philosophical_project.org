@@ -15,7 +15,7 @@ Richard Hamming, /[[https://safari.ethz.ch/digitaltechnik/spring2019/lib/exe/fet
 -----
 
 * Computer science improved my thinking and my focus
-I have always been intellectually minded and curious. But one challenge I faced was that I was a classic [[https://www.youtube.com/watch?v=U35T-KzfeLk][ADHD kid]], who went the path of refusing to take medication. I was easily distracted, and often had racing thoughts that were all over the place. When I found computer science in my late 20s, I discovered that the act of coding had a calming effect on my brain. I could focus on one thing for several hours. Furthermore, when I applied the computational lens to the rest of my life, that calming effect would remain. I attribute computer science to a good chunk of my success at the end of grad school, and my years after graduation, which involved starting a business that I still run at the time of writing.
+I have always been intellectually minded and curious. But one challenge I faced was that I was a classic [[https://www.youtube.com/watch?v=U35T-KzfeLk][ADHD kid]], who went the path of refusing to take medication. I was easily distracted, and often had racing thoughts that were all over the place. When I found computer science in my late 20s, I discovered that the act of coding had a calming effect on my brain. I could focus [[./tao_of_problem_solving.html][on one thing for several hours]]. Furthermore, when I applied the computational lens to the rest of my life, that calming effect would remain. I attribute computer science to a good chunk of my success at the end of grad school, and my years after graduation, which involved starting a business that I still run at the time of writing.
 
 In short, aside from the practical skills that computer science gave me, computer science helped me organize my thoughts and actions. It gave me a framework from which I could reason and do things in a calm and foucused way. I am not alone in this discovery. There is a whole discipline called [[https://en.wikipedia.org/wiki/Computational_thinking][computational thinking]] that is aiming to, among other things, teach people, especially [[https://en.wikipedia.org/wiki/Scratch_(programming_language)][kids]], the fundamental concepts and practices within computer science. Accordingly, I think that this computational thinking is something that everyone should get exposure to. Why does this matter? Because it could very well be that in the next few years, generative AI renders human-based coding obsolete at the practical level. If this is the case, I will continue coding and teaching people how to code. Why? Because learning how to code improved how I think.
 
@@ -30,7 +30,7 @@ We all learned the scientific method in school.\\
 6. Form a conclusion\\
 7. For each follow up question, go to step 1.\\
    
-The conclusion leads to follow-up questions and you're at the top of the loop again. Importantly, in my experience, my hypothesis is partially or fully wrong quite often. Each time I'm wrong, my intuition around how the work works improves. Furthermore, I get a chance to do a mental stack trace to see if I can locate the fallacies in my thinking that led to the wrong hypothesis. Sometimes, it's simply that biology is complicated. Often, I didn't read up enough on Gene X, or some sort of cognitive bias (wishful thinking, because I want to get the high-end publication) clouds my judgment. In this regard, through repeated experiments, where I put my hypothesis on the line, I become a better thinker. 
+The conclusion leads to follow-up questions and you're at the top of the loop again. Importantly, in my experience, my hypothesis is partially or fully wrong quite often. Each time I'm wrong, my intuition around how the work works improves. Furthermore, I get a chance to do a mental stack trace to see if I can locate the fallacies in my thinking that led to the wrong hypothesis. Sometimes, it's simply that [[./its_more_complicated_than_that.html][biology is complicated]]. Often, I didn't read up enough on Gene X, or some sort of cognitive bias (wishful thinking, because I want to get the high-end publication) clouds my judgment. In this regard, through repeated experiments, where I put my hypothesis on the line, I become a better thinker.
 
 Now, in my little corner of biology, step 4 and step 5 would both take anywhere from days to months. If you're developing a mouse model from scratch, one experiment could take years. If one of your goals is to become better at thinking, then this can really slow you down.
 
@@ -41,7 +41,7 @@ There is a level above that of the rapid-fire experiments improving your ability
 * Computer science makes explicit important concepts that are hard to put in words
 Here, I will give you a flavor of the various concepts that I came across when learning how to code that I had seen or known before in some form, but not in a way that was as clearly stated as it was through code. In other words, computer science game me a language through which I could reason about concepts that would otherwise be difficult to talk about. The examples below are by no means exhaustive. They are just meant to show you things that I came across in my journey that I found to be somewhere between really cool and really relevant to the types of things I'm working on.
 ** Emergence and cellular automata
-The concept of emergent complexity or [[https://en.wikipedia.org/wiki/Emergence][emergence]], which any biologist or chemist will find to be intutive, can be examined in a raw form with computer science, using (among other things) cellular automata. Cellualar automata are models of computation where you take a simple set of rules and run them, which produces emergent complexity. Some cellular automata are more elaborate than others despite having a rule set of similar complexity. Want an example: how about [[https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life][Conway's Game of Life]]. Take a grid. Each square on the grid can either be live or dead. For each square in the grid, follow these rules:
+The concept of emergent complexity or [[https://en.wikipedia.org/wiki/Emergence][emergence]], which any biologist or chemist will find to be intutive, can be examined in a raw form with computer science, using (among other things) [[https://en.wikipedia.org/wiki/Cellular_automaton][cellular automata]]. Cellualar automata are models of computation where you take a simple set of rules and run them, which produces emergent complexity. Some cellular automata are more elaborate than others despite having a rule set of similar complexity. Want an example: how about [[https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life][Conway's Game of Life]]. Take a grid. Each square on the grid can either be live or dead. For each square in the grid, follow these rules:
 
 1. Any live cell with fewer than two neighbors dies.
 2. Any live cell with two or three neighbors lives.
@@ -52,7 +52,7 @@ That's it. Run it and you can get [[https://www.youtube.com/watch?v=cTZkEAYeRis]
 
 [[file:images/2024-01-20_22-17-35_Screenshot 2024-01-20 at 22.17.16.png]]
 
-In other words, Conway's game of life is [[https://en.wikipedia.org/wiki/Turing_completeness][Turing complete]], meaning that any form of computation that exists, from Tetris to ChatGPT, is theoretically implementable using only Conway's game of life patterns (inefficient, but possible).
+In other words, Conway's game of life is [[https://en.wikipedia.org/wiki/Turing_completeness][Turing complete]], meaning that any form of computation that exists, from [[./logic_gates.html][logic gates]] to Tetris to ChatGPT, is theoretically implementable using only Conway's game of life patterns (inefficient, but possible).
 
 I first came across Conway's Game of Life when I was 16, there was a sort of universe-ness that was totally maxed out. It was the first time where I could conceive of our universe being made up of something like this at the very bottom. Even if it wasn't, I got the idea in my head that emergent complexity (which is perhaps the -ness that is being maxed out here) could give rise to way more than I had ever thought.
 
@@ -137,7 +137,7 @@ These are the levels abstraction. We started with a discussion of these levels o
 
 What do I mean by that? If I run into a bug in python or R, the issue could very well be a lower level issue, the same way that treating disease has you working with chemistry (eg. small molecule drug development) to treat a problem in biology. In other words, solving hard problems involves seamlessly moving up and down levels of abstraction in, whatever your domain is. So you better be well-versed in the levels of abstraction above and below what you're doing.
 ** Hacking
-Given our discussion on levels of abstraction, quite a lot of so-called hacking (both security hacking and innovation) works by means of understanding things one or more levels underneath what you're doing. A much larger discussion of this can be found from this amazing [[https://gwern.net/unseeing][article]] written by Gwern that I've read many times. But let me paste the punchline, as food for thought:
+Given our discussion on levels of abstraction, quite a lot of so-called hacking (both security hacking and innovation) works by means of understanding things one or more levels underneath what you're doing. A much larger discussion of this can be found from this amazing [[https://gwern.net/unseeing][article]] written by Gwern that I've read many times (and have since [[./on_hacking.html][written about]]). But let me paste the punchline, as food for thought:
 
 /In each case, the fundamental principle is that the hacker asks: “here I have a system W, which pretends to be made out of a few Xs; however, it is really made out of many Y, which form an entirely different system, Z; I will now proceed to ignore the X and understand how Z works, so I may use the Y to thereby change W however I like”./
 
@@ -271,6 +271,10 @@ All this being said, the actionable advice I would give is to gain a basic under
 It is my hope that everyone reading this article, ADHD dignosis or not, gets to learn and practice these principles, even if its a few days playing with Karel the Robot before moving on to the next thing on your TODO list. Computational thinking is largely learn-by-doing, so I would recommend that if you don't have very much time, then you should simply go through a couple of Karel exercises, rather than reading Wikipedia articles on each of these concepts.
 
 And from there, you can add computational thinking to your latticework of mental models. It is my hope that learning to code will also improve your thinking, as it improved mine.
+-----
+Relevant links:
+
+[[./learn_bioinformatics.html][How I transitioned from biologist to biology-leveraged bioinformatician]]: While the current article is a bit more theoretical, this article here is more practical. It discusses the use of Karel the Robot as a way to teach a lot of computational thinking, concepts like problem decomposition, and single-cell data.
 -----
 Footnotes:
 
