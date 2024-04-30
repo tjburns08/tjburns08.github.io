@@ -40,7 +40,7 @@ There is a level above that of the rapid-fire experiments improving your ability
 
 * Computer science makes explicit important concepts that are hard to put in words
 Here, I will give you a flavor of the various concepts that I came across when learning how to code that I had seen or known before in some form, but not in a way that was as clearly stated as it was through code. In other words, computer science game me a language through which I could reason about concepts that would otherwise be difficult to talk about. The examples below are by no means exhaustive. They are just meant to show you things that I came across in my journey that I found to be somewhere between really cool and really relevant to the types of things I'm working on.
-** Emergence and cellular autoamta
+** Emergence and cellular automata
 The concept of emergent complexity or [[https://en.wikipedia.org/wiki/Emergence][emergence]], which any biologist or chemist will find to be intutive, can be examined in a raw form with computer science, using (among other things) cellular automata. Cellualar automata are models of computation where you take a simple set of rules and run them, which produces emergent complexity. Some cellular automata are more elaborate than others despite having a rule set of similar complexity. Want an example: how about [[https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life][Conway's Game of Life]]. Take a grid. Each square on the grid can either be live or dead. For each square in the grid, follow these rules:
 
 1. Any live cell with fewer than two neighbors dies.
