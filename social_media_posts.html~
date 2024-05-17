@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Social media posts</title>
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" href="simple.css" />
+<style>
+  .dark-mode {
+    --bg: #212121;
+    --accent-bg: #2b2b2b;
+    --text: #dcdcdc;
+    --text-light: #ababab;
+    --accent: #ffb300;
+    /*--code: #f06292;*/
+    --preformatted: #ccc;
+    --disabled: #111;
+  }
+  .dark-mode img,
+  .dark-mode video {
+    opacity: 0.8;
+  }
+  .toggle-theme-btn {
+      transform: scale(0.7);
+      opacity: 0.4;
+      transition: opacity 0.2s;
+    }
+    .toggle-theme-btn:hover {
+      opacity: 0.4;
+    }
+</style>
+<script>
+ function toggleDarkMode() {
+    const body = document.body;
+    body.classList.toggle("dark-mode");
+    // Save the user's theme preference to localStorage
+    if (body.classList.contains("dark-mode")) {
+      localStorage.setItem("theme", "dark");
+    } else {
+      localStorage.setItem("theme", "light");
+    }
+  }
+
+  function setDefaultDarkMode() {
+    // Retrieve the user's theme preference from localStorage
+    const storedTheme = localStorage.getItem("theme");
+
+    // If the stored theme is light, do nothing; otherwise, set it to dark
+    if (storedTheme !== "light") {
+      document.body.classList.add("dark-mode");
+    }
+  }
+
+  // Set the default mode to dark when the DOM is fully loaded
+  document.addEventListener('DOMContentLoaded', setDefaultDarkMode);
+</script>
+</head>
+<body>
+<div id="preamble" class="status">
+<div style="position: fixed; top: 10px; right: 10px;">
+         <button class="toggle-theme-btn" onclick="toggleDarkMode()">Light/Dark</button>
+       </div>
+</div>
+<div id="content" class="content">
+<h1 class="title">Social media posts</h1>
+<div id="top"></div>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org475711e">KNN sleepwalk and related</a></li>
+<li><a href="#org300874f">UMAP and t-SNE manipulation animations</a></li>
+<li><a href="#orge9e1a90">Teaching and learning bioinformatics</a></li>
+<li><a href="#org6862f63">Journal club</a></li>
+<li><a href="#org6b8ce75">General data analysis</a></li>
+<li><a href="#org01878d9">Bibliometrics</a></li>
+<li><a href="#orgc86e468">Word embeddings and social media scraping</a></li>
+<li><a href="#orgd6c2548">Other</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org475711e" class="outline-2">
+<h2 id="org475711e">KNN sleepwalk and related</h2>
+<div class="outline-text-2" id="text-org475711e">
+<a href="#top">Back to top</a>
+</div>
+<div id="outline-container-org3a7415d" class="outline-3">
+<h3 id="org3a7415d"><a href="https://www.linkedin.com/posts/tylerjburns_do-you-need-quick-and-easy-intuition-around-activity-6998611378068430848-BSrt?utm_source=share&amp;utm_medium=member_desktop">Original KNN sleepwalk reveal</a></h3>
+</div>
+<div id="outline-container-org10e9d64" class="outline-3">
+<h3 id="org10e9d64"><a href="https://www.linkedin.com/posts/tylerjburns_flowcytof-users-and-leaders-have-you-ever-activity-7183087620942356480-hAHz?utm_source=share&amp;utm_medium=member_desktop">KNN sleepwalk: Biaxial-UMAP interface</a></h3>
+</div>
+<div id="outline-container-org8403ecc" class="outline-3">
+<h3 id="org8403ecc"><a href="https://www.linkedin.com/posts/tylerjburns_in-light-of-recent-scrutiny-around-umap-activity-7169341694348324865-sCmq?utm_source=share&amp;utm_medium=member_desktop">KNN sleepwalk: Two UMAPs in light of All of Us research program controversy</a></h3>
+</div>
+<div id="outline-container-org5d12119" class="outline-3">
+<h3 id="org5d12119"><a href="https://www.linkedin.com/posts/tylerjburns_one-way-to-understand-how-much-global-information-activity-7180898836213620736-lXIX?utm_source=share&amp;utm_medium=member_desktop">KFN sleepwalk, two UMAPs</a></h3>
+</div>
+<div id="outline-container-org82a9b28" class="outline-3">
+<h3 id="org82a9b28"><a href="https://www.linkedin.com/posts/tylerjburns_as-requested-here-are-the-k-farthest-neighbors-activity-7024009354307588096-ghUg?utm_source=share&amp;utm_medium=member_desktop">KFN sleepwalk, t-SNE and UMAP</a></h3>
+</div>
+<div id="outline-container-orgde2d630" class="outline-3">
+<h3 id="orgde2d630"><a href="https://www.linkedin.com/posts/tylerjburns_the-k-farthest-neighbors-of-a-cytof-dataset-activity-7021519004338958338-Q9rl?utm_source=share&amp;utm_medium=member_desktop">KFN sleepwalk, t-SNE</a></h3>
+</div>
+<div id="outline-container-orga77d454" class="outline-3">
+<h3 id="orga77d454"><a href="https://www.linkedin.com/posts/tylerjburns_heres-an-interesting-metric-i-developed-activity-7019326037322825728-3jY-?utm_source=share&amp;utm_medium=member_desktop">KFN overlap as a metric for evaluating global preservation for embeddings</a></h3>
+</div>
+<div id="outline-container-org6a1121e" class="outline-3">
+<h3 id="org6a1121e"><a href="https://www.linkedin.com/posts/tylerjburns_in-my-single-cell-sequencing-work-i-sometimes-activity-7076888734289289216-oP-4?utm_source=share&amp;utm_medium=member_desktop">A KNN based solution to viewing data on a UMAP where one condition is "sitting on top of" the other</a></h3>
+</div>
+</div>
+<div id="outline-container-org300874f" class="outline-2">
+<h2 id="org300874f">UMAP and t-SNE manipulation animations</h2>
+<div class="outline-text-2" id="text-org300874f">
+<a href="#top">Back to top</a>
+</div>
+<div id="outline-container-org3bf8bf1" class="outline-3">
+<h3 id="org3bf8bf1"><a href="https://www.linkedin.com/posts/tylerjburns_as-requested-here-are-100-t-sne-runs-in-activity-7029475365689380864-GZvE?utm_source=share&amp;utm_medium=member_desktop">Gif of running t-SNE over and over, ordered by image similarity</a></h3>
+</div>
+<div id="outline-container-orgc138a66" class="outline-3">
+<h3 id="orgc138a66"><a href="https://www.linkedin.com/posts/tylerjburns_if-you-have-one-or-two-bad-markers-in-your-activity-7038805627606814720-ybsS?utm_source=share&amp;utm_medium=member_desktop">Gif of progressively adding noisy dimensions to t-SNE</a></h3>
+</div>
+<div id="outline-container-org400f6fa" class="outline-3">
+<h3 id="org400f6fa"><a href="https://www.linkedin.com/posts/tylerjburns_run-t-sne-and-umap-on-cytof-data-100-times-activity-7029143066804420609-UsDZ?utm_source=share&amp;utm_medium=member_desktop">Gif of running t-SNE and UMAP over and over</a></h3>
+</div>
+<div id="outline-container-org311063d" class="outline-3">
+<h3 id="org311063d"><a href="https://www.linkedin.com/posts/tylerjburns_umap-on-noisy-non-trajectory-data-looks-like-activity-7041404193252737026-Zx-_?utm_source=share&amp;utm_medium=member_desktop">Gif of progressively adding noisy dimensions to UMAP</a></h3>
+</div>
+</div>
+<div id="outline-container-orge9e1a90" class="outline-2">
+<h2 id="orge9e1a90">Teaching and learning bioinformatics</h2>
+<div class="outline-text-2" id="text-orge9e1a90">
+<a href="#top">Back to top</a>
+</div>
+<div id="outline-container-orgc518701" class="outline-3">
+<h3 id="orgc518701"><a href="https://www.linkedin.com/posts/tylerjburns_here-is-a-post-i-wrote-for-biologists-and-activity-7090282332749717504-XTkW?utm_source=share&amp;utm_medium=member_desktop">How I went from biologist to biology-leveraged bioinformatician</a></h3>
+</div>
+<div id="outline-container-org2d2f986" class="outline-3">
+<h3 id="org2d2f986"><a href="https://www.linkedin.com/posts/tylerjburns_my-survey-has-revealed-that-the-act-of-problem-activity-7193215772448505858-tK7P?utm_source=share&amp;utm_medium=member_desktop">Problem solving as a bottleneck to learning how to code</a></h3>
+</div>
+<div id="outline-container-orgc67a24d" class="outline-3">
+<h3 id="orgc67a24d"><a href="https://www.linkedin.com/posts/tylerjburns_this-image-is-romanesco-broccoli-i-came-activity-7191860234095640576-rGEH?utm_source=share&amp;utm_medium=member_desktop">Learning how to code has improved how I think</a></h3>
+</div>
+<div id="outline-container-orge29df6b" class="outline-3">
+<h3 id="orge29df6b"><a href="https://www.linkedin.com/posts/tylerjburns_my-survey-has-already-revealed-that-a-large-activity-7189597924899643392-HXOM?utm_source=share&amp;utm_medium=member_desktop">Biologists becoming bioinformaticians are having the hardest time learning how to code</a></h3>
+</div>
+<div id="outline-container-org25a023e" class="outline-3">
+<h3 id="org25a023e"><a href="https://www.linkedin.com/posts/tylerjburns_bioinformatics-bigdata-collaboration-activity-7177394725853741056-W1of?utm_source=share&amp;utm_medium=member_desktop">Recap on teaching engagement with Zamora Lab at MCW</a></h3>
+</div>
+<div id="outline-container-org48da53a" class="outline-3">
+<h3 id="org48da53a"><a href="https://www.linkedin.com/posts/tylerjburns_i-am-tired-of-the-phrase-those-who-can-activity-7168606001758257152-5iMu?utm_source=share&amp;utm_medium=member_desktop">Those who can do, do; those who have done, teach</a></h3>
+</div>
+</div>
+<div id="outline-container-org6862f63" class="outline-2">
+<h2 id="org6862f63">Journal club</h2>
+<div class="outline-text-2" id="text-org6862f63">
+<a href="#top">Back to top</a>
+</div>
+<div id="outline-container-orgceb970e" class="outline-3">
+<h3 id="orgceb970e"><a href="https://www.linkedin.com/posts/tylerjburns_single-cell-protein-data-can-take-many-forms-activity-7166098906634829824-3aSF?utm_source=share&amp;utm_medium=member_desktop">Data integration using CyCombine</a></h3>
+</div>
+<div id="outline-container-org5c9ea2d" class="outline-3">
+<h3 id="org5c9ea2d"><a href="https://www.linkedin.com/posts/tylerjburns_leaders-using-single-cell-tech-do-you-have-activity-7164260356083716096-0S0M?utm_source=share&amp;utm_medium=member_desktop">Bridge integration</a></h3>
+</div>
+<div id="outline-container-org0bfa0b3" class="outline-3">
+<h3 id="org0bfa0b3"><a href="https://www.linkedin.com/posts/tylerjburns_life-science-leaders-using-flowmass-cytometry-activity-7161731050065408000-LN_D?utm_source=share&amp;utm_medium=member_desktop">Flow/CyTOF users could take a page from the best practices in single-cell sequencing</a></h3>
+</div>
+</div>
+<div id="outline-container-org6b8ce75" class="outline-2">
+<h2 id="org6b8ce75">General data analysis</h2>
+<div class="outline-text-2" id="text-org6b8ce75">
+<a href="#top">Back to top</a>
+</div>
+<div id="outline-container-org6b3a83e" class="outline-3">
+<h3 id="org6b3a83e"><a href="https://www.linkedin.com/posts/tylerjburns_facing-challenges-with-analyzing-large-flow-activity-7099769574782324736-vjnv?utm_source=share&amp;utm_medium=member_desktop">GigaSOM: FlowSOM in Julia for larger datasets</a></h3>
+</div>
+<div id="outline-container-org3710b27" class="outline-3">
+<h3 id="org3710b27"><a href="https://www.linkedin.com/posts/tylerjburns_i-wanted-to-highlight-a-clustering-method-activity-7087382242867470336-pUbG?utm_source=share&amp;utm_medium=member_desktop">How X-shift works</a></h3>
+</div>
+<div id="outline-container-org8a5b874" class="outline-3">
+<h3 id="org8a5b874"><a href="https://www.linkedin.com/posts/tylerjburns_the-following-is-a-warning-for-biologists-activity-7085200486697443330-Zzbc?utm_source=share&amp;utm_medium=member_desktop">Single-cell sequencing analysis: don't forget to integrate your data</a></h3>
+</div>
+<div id="outline-container-orga741def" class="outline-3">
+<h3 id="orga741def"><a href="https://www.linkedin.com/posts/tylerjburns_activity-7045080240515076096-kXLl?utm_source=share&amp;utm_medium=member_desktop">Survey: QC gives people the most headache in a flow/CyTOF data analysis pipeline</a></h3>
+</div>
+<div id="outline-container-org02406f4" class="outline-3">
+<h3 id="org02406f4"><a href="https://www.linkedin.com/posts/tylerjburns_cytof-users-we-use-the-asinh-transform-activity-7009180881546321922-y5qH?utm_source=share&amp;utm_medium=member_desktop">Pictures of different data transforms for CyTOF</a></h3>
+</div>
+<div id="outline-container-org30b8229" class="outline-3">
+<h3 id="org30b8229"><a href="https://www.linkedin.com/posts/tylerjburns_flow-cytometry-and-cytof-users-here-is-a-activity-7003308800543711232-eAEx?utm_source=share&amp;utm_medium=member_desktop">What happens when you run SPADE on random input</a></h3>
+</div>
+<div id="outline-container-org49da29a" class="outline-3">
+<h3 id="org49da29a"><a href="https://www.linkedin.com/posts/tylerjburns_as-per-my-two-polls-placed-11-months-apart-activity-7165771409686827008-k5E2?utm_source=share&amp;utm_medium=member_desktop">Two surveys side by side, 11 months apart on LLM usage (April 2023, March 2024)</a></h3>
+</div>
+</div>
+<div id="outline-container-org01878d9" class="outline-2">
+<h2 id="org01878d9">Bibliometrics</h2>
+<div class="outline-text-2" id="text-org01878d9">
+<a href="#top">Back to top</a>
+</div>
+<div id="outline-container-org3d24eaa" class="outline-3">
+<h3 id="org3d24eaa"><a href="https://www.linkedin.com/posts/tylerjburns_if-we-put-2008-as-the-first-cytof-paper-activity-7041804065097281537-nkIM?utm_source=share&amp;utm_medium=member_desktop">IMC vs CyTOF publication rates: surprised IMC is taking off so fast</a></h3>
+</div>
+<div id="outline-container-org1187041" class="outline-3">
+<h3 id="org1187041"><a href="https://www.linkedin.com/posts/tylerjburns_spectral-flow-cytometry-is-trending-in-my-activity-7034458560377847809-b2Zj?utm_source=share&amp;utm_medium=member_desktop">Surprisingly few spectral flow cytometry publications despite all the buzz around it</a></h3>
+</div>
+<div id="outline-container-orge2477bd" class="outline-3">
+<h3 id="orge2477bd"><a href="https://www.linkedin.com/posts/tylerjburns_major-data-analysis-errors-invalidate-cancer-activity-7092387938352656385-Cgqv?utm_source=share&amp;utm_medium=member_desktop">My fear that single-cell is in a replication crisis</a></h3>
+</div>
+</div>
+<div id="outline-container-orgc86e468" class="outline-2">
+<h2 id="orgc86e468">Word embeddings and social media scraping</h2>
+<div class="outline-text-2" id="text-orgc86e468">
+<a href="#top">Back to top</a>
+</div>
+<div id="outline-container-orgb8a4731" class="outline-3">
+<h3 id="orgb8a4731"><a href="https://www.linkedin.com/posts/tylerjburns_ever-wonder-what-regions-of-news-space-activity-7051174977668042752-G0lC?utm_source=share&amp;utm_medium=member_desktop">Spatial embedding of CNN vs FoxNews vs AP using BERT, viewing on UMAP</a></h3>
+</div>
+<div id="outline-container-orgc3ddb2f" class="outline-3">
+<h3 id="orgc3ddb2f"><a href="https://www.linkedin.com/posts/tylerjburns_ive-been-trying-to-reduce-the-scrolling-activity-6966053080530350080-BXdK?utm_source=share&amp;utm_medium=member_desktop">Original post around making tweet embeddings: the scrolling problem</a></h3>
+<div class="outline-text-3" id="text-orgc3ddb2f">
+<p>
+This post led to my TED talk in the spring of 2023.
+</p>
+</div>
+</div>
+<div id="outline-container-org61813ad" class="outline-3">
+<h3 id="org61813ad"><a href="https://www.linkedin.com/posts/tylerjburns_automated-gating-autogating-has-been-a-activity-7167877080360206336-dDlD?utm_source=share&amp;utm_medium=member_desktop">Survey March 2024, most are not using but are interested in autogating</a></h3>
+</div>
+<div id="outline-container-orgb327c5c" class="outline-3">
+<h3 id="orgb327c5c"><a href="https://www.linkedin.com/posts/tylerjburns_i-recently-hit-a-milestone-in-my-personal-activity-7152694472559017985-6KFn?utm_source=share&amp;utm_medium=member_desktop">Recap after writing 1 million words in my journal over 15 years, parsing it with AI</a></h3>
+</div>
+<div id="outline-container-orgdbb4e59" class="outline-3">
+<h3 id="orgdbb4e59"><a href="https://www.linkedin.com/posts/tylerjburns_the-retweet-to-like-ratio-matters-for-getting-activity-7039541884293128192-xFuf?utm_source=share&amp;utm_medium=member_desktop">Retweet to like ratio of single-cell sequencing tweets</a></h3>
+</div>
+<div id="outline-container-orgea43da7" class="outline-3">
+<h3 id="orgea43da7"><a href="https://www.linkedin.com/posts/tylerjburns_my-scrolling-problem-and-how-i-fixed-it-activity-7084166939647848451-uU5w?utm_source=share&amp;utm_medium=member_desktop">On my TEDx Basel talk</a></h3>
+</div>
+</div>
+<div id="outline-container-orgd6c2548" class="outline-2">
+<h2 id="orgd6c2548">Other</h2>
+<div class="outline-text-2" id="text-orgd6c2548">
+<a href="#top">Back to top</a>
+</div>
+<div id="outline-container-org0b311b2" class="outline-3">
+<h3 id="org0b311b2"><a href="https://www.linkedin.com/posts/tylerjburns_the-following-is-for-my-friends-from-academia-activity-7160684719934779392-n26f?utm_source=share&amp;utm_medium=member_desktop">Three pointers for doing self employed consulting in the life sciences</a></h3>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="date">Date: May 17, 2024 - May 17, 2024</p>
+<p class="creator"><a href="https://www.gnu.org/software/emacs/">Emacs</a> 28.1 (<a href="https://orgmode.org">Org</a> mode 9.5.2)</p>
+</div>
+</body>
+</html>
