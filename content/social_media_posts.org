@@ -16,55 +16,407 @@ Dr. Seuss, [[https://en.wikipedia.org/wiki/Horton_Hatches_the_Egg][/Horton Hatch
 * KNN sleepwalk and related
 #+HTML: <a href="#top">Back to top</a>
 ** [[https://www.linkedin.com/posts/tylerjburns_do-you-need-quick-and-easy-intuition-around-activity-6998611378068430848-BSrt?utm_source=share&utm_medium=member_desktop][Original KNN sleepwalk reveal]]
+
+Do you need quick and easy intuition around how exact your single-cell embeddings are? Check out knn_sleepwalk, a wrapper I wrote around the sleepwalk R package. Hover the cursor over any cell in your embedding, and it will show you the cell's k-nearest neighbors computed from the original feature space (as opposed to the embedding space). Below is a UMAP of 10,000 cells in CyTOF data with a k of 100. Note that the neighbors are not always nearby. Be careful if you want to gate/cluster on the embedding! https://lnkd.in/eeqRBdSn
+
+#+HTML: <img src="images/knn_sleepwalk_reveal.gif"/>
 ** [[https://www.linkedin.com/posts/tylerjburns_flowcytof-users-and-leaders-have-you-ever-activity-7183087620942356480-hAHz?utm_source=share&utm_medium=member_desktop][KNN sleepwalk: Biaxial-UMAP interface]]
+Flow/CyTOF users and leaders: have you ever wanted to know exactly where a cell on a biaxial plot is on a corresponding UMAP and vice versa? I built a tool just for you:
+
+Below is my KNN Sleepwalk tool adapted to compare any plot with any plot. The k-nearest neighbors (KNN) of a given cell are computed in the plot on the left, and the corresponding cells are visualized in the plot on the right.
+
+Here, we have a CyTOF whole blood dataset. A CD3 x CD19 biaxial plot is the "root" plot, from which the KNN are computed. The plot on the right is a UMAP, and the corresponding cells are being visualized directly on it.
+
+Having an interface like this is one way (of many) to prevent biologists from over-interpreting their dimensionality reduction plots. Thus, I hope that down the line, this biaxial-UMAP real time functionality is available for anyone doing any sort of high-dimensional flow analysis, whether you're doing manual gating or exploratory data analysis.
+
+Note that we are just looking at a biaxial vs UMAP. We can do anything vs anything. This includes biaxial vs biaxial. Note also that we can compare a "root" plot to multiple plots in real time.
+
+Credit to S. Ovchinnikova and S. Anders for developing Sleepwalk (link in comments), from which I have built these additional functionalities and use cases.
+
+I am still building this thing out, so if you have any particular feature requests, please comment or DM me. This tool is for you. Bioinformaticians who are interested in helping out, please DM me. I hope you have a great day.
+#+HTML: <img src="images/biaxial_umap_interface.gif"/>
 ** [[https://www.linkedin.com/posts/tylerjburns_in-light-of-recent-scrutiny-around-umap-activity-7169341694348324865-sCmq?utm_source=share&utm_medium=member_desktop][KNN sleepwalk: Two UMAPs in light of All of Us research program controversy]]
+In light of recent scrutiny around UMAP, coming from its controversial use in the All of Us Research Program, I refactored my KNN Sleepwalk project (which I started a year ago) to better reflect the limits of UMAP. Let me explain:
+
+This is the PBMC 3k dataset (2700 cells), which is a flagship single-cell sequencing dataset. To the left, hovering the cursor over each cell gives you the top 1% nearest neighbors (27) of that cell in UMAP space. To the right, you can see the 27 nearest neighbors of that same cell calculated from the first 10 principal components, from which you do the clustering and dimension reduction in single-cell sequencing (you can think of it as making the data flow/CyTOF-like, and then doing flow/CyTOF-like analysis on it).
+
+You will notice that the nearest neighbors in high-dimensional space are often quite far from the cell in question, speaking to the precision of the map itself. This is worth thinking about when you're looking at the clusters you've made on the map, or thinking about gating on the map directly.
+
+The bigger picture here is that I'm getting UMAP to talk about itself...to tell me its own limits. This is one way you can better understand what a model can and cannot do. I encourage everyone using UMAP or any complex visualization to do similar things with it. Scientists, PIs, and leaders: please make sure you have a healthy dose of skepticism around tools like these. They can be useful, but they can also be misinterpreted or over-interpreted.
+
+Kudos to Svetlana Ovchinnikova and Simon Anders of Center for Molecular Biology of the University of Heidelberg for developing Sleepwalk, which I re-purposed here to visualize the K-nearest neighbors (they developed it to visualize distances). Link in the comments, along with my re-working of it so you can do this on your own work.
+
+If you have questions about UMAP or similar tools, or just want to vent, please feel free to comment or DM me.
+#+HTML: <img src="images/knn_sleepwalk_two_umaps.gif"/>
 ** [[https://www.linkedin.com/posts/tylerjburns_one-way-to-understand-how-much-global-information-activity-7180898836213620736-lXIX?utm_source=share&utm_medium=member_desktop][KFN sleepwalk, two UMAPs]]
+One way to understand how much global information UMAP can (and cannot) preserve: look at the K-farthest neighbors (KFN) of cells in UMAP space versus high-dimensional space. Here is what I mean:
+
+Below is a UMAP from the flagship "PBMC 3k" single-cell RNA sequencing dataset, with 2700 cells. I am using my modification of Sleepwalk (by S. Ovchinnikova and S. Anders, link in comments) to highlight the top 10% farthest neighbors (270) for each cell the cursor is on. This is what is meant by KFN. Left side is the KFN of UMAP space, right side is the KFN of the first 10 principal components, from which you do the clustering and dimension reduction in single-cell sequencing.
+
+The first thing to notice is that the KFN in UMAP space and high-dimensional space look nothing like each other, pointing to limitations in UMAP's ability to preserve global information.
+
+The second thing to notice is that there is information that is just hard to capture in 2 dimensions. In particular, there is a region to the middle right of the UMAP that seems to be the farthest away from the majority of the dataset, including cells that are quite nearby in UMAP space. One way to make sense of this is to imagine a third dimension where the cells are pointing outward and far away from the rest of the data. But note that in reality we're dealing with 8 extra dimensions here, not 1 extra dimension. Thus, there will be all kinds of complexity at the global level that is hard to capture in 2 dimensions.
+
+UMAP claims to capture global structure better than t-SNE, and this topic is a rabbit hole once you start looking at initialization steps for the respective tools. But the point is that global structure is very complex, so even if a tool does a better job than another tool at capturing global structure in 2 dimensions, it doesn't mean that it's perfect. Or anywhere near perfect. Don't let claims like these bias you, as they initially biased me.
+
+This post is a followup to my previous "KNN sleepwalk" post, where I compare the K-nearest neighbors of UMAP space versus high-dimensional space directly on the UMAP. If you missed that, please go to the link in the comments.
+
+If you want to use this KFN (and the respective KNN) sleepwalk tool for your data and work, please go to the project's GitHub, which I will also link in the comments. If you want me to walk you through its use, just send me a direct message. Thank you and I hope you all have a great day.
+#+HTML: <img src="images/kfn_sleepwalk_two_umaps.gif"/>
 ** [[https://www.linkedin.com/posts/tylerjburns_as-requested-here-are-the-k-farthest-neighbors-activity-7024009354307588096-ghUg?utm_source=share&utm_medium=member_desktop][KFN sleepwalk, t-SNE and UMAP]]
+As requested, here are the k-farthest neighbors of a CyTOF dataset side-by-side between t-SNE and UMAP. The cell the cursor is on within the UMAP will map to the corresponding cell on the t-SNE map. Note that they're also all over the place on UMAP as well. Case in point: just because it's UMAP doesn't mean the arbitrary island placement has been solved.
+
+But again, don't take my word for it. Use the tool and analyze your data here: https://lnkd.in/eeqRBdSn. For some helpful slides, go here: https://lnkd.in/eivsbAfE
+#+HTML: <img src="images/kfn_sleepwalk_tsne_umap_umap_perspective2.gif"/>
 ** [[https://www.linkedin.com/posts/tylerjburns_the-k-farthest-neighbors-of-a-cytof-dataset-activity-7021519004338958338-Q9rl?utm_source=share&utm_medium=member_desktop][KFN sleepwalk, t-SNE]]
+The k-farthest neighbors of a CyTOF dataset, visualized on a t-SNE map, are all over the place. Why? Because t-SNE isn't optimized to capture global information. The position of the islands relative to each other doesn't mean much. Keep that in mind when interpreting these embeddings. To run this on your own data, for whatever embedding algorithms you're doing, visit my knn_sleepwalk project here: https://lnkd.in/eeqRBdSn
+#+HTML: <img src="images/kfn_sleepwalk_tsne.gif"/>
 ** [[https://www.linkedin.com/posts/tylerjburns_heres-an-interesting-metric-i-developed-activity-7019326037322825728-3jY-?utm_source=share&utm_medium=member_desktop][KFN overlap as a metric for evaluating global preservation for embeddings]]
+Here's an interesting metric I developed to get at global structure preservation of high-dimensional data in a low-dimensional embedding: k-farthest neighbor overlap between high-d and embedding space. Result (in CyTOF data, so far): PCA is better than UMAP. UMAP is better than t-SNE. From my talk here: https://lnkd.in/eivsbAfE
+[[file:images/kfn_tsne_umap_line_plot.jpeg]]
 ** [[https://www.linkedin.com/posts/tylerjburns_in-my-single-cell-sequencing-work-i-sometimes-activity-7076888734289289216-oP-4?utm_source=share&utm_medium=member_desktop][A KNN based solution to viewing data on a UMAP where one condition is "sitting on top of" the other]]
+In my single-cell sequencing work, I sometimes come across visualizations where there are two conditions stacked onto a UMAP in two respective colors, where one is very much behind the other, making it of limited use.
+
+A solution to this problem comes out of my thesis work on CyTOF data. Compute the k-nearest neighbors (KNN) of each cell, and then color the map by KNN percent belonging to condition 1. I have a pre-print and a BioConductor package around this, but in reality you just need a few lines of code, which I provide here: https://lnkd.in/eKkYub7b. Just CTRL+F for "RANN."
+
+If you want a more in-depth look at this KNN-based solution and things you can do with it, go here: https://lnkd.in/eJYTj5s5
+[[file:images/knn_two_conditions.jpeg]]
 * UMAP and t-SNE manipulation animations
 #+HTML: <a href="#top">Back to top</a>
 ** [[https://www.linkedin.com/posts/tylerjburns_as-requested-here-are-100-t-sne-runs-in-activity-7029475365689380864-GZvE?utm_source=share&utm_medium=member_desktop][Gif of running t-SNE over and over, ordered by image similarity]]
+As requested, here are 100 t-SNE runs in a row for CyTOF data ordered by image similarity. Notice that there are pockets of stability in the island placement. It's not completely random, as it appeared in the previous post. I would not have realized this had I not done this extra ordering step.
+
+How I did it: I took every plot image and made a pairwise image distance matrix using root mean square error as a metric. I then clustered the matrix as you would when viewing it as a heatmap. I then took the row names of the clustered matrix and set that as the new order for making the gif.
+#+HTML: <img src="images/tsne_multiple_run_image_similarity.gif"/>
 ** [[https://www.linkedin.com/posts/tylerjburns_if-you-have-one-or-two-bad-markers-in-your-activity-7038805627606814720-ybsS?utm_source=share&utm_medium=member_desktop][Gif of progressively adding noisy dimensions to t-SNE]]
+If you have one or two bad markers in your panel (noise), does it completely ruin your t-SNE/UMAP visualizations? According to my analysis so far, no. I take whole blood CyTOF data (22 dimensions) and add extra dimensions of random normal distributions, running t-SNE after each new column has been added (I've done UMAP too). What I have found:
+
+1. A few dimensions of noise do not catastrophically affect the map. Lots of noise dimensions do.
+
+2. The embedding space shrinks with increased number of dimensions. You have to hold the xy ranges constant to see this.
+
+3. When you have many dimensions of noise, the map starts to look trajectory-like (look at the end of the gif), which could affect biological interpretation.
+
+#+HTML: <img src="images/tsne_add_noise.gif"/>
 ** [[https://www.linkedin.com/posts/tylerjburns_run-t-sne-and-umap-on-cytof-data-100-times-activity-7029143066804420609-UsDZ?utm_source=share&utm_medium=member_desktop][Gif of running t-SNE and UMAP over and over]]
+Run t-SNE and UMAP on CyTOF data 100 times in a row. How much does the island placement for each map vary from the previous one? Notice that UMAP is quite a bit more stable. This could be the initialization, or the optimization function of UMAP, which has a "push distant cells away" component.
+#+HTML: <img src="images/tsne_umap_multiple_runs.gif"/>
 ** [[https://www.linkedin.com/posts/tylerjburns_umap-on-noisy-non-trajectory-data-looks-like-activity-7041404193252737026-Zx-_?utm_source=share&utm_medium=member_desktop][Gif of progressively adding noisy dimensions to UMAP]]
+UMAP on noisy non-trajectory data looks like a trajectory. I add one noisy dimension to whole blood CyTOF data, run UMAP, add another noise dimension, run UMAP again, etc. The map starts to look like a trajectory around 30 added noisy dimensions (biologically, it's not a trajectory at all).
+
+If you're looking at a UMAP of an unfamiliar biological dataset (eg. new technology), and it looks like a trajectory, be careful with the biological interpretation. It could just be noise.
+
+Use my code and try it on your data here: https://lnkd.in/eD29nQaw
+
+A relevant article I wrote on the Beauty is Truth Delusion that will get you in the right mindset:
+https://lnkd.in/ezeZV_Fj
+
+A relevant interrogation of dimension reduction with lots of pictures here: https://lnkd.in/eivsbAfE
+#+HTML: <img src="images/umap_add_noise.gif"/>
 * Teaching and learning bioinformatics
 #+HTML: <a href="#top">Back to top</a>
 ** [[https://www.linkedin.com/posts/tylerjburns_here-is-a-post-i-wrote-for-biologists-and-activity-7090282332749717504-XTkW?utm_source=share&utm_medium=member_desktop][How I went from biologist to biology-leveraged bioinformatician]]
+Here is a post I wrote for biologists and team leaders about my journey from wet-lab biologist to biology-leveraged bioinformatician. In short, I think you can do it too, and if you're working in the life sciences, you SHOULD do it too. You can quickly get to a level where you can understand and communicate effectively with your comp bio team, something that is essential for any project that contains any -omics data. To summarize:
+
+1. I started with Karel the Robot (link in post). This is the illustration below. It's what every CS106A student at Stanford starts with. It teaches you a surprising amount of general programming principles that I still use today. Importantly, it makes coding less scary.
+
+2. I spent a lot of time just trying things (and still do). This was due to the fact that I was initially working with CyTOF data before there were many established best practices and high-level frameworks. Nassim Taleb calls this "convex tinkering" and in my experience, this is better than hand-waving. In the context of bioinformatics, when I try a thing, I am often either wrong or partially wrong about what I thought I was going to see.
+
+3. When I am completely stuck on a problem, I solve a simpler but related problem. This is a nice trick to keep the momentum going, and to get me into the flow state. The latter is something essential, if not sacred, to my workday.
+
+Have a look here for more insights and depth: https://lnkd.in/eQ-2BvNn
+[[file:images/karel_learns_bioinformatics.jpeg]]
 ** [[https://www.linkedin.com/posts/tylerjburns_my-survey-has-revealed-that-the-act-of-problem-activity-7193215772448505858-tK7P?utm_source=share&utm_medium=member_desktop][Problem solving as a bottleneck to learning how to code]]
+My survey has revealed that the act of problem solving is a bottleneck for biologists learning how to code. So let me give you a tool that has helped me in the problem solving process over the years, especially when I feel "paralyzed" in the face of a problem:
+
+Simplify.
+
+Sometimes it's simplifying the problem itself, and sometimes it's solving a simpler but related problem. The act of doing so allows you to get some "psychological momentum." What you don't want is to be paralyzed, and not know what to do next.
+
+As an example, I like to tell the story of problem set 3 in CS106A: designing the arcade game Breakout using a Java graphics library. My problem was that even the act of decomposing the problem (standard practice) was stressful, because there were so many pieces that I didn't understand. It was overwhelming to consider everything at once.
+
+So I asked myself, could I make a ball bounce around across the walls. No, too complicated. How about just the game window with nothing in it. Ok. That worked. How about the ball in the center of the screen, in place. Ok, that worked. How about if I could get the ball to move one pixel to the right and then stop? That worked too! Now I was getting some momentum.
+
+It was in that way that I got to a point where I could do the classic problem decomposition and solve the rest of the problem.
+
+So whatever you're trying to solve, try solving a simpler version of the problem, or try solving a simpler but related problem. Keep the momentum going.
+
+More resources in the comments below.
+[[file:images/code_hangups.jpeg]]
 ** [[https://www.linkedin.com/posts/tylerjburns_this-image-is-romanesco-broccoli-i-came-activity-7191860234095640576-rGEH?utm_source=share&utm_medium=member_desktop][Learning how to code has improved how I think]]
+This image is romanesco broccoli. I came across it sophomore year in my dorm cafeteria. The pattern at play was amazing, but...hard to put into words. When I was learning how to code, I learned the word for the concept at hand: recursion. Learning how to code has given me many instances of this, where I can reason better about something that was otherwise hard to put into words.
+
+In general, learning how to code has improved how I think. It has given me a new lens, the computational lens, through which I can see the world. I wrote and chiseled away at an article over the past year and three months on this topic, and I'm finally ready to share it with you. The article can be boiled down into three main points.
+
+The first point is that in comparison to standard wet-lab biology, coding and bioinformatic analysis often involves the scientific method, sped up. A lab experiment used to take me on the order of hours to days, whereas computational experiments (eg. when debugging, analyzing data) take me on the order of seconds to minutes. Accordingly, you can get intuition around something really fast, as well as go through the process of being wrong, figuring out where you were wrong, and improving your thinking so you're not wrong about it again.
+
+The second point is that computer science allows you to reason about and operate on topics that are otherwise difficult to put into words. An example of this is "levels of abstraction," where I show you what "hello world" looks like in python (not much stuff), C (a bit more stuff), and assembly (a whole lot of stuff), so you can appreciate the sheer volume of things that get swept under the rug when you write print("hello world") in python.
+
+The third point is that in terms of "computational thinking," the computational lens is not meant to replace all other forms of thinking. It is meant to be added to your "latticework of mental models" to use the framing of the late Charlie Munger (link in comments). In other words, you want to be able to look at a problem through as many lenses as you can. I link more material about this in the article.
+
+Overall, learning how to code takes time, so don't fret if you've moving forward more slowly than you'd like. This is normal. This said, I do offer a class to get biologists started with programming, with an in-person option and a virtual option. Any labs who are interested, please feel free to reach out. Otherwise, if you want quick (free) advice, feel free to reach out too.
+
+The image is from the Wikipedia article on romanesco broccoli.
+
+The article is here:
+https://lnkd.in/ddRwmTSi
+
+[[file:images/romanesco_broccoli.jpeg]]
 ** [[https://www.linkedin.com/posts/tylerjburns_my-survey-has-already-revealed-that-a-large-activity-7189597924899643392-HXOM?utm_source=share&utm_medium=member_desktop][Biologists becoming bioinformaticians are having the hardest time learning how to code]]
+My survey has already revealed that a large bottleneck for biologists learning bioinformatics is the act of learning how to code, even with plenty of online resources, bootcamps, LLMs, etc out there these days. Let me explain why I think this is the case, based on what I've seen and experienced.
+
+For one to do bioinformatics effectively, one must learn how to think computationally. This generally means that one must know how to apply the basic principles of computer science to a problem, like abstraction, problem decomposition, and turning concepts into code. There's a great essay on this idea from 2006 by Jeannette M. Wing that I'll link in the comments.
+
+To learn how to think computationally, I had to learn how to independently write code. What I mean by independently is that when faced with a computer science or bioinformatics problem, I would really struggle with it before looking for some sort of answer online (something that's easier now given ChatGPT, etc). It's the equivalent of doing the math problems in school without looking up the answer in the back of the book first. I still keep up this practice today, trying to independently think/work through a problem before I look at what others have done.
+
+Coding is a learn-by-doing activity. It is not something that you're spoon-fed. You get better with every problem you solve. I started with very small problems and then I worked my way up. It's a lot of work, and it takes time. But proper guidance early on really helps.
+
+One can get started with the foundations of computational thinking in a few weeks with a program called Karel the Robot. It's what every intro CS student at Stanford starts with. It's what I started with. It's what I have people I teach start with. It not only provides a solid foundation but also demystifies what coding and computational thinking is. The concepts and virtues (eg. patience) I learned with Karel the Robot I still use today, ten years later. I'll link a place to get started in the comments.
+
+You can't simply become a code-fluent, computationally minded bioinformatician in a single short bootcamp. But you can develop the right foundations that allow you to effectively move yourself forward from that point on.
+
+I remember what it feels like to be a wet-lab biologist and be totally overwhelmed with this stuff. As such, I have been teaching people how to learn bioinformatics from the standpoint of a wet-lab biologist. Luckily, my availability is going to open up again this summer, so any labs who are interested, please reach out.
+
+[[file:images/bioinformatics_learning_biggest_hangups.jpeg]]
 ** [[https://www.linkedin.com/posts/tylerjburns_bioinformatics-bigdata-collaboration-activity-7177394725853741056-W1of?utm_source=share&utm_medium=member_desktop][Recap on teaching engagement with Zamora Lab at MCW]]
+After speaking with many labs last year, I determined (as many others have) that there is a lack of bioinformatics support in academia. Thus, many biologists are pressured to learn these skills on their own (as if they don't have enough on their plate already). Aside from the additional stress, this can lead to serious mistakes downstream. Anyone who knows about the replication crises in various fields should be concerned at this point.
+
+The good news is, I have also determined that biologists are fully capable of learning these skills. They just need the right guidance. Thus, I have lots of respect for trained bioinformaticians who are going out of their way to teach this material to biologists, and I encourage all of us to teach when we can.
+
+How to do it is a complex topic, and I don't think you can go from neophyte to bioinformatician in a few days. But I think providing the right foundations along with proper followup can go a long way. It did take me a long time to learn bioinformatics myself as a biologist, but it did not take long for me to have a solid foundation from which I could already start adding value.
+
+I saw this first hand with the lab of Anthony Zamora this past week. I spent three days on site with them, and there is plenty of followup planned. If your lab needs training and/or advising, and your local bioinformaticians don't have bandwidth, please contact me. I wish you all the best.
+
+[[file:images/zamora_lab.jpeg]]
 ** [[https://www.linkedin.com/posts/tylerjburns_i-am-tired-of-the-phrase-those-who-can-activity-7168606001758257152-5iMu?utm_source=share&utm_medium=member_desktop][Those who can do, do; those who have done, teach]]
+I am tired of the phrase "those who can, do; those who can't, teach." So let me fix it for you. "Those who can, do; those who have done, teach." Three things come out of this:
+
+1. If you have experience in anything (which you do), teach it: Yes, there's a lot more educational content these days, but you are specialized in your own way. Just about everyone I know has something unique to say that has not been formalized or at least put in writing. My grandma had all kinds of wisdom that she sadly never wrote down. Thus, I aim to die with everything on paper.
+
+2. Education is becoming increasingly important: in my corner, from cancer biology to bioinformatics, everything is interdisciplinary now. You have physicians talking to biologists talking to engineers talking to computer scientists, each speaking a different "language" and trying to understand each other. One question I'm asking myself a lot these days: how can I teach in a few hours the mental models that have taken me 10,000 hours to really understand?
+
+3. Respect for educators: teaching is hard. Communication is hard. You have to figure out a way to operationalize things you may never have put into words. You have to remember what it's like to not know the thing, which may be a long time ago. You have to cater to different learning styles. I don't think teachers (especially in the US) get nearly the respect they deserve.
+
+This can/can't do/teach dichotemy held me back for a long time. I have been in the single-cell world for 12 years now, and I do a lot more bioinformatics teaching now than I used to, borne out of all the experience at doing bioinformatics. It has way more impact, and I love every minute of it.
+
+If you're a student, postdoc, tech, or scientist in academia or industry, DM me and I'll give you 15 minutes of free advice about single-cell bioinformatics, any sub-topic you want. Or just say hi. I have nothing to sell you. My paid teaching/training services go to the PIs and group leaders: if you want me to set up a more formal bioinformatics workshop or advisory role for your group/lab, DM me and we'll talk. Site visits are on the table.
+
+If you know anyone who could use this post or my teaching/advice, please share it. I hope you all have a great day.
+
+[[file:images/have_done_teach.jpeg]]
 * Journal club
 #+HTML: <a href="#top">Back to top</a>
 ** [[https://www.linkedin.com/posts/tylerjburns_single-cell-protein-data-can-take-many-forms-activity-7166098906634829824-3aSF?utm_source=share&utm_medium=member_desktop][Data integration using CyCombine]]
+Single-cell protein data can take many forms: flow cytometry (spectral or otherwise), mass cytometry, CITE-seq, or protein-based imaging after cell segmentation. Not to mention the multitude of machines (eg. spectral cytometers from different companies, or CyTOF 2 vs CyTOF XT). It is inevitable that there will be a need and efforts to integrate these datasets across modalities to derive actionable insights.
+
+Accordingly, the Single Cell Omics group at Technical University of Denmark (DTU) has solved this problem with a method they call cyCombine. With this method, they are able to integrate a CITE-seq, spectral flow, and CyTOF dataset. They spell it out in a markdown (link in comments) so you can try it yourself.
+
+The UMAPs in the images show that the data, otherwise separate, now sit on top of each other. There are further metrics for evaluating the correction in the markdown (eg. earth mover's distance), and histogram visualizations. If I were using this, I'd want to try gating on the concatenated data, with the points in the biaxials colored by each method.
+
+To sum things up, there is good work being done in this space, and we should be paying attention because this type of work is going to become much more important as high-dimensional cytometry and cytometry-like methods and instrument types increase.
+[[file:images/cycombine.jpeg]]
 ** [[https://www.linkedin.com/posts/tylerjburns_leaders-using-single-cell-tech-do-you-have-activity-7164260356083716096-0S0M?utm_source=share&utm_medium=member_desktop][Bridge integration]]
+Leaders using single-cell tech: do you have data across multiple modalities (eg. flow/CyTOF and single-cell sequencing) that you want to combine? Are you making large cell "atlases" internally or externally? Then you should consider integrating these datasets with bridge integration, a new method that came out last year. How does it work?
+
+Say you have a CyTOF dataset, and a single-cell sequencing dataset. Both are PBMCs. If you have a CITE-seq PBMC dataset (both RNA and protein), then you can use that as a multiomic "bridge" to integrate the two datasets. This is one reason why getting your team to produce a CITE-seq dataset or two might be valuable in the long term.
+
+The image attached is a schematic from Hao et al. (link in comments) that shows possible combinations of multimodal integration that go beyond RNA + protein. The method is available in Seurat (in other words, it's standardized and accessible for comp bio). Your team should look critically at figure 5 and S7 in the paper and the text that references it (the page immediately after the figure), as it shows a scRNA-seq + CyTOF integrated dataset using this method, with the text describing sanity checks.
+
+Even if you don't use this method, you should note the emerging trend of integration across modalities, which goes along with the emergence of single-cell multi-omics. Importantly, the authors express interest in doing this with spatially resolved data. They specifically mention CODEX (paragraph 4, discussion section), suggesting that a CODEX + scRNA-seq integration might be a current PhD/Postdoc project in the lab.
+
+Links to the paper and Seurat code in the comments below.
+
+[[file:images/bridge_integration.jpeg]]
 ** [[https://www.linkedin.com/posts/tylerjburns_life-science-leaders-using-flowmass-cytometry-activity-7161731050065408000-LN_D?utm_source=share&utm_medium=member_desktop][Flow/CyTOF users could take a page from the best practices in single-cell sequencing]]
+Life science leaders using flow/mass cytometry: do you want to know where the best practices in data analysis will be in 3-5 years (if done right)? As a flow/CyTOF native, I've been looking to single-cell sequencing for this. Here are 3 things that I think this community has gotten right, that the flow/CyTOF world (that I’ve been part of since 2012) could really benefit from:
+
+A dedicated open-source community with well-maintained packages.\\
+On the R side, Seurat is extremely useful, constantly evolving as new methods develop, and well-maintained by the Satija Lab. On the python side, there is scverse, which is a collection of tools that do various things from single-cell sequencing analysis (scanpy) to spatial (squidpy).
+
+My recommendation: we model our ecosystem after scverse (bring it all together in one place) and our "end to end" packages after Seurat. Those working with ISAC and similar organizations should dedicate funding to dedicated individuals. I think with efforts like CyTOForum, the community is in place to do this kind of thing.
+
+A focus on standards and benchmarking\\
+There's a "single cell best practices" consortium that has a huge free jupyter book, showing you what to do with the scverse and how. Furthermore, there is a lot of benchmarking work happening, e.g., with the scib package from the Theis Lab, that allows you to do your own benchmarking for your data. Long-time flow/CyTOF users will remember the uncertainty around which clustering algorithm to use, that didn't clear up until Lukas Weber and Mark Robinson (from the sequencing world) did a benchmarking study and showed that it was FlowSOM all around and X-shift for rare cell detection.
+
+My recommendation: we incentivize benchmarking studies (eg. the FlowCAP project). Especially given the advent of spectral flow, we are going to need an efficient way to redo or build on our prior work as the tools and data evolve.
+
+Integration between commercial and open-source methods.\\
+10x Genomics has a UI for its Xenium data. Then they have a page titled "Continuing your journey after Xenium analyzer" listing relevant open-source tools that can help you analyze your data further. Similarly, on the flow/CyTOF side, with Standard BioTools is promoting Bernd Bodenmiller Lab's HistoCat on their page as something to use beyond their UI for IMC data.
+
+My recommendation: we build our commercial tools with our open-source ecosystem in mind. I think Omiq's modular design and ability  to quickly integrate the latest open-source tools into its interface is a great example.
+
+I'll acknowledge that there are differences between the fields that may impact what has and can get done, like open source community engagement levels, available funding, and the relationship between open-source and commercial solutions in either domain. However, seeing just how much the single-cell sequencing community got right, they can serve as a north star for how we build out our tools from here.
+
+[[file:images/single_cell_best_practices.jpeg]]
 * General data analysis
 #+HTML: <a href="#top">Back to top</a>
 ** [[https://www.linkedin.com/posts/tylerjburns_facing-challenges-with-analyzing-large-flow-activity-7099769574782324736-vjnv?utm_source=share&utm_medium=member_desktop][GigaSOM: FlowSOM in Julia for larger datasets]]
+Facing challenges with analyzing large flow and mass cytometry datasets?
+
+As datasets grow, the need for faster and more efficient tools becomes paramount. If you're looking to run FlowSOM clustering on more cells faster, consider exploring GigaSOM in the Julia programming language:
+
+🚀 It clustered 1.1 billion cells in just under 25 minutes (EmbedSOM image below).\\
+🖥️ Achieved on a relatively small (256 core) compute cluster.\\
+
+While I haven't done a side-by-side comparison with this exact dataset on this size compute cluster in R, my experience with Julia has been promising. It combines the ease of R and Python with the speed of a lower-level language.
+
+Thank you Abhishek Koladiya, PhD for introducing me to this innovative package.
+
+Dive deeper into the details with the paper and package homepage: https://lnkd.in/e9-Bdk3Y
+[[file:images/gigasom.jpeg]]
 ** [[https://www.linkedin.com/posts/tylerjburns_i-wanted-to-highlight-a-clustering-method-activity-7087382242867470336-pUbG?utm_source=share&utm_medium=member_desktop][How X-shift works]]
+I wanted to highlight a clustering method specialized in rare subset detection that in my opinion is under-explored with respect to newer, high dimensional data types (eg. single cell sequencing, high-dimensional imaging, spectral flow). It's called X-Shift, written by Nikolay Samusik.
+
+For biologists and directors, if you have any projects that involve the detection of rare cell subsets, then X-shift should be on your radar. X-shift was determined to be the best method for rare cell subset detection, in a 2016 clustering method benchmarking study (the one that put FlowSOM on the map). The paper is linked in the markdown below.
+
+Why isn't X-shift all over the place? The method is computationally expensive (eg. high run-times), and runs in Java, not the more common R or Python (yet), making it more difficult to integrate into existing single-cell pipelines. Thus, the method is not as widely utilized and explored as it otherwise would and should be.
+
+How does it work? The method is based on mean-shift clustering. For each cell, move in the direction of higher density until you get to a peak. That peak is your cluster.
+
+For bioinformaticians (and anyone else interested in going deep), I created a massively simplified, hyper-tailored, and highly visual version of X-shift in R, to ground your intuition in how it works. You can see the method in action, code and all, in this markdown: https://lnkd.in/e_mSEzm3. In the markdown, I include links to the X-shift paper, benchmarking study, and X-shift software.
+
+Thank you for your attention, and I hope you all have a great day.
+
+[[file:images/how_xshift_works.jpeg]]
 ** [[https://www.linkedin.com/posts/tylerjburns_the-following-is-a-warning-for-biologists-activity-7085200486697443330-Zzbc?utm_source=share&utm_medium=member_desktop][Single-cell sequencing analysis: don't forget to integrate your data]]
+The following is a warning for biologists, bioinformaticians, and leaders of research teams, especially those moving from a flow/CyTOF background into single-cell sequencing. Please study the concept of data integration.
+
+Flow and CyTOF users know to cluster on "type" markers (eg. surface), and never on "state" markers (eg. phospho-proteins). However, making this distinction is not possible for scRNA seq data. Thus, we have to rely on data integration, which is a way of algorithmically "aligning" data across multiple conditions.
+
+Here, I show how integration is done, but my main point is to show what the data look like when they're not integrated. Failure to integrate the data can lead to false conclusions, and a whole lot of wasted time and effort.
+
+For biologists and leaders of research teams, please study these pictures. You need to know what un-integrated data look like so you can have intuition around what is a novel cell subset and what is a technical artifact.
+
+For bioinformaticians and those interested in going deeper, the vignette is here: https://lnkd.in/eRJE57i5. I hope you all have a great day.
+
+[[file:images/integrate_your_data.jpeg]]
 ** [[https://www.linkedin.com/posts/tylerjburns_activity-7045080240515076096-kXLl?utm_source=share&utm_medium=member_desktop][Survey: QC gives people the most headache in a flow/CyTOF data analysis pipeline]]
+[[file:images/analysis_headache.png]]
 ** [[https://www.linkedin.com/posts/tylerjburns_cytof-users-we-use-the-asinh-transform-activity-7009180881546321922-y5qH?utm_source=share&utm_medium=member_desktop][Pictures of different data transforms for CyTOF]]
+CyTOF users: we use the asinh transform, but is that the only one that works? How does the scale argument influence the data transformation? Here is an interrogation of CyTOF data transformed in many different ways: https://lnkd.in/eRgYXzkm
+
+[[file:images/data_transformation.jpeg]]
 ** [[https://www.linkedin.com/posts/tylerjburns_flow-cytometry-and-cytof-users-here-is-a-activity-7003308800543711232-eAEx?utm_source=share&utm_medium=member_desktop][What happens when you run SPADE on random input]]
+Flow cytometry and CyTOF users: here is a SPADE tree produced from 30 dimensions of random noise. It still looks beautiful, but conveys no truth. This is an example of the beauty is truth delusion, and its behind every bioinformatic corner waiting to pounce. Read more here: https://lnkd.in/ezeZV_Fj
+
+[[file:images/spade_random_input.jpeg]]
 ** [[https://www.linkedin.com/posts/tylerjburns_as-per-my-two-polls-placed-11-months-apart-activity-7165771409686827008-k5E2?utm_source=share&utm_medium=member_desktop][Two surveys side by side, 11 months apart on LLM usage (April 2023, March 2024)]]
+As per my two polls placed 11 months apart, most people in the flow/CyTOF community are interested in but not using or experimenting with LLMs in their work, both now and one year ago. Between last year and now, more people appear to be actively using LLMs.
+
+I have not come across any work using LLMs particularly with flow/CyTOF data analysis (comment or DM me if you have), though I have seen a few papers using them in single-cell sequencing analysis, suggesting that flow/CyTOF might be next. Here is an example study reviewing seven different single-cell LLMs: https://lnkd.in/dTCxxEf5
+
+[[file:images/llm_surveys.jpeg]]
+** [[https://www.linkedin.com/posts/tylerjburns_automated-gating-autogating-has-been-a-activity-7167877080360206336-dDlD?utm_source=share&utm_medium=member_desktop][Survey March 2024, most are not using but are interested in autogating]]
+Automated gating (autogating) has been a topic of discussion for many years, but more recently I'm seeing it in the major flow/cytof analysis SaaS products, and I'm hearing of users requesting it more often. So I am interested in knowing whether it is becoming a standard part of people's workflows, whether there's simply more interest, or whether most people are not interested and there is a selection bias in what I'm seeing. Thank you to everyone who takes the time to answer.
+[[file:images/autogating.png]]
+
 * Bibliometrics
 #+HTML: <a href="#top">Back to top</a>
 ** [[https://www.linkedin.com/posts/tylerjburns_if-we-put-2008-as-the-first-cytof-paper-activity-7041804065097281537-nkIM?utm_source=share&utm_medium=member_desktop][IMC vs CyTOF publication rates: surprised IMC is taking off so fast]]
+If we put 2008 as the first CyTOF paper (from Scott Tanner, before Garry Nolan), CyTOF hit 100 publications in 2017, or 9 years. If we put 2014 as the first Imaging Mass Cytometry (IMC) paper, then IMC reached 100 publications in 2022, or 8 years.
+
+For some reason, I didn't think IMC was taking off as fast, but that might be because I witnessed the increase in CyTOF popularity while in the Nolan Lab.
+
+Some notes:
+- I filter out STAR protocols papers because of a keyword issue that makes flow cytometry papers show up. Thanks to Mike Leipold for pointing this out.
+- I have no idea why the CyTOF publication rate stays at 100 for 2017 and 2018 before increasing again.
+- Here is the code so you can do it for your own searches: https://lnkd.in/eBwU_EE9
+[[file:images/imc_vs_cytof.jpeg]]
 ** [[https://www.linkedin.com/posts/tylerjburns_spectral-flow-cytometry-is-trending-in-my-activity-7034458560377847809-b2Zj?utm_source=share&utm_medium=member_desktop][Surprisingly few spectral flow cytometry publications despite all the buzz around it]]
+Spectral flow cytometry is trending in my circles, but this isn't reflected in the publication trends (yet). My analysis puts the spectral publication rate per year closer to that of CITE-seq than CyTOF. I (probably a lot of us) predict a spike in a few years. Until then, pre-print and relevant social media trends might be more informative.
+
+If you want to see the search terms I used and/or use the code I've written for your own trend analysis, please go to the project repo here: https://lnkd.in/eBwU_EE9.
+
+If you want to know more about the project, please visit my Medium article (2018) here: https://lnkd.in/d6KCi4E
+
+[[file:images/few_spectral_pubs.jpeg]]
 ** [[https://www.linkedin.com/posts/tylerjburns_major-data-analysis-errors-invalidate-cancer-activity-7092387938352656385-Cgqv?utm_source=share&utm_medium=member_desktop][My fear that single-cell is in a replication crisis]]
+Interesting [[https://www.biorxiv.org/content/10.1101/2023.07.28.550993v1][article]] shared by [[https://www.linkedin.com/posts/%F0%9F%8E%AF-ming-tommy-tang-40650014_major-data-analysis-errors-invalidate-cancer-activity-7092366372181000192-ijo6?utm_source=share&utm_medium=member_desktop][Ming "Tommy" Tang]], showing that a re-analysis of a cancer microbiome paper leads to different results. My fear right now is that we are in the middle of a replication crisis, across many bioinformatics-dependent domains. What do we do about it?
+
+Education: all of us who can analyze data know a little corner of it better than the rest of us. We all have something to teach. It's not necessarily about turning biologists and leaders into bioinformaticians. Not everyone wants that. It's more about bioinformatic literacy. Knowing the concepts. Knowing the lingo. Having intuition.
+
+Funding and policy: I am disheartened by the number of labs that are underserved in bioinformatics. Plenty of labs need a FTE bioinformatician and are stuck borrowing the one in the adjacent lab for a few hours here and there. Why? Is it due to underestimating how much grant funding will be needed for bioinformatics, for a given project? Is it due to limits as to how much a grant agency will fund bioinformatics needs for a given project? This is more of an open question on my end, but I think it's worth getting into. (This is a sensitive topic, so feel free to DM me about this one).
+
+Skepticism: At the beginning of grad school, we would read old seminal papers in our fields and spend an hour picking them apart. This was easier to do when it was western blots. Now, who has the time to look critically at the complex methods, the code and raw data (if these are even provided, see anything posted by Mike Leipold)? This includes the reviewers. I'm hoping that a bit more bioinformatic literacy will allow us to do this better.
+
+In short, this is a complicated problem space, with a lot hinging on it. But I hope the three things above serve as a good starting point.
 * Word embeddings and social media scraping
 #+HTML: <a href="#top">Back to top</a>
 ** [[https://www.linkedin.com/posts/tylerjburns_ever-wonder-what-regions-of-news-space-activity-7051174977668042752-G0lC?utm_source=share&utm_medium=member_desktop][Spatial embedding of CNN vs FoxNews vs AP using BERT, viewing on UMAP]]
+Ever wonder what regions of "news space" are more CNN-heavy or more FoxNews-heavy? It turns out that you can get at this by using large language models to convert news article titles into spatial coordinates. I did this for a mix of CNN, Fox, and AP news articles from their respective twitter handles, but you do this analysis for any source.
+
+While I thought that each little subregion of the map (topic) would have a CNN and a Fox cluster, with AP somewhere in the middle, it turns out that Fox really doubles down on particular topics (eg. politics). Yellow in the image corresponds to Fox-heavy regions. Even AP has its its little pockets. Have a look yourself. The article title pops up with every point you hover over. If you don't like to see code, just scroll to the bottom where the plots are. Go here: https://lnkd.in/eHG3w4Ef
+
+Technical explanation for those who care: I used the sentence-transformers python library to convert each article into a 768 dimensional vector. I kept within a particular date range and randomly sub-sampled until the number of articles were equal across the three sources. I then found the K-nearest neighbors (KNN) of each data point in the high-dimensional space. I then calculated various measures, from per-KNN fraction CNN/Fox/AP to per-KNN Shannon Entropy. I then did UMAP on the data and colored the UMAP by the KNN measures that I did.
+
+If you have any particular use cases, or need help getting this working on your side, just let me know.
+[[file:images/news_space.jpeg]]
 ** [[https://www.linkedin.com/posts/tylerjburns_ive-been-trying-to-reduce-the-scrolling-activity-6966053080530350080-BXdK?utm_source=share&utm_medium=member_desktop][Original post around making tweet embeddings: the scrolling problem]]
-This post led to my TED talk in the spring of 2023.
-** [[https://www.linkedin.com/posts/tylerjburns_automated-gating-autogating-has-been-a-activity-7167877080360206336-dDlD?utm_source=share&utm_medium=member_desktop][Survey March 2024, most are not using but are interested in autogating]]
+I've been trying to reduce the scrolling I do in my life. For example, I check the news every day with a "map view" (below) I created using an AI language model (all-mpnet-base-v2) and UMAP.
+
+Points on the map are tweets (article titles) from the accounts of various news sources, accessible by a dropdown menu (top). Similar articles by context are grouped near each other on the map. Larger points have more likes. Color corresponds to how recent the tweet is. Clicking on a point gives you access to the hyperlink (bottom).
+I really hope this helps you too!
+
+https://lnkd.in/ef42rQzj
+
+[[file:images/scrolling_problem.jpeg]]
 ** [[https://www.linkedin.com/posts/tylerjburns_i-recently-hit-a-milestone-in-my-personal-activity-7152694472559017985-6KFn?utm_source=share&utm_medium=member_desktop][Recap after writing 1 million words in my journal over 15 years, parsing it with AI]]
+I recently hit a milestone in my personal journal: one million words over 15 years. To review it all, I embedded each paragraph into what I call "thought space."
+
+I found four key words that seem to partition the majority of thought space: business, science, family, and philosophy (see picture). The term "health" in turn bridged these four terms. The data suggest that at least when I sit down to write, health is on my mind, through whichever of the aforementioned lenses. I can confirm that health is at or near the top of my general value system. Everything is done with health in mind, for myself and for those close to me.
+
+Attached is a write-up on my tech-enabled journal review, which contains code and links to a repo for anyone who wants to run this on their own writing. Otherwise, if you don't keep a journal, you should start one. It is a gift that keeps on giving.
+
+The write-up can be found here: https://lnkd.in/dFuq8wYY
+
+[[file:images/one_million_words.jpeg]]
 ** [[https://www.linkedin.com/posts/tylerjburns_the-retweet-to-like-ratio-matters-for-getting-activity-7039541884293128192-xFuf?utm_source=share&utm_medium=member_desktop][Retweet to like ratio of single-cell sequencing tweets]]
+The retweet-to-like ratio matters for getting value out of twitter for your niche, to the point where you might be able to draw manual gates on the likes x retweets biaxials. For single-cell sequencing related tweets, I find three regions:
+
+- High retweets/likes: open academic student and postdoc positions
+- Medium retweets/likes: papers, projects, data
+- Low retweets/likes: memes, status updates
+
+Knowing this can save you time whether you're looking for a new position, or trying to find the latest impactful papers. This is a work in progress, and things might differ by subject (eg. CyTOF, microbiome, AI).
+
+If you're curating tweets for your particular niche, I recommend looking at the retweets and likes biaxial (note the log scale) to determine the regions that give you the most value.
+
+In a way, it's no different than gating on FSC x SSC or DNA x event_length.
+
+If you want to see and look at the tweets in the biaxial yourself (the tweet shows up when you hover the cursor over each point), please go here: https://lnkd.in/erUtFUtu
+
+[[file:images/retweet_to_like.jpeg]]
 ** [[https://www.linkedin.com/posts/tylerjburns_my-scrolling-problem-and-how-i-fixed-it-activity-7084166939647848451-uU5w?utm_source=share&utm_medium=member_desktop][On my TEDx Basel talk]]
+My TEDx Basel talk is now out! Here are a few key takeaways:
+
+If you ever struggle with being emotionally hi-jacked by and/or addicted to the infinite scroll of your feeds (including LinkedIn), you're not alone. I note that my ADHD brain is especially vulnerable, and this can perhaps be said of a huge number of other neurodivergencies.
+
+The infinite scroll is not the only way we can take in information. It may be optimally profitable (especially with the AI recommendation algorithms), but I show in some of the software that I've developed, that there are other ways.
+
+None of this is going to just go away, unless perhaps it is replaced by something even more addictive. I think better ways to take in information and connect with each other will come from a community-driven, open-sourced effort. It needs to be optimized toward something other than attention and profit.
+
+Thank you to everyone at TEDxBasel for giving me the opportunity to give this talk, and coaching me through the process. I'm a much better speaker now thanks to you, especially my coaches Cinzia Donato and Beril Esendal. Also leaders/coaches Beatriz Graça, Joanna Duda, Sara Laudato, and Smitha Rose Kariapuram, and everyone else who volunteered to make the event happen.
+
+Thank you to my fellow speakers who provided feedback and support through the process. We did it, and you all were amazing! This includes Jo Filshie Browning, Bert te Wildt, Ben Meyer, Flavio Donato, Daniele Diana, Marcel Barelli, Reto Odermatt, and Mary Meaney.
+
+The video is here: https://lnkd.in/eFPgrJ2V
+I'll link the projects I talk about in the comments.
 * Other
 #+HTML: <a href="#top">Back to top</a>
 ** [[https://www.linkedin.com/posts/tylerjburns_the-following-is-for-my-friends-from-academia-activity-7160684719934779392-n26f?utm_source=share&utm_medium=member_desktop][Three pointers for doing self employed consulting in the life sciences]]
+The following is for my friends from academia who are in a tough work and/or financial situation. I was living on the paycheck at the end of grad school (2016), when I started doing bioinformatics consulting on the side. This got me out of my financial woes. I kept this up after graduation until I transitioned to full-time self-employed consulting starting in 2018. I haven't stopped, and you can do it too. Here are three things that have kept me in business the past several years.
+
+A robust network of people who like and trust you.\\
+My first engagement came from a conversation I overheard from a former lab-mate, whose company was looking for consultants. My second engagement was through a colleague and close friend of mine. Many subsequent engagements have been through connections, and/or previous clients who know and trust my work.
+
+A high standard of excellence.\\
+Many of my clients are re-signs, meaning I've worked with them before. Every once in a while, I'll get an email from an old client who has a new problem that I'm a fit to solve. Many of my other clients are long-term engagements, and in non-employment work when they can cut you at any time with a few days warning, long-term only happens when you do good work.
+
+Give, give, give.\\
+I was on a sales call once, where I essentially solved the problem on the call so they didn't need to pay me. They came back a few months later with paid work. This also goes with passing around leads (prospective clients). If I know I can't do what's needed, I often know who can. It's not about how much I can make, it's about how much I can give.
+
+I don't expect three bullet points on a LinkedIn post to lead to my friends suddenly becoming consultants...it's a long process. Rather, I'd like everyone (especially in academia) to know that this alternative path is possible, either a few hours a week to make ends meet, or as a full-time endeavor. Accordingly, if you orient toward this path as early as you can, then perhaps you'll get an opportunity down the line that can cascade into something bigger.
+
+(image is some old notes I found from back in the day)
+
+[[file:images/self_employed.jpeg]]
