@@ -360,8 +360,7 @@ display: none;
 <h2>Read the fcs file line by line</h2>
 <p>Here, we’re going to read in a fcs file line by line and see what’s
 there. We’re reading in Stanford HIMC data from <a href="https://flowrepository.org/id/FR-FCM-ZYAJ">here</a>.</p>
-<pre class="r"><code>setwd(&#39;/Users/tylerburns/Documents/projects/read_fcs_from_scratch&#39;)
-fcs_file &lt;- &quot;081216-Mike-HIMC ctrls-001_01_normalized.fcs&quot;
+<pre class="r"><code>fcs_file &lt;- &quot;081216-Mike-HIMC ctrls-001_01_normalized.fcs&quot;
 
 dat &lt;- readLines(fcs_file)</code></pre>
 <p>The first line is the HEADER segment and the TEXT segment. The DATA
@@ -451,7 +450,7 @@ convenient way to store it, especially when you’re looking at many
 strings of 8 bits (many bytes) at the same time.</p>
 <p>So let’s read them as numbers, based on the info we have from the
 header. Data type float corresponds to type “numeric” and size of 4. We
-specify endian. So let’s look at the numbers.</p>
+specify big endian as well. Now let’s look at the numbers.</p>
 <pre class="r"><code>data_values &lt;- readBin(con = rawConnection(bin), 
                        what = &quot;numeric&quot;, 
                        size = 4, 
@@ -548,20 +547,23 @@ ourselves? First, we know that the data are being read in row by row. So
 we need the parameter names. They were stored in the TEXT segment. Let’s
 pull them out. We have the P, a number, and then a letter. P1N is the
 name (channel), P1S is the marker name (eg. CD14).</p>
-<p>Let’s pull out the PnS’s from the TEXT segment.</p>
+<p>Let’s pull out the PnN’s from the TEXT segment.</p>
 <pre class="r"><code>library(tidyverse)</code></pre>
 <pre><code>## ── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
-## ✔ dplyr     1.1.0     ✔ readr     2.1.4
-## ✔ forcats   1.0.0     ✔ stringr   1.5.0
-## ✔ ggplot2   3.4.1     ✔ tibble    3.2.0
-## ✔ lubridate 1.9.2     ✔ tidyr     1.3.0
-## ✔ purrr     1.0.1     
+## ✔ dplyr     1.1.3     ✔ readr     2.1.4
+## ✔ forcats   1.0.0     ✔ stringr   1.5.1
+## ✔ ggplot2   3.5.1     ✔ tibble    3.2.1
+## ✔ lubridate 1.9.3     ✔ tidyr     1.3.0
+## ✔ purrr     1.0.2     
 ## ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
 ## ✖ dplyr::filter() masks flowCore::filter(), stats::filter()
 ## ✖ dplyr::lag()    masks stats::lag()
-## ℹ Use the ]8;;http://conflicted.r-lib.org/conflicted package]8;; to force all conflicts to become errors</code></pre>
-<pre class="r"><code>markers &lt;- dat[[1]] %&gt;% str_split(&quot;\\\\&quot;) %&gt;% .[[1]] %&gt;% .[grep(&quot;P\\d+N&quot;, .) + 1]
-markers</code></pre>
+## ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
+<pre class="r"><code>markers &lt;- dat[[1]] %&gt;% str_split(&quot;\\\\&quot;) %&gt;% .[[1]] %&gt;% .[grep(&quot;P\\d+N&quot;, .) + 1]</code></pre>
+<pre><code>## Warning in grep(&quot;P\\d+N&quot;, .): unable to translate &#39; A&lt;95&gt;&lt;81&gt;A`&#39; to a wide
+## string</code></pre>
+<pre><code>## Warning in grep(&quot;P\\d+N&quot;, .): input string 526 is invalid</code></pre>
+<pre class="r"><code>markers</code></pre>
 <pre><code>##  [1] &quot;Time&quot;         &quot;Event_length&quot; &quot;In113Di&quot;      &quot;In115Di&quot;      &quot;Sn120Di&quot;     
 ##  [6] &quot;I127Di&quot;       &quot;Xe131Di&quot;      &quot;Ba138Di&quot;      &quot;Ce140Di&quot;      &quot;Nd142Di&quot;     
 ## [11] &quot;Nd143Di&quot;      &quot;Nd144Di&quot;      &quot;Nd146Di&quot;      &quot;Sm147Di&quot;      &quot;Nd148Di&quot;     
