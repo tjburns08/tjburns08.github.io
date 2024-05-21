@@ -250,7 +250,7 @@ I'll acknowledge that there are differences between the fields that may impact w
 [[file:images/single_cell_best_practices.jpeg]]
 * General data analysis
 #+HTML: <a href="#top">Back to top</a>
-** Cluster stability visualization
+** [[https://www.linkedin.com/posts/tylerjburns_when-you-cluster-your-single-cell-data-do-activity-7198660249229127682-sWlv?utm_source=share&utm_medium=member_desktop][Cluster stability visualization]]
 When you cluster your single-cell data, do you run it multiple times to check for consistency? You should. This is part of an important topic called cluster stability. Let me explain.
 
 The attached gif is FlowSOM clustering of CyTOF whole blood data, with 20 and 40 consensus clusters selected side by side, run 50 times. These are visualized on a UMAP. The cluster centroids from the UMAP visualization are computed and shown as yellow spots.
