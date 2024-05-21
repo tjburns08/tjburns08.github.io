@@ -250,6 +250,20 @@ I'll acknowledge that there are differences between the fields that may impact w
 [[file:images/single_cell_best_practices.jpeg]]
 * General data analysis
 #+HTML: <a href="#top">Back to top</a>
+** Cluster stability visualization
+When you cluster your single-cell data, do you run it multiple times to check for consistency? You should. This is part of an important topic called cluster stability. Let me explain.
+
+The attached gif is FlowSOM clustering of CyTOF whole blood data, with 20 and 40 consensus clusters selected side by side, run 50 times. These are visualized on a UMAP. The cluster centroids from the UMAP visualization are computed and shown as yellow spots.
+
+You'll notice that there are some instances where the centroids are relatively stable (especially in the 20 cluster case). There are other instances where they move, appear, disappear, and so on.
+
+The practical takeaway I get from this is that if you're running FlowSOM or similar clustering algorithms where you choose the number of clusters, you should aim to over-cluster rather than trying to get the perfect number of clusters. You can always merge similar clusters later.
+
+Furthermore, it helps to know which clusters are static versus which are moving around, in order to know whether a small "rare" cluster you found is a fluke that showed up one time in 50, or whether it keeps showing up.
+
+The data and code for creating this gif is linked in the comments. I just got started on this project, and there is still some work to be done. Future directions include running this on clustering algorithms where the number of clusters are actually computed rather than chosen, like PhenoGraph. If we find that these clusters are moving around all over the place, then it will be worth doing a one-over on relevant clustering strategy.
+
+#+HTML: <img src="images/cluster_stability.gif"/>
 ** [[https://www.linkedin.com/posts/tylerjburns_facing-challenges-with-analyzing-large-flow-activity-7099769574782324736-vjnv?utm_source=share&utm_medium=member_desktop][GigaSOM: FlowSOM in Julia for larger datasets]]
 Facing challenges with analyzing large flow and mass cytometry datasets?
 
