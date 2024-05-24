@@ -86,26 +86,26 @@ Dr. Seuss, <a href="https://en.wikipedia.org/wiki/Horton_Hatches_the_Egg"><i>Hor
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org025c045">KNN sleepwalk and related</a></li>
-<li><a href="#org44875ba">UMAP and t-SNE manipulation animations</a></li>
-<li><a href="#org24252a7">Teaching and learning bioinformatics</a></li>
-<li><a href="#org022bcd4">Journal club</a></li>
-<li><a href="#org2da5b67">General data analysis</a></li>
-<li><a href="#org47d3f82">Bibliometrics</a></li>
-<li><a href="#org4c2b08d">Word embeddings and social media scraping</a></li>
-<li><a href="#org38b2e14">Other</a></li>
+<li><a href="#orge37295d">KNN sleepwalk and related</a></li>
+<li><a href="#orgef59d1b">UMAP and t-SNE manipulation animations</a></li>
+<li><a href="#org3d87bd1">Teaching and learning bioinformatics</a></li>
+<li><a href="#orgb57f38e">Journal club</a></li>
+<li><a href="#org70b3dd1">General data analysis</a></li>
+<li><a href="#org68e2dd2">Bibliometrics</a></li>
+<li><a href="#orgbde6073">Word embeddings and social media scraping</a></li>
+<li><a href="#org3b70ee9">Other</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-org025c045" class="outline-2">
-<h2 id="org025c045">KNN sleepwalk and related</h2>
-<div class="outline-text-2" id="text-org025c045">
+<div id="outline-container-orge37295d" class="outline-2">
+<h2 id="orge37295d">KNN sleepwalk and related</h2>
+<div class="outline-text-2" id="text-orge37295d">
 <a href="#top">Back to top</a>
 </div>
-<div id="outline-container-org3809a11" class="outline-3">
-<h3 id="org3809a11"><a href="https://www.linkedin.com/posts/tylerjburns_do-you-need-quick-and-easy-intuition-around-activity-6998611378068430848-BSrt?utm_source=share&amp;utm_medium=member_desktop">Original KNN sleepwalk reveal</a></h3>
-<div class="outline-text-3" id="text-org3809a11">
+<div id="outline-container-org1958f4b" class="outline-3">
+<h3 id="org1958f4b"><a href="https://www.linkedin.com/posts/tylerjburns_do-you-need-quick-and-easy-intuition-around-activity-6998611378068430848-BSrt?utm_source=share&amp;utm_medium=member_desktop">Original KNN sleepwalk reveal</a></h3>
+<div class="outline-text-3" id="text-org1958f4b">
 <p>
 Do you need quick and easy intuition around how exact your single-cell embeddings are? Check out knn<sub>sleepwalk</sub>, a wrapper I wrote around the sleepwalk R package. Hover the cursor over any cell in your embedding, and it will show you the cell's k-nearest neighbors computed from the original feature space (as opposed to the embedding space). Below is a UMAP of 10,000 cells in CyTOF data with a k of 100. Note that the neighbors are not always nearby. Be careful if you want to gate/cluster on the embedding! <a href="https://lnkd.in/eeqRBdSn">https://lnkd.in/eeqRBdSn</a>
 </p>
@@ -113,9 +113,9 @@ Do you need quick and easy intuition around how exact your single-cell embedding
 <img src="images/knn_sleepwalk_reveal.gif"/>
 </div>
 </div>
-<div id="outline-container-org738445e" class="outline-3">
-<h3 id="org738445e"><a href="https://www.linkedin.com/posts/tylerjburns_flowcytof-users-and-leaders-have-you-ever-activity-7183087620942356480-hAHz?utm_source=share&amp;utm_medium=member_desktop">KNN sleepwalk: Biaxial-UMAP interface</a></h3>
-<div class="outline-text-3" id="text-org738445e">
+<div id="outline-container-orgbfba47b" class="outline-3">
+<h3 id="orgbfba47b"><a href="https://www.linkedin.com/posts/tylerjburns_flowcytof-users-and-leaders-have-you-ever-activity-7183087620942356480-hAHz?utm_source=share&amp;utm_medium=member_desktop">KNN sleepwalk: Biaxial-UMAP interface</a></h3>
+<div class="outline-text-3" id="text-orgbfba47b">
 <p>
 Flow/CyTOF users and leaders: have you ever wanted to know exactly where a cell on a biaxial plot is on a corresponding UMAP and vice versa? I built a tool just for you:
 </p>
@@ -146,9 +146,9 @@ I am still building this thing out, so if you have any particular feature reques
 <img src="images/biaxial_umap_interface.gif"/>
 </div>
 </div>
-<div id="outline-container-org8ef4492" class="outline-3">
-<h3 id="org8ef4492"><a href="https://www.linkedin.com/posts/tylerjburns_in-light-of-recent-scrutiny-around-umap-activity-7169341694348324865-sCmq?utm_source=share&amp;utm_medium=member_desktop">KNN sleepwalk: Two UMAPs in light of All of Us research program controversy</a></h3>
-<div class="outline-text-3" id="text-org8ef4492">
+<div id="outline-container-orgb368f45" class="outline-3">
+<h3 id="orgb368f45"><a href="https://www.linkedin.com/posts/tylerjburns_in-light-of-recent-scrutiny-around-umap-activity-7169341694348324865-sCmq?utm_source=share&amp;utm_medium=member_desktop">KNN sleepwalk: Two UMAPs in light of All of Us research program controversy</a></h3>
+<div class="outline-text-3" id="text-orgb368f45">
 <p>
 In light of recent scrutiny around UMAP, coming from its controversial use in the All of Us Research Program, I refactored my KNN Sleepwalk project (which I started a year ago) to better reflect the limits of UMAP. Let me explain:
 </p>
@@ -175,9 +175,9 @@ If you have questions about UMAP or similar tools, or just want to vent, please 
 <img src="images/knn_sleepwalk_two_umaps.gif"/>
 </div>
 </div>
-<div id="outline-container-org07d2ed7" class="outline-3">
-<h3 id="org07d2ed7"><a href="https://www.linkedin.com/posts/tylerjburns_one-way-to-understand-how-much-global-information-activity-7180898836213620736-lXIX?utm_source=share&amp;utm_medium=member_desktop">KFN sleepwalk, two UMAPs</a></h3>
-<div class="outline-text-3" id="text-org07d2ed7">
+<div id="outline-container-org313484a" class="outline-3">
+<h3 id="org313484a"><a href="https://www.linkedin.com/posts/tylerjburns_one-way-to-understand-how-much-global-information-activity-7180898836213620736-lXIX?utm_source=share&amp;utm_medium=member_desktop">KFN sleepwalk, two UMAPs</a></h3>
+<div class="outline-text-3" id="text-org313484a">
 <p>
 One way to understand how much global information UMAP can (and cannot) preserve: look at the K-farthest neighbors (KFN) of cells in UMAP space versus high-dimensional space. Here is what I mean:
 </p>
@@ -208,9 +208,9 @@ If you want to use this KFN (and the respective KNN) sleepwalk tool for your dat
 <img src="images/kfn_sleepwalk_two_umaps.gif"/>
 </div>
 </div>
-<div id="outline-container-org889ebfb" class="outline-3">
-<h3 id="org889ebfb"><a href="https://www.linkedin.com/posts/tylerjburns_as-requested-here-are-the-k-farthest-neighbors-activity-7024009354307588096-ghUg?utm_source=share&amp;utm_medium=member_desktop">KFN sleepwalk, t-SNE and UMAP</a></h3>
-<div class="outline-text-3" id="text-org889ebfb">
+<div id="outline-container-org9764fd0" class="outline-3">
+<h3 id="org9764fd0"><a href="https://www.linkedin.com/posts/tylerjburns_as-requested-here-are-the-k-farthest-neighbors-activity-7024009354307588096-ghUg?utm_source=share&amp;utm_medium=member_desktop">KFN sleepwalk, t-SNE and UMAP</a></h3>
+<div class="outline-text-3" id="text-org9764fd0">
 <p>
 As requested, here are the k-farthest neighbors of a CyTOF dataset side-by-side between t-SNE and UMAP. The cell the cursor is on within the UMAP will map to the corresponding cell on the t-SNE map. Note that they're also all over the place on UMAP as well. Case in point: just because it's UMAP doesn't mean the arbitrary island placement has been solved.
 </p>
@@ -221,27 +221,27 @@ But again, don't take my word for it. Use the tool and analyze your data here: <
 <img src="images/kfn_sleepwalk_tsne_umap_umap_perspective2.gif"/>
 </div>
 </div>
-<div id="outline-container-org960c478" class="outline-3">
-<h3 id="org960c478"><a href="https://www.linkedin.com/posts/tylerjburns_the-k-farthest-neighbors-of-a-cytof-dataset-activity-7021519004338958338-Q9rl?utm_source=share&amp;utm_medium=member_desktop">KFN sleepwalk, t-SNE</a></h3>
-<div class="outline-text-3" id="text-org960c478">
+<div id="outline-container-org75ddc33" class="outline-3">
+<h3 id="org75ddc33"><a href="https://www.linkedin.com/posts/tylerjburns_the-k-farthest-neighbors-of-a-cytof-dataset-activity-7021519004338958338-Q9rl?utm_source=share&amp;utm_medium=member_desktop">KFN sleepwalk, t-SNE</a></h3>
+<div class="outline-text-3" id="text-org75ddc33">
 <p>
 The k-farthest neighbors of a CyTOF dataset, visualized on a t-SNE map, are all over the place. Why? Because t-SNE isn't optimized to capture global information. The position of the islands relative to each other doesn't mean much. Keep that in mind when interpreting these embeddings. To run this on your own data, for whatever embedding algorithms you're doing, visit my knn<sub>sleepwalk</sub> project here: <a href="https://lnkd.in/eeqRBdSn">https://lnkd.in/eeqRBdSn</a>
 </p>
 <img src="images/kfn_sleepwalk_tsne.gif"/>
 </div>
 </div>
-<div id="outline-container-org744c0f3" class="outline-3">
-<h3 id="org744c0f3"><a href="https://www.linkedin.com/posts/tylerjburns_heres-an-interesting-metric-i-developed-activity-7019326037322825728-3jY-?utm_source=share&amp;utm_medium=member_desktop">KFN overlap as a metric for evaluating global preservation for embeddings</a></h3>
-<div class="outline-text-3" id="text-org744c0f3">
+<div id="outline-container-org14069a7" class="outline-3">
+<h3 id="org14069a7"><a href="https://www.linkedin.com/posts/tylerjburns_heres-an-interesting-metric-i-developed-activity-7019326037322825728-3jY-?utm_source=share&amp;utm_medium=member_desktop">KFN overlap as a metric for evaluating global preservation for embeddings</a></h3>
+<div class="outline-text-3" id="text-org14069a7">
 <p>
 Here's an interesting metric I developed to get at global structure preservation of high-dimensional data in a low-dimensional embedding: k-farthest neighbor overlap between high-d and embedding space. Result (in CyTOF data, so far): PCA is better than UMAP. UMAP is better than t-SNE. From my talk here: <a href="https://lnkd.in/eivsbAfE">https://lnkd.in/eivsbAfE</a>
 <img src="images/kfn_tsne_umap_line_plot.jpeg" alt="kfn_tsne_umap_line_plot.jpeg" />
 </p>
 </div>
 </div>
-<div id="outline-container-org57b7a53" class="outline-3">
-<h3 id="org57b7a53"><a href="https://www.linkedin.com/posts/tylerjburns_in-my-single-cell-sequencing-work-i-sometimes-activity-7076888734289289216-oP-4?utm_source=share&amp;utm_medium=member_desktop">A KNN based solution to viewing data on a UMAP where one condition is "sitting on top of" the other</a></h3>
-<div class="outline-text-3" id="text-org57b7a53">
+<div id="outline-container-org0b09811" class="outline-3">
+<h3 id="org0b09811"><a href="https://www.linkedin.com/posts/tylerjburns_in-my-single-cell-sequencing-work-i-sometimes-activity-7076888734289289216-oP-4?utm_source=share&amp;utm_medium=member_desktop">A KNN based solution to viewing data on a UMAP where one condition is "sitting on top of" the other</a></h3>
+<div class="outline-text-3" id="text-org0b09811">
 <p>
 In my single-cell sequencing work, I sometimes come across visualizations where there are two conditions stacked onto a UMAP in two respective colors, where one is very much behind the other, making it of limited use.
 </p>
@@ -257,14 +257,14 @@ If you want a more in-depth look at this KNN-based solution and things you can d
 </div>
 </div>
 </div>
-<div id="outline-container-org44875ba" class="outline-2">
-<h2 id="org44875ba">UMAP and t-SNE manipulation animations</h2>
-<div class="outline-text-2" id="text-org44875ba">
+<div id="outline-container-orgef59d1b" class="outline-2">
+<h2 id="orgef59d1b">UMAP and t-SNE manipulation animations</h2>
+<div class="outline-text-2" id="text-orgef59d1b">
 <a href="#top">Back to top</a>
 </div>
-<div id="outline-container-org221a90e" class="outline-3">
-<h3 id="org221a90e"><a href="https://www.linkedin.com/posts/tylerjburns_as-requested-here-are-100-t-sne-runs-in-activity-7029475365689380864-GZvE?utm_source=share&amp;utm_medium=member_desktop">Gif of running t-SNE over and over, ordered by image similarity</a></h3>
-<div class="outline-text-3" id="text-org221a90e">
+<div id="outline-container-orgcf41234" class="outline-3">
+<h3 id="orgcf41234"><a href="https://www.linkedin.com/posts/tylerjburns_as-requested-here-are-100-t-sne-runs-in-activity-7029475365689380864-GZvE?utm_source=share&amp;utm_medium=member_desktop">Gif of running t-SNE over and over, ordered by image similarity</a></h3>
+<div class="outline-text-3" id="text-orgcf41234">
 <p>
 As requested, here are 100 t-SNE runs in a row for CyTOF data ordered by image similarity. Notice that there are pockets of stability in the island placement. It's not completely random, as it appeared in the previous post. I would not have realized this had I not done this extra ordering step.
 </p>
@@ -275,9 +275,9 @@ How I did it: I took every plot image and made a pairwise image distance matrix 
 <img src="images/tsne_multiple_run_image_similarity.gif"/>
 </div>
 </div>
-<div id="outline-container-orgb390d04" class="outline-3">
-<h3 id="orgb390d04"><a href="https://www.linkedin.com/posts/tylerjburns_if-you-have-one-or-two-bad-markers-in-your-activity-7038805627606814720-ybsS?utm_source=share&amp;utm_medium=member_desktop">Gif of progressively adding noisy dimensions to t-SNE</a></h3>
-<div class="outline-text-3" id="text-orgb390d04">
+<div id="outline-container-org02698a0" class="outline-3">
+<h3 id="org02698a0"><a href="https://www.linkedin.com/posts/tylerjburns_if-you-have-one-or-two-bad-markers-in-your-activity-7038805627606814720-ybsS?utm_source=share&amp;utm_medium=member_desktop">Gif of progressively adding noisy dimensions to t-SNE</a></h3>
+<div class="outline-text-3" id="text-org02698a0">
 <p>
 If you have one or two bad markers in your panel (noise), does it completely ruin your t-SNE/UMAP visualizations? According to my analysis so far, no. I take whole blood CyTOF data (22 dimensions) and add extra dimensions of random normal distributions, running t-SNE after each new column has been added (I've done UMAP too). What I have found:
 </p>
@@ -293,18 +293,18 @@ If you have one or two bad markers in your panel (noise), does it completely rui
 <img src="images/tsne_add_noise.gif"/>
 </div>
 </div>
-<div id="outline-container-orgd731c08" class="outline-3">
-<h3 id="orgd731c08"><a href="https://www.linkedin.com/posts/tylerjburns_run-t-sne-and-umap-on-cytof-data-100-times-activity-7029143066804420609-UsDZ?utm_source=share&amp;utm_medium=member_desktop">Gif of running t-SNE and UMAP over and over</a></h3>
-<div class="outline-text-3" id="text-orgd731c08">
+<div id="outline-container-orgdfe302f" class="outline-3">
+<h3 id="orgdfe302f"><a href="https://www.linkedin.com/posts/tylerjburns_run-t-sne-and-umap-on-cytof-data-100-times-activity-7029143066804420609-UsDZ?utm_source=share&amp;utm_medium=member_desktop">Gif of running t-SNE and UMAP over and over</a></h3>
+<div class="outline-text-3" id="text-orgdfe302f">
 <p>
 Run t-SNE and UMAP on CyTOF data 100 times in a row. How much does the island placement for each map vary from the previous one? Notice that UMAP is quite a bit more stable. This could be the initialization, or the optimization function of UMAP, which has a "push distant cells away" component.
 </p>
 <img src="images/tsne_umap_multiple_runs.gif"/>
 </div>
 </div>
-<div id="outline-container-org6947a1c" class="outline-3">
-<h3 id="org6947a1c"><a href="https://www.linkedin.com/posts/tylerjburns_umap-on-noisy-non-trajectory-data-looks-like-activity-7041404193252737026-Zx-_?utm_source=share&amp;utm_medium=member_desktop">Gif of progressively adding noisy dimensions to UMAP</a></h3>
-<div class="outline-text-3" id="text-org6947a1c">
+<div id="outline-container-org52a9343" class="outline-3">
+<h3 id="org52a9343"><a href="https://www.linkedin.com/posts/tylerjburns_umap-on-noisy-non-trajectory-data-looks-like-activity-7041404193252737026-Zx-_?utm_source=share&amp;utm_medium=member_desktop">Gif of progressively adding noisy dimensions to UMAP</a></h3>
+<div class="outline-text-3" id="text-org52a9343">
 <p>
 UMAP on noisy non-trajectory data looks like a trajectory. I add one noisy dimension to whole blood CyTOF data, run UMAP, add another noise dimension, run UMAP again, etc. The map starts to look like a trajectory around 30 added noisy dimensions (biologically, it's not a trajectory at all).
 </p>
@@ -329,14 +329,14 @@ A relevant interrogation of dimension reduction with lots of pictures here: <a h
 </div>
 </div>
 </div>
-<div id="outline-container-org24252a7" class="outline-2">
-<h2 id="org24252a7">Teaching and learning bioinformatics</h2>
-<div class="outline-text-2" id="text-org24252a7">
+<div id="outline-container-org3d87bd1" class="outline-2">
+<h2 id="org3d87bd1">Teaching and learning bioinformatics</h2>
+<div class="outline-text-2" id="text-org3d87bd1">
 <a href="#top">Back to top</a>
 </div>
-<div id="outline-container-orge29da75" class="outline-3">
-<h3 id="orge29da75"><a href="https://www.linkedin.com/posts/tylerjburns_here-is-a-post-i-wrote-for-biologists-and-activity-7090282332749717504-XTkW?utm_source=share&amp;utm_medium=member_desktop">How I went from biologist to biology-leveraged bioinformatician</a></h3>
-<div class="outline-text-3" id="text-orge29da75">
+<div id="outline-container-org34deb33" class="outline-3">
+<h3 id="org34deb33"><a href="https://www.linkedin.com/posts/tylerjburns_here-is-a-post-i-wrote-for-biologists-and-activity-7090282332749717504-XTkW?utm_source=share&amp;utm_medium=member_desktop">How I went from biologist to biology-leveraged bioinformatician</a></h3>
+<div class="outline-text-3" id="text-org34deb33">
 <p>
 Here is a post I wrote for biologists and team leaders about my journey from wet-lab biologist to biology-leveraged bioinformatician. In short, I think you can do it too, and if you're working in the life sciences, you SHOULD do it too. You can quickly get to a level where you can understand and communicate effectively with your comp bio team, something that is essential for any project that contains any -omics data. To summarize:
 </p>
@@ -355,9 +355,9 @@ Have a look here for more insights and depth: <a href="https://lnkd.in/eQ-2BvNn"
 </p>
 </div>
 </div>
-<div id="outline-container-orgb4728b0" class="outline-3">
-<h3 id="orgb4728b0"><a href="https://www.linkedin.com/posts/tylerjburns_my-survey-has-revealed-that-the-act-of-problem-activity-7193215772448505858-tK7P?utm_source=share&amp;utm_medium=member_desktop">Problem solving as a bottleneck to learning how to code</a></h3>
-<div class="outline-text-3" id="text-orgb4728b0">
+<div id="outline-container-orge908388" class="outline-3">
+<h3 id="orge908388"><a href="https://www.linkedin.com/posts/tylerjburns_my-survey-has-revealed-that-the-act-of-problem-activity-7193215772448505858-tK7P?utm_source=share&amp;utm_medium=member_desktop">Problem solving as a bottleneck to learning how to code</a></h3>
+<div class="outline-text-3" id="text-orge908388">
 <p>
 My survey has revealed that the act of problem solving is a bottleneck for biologists learning how to code. So let me give you a tool that has helped me in the problem solving process over the years, especially when I feel "paralyzed" in the face of a problem:
 </p>
@@ -392,9 +392,9 @@ More resources in the comments below.
 </p>
 </div>
 </div>
-<div id="outline-container-org509765e" class="outline-3">
-<h3 id="org509765e"><a href="https://www.linkedin.com/posts/tylerjburns_this-image-is-romanesco-broccoli-i-came-activity-7191860234095640576-rGEH?utm_source=share&amp;utm_medium=member_desktop">Learning how to code has improved how I think</a></h3>
-<div class="outline-text-3" id="text-org509765e">
+<div id="outline-container-orgb9c70c8" class="outline-3">
+<h3 id="orgb9c70c8"><a href="https://www.linkedin.com/posts/tylerjburns_this-image-is-romanesco-broccoli-i-came-activity-7191860234095640576-rGEH?utm_source=share&amp;utm_medium=member_desktop">Learning how to code has improved how I think</a></h3>
+<div class="outline-text-3" id="text-orgb9c70c8">
 <p>
 This image is romanesco broccoli. I came across it sophomore year in my dorm cafeteria. The pattern at play was amazing, but&#x2026;hard to put into words. When I was learning how to code, I learned the word for the concept at hand: recursion. Learning how to code has given me many instances of this, where I can reason better about something that was otherwise hard to put into words.
 </p>
@@ -429,15 +429,15 @@ The article is here:
 </p>
 
 
-<div id="org4c9c90b" class="figure">
+<div id="orge4bb66b" class="figure">
 <p><img src="images/romanesco_broccoli.jpeg" alt="romanesco_broccoli.jpeg" />
 </p>
 </div>
 </div>
 </div>
-<div id="outline-container-org81f0564" class="outline-3">
-<h3 id="org81f0564"><a href="https://www.linkedin.com/posts/tylerjburns_my-survey-has-already-revealed-that-a-large-activity-7189597924899643392-HXOM?utm_source=share&amp;utm_medium=member_desktop">Biologists becoming bioinformaticians are having the hardest time learning how to code</a></h3>
-<div class="outline-text-3" id="text-org81f0564">
+<div id="outline-container-orga3d6927" class="outline-3">
+<h3 id="orga3d6927"><a href="https://www.linkedin.com/posts/tylerjburns_my-survey-has-already-revealed-that-a-large-activity-7189597924899643392-HXOM?utm_source=share&amp;utm_medium=member_desktop">Biologists becoming bioinformaticians are having the hardest time learning how to code</a></h3>
+<div class="outline-text-3" id="text-orga3d6927">
 <p>
 My survey has already revealed that a large bottleneck for biologists learning bioinformatics is the act of learning how to code, even with plenty of online resources, bootcamps, LLMs, etc out there these days. Let me explain why I think this is the case, based on what I've seen and experienced.
 </p>
@@ -467,15 +467,15 @@ I remember what it feels like to be a wet-lab biologist and be totally overwhelm
 </p>
 
 
-<div id="org6c736b1" class="figure">
+<div id="orge1f11df" class="figure">
 <p><img src="images/bioinformatics_learning_biggest_hangups.jpeg" alt="bioinformatics_learning_biggest_hangups.jpeg" />
 </p>
 </div>
 </div>
 </div>
-<div id="outline-container-org35f3953" class="outline-3">
-<h3 id="org35f3953"><a href="https://www.linkedin.com/posts/tylerjburns_bioinformatics-bigdata-collaboration-activity-7177394725853741056-W1of?utm_source=share&amp;utm_medium=member_desktop">Recap on teaching engagement with Zamora Lab at MCW</a></h3>
-<div class="outline-text-3" id="text-org35f3953">
+<div id="outline-container-orgd055442" class="outline-3">
+<h3 id="orgd055442"><a href="https://www.linkedin.com/posts/tylerjburns_bioinformatics-bigdata-collaboration-activity-7177394725853741056-W1of?utm_source=share&amp;utm_medium=member_desktop">Recap on teaching engagement with Zamora Lab at MCW</a></h3>
+<div class="outline-text-3" id="text-orgd055442">
 <p>
 After speaking with many labs last year, I determined (as many others have) that there is a lack of bioinformatics support in academia. Thus, many biologists are pressured to learn these skills on their own (as if they don't have enough on their plate already). Aside from the additional stress, this can lead to serious mistakes downstream. Anyone who knows about the replication crises in various fields should be concerned at this point.
 </p>
@@ -493,15 +493,15 @@ I saw this first hand with the lab of Anthony Zamora this past week. I spent thr
 </p>
 
 
-<div id="orgcdc63b2" class="figure">
+<div id="orgb955614" class="figure">
 <p><img src="images/zamora_lab.jpeg" alt="zamora_lab.jpeg" />
 </p>
 </div>
 </div>
 </div>
-<div id="outline-container-org40d0533" class="outline-3">
-<h3 id="org40d0533"><a href="https://www.linkedin.com/posts/tylerjburns_i-am-tired-of-the-phrase-those-who-can-activity-7168606001758257152-5iMu?utm_source=share&amp;utm_medium=member_desktop">Those who can do, do; those who have done, teach</a></h3>
-<div class="outline-text-3" id="text-org40d0533">
+<div id="outline-container-orgd0dd9ba" class="outline-3">
+<h3 id="orgd0dd9ba"><a href="https://www.linkedin.com/posts/tylerjburns_i-am-tired-of-the-phrase-those-who-can-activity-7168606001758257152-5iMu?utm_source=share&amp;utm_medium=member_desktop">Those who can do, do; those who have done, teach</a></h3>
+<div class="outline-text-3" id="text-orgd0dd9ba">
 <p>
 I am tired of the phrase "those who can, do; those who can't, teach." So let me fix it for you. "Those who can, do; those who have done, teach." Three things come out of this:
 </p>
@@ -527,21 +527,21 @@ If you know anyone who could use this post or my teaching/advice, please share i
 </p>
 
 
-<div id="orgb55976f" class="figure">
+<div id="org19f6331" class="figure">
 <p><img src="images/have_done_teach.jpeg" alt="have_done_teach.jpeg" />
 </p>
 </div>
 </div>
 </div>
 </div>
-<div id="outline-container-org022bcd4" class="outline-2">
-<h2 id="org022bcd4">Journal club</h2>
-<div class="outline-text-2" id="text-org022bcd4">
+<div id="outline-container-orgb57f38e" class="outline-2">
+<h2 id="orgb57f38e">Journal club</h2>
+<div class="outline-text-2" id="text-orgb57f38e">
 <a href="#top">Back to top</a>
 </div>
-<div id="outline-container-orga6f2183" class="outline-3">
-<h3 id="orga6f2183"><a href="https://www.linkedin.com/posts/tylerjburns_single-cell-protein-data-can-take-many-forms-activity-7166098906634829824-3aSF?utm_source=share&amp;utm_medium=member_desktop">Data integration using CyCombine</a></h3>
-<div class="outline-text-3" id="text-orga6f2183">
+<div id="outline-container-orge1659c8" class="outline-3">
+<h3 id="orge1659c8"><a href="https://www.linkedin.com/posts/tylerjburns_single-cell-protein-data-can-take-many-forms-activity-7166098906634829824-3aSF?utm_source=share&amp;utm_medium=member_desktop">Data integration using CyCombine</a></h3>
+<div class="outline-text-3" id="text-orge1659c8">
 <p>
 Single-cell protein data can take many forms: flow cytometry (spectral or otherwise), mass cytometry, CITE-seq, or protein-based imaging after cell segmentation. Not to mention the multitude of machines (eg. spectral cytometers from different companies, or CyTOF 2 vs CyTOF XT). It is inevitable that there will be a need and efforts to integrate these datasets across modalities to derive actionable insights.
 </p>
@@ -560,9 +560,9 @@ To sum things up, there is good work being done in this space, and we should be 
 </p>
 </div>
 </div>
-<div id="outline-container-orga9b8600" class="outline-3">
-<h3 id="orga9b8600"><a href="https://www.linkedin.com/posts/tylerjburns_leaders-using-single-cell-tech-do-you-have-activity-7164260356083716096-0S0M?utm_source=share&amp;utm_medium=member_desktop">Bridge integration</a></h3>
-<div class="outline-text-3" id="text-orga9b8600">
+<div id="outline-container-org04443f2" class="outline-3">
+<h3 id="org04443f2"><a href="https://www.linkedin.com/posts/tylerjburns_leaders-using-single-cell-tech-do-you-have-activity-7164260356083716096-0S0M?utm_source=share&amp;utm_medium=member_desktop">Bridge integration</a></h3>
+<div class="outline-text-3" id="text-org04443f2">
 <p>
 Leaders using single-cell tech: do you have data across multiple modalities (eg. flow/CyTOF and single-cell sequencing) that you want to combine? Are you making large cell "atlases" internally or externally? Then you should consider integrating these datasets with bridge integration, a new method that came out last year. How does it work?
 </p>
@@ -584,15 +584,15 @@ Links to the paper and Seurat code in the comments below.
 </p>
 
 
-<div id="org089cc9d" class="figure">
+<div id="org5071892" class="figure">
 <p><img src="images/bridge_integration.jpeg" alt="bridge_integration.jpeg" />
 </p>
 </div>
 </div>
 </div>
-<div id="outline-container-orgb2c6a68" class="outline-3">
-<h3 id="orgb2c6a68"><a href="https://www.linkedin.com/posts/tylerjburns_life-science-leaders-using-flowmass-cytometry-activity-7161731050065408000-LN_D?utm_source=share&amp;utm_medium=member_desktop">Flow/CyTOF users could take a page from the best practices in single-cell sequencing</a></h3>
-<div class="outline-text-3" id="text-orgb2c6a68">
+<div id="outline-container-orgc898b7b" class="outline-3">
+<h3 id="orgc898b7b"><a href="https://www.linkedin.com/posts/tylerjburns_life-science-leaders-using-flowmass-cytometry-activity-7161731050065408000-LN_D?utm_source=share&amp;utm_medium=member_desktop">Flow/CyTOF users could take a page from the best practices in single-cell sequencing</a></h3>
+<div class="outline-text-3" id="text-orgc898b7b">
 <p>
 Life science leaders using flow/mass cytometry: do you want to know where the best practices in data analysis will be in 3-5 years (if done right)? As a flow/CyTOF native, I've been looking to single-cell sequencing for this. Here are 3 things that I think this community has gotten right, that the flow/CyTOF world (that I’ve been part of since 2012) could really benefit from:
 </p>
@@ -629,21 +629,21 @@ I'll acknowledge that there are differences between the fields that may impact w
 </p>
 
 
-<div id="orgdde4fe7" class="figure">
+<div id="org817a930" class="figure">
 <p><img src="images/single_cell_best_practices.jpeg" alt="single_cell_best_practices.jpeg" />
 </p>
 </div>
 </div>
 </div>
 </div>
-<div id="outline-container-org2da5b67" class="outline-2">
-<h2 id="org2da5b67">General data analysis</h2>
-<div class="outline-text-2" id="text-org2da5b67">
+<div id="outline-container-org70b3dd1" class="outline-2">
+<h2 id="org70b3dd1">General data analysis</h2>
+<div class="outline-text-2" id="text-org70b3dd1">
 <a href="#top">Back to top</a>
 </div>
-<div id="outline-container-org62a379a" class="outline-3">
-<h3 id="org62a379a"><a href="https://www.linkedin.com/posts/tylerjburns_when-you-cluster-your-single-cell-data-do-activity-7198660249229127682-sWlv?utm_source=share&amp;utm_medium=member_desktop">Cluster stability visualization</a></h3>
-<div class="outline-text-3" id="text-org62a379a">
+<div id="outline-container-org8037210" class="outline-3">
+<h3 id="org8037210"><a href="https://www.linkedin.com/posts/tylerjburns_when-you-cluster-your-single-cell-data-do-activity-7198660249229127682-sWlv?utm_source=share&amp;utm_medium=member_desktop">Cluster stability visualization</a></h3>
+<div class="outline-text-3" id="text-org8037210">
 <p>
 When you cluster your single-cell data, do you run it multiple times to check for consistency? You should. This is part of an important topic called cluster stability. Let me explain.
 </p>
@@ -671,9 +671,9 @@ The data and code for creating this gif is linked in the comments. I just got st
 <img src="images/cluster_stability.gif"/>
 </div>
 </div>
-<div id="outline-container-orgf713084" class="outline-3">
-<h3 id="orgf713084"><a href="https://www.linkedin.com/posts/tylerjburns_facing-challenges-with-analyzing-large-flow-activity-7099769574782324736-vjnv?utm_source=share&amp;utm_medium=member_desktop">GigaSOM: FlowSOM in Julia for larger datasets</a></h3>
-<div class="outline-text-3" id="text-orgf713084">
+<div id="outline-container-orgcfec903" class="outline-3">
+<h3 id="orgcfec903"><a href="https://www.linkedin.com/posts/tylerjburns_facing-challenges-with-analyzing-large-flow-activity-7099769574782324736-vjnv?utm_source=share&amp;utm_medium=member_desktop">GigaSOM: FlowSOM in Julia for larger datasets</a></h3>
+<div class="outline-text-3" id="text-orgcfec903">
 <p>
 Facing challenges with analyzing large flow and mass cytometry datasets?
 </p>
@@ -701,9 +701,9 @@ Dive deeper into the details with the paper and package homepage: <a href="https
 </p>
 </div>
 </div>
-<div id="outline-container-org325be1b" class="outline-3">
-<h3 id="org325be1b"><a href="https://www.linkedin.com/posts/tylerjburns_i-wanted-to-highlight-a-clustering-method-activity-7087382242867470336-pUbG?utm_source=share&amp;utm_medium=member_desktop">How X-shift works</a></h3>
-<div class="outline-text-3" id="text-org325be1b">
+<div id="outline-container-org0d12378" class="outline-3">
+<h3 id="org0d12378"><a href="https://www.linkedin.com/posts/tylerjburns_i-wanted-to-highlight-a-clustering-method-activity-7087382242867470336-pUbG?utm_source=share&amp;utm_medium=member_desktop">How X-shift works</a></h3>
+<div class="outline-text-3" id="text-org0d12378">
 <p>
 I wanted to highlight a clustering method specialized in rare subset detection that in my opinion is under-explored with respect to newer, high dimensional data types (eg. single cell sequencing, high-dimensional imaging, spectral flow). It's called X-Shift, written by Nikolay Samusik.
 </p>
@@ -729,15 +729,15 @@ Thank you for your attention, and I hope you all have a great day.
 </p>
 
 
-<div id="org39aa1cd" class="figure">
+<div id="org24ab079" class="figure">
 <p><img src="images/how_xshift_works.jpeg" alt="how_xshift_works.jpeg" />
 </p>
 </div>
 </div>
 </div>
-<div id="outline-container-org5900a30" class="outline-3">
-<h3 id="org5900a30"><a href="https://www.linkedin.com/posts/tylerjburns_the-following-is-a-warning-for-biologists-activity-7085200486697443330-Zzbc?utm_source=share&amp;utm_medium=member_desktop">Single-cell sequencing analysis: don't forget to integrate your data</a></h3>
-<div class="outline-text-3" id="text-org5900a30">
+<div id="outline-container-orge295711" class="outline-3">
+<h3 id="orge295711"><a href="https://www.linkedin.com/posts/tylerjburns_the-following-is-a-warning-for-biologists-activity-7085200486697443330-Zzbc?utm_source=share&amp;utm_medium=member_desktop">Single-cell sequencing analysis: don't forget to integrate your data</a></h3>
+<div class="outline-text-3" id="text-orge295711">
 <p>
 The following is a warning for biologists, bioinformaticians, and leaders of research teams, especially those moving from a flow/CyTOF background into single-cell sequencing. Please study the concept of data integration.
 </p>
@@ -759,53 +759,53 @@ For bioinformaticians and those interested in going deeper, the vignette is here
 </p>
 
 
-<div id="orgb0309e6" class="figure">
+<div id="orgffcf3f7" class="figure">
 <p><img src="images/integrate_your_data.jpeg" alt="integrate_your_data.jpeg" />
 </p>
 </div>
 </div>
 </div>
-<div id="outline-container-org6c46dd0" class="outline-3">
-<h3 id="org6c46dd0"><a href="https://www.linkedin.com/posts/tylerjburns_activity-7045080240515076096-kXLl?utm_source=share&amp;utm_medium=member_desktop">Survey: QC gives people the most headache in a flow/CyTOF data analysis pipeline</a></h3>
-<div class="outline-text-3" id="text-org6c46dd0">
+<div id="outline-container-orgf16a88b" class="outline-3">
+<h3 id="orgf16a88b"><a href="https://www.linkedin.com/posts/tylerjburns_activity-7045080240515076096-kXLl?utm_source=share&amp;utm_medium=member_desktop">Survey: QC gives people the most headache in a flow/CyTOF data analysis pipeline</a></h3>
+<div class="outline-text-3" id="text-orgf16a88b">
 
-<div id="org4c4312d" class="figure">
+<div id="org1b58eff" class="figure">
 <p><img src="images/analysis_headache.png" alt="analysis_headache.png" />
 </p>
 </div>
 </div>
 </div>
-<div id="outline-container-org80eaacf" class="outline-3">
-<h3 id="org80eaacf"><a href="https://www.linkedin.com/posts/tylerjburns_cytof-users-we-use-the-asinh-transform-activity-7009180881546321922-y5qH?utm_source=share&amp;utm_medium=member_desktop">Pictures of different data transforms for CyTOF</a></h3>
-<div class="outline-text-3" id="text-org80eaacf">
+<div id="outline-container-org498524d" class="outline-3">
+<h3 id="org498524d"><a href="https://www.linkedin.com/posts/tylerjburns_cytof-users-we-use-the-asinh-transform-activity-7009180881546321922-y5qH?utm_source=share&amp;utm_medium=member_desktop">Pictures of different data transforms for CyTOF</a></h3>
+<div class="outline-text-3" id="text-org498524d">
 <p>
 CyTOF users: we use the asinh transform, but is that the only one that works? How does the scale argument influence the data transformation? Here is an interrogation of CyTOF data transformed in many different ways: <a href="https://lnkd.in/eRgYXzkm">https://lnkd.in/eRgYXzkm</a>
 </p>
 
 
-<div id="org640f6ac" class="figure">
+<div id="org463089a" class="figure">
 <p><img src="images/data_transformation.jpeg" alt="data_transformation.jpeg" />
 </p>
 </div>
 </div>
 </div>
-<div id="outline-container-org5478981" class="outline-3">
-<h3 id="org5478981"><a href="https://www.linkedin.com/posts/tylerjburns_flow-cytometry-and-cytof-users-here-is-a-activity-7003308800543711232-eAEx?utm_source=share&amp;utm_medium=member_desktop">What happens when you run SPADE on random input</a></h3>
-<div class="outline-text-3" id="text-org5478981">
+<div id="outline-container-org67e22b5" class="outline-3">
+<h3 id="org67e22b5"><a href="https://www.linkedin.com/posts/tylerjburns_flow-cytometry-and-cytof-users-here-is-a-activity-7003308800543711232-eAEx?utm_source=share&amp;utm_medium=member_desktop">What happens when you run SPADE on random input</a></h3>
+<div class="outline-text-3" id="text-org67e22b5">
 <p>
 Flow cytometry and CyTOF users: here is a SPADE tree produced from 30 dimensions of random noise. It still looks beautiful, but conveys no truth. This is an example of the beauty is truth delusion, and its behind every bioinformatic corner waiting to pounce. Read more here: <a href="https://lnkd.in/ezeZV_Fj">https://lnkd.in/ezeZV_Fj</a>
 </p>
 
 
-<div id="org6610a47" class="figure">
+<div id="org4d852c6" class="figure">
 <p><img src="images/spade_random_input.jpeg" alt="spade_random_input.jpeg" />
 </p>
 </div>
 </div>
 </div>
-<div id="outline-container-orgc789e5e" class="outline-3">
-<h3 id="orgc789e5e"><a href="https://www.linkedin.com/posts/tylerjburns_as-per-my-two-polls-placed-11-months-apart-activity-7165771409686827008-k5E2?utm_source=share&amp;utm_medium=member_desktop">Two surveys side by side, 11 months apart on LLM usage (April 2023, March 2024)</a></h3>
-<div class="outline-text-3" id="text-orgc789e5e">
+<div id="outline-container-orgf8cab9f" class="outline-3">
+<h3 id="orgf8cab9f"><a href="https://www.linkedin.com/posts/tylerjburns_as-per-my-two-polls-placed-11-months-apart-activity-7165771409686827008-k5E2?utm_source=share&amp;utm_medium=member_desktop">Two surveys side by side, 11 months apart on LLM usage (April 2023, March 2024)</a></h3>
+<div class="outline-text-3" id="text-orgf8cab9f">
 <p>
 As per my two polls placed 11 months apart, most people in the flow/CyTOF community are interested in but not using or experimenting with LLMs in their work, both now and one year ago. Between last year and now, more people appear to be actively using LLMs.
 </p>
@@ -815,15 +815,15 @@ I have not come across any work using LLMs particularly with flow/CyTOF data ana
 </p>
 
 
-<div id="org5c21645" class="figure">
+<div id="orgff04e03" class="figure">
 <p><img src="images/llm_surveys.jpeg" alt="llm_surveys.jpeg" />
 </p>
 </div>
 </div>
 </div>
-<div id="outline-container-org7bae79e" class="outline-3">
-<h3 id="org7bae79e"><a href="https://www.linkedin.com/posts/tylerjburns_automated-gating-autogating-has-been-a-activity-7167877080360206336-dDlD?utm_source=share&amp;utm_medium=member_desktop">Survey March 2024, most are not using but are interested in autogating</a></h3>
-<div class="outline-text-3" id="text-org7bae79e">
+<div id="outline-container-org9cdd578" class="outline-3">
+<h3 id="org9cdd578"><a href="https://www.linkedin.com/posts/tylerjburns_automated-gating-autogating-has-been-a-activity-7167877080360206336-dDlD?utm_source=share&amp;utm_medium=member_desktop">Survey March 2024, most are not using but are interested in autogating</a></h3>
+<div class="outline-text-3" id="text-org9cdd578">
 <p>
 Automated gating (autogating) has been a topic of discussion for many years, but more recently I'm seeing it in the major flow/cytof analysis SaaS products, and I'm hearing of users requesting it more often. So I am interested in knowing whether it is becoming a standard part of people's workflows, whether there's simply more interest, or whether most people are not interested and there is a selection bias in what I'm seeing. Thank you to everyone who takes the time to answer.
 <img src="images/autogating.png" alt="autogating.png" />
@@ -832,14 +832,14 @@ Automated gating (autogating) has been a topic of discussion for many years, but
 </div>
 </div>
 
-<div id="outline-container-org47d3f82" class="outline-2">
-<h2 id="org47d3f82">Bibliometrics</h2>
-<div class="outline-text-2" id="text-org47d3f82">
+<div id="outline-container-org68e2dd2" class="outline-2">
+<h2 id="org68e2dd2">Bibliometrics</h2>
+<div class="outline-text-2" id="text-org68e2dd2">
 <a href="#top">Back to top</a>
 </div>
-<div id="outline-container-orgb982db1" class="outline-3">
-<h3 id="orgb982db1"><a href="https://www.linkedin.com/posts/tylerjburns_if-we-put-2008-as-the-first-cytof-paper-activity-7041804065097281537-nkIM?utm_source=share&amp;utm_medium=member_desktop">IMC vs CyTOF publication rates: surprised IMC is taking off so fast</a></h3>
-<div class="outline-text-3" id="text-orgb982db1">
+<div id="outline-container-org1d0d65c" class="outline-3">
+<h3 id="org1d0d65c"><a href="https://www.linkedin.com/posts/tylerjburns_if-we-put-2008-as-the-first-cytof-paper-activity-7041804065097281537-nkIM?utm_source=share&amp;utm_medium=member_desktop">IMC vs CyTOF publication rates: surprised IMC is taking off so fast</a></h3>
+<div class="outline-text-3" id="text-org1d0d65c">
 <p>
 If we put 2008 as the first CyTOF paper (from Scott Tanner, before Garry Nolan), CyTOF hit 100 publications in 2017, or 9 years. If we put 2014 as the first Imaging Mass Cytometry (IMC) paper, then IMC reached 100 publications in 2022, or 8 years.
 </p>
@@ -857,15 +857,15 @@ Some notes:
 <li>Here is the code so you can do it for your own searches: <a href="https://lnkd.in/eBwU_EE9">https://lnkd.in/eBwU_EE9</a></li>
 </ul>
 
-<div id="org13ea206" class="figure">
+<div id="org05c32a1" class="figure">
 <p><img src="images/imc_vs_cytof.jpeg" alt="imc_vs_cytof.jpeg" />
 </p>
 </div>
 </div>
 </div>
-<div id="outline-container-orge833a35" class="outline-3">
-<h3 id="orge833a35"><a href="https://www.linkedin.com/posts/tylerjburns_spectral-flow-cytometry-is-trending-in-my-activity-7034458560377847809-b2Zj?utm_source=share&amp;utm_medium=member_desktop">Surprisingly few spectral flow cytometry publications despite all the buzz around it</a></h3>
-<div class="outline-text-3" id="text-orge833a35">
+<div id="outline-container-orgfe8ee17" class="outline-3">
+<h3 id="orgfe8ee17"><a href="https://www.linkedin.com/posts/tylerjburns_spectral-flow-cytometry-is-trending-in-my-activity-7034458560377847809-b2Zj?utm_source=share&amp;utm_medium=member_desktop">Surprisingly few spectral flow cytometry publications despite all the buzz around it</a></h3>
+<div class="outline-text-3" id="text-orgfe8ee17">
 <p>
 Spectral flow cytometry is trending in my circles, but this isn't reflected in the publication trends (yet). My analysis puts the spectral publication rate per year closer to that of CITE-seq than CyTOF. I (probably a lot of us) predict a spike in a few years. Until then, pre-print and relevant social media trends might be more informative.
 </p>
@@ -879,15 +879,15 @@ If you want to know more about the project, please visit my Medium article (2018
 </p>
 
 
-<div id="orgad153bb" class="figure">
+<div id="org9b61790" class="figure">
 <p><img src="images/few_spectral_pubs.jpeg" alt="few_spectral_pubs.jpeg" />
 </p>
 </div>
 </div>
 </div>
-<div id="outline-container-org1639475" class="outline-3">
-<h3 id="org1639475"><a href="https://www.linkedin.com/posts/tylerjburns_major-data-analysis-errors-invalidate-cancer-activity-7092387938352656385-Cgqv?utm_source=share&amp;utm_medium=member_desktop">My fear that single-cell is in a replication crisis</a></h3>
-<div class="outline-text-3" id="text-org1639475">
+<div id="outline-container-org469c6a1" class="outline-3">
+<h3 id="org469c6a1"><a href="https://www.linkedin.com/posts/tylerjburns_major-data-analysis-errors-invalidate-cancer-activity-7092387938352656385-Cgqv?utm_source=share&amp;utm_medium=member_desktop">My fear that single-cell is in a replication crisis</a></h3>
+<div class="outline-text-3" id="text-org469c6a1">
 <p>
 Interesting <a href="https://www.biorxiv.org/content/10.1101/2023.07.28.550993v1">article</a> shared by <a href="https://www.linkedin.com/posts/%F0%9F%8E%AF-ming-tommy-tang-40650014_major-data-analysis-errors-invalidate-cancer-activity-7092366372181000192-ijo6?utm_source=share&amp;utm_medium=member_desktop">Ming "Tommy" Tang</a>, showing that a re-analysis of a cancer microbiome paper leads to different results. My fear right now is that we are in the middle of a replication crisis, across many bioinformatics-dependent domains. What do we do about it?
 </p>
@@ -910,14 +910,14 @@ In short, this is a complicated problem space, with a lot hinging on it. But I h
 </div>
 </div>
 </div>
-<div id="outline-container-org4c2b08d" class="outline-2">
-<h2 id="org4c2b08d">Word embeddings and social media scraping</h2>
-<div class="outline-text-2" id="text-org4c2b08d">
+<div id="outline-container-orgbde6073" class="outline-2">
+<h2 id="orgbde6073">Word embeddings and social media scraping</h2>
+<div class="outline-text-2" id="text-orgbde6073">
 <a href="#top">Back to top</a>
 </div>
-<div id="outline-container-org3c4ee85" class="outline-3">
-<h3 id="org3c4ee85"><a href="https://www.linkedin.com/posts/tylerjburns_ever-wonder-what-regions-of-news-space-activity-7051174977668042752-G0lC?utm_source=share&amp;utm_medium=member_desktop">Spatial embedding of CNN vs FoxNews vs AP using BERT, viewing on UMAP</a></h3>
-<div class="outline-text-3" id="text-org3c4ee85">
+<div id="outline-container-orgdfd2ef9" class="outline-3">
+<h3 id="orgdfd2ef9"><a href="https://www.linkedin.com/posts/tylerjburns_ever-wonder-what-regions-of-news-space-activity-7051174977668042752-G0lC?utm_source=share&amp;utm_medium=member_desktop">Spatial embedding of CNN vs FoxNews vs AP using BERT, viewing on UMAP</a></h3>
+<div class="outline-text-3" id="text-orgdfd2ef9">
 <p>
 Ever wonder what regions of "news space" are more CNN-heavy or more FoxNews-heavy? It turns out that you can get at this by using large language models to convert news article titles into spatial coordinates. I did this for a mix of CNN, Fox, and AP news articles from their respective twitter handles, but you do this analysis for any source.
 </p>
@@ -936,9 +936,9 @@ If you have any particular use cases, or need help getting this working on your 
 </p>
 </div>
 </div>
-<div id="outline-container-org65260a1" class="outline-3">
-<h3 id="org65260a1"><a href="https://www.linkedin.com/posts/tylerjburns_ive-been-trying-to-reduce-the-scrolling-activity-6966053080530350080-BXdK?utm_source=share&amp;utm_medium=member_desktop">Original post around making tweet embeddings: the scrolling problem</a></h3>
-<div class="outline-text-3" id="text-org65260a1">
+<div id="outline-container-org9353e96" class="outline-3">
+<h3 id="org9353e96"><a href="https://www.linkedin.com/posts/tylerjburns_ive-been-trying-to-reduce-the-scrolling-activity-6966053080530350080-BXdK?utm_source=share&amp;utm_medium=member_desktop">Original post around making tweet embeddings: the scrolling problem</a></h3>
+<div class="outline-text-3" id="text-org9353e96">
 <p>
 I've been trying to reduce the scrolling I do in my life. For example, I check the news every day with a "map view" (below) I created using an AI language model (all-mpnet-base-v2) and UMAP.
 </p>
@@ -953,15 +953,15 @@ I really hope this helps you too!
 </p>
 
 
-<div id="org0aa2e52" class="figure">
+<div id="org58c8eb0" class="figure">
 <p><img src="images/scrolling_problem.jpeg" alt="scrolling_problem.jpeg" />
 </p>
 </div>
 </div>
 </div>
-<div id="outline-container-orgd7232d4" class="outline-3">
-<h3 id="orgd7232d4"><a href="https://www.linkedin.com/posts/tylerjburns_i-recently-hit-a-milestone-in-my-personal-activity-7152694472559017985-6KFn?utm_source=share&amp;utm_medium=member_desktop">Recap after writing 1 million words in my journal over 15 years, parsing it with AI</a></h3>
-<div class="outline-text-3" id="text-orgd7232d4">
+<div id="outline-container-org91d489f" class="outline-3">
+<h3 id="org91d489f"><a href="https://www.linkedin.com/posts/tylerjburns_i-recently-hit-a-milestone-in-my-personal-activity-7152694472559017985-6KFn?utm_source=share&amp;utm_medium=member_desktop">Recap after writing 1 million words in my journal over 15 years, parsing it with AI</a></h3>
+<div class="outline-text-3" id="text-org91d489f">
 <p>
 I recently hit a milestone in my personal journal: one million words over 15 years. To review it all, I embedded each paragraph into what I call "thought space."
 </p>
@@ -979,15 +979,15 @@ The write-up can be found here: <a href="https://lnkd.in/dFuq8wYY">https://lnkd.
 </p>
 
 
-<div id="orga285525" class="figure">
+<div id="orgfebba6a" class="figure">
 <p><img src="images/one_million_words.jpeg" alt="one_million_words.jpeg" />
 </p>
 </div>
 </div>
 </div>
-<div id="outline-container-org05bc619" class="outline-3">
-<h3 id="org05bc619"><a href="https://www.linkedin.com/posts/tylerjburns_the-retweet-to-like-ratio-matters-for-getting-activity-7039541884293128192-xFuf?utm_source=share&amp;utm_medium=member_desktop">Retweet to like ratio of single-cell sequencing tweets</a></h3>
-<div class="outline-text-3" id="text-org05bc619">
+<div id="outline-container-org80f9a6c" class="outline-3">
+<h3 id="org80f9a6c"><a href="https://www.linkedin.com/posts/tylerjburns_the-retweet-to-like-ratio-matters-for-getting-activity-7039541884293128192-xFuf?utm_source=share&amp;utm_medium=member_desktop">Retweet to like ratio of single-cell sequencing tweets</a></h3>
+<div class="outline-text-3" id="text-org80f9a6c">
 <p>
 The retweet-to-like ratio matters for getting value out of twitter for your niche, to the point where you might be able to draw manual gates on the likes x retweets biaxials. For single-cell sequencing related tweets, I find three regions:
 </p>
@@ -1015,15 +1015,15 @@ If you want to see and look at the tweets in the biaxial yourself (the tweet sho
 </p>
 
 
-<div id="orgac8f8f8" class="figure">
+<div id="org65fc91c" class="figure">
 <p><img src="images/retweet_to_like.jpeg" alt="retweet_to_like.jpeg" />
 </p>
 </div>
 </div>
 </div>
-<div id="outline-container-org3b85746" class="outline-3">
-<h3 id="org3b85746"><a href="https://www.linkedin.com/posts/tylerjburns_my-scrolling-problem-and-how-i-fixed-it-activity-7084166939647848451-uU5w?utm_source=share&amp;utm_medium=member_desktop">On my TEDx Basel talk</a></h3>
-<div class="outline-text-3" id="text-org3b85746">
+<div id="outline-container-org5b434a5" class="outline-3">
+<h3 id="org5b434a5"><a href="https://www.linkedin.com/posts/tylerjburns_my-scrolling-problem-and-how-i-fixed-it-activity-7084166939647848451-uU5w?utm_source=share&amp;utm_medium=member_desktop">On my TEDx Basel talk</a></h3>
+<div class="outline-text-3" id="text-org5b434a5">
 <p>
 My TEDx Basel talk is now out! Here are a few key takeaways:
 </p>
@@ -1055,14 +1055,14 @@ I'll link the projects I talk about in the comments.
 </div>
 </div>
 </div>
-<div id="outline-container-org38b2e14" class="outline-2">
-<h2 id="org38b2e14">Other</h2>
-<div class="outline-text-2" id="text-org38b2e14">
+<div id="outline-container-org3b70ee9" class="outline-2">
+<h2 id="org3b70ee9">Other</h2>
+<div class="outline-text-2" id="text-org3b70ee9">
 <a href="#top">Back to top</a>
 </div>
-<div id="outline-container-orga01f5ae" class="outline-3">
-<h3 id="orga01f5ae"><a href="https://www.linkedin.com/posts/tylerjburns_the-following-is-for-my-friends-from-academia-activity-7160684719934779392-n26f?utm_source=share&amp;utm_medium=member_desktop">Three pointers for doing self employed consulting in the life sciences</a></h3>
-<div class="outline-text-3" id="text-orga01f5ae">
+<div id="outline-container-orgfeb8a82" class="outline-3">
+<h3 id="orgfeb8a82"><a href="https://www.linkedin.com/posts/tylerjburns_the-following-is-for-my-friends-from-academia-activity-7160684719934779392-n26f?utm_source=share&amp;utm_medium=member_desktop">Three pointers for doing self employed consulting in the life sciences</a></h3>
+<div class="outline-text-3" id="text-orgfeb8a82">
 <p>
 The following is for my friends from academia who are in a tough work and/or financial situation. I was living on the paycheck at the end of grad school (2016), when I started doing bioinformatics consulting on the side. This got me out of my financial woes. I kept this up after graduation until I transitioned to full-time self-employed consulting starting in 2018. I haven't stopped, and you can do it too. Here are three things that have kept me in business the past several years.
 </p>
@@ -1091,7 +1091,7 @@ I don't expect three bullet points on a LinkedIn post to lead to my friends sudd
 </p>
 
 
-<div id="orgf574aad" class="figure">
+<div id="org2c7c801" class="figure">
 <p><img src="images/self_employed.jpeg" alt="self_employed.jpeg" />
 </p>
 </div>
