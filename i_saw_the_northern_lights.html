@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>I saw the northern lights</title>
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" href="simple.css" />
+<style>
+  .dark-mode {
+    --bg: #212121;
+    --accent-bg: #2b2b2b;
+    --text: #dcdcdc;
+    --text-light: #ababab;
+    --accent: #ffb300;
+    /*--code: #f06292;*/
+    --preformatted: #ccc;
+    --disabled: #111;
+  }
+  .dark-mode img,
+  .dark-mode video {
+    opacity: 0.8;
+  }
+  .toggle-theme-btn {
+      transform: scale(0.7);
+      opacity: 0.4;
+      transition: opacity 0.2s;
+    }
+    .toggle-theme-btn:hover {
+      opacity: 0.4;
+    }
+</style>
+<script>
+ function toggleDarkMode() {
+    const body = document.body;
+    body.classList.toggle("dark-mode");
+    // Save the user's theme preference to localStorage
+    if (body.classList.contains("dark-mode")) {
+      localStorage.setItem("theme", "dark");
+    } else {
+      localStorage.setItem("theme", "light");
+    }
+  }
+
+  function setDefaultDarkMode() {
+    // Retrieve the user's theme preference from localStorage
+    const storedTheme = localStorage.getItem("theme");
+
+    // If the stored theme is light, do nothing; otherwise, set it to dark
+    if (storedTheme !== "light") {
+      document.body.classList.add("dark-mode");
+    }
+  }
+
+  // Set the default mode to dark when the DOM is fully loaded
+  document.addEventListener('DOMContentLoaded', setDefaultDarkMode);
+</script>
+</head>
+<body>
+<div id="preamble" class="status">
+<div style="position: fixed; top: 10px; right: 10px;">
+         <button class="toggle-theme-btn" onclick="toggleDarkMode()">Light/Dark</button>
+       </div>
+</div>
+<div id="content" class="content">
+<h1 class="title">I saw the northern lights</h1>
+<p>
+At the time of writing <span class="timestamp-wrapper"><span class="timestamp">[2024-05-24 Fri] </span></span> people are talking about the northern lights a bit more than usual due to a geomagnetic storm that took place recently, on May 10, 2024. It was the strongest at least since one that hit in 2003, where I remember seeing a reddish glow near the northern horizon one evening, but it was difficult to tell whether that was it, or the city lights. So I never counted that is having legit seen the northern lights.
+</p>
+
+<p>
+During the recent storm, I actually didn't see them. I remember looking up at the sky coming back from a barbecue late in the evening, but if they were visible from Berlin (which they were), the light pollution was a bit too much for us to see them clearly. So this isn't an article about seeing the northern lights during the recent geomagnetic storm. It's actually about seeing them in 2019 in Iceland.
+</p>
+
+<p>
+My wife and I wanted to see the northern lights, so we booked a trip to Reykjavik, a four hour flight from Berlin. At the time there was an airline called WOW Air that offered really good service for its price (which is perhaps one reason why they went bankrupt). Anyway, we were advised that if we really wanted to see the aurora, we should get outside of town. Even tiny little Reykjavik had light pollution. So we booked a "nortern lights shuttle" that took us way outside of town into the hills, to a particularly dark spot where we would see what we see. I used to think that the auroras  would always be there, visible from anywhere in the Arctic, every night. It turns out that they're very hit or miss. We got lucky in that when we got on that shuttle, they "turned on" and were already visible from the windows, something that the tour guides said rarely happens. So we were in for a treat.
+</p>
+
+<p>
+We got out of the shuttle and looked up. I'll never forget what I saw. What the pictures don't fully capture is just how dynamic they are. A patch of aurora will just show up out of the blue, in a few seconds. Then it will move around and change shape. Sometimes it's a little independent patch. Sometimes it's a big long band. Mainly they are green. Sometimes they are other colors. We saw a little bit of red here and there. They are not as dramatic as the long exposure images show, but they are still pretty gosh darn dramatic compared to looking at the darkness of a normal night sky, especially from a major city like Berlin. We had the northern lights and a gajillion stars behind it that I otherwise would never see. So yes, I saw the northern lights. But that's not the point of this article.
+</p>
+
+<p>
+The point of this article is everybody else. The northern lights shuttle had about 50 people in it. My wife and I spent the evening staring at the northern lights. Sometimes they were sparse. Sometimes they would be all over the place. During the transitions from sparse to all-over-the-place, we would look up, say "whoaaa," talk about deep stuff&#x2026;you know, the usual. But during these transition moments you'd hear something else. The loud sound of rustling, metal hitting metal, adjusting, and so forth. The remaining people all had expensive cameras and tripods and all of that. And they were there to take photos and pose with the aurora in the background. They were all looking through their cameras, posing in different places, adjusting their camers, all of that, and then would take a break soon as the northern lights dimmed.
+</p>
+
+<p>
+In essense, my wife and I actually saw the northern lights that night. Nobody else did. Everyone else saw them enhanced through their cameras. We enjoyed the aurora dancing above us. Everyone else was working like it was their job. We stared at the dancing pathches of charged particles as they changed shape, moved around, appeared and disappeared. Everyone else stared at their cameras. I can still see the images in my head. We were able to deeply contemplate what was before us. We took the whole scene in. The sight to behold. The freezing arctic cold biting through my Berlin winter clothes. The mountanous landscape around us dimly illuminated by the lights. Sharing that moment with my wife. None of this can be captured in a photo.
+</p>
+
+<p>
+So no&#x2026;I don't have a social media photo of me and my wife with the northern lights behind us. I don't have a timelapse video of the whole thing. But I can talk with my wife about it for days. Because we took the whole thing in without any sort of end goal of having likes on social media or whatever. And I have zero regrets. Because unlike everyone else who came with us, we saw the northern lights.
+</p>
+</div>
+<div id="postamble" class="status">
+<p class="date">Date: May 24, 2024 - May 24, 2024</p>
+<p class="creator"><a href="https://www.gnu.org/software/emacs/">Emacs</a> 28.1 (<a href="https://orgmode.org">Org</a> mode 9.5.2)</p>
+</div>
+</body>
+</html>
