@@ -83,6 +83,22 @@ If you want a more in-depth look at this KNN-based solution and things you can d
 [[file:images/knn_two_conditions.jpeg]]
 * UMAP and t-SNE manipulation animations
 #+HTML: <a href="#top">Back to top</a>
+** [[https://www.linkedin.com/posts/tylerjburns_in-reviewing-the-recent-seeing-data-as-t-sne-activity-7201194319930675201-YFrF?utm_source=share&utm_medium=member_desktop][t-SNE and UMAP exist on a spectrum]]
+In reviewing the recent "Seeing data as t-SNE and UMAP do" paper, I found out that t-SNE and UMAP are on a spectrum. Let me explain:
+
+The Berens Lab at Univesity of Tübingen, Germany developed a method called Contrastive Neighbor Embeddings (link in comments) that generalizes nonlinear dimensionality reduction algorithms on a spectrum between more local preservation (t-SNE like) to more global preservation (UMAP like).
+
+Thus, rather than running t-SNE or UMAP, and so on, one can sample embeddings from the whole spectrum, which can be obtained by adjusting a particular tuning parameter. Accordingly, users can look at a handful of images across the spectrum and choose the right one.
+
+The gif attached to this post is the flagship Samusik mouse bone marrow CyTOF dataset (technically Nikolay Samusik's analysis of Matt Spitzer's data) from the X-shift paper, that I ran through the t-SNE to UMAP spectrum tool.
+
+While I have spent a lot of time focused on analyzing the preservation of local structure (the KNN preservation work you've seen from me), getting a feel for the global preservation is important, too, especially in datasets like this one where there are developmental trajectories.
+
+In my experience, and also reported by the Berens Lab, there is a tradeoff between local and global preservation for these types of embeddings (KNN graph based), which makes it all the more important to have the whole spectrum in front of you.
+
+I provide the code (in the comments) to make these images and gifs, and I encourage everyone to use this tool as well, rather than simply choosing t-SNE or UMAP or whatever is trendy and sticking with it. The more of the spectrum you see, the better intuition you'll get around the data.
+
+#+HTML: <img src="images/spectrum_animation_-1.3_1.7.gif"/>
 ** [[https://www.linkedin.com/posts/tylerjburns_as-requested-here-are-100-t-sne-runs-in-activity-7029475365689380864-GZvE?utm_source=share&utm_medium=member_desktop][Gif of running t-SNE over and over, ordered by image similarity]]
 As requested, here are 100 t-SNE runs in a row for CyTOF data ordered by image similarity. Notice that there are pockets of stability in the island placement. It's not completely random, as it appeared in the previous post. I would not have realized this had I not done this extra ordering step.
 
