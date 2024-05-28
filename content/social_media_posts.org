@@ -1,6 +1,6 @@
 #+Title: Social media posts
 #+Author: Tyler Burns
-#+Date: May 17, 2024 - May 17, 2024
+#+Date: May 17, 2024 - May 28, 2024
 #+HTML: <div id="top"></div>
 
 [[./index.org][Home]]
@@ -15,6 +15,7 @@ Dr. Seuss, [[https://en.wikipedia.org/wiki/Horton_Hatches_the_Egg][/Horton Hatch
 
 * KNN sleepwalk and related
 #+HTML: <a href="#top">Back to top</a>
+A lot of my social media content has revolved around a tool I build called KNN sleepwalk, which allows you to look at the difference between K-nearest neighbors (KNN) of a given data point in the embedding space versus the original high-dimensional space. This kind of intuition is important especially in high-dimensional flow/CyTOF data, where there is sometimes temptation to gate directly on the embedding itself. These posts show you that one should exercise caution when doing such a thing. You can use the method [[https://github.com/tjburns08/KnnSleepwalk][here]].
 ** [[https://www.linkedin.com/posts/tylerjburns_do-you-need-quick-and-easy-intuition-around-activity-6998611378068430848-BSrt?utm_source=share&utm_medium=member_desktop][Original KNN sleepwalk reveal]]
 
 Do you need quick and easy intuition around how exact your single-cell embeddings are? Check out knn_sleepwalk, a wrapper I wrote around the sleepwalk R package. Hover the cursor over any cell in your embedding, and it will show you the cell's k-nearest neighbors computed from the original feature space (as opposed to the embedding space). Below is a UMAP of 10,000 cells in CyTOF data with a k of 100. Note that the neighbors are not always nearby. Be careful if you want to gate/cluster on the embedding! https://lnkd.in/eeqRBdSn
@@ -83,6 +84,7 @@ If you want a more in-depth look at this KNN-based solution and things you can d
 [[file:images/knn_two_conditions.jpeg]]
 * UMAP and t-SNE manipulation animations
 #+HTML: <a href="#top">Back to top</a>
+Here, I ask various questions around the nature of t-SNE and UMAP, which are often well answered by manipulating the input and examining the output.
 ** [[https://www.linkedin.com/posts/tylerjburns_in-reviewing-the-recent-seeing-data-as-t-sne-activity-7201194319930675201-YFrF?utm_source=share&utm_medium=member_desktop][t-SNE and UMAP exist on a spectrum]]
 In reviewing the recent "Seeing data as t-SNE and UMAP do" paper, I found out that t-SNE and UMAP are on a spectrum. Let me explain:
 
@@ -131,6 +133,7 @@ A relevant interrogation of dimension reduction with lots of pictures here: http
 #+HTML: <img src="images/umap_add_noise.gif"/>
 * Teaching and learning bioinformatics
 #+HTML: <a href="#top">Back to top</a>
+Some of my work involves teaching bioinformatics, especially to biologists who are currently learning. I am good at this in particular because I started out as a biologist and learned bioinformatics later in life. The posts here are reflections and insights in this direction.
 ** [[https://www.linkedin.com/posts/tylerjburns_here-is-a-post-i-wrote-for-biologists-and-activity-7090282332749717504-XTkW?utm_source=share&utm_medium=member_desktop][How I went from biologist to biology-leveraged bioinformatician]]
 Here is a post I wrote for biologists and team leaders about my journey from wet-lab biologist to biology-leveraged bioinformatician. In short, I think you can do it too, and if you're working in the life sciences, you SHOULD do it too. You can quickly get to a level where you can understand and communicate effectively with your comp bio team, something that is essential for any project that contains any -omics data. To summarize:
 
@@ -222,6 +225,7 @@ If you know anyone who could use this post or my teaching/advice, please share i
 [[file:images/have_done_teach.jpeg]]
 * Journal club
 #+HTML: <a href="#top">Back to top</a>
+Sometimes I read papers and like to talk about them.
 ** [[https://www.linkedin.com/posts/tylerjburns_single-cell-protein-data-can-take-many-forms-activity-7166098906634829824-3aSF?utm_source=share&utm_medium=member_desktop][Data integration using CyCombine]]
 Single-cell protein data can take many forms: flow cytometry (spectral or otherwise), mass cytometry, CITE-seq, or protein-based imaging after cell segmentation. Not to mention the multitude of machines (eg. spectral cytometers from different companies, or CyTOF 2 vs CyTOF XT). It is inevitable that there will be a need and efforts to integrate these datasets across modalities to derive actionable insights.
 
@@ -266,6 +270,7 @@ I'll acknowledge that there are differences between the fields that may impact w
 [[file:images/single_cell_best_practices.jpeg]]
 * General data analysis
 #+HTML: <a href="#top">Back to top</a>
+The data analysis related posts that I otherwise could not categorize.
 ** [[https://www.linkedin.com/posts/tylerjburns_when-you-cluster-your-single-cell-data-do-activity-7198660249229127682-sWlv?utm_source=share&utm_medium=member_desktop][Cluster stability visualization]]
 When you cluster your single-cell data, do you run it multiple times to check for consistency? You should. This is part of an important topic called cluster stability. Let me explain.
 
@@ -342,6 +347,7 @@ Automated gating (autogating) has been a topic of discussion for many years, but
 
 * Bibliometrics
 #+HTML: <a href="#top">Back to top</a>
+Trends in the literature. There is a lot going on here, and very few people actually studying this. Given the [[https://gwern.net/replication][replication crises]] that are emerging in various fields, it is probably a good idea that more people pay attention to analyzing the literature itself in the single-cell field.
 ** [[https://www.linkedin.com/posts/tylerjburns_if-we-put-2008-as-the-first-cytof-paper-activity-7041804065097281537-nkIM?utm_source=share&utm_medium=member_desktop][IMC vs CyTOF publication rates: surprised IMC is taking off so fast]]
 If we put 2008 as the first CyTOF paper (from Scott Tanner, before Garry Nolan), CyTOF hit 100 publications in 2017, or 9 years. If we put 2014 as the first Imaging Mass Cytometry (IMC) paper, then IMC reached 100 publications in 2022, or 8 years.
 
@@ -372,6 +378,7 @@ Skepticism: At the beginning of grad school, we would read old seminal papers in
 In short, this is a complicated problem space, with a lot hinging on it. But I hope the three things above serve as a good starting point.
 * Word embeddings and social media scraping
 #+HTML: <a href="#top">Back to top</a>
+Branching from my work on t-SNE and UMAP is treating anything from single words to whole paragraphs as spatial coordinates. It's the side of large language models that is less often talked about at the time of writing [2024-05-28 Tue]. Anyway, from the spatial representations of various things, from tweets to sentences in journal entries, you can do some interesting analysis. I'll note that a lot of my work here has been cut short because it is getting harder to scrape social media now.
 ** [[https://www.linkedin.com/posts/tylerjburns_ever-wonder-what-regions-of-news-space-activity-7051174977668042752-G0lC?utm_source=share&utm_medium=member_desktop][Spatial embedding of CNN vs FoxNews vs AP using BERT, viewing on UMAP]]
 Ever wonder what regions of "news space" are more CNN-heavy or more FoxNews-heavy? It turns out that you can get at this by using large language models to convert news article titles into spatial coordinates. I did this for a mix of CNN, Fox, and AP news articles from their respective twitter handles, but you do this analysis for any source.
 
@@ -433,6 +440,7 @@ The video is here: https://lnkd.in/eFPgrJ2V
 I'll link the projects I talk about in the comments.
 * Other
 #+HTML: <a href="#top">Back to top</a>
+Anything else I could not categorize.
 ** [[https://www.linkedin.com/posts/tylerjburns_the-following-is-for-my-friends-from-academia-activity-7160684719934779392-n26f?utm_source=share&utm_medium=member_desktop][Three pointers for doing self employed consulting in the life sciences]]
 The following is for my friends from academia who are in a tough work and/or financial situation. I was living on the paycheck at the end of grad school (2016), when I started doing bioinformatics consulting on the side. This got me out of my financial woes. I kept this up after graduation until I transitioned to full-time self-employed consulting starting in 2018. I haven't stopped, and you can do it too. Here are three things that have kept me in business the past several years.
 
