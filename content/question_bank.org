@@ -1,6 +1,6 @@
 #+Title: Question bank
 #+Author: Tyler Burns
-#+Date: May 25, 2024 - May 25, 2024
+#+Date: May 25, 2024 - May 31, 2024
 
 [[./index.html][Home]]
 
@@ -136,24 +136,42 @@ These are more interview questions than self-questions. But you can see that the
 - In the past five years, what have you become better at saying no to (distractions, invitations, etc)? What new realizations and/or approaches have helped? Any other tips?
 - When you feel overwhelmed or unfocused, or have lost your focus temporarily, what do you do? What questions do you ask yourself?
 
-* Lists of unsolved problems in different domains
+* Lists of questions in different domains
 #+HTML: <a href="#top">Back to top</a>
-One of the great corners of Wikipedia. Way too many questions to copy over and list here, so I'll list the ones that are on my mind from each section. My commentary and questions not on these lists but relevant to the domain are otherwise noted.
+The links are to Wikipedia lists of unsolved problems for the given domain. Way too many questions to copy over and list here, so I'll list the ones that are on my mind from each section. My commentary is indeicated, and my questions relevant to the given topic are listed below a line separator.
 
 ** [[https://en.wikipedia.org/wiki/List_of_unsolved_problems_in_biology][Biology]]
 - Exactly how, where and when did life on Earth originate? How does life arise from the nonliving?
 - Exactly how and when did viruses originate?
 - Why does biological ageing occur? Is it inevitable?
-- Does life exist on other planets? These could be anything from microbes to intelligent life. Are the dark spots on Venus microbes? Is non-carbon based life possible (eg. on Titan)? Are there places to find life that we are blatently missing due to our built-in assumptions (eg. life arising from cellular automata-like computation deep inside a gas giant). These questions are not on the list.
+-----
+- Does life exist on other planets (our anywhere outside of Earth)? These could be anything from microbes to intelligent life. Are the dark spots on Venus microbes? Is non-carbon based life possible (eg. on Titan)? Are there places to find life that we are blatently missing due to our built-in assumptions (eg. life arising from cellular automata-like computation deep inside a gas giant). These questions are not on the list.
+- Did life start on Earth or did it come from elsewhere, as per the [[https://en.wikipedia.org/wiki/Panspermia][panspermia hypothesis]]. Elsewhere could be as simple as starting on Venus or Mars and being carried over to Earth.
+- What did the so-called primordial soup look like? What exactly does proto-life look like? What are the intermediate steps between chemical reactions in the open versus being contain in a cell, versus being contained in a self replicating cell?
+- When did viruses emerge? Do viruses (or self-replicating RNA) pre-date life?
+- Can life develop and exist outside of so-called habitable zones?
 ** [[https://en.wikipedia.org/wiki/List_of_unsolved_problems_in_neuroscience][Neuroscience]]
 - What is free will? Is it an illusion? Is there a part of the brain that gives us a sense of free will? (related to but not on the list).
 - How can consciousness be defined? What is its function? Can it exist after death?
+-----
+- Is the activity of the brain computable? In other words, could we build a computer that emulated a whole brain, neuron by neuron?
+- To what extent do quantum effects matter for cognition? There has been research on this, but I've also heard the argument that invoking quantum is a way to mysticy human cognition and make it more "special" than it actually is.
 ** [[https://en.wikipedia.org/wiki/List_of_unsolved_problems_in_physics][Physics]]
 - The diameter of the observable universe is about 93 billion light-years, but what is the size of the whole universe? Is the universe infinite?
 - Why does time have a direction?
 - The values of the fundamental physical constants are in a narrow range necessary to support carbon-based life. Is this because there are an infinite number of other universes with different constants (many worlds interpretation of quantum mechanics), or are our universe's constants the result of chance, or some other factor or process?
+------
+- Can the surface of a black hole perform the computation necessary to produce/simulate a universe? Where in the physical universe is complex computation happening (eg. very large scale cellular automata) that we otherwise might not appreciate right now?
+- Is the universe infinite? If this is the case, then if we look far enough forward we will see the back of our heads. Related: does the universe have curvature?
+- Is faster-than-light travel, or teleportation, or anything that gets us past the universe's speed limit possible? So much of science fiction relies on this.
+- Is the many worlds interpretation of quantum mechanics true? How can we test this? Would there be way to interact with parallel universes? Another common [[https://en.wikipedia.org/wiki/Everything_Everywhere_All_at_Once][science fiction trope]].
 ** [[https://en.wikipedia.org/wiki/List_of_unsolved_problems_in_mathematics][Math]]
-- What is the Turing completeness status of all unique elementary cellular automata? (my commentary) Is there a way we can find out whether a cellular automata is Turing complete without literally building a Turing machine? Are there shortcuts? Is this something AI could help us with? How do we score cellular automata in terms of their complexity? Perhaps there is a spectrum that is more complete than the binary Turing complete or not Turing complete?
+- What is the Turing completeness status of all unique elementary cellular automata?
+-----
+- Is there a way we can find out whether a cellular automata is Turing complete without literally building a Turing machine? Are there shortcuts? Is this something AI could help us with? How do we score cellular automata in terms of their complexity? Perhaps there is a spectrum that is more complete than the binary Turing complete or not Turing complete?
+** Computing
+- Can we develop human level or superhuman intelligence by means of scaling alone? If we keep feeding training examples into a LLM (or something multi-modal) and the architecture was a transformer with minimal bells and whistles, could we get to AGI? This is related to the [[https://gwern.net/scaling-hypothesis][scaling hypotheis]].
+- Is it possible to align AGI with humanity? There are many who think the answer is no, and either AI will kill us directly, or AI intersecting with profit motives and our inner demons will kill us.
 
 * Other
 #+HTML: <a href="#top">Back to top</a>
@@ -212,3 +230,4 @@ I provide attributions and commentary accordingly after the question. They are i
 - It's five years from now and X failed (where X is some sort of endeavor). Why did it fail? This is called pre-mortem, and I first came across it from Tim Ferriss. You can also do this with habits and everyday life as opposed to goals/endeavors. Eg. It's five years from now and I gained 100lb of fat, or I'm in a midlife crisis, and so on. Why? The pattern here is these types of questions are good ways to stimulate constructive self criticism around whatever you're doing right now.
 - For a given future thing, what is it that you fear most? If that thing you fear happens, what is one thing you could do that would make the situation a little better? This is the concept of [[https://tim.blog/2017/05/15/fear-setting/][fear setting]], from Tim Ferriss.
 - What are the limits of the model? Can you use the model to reveal its own limits? This is often said by Daniel Schmachtenberger, with reference to Gödel's Incompleteness Theorems, as well as the first line of the Tao Te Ching (The Tao that can be told is not the eternal Tao). Every model has its limits, and it is important to know what those limits are when you use the model. This can range from a literal model in data analysis (eg. the limits of tools like UMAP, something [[./the_beauty_is_truth_delusion.html][I've talked a lot about]]), to lenses through which you see the world (eg. relating everything to [[./coding_as_philosophical_project.html][computation by analogy]], as people like Joscha Bach masterfully do).
+- What is it about me (the things I can control) that has led to or catalyzed this outcome? From Dr. James Hollis, but can also be thought of as a generalization of pre-mortem.
