@@ -12,8 +12,8 @@ This website is a place where I can openly share my ideas and non-NDA work, rega
 If you have quesitons or comments, or you're interested in working or collaborating with me, just send me a message (see contact info below). I'm always happy to help. 
 * New
 #+HTML: <a href="#top">Back to top</a>
-** [[https://watershed.bio/resources/the-limits-of-dimensionality-reduction-tools-for-single-cell-analysis][Webinar: the limits of dimensionality reduction tools for single-cell analysis]]
-Talk.\\
+** [[https://watershed.bio/resources/the-limits-of-dimensionality-reduction-tools-for-single-cell-analysis][The limits of dimensionality reduction tools for single-cell analysis]]
+Webinar.\\
 
 This webinar is the latest iteration of my "dimensionality reduction interrogation" work, which has spanned six years. In this talk, I show the limits of these tools by looking at the K-nearest neighbors (KNN) of a given cell in the 2-D embedding space, and compare it to the K-nearest neighbors of that same cell in the high-dimensional feature space. I look at the averages across a given dataset for a given method to compare t-SNE, UMAP and PCA. I then color the maps by each cell's KNN preservation to look for patterns across the dataset. While I point out some general trends, I conclude that at least some of this depends on the dataset. Thus, I demo my free [[https://github.com/tjburns08/KnnSleepwalk][KnnSleepwalk]] tool, which allows users to deterine the performance of their t-SNE's and UMAPs for their data accordingly.
 ** [[./question_bank.html][Question Bank]]
@@ -550,8 +550,8 @@ Collection.\\
 Social media is a way for me to get things off my chest that I think are valuable to the world. Oftentimes, I will have an idea, or a piece of software, or a gif, that will give people unique intuition around a perticular topic, for example in bioinformatics. Rather than spending countless hours turning it into a paper or what not, it is easier to just turn it into a social media post. Having done this for a few years now, I have a collection of social media posts. Rather than having to scroll through each of them yourself, I have organized the ones that matter by topic here.
 * Where I was featured
 #+HTML: <a href="#top">Back to top</a>
-** [[https://watershed.bio/resources/the-limits-of-dimensionality-reduction-tools-for-single-cell-analysis][Webinar: the limits of dimensionality reduction tools for single-cell analysis]]
-Talk.\\
+** [[https://watershed.bio/resources/the-limits-of-dimensionality-reduction-tools-for-single-cell-analysis][The limits of dimensionality reduction tools for single-cell analysis]]
+Webinar.\\
 
 This webinar is the latest iteration of my "dimensionality reduction interrogation" work, which has spanned six years. In this talk, I show the limits of these tools by looking at the K-nearest neighbors (KNN) of a given cell in the 2-D embedding space, and compare it to the K-nearest neighbors of that same cell in the high-dimensional feature space. I look at the averages across a given dataset for a given method to compare t-SNE, UMAP and PCA. I then color the maps by each cell's KNN preservation to look for patterns across the dataset. While I point out some general trends, I conclude that at least some of this depends on the dataset. Thus, I demo my free [[https://github.com/tjburns08/KnnSleepwalk][KnnSleepwalk]] tool, which allows users to deterine the performance of their t-SNE's and UMAPs for their data accordingly.
 ** [[https://rseng.github.io/devstories/2023/tyler-burns-part-2/][Developer Stories Podcast: Part 2: Be the flame, not the moth]]
