@@ -12,10 +12,16 @@ This website is a place where I can openly share my ideas and non-NDA work, rega
 If you have quesitons or comments, or you're interested in working or collaborating with me, just send me a message (see contact info below). I'm always happy to help. 
 * New
 #+HTML: <a href="#top">Back to top</a>
+** [[./signal_there.html][There's some signal there]]
+Article.\\
+
+This is an expression I use a lot in casual conversation. In essence, when I come across something that feels like its part of the path forward, but can't fully articulate why, I say "there's some signal there" and then I put it in my back pocket. This essay tells the story of how doing this from my teenage years onwards, has contributed to a lot of my good decisions thus far.
+
 ** [[https://watershed.bio/resources/the-limits-of-dimensionality-reduction-tools-for-single-cell-analysis][The limits of dimensionality reduction tools for single-cell analysis]]
 Webinar.\\
 
 This webinar is the latest iteration of my "dimensionality reduction interrogation" work, which has spanned six years. In this talk, I show the limits of these tools by looking at the K-nearest neighbors (KNN) of a given cell in the 2-D embedding space, and compare it to the K-nearest neighbors of that same cell in the high-dimensional feature space. I look at the averages across a given dataset for a given method to compare t-SNE, UMAP and PCA. I then color the maps by each cell's KNN preservation to look for patterns across the dataset. While I point out some general trends, I conclude that at least some of this depends on the dataset. Thus, I demo my free [[https://github.com/tjburns08/KnnSleepwalk][KnnSleepwalk]] tool, which allows users to deterine the performance of their t-SNE's and UMAPs for their data accordingly.
+
 ** [[./question_bank.html][Question Bank]]
 Collection.\\
 
@@ -349,6 +355,10 @@ Markdown.\\
 You are only as good as the questions you ask yourself and others. My uncle told me that many years ago when I was getting started with my career and it stuck. This has been relevant to me in terms of having and maintaining good friendships, being a good husband, being a good family member, being a good businessman, and when I was in graduate school, being a good scientist, and simply being an interesting person. I have a very large list of questions now that is very overwhelming. So I turned them into an embedding using the BERT language model, turned that into a nearest neighbor graph, and then derived insight from looking at the questions in terms of "communities." 
 * Philosophy and rationality
 #+HTML: <a href="#top">Back to top</a>
+** [[./signal_there.html][There's some signal there]]
+Article.\\
+
+This is an expression I use a lot in casual conversation. In essence, when I come across something that feels like its part of the path forward, but can't fully articulate why, I say "there's some signal there" and then I put it in my back pocket. This essay tells the story of how doing this from my teenage years onwards, has contributed to a lot of my good decisions thus far.
 ** [[./i_saw_the_northern_lights.html][I saw the northern lights]]
 Article.\\
 
