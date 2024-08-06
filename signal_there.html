@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>There's some signal there</title>
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" href="simple.css" />
+<style>
+  .dark-mode {
+    --bg: #212121;
+    --accent-bg: #2b2b2b;
+    --text: #dcdcdc;
+    --text-light: #ababab;
+    --accent: #ffb300;
+    /*--code: #f06292;*/
+    --preformatted: #ccc;
+    --disabled: #111;
+  }
+  .dark-mode img,
+  .dark-mode video {
+    opacity: 0.8;
+  }
+  .toggle-theme-btn {
+      transform: scale(0.7);
+      opacity: 0.4;
+      transition: opacity 0.2s;
+    }
+    .toggle-theme-btn:hover {
+      opacity: 0.4;
+    }
+</style>
+<script>
+ function toggleDarkMode() {
+    const body = document.body;
+    body.classList.toggle("dark-mode");
+    // Save the user's theme preference to localStorage
+    if (body.classList.contains("dark-mode")) {
+      localStorage.setItem("theme", "dark");
+    } else {
+      localStorage.setItem("theme", "light");
+    }
+  }
+
+  function setDefaultDarkMode() {
+    // Retrieve the user's theme preference from localStorage
+    const storedTheme = localStorage.getItem("theme");
+
+    // If the stored theme is light, do nothing; otherwise, set it to dark
+    if (storedTheme !== "light") {
+      document.body.classList.add("dark-mode");
+    }
+  }
+
+  // Set the default mode to dark when the DOM is fully loaded
+  document.addEventListener('DOMContentLoaded', setDefaultDarkMode);
+</script>
+</head>
+<body>
+<div id="preamble" class="status">
+<div style="position: fixed; top: 10px; right: 10px;">
+         <button class="toggle-theme-btn" onclick="toggleDarkMode()">Light/Dark</button>
+       </div>
+</div>
+<div id="content" class="content">
+<h1 class="title">There's some signal there</h1>
+<hr />
+<p>
+<i>Passersby may stop for music and good food,</i><br />
+<i>But a description of the Tao</i><br />
+<i>Seems without substance or flavor.</i><br />
+<i>It cannot be seen, it cannot be heard,</i><br />
+<i>And yet it cannot be exhausted.</i><br />
+</p>
+
+<p>
+Lao Tzu, <i><a href="https://terebess.hu/english/tao/gia.html#Kap35">Tao Te Ching</a></i>, Gia-Fu Feng and Jane English translation<br />
+</p>
+<hr />
+
+<p>
+The title of this essay is an expression that I use in casual conversation all the time, but I have still not written down or seen it written down anywhere. So that means it's time to get this into public record.
+</p>
+
+<p>
+One night when I was around 16 years old, I was going down internet rabbit holes. At some point, I came across <a href="https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life">Conway's Game of Life</a>. This is a so-called cellular automata, where simple rules played out on a grid can give rise to emergent complex patterns. Furthermore, this particular cellular automata was Turing complete, which means that anything any computer could do could be implemented in Conway's Game of Life (eg. by turning the emergent complex patterns into <a href="./logic_gates.html">logic gates</a> and so forth). I am not sure why I was so drawn to it, and I did not have the computer science background to fully understand what I was looking at.
+</p>
+
+<p>
+But I knew there was some signal there, so I kept it in my back pocket.
+</p>
+
+<p>
+I ended up majoring in biology in undergrad, and going the route of biology PhD. This would entail me spending long hours in a <a href="./how_to_solve_problems.html">research laboratory</a> conducting experiments. However, the biology datasets were getting bigger at the start of grad school, so I took a genomics class to get a feel for how to analyze things that went beyond what excel could do. There, I encountered computer programming, which I knew next to nothing about. The bioinformatics instructor showed us a computer program (in perl) that would do something fairly simple. He showed us the code and then he ran it. And I got the same feeling that I had that one night when I was 16 looking at Conway's Game of Life.
+</p>
+
+<p>
+Despite this class being very stressful (too much too fast), there was some signal there, so I kept it in my back pocket.
+</p>
+
+<p>
+A few years later, after I had some momentum going for my project, I decided to take <a href="https://www.youtube.com/watch?v=KkMDCCdjyW8&amp;list=PL84A56BC7F4A1F852">CS106A</a>, the intro computer science class with the undergrads, at the age of 28. By the time I got to the third problem set, designing Atari Breakout using a java graphics library, I knew that even though there was no direct connection to my wet lab work, I had to keep going. I didn't know if this would do anything for my thesis (it did), and I still wondered if I was even smart enough for this line of work.
+</p>
+
+<p>
+But there was some signal there, so I kept going, evenings and weekends, taking class after class.
+</p>
+
+<p>
+It was around this time that I learned about this thing called "consulting." It was basically a catch-all word for any sort of non-employment work where the consultant was an expert at something that the client was either not an expert in or didn't have time to do the thing. One of my former TAs was working as a management consultant, and I talked to him about it. My aunt was a consultant, so I talked to her about it. There were a few people in my thesis lab who were doing consulting here and there for biotech companies interested in some of the tech coming out of the lab. So I did a few projects with the Stanford Healthcare Consulting Group, to get my feet wet.
+</p>
+
+<p>
+I wasn't sure if I wanted to be a consultant after grad school, but there was some signal there, so I kept these ideas and experiences in my back pocket.
+</p>
+
+<p>
+Toward the end of grad school, the so-called cost of living crisis was really starting to show itself, and I was running out of money. And from all my experiences up to this point, and from a pivotal conversation I had with my uncle (a professor) and my aunt (the aforementioned consultant), when the opportunity came up to do bioinformatics consulting for a company that had come out of my thesis lab, I jumped on it.
+</p>
+
+<p>
+Between the experience as a healthcare consultant, and the trajectory from Conway's Game of Life to CS classes with the undergrads, there was signal there that was too strong to ignore.
+</p>
+
+<p>
+This led to a chain of events, that led me to run a life sciences consulting company out of Berlin, Germany. I'm not a gajillionaire, but I have crafted the lifestyle that I want (call it time wealth), and I am doing meaningful work for myself on my terms. Yes of course there was a bit of luck involved, but a lot of where I am right now I can attribute to keeping stock of where I am able to see signal amidst all of the noise, and trusting that every bit of signal I pick up will matter eventually.
+</p>
+
+<p>
+What do I define as signal? This is something that feels right at a deep level, even if I can't fully articulate why just yet. When I say deep, I'm not talking about the signal I see when I come across an ice cream shop on a hot summer day. I'm talking about the kind of signal that sits with you for years if not decades before you fully realize what it is. The kind of signal that comes when you read a passage or poem or hear a song that toally resonates with you and you don't know why.
+</p>
+
+<p>
+So then what do you do with this?
+</p>
+
+<p>
+I would say that whenever you come across something that feels profoundly right, something that feels like it is part of <a href="./purpose_driven_vs_purposeless">the way</a> forward, but you can't quite articulate why, simply take note of it. Say "there's some signal there" and put it in your back pocket, and then wait a year or ten. You'll know what that is eventually, and you'll be happy you were paying attention.
+</p>
+</div>
+<div id="postamble" class="status">
+<p class="date">Date: August 6, 2024 - August 6, 2024</p>
+<p class="creator"><a href="https://www.gnu.org/software/emacs/">Emacs</a> 28.1 (<a href="https://orgmode.org">Org</a> mode 9.5.2)</p>
+</div>
+</body>
+</html>
