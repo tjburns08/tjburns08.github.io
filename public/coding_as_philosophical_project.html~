@@ -88,9 +88,9 @@ Richard Hamming, <i><a href="https://safari.ethz.ch/digitaltechnik/spring2019/li
 </p>
 <hr />
 
-<div id="outline-container-org778e859" class="outline-2">
-<h2 id="org778e859">Computer science improved my thinking and my focus</h2>
-<div class="outline-text-2" id="text-org778e859">
+<div id="outline-container-org422a131" class="outline-2">
+<h2 id="org422a131">Computer science improved my thinking and my focus</h2>
+<div class="outline-text-2" id="text-org422a131">
 <p>
 I have always been intellectually minded and curious. But one challenge I faced was that I was a classic <a href="https://www.youtube.com/watch?v=U35T-KzfeLk">ADHD kid</a>, who went the path of refusing to take medication. I was easily distracted, and often had racing thoughts that were all over the place. When I found computer science in my late 20s, I discovered that the act of coding had a calming effect on my brain. I could focus <a href="./tao_of_problem_solving.html">on one thing for several hours</a>. Furthermore, when I applied the computational lens to the rest of my life, that calming effect would remain. I attribute computer science to a good chunk of my success at the end of grad school, and my years after graduation, which involved starting a business that I still run at the time of writing.
 </p>
@@ -101,9 +101,9 @@ In short, aside from the practical skills that computer science gave me, compute
 </div>
 </div>
 
-<div id="outline-container-orge16f8c8" class="outline-2">
-<h2 id="orge16f8c8">Coding involves the scientific method, done really fast</h2>
-<div class="outline-text-2" id="text-orge16f8c8">
+<div id="outline-container-org0d0107c" class="outline-2">
+<h2 id="org0d0107c">Coding involves the scientific method, done really fast</h2>
+<div class="outline-text-2" id="text-org0d0107c">
 <p>
 We all learned the scientific method in school.<br />
 </p>
@@ -136,16 +136,16 @@ There is a level above that of the rapid-fire experiments improving your ability
 </div>
 </div>
 
-<div id="outline-container-orgda666bf" class="outline-2">
-<h2 id="orgda666bf">Computer science makes explicit important concepts that are hard to put in words</h2>
-<div class="outline-text-2" id="text-orgda666bf">
+<div id="outline-container-org1fac0fd" class="outline-2">
+<h2 id="org1fac0fd">Computer science makes explicit important concepts that are hard to put in words</h2>
+<div class="outline-text-2" id="text-org1fac0fd">
 <p>
 Here, I will give you a flavor of the various concepts that I came across when learning how to code that I had seen or known before in some form, but not in a way that was as clearly stated as it was through code. In other words, computer science game me a language through which I could reason about concepts that would otherwise be difficult to talk about. The examples below are by no means exhaustive. They are just meant to show you things that I came across in my journey that I found to be somewhere between really cool and really relevant to the types of things I'm working on.
 </p>
 </div>
-<div id="outline-container-org9d57e4b" class="outline-3">
-<h3 id="org9d57e4b">Emergence and cellular automata</h3>
-<div class="outline-text-3" id="text-org9d57e4b">
+<div id="outline-container-org8a31dde" class="outline-3">
+<h3 id="org8a31dde">Emergence and cellular automata</h3>
+<div class="outline-text-3" id="text-org8a31dde">
 <p>
 The concept of emergent complexity or <a href="https://en.wikipedia.org/wiki/Emergence">emergence</a>, which any biologist or chemist will find to be intutive, can be examined in a raw form with computer science, using (among other things) <a href="https://en.wikipedia.org/wiki/Cellular_automaton">cellular automata</a>. Cellualar automata are models of computation where you take a simple set of rules and run them, which produces emergent complexity. Some cellular automata are more elaborate than others despite having a rule set of similar complexity. Want an example: how about <a href="https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life">Conway's Game of Life</a>. Take a grid. Each square on the grid can either be live or dead. For each square in the grid, follow these rules:
 </p>
@@ -162,7 +162,7 @@ That's it. Run it and you can get <a href="https://www.youtube.com/watch?v=cTZkE
 </p>
 
 
-<div id="orge22ffb8" class="figure">
+<div id="org33f6548" class="figure">
 <p><img src="images/2024-01-20_22-17-35_Screenshot 2024-01-20 at 22.17.16.png" alt="2024-01-20_22-17-35_Screenshot 2024-01-20 at 22.17.16.png" />
 </p>
 </div>
@@ -181,9 +181,9 @@ It wasn't until I was 28 and was learning how to code that I had this feeling ag
 </div>
 </div>
 
-<div id="outline-container-org53e84a2" class="outline-3">
-<h3 id="org53e84a2">Levels of abstraction</h3>
-<div class="outline-text-3" id="text-org53e84a2">
+<div id="outline-container-orga951fc4" class="outline-3">
+<h3 id="orga951fc4">Levels of abstraction</h3>
+<div class="outline-text-3" id="text-orga951fc4">
 <hr />
 <p>
 <i>Email is a wonderful thing for people whose role in life is to be on top of things. But not for me; my role is to be on the bottom of things.</i>
@@ -299,9 +299,9 @@ What do I mean by that? If I run into a bug in python or R, the issue could very
 </p>
 </div>
 </div>
-<div id="outline-container-org15f3790" class="outline-3">
-<h3 id="org15f3790">Hacking</h3>
-<div class="outline-text-3" id="text-org15f3790">
+<div id="outline-container-org5f8137f" class="outline-3">
+<h3 id="org5f8137f">Hacking</h3>
+<div class="outline-text-3" id="text-org5f8137f">
 <p>
 Given our discussion on levels of abstraction, quite a lot of so-called hacking (both security hacking and innovation) works by means of understanding things one or more levels underneath what you're doing. A much larger discussion of this can be found from this amazing <a href="https://gwern.net/unseeing">article</a> written by Gwern that I've read many times (and have since <a href="./on_hacking.html">written about</a>). But let me paste the punchline, as food for thought:
 </p>
@@ -340,9 +340,9 @@ Coding really solidifies this concept and teaches you what it feels like to thin
 </div>
 </div>
 
-<div id="outline-container-org040b9f6" class="outline-3">
-<h3 id="org040b9f6">Recursion</h3>
-<div class="outline-text-3" id="text-org040b9f6">
+<div id="outline-container-org35fa448" class="outline-3">
+<h3 id="org35fa448">Recursion</h3>
+<div class="outline-text-3" id="text-org35fa448">
 <p>
 Computer science gives us data structures and algorithms that don't come easy to standard spoken language. One of these concepts is recursion. In recursion, you're defining a function where the function is executed in the function definition. Ok, that's a mouthful. Let's try again. What is recursion?
 </p>
@@ -361,7 +361,7 @@ Still a bit mind-bending if you've never seen this before. If this is new to you
 </p>
 
 
-<div id="org487671c" class="figure">
+<div id="org2fd0b9e" class="figure">
 <p><img src="images/2024-04-28_10-39-27_Screenshot 2024-04-28 at 10.39.24.png" alt="2024-04-28_10-39-27_Screenshot 2024-04-28 at 10.39.24.png" />
 </p>
 </div>
@@ -371,38 +371,37 @@ Want another example? Just do a Google search on recursion, and they give you th
 </p>
 
 
-<div id="orgb85735d" class="figure">
+<div id="org235c1ca" class="figure">
 <p><img src="images/2024-04-28_09-57-37_Screenshot 2024-04-28 at 09.57.33.png" alt="2024-04-28_09-57-37_Screenshot 2024-04-28 at 09.57.33.png" />
 </p>
 </div>
 
 <p>
-But where does this mind bending concept show up in the world? All over the place. One example we have all seen is the concept of <a href="https://en.wikipedia.org/wiki/Fractal">fractals</a>. A lot of fractals involve making a shape, like a line that bifurcates (forms two branches). And then a rule that says at the tip of each branch, bifurcate again. And at the tip of <i>those</i> branches, bifurcate again. So you get something like this image, from the Wikipedia article on "<a href="https://en.wikipedia.org/wiki/Fractal_canopy">fractal canopy</a>":
+But where does this mind bending concept show up in the world? All over the place. One example we have all seen is the concept of <a href="https://en.wikipedia.org/wiki/Fractal">fractals</a>. A lot of fractals involve making a shape, like a line that bifurcates (forms two branches). And then a rule that says at the tip of each branch, bifurcate again. And at the tip of <i>those</i> branches, bifurcate again. So you get something like this image, from the Wikipedia article on "<a href="https://en.wikipedia.org/wiki/Fractal_canopy">fractal canopy</a>" (<a href="https://en.wikipedia.org/wiki/Fractal_canopy#/media/File:Fractal_canopy.svg">image</a> by Claudio Rocchini, licensed under <a href="https://creativecommons.org/licenses/by-sa/3.0/deed.en#ref-appropriate-credit">CC BY-SA 3.0</a>):
 </p>
 
 
-<div id="org58e4715" class="figure">
+<div id="orgc7904c4" class="figure">
 <p><img src="images/2024-04-28_10-02-38_Screenshot 2024-04-28 at 10.02.35.png" alt="2024-04-28_10-02-38_Screenshot 2024-04-28 at 10.02.35.png" />
 </p>
-<p><span class="figure-number">Figure 1: </span>"Fractal canopy" by Claudio Rocchini is licensed under CC BY-SA 3.0</p>
 </div>
 
 <p>
-And where do we see this in the real world? How about snowflakes? One way a snowflake can be modeled is by starting with an equilateral triangle, and then at the center of each line, creating a smaller equilateral triangle. And then at the center of <i>these</i> lines, creating a smaller equilateral triangle. This is called a <a href="https://en.wikipedia.org/wiki/Koch_snowflake">Koch snowflake</a>, and from an image from the linked Wikpedia article on it, you can get a feel for how this works:
+And where do we see this in the real world? How about snowflakes? One way a snowflake can be modeled is by starting with an equilateral triangle, and then at the center of each line, creating a smaller equilateral triangle. And then at the center of <i>these</i> lines, creating a smaller equilateral triangle. This is called a <a href="https://en.wikipedia.org/wiki/Koch_snowflake">Koch snowflake</a>, and from an image from the linked Wikpedia article on it, you can get a feel for how this works (<a href="https://en.wikipedia.org/wiki/Koch_snowflake#/media/File:KochFlake.svg">image</a> by Wxs, licensed under <a href="https://creativecommons.org/licenses/by-sa/3.0/">CC BY-SA 3.0</a>):
 </p>
 
 
-<div id="orgfe58ff8" class="figure">
+<div id="org3127440" class="figure">
 <p><img src="images/2024-04-28_10-09-55_Screenshot 2024-04-28 at 10.09.52.png" alt="2024-04-28_10-09-55_Screenshot 2024-04-28 at 10.09.52.png" />
 </p>
 </div>
 
 <p>
-In biology, there are examples of recursion that show up in the strangest places, like <a href="https://en.wikipedia.org/wiki/Romanesco_broccoli">romanesco broccoli</a>. I saw this for the first time at my college dorm cafeteria my sophomore year, before I knew anything about recursion, and I was transfixed because I knew there was something special going on here that I couldn't quite put into words. Now the concept of recursion allows me to put it into words, just as so much of computational thinking has given words to things I couldn't otherwise make explicit. From the linked Wikipedia article above, here is what I saw in Stanford's Wilbur Hall cafeteria:
+In biology, there are examples of recursion that show up in the strangest places, like <a href="https://en.wikipedia.org/wiki/Romanesco_broccoli">romanesco broccoli</a>. I saw this for the first time at my college dorm cafeteria my sophomore year, before I knew anything about recursion, and I was transfixed because I knew there was something special going on here that I couldn't quite put into words. Now the concept of recursion allows me to put it into words, just as so much of computational thinking has given words to things I couldn't otherwise make explicit. From the linked Wikipedia article above, here is what I saw in Stanford's Wilbur Hall cafeteria (<a href="https://en.wikipedia.org/wiki/Romanesco_broccoli#/media/File:Romanesco_broccoli_(Brassica_oleracea).jpg">image</a> by Ivar Leidus, licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>):
 </p>
 
 
-<div id="orga19c40a" class="figure">
+<div id="org15a2fda" class="figure">
 <p><img src="images/2024-04-28_10-13-19_Screenshot 2024-04-28 at 10.13.17.png" alt="2024-04-28_10-13-19_Screenshot 2024-04-28 at 10.13.17.png" />
 </p>
 </div>
@@ -412,7 +411,7 @@ You can see a pattern, in which at each point, a smaller instance of the same pa
 </p>
 
 <p>
-There's a fantastic book called <a href="https://en.wikipedia.org/wiki/G%C3%B6del,_Escher,_Bach"><i>Gödel, Escher, Bach</i> by Douglas Hofstadter</a>. A key theme in the book is recursion [1]: these functions that talk about themselves. He uses this self reference to explain <a href="https://en.wikipedia.org/wiki/G%C3%B6del%27s_incompleteness_theorems">Gödel's Incompleteness Theorems</a>. This is a rabbit hole worth another article or several, but in a nutshell, he shows that formal systems (eg. math, language) start to break down if you get them to talk about themselves.
+There's a fantastic book called <a href="https://en.wikipedia.org/wiki/G%C3%B6del,_Escher,_Bach">Gödel, Escher, Bach by Douglas Hofstadter</a>. A key theme in the book is recursion [1]: these functions that talk about themselves. He uses this self reference to explain <a href="https://en.wikipedia.org/wiki/G%C3%B6del%27s_incompleteness_theorems">Gödel's Incompleteness Theorems</a>. This is a rabbit hole worth another article or several, but in a nutshell, he shows that formal systems (eg. math, language) start to break down if you get them to talk about themselves.
 </p>
 
 <p>
@@ -442,9 +441,9 @@ If you don't get this stuff right away, don't worry about it. Look at the images
 </div>
 </div>
 
-<div id="outline-container-orgbb4710d" class="outline-3">
-<h3 id="orgbb4710d">Graphs</h3>
-<div class="outline-text-3" id="text-orgbb4710d">
+<div id="outline-container-org24bfca0" class="outline-3">
+<h3 id="org24bfca0">Graphs</h3>
+<div class="outline-text-3" id="text-org24bfca0">
 <p>
 Ok, how about a practical example for biologists. What is a cell signaling pathway? Well, to massively oversimply, you have messages being passed from protein to protein all the way down to the DNA where some sort of effector (eg. a transcription factor) does a thing to the DNA. What if you wanted to model that? How would you do it? Well, in computer science (and discrete math) there is a data structure called a graph that allows for one to wire up a pathway <i>in silico.</i> This is a graph as in a mathematical abstraction of a network, not to be confused with a biaxial plot.
 </p>
@@ -480,11 +479,11 @@ When you start thinking in terms of graphs and using graphs as part of your prob
 </p>
 
 <p>
-As an example of complicated signaling pathways, anyone who studies biochemistry ultimately comes to the realization that we can't wrap our heads around every little intricate detail of cellular metabolism, aside from perhaps the memorization of the high-level pathways like the <a href="https://en.wikipedia.org/wiki/Citric_acid_cycle">Citric Acid Cycle</a> which everyone does in their intro bio classes. But the reality of cellular metabolism looks more this like image below, taken from the Wikipedia article on <a href="https://en.wikipedia.org/wiki/Metabolic_pathway">metabolic pathways</a>:
+As an example of complicated signaling pathways, anyone who studies biochemistry ultimately comes to the realization that we can't wrap our heads around every little intricate detail of cellular metabolism, aside from perhaps the memorization of the high-level pathways like the <a href="https://en.wikipedia.org/wiki/Citric_acid_cycle">Citric Acid Cycle</a> which everyone does in their intro bio classes. But the reality of cellular metabolism looks more this like image below, taken from the Wikipedia article on <a href="https://en.wikipedia.org/wiki/Metabolic_pathway">metabolic pathways</a> (<a href="https://en.wikipedia.org/wiki/File:Metabolic_Metro_Map.svg">image</a> by Chakazul):
 </p>
 
 
-<div id="org27778d0" class="figure">
+<div id="org4dc4ac1" class="figure">
 <p><img src="images/2024-04-28_10-28-44_Screenshot 2024-04-28 at 10.28.41.png" alt="2024-04-28_10-28-44_Screenshot 2024-04-28 at 10.28.41.png" />
 </p>
 </div>
@@ -496,9 +495,9 @@ Note that this is a map not of the pathway, but a map where the nodes are metabo
 </div>
 </div>
 
-<div id="outline-container-orgc733c73" class="outline-2">
-<h2 id="orgc733c73">Putting it all together, exemplified by Joscha Bach</h2>
-<div class="outline-text-2" id="text-orgc733c73">
+<div id="outline-container-orge09a301" class="outline-2">
+<h2 id="orge09a301">Putting it all together, exemplified by Joscha Bach</h2>
+<div class="outline-text-2" id="text-orge09a301">
 <p>
 Here, we will tie a lot of what we've been talking about above together with the concept of computational thinking. This is something that has been previously described by computer science professor Jeanette Wing in a <a href="https://www.cs.cmu.edu/~15110-s13/Wing06-ct.pdf">2006 essay</a> arguing that it should be a core thing that everyone learns (which I agree with).
 </p>
@@ -550,9 +549,9 @@ I listen to Joscha Bach not necessarily because I fully agree with every view he
 </div>
 </div>
 
-<div id="outline-container-org303c755" class="outline-2">
-<h2 id="org303c755">Computational thinking and your latticework of mental models</h2>
-<div class="outline-text-2" id="text-org303c755">
+<div id="outline-container-org9a1dd63" class="outline-2">
+<h2 id="org9a1dd63">Computational thinking and your latticework of mental models</h2>
+<div class="outline-text-2" id="text-org9a1dd63">
 <p>
 Putting it all together, I wanted to zoom out and note that the computational lens is a powerful lens from which you can view the world and solve important problems. But it is one lens of many. One person who understood this deeply was the late Charlie Munger, the right hand man of Warren Buffett. He saw and acted in the world in terms of a latticework of <a href="https://fs.blog/mental-models/">mental models</a>. He would look at a problem through the lens of an ecomonist and see the network of incentives at play, and then through the lens of a biologist and see the natural selection at play, and so on. We note that Munger's success as Buffett's right-hand man (for <a href="https://www.cnbc.com/2023/11/29/munger-and-buffetts-60-year-partnership-we-never-had-an-argument.html">60 years</a>), and the billions of dollars they made accordingly, is a testament to this kind of thinking. Munger <a href="https://fs.blog/charlie-munger-mental-toolbox/">says</a>:
 </p>
