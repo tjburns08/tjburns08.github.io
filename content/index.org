@@ -102,6 +102,9 @@ Markdown.\\
 
 In flow cytometry and CyTOF analysis, we distinguish between "type" and "state" markers, so we can cluster on the former and analyze per-cluster expression changes in the latter. For single-cell RNA sequencing, we cannot make this distinguishment. Thus, we have to rely on data integration algorithms when we are analyzing pre-treatment and post-treatment datasets. I show how this is done, and I show how failure to do so can lead research teams to falsely interpret the data, and make false conclusions. Thus, understanding data integration is critical to keeping research teams on track.
 * Single-cell analysis
+  :PROPERTIES:
+  :CUSTOM_ID: single_cell
+  :END:
 #+HTML: <a href="#top">Back to top</a>
 I started out analyzing CyTOF data, as I did my PhD in the lab of Garry Nolan from 2012-2017, where CyTOF was initially being developed and applied to immunology and cancer bilogy. I later broadened to single-cell sequencing and high-parameter imaging (both proteins and genes). The work below consists primarily of markdowns, with code and explanations that allow users to do things that have helped me a lot in my work, but I don't necessarily have the time to turn into publications.
 ** [[./learn_bioinformatics.html][How I transitioned from biologist to biology-leveraged bioinformatician]]
