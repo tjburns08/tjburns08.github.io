@@ -225,6 +225,29 @@ If you know anyone who could use this post or my teaching/advice, please share i
 * Journal club
 #+HTML: <a href="#top">Back to top</a>
 Sometimes I read papers and like to talk about them.
+** [[https://www.linkedin.com/posts/tylerjburns_for-spatial-transcriptomics-data-cell-segmentation-activity-7234553712344465410-NxRX?utm_source=share&utm_medium=member_desktop][Cell segmentation size matters for spatial transcriptomics]]
+For spatial transcriptomics data, cell segmentation size is critical. I recently read a 2024 preprint from Austin Hartman and Rahul Satija about benchmarking in-situ gene expression profiling methods (eg. 10x Xenium). There's a detail in here I was struck by:
+
+One of the issues with making the comparisons between spatial methods was that the default cell segmentation provided by the authors of the datasets used varied between stringent (only cell boundaries you're sure of, tightly demarcated, small), and not stringent (something of a Voronoi tessellation, with loose and large boundaries). This can be seen in the image below, which comes from Figure 3 (link in comments).
+
+The differences in cell segmentation led to artifacts in gene expression, as measured by what they call the mutually exclusive co-expression rate (MECR). This is where genes that are biologically not expressed together in a cell are nonetheless both expressed. They had to re-segment the cells themselves in order to move forward with the benchmarking.
+
+This means two things. The first is when you're comparing spatial datasets across methods (eg. Xenium vs MERSCOPE), you need to re-segment the cells with the same method and stringency first. The second is that you need to pay close attention to the stringency of cell segmentation when you're doing any sort of spatial analysis, as it has been shown that artifacts can show up in this step.
+
+Do your biological conclusions change if you run the pipeline with loose vs stringent cell segmentation?
+
+The bigger picture is that in bioinformatics (and data analysis at large), the devil is in the details. It's all the little things you have to do to make sure the data are ready for the clustering and whatever else you're going to do.
+
+If you're in leadership, make sure your team is spending sufficient time on the early stages of data analysis (eg. QC, cell segmentation, batch effect finding, data integration). The "headache" steps that seem to delay the insight generation steps. As Marcus Aurelius said, the obstacle is the way.
+
+If you're learning bioinformatics, spend as much time as you can really understanding the raw data. One way to do this is to try to analyze your data outside of any standard package, or take a page from molecular biology and KO (remove) a step in the pipeline and see what happens (eg. what happens to the clustering and UMAP if you don't log or asinh transform the data).
+
+As the datasets and methods get more complicated, these little details will become more important. I hope you all have a great day.
+
+Link to [[https://www.biorxiv.org/content/10.1101/2024.01.11.575135v1][paper]].
+
+file:images/segmentation_size.png
+
 ** [[https://www.linkedin.com/posts/tylerjburns_single-cell-protein-data-can-take-many-forms-activity-7166098906634829824-3aSF?utm_source=share&utm_medium=member_desktop][Data integration using CyCombine]]
 Single-cell protein data can take many forms: flow cytometry (spectral or otherwise), mass cytometry, CITE-seq, or protein-based imaging after cell segmentation. Not to mention the multitude of machines (eg. spectral cytometers from different companies, or CyTOF 2 vs CyTOF XT). It is inevitable that there will be a need and efforts to integrate these datasets across modalities to derive actionable insights.
 
@@ -270,28 +293,16 @@ I'll acknowledge that there are differences between the fields that may impact w
 * General data analysis
 #+HTML: <a href="#top">Back to top</a>
 The data analysis related posts that I otherwise could not categorize.
-** [[https://www.linkedin.com/posts/tylerjburns_for-spatial-transcriptomics-data-cell-segmentation-activity-7234553712344465410-NxRX?utm_source=share&utm_medium=member_desktop][Cell segmentation size matters for spatial transcriptomics]]
-For spatial transcriptomics data, cell segmentation size is critical. I recently read a 2024 preprint from Austin Hartman and Rahul Satija about benchmarking in-situ gene expression profiling methods (eg. 10x Xenium). There's a detail in here I was struck by:
+** [[https://www.linkedin.com/posts/tylerjburns_plenty-of-people-are-talking-about-automation-activity-7242885831139487746-7NxH?utm_source=share&utm_medium=member_desktop][Build automation with user paranoia in mind]]
+Plenty of people are talking about automation as the future of bioinformatics. This is fine, but there is one additional piece that leaders need to be aware of, to produce winning next-gen solutions: the user's paranoia.
 
-One of the issues with making the comparisons between spatial methods was that the default cell segmentation provided by the authors of the datasets used varied between stringent (only cell boundaries you're sure of, tightly demarcated, small), and not stringent (something of a Voronoi tessellation, with loose and large boundaries). This can be seen in the image below, which comes from Figure 3 (link in comments).
+A lot of the bioinformatics work I've done in the last 8 years has involved paranoia management, both for myself and for my clients. In other words, every last little piece of the workflow has checks and visual components to make sure there are no issues with the data and/or the algorithms (and believe me, issues come up). This is especially important when your analysis has any sort of novel component (data, tools used, etc).
 
-The differences in cell segmentation led to artifacts in gene expression, as measured by what they call the mutually exclusive co-expression rate (MECR). This is where genes that are biologically not expressed together in a cell are nonetheless both expressed. They had to re-segment the cells themselves in order to move forward with the benchmarking.
+There appears to be a push toward a "single button solution," be it auto-gating for flow/mass cytometry, or one-and-done cell segmentation in imaging. This is ok, but if you want buy-in from biologists, and especially clinicians (you do the data analysis wrong, bad things happen to sick people), you better have lots of "checks" at every step, both numeric and visual, so we can go through every last little piece of the analysis and look for things that could go wrong.
 
-This means two things. The first is when you're comparing spatial datasets across methods (eg. Xenium vs MERSCOPE), you need to re-segment the cells with the same method and stringency first. The second is that you need to pay close attention to the stringency of cell segmentation when you're doing any sort of spatial analysis, as it has been shown that artifacts can show up in this step.
+So embrace the paranoia of the users, learn about it, and speak to it as you build out the next generation of tools. We will thank you in the end.
 
-Do your biological conclusions change if you run the pipeline with loose vs stringent cell segmentation?
-
-The bigger picture is that in bioinformatics (and data analysis at large), the devil is in the details. It's all the little things you have to do to make sure the data are ready for the clustering and whatever else you're going to do.
-
-If you're in leadership, make sure your team is spending sufficient time on the early stages of data analysis (eg. QC, cell segmentation, batch effect finding, data integration). The "headache" steps that seem to delay the insight generation steps. As Marcus Aurelius said, the obstacle is the way.
-
-If you're learning bioinformatics, spend as much time as you can really understanding the raw data. One way to do this is to try to analyze your data outside of any standard package, or take a page from molecular biology and KO (remove) a step in the pipeline and see what happens (eg. what happens to the clustering and UMAP if you don't log or asinh transform the data).
-
-As the datasets and methods get more complicated, these little details will become more important. I hope you all have a great day.
-
-Link to [[https://www.biorxiv.org/content/10.1101/2024.01.11.575135v1][paper]].
-
-file:images/segmentation_size.png
+[[file:images/bioinformatics_automation_paranoia.jpeg]]
 ** [[https://www.linkedin.com/posts/tylerjburns_when-you-cluster-your-single-cell-data-do-activity-7198660249229127682-sWlv?utm_source=share&utm_medium=member_desktop][Cluster stability visualization]]
 When you cluster your single-cell data, do you run it multiple times to check for consistency? You should. This is part of an important topic called cluster stability. Let me explain.
 
