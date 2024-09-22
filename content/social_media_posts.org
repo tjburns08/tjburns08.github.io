@@ -303,6 +303,19 @@ There appears to be a push toward a "single button solution," be it auto-gating 
 So embrace the paranoia of the users, learn about it, and speak to it as you build out the next generation of tools. We will thank you in the end.
 
 [[file:images/bioinformatics_automation_paranoia.jpeg]]
+*** comment
+I think that the spotlight on paranoia in my post resonates with a broader field, that may become increasingly relevant: explainable AI (XAI).
+
+In section 2.3.1 of a 2024 review by Longo and colleagues (https://www.sciencedirect.com/science/article/pii/S1566253524000794), highlighting the current challenges in XAI, paranoia is a subtext in the following life sciences related passage:
+
+"The inferences produced by AI-based systems, such as Clinical Decision Support Systems, are often used by doctors and clinicians to inform decision-making, communicate diagnoses to patients, and choose treatment decisions. However, it is essential to adequately trust an AI-supported medical decision, as, for example, a wrong diagnosis can significantly impact patients."
+
+(there is some paranoia that comes with getting clinical work right)
+
+"In this regard, understanding AI-supported decisions can help to calibrate trust and reliance. For this reason, many XAI methods such as LIME, SHAP, and Anchors have been applied in Electronic Medical Records, COVID-19 identification, chronic kidney disease, and fungal or bloodstream infections"
+
+(XAI methods serve as a number of visible checks to mitigate paranoia by identifying issues when AI is being used)
+
 ** [[https://www.linkedin.com/posts/tylerjburns_when-you-cluster-your-single-cell-data-do-activity-7198660249229127682-sWlv?utm_source=share&utm_medium=member_desktop][Cluster stability visualization]]
 When you cluster your single-cell data, do you run it multiple times to check for consistency? You should. This is part of an important topic called cluster stability. Let me explain.
 
