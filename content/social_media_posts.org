@@ -1,6 +1,6 @@
 #+Title: Social media posts
 #+Author: Tyler Burns
-#+Date: May 17, 2024 - May 28, 2024
+#+Date: May 17, 2024 - September 22, 2024
 #+HTML: <div id="top"></div>
 
 [[./index.org][Home]]
@@ -486,6 +486,21 @@ I'll link the projects I talk about in the comments.
 * Other
 #+HTML: <a href="#top">Back to top</a>
 Anything else I could not categorize.
+** Panel design for Xenium assays
+In flow/mass cytometry, we spend a lot of time on panel design. It turns out if you're going to run a spatial transcriptomic assay (e.g. Xenium), panel design is critical too. Let me explain...
+
+The following information comes from a trusted colleague who runs a high-volume Xenium core, and has seen a lot. My general interest in this comes from an increase in spatial work (and the pain points therein) that has come my way recently.
+
+As a preliminary step, it helps to have prior annotated scRNA seq analysis on hand. This can inform what genes you select in the Xenium panels. Accordingly, you have to select markers that can confidently distinguish between cell types/clusters.
+
+If you want to do exploratory work, then something like Visium might be a better idea, given that it covers closer to the whole transcriptome. The downside here, of course, is you don't get the single-cell resolution. I've been helping with a project for almost a year involving trying to get "pseudo-cell" info out of each of the spots. In other words, Xenium has its place.
+
+Anyway, the emphasis on panel design might be changing in the near future due to a Xenium 5000-plex assay that recently came out, presumably because enough people were complaining about the low-plex (300-500 genes) that you'd otherwise get from Xenium at default. I am not familiar with all the methods in the space, but I would guess that others are going to be moving in this direction too.
+
+Assuming the higher-plex assays produce high-quality data, this points to a future where you have a few more markers to play around with.
+
+But until this is widespread and widely validated, I would budget some time into carefully designing your Xenium panels (and panels for related methods), and doing the necessary preliminary experiments (scRNA-seq) accordingly.
+[[file:images/2024-09-26_16-13-19_Screenshot 2024-09-26 at 16.13.14.png]]
 ** [[https://www.linkedin.com/posts/tylerjburns_the-following-is-for-my-friends-from-academia-activity-7160684719934779392-n26f?utm_source=share&utm_medium=member_desktop][Three pointers for doing self employed consulting in the life sciences]]
 The following is for my friends from academia who are in a tough work and/or financial situation. I was living on the paycheck at the end of grad school (2016), when I started doing bioinformatics consulting on the side. This got me out of my financial woes. I kept this up after graduation until I transitioned to full-time self-employed consulting starting in 2018. I haven't stopped, and you can do it too. Here are three things that have kept me in business the past several years.
 
