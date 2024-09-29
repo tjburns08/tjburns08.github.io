@@ -111,6 +111,10 @@ In flow cytometry and CyTOF analysis, we distinguish between "type" and "state" 
   :END:
 #+HTML: <a href="#top">Back to top</a>
 I started out analyzing CyTOF data, as I did my PhD in the lab of Garry Nolan from 2012-2017, where CyTOF was initially being developed and applied to immunology and cancer bilogy. I later broadened to single-cell sequencing and high-parameter imaging (both proteins and genes). The work below consists primarily of markdowns, with code and explanations that allow users to do things that have helped me a lot in my work, but I don't necessarily have the time to turn into publications.
+** [[./human_universal_cell_embeddings.html][UMAP does not capture the proper center and outer edges of human CNS portion of the Univesal Cell Embeddings (UCE) transformer foundation model]]
+Markdown.\\
+
+This is a jupyter notebook that looks at the Universal Cell Embeddings transformer foundation model for single-cell sequencing. It is part of an emerging sub-field of foundation model building within single-cell sequencing. The output of the model is a 1280 dimensional embedding. Here, to get a sense of the geometry of the embedding, I look at the center and the outer edges. I visualize this in the context of UMAP space, and find that UMAP does not properly capture center-ness. I further find that center-ness is positively associated with both frequency of cell subset and per-subset density. I conclude that center-ness is a worthwhile feature to look at in the context of these models, and that it is not something that UMAP can be relied upon to capture.
 ** [[./learn_bioinformatics.html][How I transitioned from biologist to biology-leveraged bioinformatician]]
 Article.\\
 
