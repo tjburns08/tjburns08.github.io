@@ -12,6 +12,10 @@ This website is a place where I can openly share my ideas and non-NDA work, rega
 If you have quesitons or comments, or you're interested in working or collaborating with me, just send me a message (see contact info below). I'm always happy to help. 
 * New
 #+HTML: <a href="#top">Back to top</a>
+** [[./human_universal_cell_embeddings.html][UMAP does not capture the proper center and outer edges of human CNS portion of the Univesal Cell Embeddings (UCE) transformer foundation model]]
+Markdown.\\
+
+This is a jupyter notebook that looks at the Universal Cell Embeddings transformer foundation model for single-cell sequencing. It is part of an emerging sub-field of foundation model building within single-cell sequencing. The output of the model is a 1280 dimensional embedding. Here, to get a sense of the geometry of the embedding, I look at the center and the outer edges. I visualize this in the context of UMAP space, and find that UMAP does not properly capture center-ness. I further find that center-ness is positively associated with both frequency of cell subset and per-subset density. I conclude that center-ness is a worthwhile feature to look at in the context of these models, and that it is not something that UMAP can be relied upon to capture.
 ** [[./signal_there.html][There's some signal there]]
 Article.\\
 
