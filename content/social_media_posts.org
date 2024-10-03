@@ -293,6 +293,36 @@ I'll acknowledge that there are differences between the fields that may impact w
 * General data analysis
 #+HTML: <a href="#top">Back to top</a>
 The data analysis related posts that I otherwise could not categorize.
+** [[https://www.linkedin.com/posts/tylerjburns_in-bioinformatics-sometimes-the-simple-solution-activity-7247585445658685440-aIzc?utm_source=share&utm_medium=member_desktop][Sometimes the simple solution is good enough]]
+In bioinformatics, sometimes the simple solution is good enough.
+
+In a spatial transcriptomics project I'm on, I was researching tools for deconvoluting Visium data to get "pseudo-cell" info out of the "spots." Accordingly, pseudo-cells are inferred from transcriptomic profiles within Visium spots, which typically capture multiple cells. Deconvolution methods help break down these mixed profiles within the spots to estimate gene expression at a more granular, pseudo-cell level per spot.
+
+In a benchmarking study to this end from the lab of Yvan Saeys, one thing stood out that I (and they) found interesting:
+
+Of the 12 methods that were analyzed, a simple regression, known as non-negative least squares (NNLS) did better than almost half of these specialized spatial deconvolution tools in at least one metric, and did better than 1/3 of the methods in a composite score (see image below, which comes from Figure 2 of the paper).
+
+The point I want to bring up here is that in some contexts the simple, rapidly implementable method, even if sub-optimal, is good enough. If you hypothetically had the first Visium dataset in human history and had to figure out a way to deconvolute it, this study shows that you would get pretty far just by running NNLS.
+
+As another example you've seen if you follow my content, I got pretty far using k-nearest neighbors (KNN) to both quantitatively and visually benchmark nonlinear dimensionality reduction tools (before this topic was mainstream). There are many more methods out there to that end, but KNN is intuitive and easy to implement, so tools like this are a good place to start.
+
+The take home message for leaders:
+
+Agile decision making: when you're doing a first pass at something and/or when you're truly in the wild west (no one has written the book on what you're doing), a simple approach will get you insights more quickly, which will inform your next steps.
+
+Resource (e.g. time) management: in projects with many moving parts, doing the most easily implementable things first will allow for a better handle on the problem space. This will help to determine if more sophisticated and time-consuming methods might be necessary down the line.
+
+The take home message for scientists:
+
+Momentum: in my experience, taking any action that moves the project forward, even if it's suboptimal, gives you psychological momentum (motivation) that moves you and the team forward. This is especially important for problems that are hard and intimidating. Just start somewhere.
+
+The paper is linked in the comments, if you want to have a closer look. If I had to "benchmark" the benchmarking studies I've seen, the ones from the Saeys Lab are as good as they get.
+
+I hope you all have a great day.
+
+[[file:visium_deconvolution.jpeg]]
+*** comment
+The spatial deconvolution benchmarking paper: https://elifesciences.org/articles/88431
 ** [[https://www.linkedin.com/posts/tylerjburns_plenty-of-people-are-talking-about-automation-activity-7242885831139487746-7NxH?utm_source=share&utm_medium=member_desktop][Build automation with user paranoia in mind]]
 Plenty of people are talking about automation as the future of bioinformatics. This is fine, but there is one additional piece that leaders need to be aware of, to produce winning next-gen solutions: the user's paranoia.
 
