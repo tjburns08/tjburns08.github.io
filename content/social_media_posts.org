@@ -225,6 +225,44 @@ If you know anyone who could use this post or my teaching/advice, please share i
 * Journal club
 #+HTML: <a href="#top">Back to top</a>
 Sometimes I read papers and like to talk about them.
+** [[https://www.linkedin.com/posts/tylerjburns_transformer-based-foundation-models-the-activity-7249759966423646210-5Ba2?utm_source=share&utm_medium=member_desktop][Review on single cell foundation models]]
+Transformer-based foundation models (the stuff of LLMs) are slowly working their way into the single-cell literature. Here is what to know and what to do about it.
+
+For this post, I draw from a neutral review from Artur Szalata and colleagues (last author: Fabian Theis) on the topic, and additional time I have spent testing these models myself. Below are three main points from the paper, and my take on each of the points, followed by a take-home message to make all of this actionable.
+
+1. These models are still quite small. Table 1 shows that most of the models reviewed were trained on 30-100 million cells, which translates to hundreds of millions of parameters. Transformer models in other fields are well into the hundreds of billions of parameters (GPT-3 was 175B).
+
+   My take: the single-cell models here might still be analogous to GPT-1/2, where they show some promise but the full potential is still down the road.
+
+2. These models serve are multi-purpose tools, in that they have many applications. These include cell annotation, gene function prediction, perturbation prediction, and inferring gene regulatory networks, among others.
+
+   My take: once these models have their GPT-3/4 moment, there will be many new things for us to play with and integrate into our workflows.
+
+3. There are applications that are still more suited for simpler solutions. An example of this was scTab, a non-transformer model that outperformed scGPT (a transformer model) in cross-organ cell type integration.
+
+   My take: from a practical standpoint, I try the simpler solutions first, but in this context, later models trained on more cells could prove to be superior. So I'm keeping tabs on this.
+
+I remember when I got early access to GPT-3 in the fall of 2021 (a year before ChatGPT), experimenting with it quite a bit, and simply making sure I was familiar enough with it that I could rapidly adopt it if it got any better. Now, I am spending time working with some of these available foundation models to see what they can do in my hands.
+
+You can get access to these models too by going to Chan-Zuckerberg Initiative's collection of census models for single-cell (link in comments). They provide links to the model pages and sample embeddings that the models produced.
+
+The take home message for leaders and scientists:
+
+Know how these models work, have some of these tools in your arsenal, and test what kinds of inputs they take and what kinds of outputs they can produce. Keep tabs on their developments. Take their results with a grain of salt, but know that they will get better. I assume that they will only improve from here, as the research around these models improve, and the number of parameters possible per model increase.
+
+The review and a markdown of me interrogating one of these models is linked in the comments.
+
+If any of you are currently tinkering at the interface between single-cell/spatial and transformer models, please let me know. I hope you all have a great day.
+
+[[file:images/2024-10-08_19-09-14_Screenshot 2024-10-08 at 19.09.08.png]]
+*** comment
+The review by Artur Szalata and colleagues can be found here: https://pubmed.ncbi.nlm.nih.gov/39122952/
+
+A page from CZI giving you starter code for a number of so-called "census models" which are essentially cells that have been run through transformer models, giving you access to the embedding:
+https://cellxgene.cziscience.com/census-models
+
+Me interrogating the geometry of a foundation model embedding by trying to find its "center" and "outer edges" and realizing that UMAP does not quite capture this.
+https://tjburns08.github.io/human_universal_cell_embeddings.html
 ** [[https://www.linkedin.com/posts/tylerjburns_for-spatial-transcriptomics-data-cell-segmentation-activity-7234553712344465410-NxRX?utm_source=share&utm_medium=member_desktop][Cell segmentation size matters for spatial transcriptomics]]
 For spatial transcriptomics data, cell segmentation size is critical. I recently read a 2024 preprint from Austin Hartman and Rahul Satija about benchmarking in-situ gene expression profiling methods (eg. 10x Xenium). There's a detail in here I was struck by:
 
