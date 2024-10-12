@@ -3,7 +3,7 @@
 <head><meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>explore_model_output</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
+<title>explore_uce_output_3k_10k</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 
 
 
@@ -15749,6 +15749,19 @@ class="
 </div>
 </div>
 
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>We run KnnSleepwalk in R. Look again at the UMAPs above colored by dataset. Then go to <a href="https://tjburns08.github.io/knn_sleepwalk_3k_10k.html">this link</a>. The UMAP on the left will give you the nearest neighbors to the cursor in UMAP space. The UMAP in the right will give you the nearest neighbors in the high-dimensional UCE space. You'll see that the one on the right has &quot;out of island&quot; nearest neighbors that correspond to the given cell type of the other dataset.</p>
+<p>This suggests that UCE might indeed have the ability to at least partially grok integration, and that UMAP might not be the best way to assess it, as UMAP space seems to distort the &quot;distances&quot; between datasets.</p>
+
+</div>
+</div>
+</div>
 </div>
 </body>
 
