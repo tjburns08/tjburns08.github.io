@@ -80,9 +80,9 @@ Robert Pirsig, <i>Zen and the Art of Motorcycle Maintenance</i>
 </p>
 <hr />
 
-<div id="outline-container-orgcd6fdf9" class="outline-2">
-<h2 id="orgcd6fdf9">Introduction</h2>
-<div class="outline-text-2" id="text-orgcd6fdf9">
+<div id="outline-container-orgc87ad57" class="outline-2">
+<h2 id="orgc87ad57">Introduction</h2>
+<div class="outline-text-2" id="text-orgc87ad57">
 <p>
 When I moved to Berlin, I was no longer legally allowed to use my American driver's license after six months. What happens next depends on what state you have your driver's license in. For some states, you can simply trade your license in for a German one. For some states, you have to take the German written test. For some states (like California, where I'm from), you have to take both the written and practical test again. This meant I had to go to German driving school and do the whole process, as if I was 16 again. While this was annoying, I took this as an opportunity to do something I had always wanted to do: learn how to drive stick.
 </p>
@@ -101,9 +101,9 @@ From a practical standpoint, automatics get the job done and are often more envi
 </div>
 </div>
 
-<div id="outline-container-orgf3a53fe" class="outline-2">
-<h2 id="orgf3a53fe">Being connected through technology, not in spite of it</h2>
-<div class="outline-text-2" id="text-orgf3a53fe">
+<div id="outline-container-org5add589" class="outline-2">
+<h2 id="org5add589">Being connected through technology, not in spite of it</h2>
+<div class="outline-text-2" id="text-org5add589">
 <p>
 What exactly does it mean to go from automatic to manual transmission? I think of it is going down one or more layers of convenience and/or technology and/or abstraction. Doing this often requires a lot more active engagement in the task at hand. While it is less convenient, unless you're under time pressure, it can be much more rewarding.
 </p>
@@ -117,41 +117,90 @@ His point is that you need to be able to connect with the technology with you're
 </p>
 
 <p>
-The best way to get at what I'm talking about is to simply provide examples from my life. There is a lot of overlap with other concepts, like do-it-yourself (DIY), and producing rather than consuming. But it took me a while to realize that a lot of my way of doing things has a bit of a "Zen" bent to it, as Robert Pirsig talked about. 
+But how does this mesh with the very real fact that if we don't adopt new technology when it comes, we'll be left in the dust by those who do?
 </p>
 </div>
 </div>
 
-<div id="outline-container-org7e9e9c8" class="outline-2">
-<h2 id="org7e9e9c8">Examples</h2>
-<div class="outline-text-2" id="text-org7e9e9c8">
+<div id="outline-container-org6f406a7" class="outline-2">
+<h2 id="org6f406a7">A barbell strategy toward new technology</h2>
+<div class="outline-text-2" id="text-org6f406a7">
+<p>
+At the time of writing (this sentence was written on <span class="timestamp-wrapper"><span class="timestamp">[2024-10-13 Sun]</span></span>), technology development is accelerating in ways that were once the realm of science fiction. AI has been accelerating development across many domains, aided by the development of the <a href="https://arxiv.org/abs/1706.03762">transformer</a>. The transformer is the deep learning architecture behind the likes of LLMs (e.g. ChatGPT, Claude). We have seen this change a lot of knowledge work in a short few years.
+</p>
+
+<p>
+This is especially true for my <a href="https://tjburns08.github.io/burns_lsc.html">current work</a> in bioinformatics, where tools are aiding me both in data analysis (LLM-generated code) and research/interpretation (LLMs connected to search). And we can't just strawman the whole thing because it hallucinated once (confabulated is a better term, by the way, but hallucination seems to be the more accepted one). The models being used today are the crappiest models you will ever use. Whatever problems the models have today will be improved upon by lots of people (increasingly assisted by the tools themselves) and unfathomable amounts of funding.
+</p>
+
+<p>
+So if I sit here and <a href="https://en.wikipedia.org/wiki/Luddite">refuse to use</a> these new tools and opt to "drive stick" because my brain is more engaged or whatever, I'll be left in the dust. It's no better than defiantly <a href="https://www.youtube.com/watch?v=kQKrmDLvijo">sticking to a sword</a> when everyone else has transitioned to machine guns. I saw a discussion on X (formerly Twitter) recently, where a distinction was made between those who were process-oriented and those who were results-oriented. The results-oriented people are likely to welcome AI because it will accelerate productivity, whereas the process-oriented people might not be so happy about it because their workflows are never going to be the same, and will perhaps change month to month. Imagine how the Japanese tea ceremony practitioners would feel if they robots came for them.
+</p>
+
+<p>
+But I think there is a <a href="https://en.wikipedia.org/wiki/Dialectic#Hegelian_dialectic">Hegelian dialectic</a> between preference for the old stuff and preference for the new stuff in this regard. This is saying that there is a synthesis between the two opposites that point to a higher truth. And it goes something like this:
+</p>
+
+<p>
+You have to learn, adopt, and use the new stuff, because if you don't, others will. We have to assume that a lot of the new stuff will accelerate productivity, at least as measured by narrow metrics like quarterly profits or number of leads generated. Thus, those who can use these tools will be more employable (at least in the near term).
+</p>
+
+<p>
+On the other hand, speaking in terms of my domain, the <a href="https://en.wikipedia.org/wiki/Assembly_language">old stuff</a> is tied more to first principles. When I analyze data <a href="https://tjburns08.github.io/scrna_seq_piepline_pbmc_3k.html">outside of</a> high-level packages, I have to actually understand every piece of the workflow. And speaking of the past few years, when I turn off code completion and "drive stick" I have to really think through every little nuance of what I'm doing. It might be the less productive option in the near term, but it leads to <a href="https://tjburns08.github.io/virtue_of_depth.html">deep</a> understanding in the long term.
+</p>
+
+<p>
+Thus, out of this comes a <a href="https://en.wikipedia.org/wiki/Antifragile_(book)">barbell strategy</a>. A barbell strategy is where you adopt the two extremes of the distribution rather than sitting in the middle. To this effect, I use all the latest technology, and test drive every little innovation as it comes at me. However, I also spend time doing things like going through the math on pen and paper, data analysis with the minimum number of packages, <a href="https://www.youtube.com/watch?v=rzXEsactdT4">recreational programming</a> in lower level languages to learn at a visceral level what the computer is actually doing, and <a href="https://en.wikipedia.org/wiki/Lectio_Divina">engaging deeply in text</a> (the opposite of speed reading and skimming) without getting assistance from a chatbot. Things that keep my brain trained.
+</p>
+
+<p>
+I am betting that this will have a payoff down the line when everyone is fully dependent on AI to tell them to brush their teeth. And if it doesn't have an external payoff, I will simply be happy that I still have some base-level understanding of the world around me, which is something I highly value.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgf5c27f5" class="outline-2">
+<h2 id="orgf5c27f5">Examples</h2>
+<div class="outline-text-2" id="text-orgf5c27f5">
+<p>
+The best way to get at what I'm talking about is to simply provide examples from my life. There is a lot of overlap with other concepts, like do-it-yourself (DIY), and producing rather than consuming. But it took me a while to realize that a lot of my way of doing things has a bit of a "Zen" bent to it, as Robert Pirsig talked about.
+</p>
+
 <p>
 This said, below is a list of examples that highlight what I mean by Stick Shift Mindset. My plan is to simply add to this list over time as I acquire or realize more and more examples. 
 </p>
 </div>
 
-<div id="outline-container-org9bbf704" class="outline-4">
-<h4 id="org9bbf704">Windows/OSX versus the command line</h4>
-<div class="outline-text-4" id="text-org9bbf704">
+<div id="outline-container-org0b4286f" class="outline-4">
+<h4 id="org0b4286f">Windows/OSX versus the command line</h4>
+<div class="outline-text-4" id="text-org0b4286f">
 <p>
 I have a Mac, and I've been using Macs since 2009 or so. Prior to that, I was on Windows machines. I spend a lot of my time clicking around to get where I want to be.
 </p>
 
 <p>
-However, when I started learning programming in the mid-2010s, I started using the command line more. At first it was cumbersome, but then I started learning the keybindings, learning Vim and Emacs (more on this later), and learning how to make shell scripts to do much more complex tasks. Now, in many respects I'm more productive on the command line than I am clicking around. I don't exclusively use the command line, of course. But when I do, I feel like I'm one layer more connected to the computer, just as I feel when I'm driving stick. In many ways, I'm much more effective doing mundane tasks on the computer now that I use the command line more than I click around.
+However, when I started learning programming in the mid-2010s, I started using the command line more. At first it was cumbersome, but then I started learning the keybindings, learning Vim and Emacs (more on this later), and learning how to make shell scripts to do much more complex tasks. Now, in many respects I'm more productive on the command line than I am clicking around. LLMs have actually helped me here, in terms of getting the syntax right for shell scripts I am writing, and pushing me past what I knew the command line could do.
+</p>
+
+<p>
+I don't exclusively use the command line, of course. But when I do, I feel like I'm one layer more connected to the computer, just as I feel when I'm driving stick. In many ways, I'm much more effective doing mundane tasks on the computer now that I use the command line more than I click around.
 </p>
 </div>
 </div>
 
-<div id="outline-container-orgf7e30e2" class="outline-4">
-<h4 id="orgf7e30e2">MS Word versus Emacs Org Mode</h4>
-<div class="outline-text-4" id="text-orgf7e30e2">
+<div id="outline-container-org1b0af97" class="outline-4">
+<h4 id="org1b0af97">MS Word versus Emacs Org Mode for writing</h4>
+<div class="outline-text-4" id="text-org1b0af97">
 <p>
 I used to write most of my files in Microsoft Word. It's simple, and it gets the job done. I wrote my PhD thesis and my manuscripts in grad school all in Word. I had also written my journal entires in Word since 2009.
 </p>
 
 <p>
-However, I discovered Emacs in the past several years. In particular, Emacs <a href="https://orgmode.org/index.html">Org Mode</a> (now available on other platforms), which most of my writing is in these days, is plain text with a ton of additional features written in Lisp. All of it is open source and fully customizable. If you're not satisfied with something, then you can write an extension yourself and contribute to the community accordingly. People talk about the steep learning curve, but if you just focus on the thing you need it to do right now, then it's not that bad. Accordingly, I found that I was able to do a lot more with my writing in Org. Importantly, I felt like I was one layer more connected to my work by using Org than I was when I was using Word. I moved all my journal entries over, wrote my website in Org, and even code in Org from time to time (it's great for literate programming).
+However, I discovered Emacs in the past several years. In particular, Emacs <a href="https://orgmode.org/index.html">Org Mode</a> (now available on other platforms), which most of my writing is in these days, is plain text with a ton of additional features written in an old programming language called Lisp. All of it is open source and fully customizable. If you're not satisfied with something, then you can write an extension yourself and contribute to the community accordingly. People talk about the steep learning curve, but if you just focus on the thing you need it to do right now, then it's not that bad. Accordingly,
+</p>
+
+<p>
+I found that I was able to do a lot more with my writing in Org. Importantly, I felt like I was one layer more connected to my work by using Org than I was when I was using Word. I moved all my journal entries over, wrote my website in Org, and even code in Org from time to time (it's great for literate programming).
 </p>
 
 <p>
@@ -160,11 +209,11 @@ As a caveat, I often need to write something with a very tight deadline or I nee
 </div>
 </div>
 
-<div id="outline-container-org96bd402" class="outline-4">
-<h4 id="org96bd402">IDE versus Vim and Emacs</h4>
-<div class="outline-text-4" id="text-org96bd402">
+<div id="outline-container-org2b58510" class="outline-4">
+<h4 id="org2b58510">IDE versus Vim and Emacs for coding</h4>
+<div class="outline-text-4" id="text-org2b58510">
 <p>
-This is a tricky one. When it comes to complex tasks and group projects, I use Visual Studio Code. This might be because I simply haven't gotten good enough at Vim and Emacs to justify its full time use (though I'm getting there&#x2026;the key is to <a href="./how_to_get_fit_long_term.html">pace yourself</a>).
+Since we just visited the topic of writing, let's talk about coding, another big part of my life. When it comes to complex tasks and group projects, I use Visual Studio Code. This might be because I simply haven't gotten good enough at Vim and Emacs to justify its full time use (though I'm getting there&#x2026;the key is to <a href="./how_to_get_fit_long_term.html">pace yourself</a>).
 </p>
 
 <p>
@@ -172,18 +221,22 @@ However, I find myself coding in Emacs when I'm doing hobby projects and/or when
 </p>
 
 <p>
+And as I have said before, the lack of LLM-assisted code completion forces me to really think through what I am doing, which if it decreases productivity, it is nonetheless a useful exercise. Ask someone why they do deadlifts at the gym when they could drive into the weight room with a forklift and do the job without breaking a sweat? Same concept.
+</p>
+
+<p>
 Another thing worth saying here, is that some of the older, less convenient tools are easier to customize to your exact liking, which makes them that much more addictive. Emacs is like asking for an operating system and getting a bucket of legos dumped onto your desk. But after a bit of tinkering, you have a version and use-case for Emacs (and your digital life in general) that no one else in the world has. In theory, you can customize Emacs to do <a href="https://xkcd.com/378/">just about anything</a>.
 </p>
 
 <p>
-It is similar to cooking your own food from scratch versus eating something that the chef made.
+It is similar to cooking your own food from scratch versus eating something that the chef made, which is what we will talk about next.
 </p>
 </div>
 </div>
 
-<div id="outline-container-org01e05ed" class="outline-4">
-<h4 id="org01e05ed">Restaurant/ordering versus cooking</h4>
-<div class="outline-text-4" id="text-org01e05ed">
+<div id="outline-container-orga10d835" class="outline-4">
+<h4 id="orga10d835">Restaurant/ordering versus cooking</h4>
+<div class="outline-text-4" id="text-orga10d835">
 <p>
 Now for something that is more relatable to non-tech people. When I was in grad school, I often ate at a restaurant next door to my apartment for the sake of efficiency. There was always something I had to do with some tough deadline that I was behind on. So Ray's Grill at Stanford was the lowest hanging fruit.
 </p>
@@ -198,9 +251,9 @@ Importantly, when I see all the ingredients of my dinner on the kitchen counter 
 </div>
 </div>
 
-<div id="outline-container-org206b98b" class="outline-4">
-<h4 id="org206b98b">Playing music versus improvising music</h4>
-<div class="outline-text-4" id="text-org206b98b">
+<div id="outline-container-org803922b" class="outline-4">
+<h4 id="org803922b">Playing music versus improvising music</h4>
+<div class="outline-text-4" id="text-org803922b">
 <p>
 I have always been a fan of music. In particular, I like jazz. One of the main reasons for this is because I played bass in jazz bands and <a href="https://open.spotify.com/artist/07SgRzTetn2P7ZXymzR8Ss">jazz combos</a> from junior high school through college. Now, I'm learning jazz piano.
 </p>
@@ -214,14 +267,14 @@ When I improvise over a song, be it on the bass or on the piano, I feel more con
 </p>
 
 <p>
-Of note here, I saw the benefit of knowing how to improvise recently when I gave a TED talk. My talk was memorized word-for-word, and fine-tuned for months, something that is standard for TED but very different than the <a href="https://rseng.github.io/devstories/2023/tyler-burns-part-1/">improvisational type of public speaking</a> that I'm used to. But what gave me confidence in the moment was simply knowing that if I did stumble on a word, I would have the "jazz" to seamlessly find my flow again.
+Of note here, I saw the benefit of knowing how to improvise recently when I gave a <a href="https://www.youtube.com/watch?v=U35T-KzfeLk">TED talk</a>. My talk was memorized word-for-word, and fine-tuned for months, something that is standard for TED but very different than the <a href="https://rseng.github.io/devstories/2023/tyler-burns-part-1/">improvisational type of public speaking</a> that I'm used to. But what gave me confidence in the moment was simply knowing that if I did stumble on a word, I would have the "jazz" to seamlessly find my flow again.
 </p>
 </div>
 </div>
 
-<div id="outline-container-orgc826878" class="outline-4">
-<h4 id="orgc826878">Being employed versus being self employed</h4>
-<div class="outline-text-4" id="text-orgc826878">
+<div id="outline-container-orga0eada3" class="outline-4">
+<h4 id="orga0eada3">Being employed versus being self employed</h4>
+<div class="outline-text-4" id="text-orga0eada3">
 <p>
 At the end of graduate school, I started consulting for biotech companies to make a bit of extra money. After I graduated, I was employed half time as a computational biologist and I was consulting half time. I was successful enough with the latter that I made the rational decision to do consulting full time. A few years after that, I turned my freelance operation into a GmbH (German LLC, but with shares and no pass-through income).
 </p>
@@ -231,15 +284,23 @@ Being self employed is hard. In a bad economy, it can be brutal. There is no gua
 </p>
 
 <p>
-However, being self employed has made me feel more connected to the economy and capitalism in general. This has been very valuable in terms of understanding things like how markets work, what value actually is, what my value actually is (either they buy or they don't), and what incentive structures are moving us around. The last one comes with a warning. Without going too far into it, my self employed friends and I really do not want to go back into employment. When you see employment from an <a href="https://www.youtube.com/watch?v=jsLUidiYm0w">external perspective</a>, you'll know what I mean.  
+However, being self employed has made me feel more connected to the economy and capitalism in general. I know every piece of the system. To make money, you have to have a good product. To have a good product, you have to leverage what you're good at to solve problems that the market needs. To do that, you have to do market research, and especially speak to people about what you're up to. You need a social media presence. You need to use the feedback to build and/or improve your product. You have to go on sales calls and know how to sell. You have to maintain good relationships with people and have a strong network. You have to understand the concept of value, and use that to both price your products and improve them. And then you realize that you can't be excellent at all of it yourself, so you have to build a team.
+</p>
+
+<p>
+In short, you see the whole picture of how a company and its interface with the market works, rather than the little corner of it you see when filing TPS reports in a cubicle somewhere.
+</p>
+
+<p>
+This has been very valuable in terms of understanding things like how markets work, what value actually is, what my value actually is (either they buy or they don't), and what incentive structures are moving us around. The last one comes with a warning. Without going too far into it, my self employed friends and I really do not want to go back into employment. When you see employment from an <a href="https://www.youtube.com/watch?v=jsLUidiYm0w">external perspective</a>, you'll know what I mean.
 </p>
 </div>
 </div>
 </div>
 
-<div id="outline-container-org1d4c30f" class="outline-2">
-<h2 id="org1d4c30f">How does this mesh with a newest-tech-dependent world</h2>
-<div class="outline-text-2" id="text-org1d4c30f">
+<div id="outline-container-org9622497" class="outline-2">
+<h2 id="org9622497">How to operationalize the stick shift mindset</h2>
+<div class="outline-text-2" id="text-org9622497">
 <p>
 Each of the examples in this article highlight a particular process, that goes something like this:
 </p>
@@ -249,15 +310,11 @@ Step 1. Pick some endeavor that you do.
 </p>
 
 <p>
-Step 2. Complete the following analogy:
+Step 2. Complete the following analogy: Automatic transmission is to your endeavor as manual transmission is to X.
 </p>
 
 <p>
-Automatic transmission is to your endeavor as manual transmission is to X.
-</p>
-
-<p>
-Step 3. If you know how to do X, do it when you can. If you don't know how to do X, learn it.
+Step 3. If you know how to do X, do it at least some of the time, so you can stay grounded in the first principles behind whatever you're doing. If you don't know how to do X, learn it.
 </p>
 
 <p>
@@ -265,30 +322,33 @@ I'm not going to pretend I am perfect at this process. Like many of the things I
 </p>
 
 <p>
-In today's world, I can't cook every meal, most cars down the line will be hybrid or electric (automatic transmission), Visual Studio is easier and faster than Emacs (at least for me), tools like Notion have a lot of advantages over tools like Org Mode, and I might come across employment opportunities down the line that I can't refuse. Things will only get more convenient. At some point very soon <span class="timestamp-wrapper"><span class="timestamp">[2023-03-24 Fri] </span></span> there will be AI models that will be able to write a better version of this article than I can, in a few milliseconds (though a lot of why I write is for the sake of self-expression&#x2026;ChatGPT can write the boring stuff).
+In today's world, I can't cook every meal. Most cars down the line will be hybrid or electric (automatic transmission), let alone self-driving. Visual Studio Code is easier and faster than Emacs (at least for me). Other AI leveraged IDEs <a href="https://www.youtube.com/watch?v=oFfVt3S51T4">are coming</a> and will likely soon be the norm. Tools like Notion have a lot of advantages over tools like Org Mode. I might come across employment opportunities down the line that I can't refuse (perhaps because running a small business gets impossibly difficult).
 </p>
 
 <p>
-What I'm trying to do now is to adapt a <a href="https://en.wikipedia.org/wiki/Barbell_strategy">barbell strategy</a> toward my use of tech. This is where my tech stack consists of very high tech and very low tech tools. This is the equivalent of my garage having a new self-driving sedan, and a sports car from the 80s that I've been customizing by hand for the last decade to fit my needs exactly. I always have an instance of ChatGPT running, which helps me write and debug code much more efficiently. But then I'll take the suggested code and paste it into my old Emacs editor where I'll do my work. Then, I'll use ChatGPT to help me write <a href="https://xkcd.com/297/">Lisp code</a> (much older than python) to further configure Emacs to my liking, rather than simply going on Visual Studio Code and looking for a plugin.
+Things will only get more convenient. At some point very soon (this sentence was written on <span class="timestamp-wrapper"><span class="timestamp">[2023-03-24 Fri]</span></span>) there will be AI models that will be able to write a better version of this article than I can, in a few milliseconds (though a lot of why I write is for the sake of self-expression&#x2026;ChatGPT can write the boring stuff).
 </p>
 
 <p>
-The general concept of being more connected to all my endeavors has made me more competent, self-reliant, creative, innovative, interesting, has led to more friendships, and has made my life more meaningful in general. Importantly, it has allowed me to spend a lot of time in the flow state. 
+What I'm trying to do now, as I've said earlier, is to adapt a <a href="https://en.wikipedia.org/wiki/Barbell_strategy">barbell strategy</a> toward my use of tech. This is where my tech stack consists of very high tech and very low tech tools. This is the equivalent of my garage having a new self-driving sedan, and a manual transmission sports car from the 80s that I've been customizing by hand for the last decade to fit my needs exactly.
 </p>
-</div>
-</div>
 
-<div id="outline-container-org1e3dffb" class="outline-2">
-<h2 id="org1e3dffb">Driving stick and coping with attention deficit disorder</h2>
-<div class="outline-text-2" id="text-org1e3dffb">
 <p>
-Another key point worth jotting down: after I gave my TED talk in Basel on <a href="./scrolling_problem.html">The Scrolling Problem</a> (YouTube video coming soon), I realized that a lot of this article can be framed as a description of what I do to handle my unmedicated Attention Deficit Disorder, something I have had my whole life. When I'm driving stick, and doing every abstraction of that, there is no room to get distracted. The task is filling up every slot in working memory. I am focusing on my task and that's it. And it feels great. If there is any truth to this framing, then it <a href="https://www.lesswrong.com/posts/a7n8GdKiAZRX86T5A/making-beliefs-pay-rent-in-anticipated-experiences">predicts</a> that with each new level of convenience that the modern world throws at us, there will be another swath of the population that begins to exhibit ADD symptoms because they are not sufficiently engaged in the world to keep their phenotype on the ADD spectrum at bay. If this is the case, then I am glad that I'm getting this article into the public domain sooner than later.
+I always have an instance of ChatGPT or similar tools running, which helps me write and debug code much more efficiently. But then I'll take the suggested code and paste it into my old Emacs editor where I'll do some of my work, choosing control and connection over convenience. Then, I'll use ChatGPT to help me write <a href="https://xkcd.com/297/">Lisp code</a> (much older than python) to further configure Emacs to my liking, rather than simply going on Visual Studio Code and looking for a plugin.
+</p>
+
+<p>
+So far, I have found that there is a time and place for the AI-imbued workflows, and at least on the coding side, it has allowed me to more quickly learn and operate in programming languages I previously did not know, and it has taught me novel things about programming languages that I am quite skilled in. On the other hand, when I'm doing more creative work, I find that sometimes turning off copilot and "driving stick" helps me do good work, despite slowing me down to pre-2022 levels of productivity.
+</p>
+
+<p>
+To conclude this essay, the general concept of being more connected to all my endeavors has made me more competent, self-reliant, creative, innovative, interesting, has led to more friendships, and has made my life more meaningful in general. And that alone makes "driving stick" every once in a while worth it.
 </p>
 </div>
 </div>
 </div>
 <div id="postamble" class="status">
-<p class="date">Date: October 9, 2022 - May 15, 2023</p>
+<p class="date">Date: October 9, 2022 - October 13, 2024</p>
 <p class="creator"><a href="https://www.gnu.org/software/emacs/">Emacs</a> 28.1 (<a href="https://orgmode.org">Org</a> mode 9.5.2)</p>
 </div>
 </body>

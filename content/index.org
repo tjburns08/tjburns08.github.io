@@ -12,7 +12,14 @@ This website is a place where I can openly share my ideas and non-NDA work, rega
 If you have quesitons or comments, or you're interested in working or collaborating with me, just send me a message (see contact info below). I'm always happy to help. 
 * New
 #+HTML: <a href="#top">Back to top</a>
+** [[./stick_shift_mindset.html][Zen and the art of driving stick]]
+Article.\\
+
+I find that if I'm driving stick rather than automatic, I'm much more connected to what I'm doing, much more satisfied in the moment, and I'm objectively a better driver as a result.This concept generalizes. Pick an endeavor. Complete the analogy: automatic transmission is to your endeavor as manual transmission is to X. If you know how to do X, do it when you can. If you don't know how to do X, then learn it. I give several examples of this in my life, and I conclude by encouraging others to embody this way of doing things.
+
 ** [[./explore_uce_output_3k_10k.html][Universal Cell Embeddings with two PBMC datasets: how to test whether it grokked integration]]
+Markdown.\\
+
 In this markdown, we import two PBMC datasets, the PBMC 3k and the PBMC 10k datasets. The 3k dataset is a flagship dataset used in the early days of Seurat. The 10k dataset is the default that is run through the model if you don't specify another dataset. Here, I show that if we look at a UMAP embedding, the datasets do not sit on top of each other. However, if we use my KnnSleepwalk package, we find that the distances on the UMAP are distorted. What we find is that, for example, the T cell island for the 3k datset sits much closer to the T cell island for the 10k dataset. This in turn suggests that we should be careful using UMAP to assess foundation models in single-cell and in any field.
 
 ** [[./human_universal_cell_embeddings.html][UMAP does not capture the proper center and outer edges of human CNS portion of the Univesal Cell Embeddings (UCE) transformer foundation model]]
@@ -28,55 +35,6 @@ This is an expression I use a lot in casual conversation. In essence, when I com
 Webinar.\\
 
 This webinar is the latest iteration of my "dimensionality reduction interrogation" work, which has spanned six years. In this talk, I show the limits of these tools by looking at the K-nearest neighbors (KNN) of a given cell in the 2-D embedding space, and compare it to the K-nearest neighbors of that same cell in the high-dimensional feature space. I look at the averages across a given dataset for a given method to compare t-SNE, UMAP and PCA. I then color the maps by each cell's KNN preservation to look for patterns across the dataset. While I point out some general trends, I conclude that at least some of this depends on the dataset. Thus, I demo my free [[https://github.com/tjburns08/KnnSleepwalk][KnnSleepwalk]] tool, which allows users to deterine the performance of their t-SNE's and UMAPs for their data accordingly.
-
-** [[./question_bank.html][Question Bank]]
-Collection.\\
-
-I find that asking good questions is key to orienting you in the right direction. As I get older, I am focusing less on answers and more on questions. Accordingly, here is a growing collection of questions that I have found helpful over the years. It is divided into two categories: lists of questions that have been collected by others, and my independent collection. Most of these questions are attributed to others, as opposed to being unique to me.
-
-** [[./i_saw_the_northern_lights.html][I saw the northern lights]]
-Article.\\
-
-A reflection of the first time I saw the northern lights, in Iceland in 2019. A reminder that for whatever moment you're immersed in, really take it in before you reach for your camera or whatever else.
-
-** [[./social_media_posts.html][Social media posts]]
-Collection.\\
-
-Social media is a way for me to get things off my chest that I think are valuable to the world. Oftentimes, I will have an idea, or a piece of software, or a gif, that will give people unique intuition around a perticular topic, for example in bioinformatics. Rather than spending countless hours turning it into a paper or what not, it is easier to just turn it into a social media post. Having done this for a few years now, I have a collection of social media posts. Rather than having to scroll through each of them yourself, I have organized the ones that matter by topic here.
-** [[./coding_as_philosophical_project.html][Learning how to code improved how I think]]
-Article.\\
-
-Learning computer science improved both my focus and my thinking, which has contributed to a lot of my success from the end of graduate school until now. This matters because I think one should still learn the basics of how to code even if AI automates all of it in the future. This is because inherent in computer science education is the concept of computational thinking, a skill which you should have whether you use it to code, organize your thoughts, or prompt the latest AI. Even the first few months of computer science drastically helped me improve my thinking in this regard. This essay goes into the concepts around computational thinking, and tells you how you can learn it too, in a shorter time than you think.
-
-** [[./tech_enabled_journaling.html][One million words: a tech-enabled review of 15 years of journaling]]
-Article.\\
-
-I started a typed journal back in 2009. It recently hit one million words. It is difficult to review that many words by reading it top to bottom, so I took some AI tools I developed over the past few years and utilized them here. I take you through the structure of the journal, the BERT spatial embedding method that underlies the journal analysis, and the results. I conclude by encouraging you to keep a journal and to use these methods to analyze your journal. I note that these methods are applicable to any sort of note taking that you're doing. The code for this project can be found [[https://github.com/tjburns08/journal_mapper][here]].
-
-** [[./limbic_language_learning.html][Limbic language learning]]
-Article.\\
-
-In the years I've lived in Germany, I have realized that a lot of my success in speaking the language has come from connecting my brain's emotion center (limbic system) with my language center. In short, I think that anyone learning a foreign language should start speaking that language with emotion sooner than later. Here, I go into personal experiences and practical advice for what I call limbic language learning.
-
-** [[./fear_the_unword.html][Fear of the un-word is the beginning of wisdom]]
-Article.\\
-
-An un-word is a word that points to that which cannot be put into words. We see examples of this in religion, where words like Tao and God are meant to point us to a vastness that is beyond anything we can possibly understand. The Christian concept of fear of God, as seen through this lens, reflects the horror and awe that comes from admitting ignorance and embracing the unknown. This is the beginning of wisdom.
-
-** [[./getting_life_done.html][Getting life done]]
-Article.\\
-
-There are two modes that we operate in: the doing mode and the getting-done mode. The doing mode is like a hike, where the focus is on the hike itself and not point A to point B. The is opposed to a commute, the getting-done mode, where you're focused on getting from point A to point B. Here, I argue that the doing mode is being wrestled away from us, and we are wasting our lives in the getting-done mode. We are going to deeply regret this.
-
-** [[./website_internal_link_graph.html][Graph visualization of my website]]
-Visualization.\\
-
-My website functions a bit like a personal wiki, with content linking internally to other content. Here is a graph that shows an updated version of what links to what, so the reader can get a feel for what ideas I express and how they relate to each other. It is colored by the number of links.
-
-** [[./learn_bioinformatics.html][How I transitioned from biologist to biology-leveraged bioinformatician]]
-Article.\\
-
-In this article, I summarize my journey from biologist at the beginning of grad school to bioinformatician at the end. On top of that, I show you some of the key insights that empowered me to get to where I am now. I link out to a number of references in bioinformatics and computer science that I find meaningful. In short, I hope that anyone in the life sciences reading this article can use it as a resource on their journey to learn bioinformatics.
 * Popular
 #+HTML: <a href="#top">Back to top</a>
 ** [[./learn_bioinformatics.html][How I transitioned from biologist to biology-leveraged bioinformatician]]
