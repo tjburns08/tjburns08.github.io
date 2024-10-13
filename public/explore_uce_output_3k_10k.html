@@ -3,7 +3,7 @@
 <head><meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>explore_model_output</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
+<title>explore_uce_output_3k_10k</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 
 
 
@@ -15756,7 +15756,10 @@ class="
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>We run KnnSleepwalk in R. Look again at the UMAPs above colored by dataset. Then go to <a href="https://tjburns08.github.io/knn_sleepwalk_3k_10k.html">this link</a>. The UMAP on the left will give you the nearest neighbors to the cursor in UMAP space. The UMAP in the right will give you the nearest neighbors in the high-dimensional UCE space. You'll see that the one on the right has &quot;out of island&quot; nearest neighbors that correspond to the given cell type of the other dataset.</p>
+<p>We run KnnSleepwalk in R. Look again at the UMAPs above colored by dataset. Now have a look at this labeled gif:</p>
+<img src="knn_sleepwalk_3k_10k_labeled_crop.gif" alt="" width="700"/>
+<p>Then, if you want to play around with this yourself, please go to <a href="https://tjburns08.github.io/knn_sleepwalk_3k_10k.html">this link</a>.</p>
+<p>The UMAP on the left will give you the nearest neighbors to the cursor in UMAP space. The UMAP in the right will give you the nearest neighbors in the high-dimensional UCE space. You'll see that the one on the right has &quot;out of island&quot; nearest neighbors that correspond to the given cell type of the other dataset.</p>
 <p>This suggests that UCE might indeed have the ability to at least partially grok integration, and that UMAP might not be the best way to assess it, as UMAP space seems to distort the &quot;distances&quot; between datasets.</p>
 <p>The last thing I'll show is that the PCA space of the UCE seems to show a specific axis that corresponds to the dataset. In this case, it's PC2. In other words, if you take one dataset and &quot;slide&quot; it in the right direction along PC2, it will merge with the other dataset.</p>
 
