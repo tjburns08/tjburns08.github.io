@@ -331,6 +331,48 @@ I'll acknowledge that there are differences between the fields that may impact w
 * General data analysis
 #+HTML: <a href="#top">Back to top</a>
 The data analysis related posts that I otherwise could not categorize.
+** [[https://www.linkedin.com/posts/tylerjburns_i-test-drove-a-single-cell-ai-foundation-activity-7252303573709938688-MCZ5?utm_source=share&utm_medium=member_desktop][Test drive of single-cell AI foundation model]]
+I test drove a single-cell AI foundation model with scRNA-seq data, so you don't have to. The punchline: it was good enough that I think you should familiarize yourself with these models. Here are the details...
+
+What I did:
+
+The Universal Cell Embeddings (UCE) transformer-based foundation model takes the raw count matrix of scRNA-seq data, and outputs a 1280 dimensional vector per cell that is biologically meaningful (I know...black box). Importantly, there is no standard pre-processing (find variable genes, normalizing, scaling, take the first n principal components). Just the raw counts as input.
+
+I ran the flagship "PBMC 3k" dataset, along with a "PBMC 10k" dataset that they had as a default, through the 33-layer transformer model (there also a 4 layer option). On my laptop (14 inch MacBook Pro), these were essentially overnight runs. I tried running them through the day, but it slowed my computer down.
+
+Observations:
+
+1. Similar output to the old way: If we take the 1280 dimensional embeddings and visualize them with UMAP, the output looks similar to what I would otherwise see if I made a UMAP from the top n principal components of pre-processed data, per dataset. This suggests that the model is capturing similar information to what one would otherwise get from the standard Seurat/Scanpy pipelines.
+
+2. No direct data integration, but UMAP makes it look worse: When I concatenated the datasets and placed them onto the same UMAP (without integration), each dataset was on different sides of UMAP space, suggesting that the model didn't "grok" integration.
+
+   However, when I ran my KNN Sleepwalk tool on the UMAPs to look at the difference between UMAP space and high-dimensional model space, I found that the two datasets were much closer to each other than UMAP suggested. In other words, UMAP was exaggerating the space between them (see the image below).
+
+3. Not integrated, but aligned in PCA space: Further analysis in PCA space (see my jupyter notebook, very bottom) suggests that the two outputs are shaped such that you could literally "slide" one dataset onto the other.
+
+The big picture:
+
+The UCE model is the first model in the larger Virtual Cell initiative (link in comments), backed by the likes of Steve Quake, Aviv Regev, Stanford, and Chan-Zuckerberg Initiative. So there will be lots of resources directed at improving these models down the line.
+
+I see a future where traditional pipelines and AI foundation models are run in parallel. This "barbell strategy" of old and new, combining standard approaches with AI pipelines, ensures we gain new insights without depending on black boxes.
+
+A major hurdle here will be a speed-up. I had a hard enough time with 13,000 cells across two files. Real-world projects can be much larger.
+
+In short, I would get familiar with these models now, before they start showing up in papers.
+
+See my jupyter notebook detailing my work in the comments.
+
+I hope you all have a great day.
+
+#+HTML: <img src="images/knn_sleepwalk_3k_10k_labeled_3.gif"/>
+*** comment
+My jupyter notebook: https://tjburns08.github.io/explore_uce_output_3k_10k.html
+
+My KNN Sleepwalk package: https://github.com/tjburns08/KnnSleepwalk
+
+Virtual Cell Initiative: https://arxiv.org/abs/2409.11654
+
+Universal Cell Embeddings: https://www.biorxiv.org/content/10.1101/2023.11.28.568918v1
 ** [[https://www.linkedin.com/posts/tylerjburns_in-bioinformatics-sometimes-the-simple-solution-activity-7247585445658685440-aIzc?utm_source=share&utm_medium=member_desktop][Sometimes the simple solution is good enough]]
 In bioinformatics, sometimes the simple solution is good enough.
 
