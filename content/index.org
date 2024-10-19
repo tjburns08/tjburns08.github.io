@@ -12,6 +12,11 @@ This website is a place where I can openly share my ideas and non-NDA work, rega
 If you have quesitons or comments, or you're interested in working or collaborating with me, just send me a message (see contact info below). I'm always happy to help. 
 * New
 #+HTML: <a href="#top">Back to top</a>
+** [[./compare_full_vs_filtered_uce.html][Running only the most variable genes through UCE leads to worse cell separation than running the whole dataset]]
+Markdown.\\
+
+In a standard single cell RNA sequencing analysis pipeline, one of the first things you do is find and use only the most variable genes, as measured by gene expression and dispersion. These variable genes are sufficient to be used in downstream analysis, like clustering and dimensionality reduction. Here, I test whether I can do the same thing for the Universal Cell Embeddings (UCE) foundation model, which in theory could save time and compute. I find that running only the variable genes through UCE leads to poorer cell type separation, as measured by both UMAP and PCA. This suggests that those who use UCE should use the full datasets, not filtered ones.
+
 ** [[./stick_shift_mindset.html][Zen and the art of driving stick]]
 Article.\\
 
