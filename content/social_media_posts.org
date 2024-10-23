@@ -331,6 +331,45 @@ I'll acknowledge that there are differences between the fields that may impact w
 * General data analysis
 #+HTML: <a href="#top">Back to top</a>
 The data analysis related posts that I otherwise could not categorize.
+** [[https://www.linkedin.com/posts/tylerjburns_in-a-standard-scrna-seq-analysis-pipeline-activity-7254837976428388352-Ki7x?utm_source=share&utm_medium=member_desktop][Don't use top n variable genes for AI foundation models]]
+In a standard scRNA-seq analysis pipeline, you select the top ~2000 variable genes for downstream analysis (eg. clustering). However, my recent experiment suggests that you should not do this for foundation models. Here is what I did...
+
+The Universal Cell Embeddings (UCE) foundation model, part of a bigger "virtual cell" initiative, takes a raw cells x counts matrix as input and outputs a 1280 dimensional vector that contains biological meaning as output. This is then used for downstream analysis.
+
+The power here is that you get the same vectors every time. There is no fine-tuning of the model. So you can make comparisons with any datasets that have never been run through the model, and therefore do things like annotate, given metadata cells from other datasets.
+
+As I said in a previous post, this can take a long time if you're running it locally. One hypothesis, inspired by one of the comments, was that I could put in an abbreviated dataset of only variable genes, and get a faster result without sacrificing accuracy - a good thing when computational resources are limited.
+
+Experimental design:
+
+I ran the following 3 datasets through UCE.
+1. The full dataset (positive control).
+2. The dataset containing the most variable genes (experimental).
+3. The dataset containing a random selection of genes (negative control).
+
+My results:
+
+I found that the dataset containing the most variable genes did not have the same level of cell type separation compared to the full dataset, with the negative control performing worse than both of them. This can be seen by assessing PCA space of the concatenated data (image below). Further quantification via Shannon entropy (to measure diversity) confirms this (see my jupyter notebook in the comments).
+
+What this means for you:
+
+This suggests that for UCE, and perhaps for other foundation models (geneformer, scGPT), you should run the full dataset through it to get the best results, and the typical practice of only selecting variable genes may not apply to the use of foundation models.
+
+Zooming out:
+
+There has been an uptick in people asking me questions around AI as it relates to single-cell in the past few weeks (perhaps because I'm posting about it). Even if you're a natural skeptic (like me), you should at least be familiar with them, because like the black boxes before it (eg. t-SNE/UMAP), these tools don't appear to be going anywhere. And they do indeed have potential to accelerate our workflows.
+
+If you are doing work in this space, or interested in doing work in this space, please let me know.
+
+A jupyter notebook showing my work is linked in the comments. I hope you all have a great day.
+
+[[file:images/variable_genes_foundation_model.png]]
+*** comment
+Jupyter notebook detailing my work: https://tjburns08.github.io/compare_full_vs_filtered_uce.html
+
+Universal Cell Embeddings: https://www.biorxiv.org/content/10.1101/2023.11.28.568918v1
+
+Note: a pre-processing step in the UCE pipeline reduced the 1838 genes I took out in the experiment and control groups down to 1529 and 538 genes respectively. The 528 genes is fine because this is a negative control...we are trying to get a situation where there is no cell separation. The 1529 genes (rather than around 1800) is a bit less than I'd otherwise use, and it is up to the reader to determine (and ideally experiment with their data) whether an additional 200-300 genes on the lower end of "most variable" would really bring it up to the standard of the full dataset.
 ** [[https://www.linkedin.com/posts/tylerjburns_i-test-drove-a-single-cell-ai-foundation-activity-7252303573709938688-MCZ5?utm_source=share&utm_medium=member_desktop][Test drive of single-cell AI foundation model]]
 I test drove a single-cell AI foundation model with scRNA-seq data, so you don't have to. The punchline: it was good enough that I think you should familiarize yourself with these models. Here are the details...
 
