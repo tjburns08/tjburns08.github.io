@@ -1,7 +1,6 @@
 #!/bin/sh
 
 # Instructions: run: ./build.sh "your commit message here"
-# TODO: address a weird message that says nothing to commit, despite the commit taking place
 
 # Save the original directory for later
 original_dir=$(pwd)
