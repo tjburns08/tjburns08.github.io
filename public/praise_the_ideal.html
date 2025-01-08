@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>On worshipping an ideal</title>
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" href="simple.css" />
+<style>
+  .dark-mode {
+    --bg: #212121;
+    --accent-bg: #2b2b2b;
+    --text: #dcdcdc;
+    --text-light: #ababab;
+    --accent: #ffb300;
+    /*--code: #f06292;*/
+    --preformatted: #ccc;
+    --disabled: #111;
+  }
+  .dark-mode img,
+  .dark-mode video {
+    opacity: 0.8;
+  }
+  .toggle-theme-btn {
+      transform: scale(0.7);
+      opacity: 0.4;
+      transition: opacity 0.2s;
+    }
+    .toggle-theme-btn:hover {
+      opacity: 0.4;
+    }
+</style>
+<script>
+ function toggleDarkMode() {
+    const body = document.body;
+    body.classList.toggle("dark-mode");
+    // Save the user's theme preference to localStorage
+    if (body.classList.contains("dark-mode")) {
+      localStorage.setItem("theme", "dark");
+    } else {
+      localStorage.setItem("theme", "light");
+    }
+  }
+
+  function setDefaultDarkMode() {
+    // Retrieve the user's theme preference from localStorage
+    const storedTheme = localStorage.getItem("theme");
+
+    // If the stored theme is light, do nothing; otherwise, set it to dark
+    if (storedTheme !== "light") {
+      document.body.classList.add("dark-mode");
+    }
+  }
+
+  // Set the default mode to dark when the DOM is fully loaded
+  document.addEventListener('DOMContentLoaded', setDefaultDarkMode);
+</script>
+</head>
+<body>
+<div id="preamble" class="status">
+<div style="position: fixed; top: 10px; right: 10px;">
+         <button class="toggle-theme-btn" onclick="toggleDarkMode()">Light/Dark</button>
+       </div>
+</div>
+<div id="content" class="content">
+<h1 class="title">On worshipping an ideal</h1>
+<p>
+I will preface by saying that I am not a practicing Christian, through I grew up in a Christian family, and so I can speak to the relgion. In general, given that society has done a good job steelmanning Buddhism and taking practices like mindfulness directly out of the religion for secular use in the west, I wanted to do a similar thing for Christianity. But first, a story.
+</p>
+
+<p>
+So far as I understand, many boys have a phase in their childhood where they view their father as somewhat of a Superman. The strongest, smarteset, kindest, bestest man in the whole wide world. I myself very much went through that phase when I was a small child, with my father. I remember thinking of him as a literal Clark Kent, hanging on to his every word and every move.
+</p>
+
+<p>
+And that is when he died.
+</p>
+
+<p>
+What this did to my young brain is keep me in the "Dad is Superman" phase, indefinitely. I am still in that phase today, in my late 30s, actually older than my father ever got to. This infinite loop pushed me to work harder. I had to get smart like my Dad and strong like my Dad, and so forth. But the "Dad" in my head was not the great but imperfect human being that my father was (by that I mean no one is perfect). The "Dad" in my head was an impossible Jungian archetype that I had constructed over years and years. Whatever good virtue or characteristic, crank it to 11, and I convinced my young self that my Dad was exactly like that. And so I pushed harder to become more like this impossible vision of ultimate good that was my father.
+</p>
+
+<p>
+When I became older than my father, there was a minute where this started to get toxic. I realized what was going on. I realized that I was essentially worshipping an impossible ideal rather than my actual father. That comparison, the infinite delta between imperfect me and this perfect ideal was a bit tough on my mental health, especially because I was transitioning from "the man I am becoming," my poential, to "the man I have become." And while I am proud of and thankful for what I have achieved, I did not become Superman.
+</p>
+
+<p>
+But then after a few more years, I realized that basically the Christian religion (the one I can speak to&#x2026;I suspect other religions are like this too) is at least in part an exercise of imagining the absolute most perfect human being possible, and trying to move in that direction. The common phrase "what would Jesus do" is basically this.
+</p>
+
+<p>
+And at that point I realized that the "father worshipping" algorithm that had been running in my head my whole life was not much different than what Christians do day to day. And so I stopped shying away from it. It's not that I was trying to be like my father. I was trying to be like the most ultimate ideal of human I could possibly imagine, and my father had done me enough good when he was alive that he could serve as a seed, from which I could build this ideal vision.
+</p>
+
+<p>
+And just as we have taken mindfulness out of Buddhism, I propose the following perfectly secular exercise from Christianity: imagine the greatest possible human being. Perfect kindness, perfect competence, perfect virtue, whatever you can think of. Hold that image in your head. This is comparable to religious contemplation. What would that person do in your situation? What steps can you take to become more like that ideal person? Who in the real world exemplifies what facets of this ideal person? What does the opposite of this ideal person look like, and how do you make sure that you don't go that route? In what ways are you going that negative route and how can you reverse the course?
+</p>
+
+<p>
+For what it's worth, this is the exercise I have been doing unconsciously my entire life since I lost my father. And it's only recently that I have realized what I was doing, and have generalized it, and it therefore continues to benefit me. At the time of writing <span class="timestamp-wrapper"><span class="timestamp">[2025-01-08 Wed] </span></span> there is a lot of talk about meditation and mindfulness, but very little about this. If you're into these secularized religious/spiritual practices, try this one on for size. It has been a huge positive force in my life, and maybe it will be for you, too.
+</p>
+</div>
+<div id="postamble" class="status">
+<p class="date">Date: January 8, 2025 - January 8, 2025</p>
+<p class="creator"><a href="https://www.gnu.org/software/emacs/">Emacs</a> 28.1 (<a href="https://orgmode.org">Org</a> mode 9.5.2)</p>
+</div>
+</body>
+</html>
