@@ -225,6 +225,40 @@ If you know anyone who could use this post or my teaching/advice, please share i
 * Journal club
 #+HTML: <a href="#top">Back to top</a>
 Sometimes I read papers and like to talk about them.
+** [[https://www.linkedin.com/posts/tylerjburns_in-light-of-recent-work-i-am-doing-that-requires-activity-7285315114067517440-tGpT?utm_source=share&utm_medium=member_desktop][Reproducibility of Jupyter notebooks from biomedical publications]]
+In light of recent work I am doing that requires me to reproduce results from GitHub repos associated with papers (eg. foundation models), I wanted to highlight a paper by Sheeba Samuel and Daniel Mietchen that discusses reproducibility of Jupyter notebooks associated with the biomedical literature (peer reviewed papers, not pre-prints). The results are nothing to be proud of.
+
+The authors looked at 27,271 Jupyter notebooks across 2660 GitHub repos linked from 3467 publications.
+
+Specifically, the authors looked at:
+- 22,578 Jupyter notebooks written in python. Of these:
+- 15,817 had dependencies declared. Of these:
+- 10,388 had dependencies that could be installed successfully. Of these:
+- 1203 notebooks ran without any errors. Of these:
+- 879 produced results identical to those reported in the original notebook, and
+- 324 produced results that differed from those reported in the original notebook
+
+In other words, 5.3% of notebooks ran without errors, and 3.9% produced results identical to the paper.
+
+One thing (of many) that the authors bring up, and what struck me here, is that the results suggest that the available code had little bearing on the peer review process. And perhaps it should have.
+
+From a practical standpoint, I've assisted in peer review, and I understand that the reviewers simply don't have time to dig into the code themselves. So there should probably be ways to make this easier.
+
+I think ensuring reproducibility of code in papers could be something that automated tools could do or help do down the line. The methods section of the paper is a testament to this. Given the current "agentic" direction AI is going, this would be an interesting use case to either aid in the peer review process, or be used by the authors themselves to ensure reproducibility at every step of the process.
+
+I'll note, given that I use R heavily and therefore use R Markdowns moreso than Jupyter notebooks, I hypothesize that there will be similar issues here. But an important observation from the paper from Figure 19 (attached image, left side) is that the majority of problems were ModuleNotFoundError. This suggests that issues with dependencies cause a lot of the reproducibility problems, something that would generally not surprise python users. R is not without its problems in this regard, but this is especially notorious in python.
+
+If you are a biologist interested in how to ensure reproducibility in your code, please let me know. My friends and I have been through enough of this that I have things to say. If enough are interested, I'll make a more in depth write-up.
+
+Until then, be sure to use virtual environments (I use renv if in R), and in python be sure to run "pip freeze > requirements.txt."
+
+The link to the paper is in the comments. You should read it. There are 30 figures and 5 tables. In the "implications" section they bring up nine talking points (and the peer review bit above is implication 2).
+
+That's all for now. Happy new year everyone.
+*** comment
+The link to the paper is here: https://academic.oup.com/gigascience/article/doi/10.1093/gigascience/giad113/7516267#493978474
+
+And thanks to Mike Leipold for finding this paper and sending it over.
 ** [[https://www.linkedin.com/posts/tylerjburns_transformer-based-foundation-models-the-activity-7249759966423646210-5Ba2?utm_source=share&utm_medium=member_desktop][Review on single cell foundation models]]
 Transformer-based foundation models (the stuff of LLMs) are slowly working their way into the single-cell literature. Here is what to know and what to do about it.
 
