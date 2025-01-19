@@ -7,190 +7,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>My Meditations Chapter 1</title>
 <meta name="generator" content="Org Mode" />
-<style>
-  #content { max-width: 60em; margin: auto; }
-  .title  { text-align: center;
-             margin-bottom: .2em; }
-  .subtitle { text-align: center;
-              font-size: medium;
-              font-weight: bold;
-              margin-top:0; }
-  .todo   { font-family: monospace; color: red; }
-  .done   { font-family: monospace; color: green; }
-  .priority { font-family: monospace; color: orange; }
-  .tag    { background-color: #eee; font-family: monospace;
-            padding: 2px; font-size: 80%; font-weight: normal; }
-  .timestamp { color: #bebebe; }
-  .timestamp-kwd { color: #5f9ea0; }
-  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
-  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
-  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
-  .underline { text-decoration: underline; }
-  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
-  p.verse { margin-left: 3%; }
-  pre {
-    border: 1px solid #e6e6e6;
-    border-radius: 3px;
-    background-color: #f2f2f2;
-    padding: 8pt;
-    font-family: monospace;
-    overflow: auto;
-    margin: 1.2em;
-  }
-  pre.src {
-    position: relative;
-    overflow: auto;
-  }
-  pre.src:before {
-    display: none;
-    position: absolute;
-    top: -8px;
-    right: 12px;
-    padding: 3px;
-    color: #555;
-    background-color: #f2f2f299;
-  }
-  pre.src:hover:before { display: inline; margin-top: 14px;}
-  /* Languages per Org manual */
-  pre.src-asymptote:before { content: 'Asymptote'; }
-  pre.src-awk:before { content: 'Awk'; }
-  pre.src-authinfo::before { content: 'Authinfo'; }
-  pre.src-C:before { content: 'C'; }
-  /* pre.src-C++ doesn't work in CSS */
-  pre.src-clojure:before { content: 'Clojure'; }
-  pre.src-css:before { content: 'CSS'; }
-  pre.src-D:before { content: 'D'; }
-  pre.src-ditaa:before { content: 'ditaa'; }
-  pre.src-dot:before { content: 'Graphviz'; }
-  pre.src-calc:before { content: 'Emacs Calc'; }
-  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
-  pre.src-fortran:before { content: 'Fortran'; }
-  pre.src-gnuplot:before { content: 'gnuplot'; }
-  pre.src-haskell:before { content: 'Haskell'; }
-  pre.src-hledger:before { content: 'hledger'; }
-  pre.src-java:before { content: 'Java'; }
-  pre.src-js:before { content: 'Javascript'; }
-  pre.src-latex:before { content: 'LaTeX'; }
-  pre.src-ledger:before { content: 'Ledger'; }
-  pre.src-lisp:before { content: 'Lisp'; }
-  pre.src-lilypond:before { content: 'Lilypond'; }
-  pre.src-lua:before { content: 'Lua'; }
-  pre.src-matlab:before { content: 'MATLAB'; }
-  pre.src-mscgen:before { content: 'Mscgen'; }
-  pre.src-ocaml:before { content: 'Objective Caml'; }
-  pre.src-octave:before { content: 'Octave'; }
-  pre.src-org:before { content: 'Org mode'; }
-  pre.src-oz:before { content: 'OZ'; }
-  pre.src-plantuml:before { content: 'Plantuml'; }
-  pre.src-processing:before { content: 'Processing.js'; }
-  pre.src-python:before { content: 'Python'; }
-  pre.src-R:before { content: 'R'; }
-  pre.src-ruby:before { content: 'Ruby'; }
-  pre.src-sass:before { content: 'Sass'; }
-  pre.src-scheme:before { content: 'Scheme'; }
-  pre.src-screen:before { content: 'Gnu Screen'; }
-  pre.src-sed:before { content: 'Sed'; }
-  pre.src-sh:before { content: 'shell'; }
-  pre.src-sql:before { content: 'SQL'; }
-  pre.src-sqlite:before { content: 'SQLite'; }
-  /* additional languages in org.el's org-babel-load-languages alist */
-  pre.src-forth:before { content: 'Forth'; }
-  pre.src-io:before { content: 'IO'; }
-  pre.src-J:before { content: 'J'; }
-  pre.src-makefile:before { content: 'Makefile'; }
-  pre.src-maxima:before { content: 'Maxima'; }
-  pre.src-perl:before { content: 'Perl'; }
-  pre.src-picolisp:before { content: 'Pico Lisp'; }
-  pre.src-scala:before { content: 'Scala'; }
-  pre.src-shell:before { content: 'Shell Script'; }
-  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
-  /* additional language identifiers per "defun org-babel-execute"
-       in ob-*.el */
-  pre.src-cpp:before  { content: 'C++'; }
-  pre.src-abc:before  { content: 'ABC'; }
-  pre.src-coq:before  { content: 'Coq'; }
-  pre.src-groovy:before  { content: 'Groovy'; }
-  /* additional language identifiers from org-babel-shell-names in
-     ob-shell.el: ob-shell is the only babel language using a lambda to put
-     the execution function name together. */
-  pre.src-bash:before  { content: 'bash'; }
-  pre.src-csh:before  { content: 'csh'; }
-  pre.src-ash:before  { content: 'ash'; }
-  pre.src-dash:before  { content: 'dash'; }
-  pre.src-ksh:before  { content: 'ksh'; }
-  pre.src-mksh:before  { content: 'mksh'; }
-  pre.src-posh:before  { content: 'posh'; }
-  /* Additional Emacs modes also supported by the LaTeX listings package */
-  pre.src-ada:before { content: 'Ada'; }
-  pre.src-asm:before { content: 'Assembler'; }
-  pre.src-caml:before { content: 'Caml'; }
-  pre.src-delphi:before { content: 'Delphi'; }
-  pre.src-html:before { content: 'HTML'; }
-  pre.src-idl:before { content: 'IDL'; }
-  pre.src-mercury:before { content: 'Mercury'; }
-  pre.src-metapost:before { content: 'MetaPost'; }
-  pre.src-modula-2:before { content: 'Modula-2'; }
-  pre.src-pascal:before { content: 'Pascal'; }
-  pre.src-ps:before { content: 'PostScript'; }
-  pre.src-prolog:before { content: 'Prolog'; }
-  pre.src-simula:before { content: 'Simula'; }
-  pre.src-tcl:before { content: 'tcl'; }
-  pre.src-tex:before { content: 'TeX'; }
-  pre.src-plain-tex:before { content: 'Plain TeX'; }
-  pre.src-verilog:before { content: 'Verilog'; }
-  pre.src-vhdl:before { content: 'VHDL'; }
-  pre.src-xml:before { content: 'XML'; }
-  pre.src-nxml:before { content: 'XML'; }
-  /* add a generic configuration mode; LaTeX export needs an additional
-     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
-  pre.src-conf:before { content: 'Configuration File'; }
-
-  table { border-collapse:collapse; }
-  caption.t-above { caption-side: top; }
-  caption.t-bottom { caption-side: bottom; }
-  td, th { vertical-align:top;  }
-  th.org-right  { text-align: center;  }
-  th.org-left   { text-align: center;   }
-  th.org-center { text-align: center; }
-  td.org-right  { text-align: right;  }
-  td.org-left   { text-align: left;   }
-  td.org-center { text-align: center; }
-  dt { font-weight: bold; }
-  .footpara { display: inline; }
-  .footdef  { margin-bottom: 1em; }
-  .figure { padding: 1em; }
-  .figure p { text-align: center; }
-  .equation-container {
-    display: table;
-    text-align: center;
-    width: 100%;
-  }
-  .equation {
-    vertical-align: middle;
-  }
-  .equation-label {
-    display: table-cell;
-    text-align: right;
-    vertical-align: middle;
-  }
-  .inlinetask {
-    padding: 10px;
-    border: 2px solid gray;
-    margin: 10px;
-    background: #ffffcc;
-  }
-  #org-div-home-and-up
-   { text-align: right; font-size: 70%; white-space: nowrap; }
-  textarea { overflow-x: auto; }
-  .linenr { font-size: smaller }
-  .code-highlighted { background-color: #ffff00; }
-  .org-info-js_info-navigation { border-style: none; }
-  #org-info-js_console-label
-    { font-size: 10px; font-weight: bold; white-space: nowrap; }
-  .org-info-js_search-highlight
-    { background-color: #ffff00; color: #000000; font-weight: bold; }
-  .org-svg { width: 90%; }
-</style>
 <link rel="stylesheet" href="simple.css" />
 <style>
   .dark-mode {
@@ -241,26 +57,6 @@
   // Set the default mode to dark when the DOM is fully loaded
   document.addEventListener('DOMContentLoaded', setDefaultDarkMode);
 </script>
-<script>
-// @license magnet:?xt=urn:btih:1f739d935676111cfff4b4693e3816e664797050&amp;dn=gpl-3.0.txt GPL-v3-or-Later
-     function CodeHighlightOn(elem, id)
-     {
-       var target = document.getElementById(id);
-       if(null != target) {
-         elem.classList.add("code-highlighted");
-         target.classList.add("code-highlighted");
-       }
-     }
-     function CodeHighlightOff(elem, id)
-     {
-       var target = document.getElementById(id);
-       if(null != target) {
-         elem.classList.remove("code-highlighted");
-         target.classList.remove("code-highlighted");
-       }
-     }
-// @license-end
-</script>
 </head>
 <body>
 <div id="preamble" class="status">
@@ -274,9 +70,9 @@
 <a href="./index.html">Home</a>
 </p>
 
-<div id="outline-container-org9efffe3" class="outline-2">
-<h2 id="org9efffe3">Preface</h2>
-<div class="outline-text-2" id="text-org9efffe3">
+<div id="outline-container-org37b4934" class="outline-2">
+<h2 id="org37b4934">Preface</h2>
+<div class="outline-text-2" id="text-org37b4934">
 <p>
 The Meditations by Marcus Aurelius opens with an entire chapter where he expresses his appreciation for his inner circle. He goes through the key people in his life and what wisdom he learned from each of them. There is a subtle point here. This isn't just a shout-out to the good people in his life. He's looking at these people the way Christians look at Bible verses: deeply contemplating the wisdom they reveal after being around them for years, if not decades.
 </p>
@@ -287,9 +83,9 @@ This had such an impact on my thinking that I decided to do the same thing here.
 </div>
 </div>
 
-<div id="outline-container-orgf3f3291" class="outline-2">
-<h2 id="orgf3f3291">My mom</h2>
-<div class="outline-text-2" id="text-orgf3f3291">
+<div id="outline-container-org7104198" class="outline-2">
+<h2 id="org7104198">My mom</h2>
+<div class="outline-text-2" id="text-org7104198">
 <p>
 My mom taught me how to be tough. Her husband, my father, got diagnosed with brain cancer when she was in her late 20s and pregnant with her second child, my sister. He died a few years later, leaving Mom to raise us by herself. She never complained. She never said the kinds of things one might say in these situations: "woe is me&#x2026;my husband is gone" or "you little shits are standing in the way between me and a halfway decent life."
 </p>
@@ -304,9 +100,9 @@ Also, we have the same sense of humor. There are moments from my childhood where
 </div>
 </div>
 
-<div id="outline-container-org9e4cbfe" class="outline-2">
-<h2 id="org9e4cbfe">My dad</h2>
-<div class="outline-text-2" id="text-org9e4cbfe">
+<div id="outline-container-org4e6e706" class="outline-2">
+<h2 id="org4e6e706">My dad</h2>
+<div class="outline-text-2" id="text-org4e6e706">
 <p>
 I only have memories of him up to the age of 5. But I clung onto every memory that I had of him, so I remember a lot. Like Mom, he put his best foot forward toward us even when he was dying of cancer. Of note, he was optimistic to the end. This might have helped him put his best foot forward. So he taught me that optimism is useful. He taught me how to act in the face of hardship. 
 </p>
@@ -317,9 +113,9 @@ He taught me how to be in line with nature. He had a German Shepherd who he spen
 </div>
 </div>
 
-<div id="outline-container-org7ed7997" class="outline-2">
-<h2 id="org7ed7997">My stepdad</h2>
-<div class="outline-text-2" id="text-org7ed7997">
+<div id="outline-container-org3de0f33" class="outline-2">
+<h2 id="org3de0f33">My stepdad</h2>
+<div class="outline-text-2" id="text-org3de0f33">
 <p>
 My stepdad was raised in one of the meanest parts of town, in the gang-ridden days of the 80s and 90s. To sum up a bunch of crazy stories, he did what he had to do to survive. When he tells me about the situations he was repeatedly in, I question whether I would be able to rise up to the challenge if it were me. This is an important reality check. 
 </p>
@@ -330,9 +126,9 @@ My stepdad taught me that some people are tested much more than others. And impo
 </div>
 </div>
 
-<div id="outline-container-org0683878" class="outline-2">
-<h2 id="org0683878">My sister</h2>
-<div class="outline-text-2" id="text-org0683878">
+<div id="outline-container-org8801d57" class="outline-2">
+<h2 id="org8801d57">My sister</h2>
+<div class="outline-text-2" id="text-org8801d57">
 <p>
 My sister has the opposite brain to mine. I'm the math/science guy, and she's the artist. She taught me that you have to figure out a way to pursue what you enjoy. She was going the nursing route and was miserable. But as soon as she switched to graphic design, her life completely changed. She became Associate Creative Director of a graphic design firm by the time she was 30, and now she's balancing that with being a mother. 
 </p>
@@ -347,17 +143,17 @@ She taught me the value of the companionship you get with a sibling. I call myse
 </div>
 </div>
 
-<div id="outline-container-org75bf5d3" class="outline-2">
-<h2 id="org75bf5d3">My sister's husband</h2>
-<div class="outline-text-2" id="text-org75bf5d3">
+<div id="outline-container-org3824bfa" class="outline-2">
+<h2 id="org3824bfa">My sister's husband</h2>
+<div class="outline-text-2" id="text-org3824bfa">
 <p>
 When my sister's husband was in his 20s, his parents offered to help him financially while he was in school. He wanted to be independent for the first time, so he refused, got an evening job at a restaurant to pay the bills, completed his college education, and became a successful graphic designer. He can proudly say that he did all of this independent of his family. This story stands out because I simply don't hear things like this very often. He taught me than when life gives you lemons, sometimes the right move is to say "nah, I'm good." 
 </p>
 </div>
 </div>
-<div id="outline-container-org7cfb93b" class="outline-2">
-<h2 id="org7cfb93b">Uncle John</h2>
-<div class="outline-text-2" id="text-org7cfb93b">
+<div id="outline-container-org3309ef5" class="outline-2">
+<h2 id="org3309ef5">Uncle John</h2>
+<div class="outline-text-2" id="text-org3309ef5">
 <p>
 I call him Uncle John, but he's really Dad's best friend. It took me a few years to figure that out. When Dad got sick, Uncle John and his wife Sherie-Ann stepped in. They took a lot of the parenting burden off of Mom, at least on the weekends.
 </p>
@@ -384,9 +180,9 @@ Uncle John taught me that you can have a huge impact on a child, and be a father
 </div>
 </div>
 
-<div id="outline-container-orgfdf13c5" class="outline-2">
-<h2 id="orgfdf13c5">Aunt Sherie-Ann</h2>
-<div class="outline-text-2" id="text-orgfdf13c5">
+<div id="outline-container-orgda1d78c" class="outline-2">
+<h2 id="orgda1d78c">Aunt Sherie-Ann</h2>
+<div class="outline-text-2" id="text-orgda1d78c">
 <p>
 Uncle John's wife. They never had kids but she and Uncle John took care of my sister and me quite often after my dad passed away. There is a common lament in the western world these days that kids are viewed as a burden. My friend Harrison is from Tanzania, and he says back home kids are viewed as a blessing, and that permeates Tanzanian culture. Now if there is anyone in the western world who is an exception and views kids as a blessing, it's Sherie-Ann.
 </p>
@@ -397,9 +193,9 @@ When we would go over there to spend one or two nights with them, she had everyt
 </div>
 </div>
 
-<div id="outline-container-org3313e75" class="outline-2">
-<h2 id="org3313e75">Grandma Anna</h2>
-<div class="outline-text-2" id="text-org3313e75">
+<div id="outline-container-org18c86c5" class="outline-2">
+<h2 id="org18c86c5">Grandma Anna</h2>
+<div class="outline-text-2" id="text-org18c86c5">
 <p>
 My mom's mom. The best way to describe her: if I came across her talking to a literal angel, I would not be surprised. She was Christianity done right. I'm not religious today, but I respect people who can take and exemplify the best of what religion has to offer. It is because of her that I still revisit the Bible from time to time.
 </p>
@@ -410,9 +206,9 @@ This seems to be a common theme in my family, but she also taught me a few lesso
 </div>
 </div>
 
-<div id="outline-container-org560c893" class="outline-2">
-<h2 id="org560c893">My wife</h2>
-<div class="outline-text-2" id="text-org560c893">
+<div id="outline-container-org2687082" class="outline-2">
+<h2 id="org2687082">My wife</h2>
+<div class="outline-text-2" id="text-org2687082">
 <p>
 In-line with the themes of this piece, my wife taught me how to be tough. I'm the kind of person who will go to the doctor when I have a paper cut, and stay home when I'm feeling slightly off. She'll work a 12 hour shift with a full-on migraine (if you've ever experienced that) and somehow find the energy to survive the day. I want to take care of her, but I also know that she's in no way dependent on me. 
 </p>
@@ -431,18 +227,18 @@ She got me into the humanities, which originally had more of a negative connotat
 </div>
 </div>
 
-<div id="outline-container-org2d8a936" class="outline-2">
-<h2 id="org2d8a936">Eric N</h2>
-<div class="outline-text-2" id="text-org2d8a936">
+<div id="outline-container-orgfad8285" class="outline-2">
+<h2 id="orgfad8285">Eric N</h2>
+<div class="outline-text-2" id="text-orgfad8285">
 <p>
 Eric, my friend since middle school, taught me what it means to be adventurous. Have you ever decided against something because it was uncomfortable? Eric hasn't. He taught me to push past my comfort zone and try new things. Every time he tried a new thing and told me about it, I felt compelled to try a new thing and tell him about it. So it helps me to always ask the question "what would Eric do?" Do you remember those <a href="https://www.youtube.com/watch?v=L8nt94LCyqY">Most Interesting Man in the World</a> commercials? That's what 70 year old Eric is going to be if he keeps it up. Eric taught me to "stay thirsty, my friends."
 </p>
 </div>
 </div>
 
-<div id="outline-container-orgdeb701c" class="outline-2">
-<h2 id="orgdeb701c">Uncle Nigel</h2>
-<div class="outline-text-2" id="text-orgdeb701c">
+<div id="outline-container-org11daa34" class="outline-2">
+<h2 id="org11daa34">Uncle Nigel</h2>
+<div class="outline-text-2" id="text-org11daa34">
 <p>
 My mom's younger brother. The professor of the family. In the sixth grade, I was bored and was getting chastised by my teacher (in a constructive way) because I simply couldn't pay attention. I was hooked on coming up with quicker ways to do whatever the math was. Of course, this gets in the way of teaching. It was Uncle Nigel who encouraged me to keep going.
 </p>
@@ -453,18 +249,18 @@ Uncle Nigel was the archetype of what I could become if I pursued a PhD, which I
 </div>
 </div>
 
-<div id="outline-container-orgf8edac6" class="outline-2">
-<h2 id="orgf8edac6">Aunt Lisa</h2>
-<div class="outline-text-2" id="text-orgf8edac6">
+<div id="outline-container-org9be58aa" class="outline-2">
+<h2 id="org9be58aa">Aunt Lisa</h2>
+<div class="outline-text-2" id="text-org9be58aa">
 <p>
 The wife of Uncle Nigel. She was a consultant and leadership coach who started from nothing and retired at the age of 40, to give you an idea of how she did financially. She taught me what it means to make a moment live up to its full potential. She's the kind of person who will say "Let's make a haiku on the spot to capture this event. Who wants to start?" The rest of the world captures events with smartphone cameras. Aunt Lisa taught me the value of the former. Another example: she had some family members come over for a couple of beers. Rather than us just casually drinking beers, she turned it into a blind beer tasting event. The cans were covered up. She made a grid of beer number x [color, smell, taste, guess the beer] for each of us, that we would fill out as we went. They were all high-end beers, except the last one, which was Budweiser. We were all clowned into writing nice things about the low quality beer (maybe it's a good beer afterall). She taught me to take every little moment seriously. Ask yourself, "what could I do to make this moment better, more special, more memorable?" That is what Aunt Lisa taught me to do. 
 </p>
 </div>
 </div>
 
-<div id="outline-container-org8cd3f03" class="outline-2">
-<h2 id="org8cd3f03">Uncle Mark</h2>
-<div class="outline-text-2" id="text-org8cd3f03">
+<div id="outline-container-org4b9b8bf" class="outline-2">
+<h2 id="org4b9b8bf">Uncle Mark</h2>
+<div class="outline-text-2" id="text-org4b9b8bf">
 <p>
 My mom's older brother. He was a Deputy Sheriff for the majority of my childhood, and is now retired. He would come over sometimes in full uniform. I remember him showing me his nightstick and gun. I remember feeling safe around him. I think this formed a positive impression of law enforcement at an early age. He taught me that despite the current sentiment, some cops are good.
 </p>
@@ -483,9 +279,9 @@ Oh, and he's really funny in the face of hard times. He had a very tough job. Bu
 </div>
 </div>
 
-<div id="outline-container-orgb266f04" class="outline-2">
-<h2 id="orgb266f04">Uncle Bob</h2>
-<div class="outline-text-2" id="text-orgb266f04">
+<div id="outline-container-org2217d0f" class="outline-2">
+<h2 id="org2217d0f">Uncle Bob</h2>
+<div class="outline-text-2" id="text-org2217d0f">
 <p>
 My mom's oldest brother. The life of the party at the group level, kind and compassionate at the one-on-one level. Whenever I learned a new funny joke in school, it was always Uncle Bob that I was looking forward to telling.
 </p>
@@ -504,9 +300,9 @@ This is how I approach quite a lot of things in my life these days. The object o
 </div>
 </div>
 
-<div id="outline-container-orgdfc3366" class="outline-2">
-<h2 id="orgdfc3366">Uncle Bill</h2>
-<div class="outline-text-2" id="text-orgdfc3366">
+<div id="outline-container-org34127ae" class="outline-2">
+<h2 id="org34127ae">Uncle Bill</h2>
+<div class="outline-text-2" id="text-org34127ae">
 <p>
 My dad's older brother. Think of the unhealthy thing that you crave the most in life. Your biggest guilty pleasure. Now imagine the craving gnawing at you every day, especially at your low points. And imagine that at every moment you say "not today." And you do that the next day. And the next day. For 30 years. My Uncle Bill, sober for that long, taught me that such self-restraint is possible. Something to think about the next time someone brings doughnuts to the office.
 </p>
@@ -517,9 +313,9 @@ Uncle Bill also catalyzed my love of music. He would always play the guitar at f
 </div>
 </div>
 
-<div id="outline-container-orgb8068a2" class="outline-2">
-<h2 id="orgb8068a2">Garry Nolan</h2>
-<div class="outline-text-2" id="text-orgb8068a2">
+<div id="outline-container-org3c9aedb" class="outline-2">
+<h2 id="org3c9aedb">Garry Nolan</h2>
+<div class="outline-text-2" id="text-org3c9aedb">
 <p>
 The professor of my thesis lab. He taught me what it really means to go for it. He taught me that if you're not happy with the path you're on, and any of the alternative paths, to create a path of your own. He's a professor and entrepreneur and innovator, but to even label him anything takes away from who he is. When I decided to learn computer science halfway through my time in grad school, he encouraged it. He knew that I would make something of it. I know plenty of people who would have told me that I was just distracting myself. He taught me that something good will come out of whatever you're doing, so you might as well go for it, whatever it is.
 </p>
