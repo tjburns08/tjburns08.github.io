@@ -164,7 +164,7 @@ Where you can see that "+" is PLUSOP, where x1 + x2 is defined.
 
 ** From C to Assembly
 
-So we started with 5 + 7 and now we are looking at an obscure switch statement in C. But if it is written in C, that means it is indirectly written in something deeper: machine code.
+So we started with 5 + 2 and now we are looking at an obscure switch statement in C. But if it is written in C, that means it is indirectly written in something deeper: machine code.
 
 C code compiles down to what is known as machine code, which is the zeros and ones that allow the program to execute. There is a human-readable representation of machine code called Assembly that allows one to actually read and understand what is going on, with proper training.
 
