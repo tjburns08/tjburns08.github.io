@@ -80,9 +80,9 @@ Charlie Munger
 </p>
 <hr />
 
-<div id="outline-container-orge78996f" class="outline-2">
-<h2 id="orge78996f">Introduction</h2>
-<div class="outline-text-2" id="text-orge78996f">
+<div id="outline-container-org46f3574" class="outline-2">
+<h2 id="org46f3574">Introduction</h2>
+<div class="outline-text-2" id="text-org46f3574">
 <p>
 One day, back in 2009, I decided to start a typed journal. I called it "the one sentence journal." The idea was that I would write at least one sentence per day for as long as possible. I had a hand-written journal for a few years prior, but because I was always in front of a computer, a typed journal would be an easier thing to do.
 </p>
@@ -100,7 +100,7 @@ Here is the word count up through the beginning of December:
 </p>
 
 
-<div id="orga508b9c" class="figure">
+<div id="orgec2fdd5" class="figure">
 <p><img src="images/2023-12-31_12-15-00_Screenshot 2023-12-31 at 12.13.17.png" alt="2023-12-31_12-15-00_Screenshot 2023-12-31 at 12.13.17.png" />
 </p>
 </div>
@@ -118,9 +118,9 @@ In this essay, I will talk about my million word introspection, and I will also 
 </p>
 </div>
 </div>
-<div id="outline-container-orga14bf0f" class="outline-2">
-<h2 id="orga14bf0f">Anatomy of the journal</h2>
-<div class="outline-text-2" id="text-orga14bf0f">
+<div id="outline-container-org45bfa6a" class="outline-2">
+<h2 id="org45bfa6a">Anatomy of the journal</h2>
+<div class="outline-text-2" id="text-org45bfa6a">
 <p>
 My journal was originally typed out in Microsoft Word. At some point, it got so bulky that even Word could not handle its size (it would take a long time to load all the pages so I could start writing). Furthermore, it was simply difficult to scroll through all of it, as it was expanding to hundreds of pages. Initially, I started breaking the document up into chunks with date ranges. Then, I discovered org mode.
 </p>
@@ -134,7 +134,7 @@ But the reason why org mode is applicable to journaling is the use of collapsabl
 </p>
 
 
-<div id="org25ad91c" class="figure">
+<div id="org92ee1bd" class="figure">
 <p><img src="images/2023-12-30_12-15-10_Screenshot 2023-12-30 at 12.15.04.png" alt="2023-12-30_12-15-10_Screenshot 2023-12-30 at 12.15.04.png" />
 </p>
 </div>
@@ -152,16 +152,16 @@ But anyway, back to the journal. What happens when you have written all this stu
 </p>
 </div>
 </div>
-<div id="outline-container-orge131339" class="outline-2">
-<h2 id="orge131339">Tools for exploration: mapper and nearest neighbor Search</h2>
-<div class="outline-text-2" id="text-orge131339">
+<div id="outline-container-org23d8f24" class="outline-2">
+<h2 id="org23d8f24">Tools for exploration: mapper and nearest neighbor Search</h2>
+<div class="outline-text-2" id="text-org23d8f24">
 <p>
 Here, we're going to talk about the tools that I have used to review one million words of journaling. I'll give you the general structure here. If you're not interested in the technical details, then please skip to the next section where you'll be able to see the results.
 </p>
 </div>
-<div id="outline-container-orgd7a4c0a" class="outline-3">
-<h3 id="orgd7a4c0a">Reading in the org mode file</h3>
-<div class="outline-text-3" id="text-orgd7a4c0a">
+<div id="outline-container-org3a87d20" class="outline-3">
+<h3 id="org3a87d20">Reading in the org mode file</h3>
+<div class="outline-text-3" id="text-org3a87d20">
 <p>
 In short, I read the org mode file line by line. I have the journal set up such that each paragraph is a single line, separated by an empty line, similar to the way I wrote this essay (which was also written in org mode). To get rid of the year/date/time lines, I exclude anything that starts with an asterisk (which is how you do a bullet point in org mode).
 </p>
@@ -171,34 +171,34 @@ The year is preceeded by one asterisk (<code>* 2023</code>). The day is preceede
 </p>
 
 <div class="org-src-container">
-<pre class="src src-python"><span class="org-comment-delimiter"># </span><span class="org-comment">Function to read and process the org file</span>
-<span class="org-keyword">def</span> <span class="org-function-name">read_org_file</span>(file_path):
-    <span class="org-keyword">with</span> <span class="org-builtin">open</span>(file_path, <span class="org-string">'r'</span>, encoding=<span class="org-string">'utf-8'</span>) <span class="org-keyword">as</span> <span class="org-builtin">file</span>:
-        content = <span class="org-builtin">file</span>.readlines()
+<pre class="src src-python"><span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">Function to read and process the org file</span>
+<span style="font-weight: bold;">def</span> <span style="font-weight: bold;">read_org_file</span>(file_path):
+    <span style="font-weight: bold;">with</span> <span style="font-weight: bold;">open</span>(file_path, <span style="font-style: italic;">'r'</span>, encoding=<span style="font-style: italic;">'utf-8'</span>) <span style="font-weight: bold;">as</span> <span style="font-weight: bold;">file</span>:
+        content = <span style="font-weight: bold;">file</span>.readlines()
 
-    <span class="org-variable-name">year</span>, <span class="org-variable-name">day</span>, <span class="org-variable-name">time</span> = <span class="org-constant">None</span>, <span class="org-constant">None</span>, <span class="org-constant">None</span>
+    <span style="font-weight: bold; font-style: italic;">year</span>, <span style="font-weight: bold; font-style: italic;">day</span>, <span style="font-weight: bold; font-style: italic;">time</span> = <span style="font-weight: bold; text-decoration: underline;">None</span>, <span style="font-weight: bold; text-decoration: underline;">None</span>, <span style="font-weight: bold; text-decoration: underline;">None</span>
     paragraphs = []
-    paragraph_details = []  <span class="org-comment-delimiter"># </span><span class="org-comment">To store year, day, and time</span>
+    paragraph_details = []  <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">To store year, day, and time</span>
 
-    <span class="org-keyword">for</span> line <span class="org-keyword">in</span> content:
+    <span style="font-weight: bold;">for</span> line <span style="font-weight: bold;">in</span> content:
         line = line.strip()
-        <span class="org-keyword">if</span> line.startswith(<span class="org-string">'**** '</span>):
-            time = line.strip(<span class="org-string">'* '</span>)
-        <span class="org-keyword">elif</span> line.startswith(<span class="org-string">'*** '</span>):
-            day = line.strip(<span class="org-string">'* '</span>)
-        <span class="org-keyword">elif</span> line.startswith(<span class="org-string">'* 20'</span>):
-            year = line.strip(<span class="org-string">'* '</span>)
-        <span class="org-keyword">elif</span> line <span class="org-keyword">and</span> <span class="org-keyword">not</span> line.isspace():  <span class="org-comment-delimiter"># </span><span class="org-comment">Check if line is a non-empty paragraph</span>
+        <span style="font-weight: bold;">if</span> line.startswith(<span style="font-style: italic;">'**** '</span>):
+            time = line.strip(<span style="font-style: italic;">'* '</span>)
+        <span style="font-weight: bold;">elif</span> line.startswith(<span style="font-style: italic;">'*** '</span>):
+            day = line.strip(<span style="font-style: italic;">'* '</span>)
+        <span style="font-weight: bold;">elif</span> line.startswith(<span style="font-style: italic;">'* 20'</span>):
+            year = line.strip(<span style="font-style: italic;">'* '</span>)
+        <span style="font-weight: bold;">elif</span> line <span style="font-weight: bold;">and</span> <span style="font-weight: bold;">not</span> line.isspace():  <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">Check if line is a non-empty paragraph</span>
             paragraphs.append(line)
-            paragraph_details.append({<span class="org-string">'year'</span>: year, <span class="org-string">'day'</span>: day, <span class="org-string">'time'</span>: time})
-    <span class="org-keyword">return</span> paragraphs, paragraph_details
+            paragraph_details.append({<span style="font-style: italic;">'year'</span>: year, <span style="font-style: italic;">'day'</span>: day, <span style="font-style: italic;">'time'</span>: time})
+    <span style="font-weight: bold;">return</span> paragraphs, paragraph_details
 </pre>
 </div>
 </div>
 </div>
-<div id="outline-container-org1d25c08" class="outline-3">
-<h3 id="org1d25c08">Create word embeddings</h3>
-<div class="outline-text-3" id="text-org1d25c08">
+<div id="outline-container-org2acd50a" class="outline-3">
+<h3 id="org2acd50a">Create word embeddings</h3>
+<div class="outline-text-3" id="text-org2acd50a">
 <p>
 The word embeddings are created using the BERT language model. This has been around for a while, but it differs from the GPT-based models in a very important way. While the GPTs function as chatbots, BERT simply takes the strings (words/sentences/paragraphs) its given and embeds them into a high-dimensional vector space, where strings that are similar to each other in context will be physically nearer to each other in this vector space. In other words, the sentence "I played fetch with my dog" will in theory be located nearer to "I walked my dog" than "The clown rode the unicycle." The first two sentences involve things you do with your dog, so they're grouped together.
 </p>
@@ -208,31 +208,31 @@ Specifically, the model I've been using is called <a href="https://huggingface.c
 </p>
 
 <div class="org-src-container">
-<pre class="src src-python"><span class="org-keyword">from</span> sentence_transformers <span class="org-keyword">import</span> SentenceTransformer
-<span class="org-keyword">import</span> numpy <span class="org-keyword">as</span> np
+<pre class="src src-python"><span style="font-weight: bold;">from</span> sentence_transformers <span style="font-weight: bold;">import</span> SentenceTransformer
+<span style="font-weight: bold;">import</span> numpy <span style="font-weight: bold;">as</span> np
 
-<span class="org-variable-name">model</span> = SentenceTransformer(<span class="org-string">'all-mpnet-base-v2'</span>)
+<span style="font-weight: bold; font-style: italic;">model</span> = SentenceTransformer(<span style="font-style: italic;">'all-mpnet-base-v2'</span>)
 
-<span class="org-keyword">def</span> <span class="org-function-name">embed_paragraphs</span>(paragraphs, embeddings_file=<span class="org-string">'embeddings.npy'</span>):
-    <span class="org-comment-delimiter"># </span><span class="org-comment">Check if embeddings file exists</span>
-    <span class="org-keyword">if</span> os.path.exists(embeddings_file):
-        <span class="org-builtin">print</span>(<span class="org-string">"Loading embeddings from file..."</span>)
-        <span class="org-comment-delimiter"># </span><span class="org-comment">Load embeddings</span>
-        embeddings = np.load(embeddings_file, allow_pickle=<span class="org-constant">True</span>)
-    <span class="org-keyword">else</span>:
-        <span class="org-builtin">print</span>(<span class="org-string">"Embedding paragraphs..."</span>)
-        <span class="org-comment-delimiter"># </span><span class="org-comment">Compute embeddings</span>
-        embeddings = model.encode(paragraphs, show_progress_bar=<span class="org-constant">True</span>)
-        <span class="org-comment-delimiter"># </span><span class="org-comment">Save embeddings</span>
+<span style="font-weight: bold;">def</span> <span style="font-weight: bold;">embed_paragraphs</span>(paragraphs, embeddings_file=<span style="font-style: italic;">'embeddings.npy'</span>):
+    <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">Check if embeddings file exists</span>
+    <span style="font-weight: bold;">if</span> os.path.exists(embeddings_file):
+        <span style="font-weight: bold;">print</span>(<span style="font-style: italic;">"Loading embeddings from file..."</span>)
+        <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">Load embeddings</span>
+        embeddings = np.load(embeddings_file, allow_pickle=<span style="font-weight: bold; text-decoration: underline;">True</span>)
+    <span style="font-weight: bold;">else</span>:
+        <span style="font-weight: bold;">print</span>(<span style="font-style: italic;">"Embedding paragraphs..."</span>)
+        <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">Compute embeddings</span>
+        embeddings = model.encode(paragraphs, show_progress_bar=<span style="font-weight: bold; text-decoration: underline;">True</span>)
+        <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">Save embeddings</span>
         np.save(embeddings_file, embeddings)
-    <span class="org-keyword">return</span> embeddings
+    <span style="font-weight: bold;">return</span> embeddings
 </pre>
 </div>
 </div>
 </div>
-<div id="outline-container-org00825df" class="outline-3">
-<h3 id="org00825df">Reduce the embedding to 2 dimensions using UMAP</h3>
-<div class="outline-text-3" id="text-org00825df">
+<div id="outline-container-orgf6ea311" class="outline-3">
+<h3 id="orgf6ea311">Reduce the embedding to 2 dimensions using UMAP</h3>
+<div class="outline-text-3" id="text-orgf6ea311">
 <p>
 So now you have a two dimensional array of 768-dimensional vectors that correspond to each paragraph that you upladed. What happens now? Well, my PhD thesis was in high-dimensional single-cell analysis (CyTOF), which is a very visual field. We used nonlinear dimension reduction to visualize our outputs to quickly get a feel for what's there. If you want to see some of my work on that, go <a href="https://tjburns08.github.io/tjb_dimr_talk.pdf">here</a>. Anyway, as critical as I am about these tools (if you look at the previous link), I am still all for the narrow use case of quickly getting a feel for what's there. In the context of creating a map of journal entries, where each entry is a point, you can think of it as "thought space."
 </p>
@@ -246,19 +246,19 @@ The code for doing such a thing is below. Note that we're also saving the umap e
 </p>
 
 <div class="org-src-container">
-<pre class="src src-python"><span class="org-keyword">def</span> <span class="org-function-name">compute_and_save_umap_embeddings</span>(embeddings, umap_file=<span class="org-string">'umap_embeddings.npy'</span>):
-    <span class="org-builtin">print</span>(<span class="org-string">"Applying UMAP..."</span>)
-    umap_reducer = umap.UMAP(n_neighbors=15, n_components=2, min_dist=0.1, metric=<span class="org-string">'cosine'</span>)
+<pre class="src src-python"><span style="font-weight: bold;">def</span> <span style="font-weight: bold;">compute_and_save_umap_embeddings</span>(embeddings, umap_file=<span style="font-style: italic;">'umap_embeddings.npy'</span>):
+    <span style="font-weight: bold;">print</span>(<span style="font-style: italic;">"Applying UMAP..."</span>)
+    umap_reducer = umap.UMAP(n_neighbors=15, n_components=2, min_dist=0.1, metric=<span style="font-style: italic;">'cosine'</span>)
     umap_embeddings = umap_reducer.fit_transform(embeddings)
     np.save(umap_file, umap_embeddings)
-    <span class="org-keyword">return</span> umap_embeddings
+    <span style="font-weight: bold;">return</span> umap_embeddings
 </pre>
 </div>
 </div>
 </div>
-<div id="outline-container-orgf7d8bab" class="outline-3">
-<h3 id="orgf7d8bab">Nearest neighbor searches</h3>
-<div class="outline-text-3" id="text-orgf7d8bab">
+<div id="outline-container-orgc613bcd" class="outline-3">
+<h3 id="orgc613bcd">Nearest neighbor searches</h3>
+<div class="outline-text-3" id="text-orgc613bcd">
 <p>
 We also want to be able to do nearest neighbor searches on a given journal entry (or new text entrely) that allows us to see if we have written similar things in the past. This allows me to track ideas from their inception to the present moment. This work builds off of some previous work that I did <a href="https://tjburns08.github.io/ask_marcus_writeup.html">here</a>, involving nearest neighbor searches between new text and the Meditations by Marcus Aurelius (when I first started reading the Stoic texts a few years ago). This is in turn built off of my <a href="https://www.biorxiv.org/content/10.1101/337485v1">second publication</a>, which remained a pre-print due to a combination of "reviewer number 3" and just being busy with moving to another country and starting my business. Anyway, my paper used k-nearest neighbors to analyze CyTOF data in many ways, while the rest of the field at the time was fixated on clustering.
 </p>
@@ -268,39 +268,39 @@ Here, I'm taking a given text, and returning the k-nearest neighbor entries from
 </p>
 
 <div class="org-src-container">
-<pre class="src src-python"><span class="org-keyword">from</span> sklearn.metrics.pairwise <span class="org-keyword">import</span> cosine_similarity
-<span class="org-keyword">import</span> numpy <span class="org-keyword">as</span> np
+<pre class="src src-python"><span style="font-weight: bold;">from</span> sklearn.metrics.pairwise <span style="font-weight: bold;">import</span> cosine_similarity
+<span style="font-weight: bold;">import</span> numpy <span style="font-weight: bold;">as</span> np
 
-<span class="org-keyword">def</span> <span class="org-function-name">find_nearest_neighbors</span>(query_embedding, all_embeddings, top_k=10):
+<span style="font-weight: bold;">def</span> <span style="font-weight: bold;">find_nearest_neighbors</span>(query_embedding, all_embeddings, top_k=10):
     similarities = cosine_similarity(query_embedding, all_embeddings)[0]
     top_indices = np.argsort(similarities)[-top_k:][::-1]
-    <span class="org-keyword">return</span> top_indices
+    <span style="font-weight: bold;">return</span> top_indices
 </pre>
 </div>
 </div>
 </div>
-<div id="outline-container-orge106125" class="outline-3">
-<h3 id="orge106125">Web interface</h3>
-<div class="outline-text-3" id="text-orge106125">
+<div id="outline-container-org651e634" class="outline-3">
+<h3 id="org651e634">Web interface</h3>
+<div class="outline-text-3" id="text-org651e634">
 <p>
 In order to make these tools easy to use, I built web interface around them. I made two web interfaces. One for the map-based analysis and one for the nearest neighbor search. I did these both using the <a href="https://github.com/plotly/dash">Plotly Dash</a> framework. It was originally quite some work to figure out how everything tied together (here is a <a href="https://dash.plotly.com/layout">tutorial</a> that I used), but now ChatGPT allows me to quickly change the UI/UX to fit my needs. Accordingly, I'll avoid the details here, but you can go the source code that I provide so you can see what the back end looks like. The next section will show you what the front end looks like as a side effect of the main point: the analysis.
 </p>
 </div>
 </div>
 </div>
-<div id="outline-container-orgd94ad4b" class="outline-2">
-<h2 id="orgd94ad4b">Deep dives into the self</h2>
-<div class="outline-text-2" id="text-orgd94ad4b">
+<div id="outline-container-org913efbc" class="outline-2">
+<h2 id="org913efbc">Deep dives into the self</h2>
+<div class="outline-text-2" id="text-org913efbc">
 </div>
-<div id="outline-container-orgfda9563" class="outline-3">
-<h3 id="orgfda9563">Thought space</h3>
-<div class="outline-text-3" id="text-orgfda9563">
+<div id="outline-container-orgd30541f" class="outline-3">
+<h3 id="orgd30541f">Thought space</h3>
+<div class="outline-text-3" id="text-orgd30541f">
 <p>
 The transformed sentences compressed into a UMAP representation present an approximation of what I call thought space. I have a UI that allows for the querying of this thought space, in which paragraphs that are similar to each other in context will physically group near each other. The UI looks like this:
 </p>
 
 
-<div id="org12dfe69" class="figure">
+<div id="org68aea72" class="figure">
 <p><img src="images/2024-01-11_17-05-38_Screenshot 2024-01-11 at 17.05.35.png" alt="2024-01-11_17-05-38_Screenshot 2024-01-11 at 17.05.35.png" />
 </p>
 </div>
@@ -315,7 +315,7 @@ When I saw this map, which runs until the end of 2023, the big question on my mi
 
 
 
-<div id="org552fcdb" class="figure">
+<div id="orge0c4ebe" class="figure">
 <p><img src="images/2024-01-11_17-10-09_Screenshot 2024-01-11 at 17.10.06.png" alt="2024-01-11_17-10-09_Screenshot 2024-01-11 at 17.10.06.png" />
 </p>
 </div>
@@ -329,7 +329,7 @@ But for the sake of my readers, let's delve a bit into science, as it is a large
 </p>
 
 
-<div id="org48fabcb" class="figure">
+<div id="orgdb904c8" class="figure">
 <p><img src="images/2024-01-11_17-31-42_Screenshot 2024-01-11 at 17.31.36.png" alt="2024-01-11_17-31-42_Screenshot 2024-01-11 at 17.31.36.png" />
 </p>
 </div>
@@ -343,7 +343,7 @@ The last observation I'll note is that there are certain keywords that bridge th
 </p>
 
 
-<div id="org616c161" class="figure">
+<div id="orgd5422f1" class="figure">
 <p><img src="images/2024-01-11_17-44-40_Screenshot 2024-01-11 at 17.44.38.png" alt="2024-01-11_17-44-40_Screenshot 2024-01-11 at 17.44.38.png" />
 </p>
 </div>
@@ -361,7 +361,7 @@ But those who know me well will know that I'm also obsessed with all things heal
 </p>
 
 
-<div id="orga41bc80" class="figure">
+<div id="orgeb6e88b" class="figure">
 <p><img src="images/2024-01-11_17-51-18_Screenshot 2024-01-11 at 17.51.15.png" alt="2024-01-11_17-51-18_Screenshot 2024-01-11 at 17.51.15.png" />
 </p>
 </div>
@@ -369,9 +369,9 @@ But those who know me well will know that I'm also obsessed with all things heal
 </div>
 
 
-<div id="outline-container-orgbc7551c" class="outline-3">
-<h3 id="orgbc7551c">You've written about this before</h3>
-<div class="outline-text-3" id="text-orgbc7551c">
+<div id="outline-container-org0237e69" class="outline-3">
+<h3 id="org0237e69">You've written about this before</h3>
+<div class="outline-text-3" id="text-org0237e69">
 <p>
 In reviewing my entries, I have noticed that there are ideas that I think are new, but I find that I actually wrote about it in the past, sometimes years ago. I also find particular "moods" that I stumble into where I write a particular way about particular things. I want to be able to see these kinds of things in real time. This is where the nearest neighbor search comes in.
 </p>
@@ -396,7 +396,7 @@ Ok, place that into the search bar and we get (the text is small, so I'll explai
 </p>
 
 
-<div id="org92edc04" class="figure">
+<div id="org965d3c0" class="figure">
 <p><img src="images/2023-12-30_14-52-11_Screenshot 2023-12-30 at 14.52.06.png" alt="2023-12-30_14-52-11_Screenshot 2023-12-30 at 14.52.06.png" />
 </p>
 </div>
@@ -415,13 +415,13 @@ Note that the same way you can go down rabbit holes on YouTube by simply clickin
 </div>
 </div>
 </div>
-<div id="outline-container-org83c4f74" class="outline-2">
-<h2 id="org83c4f74">Conclusions</h2>
-<div class="outline-text-2" id="text-org83c4f74">
+<div id="outline-container-org4c5ba07" class="outline-2">
+<h2 id="org4c5ba07">Conclusions</h2>
+<div class="outline-text-2" id="text-org4c5ba07">
 </div>
-<div id="outline-container-orgd3754aa" class="outline-3">
-<h3 id="orgd3754aa">Journaling is good</h3>
-<div class="outline-text-3" id="text-orgd3754aa">
+<div id="outline-container-org1a73876" class="outline-3">
+<h3 id="org1a73876">Journaling is good</h3>
+<div class="outline-text-3" id="text-org1a73876">
 <p>
 The most important thing that I want to convey in this article is that keeping a journal for a long time is a very good thing to do. Aside from the benefits of daily journaling, it makes it easier to live an examined life. It is very interesting, and very fun to look at where I was at a decade ago, both in terms of what I was up to, and what I was feeling at the time. There are often contrasts between what I remember and what I actually wrote down. I anticipate that this will continue to become more interesting, beneficial, and fun as time goes by and my journal continues to grow.
 </p>
@@ -431,9 +431,9 @@ The use of plain text and the use of org mode in particular has made it much eas
 </p>
 </div>
 </div>
-<div id="outline-container-org3d2dfc6" class="outline-3">
-<h3 id="org3d2dfc6">An automated Zettelkasten</h3>
-<div class="outline-text-3" id="text-org3d2dfc6">
+<div id="outline-container-orgb217acc" class="outline-3">
+<h3 id="orgb217acc">An automated Zettelkasten</h3>
+<div class="outline-text-3" id="text-orgb217acc">
 <p>
 At the time of writing <span class="timestamp-wrapper"><span class="timestamp">[2023-12-30 Sat] </span></span> there are tools that are making a particular type of linked note taking popular. This is known as the <a href="https://en.wikipedia.org/wiki/Zettelkasten">Zettelkasten</a> (German for slip box) style of note taking. The easiest way to understand what this is would be to browse Obsidian's <a href="https://obsidian.md/">note taking system</a>. You take notes and you link them until you have a personal wiki that you can either click through (like hyperlinks on Wikipedia) or view the entire network.
 </p>
@@ -451,9 +451,9 @@ Of course, the use case that I'm talking about here is my journal. However, if t
 </p>
 </div>
 </div>
-<div id="outline-container-orged60ba1" class="outline-3">
-<h3 id="orged60ba1">Who am I?</h3>
-<div class="outline-text-3" id="text-orged60ba1">
+<div id="outline-container-org32e0b30" class="outline-3">
+<h3 id="org32e0b30">Who am I?</h3>
+<div class="outline-text-3" id="text-org32e0b30">
 <p>
 I am assuming that everyone asks the question "who am I" from time to time. This is a particularly difficult question, as the passage of life makes the self concept rather dynamic. However, a million words of written journal over 15 years can start to get at this question a little bit. Looking each paragraph of my journal entries in a map form, thought space, and later interrogation of what was written in each region of thought space, allowed me to test my self concept against what I actually have been writing down over the years. Doing such a thing only really works if your journal entries are faily unfiltered. Doing this on your social media posts probably will not provide very much insight into who you actually are, though it may offer utility when coloring it by engagement metrics.
 </p>
@@ -467,9 +467,9 @@ So who am I? My tech-enabled journal review suggests that I am a lot of things. 
 </p>
 </div>
 </div>
-<div id="outline-container-org48d6701" class="outline-3">
-<h3 id="org48d6701">Additional use cases and future directions</h3>
-<div class="outline-text-3" id="text-org48d6701">
+<div id="outline-container-org1013c90" class="outline-3">
+<h3 id="org1013c90">Additional use cases and future directions</h3>
+<div class="outline-text-3" id="text-org1013c90">
 <p>
 I take a lot of notes on the computer. I used to keep everything in Evernote, but now I'm keeping everything in org mode files that are orgnized in a way that is similar to my journal: by year/date/time. I use <a href="https://orgmode.org/manual/Tags.html">tags</a> if I want to drill into particular subjects, but otherwise I can use the same software to organize things automatically.
 </p>

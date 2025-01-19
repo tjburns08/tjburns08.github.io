@@ -20,7 +20,10 @@
 (require 'htmlize)
 
 ;; Enable syntax highlighting in exported HTML (dev)
-(setq org-html-htmlize-output-type 'inline-css)
+(setq org-html-htmlize-output-type 'css)
+
+;; Native fontify (dev)
+(setq org-src-fontify-natively t)
 
 ;; Load the publishing system
 (require 'ox-publish)
