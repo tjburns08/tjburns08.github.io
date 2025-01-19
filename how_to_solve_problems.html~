@@ -7,190 +7,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>What I learned about problem solving from my thesis lab</title>
 <meta name="generator" content="Org Mode" />
-<style>
-  #content { max-width: 60em; margin: auto; }
-  .title  { text-align: center;
-             margin-bottom: .2em; }
-  .subtitle { text-align: center;
-              font-size: medium;
-              font-weight: bold;
-              margin-top:0; }
-  .todo   { font-family: monospace; color: red; }
-  .done   { font-family: monospace; color: green; }
-  .priority { font-family: monospace; color: orange; }
-  .tag    { background-color: #eee; font-family: monospace;
-            padding: 2px; font-size: 80%; font-weight: normal; }
-  .timestamp { color: #bebebe; }
-  .timestamp-kwd { color: #5f9ea0; }
-  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
-  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
-  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
-  .underline { text-decoration: underline; }
-  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
-  p.verse { margin-left: 3%; }
-  pre {
-    border: 1px solid #e6e6e6;
-    border-radius: 3px;
-    background-color: #f2f2f2;
-    padding: 8pt;
-    font-family: monospace;
-    overflow: auto;
-    margin: 1.2em;
-  }
-  pre.src {
-    position: relative;
-    overflow: auto;
-  }
-  pre.src:before {
-    display: none;
-    position: absolute;
-    top: -8px;
-    right: 12px;
-    padding: 3px;
-    color: #555;
-    background-color: #f2f2f299;
-  }
-  pre.src:hover:before { display: inline; margin-top: 14px;}
-  /* Languages per Org manual */
-  pre.src-asymptote:before { content: 'Asymptote'; }
-  pre.src-awk:before { content: 'Awk'; }
-  pre.src-authinfo::before { content: 'Authinfo'; }
-  pre.src-C:before { content: 'C'; }
-  /* pre.src-C++ doesn't work in CSS */
-  pre.src-clojure:before { content: 'Clojure'; }
-  pre.src-css:before { content: 'CSS'; }
-  pre.src-D:before { content: 'D'; }
-  pre.src-ditaa:before { content: 'ditaa'; }
-  pre.src-dot:before { content: 'Graphviz'; }
-  pre.src-calc:before { content: 'Emacs Calc'; }
-  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
-  pre.src-fortran:before { content: 'Fortran'; }
-  pre.src-gnuplot:before { content: 'gnuplot'; }
-  pre.src-haskell:before { content: 'Haskell'; }
-  pre.src-hledger:before { content: 'hledger'; }
-  pre.src-java:before { content: 'Java'; }
-  pre.src-js:before { content: 'Javascript'; }
-  pre.src-latex:before { content: 'LaTeX'; }
-  pre.src-ledger:before { content: 'Ledger'; }
-  pre.src-lisp:before { content: 'Lisp'; }
-  pre.src-lilypond:before { content: 'Lilypond'; }
-  pre.src-lua:before { content: 'Lua'; }
-  pre.src-matlab:before { content: 'MATLAB'; }
-  pre.src-mscgen:before { content: 'Mscgen'; }
-  pre.src-ocaml:before { content: 'Objective Caml'; }
-  pre.src-octave:before { content: 'Octave'; }
-  pre.src-org:before { content: 'Org mode'; }
-  pre.src-oz:before { content: 'OZ'; }
-  pre.src-plantuml:before { content: 'Plantuml'; }
-  pre.src-processing:before { content: 'Processing.js'; }
-  pre.src-python:before { content: 'Python'; }
-  pre.src-R:before { content: 'R'; }
-  pre.src-ruby:before { content: 'Ruby'; }
-  pre.src-sass:before { content: 'Sass'; }
-  pre.src-scheme:before { content: 'Scheme'; }
-  pre.src-screen:before { content: 'Gnu Screen'; }
-  pre.src-sed:before { content: 'Sed'; }
-  pre.src-sh:before { content: 'shell'; }
-  pre.src-sql:before { content: 'SQL'; }
-  pre.src-sqlite:before { content: 'SQLite'; }
-  /* additional languages in org.el's org-babel-load-languages alist */
-  pre.src-forth:before { content: 'Forth'; }
-  pre.src-io:before { content: 'IO'; }
-  pre.src-J:before { content: 'J'; }
-  pre.src-makefile:before { content: 'Makefile'; }
-  pre.src-maxima:before { content: 'Maxima'; }
-  pre.src-perl:before { content: 'Perl'; }
-  pre.src-picolisp:before { content: 'Pico Lisp'; }
-  pre.src-scala:before { content: 'Scala'; }
-  pre.src-shell:before { content: 'Shell Script'; }
-  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
-  /* additional language identifiers per "defun org-babel-execute"
-       in ob-*.el */
-  pre.src-cpp:before  { content: 'C++'; }
-  pre.src-abc:before  { content: 'ABC'; }
-  pre.src-coq:before  { content: 'Coq'; }
-  pre.src-groovy:before  { content: 'Groovy'; }
-  /* additional language identifiers from org-babel-shell-names in
-     ob-shell.el: ob-shell is the only babel language using a lambda to put
-     the execution function name together. */
-  pre.src-bash:before  { content: 'bash'; }
-  pre.src-csh:before  { content: 'csh'; }
-  pre.src-ash:before  { content: 'ash'; }
-  pre.src-dash:before  { content: 'dash'; }
-  pre.src-ksh:before  { content: 'ksh'; }
-  pre.src-mksh:before  { content: 'mksh'; }
-  pre.src-posh:before  { content: 'posh'; }
-  /* Additional Emacs modes also supported by the LaTeX listings package */
-  pre.src-ada:before { content: 'Ada'; }
-  pre.src-asm:before { content: 'Assembler'; }
-  pre.src-caml:before { content: 'Caml'; }
-  pre.src-delphi:before { content: 'Delphi'; }
-  pre.src-html:before { content: 'HTML'; }
-  pre.src-idl:before { content: 'IDL'; }
-  pre.src-mercury:before { content: 'Mercury'; }
-  pre.src-metapost:before { content: 'MetaPost'; }
-  pre.src-modula-2:before { content: 'Modula-2'; }
-  pre.src-pascal:before { content: 'Pascal'; }
-  pre.src-ps:before { content: 'PostScript'; }
-  pre.src-prolog:before { content: 'Prolog'; }
-  pre.src-simula:before { content: 'Simula'; }
-  pre.src-tcl:before { content: 'tcl'; }
-  pre.src-tex:before { content: 'TeX'; }
-  pre.src-plain-tex:before { content: 'Plain TeX'; }
-  pre.src-verilog:before { content: 'Verilog'; }
-  pre.src-vhdl:before { content: 'VHDL'; }
-  pre.src-xml:before { content: 'XML'; }
-  pre.src-nxml:before { content: 'XML'; }
-  /* add a generic configuration mode; LaTeX export needs an additional
-     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
-  pre.src-conf:before { content: 'Configuration File'; }
-
-  table { border-collapse:collapse; }
-  caption.t-above { caption-side: top; }
-  caption.t-bottom { caption-side: bottom; }
-  td, th { vertical-align:top;  }
-  th.org-right  { text-align: center;  }
-  th.org-left   { text-align: center;   }
-  th.org-center { text-align: center; }
-  td.org-right  { text-align: right;  }
-  td.org-left   { text-align: left;   }
-  td.org-center { text-align: center; }
-  dt { font-weight: bold; }
-  .footpara { display: inline; }
-  .footdef  { margin-bottom: 1em; }
-  .figure { padding: 1em; }
-  .figure p { text-align: center; }
-  .equation-container {
-    display: table;
-    text-align: center;
-    width: 100%;
-  }
-  .equation {
-    vertical-align: middle;
-  }
-  .equation-label {
-    display: table-cell;
-    text-align: right;
-    vertical-align: middle;
-  }
-  .inlinetask {
-    padding: 10px;
-    border: 2px solid gray;
-    margin: 10px;
-    background: #ffffcc;
-  }
-  #org-div-home-and-up
-   { text-align: right; font-size: 70%; white-space: nowrap; }
-  textarea { overflow-x: auto; }
-  .linenr { font-size: smaller }
-  .code-highlighted { background-color: #ffff00; }
-  .org-info-js_info-navigation { border-style: none; }
-  #org-info-js_console-label
-    { font-size: 10px; font-weight: bold; white-space: nowrap; }
-  .org-info-js_search-highlight
-    { background-color: #ffff00; color: #000000; font-weight: bold; }
-  .org-svg { width: 90%; }
-</style>
 <link rel="stylesheet" href="simple.css" />
 <style>
   .dark-mode {
@@ -254,9 +70,9 @@
 <a href="./index.html">Home</a>
 </p>
 
-<div id="outline-container-org89b1269" class="outline-2">
-<h2 id="org89b1269">My thesis laboratory</h2>
-<div class="outline-text-2" id="text-org89b1269">
+<div id="outline-container-org79f3208" class="outline-2">
+<h2 id="org79f3208">My thesis laboratory</h2>
+<div class="outline-text-2" id="text-org79f3208">
 <p>
 When I showed up to rotate at my thesis lab in 2012, I sat next to a guy named Jack (name anonymized). This was a biology lab, but he had a huge pile of circuit boards, tubes, and all kinds of other gizmos on his desk and adjacent lab bench. He was clearly building something big. So I chatted with him and he told me that he was automating some piece of his lab protocol that was too tedious and time consuming for him.
 </p>
@@ -287,9 +103,9 @@ I talk a lot about this stuff over and over, and it's clear in my head. But memo
 </div>
 </div>
 
-<div id="outline-container-org7289a76" class="outline-2">
-<h2 id="org7289a76">Simplify</h2>
-<div class="outline-text-2" id="text-org7289a76">
+<div id="outline-container-orgb012a64" class="outline-2">
+<h2 id="orgb012a64">Simplify</h2>
+<div class="outline-text-2" id="text-orgb012a64">
 <p>
 The Nolan Lab had a lot of computational people. One of my former colleagues likes to joke that when I arrived in the Nolan Lab I barely knew what a t-test was. After being around enough of the dry-lab colleagues, and seeing them invent novel algorithms out of the blue, I decided that I want to try my hand at computer science too. 
 </p>
@@ -330,9 +146,9 @@ If you want to know more about how Claude Shannon approached problems, I encoura
 </div>
 </div>
 
-<div id="outline-container-orgf94e87b" class="outline-2">
-<h2 id="orgf94e87b">Reinvent the wheel</h2>
-<div class="outline-text-2" id="text-orgf94e87b">
+<div id="outline-container-org58b079b" class="outline-2">
+<h2 id="org58b079b">Reinvent the wheel</h2>
+<div class="outline-text-2" id="text-org58b079b">
 <p>
 The next story I want to tell is one I have told many times, but I have not written down until now. If we go back to the early 2010s in the Nolan Lab, there was a technology taking off that combined mass spectrometry with imaging. You can think of it is being able to do microscopy, but using 30 colors rather than the usual 3. This was a very complicated method involving a huge mass spectrometer with a ton of parts that needed lots of maintenance, with a price tag of north of half a million dollars. It has its place in very precise imaging, where you need high quality and high resolution. This is important, because the method I'm about to introduce is complimentary to it, with a different niche.
 </p>
@@ -351,9 +167,9 @@ When you reinvent the wheel, your wheel is going to be different than whatever w
 </div>
 </div>
 
-<div id="outline-container-org60d2c34" class="outline-2">
-<h2 id="org60d2c34">Play</h2>
-<div class="outline-text-2" id="text-org60d2c34">
+<div id="outline-container-orgc73d13d" class="outline-2">
+<h2 id="orgc73d13d">Play</h2>
+<div class="outline-text-2" id="text-orgc73d13d">
 <p>
 This next story involves how the final chapter of my thesis (what people actually remember me for) came to be. I was in lab one day and one of the summer students came to me and asked me a simple question about whether we could color a t-SNE map (data visualization) by a comparison metric between two datasets, rather than looking at two t-SNE maps from two respective datasets. This was an unsolved problem at the time, which I called the t-SNE comparison problem. This was totally unrelated to anything I was doing at the time, but I sat down with her and brainstormed a bunch of wild solutions just for fun.
 </p>
@@ -414,9 +230,9 @@ What's the moral of the story? A lot of good can come out of just playing and be
 </div>
 </div>
 
-<div id="outline-container-org550719a" class="outline-2">
-<h2 id="org550719a">Leverage what you know</h2>
-<div class="outline-text-2" id="text-org550719a">
+<div id="outline-container-orgca0a8f8" class="outline-2">
+<h2 id="orgca0a8f8">Leverage what you know</h2>
+<div class="outline-text-2" id="text-orgca0a8f8">
 <p>
 The final story I'll tell comes from a little addictive habit that I had in my thesis lab that continued with me after I graduated: endless, mindless scrolling. I have written extensively about this <a href="./scrolling_problem.html">elsewhere</a>, but in sum, the inflammatory content in my feeds acts as malware, leading to a distorted perception of the world.
 </p>
@@ -434,9 +250,9 @@ Having seen what I saw in the Nolan Lab, I knew that I probably didn't have to t
 </p>
 </div>
 </div>
-<div id="outline-container-org7dd25ac" class="outline-2">
-<h2 id="org7dd25ac">Conclusion</h2>
-<div class="outline-text-2" id="text-org7dd25ac">
+<div id="outline-container-org3cfade8" class="outline-2">
+<h2 id="org3cfade8">Conclusion</h2>
+<div class="outline-text-2" id="text-org3cfade8">
 <p>
 It was the moment where Jack told me that he knew nothing about engineering and was just figuring things out as he went, where I realized that I was in a special place. So much of what I saw and experienced, I didn't know was possible. From being able to learn computer science later in life while working as a busy wet-lab biology grad student, to my two colleagues completely reinventing a complicated device, complete with legos and duck tape, to the final chapter of my thesis coming from just playing around, to being able to work as a consultant. All of these things have the same element in common: just going for it, and figuring things out as they come.
 </p>
