@@ -16,6 +16,12 @@
 ;; Install dependencies
 (package-install 'htmlize)
 
+;; Load the htmlize package (dev)
+(require 'htmlize)
+
+;; Enable syntax highlighting in exported HTML (dev)
+(setq org-html-htmlize-output-type 'css)
+
 ;; Load the publishing system
 (require 'ox-publish)
 
