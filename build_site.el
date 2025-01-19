@@ -5,6 +5,9 @@
 (setq package-archives '(("melpa" . "https://melpa.org/packages/")
                          ("elpa" . "https://elpa.gnu.org/packages/")))
 
+;; For babel, disable the need for confirmation of code running
+(setq org-confirm-babel-evaluate nil)
+
 ;; Initialize the package system
 (package-initialize)
 (unless package-archive-contents
