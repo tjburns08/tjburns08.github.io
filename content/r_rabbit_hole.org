@@ -50,7 +50,7 @@ S-expressions can get pretty gnarly looking to the untrained eye. Let's say I wa
 
 Which equals 14.
 
-What that looks like as an S-expression is something like this:
+What that looks like as an S-expression is something like this, in LISP:
 
 #+begin_src elisp :exports both
 (* 2 (+ 5 2))
@@ -59,7 +59,7 @@ What that looks like as an S-expression is something like this:
 #+RESULTS:
 : 14
 
-And lets say we wanted to divide the resulting answer by 7, which would give us 2. We have:
+And lets say we wanted to divide the resulting answer by 7, which would give us 2. We have, in LISP:
 
 #+begin_src elisp :exports both
 (/ (* 2 (+ 5 2)) 7)
@@ -70,7 +70,7 @@ And lets say we wanted to divide the resulting answer by 7, which would give us 
 
 So you can imagine if you want to in turn take this product and do something else with it, and so forth, you will end up with parentheses wrapped in parentheses, and so forth. LISP programmers are used to it, and it is a bit of a [[https://xkcd.com/297/][running joke]].
 
-But here's the rub: R operates like this. Let me show you. Below is R:
+But here's the rub: R operates like this. Let me show you. Below is R, not LISP. Again, try this yourself:
 
 #+begin_src R :exports both :results output
 `/`(`*`(2, `+`(5, 2)), 7)
@@ -139,7 +139,7 @@ From here, you're going to go into src. And then main. The first observation is 
 
 Notice the .c and .h files. These are both associated with the C programming language. We note here that C is a lower level language. It is much more verbose than what you see in R (or python for that matter), and you have to worry about a lot of things that get swept under the rug in R (like memory management) but it runs much faster.
 
-If we then go into the file arithmetic.c, we find the place the addition operator is defined:
+If we then go into the file arithmetic.c, we find the place the addition operator is defined. The code below is C:
 
 #+begin_src C :eval no
 attribute_hidden SEXP do_arith(SEXP call, SEXP op, SEXP args, SEXP env)
@@ -147,7 +147,7 @@ attribute_hidden SEXP do_arith(SEXP call, SEXP op, SEXP args, SEXP env)
 
 Where this function takes care of many of the arithmetic operations. The SEXP means S-expression. The "op" is the operator of interest, which is +, -, *, or /.
 
-Within this function, we can find a switch statement (think of this as an if statement across multiple cases), where the operators and actions are defined:
+Within this function, we can find a switch statement (think of this as an if statement across multiple cases), where the operators and actions are defined. Again, this is C:
 
 #+begin_src C :eval no
 switch (PRIMVAL(op)) {
@@ -194,7 +194,7 @@ gcc -S -o temp.s -fno-asynchronous-unwind-tables -fno-verbose-asm -O2 temp.c
 cat temp.s
 #+end_src
 
-Which we then put into another code block to make it a bit less ugly.
+Which we then put into another code block to make it a bit less ugly. This is what Assembly looks like. This is the kind of thing being swept under the rug when you do 5 + 2 and print it out.
 
 #+begin_src asm
 	.section	__TEXT,__text,regular,pure_instructions
@@ -261,17 +261,24 @@ And then there is that "return 0" but from C. This is an interesting concept whe
     ret                    ; Return to the caller (like `return()`
 #+end_src
 
+** Conclusion
+
 Ok, let's go back to familiarity now.
 
 #+begin_src R :exports both :results output
 5 + 2
 #+end_src
 
-#+RESULTS:
-: [1] 7
-
-** Conclusion
-
 And you can now see just how much is swept under the rug. We started with 5 + 2. We then showed that we could make the equivalent statement as an S-expression and have it successfully run in R. We then showed some more complex S-expressions and showed that counter-intuitively they run in R. We then looked at the C code behind the S-expression that defines arithmetic operations in R. And from there, we looked at the Assembly code that underlies C.
+
+What is the point?
+
+What has helped me solve the truly difficult problems, where no one has written the book on the thing, is understanding first principles. This means understanding the concepts that underlie whatever I'm doing. This is similar to how as a biologist, you have to learn chemistry and physics as part of the curriculum.
+
+Similar to here, if you started in R and Python, you should have familiarity with the languages that are lower level, like C (even if it's literally at the level of very basic operations like printing something or writing a simple function). And you should at least know what Assembly looks like and what it generally does.
+
+Be familiar with the full stack. Whatever it is. And you will be a better problem solver, able to see the high-level, and able to reason from first principles.
+
+And of course, we can be grateful for the sheer volume of things we don't have to worry about now because of the coders before us, who innovated so we didn't have to worry about analyzing single-cell sequencing data in Assembly.
 
 We truly stand on the shoulders of giants before us.

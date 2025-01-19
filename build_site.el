@@ -23,7 +23,7 @@
 (setq org-html-htmlize-output-type 'css)
 
 ;; Native fontify (dev)
-;; (setq org-src-fontify-natively t)
+(setq org-src-fontify-natively t)
 
 ;; Load the publishing system
 (require 'ox-publish)
@@ -37,8 +37,8 @@
 
 ;; Dev: Toggle dark mode
 (setq org-html-validation-link nil
-      org-html-head-include-scripts nil
-      org-html-head-include-default-style nil
+      org-html-head-include-scripts t ;; dev
+      org-html-head-include-default-style t ;; dev
       org-html-head "<link rel=\"stylesheet\" href=\"simple.css\" />
 <style>
   .dark-mode {

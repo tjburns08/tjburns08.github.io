@@ -7,6 +7,190 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>The R Rabbit Hole</title>
 <meta name="generator" content="Org Mode" />
+<style>
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+</style>
 <link rel="stylesheet" href="simple.css" />
 <style>
   .dark-mode {
@@ -57,6 +241,26 @@
   // Set the default mode to dark when the DOM is fully loaded
   document.addEventListener('DOMContentLoaded', setDefaultDarkMode);
 </script>
+<script>
+// @license magnet:?xt=urn:btih:1f739d935676111cfff4b4693e3816e664797050&amp;dn=gpl-3.0.txt GPL-v3-or-Later
+     function CodeHighlightOn(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.add("code-highlighted");
+         target.classList.add("code-highlighted");
+       }
+     }
+     function CodeHighlightOff(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.remove("code-highlighted");
+         target.classList.remove("code-highlighted");
+       }
+     }
+// @license-end
+</script>
 </head>
 <body>
 <div id="preamble" class="status">
@@ -80,9 +284,9 @@ Lewis Carroll, Alice's Adventures in Wonderland
 </p>
 <hr />
 
-<div id="outline-container-org1c38658" class="outline-2">
-<h2 id="org1c38658">From R to S</h2>
-<div class="outline-text-2" id="text-org1c38658">
+<div id="outline-container-org5f549a2" class="outline-2">
+<h2 id="org5f549a2">From R to S</h2>
+<div class="outline-text-2" id="text-org5f549a2">
 <p>
 Let's begin with a simple expression in R. Adding two numbers together.
 </p>
@@ -147,7 +351,7 @@ Which equals 14.
 </p>
 
 <p>
-What that looks like as an S-expression is something like this:
+What that looks like as an S-expression is something like this, in LISP:
 </p>
 
 <div class="org-src-container">
@@ -161,7 +365,7 @@ What that looks like as an S-expression is something like this:
 
 
 <p>
-And lets say we wanted to divide the resulting answer by 7, which would give us 2. We have:
+And lets say we wanted to divide the resulting answer by 7, which would give us 2. We have, in LISP:
 </p>
 
 <div class="org-src-container">
@@ -179,7 +383,7 @@ So you can imagine if you want to in turn take this product and do something els
 </p>
 
 <p>
-But here's the rub: R operates like this. Let me show you. Below is R:
+But here's the rub: R operates like this. Let me show you. Below is R, not LISP. Again, try this yourself:
 </p>
 
 <div class="org-src-container">
@@ -198,9 +402,9 @@ So now you can see objectively that there is a chunk of R that is rooted in some
 </div>
 </div>
 
-<div id="outline-container-orgc84578f" class="outline-2">
-<h2 id="orgc84578f">From S to C</h2>
-<div class="outline-text-2" id="text-orgc84578f">
+<div id="outline-container-orgc6df126" class="outline-2">
+<h2 id="orgc6df126">From S to C</h2>
+<div class="outline-text-2" id="text-orgc6df126">
 <p>
 Ok, this is all well and good, but how do I know that R specifically had S-expressions in mind? In order to answer that, we can download the <a href="https://cran.r-project.org/src/base/R-4/">source code</a> of the R programming language and have a look at it. Below is the source code from R 4.4.0.
 </p>
@@ -266,7 +470,7 @@ Notice the .c and .h files. These are both associated with the C programming lan
 </p>
 
 <p>
-If we then go into the file arithmetic.c, we find the place the addition operator is defined:
+If we then go into the file arithmetic.c, we find the place the addition operator is defined. The code below is C:
 </p>
 
 <div class="org-src-container">
@@ -279,7 +483,7 @@ Where this function takes care of many of the arithmetic operations. The SEXP me
 </p>
 
 <p>
-Within this function, we can find a switch statement (think of this as an if statement across multiple cases), where the operators and actions are defined:
+Within this function, we can find a switch statement (think of this as an if statement across multiple cases), where the operators and actions are defined. Again, this is C:
 </p>
 
 <div class="org-src-container">
@@ -298,9 +502,9 @@ Where you can see that "+" is PLUSOP, where x1 + x2 is defined.
 </div>
 </div>
 
-<div id="outline-container-org84ee45c" class="outline-2">
-<h2 id="org84ee45c">From C to Assembly</h2>
-<div class="outline-text-2" id="text-org84ee45c">
+<div id="outline-container-org43a2b14" class="outline-2">
+<h2 id="org43a2b14">From C to Assembly</h2>
+<div class="outline-text-2" id="text-org43a2b14">
 <p>
 So we started with 5 + 7 and now we are looking at an obscure switch statement in C. But if it is written in C, that means it is indirectly written in something deeper: machine code.
 </p>
@@ -348,7 +552,7 @@ cat temp.s
 </div>
 
 <p>
-Which we then put into another code block to make it a bit less ugly.
+Which we then put into another code block to make it a bit less ugly. This is what Assembly looks like. This is the kind of thing being swept under the rug when you do 5 + 2 and print it out.
 </p>
 
 <div class="org-src-container">
@@ -433,7 +637,12 @@ And then there is that "return 0" but from C. This is an interesting concept whe
 <span class="org-function-name">ret</span>                    <span class="org-comment-delimiter">; </span><span class="org-comment">Return to the caller (like `return()`</span>
 </pre>
 </div>
+</div>
+</div>
 
+<div id="outline-container-org20e8139" class="outline-2">
+<h2 id="org20e8139">Conclusion</h2>
+<div class="outline-text-2" id="text-org20e8139">
 <p>
 Ok, let's go back to familiarity now.
 </p>
@@ -443,17 +652,28 @@ Ok, let's go back to familiarity now.
 </pre>
 </div>
 
-<pre class="example">
-[1] 7
-</pre>
-</div>
-</div>
-
-<div id="outline-container-org812a813" class="outline-2">
-<h2 id="org812a813">Conclusion</h2>
-<div class="outline-text-2" id="text-org812a813">
 <p>
 And you can now see just how much is swept under the rug. We started with 5 + 2. We then showed that we could make the equivalent statement as an S-expression and have it successfully run in R. We then showed some more complex S-expressions and showed that counter-intuitively they run in R. We then looked at the C code behind the S-expression that defines arithmetic operations in R. And from there, we looked at the Assembly code that underlies C.
+</p>
+
+<p>
+What is the point?
+</p>
+
+<p>
+What has helped me solve the truly difficult problems, where no one has written the book on the thing, is understanding first principles. This means understanding the concepts that underlie whatever I'm doing. This is similar to how as a biologist, you have to learn chemistry and physics as part of the curriculum.
+</p>
+
+<p>
+Similar to here, if you started in R and Python, you should have familiarity with the languages that are lower level, like C (even if it's literally at the level of very basic operations like printing something or writing a simple function). And you should at least know what Assembly looks like and what it generally does.
+</p>
+
+<p>
+Be familiar with the full stack. Whatever it is. And you will be a better problem solver, able to see the high-level, and able to reason from first principles.
+</p>
+
+<p>
+And of course, we can be grateful for the sheer volume of things we don't have to worry about now because of the coders before us, who innovated so we didn't have to worry about analyzing single-cell sequencing data in Assembly.
 </p>
 
 <p>
