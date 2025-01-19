@@ -47,7 +47,7 @@
     --text: #dcdcdc;
     --text-light: #ababab;
     --accent: #ffb300;
-    --code: #f06292;*/
+    /*--code: #f06292;*/
     --preformatted: #ccc;
     --disabled: #111;
   }
