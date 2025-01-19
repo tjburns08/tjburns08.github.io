@@ -7,6 +7,190 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>How I'm applying the mindset around sustainability to everyday life</title>
 <meta name="generator" content="Org Mode" />
+<style>
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+</style>
 <link rel="stylesheet" href="simple.css" />
 <style>
   .dark-mode {
@@ -70,9 +254,9 @@
 <a href="./index.html">Home</a>
 </p>
 
-<div id="outline-container-org4da996b" class="outline-2">
-<h2 id="org4da996b">Introduction: uncertainty and resilience</h2>
-<div class="outline-text-2" id="text-org4da996b">
+<div id="outline-container-org166c4b8" class="outline-2">
+<h2 id="org166c4b8">Introduction: uncertainty and resilience</h2>
+<div class="outline-text-2" id="text-org166c4b8">
 <p>
 There have been many events in the past few years that have increased the general uncertainty of where our world is going. We've had a pandemic, war, the rapid incrase of AI's capabilities, and so on. To add to this, one of my clients is an existential risk think tank, so I spend a good deal of time every week thinking about the end of the world.
 </p>
@@ -103,9 +287,9 @@ I am not saying that I'm going to get rid of my original ways of doing things. R
 </div>
 </div>
 
-<div id="outline-container-org83d7a93" class="outline-2">
-<h2 id="org83d7a93">Minimize rather than maximize</h2>
-<div class="outline-text-2" id="text-org83d7a93">
+<div id="outline-container-org744db0c" class="outline-2">
+<h2 id="org744db0c">Minimize rather than maximize</h2>
+<div class="outline-text-2" id="text-org744db0c">
 <p>
 By this subtitle, I am not talking about minimalism per-se. There are plenty of books and articles (and not to mention religions) around minimalist philosophy.
 </p>
@@ -115,9 +299,9 @@ I am talking about incorporating "minimize X" into your goals on top of the comm
 </p>
 </div>
 
-<div id="outline-container-org20881cc" class="outline-4">
-<h4 id="org20881cc">Money: Maximize profit -&gt; minimize spending.</h4>
-<div class="outline-text-4" id="text-org20881cc">
+<div id="outline-container-org12c60e1" class="outline-4">
+<h4 id="org12c60e1">Money: Maximize profit -&gt; minimize spending.</h4>
+<div class="outline-text-4" id="text-org12c60e1">
 <p>
 Maximize income/profit is something that is always on my mind as a business owner. The problem I face is that there are many ways to maximize profit. Many of them have negative externalities, like pressuring employees to work harder.
 </p>
@@ -136,9 +320,9 @@ I am operating on the hypothesis that these additional skills I'm learning will 
 </div>
 </div>
 
-<div id="outline-container-org38371ab" class="outline-4">
-<h4 id="org38371ab">Decision making: Maximize rationality -&gt; minimize bias</h4>
-<div class="outline-text-4" id="text-org38371ab">
+<div id="outline-container-org831cde5" class="outline-4">
+<h4 id="org831cde5">Decision making: Maximize rationality -&gt; minimize bias</h4>
+<div class="outline-text-4" id="text-org831cde5">
 <p>
 A lot of operating in uncertainty means being able to make rational decisions. As such, I am trying to work on my rationality overall. Having a goal like "improve or maximize rationality" is a bit broad. However, a lot of rational decision making involves being aware of the cognitive biases that can lead to irrational decisions. This is written about quite a lot on <a href="https://www.lesswrong.com/posts/bJ2haLkcGeLtTWaD5/welcome-to-lesswrong">LessWrong</a>, a community devoted to the art of rationality. Notice the mentality is consistent with this article: becoming less wrong rather than more right, something that influenced my "minimization" approach.
 </p>
@@ -157,9 +341,9 @@ I am hypothesizing that this de-biasing will allow me to make more rational deci
 </div>
 </div>
 
-<div id="outline-container-org12006af" class="outline-4">
-<h4 id="org12006af">Music: maximize self-expression -&gt; minimize hindrances to self-expression</h4>
-<div class="outline-text-4" id="text-org12006af">
+<div id="outline-container-org3f99225" class="outline-4">
+<h4 id="org3f99225">Music: maximize self-expression -&gt; minimize hindrances to self-expression</h4>
+<div class="outline-text-4" id="text-org3f99225">
 <p>
 I am a jazz musician (primarily bass, but currently learning jazz piano). The jazz mindset is one optimized for self-expression. You have to be able to embody the spirit of the music and then play new music on top of it, on the fly (a solo).
 </p>
@@ -170,9 +354,9 @@ When I focus on maximizing that (which I have been doing all my life), I spend h
 </div>
 </div>
 
-<div id="outline-container-org87252c0" class="outline-4">
-<h4 id="org87252c0">Fitness: maximize strength -&gt; minimize biomechanical inefficiency</h4>
-<div class="outline-text-4" id="text-org87252c0">
+<div id="outline-container-org7d0539a" class="outline-4">
+<h4 id="org7d0539a">Fitness: maximize strength -&gt; minimize biomechanical inefficiency</h4>
+<div class="outline-text-4" id="text-org7d0539a">
 <p>
 I have been lifting weights since 1999, and I rarely skip a workout. Earlier, I would optimize for maximum strength. This would be the mindset of no-pain-no-gain. I would give it my all. I still do, but later in life, being more vulnerable to injury, I have flipped the script.
 </p>
@@ -188,9 +372,9 @@ There is a lot more I want to say here, but that will be for a future article.
 </div>
 </div>
 
-<div id="outline-container-org2a71636" class="outline-2">
-<h2 id="org2a71636">Permaculture mindset: closing loops</h2>
-<div class="outline-text-2" id="text-org2a71636">
+<div id="outline-container-org4984b13" class="outline-2">
+<h2 id="org4984b13">Permaculture mindset: closing loops</h2>
+<div class="outline-text-2" id="text-org4984b13">
 <p>
 I have been researching sustainability a bit more in the past few years. Part of this is cimate change, part of this is due to my uncle being a professor of "green information technology," a field he developed. A lot of these ideas come from the FIRE movement (Financial Independence Retire Early), specifically the works of <a href="https://www.mrmoneymustache.com/2013/02/22/getting-rich-from-zero-to-hero-in-one-blog-post/">Mr. Money Mustache</a> and <a href="http://earlyretirementextreme.com/">Jacob Lund Fisker</a>. The former popularized concepts like "insourcing" and DIY for the sake of frugality, and the latter applied systems thinking and sustainability to minimize spending to the extreme while still having a good quality of life. 
 </p>
@@ -204,9 +388,9 @@ The concept of permaculture has gotten me thinking about how I orient toward the
 </p>
 </div>
 
-<div id="outline-container-org59c17bf" class="outline-4">
-<h4 id="org59c17bf">Recycle: Journal -&gt; public articles</h4>
-<div class="outline-text-4" id="text-org59c17bf">
+<div id="outline-container-org16a8685" class="outline-4">
+<h4 id="org16a8685">Recycle: Journal -&gt; public articles</h4>
+<div class="outline-text-4" id="text-org16a8685">
 <p>
 I have been writing in a digital journal since 2009, and a pen-and-paper one since 2006. Some of the writing is personal, but a lot of the writing centers on ideas. For the sake of my company, or for the sake of future employers in a recession where layoffs are around the corner for everyone, it helps to have visibility beyond your resume. As such. One way of doing that is to have a block, substack, personal website, or something of that nature where you can share your work.
 </p>
@@ -221,9 +405,9 @@ Marketing thought leader Seth Godin is a great example of value reclamation in t
 </div>
 </div>
 
-<div id="outline-container-org939b0e6" class="outline-4">
-<h4 id="org939b0e6">Energy efficiency: Services -&gt; productized services -&gt; products</h4>
-<div class="outline-text-4" id="text-org939b0e6">
+<div id="outline-container-org11fdca4" class="outline-4">
+<h4 id="org11fdca4">Energy efficiency: Services -&gt; productized services -&gt; products</h4>
+<div class="outline-text-4" id="text-org11fdca4">
 <p>
 This one is a bit more well-trodden, so I'll keep it brief. We all add value in some way. We all have a sense of what we can do that people will pay money for. With my company, I started out as a general purpose per-hour consultant. I am now slowly productizing my services and selling deliverables rather than my time. These productized services are in turn being developed into standalone products. I am far from complete in this journey, but this is how I am orienting myself. From a permaculture sense, one might think of this as energy efficiency.
 </p>
@@ -234,9 +418,9 @@ I was a bit late to the party in terms of productization, but a couple friends o
 </div>
 </div>
 
-<div id="outline-container-org4750c0b" class="outline-4">
-<h4 id="org4750c0b">Broader impact: Do -&gt; teach</h4>
-<div class="outline-text-4" id="text-org4750c0b">
+<div id="outline-container-org93b1298" class="outline-4">
+<h4 id="org93b1298">Broader impact: Do -&gt; teach</h4>
+<div class="outline-text-4" id="text-org93b1298">
 <p>
 In my company, I originally was getting paid to do single cell bioinformatics. While I still have that as a service, I have added additional services oriented toward up-skilling bioinformaticians in things like unsupervised learning, something that is not always the primary focus of a bioinformatics and data science education.
 </p>
@@ -251,9 +435,9 @@ Consultant <a href="https://en.wikipedia.org/wiki/Alan_Weiss_(entrepreneur)">Ala
 </div>
 </div>
 
-<div id="outline-container-org0057184" class="outline-4">
-<h4 id="org0057184">Systems thinking: you are more than your job</h4>
-<div class="outline-text-4" id="text-org0057184">
+<div id="outline-container-orgbc48c87" class="outline-4">
+<h4 id="orgbc48c87">Systems thinking: you are more than your job</h4>
+<div class="outline-text-4" id="text-orgbc48c87">
 <p>
 I run a <a href="https://burnslsc.com/">bioinformatics company</a>, and that's what puts food on the table. But is that all I am? At some point, I stop working. I have hobbies, responsibilities, friends, and family. In short, I am a human being trying to survive. So is there a better way to think of myself rather than a job title? This is a relatively new idea for me, as my years in grad school consumed me to the point where I was a grad student above all else. But now that I'm away from Stanford, away from Silicon Valley, in the still busy but more relaxed city of Berlin, and married, I know that there is more to me than my job. More to life than my job.
 </p>
@@ -273,9 +457,9 @@ We can take this a step further. A former client of mine was the CIO of a succes
 </div>
 </div>
 
-<div id="outline-container-org4d81f70" class="outline-2">
-<h2 id="org4d81f70">Conclusions</h2>
-<div class="outline-text-2" id="text-org4d81f70">
+<div id="outline-container-orgdeb2df1" class="outline-2">
+<h2 id="orgdeb2df1">Conclusions</h2>
+<div class="outline-text-2" id="text-orgdeb2df1">
 <p>
 This article is me documenting my thoughts and progress toward becoming more resilient in the face of uncertain times. What I cover is by no means exhaustive, but it is where I am at right now.
 </p>

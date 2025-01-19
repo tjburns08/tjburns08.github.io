@@ -7,190 +7,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>How I curate content</title>
 <meta name="generator" content="Org Mode" />
-<style>
-  #content { max-width: 60em; margin: auto; }
-  .title  { text-align: center;
-             margin-bottom: .2em; }
-  .subtitle { text-align: center;
-              font-size: medium;
-              font-weight: bold;
-              margin-top:0; }
-  .todo   { font-family: monospace; color: red; }
-  .done   { font-family: monospace; color: green; }
-  .priority { font-family: monospace; color: orange; }
-  .tag    { background-color: #eee; font-family: monospace;
-            padding: 2px; font-size: 80%; font-weight: normal; }
-  .timestamp { color: #bebebe; }
-  .timestamp-kwd { color: #5f9ea0; }
-  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
-  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
-  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
-  .underline { text-decoration: underline; }
-  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
-  p.verse { margin-left: 3%; }
-  pre {
-    border: 1px solid #e6e6e6;
-    border-radius: 3px;
-    background-color: #f2f2f2;
-    padding: 8pt;
-    font-family: monospace;
-    overflow: auto;
-    margin: 1.2em;
-  }
-  pre.src {
-    position: relative;
-    overflow: auto;
-  }
-  pre.src:before {
-    display: none;
-    position: absolute;
-    top: -8px;
-    right: 12px;
-    padding: 3px;
-    color: #555;
-    background-color: #f2f2f299;
-  }
-  pre.src:hover:before { display: inline; margin-top: 14px;}
-  /* Languages per Org manual */
-  pre.src-asymptote:before { content: 'Asymptote'; }
-  pre.src-awk:before { content: 'Awk'; }
-  pre.src-authinfo::before { content: 'Authinfo'; }
-  pre.src-C:before { content: 'C'; }
-  /* pre.src-C++ doesn't work in CSS */
-  pre.src-clojure:before { content: 'Clojure'; }
-  pre.src-css:before { content: 'CSS'; }
-  pre.src-D:before { content: 'D'; }
-  pre.src-ditaa:before { content: 'ditaa'; }
-  pre.src-dot:before { content: 'Graphviz'; }
-  pre.src-calc:before { content: 'Emacs Calc'; }
-  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
-  pre.src-fortran:before { content: 'Fortran'; }
-  pre.src-gnuplot:before { content: 'gnuplot'; }
-  pre.src-haskell:before { content: 'Haskell'; }
-  pre.src-hledger:before { content: 'hledger'; }
-  pre.src-java:before { content: 'Java'; }
-  pre.src-js:before { content: 'Javascript'; }
-  pre.src-latex:before { content: 'LaTeX'; }
-  pre.src-ledger:before { content: 'Ledger'; }
-  pre.src-lisp:before { content: 'Lisp'; }
-  pre.src-lilypond:before { content: 'Lilypond'; }
-  pre.src-lua:before { content: 'Lua'; }
-  pre.src-matlab:before { content: 'MATLAB'; }
-  pre.src-mscgen:before { content: 'Mscgen'; }
-  pre.src-ocaml:before { content: 'Objective Caml'; }
-  pre.src-octave:before { content: 'Octave'; }
-  pre.src-org:before { content: 'Org mode'; }
-  pre.src-oz:before { content: 'OZ'; }
-  pre.src-plantuml:before { content: 'Plantuml'; }
-  pre.src-processing:before { content: 'Processing.js'; }
-  pre.src-python:before { content: 'Python'; }
-  pre.src-R:before { content: 'R'; }
-  pre.src-ruby:before { content: 'Ruby'; }
-  pre.src-sass:before { content: 'Sass'; }
-  pre.src-scheme:before { content: 'Scheme'; }
-  pre.src-screen:before { content: 'Gnu Screen'; }
-  pre.src-sed:before { content: 'Sed'; }
-  pre.src-sh:before { content: 'shell'; }
-  pre.src-sql:before { content: 'SQL'; }
-  pre.src-sqlite:before { content: 'SQLite'; }
-  /* additional languages in org.el's org-babel-load-languages alist */
-  pre.src-forth:before { content: 'Forth'; }
-  pre.src-io:before { content: 'IO'; }
-  pre.src-J:before { content: 'J'; }
-  pre.src-makefile:before { content: 'Makefile'; }
-  pre.src-maxima:before { content: 'Maxima'; }
-  pre.src-perl:before { content: 'Perl'; }
-  pre.src-picolisp:before { content: 'Pico Lisp'; }
-  pre.src-scala:before { content: 'Scala'; }
-  pre.src-shell:before { content: 'Shell Script'; }
-  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
-  /* additional language identifiers per "defun org-babel-execute"
-       in ob-*.el */
-  pre.src-cpp:before  { content: 'C++'; }
-  pre.src-abc:before  { content: 'ABC'; }
-  pre.src-coq:before  { content: 'Coq'; }
-  pre.src-groovy:before  { content: 'Groovy'; }
-  /* additional language identifiers from org-babel-shell-names in
-     ob-shell.el: ob-shell is the only babel language using a lambda to put
-     the execution function name together. */
-  pre.src-bash:before  { content: 'bash'; }
-  pre.src-csh:before  { content: 'csh'; }
-  pre.src-ash:before  { content: 'ash'; }
-  pre.src-dash:before  { content: 'dash'; }
-  pre.src-ksh:before  { content: 'ksh'; }
-  pre.src-mksh:before  { content: 'mksh'; }
-  pre.src-posh:before  { content: 'posh'; }
-  /* Additional Emacs modes also supported by the LaTeX listings package */
-  pre.src-ada:before { content: 'Ada'; }
-  pre.src-asm:before { content: 'Assembler'; }
-  pre.src-caml:before { content: 'Caml'; }
-  pre.src-delphi:before { content: 'Delphi'; }
-  pre.src-html:before { content: 'HTML'; }
-  pre.src-idl:before { content: 'IDL'; }
-  pre.src-mercury:before { content: 'Mercury'; }
-  pre.src-metapost:before { content: 'MetaPost'; }
-  pre.src-modula-2:before { content: 'Modula-2'; }
-  pre.src-pascal:before { content: 'Pascal'; }
-  pre.src-ps:before { content: 'PostScript'; }
-  pre.src-prolog:before { content: 'Prolog'; }
-  pre.src-simula:before { content: 'Simula'; }
-  pre.src-tcl:before { content: 'tcl'; }
-  pre.src-tex:before { content: 'TeX'; }
-  pre.src-plain-tex:before { content: 'Plain TeX'; }
-  pre.src-verilog:before { content: 'Verilog'; }
-  pre.src-vhdl:before { content: 'VHDL'; }
-  pre.src-xml:before { content: 'XML'; }
-  pre.src-nxml:before { content: 'XML'; }
-  /* add a generic configuration mode; LaTeX export needs an additional
-     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
-  pre.src-conf:before { content: 'Configuration File'; }
-
-  table { border-collapse:collapse; }
-  caption.t-above { caption-side: top; }
-  caption.t-bottom { caption-side: bottom; }
-  td, th { vertical-align:top;  }
-  th.org-right  { text-align: center;  }
-  th.org-left   { text-align: center;   }
-  th.org-center { text-align: center; }
-  td.org-right  { text-align: right;  }
-  td.org-left   { text-align: left;   }
-  td.org-center { text-align: center; }
-  dt { font-weight: bold; }
-  .footpara { display: inline; }
-  .footdef  { margin-bottom: 1em; }
-  .figure { padding: 1em; }
-  .figure p { text-align: center; }
-  .equation-container {
-    display: table;
-    text-align: center;
-    width: 100%;
-  }
-  .equation {
-    vertical-align: middle;
-  }
-  .equation-label {
-    display: table-cell;
-    text-align: right;
-    vertical-align: middle;
-  }
-  .inlinetask {
-    padding: 10px;
-    border: 2px solid gray;
-    margin: 10px;
-    background: #ffffcc;
-  }
-  #org-div-home-and-up
-   { text-align: right; font-size: 70%; white-space: nowrap; }
-  textarea { overflow-x: auto; }
-  .linenr { font-size: smaller }
-  .code-highlighted { background-color: #ffff00; }
-  .org-info-js_info-navigation { border-style: none; }
-  #org-info-js_console-label
-    { font-size: 10px; font-weight: bold; white-space: nowrap; }
-  .org-info-js_search-highlight
-    { background-color: #ffff00; color: #000000; font-weight: bold; }
-  .org-svg { width: 90%; }
-</style>
 <link rel="stylesheet" href="simple.css" />
 <style>
   .dark-mode {
@@ -254,9 +70,9 @@
 <a href="./index.html">Home</a>
 </p>
 
-<div id="outline-container-orgc3ebb43" class="outline-2">
-<h2 id="orgc3ebb43">We should all be content curators</h2>
-<div class="outline-text-2" id="text-orgc3ebb43">
+<div id="outline-container-orgb1d0cdf" class="outline-2">
+<h2 id="orgb1d0cdf">We should all be content curators</h2>
+<div class="outline-text-2" id="text-orgb1d0cdf">
 <p>
 I haven written extensively about the problem of <a href="./scrolling_problem.html">infinite scrolling</a> as a means of getting our information. At the time of writing <span class="timestamp-wrapper"><span class="timestamp">[2023-03-30 Thu] </span></span> there is a gaping hole in active discussion around content curation. You can find <a href="https://news.ycombinator.com/item?id=8806950">discussion threads</a> and <a href="https://gwern.net/about">articles</a> about how individuals do it. You can also find bloggers who post their <a href="https://astralcodexten.substack.com/p/links-for-march-2023">favorite links</a>, over some time interval, for example on a monthly basis. There is also no shortage of systems that allow you to curate content, some of which you have to buy, and some of which come built into the source of the <a href="https://help.twitter.com/en/using-twitter/twitter-lists">feed</a>.
 </p>
@@ -267,13 +83,13 @@ All of this said, I think these discussions should be much more front and center
 </div>
 </div>
 
-<div id="outline-container-orgd3d78d5" class="outline-2">
-<h2 id="orgd3d78d5">First pass</h2>
-<div class="outline-text-2" id="text-orgd3d78d5">
+<div id="outline-container-orgee6fd63" class="outline-2">
+<h2 id="orgee6fd63">First pass</h2>
+<div class="outline-text-2" id="text-orgee6fd63">
 </div>
-<div id="outline-container-orgb8d4a3b" class="outline-3">
-<h3 id="orgb8d4a3b">Personal journal</h3>
-<div class="outline-text-3" id="text-orgb8d4a3b">
+<div id="outline-container-org3474283" class="outline-3">
+<h3 id="org3474283">Personal journal</h3>
+<div class="outline-text-3" id="text-org3474283">
 <p>
 I write what's on my mind in a typed personal journal that I have kept since the late 2000s. This is typically messy and unstructured, but it serves as a data dump for whatever is on my mind. This does a good job at putting my internal subjective state into words, which is increasingly valuable to my future self as I get older. 
 </p>
@@ -287,9 +103,9 @@ However, looking back at old stuff I've done, what is particularly interesting i
 </p>
 </div>
 </div>
-<div id="outline-container-org3bb58f6" class="outline-3">
-<h3 id="org3bb58f6">Paper notebooks</h3>
-<div class="outline-text-3" id="text-org3bb58f6">
+<div id="outline-container-org4e308d5" class="outline-3">
+<h3 id="org4e308d5">Paper notebooks</h3>
+<div class="outline-text-3" id="text-org4e308d5">
 <p>
 I have always been a prolific pen-and-paper note taker. In the late 2000s, I had a <a href="https://en.wikipedia.org/wiki/PalmPilot">palm pilot</a> that had a little stylus. It was just big enough that I could use it as a tiny notebook to scribble things on. Then the iPhone, and smartphones in general, took over the world. It's a big shame that the stylus didn't remain a thing. It would have been great to have my iPhone simply be a palm pilot with expanded functionality.
 </p>
@@ -299,17 +115,17 @@ So I keep a thin pen paper notebook wherever I go to scribble things down. I typ
 </p>
 </div>
 </div>
-<div id="outline-container-org55b85c3" class="outline-3">
-<h3 id="org55b85c3">iPad note taking</h3>
-<div class="outline-text-3" id="text-org55b85c3">
+<div id="outline-container-org1f53094" class="outline-3">
+<h3 id="org1f53094">iPad note taking</h3>
+<div class="outline-text-3" id="text-org1f53094">
 <p>
 Finally, the iPad was able to get a stylus, becoming a larger version of the palm pilot that I was using. I use GoodNotes to take notes, but I'm not attached. It just gets the job done. I have very broad categories of notebooks, and I mainly just scribble into one called "scratch." It's very productive for me to always have the iPad by my side whatever I'm doing so I can scribble ideas (especially pictures, diagrams, and mind maps). The more I do this, the more I can be in the moment when I'm away from the computer, because whatever is in my head is out on paper.
 </p>
 </div>
 </div>
-<div id="outline-container-orgbc1d59a" class="outline-3">
-<h3 id="orgbc1d59a">RSS for news, blogs, pre-prints</h3>
-<div class="outline-text-3" id="text-orgbc1d59a">
+<div id="outline-container-org6ebef14" class="outline-3">
+<h3 id="org6ebef14">RSS for news, blogs, pre-prints</h3>
+<div class="outline-text-3" id="text-org6ebef14">
 <p>
 I recently discovered RSS feeds after spending some time <a href="https://medium.com/@tjburns_72591/using-and-mining-pre-prints-to-stay-ahead-of-your-field-with-the-help-of-twitter-50d5bdc528de">pulling twitter content into tables</a> to store and organize it, and make the infinite feeds finite. I realized that I was essentially reinventing the <a href="https://en.wikipedia.org/wiki/RSS">RSS feed</a>, an older way of curating content that got pushed out by social media in the early 2010s, with the death of Google Reader being a huge blow to the RSS community.
 </p>
@@ -319,9 +135,9 @@ There are many feed reader options, but I use NetNewsWire (which I'm not attache
 </p>
 </div>
 </div>
-<div id="outline-container-org70a31ef" class="outline-3">
-<h3 id="org70a31ef">Twitter for AI news</h3>
-<div class="outline-text-3" id="text-org70a31ef">
+<div id="outline-container-orgd014636" class="outline-3">
+<h3 id="orgd014636">Twitter for AI news</h3>
+<div class="outline-text-3" id="text-orgd014636">
 <p>
 I don't like Twitter very much, but as I said before, I like to pull content off of Twitter into sortable tables, which allows me to utilize the content without getting sucked in. I'll note that this is by no means perfect, but I have much more control over Twitter than I used to.
 </p>
@@ -335,9 +151,9 @@ But most importantly these days <span class="timestamp-wrapper"><span class="tim
 </p>
 </div>
 </div>
-<div id="outline-container-orgc6efe72" class="outline-3">
-<h3 id="orgc6efe72">Topic maps</h3>
-<div class="outline-text-3" id="text-orgc6efe72">
+<div id="outline-container-org87284dd" class="outline-3">
+<h3 id="org87284dd">Topic maps</h3>
+<div class="outline-text-3" id="text-org87284dd">
 <p>
 Motivated by years of turning single-cell data into <a href="https://pubmed.ncbi.nlm.nih.gov/23685480/">maps</a> to quickly make sense of it, I developed a workflow where I use large language models to convert article titles, tweets, abstracts, and anything from a sentence to a paragraph into coordinates, such that content that is similar by context is grouped together on the map. At the time of writing <span class="timestamp-wrapper"><span class="timestamp">[2023-03-30 Thu] </span></span> this "map view" of content does not exist as a mainstream content curation strategy. If you want to get a sense of what this looks like, go to my article <a href="https://tjburns08.github.io/scrolling_problem.html">here</a>, and scroll to the bottom half of the article.
 </p>
@@ -348,13 +164,13 @@ It works wonders when you need to get a high-level overview of what is going on,
 </div>
 </div>
 </div>
-<div id="outline-container-org179d6c3" class="outline-2">
-<h2 id="org179d6c3">Second pass</h2>
-<div class="outline-text-2" id="text-org179d6c3">
+<div id="outline-container-orgef61783" class="outline-2">
+<h2 id="orgef61783">Second pass</h2>
+<div class="outline-text-2" id="text-orgef61783">
 </div>
-<div id="outline-container-org8b50cf2" class="outline-3">
-<h3 id="org8b50cf2">Evernote</h3>
-<div class="outline-text-3" id="text-org8b50cf2">
+<div id="outline-container-org6468c7f" class="outline-3">
+<h3 id="org6468c7f">Evernote</h3>
+<div class="outline-text-3" id="text-org6468c7f">
 <p>
 I've used Evernote on and off through the years (back to 2008 or so). I ran into the problem where I would make my set of notebooks and over-engineer the setup, get frustrated, and stop using it. Recently, I started using it again because I finally came up with a strategy that works for me.
 </p>
@@ -368,9 +184,9 @@ Evernote is accessible by phone and I can make notes accordingly, but I resist t
 </p>
 </div>
 </div>
-<div id="outline-container-org38c7c12" class="outline-3">
-<h3 id="org38c7c12">Org mode</h3>
-<div class="outline-text-3" id="text-org38c7c12">
+<div id="outline-container-org12360c4" class="outline-3">
+<h3 id="org12360c4">Org mode</h3>
+<div class="outline-text-3" id="text-org12360c4">
 <p>
 Aside from my journal entries, I use org mode mainly to handle projects I'm working on, track my goals, track my values, handle things like reading lists and my book reviews, and handle various other aspects of my life. 
 </p>
@@ -385,13 +201,13 @@ But if Notion is a car with automatic transmission and parallel park assist, org
 </div>
 </div>
 </div>
-<div id="outline-container-org8315964" class="outline-2">
-<h2 id="org8315964">Third pass: public</h2>
-<div class="outline-text-2" id="text-org8315964">
+<div id="outline-container-org9fc702e" class="outline-2">
+<h2 id="org9fc702e">Third pass: public</h2>
+<div class="outline-text-2" id="text-org9fc702e">
 </div>
-<div id="outline-container-orgc04222f" class="outline-3">
-<h3 id="orgc04222f">My website</h3>
-<div class="outline-text-3" id="text-orgc04222f">
+<div id="outline-container-org44d9f21" class="outline-3">
+<h3 id="org44d9f21">My website</h3>
+<div class="outline-text-3" id="text-org44d9f21">
 <p>
 As my journal started to approach one million words, I realized that perhaps I should refine some of my writings and make them public. Also, being self employed requires me to be a bit louder on the internet. My aunt told me to "<a href="https://tjburns08.github.io/just_paint.html">just paint</a>" and that kicked off the website. As the website grows and I grow, I revise my content. Sometimes I realize I was wrong about something. When thinking about explainable AI for example, I realized that I was anthropomorphizing large language models a bit too much, especially after ChatGPT was rolled out. I updated my <a href="./xai_and_us.html">article</a> with this new information in mind. If all my content was exclusively being posted to external platforms (eg. Medium), then it would be much harder to "grow" the articles.
 </p>
@@ -401,9 +217,9 @@ Content from the first and the second passes of my content curation strategy ult
 </p>
 </div>
 </div>
-<div id="outline-container-org733913a" class="outline-3">
-<h3 id="org733913a">Social media</h3>
-<div class="outline-text-3" id="text-org733913a">
+<div id="outline-container-orgd79fe12" class="outline-3">
+<h3 id="orgd79fe12">Social media</h3>
+<div class="outline-text-3" id="text-orgd79fe12">
 <p>
 The content I post is usually related to the articles I write on my website or the projects that I'm working on. In sum, because I am not stuck in the "publish or perish" paradigm anymore, I build and research in public. Any new findings I have for any of my projects immediately become <a href="https://www.linkedin.com/posts/tylerjburns_run-t-sne-and-umap-on-cytof-data-100-times-activity-7029143066804420609-UsDZ?utm_source=share&amp;utm_medium=member_desktop">social media posts</a>. This in turn helps let people know what I do, which allows me to find new clients and collaborators.
 </p>
@@ -418,9 +234,9 @@ I am interested in posting some of my stuff to places like Reddit, HackerNews, a
 </div>
 </div>
 </div>
-<div id="outline-container-orgaf5c196" class="outline-2">
-<h2 id="orgaf5c196">Conclusion</h2>
-<div class="outline-text-2" id="text-orgaf5c196">
+<div id="outline-container-org1ba1900" class="outline-2">
+<h2 id="org1ba1900">Conclusion</h2>
+<div class="outline-text-2" id="text-org1ba1900">
 <p>
 My content curation strategy is growing and adapting to the times. As large language models become more prominent, and a larger chunk of the internet becomes machine generated, I know that my content curation strategy is going to change. We all know what can happen if we don't have control of our feeds. This was very well explained in <a href="https://en.wikipedia.org/wiki/The_Social_Dilemma">The Social Dilemma</a>. Perhaps if we were actively discussing how to curate content as social media started to replace RSS in the early 2010s, then some of the effects observed in the later 2010s would have been mitigated. Perhaps we wouldn't be so politically divided right now. So my hope is we actively discuss content and content curation moving forward, so we can perhaps do a better job both with controlling our feeds and anticipating techno-social problems that will emerge as the landscape of the internet and the digital world changes. 
 </p>

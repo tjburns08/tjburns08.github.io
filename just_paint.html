@@ -7,190 +7,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Just paint</title>
 <meta name="generator" content="Org Mode" />
-<style>
-  #content { max-width: 60em; margin: auto; }
-  .title  { text-align: center;
-             margin-bottom: .2em; }
-  .subtitle { text-align: center;
-              font-size: medium;
-              font-weight: bold;
-              margin-top:0; }
-  .todo   { font-family: monospace; color: red; }
-  .done   { font-family: monospace; color: green; }
-  .priority { font-family: monospace; color: orange; }
-  .tag    { background-color: #eee; font-family: monospace;
-            padding: 2px; font-size: 80%; font-weight: normal; }
-  .timestamp { color: #bebebe; }
-  .timestamp-kwd { color: #5f9ea0; }
-  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
-  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
-  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
-  .underline { text-decoration: underline; }
-  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
-  p.verse { margin-left: 3%; }
-  pre {
-    border: 1px solid #e6e6e6;
-    border-radius: 3px;
-    background-color: #f2f2f2;
-    padding: 8pt;
-    font-family: monospace;
-    overflow: auto;
-    margin: 1.2em;
-  }
-  pre.src {
-    position: relative;
-    overflow: auto;
-  }
-  pre.src:before {
-    display: none;
-    position: absolute;
-    top: -8px;
-    right: 12px;
-    padding: 3px;
-    color: #555;
-    background-color: #f2f2f299;
-  }
-  pre.src:hover:before { display: inline; margin-top: 14px;}
-  /* Languages per Org manual */
-  pre.src-asymptote:before { content: 'Asymptote'; }
-  pre.src-awk:before { content: 'Awk'; }
-  pre.src-authinfo::before { content: 'Authinfo'; }
-  pre.src-C:before { content: 'C'; }
-  /* pre.src-C++ doesn't work in CSS */
-  pre.src-clojure:before { content: 'Clojure'; }
-  pre.src-css:before { content: 'CSS'; }
-  pre.src-D:before { content: 'D'; }
-  pre.src-ditaa:before { content: 'ditaa'; }
-  pre.src-dot:before { content: 'Graphviz'; }
-  pre.src-calc:before { content: 'Emacs Calc'; }
-  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
-  pre.src-fortran:before { content: 'Fortran'; }
-  pre.src-gnuplot:before { content: 'gnuplot'; }
-  pre.src-haskell:before { content: 'Haskell'; }
-  pre.src-hledger:before { content: 'hledger'; }
-  pre.src-java:before { content: 'Java'; }
-  pre.src-js:before { content: 'Javascript'; }
-  pre.src-latex:before { content: 'LaTeX'; }
-  pre.src-ledger:before { content: 'Ledger'; }
-  pre.src-lisp:before { content: 'Lisp'; }
-  pre.src-lilypond:before { content: 'Lilypond'; }
-  pre.src-lua:before { content: 'Lua'; }
-  pre.src-matlab:before { content: 'MATLAB'; }
-  pre.src-mscgen:before { content: 'Mscgen'; }
-  pre.src-ocaml:before { content: 'Objective Caml'; }
-  pre.src-octave:before { content: 'Octave'; }
-  pre.src-org:before { content: 'Org mode'; }
-  pre.src-oz:before { content: 'OZ'; }
-  pre.src-plantuml:before { content: 'Plantuml'; }
-  pre.src-processing:before { content: 'Processing.js'; }
-  pre.src-python:before { content: 'Python'; }
-  pre.src-R:before { content: 'R'; }
-  pre.src-ruby:before { content: 'Ruby'; }
-  pre.src-sass:before { content: 'Sass'; }
-  pre.src-scheme:before { content: 'Scheme'; }
-  pre.src-screen:before { content: 'Gnu Screen'; }
-  pre.src-sed:before { content: 'Sed'; }
-  pre.src-sh:before { content: 'shell'; }
-  pre.src-sql:before { content: 'SQL'; }
-  pre.src-sqlite:before { content: 'SQLite'; }
-  /* additional languages in org.el's org-babel-load-languages alist */
-  pre.src-forth:before { content: 'Forth'; }
-  pre.src-io:before { content: 'IO'; }
-  pre.src-J:before { content: 'J'; }
-  pre.src-makefile:before { content: 'Makefile'; }
-  pre.src-maxima:before { content: 'Maxima'; }
-  pre.src-perl:before { content: 'Perl'; }
-  pre.src-picolisp:before { content: 'Pico Lisp'; }
-  pre.src-scala:before { content: 'Scala'; }
-  pre.src-shell:before { content: 'Shell Script'; }
-  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
-  /* additional language identifiers per "defun org-babel-execute"
-       in ob-*.el */
-  pre.src-cpp:before  { content: 'C++'; }
-  pre.src-abc:before  { content: 'ABC'; }
-  pre.src-coq:before  { content: 'Coq'; }
-  pre.src-groovy:before  { content: 'Groovy'; }
-  /* additional language identifiers from org-babel-shell-names in
-     ob-shell.el: ob-shell is the only babel language using a lambda to put
-     the execution function name together. */
-  pre.src-bash:before  { content: 'bash'; }
-  pre.src-csh:before  { content: 'csh'; }
-  pre.src-ash:before  { content: 'ash'; }
-  pre.src-dash:before  { content: 'dash'; }
-  pre.src-ksh:before  { content: 'ksh'; }
-  pre.src-mksh:before  { content: 'mksh'; }
-  pre.src-posh:before  { content: 'posh'; }
-  /* Additional Emacs modes also supported by the LaTeX listings package */
-  pre.src-ada:before { content: 'Ada'; }
-  pre.src-asm:before { content: 'Assembler'; }
-  pre.src-caml:before { content: 'Caml'; }
-  pre.src-delphi:before { content: 'Delphi'; }
-  pre.src-html:before { content: 'HTML'; }
-  pre.src-idl:before { content: 'IDL'; }
-  pre.src-mercury:before { content: 'Mercury'; }
-  pre.src-metapost:before { content: 'MetaPost'; }
-  pre.src-modula-2:before { content: 'Modula-2'; }
-  pre.src-pascal:before { content: 'Pascal'; }
-  pre.src-ps:before { content: 'PostScript'; }
-  pre.src-prolog:before { content: 'Prolog'; }
-  pre.src-simula:before { content: 'Simula'; }
-  pre.src-tcl:before { content: 'tcl'; }
-  pre.src-tex:before { content: 'TeX'; }
-  pre.src-plain-tex:before { content: 'Plain TeX'; }
-  pre.src-verilog:before { content: 'Verilog'; }
-  pre.src-vhdl:before { content: 'VHDL'; }
-  pre.src-xml:before { content: 'XML'; }
-  pre.src-nxml:before { content: 'XML'; }
-  /* add a generic configuration mode; LaTeX export needs an additional
-     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
-  pre.src-conf:before { content: 'Configuration File'; }
-
-  table { border-collapse:collapse; }
-  caption.t-above { caption-side: top; }
-  caption.t-bottom { caption-side: bottom; }
-  td, th { vertical-align:top;  }
-  th.org-right  { text-align: center;  }
-  th.org-left   { text-align: center;   }
-  th.org-center { text-align: center; }
-  td.org-right  { text-align: right;  }
-  td.org-left   { text-align: left;   }
-  td.org-center { text-align: center; }
-  dt { font-weight: bold; }
-  .footpara { display: inline; }
-  .footdef  { margin-bottom: 1em; }
-  .figure { padding: 1em; }
-  .figure p { text-align: center; }
-  .equation-container {
-    display: table;
-    text-align: center;
-    width: 100%;
-  }
-  .equation {
-    vertical-align: middle;
-  }
-  .equation-label {
-    display: table-cell;
-    text-align: right;
-    vertical-align: middle;
-  }
-  .inlinetask {
-    padding: 10px;
-    border: 2px solid gray;
-    margin: 10px;
-    background: #ffffcc;
-  }
-  #org-div-home-and-up
-   { text-align: right; font-size: 70%; white-space: nowrap; }
-  textarea { overflow-x: auto; }
-  .linenr { font-size: smaller }
-  .code-highlighted { background-color: #ffff00; }
-  .org-info-js_info-navigation { border-style: none; }
-  #org-info-js_console-label
-    { font-size: 10px; font-weight: bold; white-space: nowrap; }
-  .org-info-js_search-highlight
-    { background-color: #ffff00; color: #000000; font-weight: bold; }
-  .org-svg { width: 90%; }
-</style>
 <link rel="stylesheet" href="simple.css" />
 <style>
   .dark-mode {
@@ -254,9 +70,9 @@
 <a href="./index.html">Home</a>
 </p>
 
-<div id="outline-container-orgee1126f" class="outline-2">
-<h2 id="orgee1126f">My aunt and painting</h2>
-<div class="outline-text-2" id="text-orgee1126f">
+<div id="outline-container-org3dc9323" class="outline-2">
+<h2 id="org3dc9323">My aunt and painting</h2>
+<div class="outline-text-2" id="text-org3dc9323">
 <p>
 My uncle and aunt travelled to India for a sabatical. They were there for a few months. My aunt, who is quite the artist, had an idea to "paint India" wherever she went. But when she was there in the moment, getting ready to paint, she would note that things weren't quite the way she wanted them to be. Maybe it wasn't the setting she had in mind. Or maybe the colors she had on the palette didn't quite match what she was seeing. So she wouldn't paint and wait for the next opportunity. And that one wouldn't be quite right either. 
 </p>
@@ -279,9 +95,9 @@ This article attempts to address the problem my aunt faced in India. The problem
 </div>
 </div>
 
-<div id="outline-container-orgdd33cdb" class="outline-2">
-<h2 id="orgdd33cdb">Psychological momentum</h2>
-<div class="outline-text-2" id="text-orgdd33cdb">
+<div id="outline-container-org36ff1da" class="outline-2">
+<h2 id="org36ff1da">Psychological momentum</h2>
+<div class="outline-text-2" id="text-org36ff1da">
 <p>
 "Just paint" is the first step toward gaining psychological momentum. I'll loosely define that as the probability that I will do the next step of a task given that I do this step. Psychological momentum is critial to my work as a programmer, as it is to my aunt as a painter. If I want to tackle some problem, I have to get started. I have to make a little bit of progress. This makes it easier for me to make a little bit more progress, which makes it easier, and so forth. Before you know it, several hours have gone by. I was in the zone.
 </p>
@@ -308,9 +124,9 @@ This strategy is beautifully described in this <a href="https://www.youtube.com/
 </div>
 </div>
 
-<div id="outline-container-orgc7efbe1" class="outline-2">
-<h2 id="orgc7efbe1">Showing imperfect work but remaining rigorous</h2>
-<div class="outline-text-2" id="text-orgc7efbe1">
+<div id="outline-container-org8b1fbe1" class="outline-2">
+<h2 id="org8b1fbe1">Showing imperfect work but remaining rigorous</h2>
+<div class="outline-text-2" id="text-org8b1fbe1">
 <p>
 At the time of writing, I am 36 years old. I am one year older than my father lived to be. What does that feel like? Although statistically I'm expected to live <a href="https://en.wikipedia.org/wiki/Life_expectancy">several decades longer</a>, it feels like I'm living on borrowed time. What would happen if I died tomorrow? A lot of my thoughts and my work, potential contributions, would die with me. Things I didn't make public because of the academic mentality of hiding things until they're perfect.
 </p>
@@ -325,9 +141,9 @@ We already do this in academia at lab meetings, internal departmental retreats, 
 </div>
 </div>
 
-<div id="outline-container-org65c4594" class="outline-2">
-<h2 id="org65c4594">Long content: always revising</h2>
-<div class="outline-text-2" id="text-org65c4594">
+<div id="outline-container-org562f64a" class="outline-2">
+<h2 id="org562f64a">Long content: always revising</h2>
+<div class="outline-text-2" id="text-org562f64a">
 <p>
 This section, and my general approach to producing and showing work, is inspired heavily by this piece by AI and tech writer Gwern on the concept of <a href="https://www.gwern.net/About#long-content">Long Content</a>. In short, I consider everything I show to be constantly evolving. If you look at the date for this artcile and the others you'll see a date range. Chances are at least for a time, if you come back to this article or any other article on my website, you'll see it change. There is no law against this. We think of blogs, pubications, books, posts, as static documents. Snapshots in time. But what I'm thinking right now, at least in some contexts, is that it doesn't have to be that way. 
 </p>
@@ -362,9 +178,9 @@ Treating my work as Long Content has helped me psychologically keep going in my 
 </div>
 </div>
 
-<div id="outline-container-org6322238" class="outline-2">
-<h2 id="org6322238">Long content: dopamine optimization</h2>
-<div class="outline-text-2" id="text-org6322238">
+<div id="outline-container-orgb44c974" class="outline-2">
+<h2 id="orgb44c974">Long content: dopamine optimization</h2>
+<div class="outline-text-2" id="text-orgb44c974">
 <p>
 The Long Content appraoch has a neuroscience-based benefit: dopamine optimization. To clarify, I'm talking about dopamine in the context of our motivation circuitry, not the so-called "dopamine hits" that you get when someone likes your social media post. Dopamine affects motivation to do a thing rather than reward from doing a thing. Quite a lot of work has been done here. I envourage you to listen to <a href="https://www.youtube.com/watch?v=QmOF0crdyRU">this podcast by Andrew Huberman</a> where he sums up the recent research and take-home points around dopamine.
 </p>
@@ -379,9 +195,9 @@ I have direct experience here. I go to the gym for its own sake, an it has led t
 </div>
 </div>
 
-<div id="outline-container-org7bebbf5" class="outline-2">
-<h2 id="org7bebbf5">Conclusion: your web of influence</h2>
-<div class="outline-text-2" id="text-org7bebbf5">
+<div id="outline-container-org0dd0801" class="outline-2">
+<h2 id="org0dd0801">Conclusion: your web of influence</h2>
+<div class="outline-text-2" id="text-org0dd0801">
 <p>
 Here, I attempted to address the problem of starting a project and the problem of staying motivated to continue. To start a project, I introduced the concept of psychological momentum and talked about the concept of solving a simpler but related problem whenever I'm stuck for the sake of simply maintaining and building momentum, regardless of whether that is the most efficient path for a given project. I then talk about focusing on the process rather than the outcome from the standpoint of writing and showing something that is not yet perfect, and from the standpoint of Long Content, in which you really downplay the outcome and build/revise something for years if not decades. I talk about this from the standpoint of dopamine optimization, where I suggest that this process focus is a neuroscience-backed way to maintain motivation. 
 </p>
