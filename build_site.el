@@ -28,36 +28,6 @@
 ;; Load the publishing system
 (require 'ox-publish)
 
-;; Setting custom code faces (dev)
-(require 'font-lock)
-(global-font-lock-mode 1)
-(setq frame-background-mode 'dark)
-
-(custom-set-faces
- ;; Preprocessor directives, like #include
- '(font-lock-preprocessor-face ((t (:foreground "#5272AF")))) ; Muted Blue
- ;; Keywords like int, return, for
- '(font-lock-keyword-face ((t (:foreground "#B877DB" :weight bold)))) ; Muted Lavender
- ;; Function and method names
- '(font-lock-function-name-face ((t (:foreground "#68B6F3")))) ; Softer Sky Blue
- ;; Strings and character literals
- '(font-lock-string-face ((t (:foreground "#99C794")))) ; Muted Green
- ;; Numbers, constants, and literals
- '(font-lock-constant-face ((t (:foreground "#F78C6C")))) ; Peach/Orange
- ;; Types like int, float, etc.
- '(font-lock-type-face ((t (:foreground "#E5C07B")))) ; Gold
- ;; Variable names
- '(font-lock-variable-name-face ((t (:foreground "#D4BFFF")))) ; Soft Lavender
- ;; Comments
- '(font-lock-comment-face ((t (:foreground "#5A6374" :slant italic)))) ; Muted Gray
- ;; Documentation strings
- '(font-lock-doc-face ((t (:foreground "#5A6374" :slant italic)))) ; Same as comments
- ;; Built-in functions and macros
- '(font-lock-builtin-face ((t (:foreground "#7E9CD8")))) ; Blue
- ;; Warnings and errors
- '(font-lock-warning-face ((t (:foreground "#E06C75" :weight bold)))) ; Red
-)
-
 ;; Customize the HTML output
 ;;(setq org-html-validation-link nil            ;; Don't show validation link
 ;;      org-html-head-include-scripts nil       ;; Use our own scripts
