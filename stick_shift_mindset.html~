@@ -7,190 +7,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Zen and the art of driving stick</title>
 <meta name="generator" content="Org Mode" />
-<style>
-  #content { max-width: 60em; margin: auto; }
-  .title  { text-align: center;
-             margin-bottom: .2em; }
-  .subtitle { text-align: center;
-              font-size: medium;
-              font-weight: bold;
-              margin-top:0; }
-  .todo   { font-family: monospace; color: red; }
-  .done   { font-family: monospace; color: green; }
-  .priority { font-family: monospace; color: orange; }
-  .tag    { background-color: #eee; font-family: monospace;
-            padding: 2px; font-size: 80%; font-weight: normal; }
-  .timestamp { color: #bebebe; }
-  .timestamp-kwd { color: #5f9ea0; }
-  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
-  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
-  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
-  .underline { text-decoration: underline; }
-  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
-  p.verse { margin-left: 3%; }
-  pre {
-    border: 1px solid #e6e6e6;
-    border-radius: 3px;
-    background-color: #f2f2f2;
-    padding: 8pt;
-    font-family: monospace;
-    overflow: auto;
-    margin: 1.2em;
-  }
-  pre.src {
-    position: relative;
-    overflow: auto;
-  }
-  pre.src:before {
-    display: none;
-    position: absolute;
-    top: -8px;
-    right: 12px;
-    padding: 3px;
-    color: #555;
-    background-color: #f2f2f299;
-  }
-  pre.src:hover:before { display: inline; margin-top: 14px;}
-  /* Languages per Org manual */
-  pre.src-asymptote:before { content: 'Asymptote'; }
-  pre.src-awk:before { content: 'Awk'; }
-  pre.src-authinfo::before { content: 'Authinfo'; }
-  pre.src-C:before { content: 'C'; }
-  /* pre.src-C++ doesn't work in CSS */
-  pre.src-clojure:before { content: 'Clojure'; }
-  pre.src-css:before { content: 'CSS'; }
-  pre.src-D:before { content: 'D'; }
-  pre.src-ditaa:before { content: 'ditaa'; }
-  pre.src-dot:before { content: 'Graphviz'; }
-  pre.src-calc:before { content: 'Emacs Calc'; }
-  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
-  pre.src-fortran:before { content: 'Fortran'; }
-  pre.src-gnuplot:before { content: 'gnuplot'; }
-  pre.src-haskell:before { content: 'Haskell'; }
-  pre.src-hledger:before { content: 'hledger'; }
-  pre.src-java:before { content: 'Java'; }
-  pre.src-js:before { content: 'Javascript'; }
-  pre.src-latex:before { content: 'LaTeX'; }
-  pre.src-ledger:before { content: 'Ledger'; }
-  pre.src-lisp:before { content: 'Lisp'; }
-  pre.src-lilypond:before { content: 'Lilypond'; }
-  pre.src-lua:before { content: 'Lua'; }
-  pre.src-matlab:before { content: 'MATLAB'; }
-  pre.src-mscgen:before { content: 'Mscgen'; }
-  pre.src-ocaml:before { content: 'Objective Caml'; }
-  pre.src-octave:before { content: 'Octave'; }
-  pre.src-org:before { content: 'Org mode'; }
-  pre.src-oz:before { content: 'OZ'; }
-  pre.src-plantuml:before { content: 'Plantuml'; }
-  pre.src-processing:before { content: 'Processing.js'; }
-  pre.src-python:before { content: 'Python'; }
-  pre.src-R:before { content: 'R'; }
-  pre.src-ruby:before { content: 'Ruby'; }
-  pre.src-sass:before { content: 'Sass'; }
-  pre.src-scheme:before { content: 'Scheme'; }
-  pre.src-screen:before { content: 'Gnu Screen'; }
-  pre.src-sed:before { content: 'Sed'; }
-  pre.src-sh:before { content: 'shell'; }
-  pre.src-sql:before { content: 'SQL'; }
-  pre.src-sqlite:before { content: 'SQLite'; }
-  /* additional languages in org.el's org-babel-load-languages alist */
-  pre.src-forth:before { content: 'Forth'; }
-  pre.src-io:before { content: 'IO'; }
-  pre.src-J:before { content: 'J'; }
-  pre.src-makefile:before { content: 'Makefile'; }
-  pre.src-maxima:before { content: 'Maxima'; }
-  pre.src-perl:before { content: 'Perl'; }
-  pre.src-picolisp:before { content: 'Pico Lisp'; }
-  pre.src-scala:before { content: 'Scala'; }
-  pre.src-shell:before { content: 'Shell Script'; }
-  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
-  /* additional language identifiers per "defun org-babel-execute"
-       in ob-*.el */
-  pre.src-cpp:before  { content: 'C++'; }
-  pre.src-abc:before  { content: 'ABC'; }
-  pre.src-coq:before  { content: 'Coq'; }
-  pre.src-groovy:before  { content: 'Groovy'; }
-  /* additional language identifiers from org-babel-shell-names in
-     ob-shell.el: ob-shell is the only babel language using a lambda to put
-     the execution function name together. */
-  pre.src-bash:before  { content: 'bash'; }
-  pre.src-csh:before  { content: 'csh'; }
-  pre.src-ash:before  { content: 'ash'; }
-  pre.src-dash:before  { content: 'dash'; }
-  pre.src-ksh:before  { content: 'ksh'; }
-  pre.src-mksh:before  { content: 'mksh'; }
-  pre.src-posh:before  { content: 'posh'; }
-  /* Additional Emacs modes also supported by the LaTeX listings package */
-  pre.src-ada:before { content: 'Ada'; }
-  pre.src-asm:before { content: 'Assembler'; }
-  pre.src-caml:before { content: 'Caml'; }
-  pre.src-delphi:before { content: 'Delphi'; }
-  pre.src-html:before { content: 'HTML'; }
-  pre.src-idl:before { content: 'IDL'; }
-  pre.src-mercury:before { content: 'Mercury'; }
-  pre.src-metapost:before { content: 'MetaPost'; }
-  pre.src-modula-2:before { content: 'Modula-2'; }
-  pre.src-pascal:before { content: 'Pascal'; }
-  pre.src-ps:before { content: 'PostScript'; }
-  pre.src-prolog:before { content: 'Prolog'; }
-  pre.src-simula:before { content: 'Simula'; }
-  pre.src-tcl:before { content: 'tcl'; }
-  pre.src-tex:before { content: 'TeX'; }
-  pre.src-plain-tex:before { content: 'Plain TeX'; }
-  pre.src-verilog:before { content: 'Verilog'; }
-  pre.src-vhdl:before { content: 'VHDL'; }
-  pre.src-xml:before { content: 'XML'; }
-  pre.src-nxml:before { content: 'XML'; }
-  /* add a generic configuration mode; LaTeX export needs an additional
-     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
-  pre.src-conf:before { content: 'Configuration File'; }
-
-  table { border-collapse:collapse; }
-  caption.t-above { caption-side: top; }
-  caption.t-bottom { caption-side: bottom; }
-  td, th { vertical-align:top;  }
-  th.org-right  { text-align: center;  }
-  th.org-left   { text-align: center;   }
-  th.org-center { text-align: center; }
-  td.org-right  { text-align: right;  }
-  td.org-left   { text-align: left;   }
-  td.org-center { text-align: center; }
-  dt { font-weight: bold; }
-  .footpara { display: inline; }
-  .footdef  { margin-bottom: 1em; }
-  .figure { padding: 1em; }
-  .figure p { text-align: center; }
-  .equation-container {
-    display: table;
-    text-align: center;
-    width: 100%;
-  }
-  .equation {
-    vertical-align: middle;
-  }
-  .equation-label {
-    display: table-cell;
-    text-align: right;
-    vertical-align: middle;
-  }
-  .inlinetask {
-    padding: 10px;
-    border: 2px solid gray;
-    margin: 10px;
-    background: #ffffcc;
-  }
-  #org-div-home-and-up
-   { text-align: right; font-size: 70%; white-space: nowrap; }
-  textarea { overflow-x: auto; }
-  .linenr { font-size: smaller }
-  .code-highlighted { background-color: #ffff00; }
-  .org-info-js_info-navigation { border-style: none; }
-  #org-info-js_console-label
-    { font-size: 10px; font-weight: bold; white-space: nowrap; }
-  .org-info-js_search-highlight
-    { background-color: #ffff00; color: #000000; font-weight: bold; }
-  .org-svg { width: 90%; }
-</style>
 <link rel="stylesheet" href="simple.css" />
 <style>
   .dark-mode {
@@ -241,26 +57,6 @@
   // Set the default mode to dark when the DOM is fully loaded
   document.addEventListener('DOMContentLoaded', setDefaultDarkMode);
 </script>
-<script>
-// @license magnet:?xt=urn:btih:1f739d935676111cfff4b4693e3816e664797050&amp;dn=gpl-3.0.txt GPL-v3-or-Later
-     function CodeHighlightOn(elem, id)
-     {
-       var target = document.getElementById(id);
-       if(null != target) {
-         elem.classList.add("code-highlighted");
-         target.classList.add("code-highlighted");
-       }
-     }
-     function CodeHighlightOff(elem, id)
-     {
-       var target = document.getElementById(id);
-       if(null != target) {
-         elem.classList.remove("code-highlighted");
-         target.classList.remove("code-highlighted");
-       }
-     }
-// @license-end
-</script>
 </head>
 <body>
 <div id="preamble" class="status">
@@ -284,9 +80,9 @@ Robert Pirsig, <i>Zen and the Art of Motorcycle Maintenance</i>
 </p>
 <hr />
 
-<div id="outline-container-orga0e7441" class="outline-2">
-<h2 id="orga0e7441">Introduction</h2>
-<div class="outline-text-2" id="text-orga0e7441">
+<div id="outline-container-orgc4c7bf2" class="outline-2">
+<h2 id="orgc4c7bf2">Introduction</h2>
+<div class="outline-text-2" id="text-orgc4c7bf2">
 <p>
 When I moved to Berlin, I was no longer legally allowed to use my American driver's license after six months. What happens next depends on what state you have your driver's license in. For some states, you can simply trade your license in for a German one. For some states, you have to take the German written test. For some states (like California, where I'm from), you have to take both the written and practical test again. This meant I had to go to German driving school and do the whole process, as if I was 16 again. While this was annoying, I took this as an opportunity to do something I had always wanted to do: learn how to drive stick.
 </p>
@@ -305,9 +101,9 @@ From a practical standpoint, automatics get the job done and are often more envi
 </div>
 </div>
 
-<div id="outline-container-org169aae0" class="outline-2">
-<h2 id="org169aae0">Being connected through technology, not in spite of it</h2>
-<div class="outline-text-2" id="text-org169aae0">
+<div id="outline-container-orgeaf635e" class="outline-2">
+<h2 id="orgeaf635e">Being connected through technology, not in spite of it</h2>
+<div class="outline-text-2" id="text-orgeaf635e">
 <p>
 What exactly does it mean to go from automatic to manual transmission? I think of it is going down one or more layers of convenience and/or technology and/or abstraction. Doing this often requires a lot more active engagement in the task at hand. While it is less convenient, unless you're under time pressure, it can be much more rewarding.
 </p>
@@ -326,9 +122,9 @@ But how does this mesh with the very real fact that if we don't adopt new techno
 </div>
 </div>
 
-<div id="outline-container-org67429f0" class="outline-2">
-<h2 id="org67429f0">A barbell strategy toward new technology</h2>
-<div class="outline-text-2" id="text-org67429f0">
+<div id="outline-container-orgcbb0320" class="outline-2">
+<h2 id="orgcbb0320">A barbell strategy toward new technology</h2>
+<div class="outline-text-2" id="text-orgcbb0320">
 <p>
 At the time of writing (this sentence was written on <span class="timestamp-wrapper"><span class="timestamp">[2024-10-13 Sun]</span></span>), technology development is accelerating in ways that were once the realm of science fiction. To give a concrete example, have a look at this "ChatGPT" scene from the 1983 science fiction film <a href="https://www.youtube.com/watch?v=KXzNo0vR_dU">War Games</a>. The bot writes "How are you feeling today?" and one of the characters, shocked, says "How could it ask you that?!" Such a chatbot went from science fiction to mundane in a few short years.
 </p>
@@ -367,9 +163,9 @@ I am betting that this will have a payoff down the line when everyone is fully d
 </div>
 </div>
 
-<div id="outline-container-orgb7b3704" class="outline-2">
-<h2 id="orgb7b3704">Examples</h2>
-<div class="outline-text-2" id="text-orgb7b3704">
+<div id="outline-container-org3450935" class="outline-2">
+<h2 id="org3450935">Examples</h2>
+<div class="outline-text-2" id="text-org3450935">
 <p>
 The best way to get at what I'm talking about is to simply provide examples from my life. There is a lot of overlap with other concepts, like do-it-yourself (DIY), and producing rather than consuming. But it took me a while to realize that a lot of my way of doing things has a bit of a "Zen" bent to it, as Robert Pirsig talked about.
 </p>
@@ -379,9 +175,9 @@ This said, below is a list of examples that highlight what I mean by Stick Shift
 </p>
 </div>
 
-<div id="outline-container-org753f0b9" class="outline-4">
-<h4 id="org753f0b9">Windows/OSX versus the command line</h4>
-<div class="outline-text-4" id="text-org753f0b9">
+<div id="outline-container-orgab93f33" class="outline-4">
+<h4 id="orgab93f33">Windows/OSX versus the command line</h4>
+<div class="outline-text-4" id="text-orgab93f33">
 <p>
 I have a Mac, and I've been using Macs since 2009 or so. Prior to that, I was on Windows machines. I spend a lot of my time clicking around to get where I want to be.
 </p>
@@ -396,9 +192,9 @@ I don't exclusively use the command line, of course. But when I do, I feel like 
 </div>
 </div>
 
-<div id="outline-container-org4ee62bd" class="outline-4">
-<h4 id="org4ee62bd">MS Word versus Emacs Org Mode for writing</h4>
-<div class="outline-text-4" id="text-org4ee62bd">
+<div id="outline-container-org6fc4bdd" class="outline-4">
+<h4 id="org6fc4bdd">MS Word versus Emacs Org Mode for writing</h4>
+<div class="outline-text-4" id="text-org6fc4bdd">
 <p>
 I used to write most of my files in Microsoft Word. It's simple, and it gets the job done. I wrote my PhD thesis and my manuscripts in grad school all in Word. I had also written my journal entires in Word since 2009.
 </p>
@@ -417,9 +213,9 @@ As a caveat, I often need to write something with a very tight deadline or I nee
 </div>
 </div>
 
-<div id="outline-container-org54d5fc3" class="outline-4">
-<h4 id="org54d5fc3">IDE versus Vim and Emacs for coding</h4>
-<div class="outline-text-4" id="text-org54d5fc3">
+<div id="outline-container-orge8a044a" class="outline-4">
+<h4 id="orge8a044a">IDE versus Vim and Emacs for coding</h4>
+<div class="outline-text-4" id="text-orge8a044a">
 <p>
 Since we just visited the topic of writing, let's talk about coding, another big part of my life. When it comes to complex tasks and group projects, I use Visual Studio Code. This might be because I simply haven't gotten good enough at Vim and Emacs to justify its full time use (though I'm getting there&#x2026;the key is to <a href="./how_to_get_fit_long_term.html">pace yourself</a>).
 </p>
@@ -442,9 +238,9 @@ It is similar to cooking your own food from scratch versus eating something that
 </div>
 </div>
 
-<div id="outline-container-org563d371" class="outline-4">
-<h4 id="org563d371">Restaurant/ordering versus cooking</h4>
-<div class="outline-text-4" id="text-org563d371">
+<div id="outline-container-orgedfb00c" class="outline-4">
+<h4 id="orgedfb00c">Restaurant/ordering versus cooking</h4>
+<div class="outline-text-4" id="text-orgedfb00c">
 <p>
 Now for something that is more relatable to non-tech people. When I was in grad school, I often ate at a restaurant next door to my apartment for the sake of efficiency. There was always something I had to do with some tough deadline that I was behind on. So Ray's Grill at Stanford was the lowest hanging fruit.
 </p>
@@ -459,9 +255,9 @@ Importantly, when I see all the ingredients of my dinner on the kitchen counter 
 </div>
 </div>
 
-<div id="outline-container-org225e92c" class="outline-4">
-<h4 id="org225e92c">Playing music versus improvising music</h4>
-<div class="outline-text-4" id="text-org225e92c">
+<div id="outline-container-orgb4d3ed0" class="outline-4">
+<h4 id="orgb4d3ed0">Playing music versus improvising music</h4>
+<div class="outline-text-4" id="text-orgb4d3ed0">
 <p>
 I have always been a fan of music. In particular, I like jazz. One of the main reasons for this is because I played bass in jazz bands and <a href="https://open.spotify.com/artist/07SgRzTetn2P7ZXymzR8Ss">jazz combos</a> from junior high school through college. Now, I'm learning jazz piano.
 </p>
@@ -480,9 +276,9 @@ Of note here, I saw the benefit of knowing how to improvise recently when I gave
 </div>
 </div>
 
-<div id="outline-container-org411b6d2" class="outline-4">
-<h4 id="org411b6d2">Being employed versus being self employed</h4>
-<div class="outline-text-4" id="text-org411b6d2">
+<div id="outline-container-orgc0209c7" class="outline-4">
+<h4 id="orgc0209c7">Being employed versus being self employed</h4>
+<div class="outline-text-4" id="text-orgc0209c7">
 <p>
 At the end of graduate school, I started consulting for biotech companies to make a bit of extra money. After I graduated, I was employed half time as a computational biologist and I was consulting half time. I was successful enough with the latter that I made the rational decision to do consulting full time. A few years after that, I turned my freelance operation into a GmbH (German LLC, but with shares and no pass-through income).
 </p>
@@ -506,9 +302,9 @@ This has been very valuable in terms of understanding things like how markets wo
 </div>
 </div>
 
-<div id="outline-container-org9f7a471" class="outline-2">
-<h2 id="org9f7a471">How to operationalize the stick shift mindset</h2>
-<div class="outline-text-2" id="text-org9f7a471">
+<div id="outline-container-org0e9c407" class="outline-2">
+<h2 id="org0e9c407">How to operationalize the stick shift mindset</h2>
+<div class="outline-text-2" id="text-org0e9c407">
 <p>
 Each of the examples in this article highlight a particular process, that goes something like this:
 </p>

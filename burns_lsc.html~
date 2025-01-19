@@ -7,190 +7,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Burns Life Sciences Consulting GmbH</title>
 <meta name="generator" content="Org Mode" />
-<style>
-  #content { max-width: 60em; margin: auto; }
-  .title  { text-align: center;
-             margin-bottom: .2em; }
-  .subtitle { text-align: center;
-              font-size: medium;
-              font-weight: bold;
-              margin-top:0; }
-  .todo   { font-family: monospace; color: red; }
-  .done   { font-family: monospace; color: green; }
-  .priority { font-family: monospace; color: orange; }
-  .tag    { background-color: #eee; font-family: monospace;
-            padding: 2px; font-size: 80%; font-weight: normal; }
-  .timestamp { color: #bebebe; }
-  .timestamp-kwd { color: #5f9ea0; }
-  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
-  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
-  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
-  .underline { text-decoration: underline; }
-  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
-  p.verse { margin-left: 3%; }
-  pre {
-    border: 1px solid #e6e6e6;
-    border-radius: 3px;
-    background-color: #f2f2f2;
-    padding: 8pt;
-    font-family: monospace;
-    overflow: auto;
-    margin: 1.2em;
-  }
-  pre.src {
-    position: relative;
-    overflow: auto;
-  }
-  pre.src:before {
-    display: none;
-    position: absolute;
-    top: -8px;
-    right: 12px;
-    padding: 3px;
-    color: #555;
-    background-color: #f2f2f299;
-  }
-  pre.src:hover:before { display: inline; margin-top: 14px;}
-  /* Languages per Org manual */
-  pre.src-asymptote:before { content: 'Asymptote'; }
-  pre.src-awk:before { content: 'Awk'; }
-  pre.src-authinfo::before { content: 'Authinfo'; }
-  pre.src-C:before { content: 'C'; }
-  /* pre.src-C++ doesn't work in CSS */
-  pre.src-clojure:before { content: 'Clojure'; }
-  pre.src-css:before { content: 'CSS'; }
-  pre.src-D:before { content: 'D'; }
-  pre.src-ditaa:before { content: 'ditaa'; }
-  pre.src-dot:before { content: 'Graphviz'; }
-  pre.src-calc:before { content: 'Emacs Calc'; }
-  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
-  pre.src-fortran:before { content: 'Fortran'; }
-  pre.src-gnuplot:before { content: 'gnuplot'; }
-  pre.src-haskell:before { content: 'Haskell'; }
-  pre.src-hledger:before { content: 'hledger'; }
-  pre.src-java:before { content: 'Java'; }
-  pre.src-js:before { content: 'Javascript'; }
-  pre.src-latex:before { content: 'LaTeX'; }
-  pre.src-ledger:before { content: 'Ledger'; }
-  pre.src-lisp:before { content: 'Lisp'; }
-  pre.src-lilypond:before { content: 'Lilypond'; }
-  pre.src-lua:before { content: 'Lua'; }
-  pre.src-matlab:before { content: 'MATLAB'; }
-  pre.src-mscgen:before { content: 'Mscgen'; }
-  pre.src-ocaml:before { content: 'Objective Caml'; }
-  pre.src-octave:before { content: 'Octave'; }
-  pre.src-org:before { content: 'Org mode'; }
-  pre.src-oz:before { content: 'OZ'; }
-  pre.src-plantuml:before { content: 'Plantuml'; }
-  pre.src-processing:before { content: 'Processing.js'; }
-  pre.src-python:before { content: 'Python'; }
-  pre.src-R:before { content: 'R'; }
-  pre.src-ruby:before { content: 'Ruby'; }
-  pre.src-sass:before { content: 'Sass'; }
-  pre.src-scheme:before { content: 'Scheme'; }
-  pre.src-screen:before { content: 'Gnu Screen'; }
-  pre.src-sed:before { content: 'Sed'; }
-  pre.src-sh:before { content: 'shell'; }
-  pre.src-sql:before { content: 'SQL'; }
-  pre.src-sqlite:before { content: 'SQLite'; }
-  /* additional languages in org.el's org-babel-load-languages alist */
-  pre.src-forth:before { content: 'Forth'; }
-  pre.src-io:before { content: 'IO'; }
-  pre.src-J:before { content: 'J'; }
-  pre.src-makefile:before { content: 'Makefile'; }
-  pre.src-maxima:before { content: 'Maxima'; }
-  pre.src-perl:before { content: 'Perl'; }
-  pre.src-picolisp:before { content: 'Pico Lisp'; }
-  pre.src-scala:before { content: 'Scala'; }
-  pre.src-shell:before { content: 'Shell Script'; }
-  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
-  /* additional language identifiers per "defun org-babel-execute"
-       in ob-*.el */
-  pre.src-cpp:before  { content: 'C++'; }
-  pre.src-abc:before  { content: 'ABC'; }
-  pre.src-coq:before  { content: 'Coq'; }
-  pre.src-groovy:before  { content: 'Groovy'; }
-  /* additional language identifiers from org-babel-shell-names in
-     ob-shell.el: ob-shell is the only babel language using a lambda to put
-     the execution function name together. */
-  pre.src-bash:before  { content: 'bash'; }
-  pre.src-csh:before  { content: 'csh'; }
-  pre.src-ash:before  { content: 'ash'; }
-  pre.src-dash:before  { content: 'dash'; }
-  pre.src-ksh:before  { content: 'ksh'; }
-  pre.src-mksh:before  { content: 'mksh'; }
-  pre.src-posh:before  { content: 'posh'; }
-  /* Additional Emacs modes also supported by the LaTeX listings package */
-  pre.src-ada:before { content: 'Ada'; }
-  pre.src-asm:before { content: 'Assembler'; }
-  pre.src-caml:before { content: 'Caml'; }
-  pre.src-delphi:before { content: 'Delphi'; }
-  pre.src-html:before { content: 'HTML'; }
-  pre.src-idl:before { content: 'IDL'; }
-  pre.src-mercury:before { content: 'Mercury'; }
-  pre.src-metapost:before { content: 'MetaPost'; }
-  pre.src-modula-2:before { content: 'Modula-2'; }
-  pre.src-pascal:before { content: 'Pascal'; }
-  pre.src-ps:before { content: 'PostScript'; }
-  pre.src-prolog:before { content: 'Prolog'; }
-  pre.src-simula:before { content: 'Simula'; }
-  pre.src-tcl:before { content: 'tcl'; }
-  pre.src-tex:before { content: 'TeX'; }
-  pre.src-plain-tex:before { content: 'Plain TeX'; }
-  pre.src-verilog:before { content: 'Verilog'; }
-  pre.src-vhdl:before { content: 'VHDL'; }
-  pre.src-xml:before { content: 'XML'; }
-  pre.src-nxml:before { content: 'XML'; }
-  /* add a generic configuration mode; LaTeX export needs an additional
-     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
-  pre.src-conf:before { content: 'Configuration File'; }
-
-  table { border-collapse:collapse; }
-  caption.t-above { caption-side: top; }
-  caption.t-bottom { caption-side: bottom; }
-  td, th { vertical-align:top;  }
-  th.org-right  { text-align: center;  }
-  th.org-left   { text-align: center;   }
-  th.org-center { text-align: center; }
-  td.org-right  { text-align: right;  }
-  td.org-left   { text-align: left;   }
-  td.org-center { text-align: center; }
-  dt { font-weight: bold; }
-  .footpara { display: inline; }
-  .footdef  { margin-bottom: 1em; }
-  .figure { padding: 1em; }
-  .figure p { text-align: center; }
-  .equation-container {
-    display: table;
-    text-align: center;
-    width: 100%;
-  }
-  .equation {
-    vertical-align: middle;
-  }
-  .equation-label {
-    display: table-cell;
-    text-align: right;
-    vertical-align: middle;
-  }
-  .inlinetask {
-    padding: 10px;
-    border: 2px solid gray;
-    margin: 10px;
-    background: #ffffcc;
-  }
-  #org-div-home-and-up
-   { text-align: right; font-size: 70%; white-space: nowrap; }
-  textarea { overflow-x: auto; }
-  .linenr { font-size: smaller }
-  .code-highlighted { background-color: #ffff00; }
-  .org-info-js_info-navigation { border-style: none; }
-  #org-info-js_console-label
-    { font-size: 10px; font-weight: bold; white-space: nowrap; }
-  .org-info-js_search-highlight
-    { background-color: #ffff00; color: #000000; font-weight: bold; }
-  .org-svg { width: 90%; }
-</style>
 <link rel="stylesheet" href="simple.css" />
 <style>
   .dark-mode {
@@ -241,26 +57,6 @@
   // Set the default mode to dark when the DOM is fully loaded
   document.addEventListener('DOMContentLoaded', setDefaultDarkMode);
 </script>
-<script>
-// @license magnet:?xt=urn:btih:1f739d935676111cfff4b4693e3816e664797050&amp;dn=gpl-3.0.txt GPL-v3-or-Later
-     function CodeHighlightOn(elem, id)
-     {
-       var target = document.getElementById(id);
-       if(null != target) {
-         elem.classList.add("code-highlighted");
-         target.classList.add("code-highlighted");
-       }
-     }
-     function CodeHighlightOff(elem, id)
-     {
-       var target = document.getElementById(id);
-       if(null != target) {
-         elem.classList.remove("code-highlighted");
-         target.classList.remove("code-highlighted");
-       }
-     }
-// @license-end
-</script>
 </head>
 <body>
 <div id="preamble" class="status">
@@ -280,34 +76,34 @@ For Tyler's personal website, go <a href="./index.html">here</a>.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org19e7dcd">Our philosophy</a></li>
-<li><a href="#org58ec366">Who are we</a></li>
-<li><a href="#org91cdb72">Who we help</a></li>
-<li><a href="#orgcd923f0">Services</a></li>
-<li><a href="#org03bbd20">Domains</a></li>
-<li><a href="#orgd4894d9">What to expect from an engagement with Burns LSC</a></li>
-<li><a href="#org55c671f">What people are saying</a></li>
-<li><a href="#org7546634">Contact us</a></li>
-<li><a href="#orgcc5f50d">Insights</a></li>
+<li><a href="#org0d85ce6">Our philosophy</a></li>
+<li><a href="#orgbf8d1a1">Who are we</a></li>
+<li><a href="#org5b06cad">Who we help</a></li>
+<li><a href="#orgca3cb4d">Services</a></li>
+<li><a href="#org7db995b">Domains</a></li>
+<li><a href="#orgb568883">What to expect from an engagement with Burns LSC</a></li>
+<li><a href="#org03a5ad1">What people are saying</a></li>
+<li><a href="#org4b8d06a">Contact us</a></li>
+<li><a href="#org7898d9d">Insights</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-orgdb63cd0" class="outline-2">
-<h2 id="orgdb63cd0">Your single-cell and spatial strategic partner</h2>
-<div class="outline-text-2" id="text-orgdb63cd0">
+<div id="outline-container-org07b87b0" class="outline-2">
+<h2 id="org07b87b0">Your single-cell and spatial strategic partner</h2>
+<div class="outline-text-2" id="text-org07b87b0">
 <p>
 A partnership with us adds substantial value to all aspects of your single-cell and spatial operations, from the product to the research to the marketing.
 </p>
 </div>
 </div>
 
-<div id="outline-container-org19e7dcd" class="outline-2">
-<h2 id="org19e7dcd">Our philosophy</h2>
-<div class="outline-text-2" id="text-org19e7dcd">
+<div id="outline-container-org0d85ce6" class="outline-2">
+<h2 id="org0d85ce6">Our philosophy</h2>
+<div class="outline-text-2" id="text-org0d85ce6">
 <a href="#top">Back to top</a>
 
-<div id="orgfcff205" class="figure">
+<div id="orge2b8975" class="figure">
 <p><img src="images/2024-09-08_13-45-17_matrix_multiplication.jpg" alt="2024-09-08_13-45-17_matrix_multiplication.jpg" />
 </p>
 </div>
@@ -325,16 +121,16 @@ Whatever the project, we will cut through the noise and get right to the essenti
 </p>
 </div>
 </div>
-<div id="outline-container-org58ec366" class="outline-2">
-<h2 id="org58ec366">Who are we</h2>
-<div class="outline-text-2" id="text-org58ec366">
+<div id="outline-container-orgbf8d1a1" class="outline-2">
+<h2 id="orgbf8d1a1">Who are we</h2>
+<div class="outline-text-2" id="text-orgbf8d1a1">
 <a href="#top">Back to top</a>
 </div>
-<div id="outline-container-org48bc029" class="outline-3">
-<h3 id="org48bc029">Tyler Burns</h3>
-<div class="outline-text-3" id="text-org48bc029">
+<div id="outline-container-orge42dca2" class="outline-3">
+<h3 id="orge42dca2">Tyler Burns</h3>
+<div class="outline-text-3" id="text-orge42dca2">
 
-<div id="orgb50b41e" class="figure">
+<div id="orgc8d3add" class="figure">
 <p><img src="images/2024-09-08_13-52-02_professional_photo.jpg" alt="2024-09-08_13-52-02_professional_photo.jpg" width="40%" style="float:left;margin:0px 20px 20px 0px;" />
 </p>
 </div>
@@ -356,18 +152,18 @@ To see Tyler's personal website, complete with blog posts, personal projects, an
 </p>
 </div>
 </div>
-<div id="outline-container-orged149ca" class="outline-3">
-<h3 id="orged149ca">The Burns LSC Network</h3>
-<div class="outline-text-3" id="text-orged149ca">
+<div id="outline-container-org37ecdac" class="outline-3">
+<h3 id="org37ecdac">The Burns LSC Network</h3>
+<div class="outline-text-3" id="text-org37ecdac">
 <p>
 Burns Life Sciences Consulting operates as a decentralized network of top talent in the single cell and spatial fields, amassed over the 12+ years of doing this work, starting with Tyler's work in the lab of Garry Nolan in 2012 when CyTOF and its analysis were still in the "wild west" phase. We have deep experts in each of the domains below at our fingertips.
 </p>
 </div>
 </div>
 </div>
-<div id="outline-container-org91cdb72" class="outline-2">
-<h2 id="org91cdb72">Who we help</h2>
-<div class="outline-text-2" id="text-org91cdb72">
+<div id="outline-container-org5b06cad" class="outline-2">
+<h2 id="org5b06cad">Who we help</h2>
+<div class="outline-text-2" id="text-org5b06cad">
 <a href="#top">Back to top</a>
 <ul class="org-ul">
 <li>Companies developing single-cell and spatial technologies</li>
@@ -377,19 +173,19 @@ Burns Life Sciences Consulting operates as a decentralized network of top talent
 </ul>
 </div>
 </div>
-<div id="outline-container-orgcd923f0" class="outline-2">
-<h2 id="orgcd923f0">Services</h2>
-<div class="outline-text-2" id="text-orgcd923f0">
+<div id="outline-container-orgca3cb4d" class="outline-2">
+<h2 id="orgca3cb4d">Services</h2>
+<div class="outline-text-2" id="text-orgca3cb4d">
 <a href="#top">Back to top</a>
 
-<div id="orgedf05d4" class="figure">
+<div id="orgd7b9722" class="figure">
 <p><img src="images/2024-09-08_13-45-49_consultant_laptop.jpg" alt="2024-09-08_13-45-49_consultant_laptop.jpg" />
 </p>
 </div>
 </div>
-<div id="outline-container-org84b771f" class="outline-3">
-<h3 id="org84b771f">Data analysis</h3>
-<div class="outline-text-3" id="text-org84b771f">
+<div id="outline-container-orgd6ac2d8" class="outline-3">
+<h3 id="orgd6ac2d8">Data analysis</h3>
+<div class="outline-text-3" id="text-orgd6ac2d8">
 <p>
 We build and use custom-tailored data analysis pipelines for each of the listed domains. We focus heavily on common pain points (eg. batch effects, cell segmentation) so you don't have to.
 </p>
@@ -416,9 +212,9 @@ By working with us, you'll receive actionable insights without having to navigat
 </p>
 </div>
 </div>
-<div id="outline-container-orgc8687da" class="outline-3">
-<h3 id="orgc8687da">Experimental design</h3>
-<div class="outline-text-3" id="text-orgc8687da">
+<div id="outline-container-orgd53a6c6" class="outline-3">
+<h3 id="orgd53a6c6">Experimental design</h3>
+<div class="outline-text-3" id="text-orgd53a6c6">
 <p>
 We understand that bioinformatics is a garbage-in, garbage-out endeavor. As such, we want to make sure that the wet lab procedures are done properly and that the experiment is designed and optimized to best answer the research team's questions.
 </p>
@@ -428,13 +224,13 @@ We help you avoid common pitfalls and produce reliable data, which makes all the
 </p>
 </div>
 </div>
-<div id="outline-container-orga680e83" class="outline-3">
-<h3 id="orga680e83">Teaching</h3>
-<div class="outline-text-3" id="text-orga680e83">
+<div id="outline-container-orgb322bd7" class="outline-3">
+<h3 id="orgb322bd7">Teaching</h3>
+<div class="outline-text-3" id="text-orgb322bd7">
 </div>
-<div id="outline-container-org07abeb5" class="outline-4">
-<h4 id="org07abeb5">Introduction to single-cell bioinformatics seminar</h4>
-<div class="outline-text-4" id="text-org07abeb5">
+<div id="outline-container-orgd7ec78e" class="outline-4">
+<h4 id="orgd7ec78e">Introduction to single-cell bioinformatics seminar</h4>
+<div class="outline-text-4" id="text-orgd7ec78e">
 <p>
 This seminar is 3 days. It can be done in person or over video calls. We focus heavily on the fundamentals of how to code, and the basic concepts that underlie the popular packages and libraries being used in modern single cell analysis.
 </p>
@@ -453,9 +249,9 @@ After the seminar, we offer ongoing support, such that we can help you apply the
 </div>
 </div>
 </div>
-<div id="outline-container-org089f1c1" class="outline-3">
-<h3 id="org089f1c1">Marketing and communication</h3>
-<div class="outline-text-3" id="text-org089f1c1">
+<div id="outline-container-org0673f22" class="outline-3">
+<h3 id="org0673f22">Marketing and communication</h3>
+<div class="outline-text-3" id="text-org0673f22">
 <p>
 For biotech companies, our materials bridge the gap between highly technical information around your products, and the audience of current or potential users that may or may not have the deep domain expertise necessary to make decisions around the use of your products.
 </p>
@@ -473,9 +269,9 @@ With our help, you will be able to effectively communicate your message to your 
 </p>
 </div>
 </div>
-<div id="outline-container-org5da6bca" class="outline-3">
-<h3 id="org5da6bca">Market and technology trends research</h3>
-<div class="outline-text-3" id="text-org5da6bca">
+<div id="outline-container-org9e739de" class="outline-3">
+<h3 id="org9e739de">Market and technology trends research</h3>
+<div class="outline-text-3" id="text-org9e739de">
 <p>
 In today's rapidly evolving bio-pharma landscape, staying ahead of emerging trends and technologies is crucial. We provide clear, actionable insights that keep you ahead of your competition and ahead of the curve.
 </p>
@@ -496,12 +292,12 @@ We are your trusted partner in navigating the emerging trends and technologies i
 </div>
 </div>
 </div>
-<div id="outline-container-org03bbd20" class="outline-2">
-<h2 id="org03bbd20">Domains</h2>
-<div class="outline-text-2" id="text-org03bbd20">
+<div id="outline-container-org7db995b" class="outline-2">
+<h2 id="org7db995b">Domains</h2>
+<div class="outline-text-2" id="text-org7db995b">
 <a href="#top">Back to top</a>
 
-<div id="org2c361da" class="figure">
+<div id="org628b2e6" class="figure">
 <p><img src="images/2024-09-08_13-46-48_tubes.jpg" alt="2024-09-08_13-46-48_tubes.jpg" />
 </p>
 </div>
@@ -510,55 +306,55 @@ We are your trusted partner in navigating the emerging trends and technologies i
 The following are brief descriptions of the domains in which we have deep expertise, and through which we provide our services.
 </p>
 </div>
-<div id="outline-container-orgda1d203" class="outline-3">
-<h3 id="orgda1d203">High-dimensional flow cytometry</h3>
-<div class="outline-text-3" id="text-orgda1d203">
+<div id="outline-container-orgbad151e" class="outline-3">
+<h3 id="orgbad151e">High-dimensional flow cytometry</h3>
+<div class="outline-text-3" id="text-orgbad151e">
 </div>
-<div id="outline-container-orgbeff989" class="outline-4">
-<h4 id="orgbeff989">Mass cytometry</h4>
-<div class="outline-text-4" id="text-orgbeff989">
+<div id="outline-container-org1182de5" class="outline-4">
+<h4 id="org1182de5">Mass cytometry</h4>
+<div class="outline-text-4" id="text-org1182de5">
 <p>
 We leverage direct wet-lab and dry-lab experience from the lab of Garry Nolan starting in 2012, when mass cytometry was in its infancy, and the best practices were being developed in real time.
 </p>
 </div>
 </div>
-<div id="outline-container-orgd1d9eba" class="outline-4">
-<h4 id="orgd1d9eba">Spectral flow cytometry</h4>
-<div class="outline-text-4" id="text-orgd1d9eba">
+<div id="outline-container-org5acacc9" class="outline-4">
+<h4 id="org5acacc9">Spectral flow cytometry</h4>
+<div class="outline-text-4" id="text-org5acacc9">
 <p>
 Leveraging our experience in mass cytometry and traditional fluorescnece flow cytometry, we began working and partnering in spectral in the 2020s.
 </p>
 </div>
 </div>
 </div>
-<div id="outline-container-orgafd29fb" class="outline-3">
-<h3 id="orgafd29fb">Single-cell sequencing</h3>
-<div class="outline-text-3" id="text-orgafd29fb">
+<div id="outline-container-org538c5aa" class="outline-3">
+<h3 id="org538c5aa">Single-cell sequencing</h3>
+<div class="outline-text-3" id="text-org538c5aa">
 </div>
-<div id="outline-container-orgf77ecb2" class="outline-4">
-<h4 id="orgf77ecb2">RNA, ATAC, and related (integration included)</h4>
-<div class="outline-text-4" id="text-orgf77ecb2">
+<div id="outline-container-org68d94bc" class="outline-4">
+<h4 id="org68d94bc">RNA, ATAC, and related (integration included)</h4>
+<div class="outline-text-4" id="text-org68d94bc">
 <p>
 Leveraging established best practices and our "first principles" approach from the early days of mass cytometry, we make sure that we deeply understand every detail of our analysis solutions. Our services here include data integration.
 </p>
 </div>
 </div>
-<div id="outline-container-orgc797086" class="outline-4">
-<h4 id="orgc797086">CITE-seq and related</h4>
-<div class="outline-text-4" id="text-orgc797086">
+<div id="outline-container-org9a04fee" class="outline-4">
+<h4 id="org9a04fee">CITE-seq and related</h4>
+<div class="outline-text-4" id="text-org9a04fee">
 <p>
 Here, we leverage our work in flow and mass cytometry to make sure the antibody side is done right, and looks right, along with our expertise in single-cell sequencing on the transcript side.
 </p>
 </div>
 </div>
 </div>
-<div id="outline-container-orgc752494" class="outline-3">
-<h3 id="orgc752494">Spatial proteomics</h3>
-<div class="outline-text-3" id="text-orgc752494">
+<div id="outline-container-org44da777" class="outline-3">
+<h3 id="org44da777">Spatial proteomics</h3>
+<div class="outline-text-3" id="text-org44da777">
 </div>
-<div id="outline-container-org36a637f" class="outline-4">
-<h4 id="org36a637f">Mass tag based (MIBI and IMC), and fluorescence based (codex)</h4>
-<div class="outline-text-4" id="text-org36a637f">
+<div id="outline-container-org12fedcc" class="outline-4">
+<h4 id="org12fedcc">Mass tag based (MIBI and IMC), and fluorescence based (codex)</h4>
+<div class="outline-text-4" id="text-org12fedcc">
 <p>
 We utilize our direct experience from the Nolan lab and collaborators, where both MIBI and CODEX were being developed at the same time.
 </p>
@@ -569,13 +365,13 @@ This is how we deliver the same "first principles" approach that we deliver for 
 </div>
 </div>
 </div>
-<div id="outline-container-org7eefe02" class="outline-3">
-<h3 id="org7eefe02">Spatial transcriptomics</h3>
-<div class="outline-text-3" id="text-org7eefe02">
+<div id="outline-container-orgd907d3d" class="outline-3">
+<h3 id="orgd907d3d">Spatial transcriptomics</h3>
+<div class="outline-text-3" id="text-orgd907d3d">
 </div>
-<div id="outline-container-org56c8e83" class="outline-4">
-<h4 id="org56c8e83">Core based (eg. Visium), and cell based (eg. Xenium)</h4>
-<div class="outline-text-4" id="text-org56c8e83">
+<div id="outline-container-orgd9dcf51" class="outline-4">
+<h4 id="orgd9dcf51">Core based (eg. Visium), and cell based (eg. Xenium)</h4>
+<div class="outline-text-4" id="text-orgd9dcf51">
 <p>
 These methods share principles and methods with spatial proteomic analyis. Again, cell segmentation is critical. There are key differences, and we note that there are a number of different technologies to choose from.
 </p>
@@ -586,34 +382,34 @@ We emphasize a general understanding of each one and the respective trade-offs, 
 </div>
 </div>
 </div>
-<div id="outline-container-org57e7b49" class="outline-3">
-<h3 id="org57e7b49">Network analysis</h3>
-<div class="outline-text-3" id="text-org57e7b49">
+<div id="outline-container-org28bafc1" class="outline-3">
+<h3 id="org28bafc1">Network analysis</h3>
+<div class="outline-text-3" id="text-org28bafc1">
 </div>
-<div id="outline-container-org3dfd9c9" class="outline-4">
-<h4 id="org3dfd9c9">Pathway analysis</h4>
-<div class="outline-text-4" id="text-org3dfd9c9">
+<div id="outline-container-org772b606" class="outline-4">
+<h4 id="org772b606">Pathway analysis</h4>
+<div class="outline-text-4" id="text-org772b606">
 <p>
 We determine what pathways are likely active in a given cell subset with specific DEGs. We then go into the pathways themselves and determine what genes within the pathway matter. We emphasize the fundamentals of graph theory in this type of work.
 </p>
 </div>
 </div>
 </div>
-<div id="outline-container-org9311aae" class="outline-3">
-<h3 id="org9311aae">Data management</h3>
-<div class="outline-text-3" id="text-org9311aae">
+<div id="outline-container-orgb0e9d99" class="outline-3">
+<h3 id="orgb0e9d99">Data management</h3>
+<div class="outline-text-3" id="text-orgb0e9d99">
 </div>
-<div id="outline-container-org9e64e17" class="outline-4">
-<h4 id="org9e64e17">Knowledge graphs (eg. Neo4J)</h4>
-<div class="outline-text-4" id="text-org9e64e17">
+<div id="outline-container-orga4e996d" class="outline-4">
+<h4 id="orga4e996d">Knowledge graphs (eg. Neo4J)</h4>
+<div class="outline-text-4" id="text-orga4e996d">
 <p>
 Projects in this domain typically involve organizations that have multi-modal data (genes, drugs, pathways, PPI, diseases, and so forth). Knowledge graphs can put all of this together to produce novel insights you won't get looking at these data separately.
 </p>
 </div>
 </div>
-<div id="outline-container-org9b3c26f" class="outline-4">
-<h4 id="org9b3c26f">LLM integration</h4>
-<div class="outline-text-4" id="text-org9b3c26f">
+<div id="outline-container-org6c8ccf3" class="outline-4">
+<h4 id="org6c8ccf3">LLM integration</h4>
+<div class="outline-text-4" id="text-org6c8ccf3">
 <p>
 A typical project in this domain includes converting English into a given query language (eg. Cypher for Neo4J), such that a knowledge graph can be easily queried to deliver actionable insights.
 </p>
@@ -621,12 +417,12 @@ A typical project in this domain includes converting English into a given query 
 </div>
 </div>
 </div>
-<div id="outline-container-orgd4894d9" class="outline-2">
-<h2 id="orgd4894d9">What to expect from an engagement with Burns LSC</h2>
-<div class="outline-text-2" id="text-orgd4894d9">
+<div id="outline-container-orgb568883" class="outline-2">
+<h2 id="orgb568883">What to expect from an engagement with Burns LSC</h2>
+<div class="outline-text-2" id="text-orgb568883">
 <a href="#top">Back to top</a>
 
-<div id="orgc5f60ae" class="figure">
+<div id="orgb83cd7b" class="figure">
 <p><img src="images/2024-09-08_15-25-11_handshake.jpg" alt="2024-09-08_15-25-11_handshake.jpg" />
 </p>
 </div>
@@ -644,9 +440,9 @@ While most of my clients are remote and most interaction is via email, slack, an
 </p>
 </div>
 </div>
-<div id="outline-container-org55c671f" class="outline-2">
-<h2 id="org55c671f">What people are saying</h2>
-<div class="outline-text-2" id="text-org55c671f">
+<div id="outline-container-org03a5ad1" class="outline-2">
+<h2 id="org03a5ad1">What people are saying</h2>
+<div class="outline-text-2" id="text-org03a5ad1">
 <a href="#top">Back to top</a>
 <p>
 <i>“BLS Consulting has brought tremendous value to Alkahest’s research efforts. Their extensive expertise helped us advance cutting-edge projects both in the scientific foundation, as well as the technical implementation. They’re the rare organization that can distill the ambiguity of advanced research down to pragmatic solutions with demonstrable value.”</i>
@@ -681,44 +477,44 @@ While most of my clients are remote and most interaction is via email, slack, an
 </p>
 </div>
 </div>
-<div id="outline-container-org7546634" class="outline-2">
-<h2 id="org7546634">Contact us</h2>
-<div class="outline-text-2" id="text-org7546634">
+<div id="outline-container-org4b8d06a" class="outline-2">
+<h2 id="org4b8d06a">Contact us</h2>
+<div class="outline-text-2" id="text-org4b8d06a">
 <a href="#top">Back to top</a>
 </div>
-<div id="outline-container-org618ac8c" class="outline-3">
-<h3 id="org618ac8c"><a href="https://calendly.com/burnslsc-info/30min">Book a free 30min consultation</a></h3>
-<div class="outline-text-3" id="text-org618ac8c">
+<div id="outline-container-orgda03040" class="outline-3">
+<h3 id="orgda03040"><a href="https://calendly.com/burnslsc-info/30min">Book a free 30min consultation</a></h3>
+<div class="outline-text-3" id="text-orgda03040">
 <p>
 If you'd like my two cents on anything, and/or you would like to explore potential engagements/partnerships, you can book a call accordingly.
 </p>
 </div>
 </div>
-<div id="outline-container-orga02cca4" class="outline-3">
-<h3 id="orga02cca4"><a href="https://www.linkedin.com/in/tylerjburns/">Tyler's LinkedIn</a></h3>
-<div class="outline-text-3" id="text-orga02cca4">
+<div id="outline-container-org8cecbf9" class="outline-3">
+<h3 id="org8cecbf9"><a href="https://www.linkedin.com/in/tylerjburns/">Tyler's LinkedIn</a></h3>
+<div class="outline-text-3" id="text-org8cecbf9">
 <p>
 Tyler maintains a strong LinkedIn presence. If you're not connected, simply send a connection request with a message. If he can't answer your questions, he can link you to people who can.
 </p>
 </div>
 </div>
 </div>
-<div id="outline-container-orgcc5f50d" class="outline-2">
-<h2 id="orgcc5f50d">Insights</h2>
-<div class="outline-text-2" id="text-orgcc5f50d">
+<div id="outline-container-org7898d9d" class="outline-2">
+<h2 id="org7898d9d">Insights</h2>
+<div class="outline-text-2" id="text-org7898d9d">
 <a href="#top">Back to top</a>
 </div>
-<div id="outline-container-org70ca0f5" class="outline-3">
-<h3 id="org70ca0f5"><a href="https://tjburns08.github.io/social_media_posts.html">A compendium of Tyler's social media posts</a></h3>
-<div class="outline-text-3" id="text-org70ca0f5">
+<div id="outline-container-org1113a16" class="outline-3">
+<h3 id="org1113a16"><a href="https://tjburns08.github.io/social_media_posts.html">A compendium of Tyler's social media posts</a></h3>
+<div class="outline-text-3" id="text-org1113a16">
 <p>
 These are grouped by subject, and easier to go through here than trying to browse through LinkedIn history.
 </p>
 </div>
 </div>
-<div id="outline-container-orga9eff96" class="outline-3">
-<h3 id="orga9eff96"><a href="https://tjburns08.github.io/index.html#single_cell">Single-cell relevant posts</a></h3>
-<div class="outline-text-3" id="text-orga9eff96">
+<div id="outline-container-org2d13148" class="outline-3">
+<h3 id="org2d13148"><a href="https://tjburns08.github.io/index.html#single_cell">Single-cell relevant posts</a></h3>
+<div class="outline-text-3" id="text-org2d13148">
 <p>
 These are markdowns and articles related to all things single-cell, from Tyler's personal website.
 </p>
