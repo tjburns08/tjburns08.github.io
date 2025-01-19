@@ -80,6 +80,9 @@ Lewis Carroll, Alice's Adventures in Wonderland
 </p>
 <hr />
 
+<div id="outline-container-org1c38658" class="outline-2">
+<h2 id="org1c38658">From R to S</h2>
+<div class="outline-text-2" id="text-org1c38658">
 <p>
 Let's begin with a simple expression in R. Adding two numbers together.
 </p>
@@ -192,8 +195,12 @@ But here's the rub: R operates like this. Let me show you. Below is R:
 <p>
 So now you can see objectively that there is a chunk of R that is rooted in something much older than R.
 </p>
+</div>
+</div>
 
-
+<div id="outline-container-orgc84578f" class="outline-2">
+<h2 id="orgc84578f">From S to C</h2>
+<div class="outline-text-2" id="text-orgc84578f">
 <p>
 Ok, this is all well and good, but how do I know that R specifically had S-expressions in mind? In order to answer that, we can download the <a href="https://cran.r-project.org/src/base/R-4/">source code</a> of the R programming language and have a look at it. Below is the source code from R 4.4.0.
 </p>
@@ -288,7 +295,12 @@ Within this function, we can find a switch statement (think of this as an if sta
 <p>
 Where you can see that "+" is PLUSOP, where x1 + x2 is defined.
 </p>
+</div>
+</div>
 
+<div id="outline-container-org84ee45c" class="outline-2">
+<h2 id="org84ee45c">From C to Assembly</h2>
+<div class="outline-text-2" id="text-org84ee45c">
 <p>
 So we started with 5 + 7 and now we are looking at an obscure switch statement in C. But if it is written in C, that means it is indirectly written in something deeper: machine code.
 </p>
@@ -434,8 +446,12 @@ Ok, let's go back to familiarity now.
 <pre class="example">
 [1] 7
 </pre>
+</div>
+</div>
 
-
+<div id="outline-container-org812a813" class="outline-2">
+<h2 id="org812a813">Conclusion</h2>
+<div class="outline-text-2" id="text-org812a813">
 <p>
 And you can now see just how much is swept under the rug. We started with 5 + 2. We then showed that we could make the equivalent statement as an S-expression and have it successfully run in R. We then showed some more complex S-expressions and showed that counter-intuitively they run in R. We then looked at the C code behind the S-expression that defines arithmetic operations in R. And from there, we looked at the Assembly code that underlies C.
 </p>
@@ -443,6 +459,8 @@ And you can now see just how much is swept under the rug. We started with 5 + 2.
 <p>
 We truly stand on the shoulders of giants before us.
 </p>
+</div>
+</div>
 </div>
 <div id="postamble" class="status">
 <p class="date">Date: January 19, 2025 - January 19, 2025</p>
