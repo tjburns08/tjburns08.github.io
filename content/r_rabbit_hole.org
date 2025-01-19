@@ -297,8 +297,8 @@ And you can now see just how much is swept under the rug. We started with 5 + 2.
 To summarize as a list:
 
 1. R code (5 + 2) -> internally becomes an S-expression (`+`(5,2)).
-2. Arithmetic in R -> implemented in C code (like =do_arith= in arithmetic.c).
-3. C code -> compiled to machine code, which we can view as assembly.
+2. Arithmetic in R -> implemented in C code.
+3. C code -> compiled to machine code, which we can view as Assembly.
 4. Assembly -> direct instructions for the CPU: move data into registers, call functions, manage the stack, exit.
 
 What is the point?
