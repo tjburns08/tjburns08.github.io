@@ -269,6 +269,9 @@ Ok, let's go back to familiarity now.
 5 + 2
 #+end_src
 
+#+RESULTS:
+: [1] 7
+
 And you can now see just how much is swept under the rug. We started with 5 + 2. We then showed that we could make the equivalent statement as an S-expression and have it successfully run in R. We then showed some more complex S-expressions and showed that counter-intuitively they run in R. We then looked at the C code behind the S-expression that defines arithmetic operations in R. And from there, we looked at the Assembly code that underlies C.
 
 What is the point?
