@@ -80,9 +80,9 @@
 </p>
 <hr />
 
-<div id="outline-container-orge84756e" class="outline-2">
-<h2 id="orge84756e">Introduction</h2>
-<div class="outline-text-2" id="text-orge84756e">
+<div id="outline-container-org7996af1" class="outline-2">
+<h2 id="org7996af1">Introduction</h2>
+<div class="outline-text-2" id="text-org7996af1">
 <p>
 This article is written for biologists and research team directors with a biology background. If you are a bioinformatician, then perhaps you can be entertained by my perspective, here. Everyone has a slightly or massively different path, afterall.
 </p>
@@ -97,9 +97,9 @@ For an audio version of my journey from biologist to bioinformatician, plus some
 </div>
 </div>
 
-<div id="outline-container-org0b56199" class="outline-2">
-<h2 id="org0b56199">Learning how to code</h2>
-<div class="outline-text-2" id="text-org0b56199">
+<div id="outline-container-org6bfffc2" class="outline-2">
+<h2 id="org6bfffc2">Learning how to code</h2>
+<div class="outline-text-2" id="text-org6bfffc2">
 <p>
 I had two attempts at learning how to code. The first was a genomics class in 2012, done in <a href="https://xkcd.com/224/">Perl</a>. The class was too much too fast. I had to learn the basics of genomics (it wasn't my background), I had to learn how to code, and I had to learn how to analyze genomics datasets. The whole thing was a big blur of cortisol. So I'm not going to talk about it except for here, only to say that if you've had a similar experience, know that you might have simply been in the wrong environment.
 </p>
@@ -109,15 +109,15 @@ My second attempt was in 2015, when I took Stanford's <a href="https://web.stanf
 </p>
 </div>
 
-<div id="outline-container-orgf0e205e" class="outline-3">
-<h3 id="orgf0e205e">Karel the Robot</h3>
-<div class="outline-text-3" id="text-orgf0e205e">
+<div id="outline-container-orgc4072a8" class="outline-3">
+<h3 id="orgc4072a8">Karel the Robot</h3>
+<div class="outline-text-3" id="text-orgc4072a8">
 <p>
 We started with <a href="https://en.wikipedia.org/wiki/Karel_(programming_language)">Karel the Robot</a>, available to the public <a href="https://compedu.stanford.edu/karel-reader/docs/python/en/chapter1.html">here</a>. It's such a simple concept, but was surprisingly deep in terms of just how much it taught me, and how much confidence it gave me. Let me try to distill some of the magic here. Have a look at the image below, so you can get a feel for what Karel is.
 </p>
 
 
-<div id="org18162c5" class="figure">
+<div id="org55d6654" class="figure">
 <p><img src="images/karel1.png" alt="karel1.png" width="500px" />
 </p>
 </div>
@@ -127,9 +127,9 @@ We have a robot facing east. In front of him is a beeper. He runs in python. You
 </p>
 
 <div class="org-src-container">
-<pre class="src src-python"><span style="font-weight: bold;">from</span> karel.stanfordkarel <span style="font-weight: bold;">import</span> *
+<pre class="src src-python"><span class="org-keyword">from</span> karel.stanfordkarel <span class="org-keyword">import</span> *
 
-<span style="font-weight: bold;">def</span> <span style="font-weight: bold;">main</span>():
+<span class="org-keyword">def</span> <span class="org-function-name">main</span>():
    move()
    pick_beeper()
    move()
@@ -141,7 +141,7 @@ Then Karel ends up here:
 </p>
 
 
-<div id="orgc7476e7" class="figure">
+<div id="org1ccc5b4" class="figure">
 <p><img src="images/karel2.png" alt="karel2.png" width="500px" />
 </p>
 </div>
@@ -156,9 +156,9 @@ And that was coding! You gave Karel a set of instructions, written in a particul
 </div>
 </div>
 
-<div id="outline-container-orgf72cc43" class="outline-3">
-<h3 id="orgf72cc43">Functions</h3>
-<div class="outline-text-3" id="text-orgf72cc43">
+<div id="outline-container-orgecadba2" class="outline-3">
+<h3 id="orgecadba2">Functions</h3>
+<div class="outline-text-3" id="text-orgecadba2">
 <p>
 Ok, here is where it gets interesting. We're going to look at functions, which one can think of as a fundamental unit of innovation. Suppose Karel wants to walk along that wall, and end up at xy position (4, 2). What does he have to do?
 </p>
@@ -175,9 +175,9 @@ But we have a problem. Karel only knows how to turn left. So to make Karel turn 
 </p>
 
 <div class="org-src-container">
-<pre class="src src-python"><span style="font-weight: bold;">from</span> karel.stanfordkarel <span style="font-weight: bold;">import</span> *
+<pre class="src src-python"><span class="org-keyword">from</span> karel.stanfordkarel <span class="org-keyword">import</span> *
 
-<span style="font-weight: bold;">def</span> <span style="font-weight: bold;">main</span>():
+<span class="org-keyword">def</span> <span class="org-function-name">main</span>():
    turn_left()
    move()
    turn_left()
@@ -192,14 +192,14 @@ And maybe that's a bit more unsightly and inconvenient than we wanted. So it's t
 </p>
 
 <div class="org-src-container">
-<pre class="src src-python"><span style="font-weight: bold;">from</span> karel.stanfordkarel <span style="font-weight: bold;">import</span> *
+<pre class="src src-python"><span class="org-keyword">from</span> karel.stanfordkarel <span class="org-keyword">import</span> *
 
-<span style="font-weight: bold;">def</span> <span style="font-weight: bold;">turn_right</span>():
+<span class="org-keyword">def</span> <span class="org-function-name">turn_right</span>():
     turn_left()
     turn_left()
     turn_left()
 
-<span style="font-weight: bold;">def</span> <span style="font-weight: bold;">main</span>():
+<span class="org-keyword">def</span> <span class="org-function-name">main</span>():
     turn_left()
     move()
     turn_right()
@@ -217,9 +217,9 @@ Final point: you'll hear the phrase "don't <a href="https://en.wikipedia.org/wik
 </div>
 </div>
 
-<div id="outline-container-org89b376a" class="outline-3">
-<h3 id="org89b376a">Problem decomposition</h3>
-<div class="outline-text-3" id="text-org89b376a">
+<div id="outline-container-org1b9802c" class="outline-3">
+<h3 id="org1b9802c">Problem decomposition</h3>
+<div class="outline-text-3" id="text-org1b9802c">
 <p>
 Another key concept embedded in here is <a href="https://en.wikipedia.org/wiki/Decomposition_(computer_science)">problem decomposition</a>. This is the idea that when you're dealing with a complex problem, you break it down into pieces. Here, we were initially using high-level abstractions like turning right, prior to even thinking about how we're going to implement <code>turn_right</code> in python. Perhaps thinking about how we're going to implement <code>turn_right</code> would make us nervous because it's just too much to think about. Problems are hard. Even today, I will get overwhelmed if I don't properly decompose these problems prior to attacking.
 </p>
@@ -234,9 +234,9 @@ A variant of problem decomposition is something I use quite a bit, and something
 </div>
 </div>
 
-<div id="outline-container-org224aa87" class="outline-3">
-<h3 id="org224aa87">Loops</h3>
-<div class="outline-text-3" id="text-org224aa87">
+<div id="outline-container-org0414627" class="outline-3">
+<h3 id="org0414627">Loops</h3>
+<div class="outline-text-3" id="text-org0414627">
 <p>
 Ok, now let's introduce one more concept. <a href="https://en.wikipedia.org/wiki/Control_flow#Loops">Loops</a>.
 </p>
@@ -246,7 +246,7 @@ Let's suppose you have Karel in the following 8x8 grid:
 </p>
 
 
-<div id="orgabf14c6" class="figure">
+<div id="org8705186" class="figure">
 <p><img src="images/karel4.png" alt="karel4.png" width="500px" />
 </p>
 </div>
@@ -256,9 +256,9 @@ Ok. Let's say we want Karel to move across the grid from one side to the other. 
 </p>
 
 <div class="org-src-container">
-<pre class="src src-python"><span style="font-weight: bold;">from</span> karel.stanfordkarel <span style="font-weight: bold;">import</span> *
+<pre class="src src-python"><span class="org-keyword">from</span> karel.stanfordkarel <span class="org-keyword">import</span> *
 
-<span style="font-weight: bold;">def</span> <span style="font-weight: bold;">main</span>():
+<span class="org-keyword">def</span> <span class="org-function-name">main</span>():
     move()
     move()
     move()
@@ -278,10 +278,10 @@ Well&#x2026;
 </p>
 
 <div class="org-src-container">
-<pre class="src src-python"><span style="font-weight: bold;">from</span> karel.stanfordkarel <span style="font-weight: bold;">import</span> *
+<pre class="src src-python"><span class="org-keyword">from</span> karel.stanfordkarel <span class="org-keyword">import</span> *
 
-<span style="font-weight: bold;">def</span> <span style="font-weight: bold;">main</span>():
-    <span style="font-weight: bold;">for</span> i <span style="font-weight: bold;">in</span> <span style="font-weight: bold;">range</span>(999999):
+<span class="org-keyword">def</span> <span class="org-function-name">main</span>():
+    <span class="org-keyword">for</span> i <span class="org-keyword">in</span> <span class="org-builtin">range</span>(999999):
         move()
 </pre>
 </div>
@@ -304,9 +304,9 @@ I encourage you to play around with Karel the Robot. I did so for 3 weeks in CS1
 </div>
 </div>
 
-<div id="outline-container-orgb105213" class="outline-3">
-<h3 id="orgb105213">On languages</h3>
-<div class="outline-text-3" id="text-orgb105213">
+<div id="outline-container-org20cfe78" class="outline-3">
+<h3 id="org20cfe78">On languages</h3>
+<div class="outline-text-3" id="text-org20cfe78">
 <p>
 I remember having the misconception that after learning my first programming language, the next one would be just as hard and take just as long. This is not true. When you learn python, learning R will simply be a matter of learning the syntax and learning the specific quirks of the language itself. This is because within python, and within Karel, you will have learned many of the core concepts in computer science. These concepts are used in every language, in higher and lower level abstractions. It will be work to learn a new programming language, but it won't be like learning German after learning Spanish (I speak from literal experience).
 </p>
@@ -318,9 +318,9 @@ The next section, on mass cytometry analysis, initially involved <a href="https:
 </div>
 </div>
 
-<div id="outline-container-org880c07f" class="outline-2">
-<h2 id="org880c07f">Mass cytometry and the first principles of bioinformatics</h2>
-<div class="outline-text-2" id="text-org880c07f">
+<div id="outline-container-orgd0b58fe" class="outline-2">
+<h2 id="orgd0b58fe">Mass cytometry and the first principles of bioinformatics</h2>
+<div class="outline-text-2" id="text-orgd0b58fe">
 <p>
 Let's talk about <a href="https://en.wikipedia.org/wiki/Mass_cytometry">mass cytometry</a>, also known as CyTOF. This was a tool developed in the late 2000s by Scott Tanner at University of Toronto, but whose potential was fully realized by <a href="https://www.youtube.com/watch?v=uTCc2-1tbBQ">Garry Nolan</a>, my thesis advisor. The landmark <a href="https://pubmed.ncbi.nlm.nih.gov/21551058/">mass cytometry for immunology</a> paper came out in 2011, and I joined the lab in 2012. The technology was still new, and there were no best practices for analyzing this type of data in biology aside from those developed by the lab and its collaborators.
 </p>
@@ -338,7 +338,7 @@ Unlike single-cell sequencing frameworks like <a href="https://satijalab.org/seu
 </p>
 
 
-<div id="org438dcfa" class="figure">
+<div id="orgced3f11" class="figure">
 <p><img src="images/cytof_matrix.png" alt="cytof_matrix.png" width="800px" />
 </p>
 </div>
@@ -356,7 +356,7 @@ If we roll the clock back to 2011, one of the images that arguably sold the immu
 </p>
 
 
-<div id="org5cc097c" class="figure">
+<div id="org505c5aa" class="figure">
 <p><img src="images/spade_trees.png" alt="spade_trees.png" width="800px" />
 </p>
 </div>
@@ -403,9 +403,9 @@ Bioinformaticians, biologists, and research team leaders need to be able to look
 </div>
 </div>
 
-<div id="outline-container-org2ba013f" class="outline-2">
-<h2 id="org2ba013f">Summary and conclusions</h2>
-<div class="outline-text-2" id="text-org2ba013f">
+<div id="outline-container-org37f2f9b" class="outline-2">
+<h2 id="org37f2f9b">Summary and conclusions</h2>
+<div class="outline-text-2" id="text-org37f2f9b">
 <p>
 To learn bioinformatics, you have to learn the basics of code. Luckily, programs like Karel the Robot can teach you the core concepts in a matter of weeks. A basic class like Stanford's CS106A will give you this and more. You can find old <a href="https://www.youtube.com/watch?v=KkMDCCdjyW8&amp;list=PL84A56BC7F4A1F852">lectures on YouTube</a> that are perfectly relevant today (though they are in Java, the core concepts are the same). If you don't plan to actually code, you should at least learn it to the point where you can run scripts if you're a biologist, or effectively communicate to comp bio teams if you're a biologist or a research team leader.
 </p>
