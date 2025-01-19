@@ -7,190 +7,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>The virtue of depth</title>
 <meta name="generator" content="Org Mode" />
-<style>
-  #content { max-width: 60em; margin: auto; }
-  .title  { text-align: center;
-             margin-bottom: .2em; }
-  .subtitle { text-align: center;
-              font-size: medium;
-              font-weight: bold;
-              margin-top:0; }
-  .todo   { font-family: monospace; color: red; }
-  .done   { font-family: monospace; color: green; }
-  .priority { font-family: monospace; color: orange; }
-  .tag    { background-color: #eee; font-family: monospace;
-            padding: 2px; font-size: 80%; font-weight: normal; }
-  .timestamp { color: #bebebe; }
-  .timestamp-kwd { color: #5f9ea0; }
-  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
-  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
-  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
-  .underline { text-decoration: underline; }
-  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
-  p.verse { margin-left: 3%; }
-  pre {
-    border: 1px solid #e6e6e6;
-    border-radius: 3px;
-    background-color: #f2f2f2;
-    padding: 8pt;
-    font-family: monospace;
-    overflow: auto;
-    margin: 1.2em;
-  }
-  pre.src {
-    position: relative;
-    overflow: auto;
-  }
-  pre.src:before {
-    display: none;
-    position: absolute;
-    top: -8px;
-    right: 12px;
-    padding: 3px;
-    color: #555;
-    background-color: #f2f2f299;
-  }
-  pre.src:hover:before { display: inline; margin-top: 14px;}
-  /* Languages per Org manual */
-  pre.src-asymptote:before { content: 'Asymptote'; }
-  pre.src-awk:before { content: 'Awk'; }
-  pre.src-authinfo::before { content: 'Authinfo'; }
-  pre.src-C:before { content: 'C'; }
-  /* pre.src-C++ doesn't work in CSS */
-  pre.src-clojure:before { content: 'Clojure'; }
-  pre.src-css:before { content: 'CSS'; }
-  pre.src-D:before { content: 'D'; }
-  pre.src-ditaa:before { content: 'ditaa'; }
-  pre.src-dot:before { content: 'Graphviz'; }
-  pre.src-calc:before { content: 'Emacs Calc'; }
-  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
-  pre.src-fortran:before { content: 'Fortran'; }
-  pre.src-gnuplot:before { content: 'gnuplot'; }
-  pre.src-haskell:before { content: 'Haskell'; }
-  pre.src-hledger:before { content: 'hledger'; }
-  pre.src-java:before { content: 'Java'; }
-  pre.src-js:before { content: 'Javascript'; }
-  pre.src-latex:before { content: 'LaTeX'; }
-  pre.src-ledger:before { content: 'Ledger'; }
-  pre.src-lisp:before { content: 'Lisp'; }
-  pre.src-lilypond:before { content: 'Lilypond'; }
-  pre.src-lua:before { content: 'Lua'; }
-  pre.src-matlab:before { content: 'MATLAB'; }
-  pre.src-mscgen:before { content: 'Mscgen'; }
-  pre.src-ocaml:before { content: 'Objective Caml'; }
-  pre.src-octave:before { content: 'Octave'; }
-  pre.src-org:before { content: 'Org mode'; }
-  pre.src-oz:before { content: 'OZ'; }
-  pre.src-plantuml:before { content: 'Plantuml'; }
-  pre.src-processing:before { content: 'Processing.js'; }
-  pre.src-python:before { content: 'Python'; }
-  pre.src-R:before { content: 'R'; }
-  pre.src-ruby:before { content: 'Ruby'; }
-  pre.src-sass:before { content: 'Sass'; }
-  pre.src-scheme:before { content: 'Scheme'; }
-  pre.src-screen:before { content: 'Gnu Screen'; }
-  pre.src-sed:before { content: 'Sed'; }
-  pre.src-sh:before { content: 'shell'; }
-  pre.src-sql:before { content: 'SQL'; }
-  pre.src-sqlite:before { content: 'SQLite'; }
-  /* additional languages in org.el's org-babel-load-languages alist */
-  pre.src-forth:before { content: 'Forth'; }
-  pre.src-io:before { content: 'IO'; }
-  pre.src-J:before { content: 'J'; }
-  pre.src-makefile:before { content: 'Makefile'; }
-  pre.src-maxima:before { content: 'Maxima'; }
-  pre.src-perl:before { content: 'Perl'; }
-  pre.src-picolisp:before { content: 'Pico Lisp'; }
-  pre.src-scala:before { content: 'Scala'; }
-  pre.src-shell:before { content: 'Shell Script'; }
-  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
-  /* additional language identifiers per "defun org-babel-execute"
-       in ob-*.el */
-  pre.src-cpp:before  { content: 'C++'; }
-  pre.src-abc:before  { content: 'ABC'; }
-  pre.src-coq:before  { content: 'Coq'; }
-  pre.src-groovy:before  { content: 'Groovy'; }
-  /* additional language identifiers from org-babel-shell-names in
-     ob-shell.el: ob-shell is the only babel language using a lambda to put
-     the execution function name together. */
-  pre.src-bash:before  { content: 'bash'; }
-  pre.src-csh:before  { content: 'csh'; }
-  pre.src-ash:before  { content: 'ash'; }
-  pre.src-dash:before  { content: 'dash'; }
-  pre.src-ksh:before  { content: 'ksh'; }
-  pre.src-mksh:before  { content: 'mksh'; }
-  pre.src-posh:before  { content: 'posh'; }
-  /* Additional Emacs modes also supported by the LaTeX listings package */
-  pre.src-ada:before { content: 'Ada'; }
-  pre.src-asm:before { content: 'Assembler'; }
-  pre.src-caml:before { content: 'Caml'; }
-  pre.src-delphi:before { content: 'Delphi'; }
-  pre.src-html:before { content: 'HTML'; }
-  pre.src-idl:before { content: 'IDL'; }
-  pre.src-mercury:before { content: 'Mercury'; }
-  pre.src-metapost:before { content: 'MetaPost'; }
-  pre.src-modula-2:before { content: 'Modula-2'; }
-  pre.src-pascal:before { content: 'Pascal'; }
-  pre.src-ps:before { content: 'PostScript'; }
-  pre.src-prolog:before { content: 'Prolog'; }
-  pre.src-simula:before { content: 'Simula'; }
-  pre.src-tcl:before { content: 'tcl'; }
-  pre.src-tex:before { content: 'TeX'; }
-  pre.src-plain-tex:before { content: 'Plain TeX'; }
-  pre.src-verilog:before { content: 'Verilog'; }
-  pre.src-vhdl:before { content: 'VHDL'; }
-  pre.src-xml:before { content: 'XML'; }
-  pre.src-nxml:before { content: 'XML'; }
-  /* add a generic configuration mode; LaTeX export needs an additional
-     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
-  pre.src-conf:before { content: 'Configuration File'; }
-
-  table { border-collapse:collapse; }
-  caption.t-above { caption-side: top; }
-  caption.t-bottom { caption-side: bottom; }
-  td, th { vertical-align:top;  }
-  th.org-right  { text-align: center;  }
-  th.org-left   { text-align: center;   }
-  th.org-center { text-align: center; }
-  td.org-right  { text-align: right;  }
-  td.org-left   { text-align: left;   }
-  td.org-center { text-align: center; }
-  dt { font-weight: bold; }
-  .footpara { display: inline; }
-  .footdef  { margin-bottom: 1em; }
-  .figure { padding: 1em; }
-  .figure p { text-align: center; }
-  .equation-container {
-    display: table;
-    text-align: center;
-    width: 100%;
-  }
-  .equation {
-    vertical-align: middle;
-  }
-  .equation-label {
-    display: table-cell;
-    text-align: right;
-    vertical-align: middle;
-  }
-  .inlinetask {
-    padding: 10px;
-    border: 2px solid gray;
-    margin: 10px;
-    background: #ffffcc;
-  }
-  #org-div-home-and-up
-   { text-align: right; font-size: 70%; white-space: nowrap; }
-  textarea { overflow-x: auto; }
-  .linenr { font-size: smaller }
-  .code-highlighted { background-color: #ffff00; }
-  .org-info-js_info-navigation { border-style: none; }
-  #org-info-js_console-label
-    { font-size: 10px; font-weight: bold; white-space: nowrap; }
-  .org-info-js_search-highlight
-    { background-color: #ffff00; color: #000000; font-weight: bold; }
-  .org-svg { width: 90%; }
-</style>
 <link rel="stylesheet" href="simple.css" />
 <style>
   .dark-mode {
@@ -254,9 +70,9 @@
 <a href="./index.html">Home</a>
 </p>
 
-<div id="outline-container-orge2e77bd" class="outline-2">
-<h2 id="orge2e77bd">Introduction</h2>
-<div class="outline-text-2" id="text-orge2e77bd">
+<div id="outline-container-orgab26e11" class="outline-2">
+<h2 id="orgab26e11">Introduction</h2>
+<div class="outline-text-2" id="text-orgab26e11">
 <p>
 When I was in grad school, I focused on the same narrow little thing on the timescale of years. Every day I would obsess about all things technical and scientific related to that narrow little thing. I had a <a href="https://pubmed.ncbi.nlm.nih.gov/28094900/">wet-lab project</a> that was like this, and a <a href="https://www.biorxiv.org/content/10.1101/337485v1">dry-lab project</a> that was like this. When I left graduate school, I left the country and I started working on a self employed basis and eventually started a company. Now my day to day involves typical real-world things. Taxes, immigration bureaucracy, family responsibilities, finances, market research, and keeping track of the four horsemen (war, pandemic, famine, death).
 </p>
@@ -268,9 +84,9 @@ A lot of this involves <a href="./scrolling_problem.html">scrolling</a> through 
 </div>
 
 
-<div id="outline-container-org77af116" class="outline-2">
-<h2 id="org77af116">What is depth</h2>
-<div class="outline-text-2" id="text-org77af116">
+<div id="outline-container-org643fe99" class="outline-2">
+<h2 id="org643fe99">What is depth</h2>
+<div class="outline-text-2" id="text-org643fe99">
 <p>
 What is depth? The example that comes to mind, though fictional, comes from the book Musashi by Eiji Yoshikawa. Miyamoto Musashi is a Japanese swordsman who lived around the year 1600. He was known for his skill, as tested by apparently winning 61 duels. I can't find the exact passage (I only have the audiobook), but he goes to a tea ceremony, and in observing the ways of the teamaster, he realized that she had trained with the same lifetime devotion, also for several decades, in the art of tea rather than the art of the sword. In that regard, there was a mutual respect for the depth of each respective practitioner.
 </p>
@@ -297,9 +113,9 @@ But again, adult life is adult life. Starting in high school, you're pulled a mi
 </div>
 </div>
 
-<div id="outline-container-orgf521ec7" class="outline-2">
-<h2 id="orgf521ec7">Depth as minimalism</h2>
-<div class="outline-text-2" id="text-orgf521ec7">
+<div id="outline-container-org6629b6d" class="outline-2">
+<h2 id="org6629b6d">Depth as minimalism</h2>
+<div class="outline-text-2" id="text-org6629b6d">
 <p>
 I can't talk about depth without talking about <a href="https://en.wikipedia.org/wiki/Cal_Newport">Cal Newport</a>. He has written many books that dance around this topic. In sum, he encourages blocking out chunks of the calendar for what he calls "deep work" or focused work that deepens your craft. He talks about deliberate practice being vital to whatever you do. He talks about digital minimalism. He advocates not being on social media. In his podcasts, he's building toward a bigger concept he calls "deep life" which to the best of my understanding is an ideal around the sum of all of these things.
 </p>
@@ -310,9 +126,9 @@ But in my discussions, I hear the same comments. Some people can't quit social m
 </div>
 </div>
 
-<div id="outline-container-org2ca2405" class="outline-2">
-<h2 id="org2ca2405">Depth as narrowness</h2>
-<div class="outline-text-2" id="text-org2ca2405">
+<div id="outline-container-org35d2958" class="outline-2">
+<h2 id="org35d2958">Depth as narrowness</h2>
+<div class="outline-text-2" id="text-org35d2958">
 <p>
 So then how do you achieve the virtue of depth when the modern world is doing everything it can to wrestle that away from you? That's a good question. I think the place to start is with a related <a href="https://www.lesswrong.com/posts/yDfxTj9TKYsYiWH5o/the-virtue-of-narrowness">virtue of narrowness</a>. This has somewhat of a negative connotation, but hear me out. If you've already done as much of the Cal Newport timeblocking and digital minimalism as you possibly can, is there a way you can take the multitude of things on your plate, and somehow unite them into a particular theme or framing?
 </p>
@@ -335,9 +151,9 @@ Perhaps this simply makes you more playful and loosens things up. Perhaps this i
 </div>
 </div>
 
-<div id="outline-container-orgf6ea4ce" class="outline-2">
-<h2 id="orgf6ea4ce">Conclusion</h2>
-<div class="outline-text-2" id="text-orgf6ea4ce">
+<div id="outline-container-orga4bb6c4" class="outline-2">
+<h2 id="orga4bb6c4">Conclusion</h2>
+<div class="outline-text-2" id="text-orga4bb6c4">
 <p>
 I think we all want depth in our life. I think it's tied to meaning. I think the question "what is the meaning of life" can also be framed as "is there some theme I can use to tie together this chaotic mess that we call life?" Life is complicated, and most of us can't just shut off anymore and slowly read a book, or go for a walk in nature, or any of that. When we do have time off, the attention-seeking algorithms in internet-connected devices in our pockets beckon us.
 </p>
