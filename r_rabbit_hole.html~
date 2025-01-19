@@ -15,7 +15,7 @@
     --text: #dcdcdc;
     --text-light: #ababab;
     --accent: #ffb300;
-    /*--code: #f06292;*/
+    --code: #f06292;*/
     --preformatted: #ccc;
     --disabled: #111;
   }
@@ -80,9 +80,9 @@ Lewis Carroll, Alice's Adventures in Wonderland
 </p>
 <hr />
 
-<div id="outline-container-orgc247782" class="outline-2">
-<h2 id="orgc247782">From R to S</h2>
-<div class="outline-text-2" id="text-orgc247782">
+<div id="outline-container-orgca3efec" class="outline-2">
+<h2 id="orgca3efec">From R to S</h2>
+<div class="outline-text-2" id="text-orgca3efec">
 <p>
 Let's begin with a simple expression in R. Adding two numbers together.
 </p>
@@ -198,9 +198,9 @@ So now you can see objectively that there is a chunk of R that is rooted in some
 </div>
 </div>
 
-<div id="outline-container-org6901402" class="outline-2">
-<h2 id="org6901402">From S to C</h2>
-<div class="outline-text-2" id="text-org6901402">
+<div id="outline-container-orgb16f82a" class="outline-2">
+<h2 id="orgb16f82a">From S to C</h2>
+<div class="outline-text-2" id="text-orgb16f82a">
 <p>
 Ok, this is all well and good, but how do I know that R specifically had S-expressions in mind? In order to answer that, we can download the <a href="https://cran.r-project.org/src/base/R-4/">source code</a> of the R programming language and have a look at it. Below is the source code from R 4.4.0.
 </p>
@@ -298,9 +298,9 @@ Where you can see that "+" is PLUSOP, where x1 + x2 is defined.
 </div>
 </div>
 
-<div id="outline-container-orgfe23468" class="outline-2">
-<h2 id="orgfe23468">From C to Assembly</h2>
-<div class="outline-text-2" id="text-orgfe23468">
+<div id="outline-container-orgd579388" class="outline-2">
+<h2 id="orgd579388">From C to Assembly</h2>
+<div class="outline-text-2" id="text-orgd579388">
 <p>
 So we started with 5 + 7 and now we are looking at an obscure switch statement in C. But if it is written in C, that means it is indirectly written in something deeper: machine code.
 </p>
@@ -436,9 +436,9 @@ And then there is that "return 0" but from C. This is an interesting concept whe
 </div>
 </div>
 
-<div id="outline-container-org17e99c7" class="outline-2">
-<h2 id="org17e99c7">Conclusion</h2>
-<div class="outline-text-2" id="text-org17e99c7">
+<div id="outline-container-org77ac037" class="outline-2">
+<h2 id="org77ac037">Conclusion</h2>
+<div class="outline-text-2" id="text-org77ac037">
 <p>
 Ok, let's go back to familiarity now.
 </p>
