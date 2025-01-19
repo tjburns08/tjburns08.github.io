@@ -1,0 +1,448 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>The R Rabbit Hole</title>
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" href="simple.css" />
+<style>
+  .dark-mode {
+    --bg: #212121;
+    --accent-bg: #2b2b2b;
+    --text: #dcdcdc;
+    --text-light: #ababab;
+    --accent: #ffb300;
+    /*--code: #f06292;*/
+    --preformatted: #ccc;
+    --disabled: #111;
+  }
+  .dark-mode img,
+  .dark-mode video {
+    opacity: 0.8;
+  }
+  .toggle-theme-btn {
+      transform: scale(0.7);
+      opacity: 0.4;
+      transition: opacity 0.2s;
+    }
+    .toggle-theme-btn:hover {
+      opacity: 0.4;
+    }
+</style>
+<script>
+ function toggleDarkMode() {
+    const body = document.body;
+    body.classList.toggle("dark-mode");
+    // Save the user's theme preference to localStorage
+    if (body.classList.contains("dark-mode")) {
+      localStorage.setItem("theme", "dark");
+    } else {
+      localStorage.setItem("theme", "light");
+    }
+  }
+
+  function setDefaultDarkMode() {
+    // Retrieve the user's theme preference from localStorage
+    const storedTheme = localStorage.getItem("theme");
+
+    // If the stored theme is light, do nothing; otherwise, set it to dark
+    if (storedTheme !== "light") {
+      document.body.classList.add("dark-mode");
+    }
+  }
+
+  // Set the default mode to dark when the DOM is fully loaded
+  document.addEventListener('DOMContentLoaded', setDefaultDarkMode);
+</script>
+</head>
+<body>
+<div id="preamble" class="status">
+<div style="position: fixed; top: 10px; right: 10px;">
+         <button class="toggle-theme-btn" onclick="toggleDarkMode()">Light/Dark</button>
+       </div>
+</div>
+<div id="content" class="content">
+<h1 class="title">The R Rabbit Hole</h1>
+<hr />
+<p>
+<i>I almost wish I hadn't gone down that rabbit-hole—and yet—and yet—it's rather curious, you know, this sort of life!</i>
+</p>
+
+<p>
+Lewis Carroll, Alice's Adventures in Wonderland
+</p>
+<hr />
+
+<p>
+Let's begin with a simple expression in R. Adding two numbers together.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-R">5 + 2
+</pre>
+</div>
+
+<pre class="example">
+[1] 7
+</pre>
+
+
+<p>
+Now what we are going to do is ask the simple question: what is actually happening under the hood here. In my Advanced R class that I took around 2016, I learned that R uses an old concept called S-expressions, or symbolic expressions. The way this works is you have a list whereby the first element is a function, followed by the function arguments.
+</p>
+
+<p>
+We know of this in the form:
+function(arg1, arg2, &#x2026;)
+</p>
+
+<p>
+But here with "+" we can actually express this in the same format and we will get the same result. Directly in R. Try it yourself.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-R">`+`(5, 2)
+</pre>
+</div>
+
+<pre class="example">
+[1] 7
+</pre>
+
+
+<p>
+S-expressions are a hallmark of an even older programming language called LISP (something Emacs users will still be famililar with today). If we want to see what S-expressions look like in this regard, consider the following LISP code below:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-elisp">(+ 5 2)
+</pre>
+</div>
+
+<pre class="example">
+7
+</pre>
+
+
+<p>
+S-expressions can get pretty gnarly looking to the untrained eye. Let's say I wanted to do something like this:
+</p>
+
+<p>
+2 * (5 + 2)
+</p>
+
+<p>
+Which equals 14.
+</p>
+
+<p>
+What that looks like as an S-expression is something like this:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-elisp">(* 2 (+ 5 2))
+</pre>
+</div>
+
+<pre class="example">
+14
+</pre>
+
+
+<p>
+And lets say we wanted to divide the resulting answer by 7, which would give us 2. We have:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-elisp">(/ (* 2 (+ 5 2)) 7)
+</pre>
+</div>
+
+<pre class="example">
+2
+</pre>
+
+
+<p>
+So you can imagine if you want to in turn take this product and do something else with it, and so forth, you will end up with parentheses wrapped in parentheses, and so forth. LISP programmers are used to it, and it is a bit of a <a href="https://xkcd.com/297/">running joke</a>.
+</p>
+
+<p>
+But here's the rub: R operates like this. Let me show you. Below is R:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-R">`/`(`*`(2, `+`(5, 2)), 7)
+</pre>
+</div>
+
+<pre class="example">
+[1] 2
+</pre>
+
+
+<p>
+So now you can see objectively that there is a chunk of R that is rooted in something much older than R.
+</p>
+
+
+<p>
+Ok, this is all well and good, but how do I know that R specifically had S-expressions in mind? In order to answer that, we can download the <a href="https://cran.r-project.org/src/base/R-4/">source code</a> of the R programming language and have a look at it. Below is the source code from R 4.4.0.
+</p>
+
+<p>
+The directory looks like this:
+</p>
+
+<pre class="example">
+drwxr-xr-x  27 tylerburns staff  864 Apr 24  2024 doc
+drwxr-xr-x   8 tylerburns staff  256 Apr 24  2024 etc
+drwxr-xr-x  19 tylerburns staff  608 Apr 24  2024 m4
+drwxr-xr-x   7 tylerburns staff  224 Mar 27  2024 po
+drwxr-xr-x  12 tylerburns staff  384 Apr 24  2024 share
+drwxr-xr-x  13 tylerburns staff  416 Apr 24  2024 src
+drwxr-xr-x 129 tylerburns staff 4.1K Apr 24  2024 tests
+drwxr-xr-x  24 tylerburns staff  768 Apr 24  2024 tools
+-rw-r--r--   1 tylerburns staff  18K Sep 25  2018 COPYING
+-rw-r--r--   1 tylerburns staff  210 Sep 25  2018 ChangeLog
+-rw-r--r--   1 tylerburns staff 1.8K Sep 25  2018 INSTALL
+-rw-r--r--   1 tylerburns staff 5.4K Mar 24  2023 Makeconf.in
+-rw-r--r--   1 tylerburns staff 7.1K Mar 25  2022 Makefile.fw
+-rw-r--r--   1 tylerburns staff  11K Mar 27  2024 Makefile.in
+-rw-r--r--   1 tylerburns staff 4.1K Sep 25  2018 README
+-rw-r--r--   1 tylerburns staff   46 Apr 24  2024 SVN-REVISION
+-rw-r--r--   1 tylerburns staff    6 Apr 24  2024 VERSION
+-rw-r--r--   1 tylerburns staff   10 Apr 10  2024 VERSION-NICK
+-rw-r--r--   1 tylerburns staff  19K Mar 27  2024 config.site
+-rwxr-xr-x   1 tylerburns staff 1.7M Apr 24  2024 configure
+-rw-r--r--   1 tylerburns staff 104K Mar 27  2024 configure.ac
+-rw-r--r--   1 tylerburns staff  356 Mar 24  2023 configure.patch
+</pre>
+
+<p>
+From here, you're going to go into src. And then main. The first observation is that a whole lot of this is written in C. Here is a slice of the "main" directory:
+</p>
+
+<pre class="example">
+-rw-r--r--   1 tylerburns staff 8.0K Mar 27  2024 CommandLineArgs.c
+  -rw-r--r--   1 tylerburns staff 8.4K Mar 27  2024 Makefile.in
+  -rw-r--r--   1 tylerburns staff 2.8K Mar 27  2024 Makefile.win
+  -rw-r--r--   1 tylerburns staff 1.3K Sep 25  2018 RBufferUtils.h
+  -rw-r--r--   1 tylerburns staff  27K Mar 27  2024 RNG.c
+  -rw-r--r--   1 tylerburns staff 1.9K Mar 29  2019 Rcomplex.h
+  -rw-r--r--   1 tylerburns staff  51K Mar 27  2024 Rdynload.c
+  -rw-r--r--   1 tylerburns staff  13K Mar 27  2024 Renviron.c
+  -rw-r--r--   1 tylerburns staff 1.3K Sep 25  2018 Rmain.c
+  -rw-r--r--   1 tylerburns staff  34K Mar 24  2023 Rstrptime.h
+  -rw-r--r--   1 tylerburns staff  25K Mar 27  2024 agrep.c
+  -rw-r--r--   1 tylerburns staff  14K Sep 25  2018 alloca.c
+  -rw-r--r--   1 tylerburns staff  59K Mar 27  2024 altclasses.c
+  -rw-r--r--   1 tylerburns staff  34K Mar 24  2023 altrep.c
+  -rw-r--r--   1 tylerburns staff  14K Mar 27  2024 apply.c
+  -rw-r--r--   1 tylerburns staff  65K Mar 27  2024 arithmetic.c
+  -rw-r--r--   1 tylerburns staff 3.5K Mar 25  2022 arithmetic.h
+  -rw-r--r--   1 tylerburns staff  64K Mar 27  2024 array.c
+  -rw-r--r--   1 tylerburns staff  58K Mar 27  2024 attrib.c
+  -rw-r--r--   1 tylerburns staff 1.1K Sep 25  2018 basedecl.h
+</pre>
+
+<p>
+Notice the .c and .h files. These are both associated with the C programming language. We note here that C is a lower level language. It is much more verbose than what you see in R (or python for that matter), and you have to worry about a lot of things that get swept under the rug in R (like memory management) but it runs much faster.
+</p>
+
+<p>
+If we then go into the file arithmetic.c, we find the place the addition operator is defined:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-C">attribute_hidden <span style="font-weight: bold; text-decoration: underline;">SEXP</span> <span style="font-weight: bold;">do_arith</span>(<span style="font-weight: bold; text-decoration: underline;">SEXP</span> <span style="font-weight: bold; font-style: italic;">call</span>, <span style="font-weight: bold; text-decoration: underline;">SEXP</span> <span style="font-weight: bold; font-style: italic;">op</span>, <span style="font-weight: bold; text-decoration: underline;">SEXP</span> <span style="font-weight: bold; font-style: italic;">args</span>, <span style="font-weight: bold; text-decoration: underline;">SEXP</span> <span style="font-weight: bold; font-style: italic;">env</span>)
+</pre>
+</div>
+
+<p>
+Where this function takes care of many of the arithmetic operations. The SEXP means S-expression. The "op" is the operator of interest, which is +, -, *, or /.
+</p>
+
+<p>
+Within this function, we can find a switch statement (think of this as an if statement across multiple cases), where the operators and actions are defined:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-C"><span style="font-weight: bold;">switch</span> (PRIMVAL(op)) {
+        <span style="font-weight: bold;">case</span> PLUSOP: SET_SCALAR_DVAL(ans, x1 + x2); <span style="font-weight: bold;">return</span> ans;
+        <span style="font-weight: bold;">case</span> MINUSOP: SET_SCALAR_DVAL(ans, x1 - x2); <span style="font-weight: bold;">return</span> ans;
+        <span style="font-weight: bold;">case</span> TIMESOP: SET_SCALAR_DVAL(ans, x1 * x2); <span style="font-weight: bold;">return</span> ans;
+        <span style="font-weight: bold;">case</span> DIVOP: SET_SCALAR_DVAL(ans, x1 / x2); <span style="font-weight: bold;">return</span> ans;
+}
+</pre>
+</div>
+
+<p>
+Where you can see that "+" is PLUSOP, where x1 + x2 is defined.
+</p>
+
+<p>
+So we started with 5 + 7 and now we are looking at an obscure switch statement in C. But if it is written in C, that means it is indirectly written in something deeper: machine code.
+</p>
+
+<p>
+C code compiles down to what is known as machine code, which is the zeros and ones that allow the program to execute. There is a human-readable representation of machine code called Assembly that allows one to actually read and understand what is going on, with proper training.
+</p>
+
+<p>
+In order for us to understand what is going on there, let's go ahead and return to 5 + 7, but write it in C. I note that below I am using a literate programming environment to run C, and the standard way to do it is to make a c script (eg. add<sub>two</sub><sub>numbers.c</sub>) and then compile it using a tool like gcc or clang, depending on what kind of computer you have. But anyway, here is the C code and its execution:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-C"><span style="font-weight: bold;">#include</span> <span style="font-style: italic;">&lt;stdio.h&gt;</span>
+
+<span style="font-weight: bold; text-decoration: underline;">int</span> <span style="font-weight: bold;">main</span>() {
+    printf(<span style="font-style: italic;">"%d"</span>, 5 + 2);
+    <span style="font-weight: bold;">return</span> 0;
+}
+</pre>
+</div>
+
+<pre class="example">
+7
+</pre>
+
+
+<p>
+We did a simple arithmetic operation. Add two numbers together and print it. But what is actually happening in Assembly. To answer that question, we will go ahead and print out the Assembly code associated with the function, and have a look at it. It is going to be really complicated looking but we will just look at a few pieces of it so you can have a feel for what is going on here.
+</p>
+
+<p>
+We do this in-line by running the following shell script, which in turn prints out the assembly.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-shell"><span style="font-weight: bold;">echo</span> <span style="font-style: italic;">'#include &lt;stdio.h&gt;</span>
+<span style="font-style: italic;">int main() {</span>
+<span style="font-style: italic;">    printf("%d", 5 + 2);</span>
+<span style="font-style: italic;">    return 0;</span>
+<span style="font-style: italic;">}'</span> &gt; temp.c
+gcc -S -o temp.s -fno-asynchronous-unwind-tables -fno-verbose-asm -O2 temp.c
+cat temp.s
+</pre>
+</div>
+
+<p>
+Which we then put into another code block to make it a bit less ugly.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-asm">        <span style="font-weight: bold;">.section</span>        __TEXT,__text,regular,pure_instructions
+        <span style="font-weight: bold;">.build_version</span> macos, 14, 0     sdk_version 14, 2
+        <span style="font-weight: bold;">.globl</span>  _main
+        <span style="font-weight: bold;">.p2align</span>        2
+<span style="font-weight: bold;">_main</span>:
+        <span style="font-weight: bold;">.cfi_startproc</span>
+        <span style="font-weight: bold;">sub</span>     sp, sp, #32
+        <span style="font-weight: bold;">.cfi_def_cfa_offset</span> 32
+        <span style="font-weight: bold;">stp</span>     x29, x30, [sp, #16]
+        <span style="font-weight: bold;">add</span>     x29, sp, #16
+        <span style="font-weight: bold;">.cfi_def_cfa</span> w29, 16
+        <span style="font-weight: bold;">.cfi_offset</span> w30, -8
+        <span style="font-weight: bold;">.cfi_offset</span> w29, -16
+        <span style="font-weight: bold;">mov</span>     w8, #7
+        <span style="font-weight: bold;">str</span>     x8, [sp]
+<span style="font-weight: bold;">Lloh0</span>:
+        <span style="font-weight: bold;">adrp</span>    x0, l_.str@PAGE
+<span style="font-weight: bold;">Lloh1</span>:
+        <span style="font-weight: bold;">add</span>     x0, x0, l_.str@PAGEOFF
+        <span style="font-weight: bold;">bl</span>      _printf
+        <span style="font-weight: bold;">mov</span>     w0, #0
+        <span style="font-weight: bold;">ldp</span>     x29, x30, [sp, #16]
+        <span style="font-weight: bold;">add</span>     sp, sp, #32
+        <span style="font-weight: bold;">ret</span>
+        <span style="font-weight: bold;">.loh</span> AdrpAdd    Lloh0, Lloh1
+        <span style="font-weight: bold;">.cfi_endproc</span>
+
+        <span style="font-weight: bold;">.section</span>        __TEXT,__cstring,cstring_literals
+<span style="font-weight: bold;">l</span>_.str:
+        <span style="font-weight: bold;">.asciz</span>  <span style="font-style: italic;">"%d"</span>
+
+<span style="font-weight: bold;">.subsections_via_symbols</span>
+</pre>
+</div>
+
+<p>
+Ok, this is a mess. I get it. Let's just zoom in on a few things. The first is that it's basically a recipe or protocol. There is a sort of step by step execution taking place. A command followed by some symbols. Similar to the format of the S-expression from earlier:
+</p>
+
+<p>
+(function arg1 arg2 &#x2026;)
+</p>
+
+<p>
+Now let's find 5 + 2. We note that it is pre-computed by the compiler, so the remaining assembly instructions start with the number 7. There are other instances (beyond the scope of this document) where a function called "add" is called directly within Assembly:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-asm"><span style="font-weight: bold;">mov</span> <span style="font-weight: bold;">w8</span>, #7             <span style="font-weight: bold; font-style: italic;">; </span><span style="font-weight: bold; font-style: italic;">Equivalent to x &lt;- 5 + 2 in R (precomputed by the compiler)</span>
+<span style="font-weight: bold;">str</span> <span style="font-weight: bold;">x8</span>, [sp]           <span style="font-weight: bold; font-style: italic;">; </span><span style="font-weight: bold; font-style: italic;">Store value (7) on the stack</span>
+</pre>
+</div>
+
+<p>
+The stack is a "stack" or memory addresses where, for example, data like the values of variables are stored.
+</p>
+
+<p>
+Here, the 5 + 2 was pre-computed at compile time and, and is now directly in the assembly instructions as 7. This is in turn stored. In this line, the number 7 is being moved into a specific register (place where you can store stuff) called w8.
+</p>
+
+<p>
+From here, the main task is to print it out. Where does that take place? Here:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-asm"><span style="font-weight: bold;">bl</span> _printf <span style="font-weight: bold; font-style: italic;">; </span><span style="font-weight: bold; font-style: italic;">Call `printf` (similar to calling `print` in R)</span>
+</pre>
+</div>
+
+<p>
+And then there is that "return 0" but from C. This is an interesting concept whereby you have to explicitly tell the program to stop running. This is something we don't worry about in R, but it is something that happens under the hood:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-asm"><span style="font-weight: bold;">mov</span> <span style="font-weight: bold;">w0</span>, #0             <span style="font-weight: bold; font-style: italic;">; </span><span style="font-weight: bold; font-style: italic;">Set return value to 0</span>
+<span style="font-weight: bold;">ldp</span> <span style="font-weight: bold;">x29</span>, x30, [sp]     <span style="font-weight: bold; font-style: italic;">; </span><span style="font-weight: bold; font-style: italic;">Restore the frame pointer and return address</span>
+<span style="font-weight: bold;">add</span> <span style="font-weight: bold;">sp</span>, sp, #32        <span style="font-weight: bold; font-style: italic;">; </span><span style="font-weight: bold; font-style: italic;">Clean up the stack</span>
+<span style="font-weight: bold;">ret</span>                    <span style="font-weight: bold; font-style: italic;">; </span><span style="font-weight: bold; font-style: italic;">Return to the caller (like `return()`</span>
+</pre>
+</div>
+
+<p>
+Ok, let's go back to familiarity now.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-R">5 + 2
+</pre>
+</div>
+
+<pre class="example">
+[1] 7
+</pre>
+
+
+<p>
+And you can now see just how much is swept under the rug. We started with 5 + 2. We then showed that we could make the equivalent statement as an S-expression and have it successfully run in R. We then showed some more complex S-expressions and showed that counter-intuitively they run in R. We then looked at the C code behind the S-expression that defines arithmetic operations in R. And from there, we looked at the Assembly code that underlies C.
+</p>
+
+<p>
+We truly stand on the shoulders of giants before us.
+</p>
+</div>
+<div id="postamble" class="status">
+<p class="date">Date: January 19, 2025 - January 19, 2025</p>
+<p class="creator"><a href="https://www.gnu.org/software/emacs/">Emacs</a> 28.1 (<a href="https://orgmode.org">Org</a> mode 9.5.2)</p>
+</div>
+</body>
+</html>
