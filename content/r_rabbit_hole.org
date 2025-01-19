@@ -21,12 +21,12 @@ Let's begin with a simple expression in R. Adding two numbers together.
 #+RESULTS:
 : [1] 7
 
-Now what we are going to do is ask the simple question: what is actually happening under the hood here. In my Advanced R class that I took around 2016, I learned that R uses an old concept called S-expressions, or symbolic expressions. The way this works is you have a list whereby the first element is a function, followed by the function arguments.
+Now what we are going to do is ask the simple question: what is actually happening under the hood here? In my Advanced R class that I took around 2016, I learned that R uses an old concept called S-expressions, or symbolic expressions. The way this works is you have a list whereby the first element is a function, followed by the function arguments.
 
 We know of this in the form:
 function(arg1, arg2, ...)
 
-But here with "+" we can actually express this in the same format and we will get the same result. Directly in R. Try it yourself.
+But here with "+" we can actually express this in the same format and we will get the same result. Directly in R. You just have to put back ticks around the operator. Try it yourself.
 
 #+begin_src R :exports both :results output
 `+`(5, 2)
@@ -34,6 +34,8 @@ But here with "+" we can actually express this in the same format and we will ge
 
 #+RESULTS:
 : [1] 7
+
+It turns out that R will internally parse 5 + 2 into the S-expression above. That is how 5 + 2 is actually represented behind the scenes in R.
 
 S-expressions are a hallmark of an even older programming language called LISP (something Emacs users will still be famililar with today). If we want to see what S-expressions look like in this regard, consider the following LISP code below:
 
@@ -44,7 +46,7 @@ S-expressions are a hallmark of an even older programming language called LISP (
 #+RESULTS:
 : 7
 
-S-expressions can get pretty gnarly looking to the untrained eye. Let's say I wanted to do something like this:
+You can see that it's an S-expression, like the one we made in R, but using parentheses. S-expressions can get pretty gnarly looking to the untrained eye. Let's say I wanted to do something like this:
 
 2 * (5 + 2)
 
@@ -70,7 +72,7 @@ And lets say we wanted to divide the resulting answer by 7, which would give us 
 
 So you can imagine if you want to in turn take this product and do something else with it, and so forth, you will end up with parentheses wrapped in parentheses, and so forth. LISP programmers are used to it, and it is a bit of a [[https://xkcd.com/297/][running joke]].
 
-But here's the rub: R operates like this. Let me show you. Below is R, not LISP. Again, try this yourself:
+But here's the rub: R operates like this too. Let me show you. Below is R, not LISP. Again, try this yourself:
 
 #+begin_src R :exports both :results output
 `/`(`*`(2, `+`(5, 2)), 7)
@@ -79,11 +81,11 @@ But here's the rub: R operates like this. Let me show you. Below is R, not LISP.
 #+RESULTS:
 : [1] 2
 
-So now you can see objectively that there is a chunk of R that is rooted in something much older than R.
+So now you can see objectively that R's arithmetic is using S-expressions, the way you would otherwise do in LISP.
 
 ** From S to C
 
-Ok, this is all well and good, but how do I know that R specifically had S-expressions in mind? In order to answer that, we can download the [[https://cran.r-project.org/src/base/R-4/][source code]] of the R programming language and have a look at it. Below is the source code from R 4.4.0.
+Ok, this is all well and good, but how do I know that R specifically has S-expressions in mind? In order to answer that, we can download the [[https://cran.r-project.org/src/base/R-4/][source code]] of the R programming language and have a look at it. We can see if any S-expressions are explicitly declared here. Below is the source code from R 4.4.0.
 
 The directory looks like this:
 
@@ -166,7 +168,7 @@ So we started with 5 + 7 and now we are looking at an obscure switch statement i
 
 C code compiles down to what is known as machine code, which is the zeros and ones that allow the program to execute. There is a human-readable representation of machine code called Assembly that allows one to actually read and understand what is going on, with proper training.
 
-In order for us to understand what is going on there, let's go ahead and return to 5 + 7, but write it in C. I note that below I am using a literate programming environment to run C, and the standard way to do it is to make a c script (eg. add_two_numbers.c) and then compile it using a tool like gcc or clang, depending on what kind of computer you have. But anyway, here is the C code and its execution:
+In order for us to understand what is going on there, let's go ahead and return to 5 + 2, but write it in C. I note that below I am using a literate programming environment to run C, and the standard way to do it is to make a c script (eg. add_two_numbers.c) and then compile it using a tool like gcc or clang, depending on what kind of computer you have. But anyway, here is the C code and its execution:
 
 #+begin_src C :exports both :results output
 #include <stdio.h>
@@ -180,9 +182,15 @@ int main() {
 #+RESULTS:
 : 7
 
-We did a simple arithmetic operation. Add two numbers together and print it. But what is actually happening in Assembly. To answer that question, we will go ahead and print out the Assembly code associated with the function, and have a look at it. It is going to be really complicated looking but we will just look at a few pieces of it so you can have a feel for what is going on here.
+We did a simple arithmetic operation. Add two numbers together and print it. "int main" is similar to "def main" in python. "printf" is the C way of printing, where you declare what data type you are printing ("%d" is going to be an integer), and then what you're printing. Here, C adds 5 and 2 and then prints it.
 
-We do this in-line by running the following shell script, which in turn prints out the assembly.
+Then it returns 0, which is a way of explicitly saying "exit the program." Exiting with 0 indicates that the program ran successfully, by convention. R does this too under the hood, but it is not something that the user has to worry about.
+
+Anyway, we have looked at C, but what is actually happening in Assembly?
+
+To answer that question, we will go ahead and print out the Assembly code associated with the function, and have a look at it. It is going to be really complicated looking but we will just look at a few pieces of it so you can have a feel for what is going on here.
+
+We do this in the literate programming environment we have here by running the following shell script, which takes the code we wrote above and prints out the assembly.
 
 #+begin_src shell :eval no
 echo '#include <stdio.h>
@@ -194,7 +202,9 @@ gcc -S -o temp.s -fno-asynchronous-unwind-tables -fno-verbose-asm -O2 temp.c
 cat temp.s
 #+end_src
 
-Which we then put into another code block to make it a bit less ugly. This is what Assembly looks like. This is the kind of thing being swept under the rug when you do 5 + 2 and print it out.
+Which we then put into another code block to make it a bit less ugly. This is what Assembly looks like. This is the kind of thing being swept under the rug when you do 5 + 2 and print it out. This is going to look messy and you don't have to fully understand it. I just want you to see what it looks like. Note also that the code below is ARM Assembly, because this was made on a MacBook Pro with a M1 architecture. Those who have another architecture, like x86, will have Assembly that looks similar in concept, but has slightly different syntax.
+
+Anyway, here's the Assembly from the C code above:
 
 #+begin_src asm
 	.section	__TEXT,__text,regular,pure_instructions
@@ -231,20 +241,24 @@ l_.str:
 .subsections_via_symbols
 #+end_src
 
-Ok, this is a mess. I get it. Let's just zoom in on a few things. The first is that it's basically a recipe or protocol. There is a sort of step by step execution taking place. A command followed by some symbols. Similar to the format of the S-expression from earlier:
+Yes, this is kindof a lot. I get it. Again, you don't have to fully understand it. I just want to zoom in on a few things. The first is that it's basically a recipe. There is a sort of step by step execution taking place. A command followed by some symbols. Similar to the format of the S-expression from earlier:
 
 (function arg1 arg2 ...)
 
-Now let's find 5 + 2. We note that it is pre-computed by the compiler, so the remaining assembly instructions start with the number 7. There are other instances (beyond the scope of this document) where a function called "add" is called directly within Assembly:
+Now let's find 5 + 2. We note that it is pre-computed by the [[https://en.wikipedia.org/wiki/Compiler][compiler]] as an optimization, so the remaining assembly instructions start with the number 7 (I actually didn't expect this...call it learn by doing). Many modern compilers do this, and it's known as [[https://en.wikipedia.org/wiki/Constant_folding][constant folding]].
+
+There are other instances (beyond the scope of this document) where a function called "add" is called directly within Assembly. Below is what happens with the number 7 in our Assembly code:
 
 #+begin_src asm :eval no
     mov w8, #7             ; Equivalent to x <- 5 + 2 in R (precomputed by the compiler)
     str x8, [sp]           ; Store value (7) on the stack
 #+end_src
 
-The stack is a "stack" or memory addresses where, for example, data like the values of variables are stored.
+As a quick primer, ARM64 (my computer architecture) has 64-bit memory registers x0 to x30. We can refer to them directly, but if we only want to refer to the lower 32 bits of the registers, we can use w0 to w30 to refer to each of the registers, where the numbers denote the same physical register. So x8 and w8 both are referring to the same physical register. At the time of writing [2025-01-19 Sun], I have not done enough Assembly to tell you when you would refer to "w" versus "x" for a given physical register.
 
-Here, the 5 + 2 was pre-computed at compile time and, and is now directly in the assembly instructions as 7. This is in turn stored. In this line, the number 7 is being moved into a specific register (place where you can store stuff) called w8.
+Anyway in this chunk, you have "mov" which is a function that moves the second argument, 7, into a memory register called w8. From there, the value gets stored on the stack, referring to x8, which is valid as we have explained above.
+
+The stack is a region in the computer's memory where local variables can be stored. It is analogous to the "local environment" in R/Python.
 
 From here, the main task is to print it out. Where does that take place? Here:
 
@@ -252,7 +266,7 @@ From here, the main task is to print it out. Where does that take place? Here:
     bl _printf ; Call `printf` (similar to calling `print` in R)
 #+end_src
 
-And then there is that "return 0" but from C. This is an interesting concept whereby you have to explicitly tell the program to stop running. This is something we don't worry about in R, but it is something that happens under the hood:
+And then there is that "return 0" from C that we had seen before. Again, this is an interesting concept whereby you have to explicitly tell the program to stop running, and indicate whether the program ran successfully. A return of 0 indicates that it ran successfully. This is something we don't worry about in R, but it is something that happens under the hood. Below is what is actually happening in Assembly:
 
 #+begin_src asm :eval no
     mov w0, #0             ; Set return value to 0
@@ -260,6 +274,12 @@ And then there is that "return 0" but from C. This is an interesting concept whe
     add sp, sp, #32        ; Clean up the stack
     ret                    ; Return to the caller (like `return()`
 #+end_src
+
+Notice the "mov" function again, where here we are moving the number 0 into another memory register called w0. Again, the exit code of zero is a convention that typically means "no errors."
+
+Ok, wrapping up this section, we can see a few important things. The first is that the lowest level of code, well underneath R, is all a big recipe, where instructions are computed line by line, as explicit as possible, all the way to telling the computer to exit the program and that there was no errors.
+
+Another important thing is that within this recipe, while there are a number of commands, these generally boil down to simple actions, like moving things into registers, running functions like printf, managing memory (the stack in our example), and returning with an exit code.
 
 ** Conclusion
 
@@ -272,7 +292,14 @@ Ok, let's go back to familiarity now.
 #+RESULTS:
 : [1] 7
 
-And you can now see just how much is swept under the rug. We started with 5 + 2. We then showed that we could make the equivalent statement as an S-expression and have it successfully run in R. We then showed some more complex S-expressions and showed that counter-intuitively they run in R. We then looked at the C code behind the S-expression that defines arithmetic operations in R. And from there, we looked at the Assembly code that underlies C.
+And you can now see just how much is swept under the rug. We started with 5 + 2. We then showed that we could make the equivalent statement as an S-expression and have it successfully run in R. This is because R will parse 5 + 7 into an S-expression internally. We then showed that R's built-in arithmetic functions are written in C. We then looked at the C code behind the S-expression that defines arithmetic operations in R. And from there, we looked at the Assembly code that underlies C.
+
+To summarize as a list:
+
+R code (5 + 2) -> internally becomes an S-expression (`+`(5,2)).
+Arithmetic in R -> implemented in C code (like do_arith in arithmetic.c).
+C code -> compiled to machine code, which we can view as assembly.
+Assembly -> direct instructions for the CPU: move data into registers, call functions, manage the stack, exit.
 
 What is the point?
 
@@ -280,7 +307,7 @@ What has helped me solve the truly difficult problems, where no one has written 
 
 Similar to here, if you started in R and Python, you should have familiarity with the languages that are lower level, like C (even if it's literally at the level of very basic operations like printing something or writing a simple function). And you should at least know what Assembly looks like and what it generally does.
 
-Be familiar with the full stack. Whatever it is. And you will be a better problem solver, able to see the high-level, and able to reason from first principles.
+Be familiar with the full stack. Whatever it is. Go down the rabbit hole, as far as you can. And you will be a better problem solver, able to see the high-level, and able to reason from first principles.
 
 And of course, we can be grateful for the sheer volume of things we don't have to worry about now because of the coders before us, who innovated so we didn't have to worry about analyzing single-cell sequencing data in Assembly.
 

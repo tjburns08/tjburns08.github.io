@@ -80,9 +80,9 @@ Lewis Carroll, Alice's Adventures in Wonderland
 </p>
 <hr />
 
-<div id="outline-container-org4d156c9" class="outline-2">
-<h2 id="org4d156c9">From R to S</h2>
-<div class="outline-text-2" id="text-org4d156c9">
+<div id="outline-container-orgb1333bb" class="outline-2">
+<h2 id="orgb1333bb">From R to S</h2>
+<div class="outline-text-2" id="text-orgb1333bb">
 <p>
 Let's begin with a simple expression in R. Adding two numbers together.
 </p>
@@ -198,9 +198,9 @@ So now you can see objectively that there is a chunk of R that is rooted in some
 </div>
 </div>
 
-<div id="outline-container-org1f2c8b9" class="outline-2">
-<h2 id="org1f2c8b9">From S to C</h2>
-<div class="outline-text-2" id="text-org1f2c8b9">
+<div id="outline-container-orgf66184e" class="outline-2">
+<h2 id="orgf66184e">From S to C</h2>
+<div class="outline-text-2" id="text-orgf66184e">
 <p>
 Ok, this is all well and good, but how do I know that R specifically had S-expressions in mind? In order to answer that, we can download the <a href="https://cran.r-project.org/src/base/R-4/">source code</a> of the R programming language and have a look at it. Below is the source code from R 4.4.0.
 </p>
@@ -298,9 +298,9 @@ Where you can see that "+" is PLUSOP, where x1 + x2 is defined.
 </div>
 </div>
 
-<div id="outline-container-org6217624" class="outline-2">
-<h2 id="org6217624">From C to Assembly</h2>
-<div class="outline-text-2" id="text-org6217624">
+<div id="outline-container-org41b91d8" class="outline-2">
+<h2 id="org41b91d8">From C to Assembly</h2>
+<div class="outline-text-2" id="text-org41b91d8">
 <p>
 So we started with 5 + 7 and now we are looking at an obscure switch statement in C. But if it is written in C, that means it is indirectly written in something deeper: machine code.
 </p>
@@ -436,9 +436,9 @@ And then there is that "return 0" but from C. This is an interesting concept whe
 </div>
 </div>
 
-<div id="outline-container-org533e8c1" class="outline-2">
-<h2 id="org533e8c1">Conclusion</h2>
-<div class="outline-text-2" id="text-org533e8c1">
+<div id="outline-container-org5dd2c55" class="outline-2">
+<h2 id="org5dd2c55">Conclusion</h2>
+<div class="outline-text-2" id="text-org5dd2c55">
 <p>
 Ok, let's go back to familiarity now.
 </p>
@@ -447,6 +447,11 @@ Ok, let's go back to familiarity now.
 <pre class="src src-R">5 + 2
 </pre>
 </div>
+
+<pre class="example">
+[1] 7
+</pre>
+
 
 <p>
 And you can now see just how much is swept under the rug. We started with 5 + 2. We then showed that we could make the equivalent statement as an S-expression and have it successfully run in R. We then showed some more complex S-expressions and showed that counter-intuitively they run in R. We then looked at the C code behind the S-expression that defines arithmetic operations in R. And from there, we looked at the Assembly code that underlies C.
