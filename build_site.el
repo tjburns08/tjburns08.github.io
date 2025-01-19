@@ -29,6 +29,10 @@
 (require 'ox-publish)
 
 ;; Setting custom code faces (dev)
+(require 'font-lock)
+(global-font-lock-mode 1)
+(setq frame-background-mode 'dark)
+
 (custom-set-faces
  ;; Preprocessor directives, like #include
  '(font-lock-preprocessor-face ((t (:foreground "#5272AF")))) ; Muted Blue
