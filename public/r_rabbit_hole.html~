@@ -263,7 +263,7 @@ If we then go into the file arithmetic.c, we find the place the addition operato
 </p>
 
 <div class="org-src-container">
-<pre class="src src-C">attribute_hidden <span style="font-weight: bold; text-decoration: underline;">SEXP</span> <span style="font-weight: bold;">do_arith</span>(<span style="font-weight: bold; text-decoration: underline;">SEXP</span> <span style="font-weight: bold; font-style: italic;">call</span>, <span style="font-weight: bold; text-decoration: underline;">SEXP</span> <span style="font-weight: bold; font-style: italic;">op</span>, <span style="font-weight: bold; text-decoration: underline;">SEXP</span> <span style="font-weight: bold; font-style: italic;">args</span>, <span style="font-weight: bold; text-decoration: underline;">SEXP</span> <span style="font-weight: bold; font-style: italic;">env</span>)
+<pre class="src src-C">attribute_hidden <span class="org-type">SEXP</span> <span class="org-function-name">do_arith</span>(<span class="org-type">SEXP</span> <span class="org-variable-name">call</span>, <span class="org-type">SEXP</span> <span class="org-variable-name">op</span>, <span class="org-type">SEXP</span> <span class="org-variable-name">args</span>, <span class="org-type">SEXP</span> <span class="org-variable-name">env</span>)
 </pre>
 </div>
 
@@ -276,11 +276,11 @@ Within this function, we can find a switch statement (think of this as an if sta
 </p>
 
 <div class="org-src-container">
-<pre class="src src-C"><span style="font-weight: bold;">switch</span> (PRIMVAL(op)) {
-        <span style="font-weight: bold;">case</span> PLUSOP: SET_SCALAR_DVAL(ans, x1 + x2); <span style="font-weight: bold;">return</span> ans;
-        <span style="font-weight: bold;">case</span> MINUSOP: SET_SCALAR_DVAL(ans, x1 - x2); <span style="font-weight: bold;">return</span> ans;
-        <span style="font-weight: bold;">case</span> TIMESOP: SET_SCALAR_DVAL(ans, x1 * x2); <span style="font-weight: bold;">return</span> ans;
-        <span style="font-weight: bold;">case</span> DIVOP: SET_SCALAR_DVAL(ans, x1 / x2); <span style="font-weight: bold;">return</span> ans;
+<pre class="src src-C"><span class="org-keyword">switch</span> (PRIMVAL(op)) {
+        <span class="org-keyword">case</span> PLUSOP: SET_SCALAR_DVAL(ans, x1 + x2); <span class="org-keyword">return</span> ans;
+        <span class="org-keyword">case</span> MINUSOP: SET_SCALAR_DVAL(ans, x1 - x2); <span class="org-keyword">return</span> ans;
+        <span class="org-keyword">case</span> TIMESOP: SET_SCALAR_DVAL(ans, x1 * x2); <span class="org-keyword">return</span> ans;
+        <span class="org-keyword">case</span> DIVOP: SET_SCALAR_DVAL(ans, x1 / x2); <span class="org-keyword">return</span> ans;
 }
 </pre>
 </div>
@@ -302,11 +302,11 @@ In order for us to understand what is going on there, let's go ahead and return 
 </p>
 
 <div class="org-src-container">
-<pre class="src src-C"><span style="font-weight: bold;">#include</span> <span style="font-style: italic;">&lt;stdio.h&gt;</span>
+<pre class="src src-C"><span class="org-preprocessor">#include</span> <span class="org-string">&lt;stdio.h&gt;</span>
 
-<span style="font-weight: bold; text-decoration: underline;">int</span> <span style="font-weight: bold;">main</span>() {
-    printf(<span style="font-style: italic;">"%d"</span>, 5 + 2);
-    <span style="font-weight: bold;">return</span> 0;
+<span class="org-type">int</span> <span class="org-function-name">main</span>() {
+    printf(<span class="org-string">"%d"</span>, 5 + 2);
+    <span class="org-keyword">return</span> 0;
 }
 </pre>
 </div>
@@ -325,11 +325,11 @@ We do this in-line by running the following shell script, which in turn prints o
 </p>
 
 <div class="org-src-container">
-<pre class="src src-shell"><span style="font-weight: bold;">echo</span> <span style="font-style: italic;">'#include &lt;stdio.h&gt;</span>
-<span style="font-style: italic;">int main() {</span>
-<span style="font-style: italic;">    printf("%d", 5 + 2);</span>
-<span style="font-style: italic;">    return 0;</span>
-<span style="font-style: italic;">}'</span> &gt; temp.c
+<pre class="src src-shell"><span class="org-builtin">echo</span> <span class="org-string">'#include &lt;stdio.h&gt;</span>
+<span class="org-string">int main() {</span>
+<span class="org-string">    printf("%d", 5 + 2);</span>
+<span class="org-string">    return 0;</span>
+<span class="org-string">}'</span> &gt; temp.c
 gcc -S -o temp.s -fno-asynchronous-unwind-tables -fno-verbose-asm -O2 temp.c
 cat temp.s
 </pre>
@@ -340,38 +340,38 @@ Which we then put into another code block to make it a bit less ugly.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-asm">        <span style="font-weight: bold;">.section</span>        __TEXT,__text,regular,pure_instructions
-        <span style="font-weight: bold;">.build_version</span> macos, 14, 0     sdk_version 14, 2
-        <span style="font-weight: bold;">.globl</span>  _main
-        <span style="font-weight: bold;">.p2align</span>        2
-<span style="font-weight: bold;">_main</span>:
-        <span style="font-weight: bold;">.cfi_startproc</span>
-        <span style="font-weight: bold;">sub</span>     sp, sp, #32
-        <span style="font-weight: bold;">.cfi_def_cfa_offset</span> 32
-        <span style="font-weight: bold;">stp</span>     x29, x30, [sp, #16]
-        <span style="font-weight: bold;">add</span>     x29, sp, #16
-        <span style="font-weight: bold;">.cfi_def_cfa</span> w29, 16
-        <span style="font-weight: bold;">.cfi_offset</span> w30, -8
-        <span style="font-weight: bold;">.cfi_offset</span> w29, -16
-        <span style="font-weight: bold;">mov</span>     w8, #7
-        <span style="font-weight: bold;">str</span>     x8, [sp]
-<span style="font-weight: bold;">Lloh0</span>:
-        <span style="font-weight: bold;">adrp</span>    x0, l_.str@PAGE
-<span style="font-weight: bold;">Lloh1</span>:
-        <span style="font-weight: bold;">add</span>     x0, x0, l_.str@PAGEOFF
-        <span style="font-weight: bold;">bl</span>      _printf
-        <span style="font-weight: bold;">mov</span>     w0, #0
-        <span style="font-weight: bold;">ldp</span>     x29, x30, [sp, #16]
-        <span style="font-weight: bold;">add</span>     sp, sp, #32
-        <span style="font-weight: bold;">ret</span>
-        <span style="font-weight: bold;">.loh</span> AdrpAdd    Lloh0, Lloh1
-        <span style="font-weight: bold;">.cfi_endproc</span>
+<pre class="src src-asm">        <span class="org-keyword">.section</span>        __TEXT,__text,regular,pure_instructions
+        <span class="org-keyword">.build_version</span> macos, 14, 0     sdk_version 14, 2
+        <span class="org-keyword">.globl</span>  _main
+        <span class="org-keyword">.p2align</span>        2
+<span class="org-function-name">_main</span>:
+        <span class="org-keyword">.cfi_startproc</span>
+        <span class="org-keyword">sub</span>     sp, sp, #32
+        <span class="org-keyword">.cfi_def_cfa_offset</span> 32
+        <span class="org-keyword">stp</span>     x29, x30, [sp, #16]
+        <span class="org-keyword">add</span>     x29, sp, #16
+        <span class="org-keyword">.cfi_def_cfa</span> w29, 16
+        <span class="org-keyword">.cfi_offset</span> w30, -8
+        <span class="org-keyword">.cfi_offset</span> w29, -16
+        <span class="org-keyword">mov</span>     w8, #7
+        <span class="org-keyword">str</span>     x8, [sp]
+<span class="org-function-name">Lloh0</span>:
+        <span class="org-keyword">adrp</span>    x0, l_.str@PAGE
+<span class="org-function-name">Lloh1</span>:
+        <span class="org-keyword">add</span>     x0, x0, l_.str@PAGEOFF
+        <span class="org-keyword">bl</span>      _printf
+        <span class="org-keyword">mov</span>     w0, #0
+        <span class="org-keyword">ldp</span>     x29, x30, [sp, #16]
+        <span class="org-keyword">add</span>     sp, sp, #32
+        <span class="org-keyword">ret</span>
+        <span class="org-keyword">.loh</span> AdrpAdd    Lloh0, Lloh1
+        <span class="org-keyword">.cfi_endproc</span>
 
-        <span style="font-weight: bold;">.section</span>        __TEXT,__cstring,cstring_literals
-<span style="font-weight: bold;">l</span>_.str:
-        <span style="font-weight: bold;">.asciz</span>  <span style="font-style: italic;">"%d"</span>
+        <span class="org-keyword">.section</span>        __TEXT,__cstring,cstring_literals
+<span class="org-function-name">l</span>_.str:
+        <span class="org-keyword">.asciz</span>  <span class="org-string">"%d"</span>
 
-<span style="font-weight: bold;">.subsections_via_symbols</span>
+<span class="org-keyword">.subsections_via_symbols</span>
 </pre>
 </div>
 
@@ -388,8 +388,8 @@ Now let's find 5 + 2. We note that it is pre-computed by the compiler, so the re
 </p>
 
 <div class="org-src-container">
-<pre class="src src-asm"><span style="font-weight: bold;">mov</span> <span style="font-weight: bold;">w8</span>, #7             <span style="font-weight: bold; font-style: italic;">; </span><span style="font-weight: bold; font-style: italic;">Equivalent to x &lt;- 5 + 2 in R (precomputed by the compiler)</span>
-<span style="font-weight: bold;">str</span> <span style="font-weight: bold;">x8</span>, [sp]           <span style="font-weight: bold; font-style: italic;">; </span><span style="font-weight: bold; font-style: italic;">Store value (7) on the stack</span>
+<pre class="src src-asm"><span class="org-function-name">mov</span> <span class="org-keyword">w8</span>, #7             <span class="org-comment-delimiter">; </span><span class="org-comment">Equivalent to x &lt;- 5 + 2 in R (precomputed by the compiler)</span>
+<span class="org-function-name">str</span> <span class="org-keyword">x8</span>, [sp]           <span class="org-comment-delimiter">; </span><span class="org-comment">Store value (7) on the stack</span>
 </pre>
 </div>
 
@@ -406,7 +406,7 @@ From here, the main task is to print it out. Where does that take place? Here:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-asm"><span style="font-weight: bold;">bl</span> _printf <span style="font-weight: bold; font-style: italic;">; </span><span style="font-weight: bold; font-style: italic;">Call `printf` (similar to calling `print` in R)</span>
+<pre class="src src-asm"><span class="org-function-name">bl</span> _printf <span class="org-comment-delimiter">; </span><span class="org-comment">Call `printf` (similar to calling `print` in R)</span>
 </pre>
 </div>
 
@@ -415,10 +415,10 @@ And then there is that "return 0" but from C. This is an interesting concept whe
 </p>
 
 <div class="org-src-container">
-<pre class="src src-asm"><span style="font-weight: bold;">mov</span> <span style="font-weight: bold;">w0</span>, #0             <span style="font-weight: bold; font-style: italic;">; </span><span style="font-weight: bold; font-style: italic;">Set return value to 0</span>
-<span style="font-weight: bold;">ldp</span> <span style="font-weight: bold;">x29</span>, x30, [sp]     <span style="font-weight: bold; font-style: italic;">; </span><span style="font-weight: bold; font-style: italic;">Restore the frame pointer and return address</span>
-<span style="font-weight: bold;">add</span> <span style="font-weight: bold;">sp</span>, sp, #32        <span style="font-weight: bold; font-style: italic;">; </span><span style="font-weight: bold; font-style: italic;">Clean up the stack</span>
-<span style="font-weight: bold;">ret</span>                    <span style="font-weight: bold; font-style: italic;">; </span><span style="font-weight: bold; font-style: italic;">Return to the caller (like `return()`</span>
+<pre class="src src-asm"><span class="org-function-name">mov</span> <span class="org-keyword">w0</span>, #0             <span class="org-comment-delimiter">; </span><span class="org-comment">Set return value to 0</span>
+<span class="org-function-name">ldp</span> <span class="org-keyword">x29</span>, x30, [sp]     <span class="org-comment-delimiter">; </span><span class="org-comment">Restore the frame pointer and return address</span>
+<span class="org-function-name">add</span> <span class="org-keyword">sp</span>, sp, #32        <span class="org-comment-delimiter">; </span><span class="org-comment">Clean up the stack</span>
+<span class="org-function-name">ret</span>                    <span class="org-comment-delimiter">; </span><span class="org-comment">Return to the caller (like `return()`</span>
 </pre>
 </div>
 

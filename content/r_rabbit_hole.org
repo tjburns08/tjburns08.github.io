@@ -10,6 +10,8 @@
 Lewis Carroll, Alice's Adventures in Wonderland
 -----
 
+** From R to S
+
 Let's begin with a simple expression in R. Adding two numbers together.
 
 #+begin_src R :exports both :results output
@@ -79,6 +81,7 @@ But here's the rub: R operates like this. Let me show you. Below is R:
 
 So now you can see objectively that there is a chunk of R that is rooted in something much older than R.
 
+** From S to C
 
 Ok, this is all well and good, but how do I know that R specifically had S-expressions in mind? In order to answer that, we can download the [[https://cran.r-project.org/src/base/R-4/][source code]] of the R programming language and have a look at it. Below is the source code from R 4.4.0.
 
@@ -156,6 +159,8 @@ switch (PRIMVAL(op)) {
 #+end_src
 
 Where you can see that "+" is PLUSOP, where x1 + x2 is defined.
+
+** From C to Assembly
 
 So we started with 5 + 7 and now we are looking at an obscure switch statement in C. But if it is written in C, that means it is indirectly written in something deeper: machine code.
 
@@ -264,6 +269,8 @@ Ok, let's go back to familiarity now.
 
 #+RESULTS:
 : [1] 7
+
+** Conclusion
 
 And you can now see just how much is swept under the rug. We started with 5 + 2. We then showed that we could make the equivalent statement as an S-expression and have it successfully run in R. We then showed some more complex S-expressions and showed that counter-intuitively they run in R. We then looked at the C code behind the S-expression that defines arithmetic operations in R. And from there, we looked at the Assembly code that underlies C.
 

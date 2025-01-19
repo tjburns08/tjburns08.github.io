@@ -23,7 +23,7 @@
 (setq org-html-htmlize-output-type 'css)
 
 ;; Native fontify (dev)
-(setq org-src-fontify-natively t)
+;; (setq org-src-fontify-natively t)
 
 ;; Load the publishing system
 (require 'ox-publish)
