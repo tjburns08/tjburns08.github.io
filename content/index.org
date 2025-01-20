@@ -105,6 +105,10 @@ In flow cytometry and CyTOF analysis, we distinguish between "type" and "state" 
   :END:
 #+HTML: <a href="#top">Back to top</a>
 I started out analyzing CyTOF data, as I did my PhD in the lab of Garry Nolan from 2012-2017, where CyTOF was initially being developed and applied to immunology and cancer bilogy. I later broadened to single-cell sequencing and high-parameter imaging (both proteins and genes). The work below consists primarily of markdowns, with code and explanations that allow users to do things that have helped me a lot in my work, but I don't necessarily have the time to turn into publications.
+** [[./rainbow_feature_plot.html][Flow cytometry color scheme for Seurat's FeaturePlot]]
+Markdown.\\
+
+Seurat's FeaturePlot has a built in color scheme that goes from grey (zero expression) through violet, to a deep blue for the highest expression. People like me who started with CyTOF in Cytobank or similar tools are used to a color scheme that starts with blue, then goes through cyan, green, yellow, orange, then red. Here, I re-make that color palette for use in Seurat's FeaturePlot. Then, I further show how to make the FeaturePlot output with the altered color palette independent of Seurat.
 ** [[./compare_full_vs_filtered_uce.html][Running only the most variable genes through UCE leads to worse cell separation than running the whole dataset]]
 Markdown.\\
 
