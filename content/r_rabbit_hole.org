@@ -12,7 +12,7 @@ Lewis Carroll, Alice's Adventures in Wonderland
 
 ** From R to S
 
-Let's begin with a simple expression in R. Adding two numbers together.
+What happens under the hood when we do simple arithmetic in R? Let's begin with a simple expression. Adding two numbers together.
 
 #+begin_src R :exports both :results output
 5 + 2
@@ -46,7 +46,7 @@ S-expressions are a hallmark of an even older programming language called LISP (
 #+RESULTS:
 : 7
 
-You can see that it's an S-expression, like the one we made in R, but using parentheses. S-expressions can get pretty gnarly looking to the untrained eye. Let's say I wanted to do something like this:
+You can see that it's an S-expression, like the one we made in R, but using parentheses. S-expressions are a completely different notation than we are used to, so they can be difficult to read at first. Let's say I wanted to do something like this:
 
 2 * (5 + 2)
 
@@ -149,7 +149,7 @@ attribute_hidden SEXP do_arith(SEXP call, SEXP op, SEXP args, SEXP env)
 
 Where this function takes care of many of the arithmetic operations. The SEXP means S-expression. The "op" is the operator of interest, which is +, -, *, or /.
 
-Within this function, we can find a switch statement (think of this as an if statement across multiple cases), where the operators and actions are defined. Again, this is C:
+Within this function, we can find a switch statement (think of this as an if statement across multiple cases), where the operators and actions are defined [1]. Again, the code below is C:
 
 #+begin_src C :eval no
 switch (PRIMVAL(op)) {
@@ -184,7 +184,7 @@ int main() {
 
 We did a simple arithmetic operation. Add two numbers together and print it. "int main" is similar to "def main" in python. "printf" is the C way of printing, where you declare what data type you are printing ("%d" is going to be an integer), and then what you're printing. Here, C adds 5 and 2 and then prints it.
 
-Then it returns 0, which is a way of explicitly saying "exit the program." Exiting with 0 indicates that the program ran successfully, by convention. R does this too under the hood, but it is not something that the user has to worry about.
+Then it returns 0, which is a way of explicitly saying "exit the program." Exiting with 0 indicates that the program ran successfully, by convention. R does this too under the hood, and this becomes important if you are running R from the command line. The function quit(), which you can read about in the documentation [[https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/quit][here]], allows you to explicitly exit in R, also retruning an exit code with the same convention of 0 meaning no errors.
 
 Anyway, we have looked at C, but what is actually happening in Assembly?
 
@@ -312,3 +312,7 @@ Be familiar with the full stack. Whatever it is. Go down the rabbit hole, as far
 And of course, we can be grateful for the sheer volume of things we don't have to worry about now because of the coders before us, who innovated so we didn't have to worry about analyzing single-cell sequencing data in Assembly.
 
 We truly stand on the shoulders of giants before us.
+
+-----
+
+[1] We note that R has a switch as well, which you can read about in the documentation [[https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/switch][here]]. Note that in R, switch is a function, and not a statement.
