@@ -576,6 +576,55 @@ Automated gating (autogating) has been a topic of discussion for many years, but
 * Bibliometrics
 #+HTML: <a href="#top">Back to top</a>
 Trends in the literature. There is a lot going on here, and very few people actually studying this. Given the [[https://gwern.net/replication][replication crises]] that are emerging in various fields, it is probably a good idea that more people pay attention to analyzing the literature itself in the single-cell field.
+** [[https://www.linkedin.com/posts/tylerjburns_keeping-ahead-of-the-single-cell-foundation-activity-7287119420181680128-oxJk?utm_source=share&utm_medium=member_desktop][Keeping ahead of the single-cell foundation model literature with GitHub's "awesome" page]]
+Keeping ahead of the single-cell foundation model literature, using GitHub's "awesome" pages:
+
+Foundation models are AI models that, after being trained on a large amount of relevant data, can serve as a "swiss army knife" to perform a number of tasks (eg. cell type annotation).
+
+Accordingly, these are creating a bit of a buzz in single-cell and spatial analysis, and people should have a thumb on what is going on in this space. But like any popular emerging field, it can be hard to stay on top of all the new work...
+
+For those interested in keeping up with progress in foundation models, look no further than GitHub's "awesome" pages. This one (link in comments), called awesome-foundation-model-single-cell-papers, contains lists of papers in the following categories:
+- foundation model evaluation for single-cell
+- foundation models for single-cell (includes spatial papers like nicheformer)
+- foundation models for genetic perturbation
+- foundation models for pathology
+
+The papers are ordered in each category, with the most recent papers being at the top.
+
+In essence, there are many more papers in this domain than I previously appreciated. I started with scGPT and moved to Universal Cell Embeddings, which I have posted about on here previously. Others in my network are using geneformer. There were a handful of others in the benchmarking efforts I saw.
+
+But on this page, I counted 78 papers that go back to 2022.
+
+A simple CTRL+F for "review" revealed only two papers. Additional context in the titles reveal two more review-like papers, bringing the upper limit to 4. This would suggest that review articles would be a low hanging fruit for those publishing in this space.
+
+A caution:
+
+Like any field that is "hot," along with all the imperfections we know about in terms of publication (replication crisis, the jupyter notebook issue that I posted about recently), the work here needs to be taken with a grain of salt.
+
+What I'm doing right now:
+
+First, I am trying to understand these models from first principles (more in the comments).
+
+What has helped me is the simple act of running these models on my data to see what actually is used as input and what comes out. I will link to some of that work in the comments. Otherwise I would visit this page every once in a while to get an idea for where this is going. This will become easier as UIs start to allow for low-code/no-code use. If you want a taste of this from an adjacent domain, do a google search for "AlphaFold Server."
+
+Things like supervised label transfer between datasets are being discussed in my circles, a direct application of these foundation models. So like UMAP, I don't think this is going away any time soon.
+
+Thank you to Jiayuan Ding (user
+JiayuanDing100), the creator and maintainer of this GitHub page.
+
+In short, foundation models are rapidly developing in single-cell genomics. If you’re exploring these or plan to publish a review, let me know. I’d love to learn about new work or collaborate.
+[[file:images/awesome_single_cell_foundation_model_lit.png]]
+*** comment
+The GitHub page: https://github.com/OmicsML/awesome-foundation-model-single-cell-papers?tab=readme-ov-file
+
+My use of the UCE foundation model: https://tjburns08.github.io/explore_uce_output_3k_10k.html
+
+In terms of first principles, a longer post is warrented (we have exceeded the character limit). But to start:
+- What is going in?
+- What is the transformer doing?
+- What is coming out?
+
+There are a handful of concepts here that intersect with stuff any single-cell researcher would already know. For instance, the output is often a high-dimensional embedding. So things like the curse of dimensionality, distance metrics, dimensionality reduction and its limits, and so forth are relevant here too. If you've ever used BERT (as opposed to a GPT), you have a leg up too.
 ** [[https://www.linkedin.com/posts/tylerjburns_if-we-put-2008-as-the-first-cytof-paper-activity-7041804065097281537-nkIM?utm_source=share&utm_medium=member_desktop][IMC vs CyTOF publication rates: surprised IMC is taking off so fast]]
 If we put 2008 as the first CyTOF paper (from Scott Tanner, before Garry Nolan), CyTOF hit 100 publications in 2017, or 9 years. If we put 2014 as the first Imaging Mass Cytometry (IMC) paper, then IMC reached 100 publications in 2022, or 8 years.
 
