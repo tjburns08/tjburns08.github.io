@@ -15,6 +15,11 @@ This website is a place where I can openly share my ideas and non-NDA work, rega
 If you have quesitons or comments, or you're interested in working or collaborating with me, just send me a message (see contact info below). I'm always happy to help. 
 * New
 #+HTML: <a href="#top">Back to top</a>
+** [[./rainbow_feature_plot.html][Flow cytometry color scheme for Seurat's FeaturePlot]]
+Markdown.\\
+
+Seurat's FeaturePlot has a built in color scheme that goes from grey (zero expression) through violet, to a deep blue for the highest expression. People like me who started with CyTOF in Cytobank or similar tools are used to a color scheme that starts with blue, then goes through cyan, green, yellow, orange, then red. Here, I re-make that color palette for use in Seurat's FeaturePlot. Then, I further show how to make the FeaturePlot output with the altered color palette independent of Seurat.
+
 ** [[./r_rabbit_hole.html][The R Rabbit Hole]]
 Article.\\
 
