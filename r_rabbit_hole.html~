@@ -80,11 +80,11 @@ Lewis Carroll, Alice's Adventures in Wonderland
 </p>
 <hr />
 
-<div id="outline-container-orge57decd" class="outline-2">
-<h2 id="orge57decd">From R to S</h2>
-<div class="outline-text-2" id="text-orge57decd">
+<div id="outline-container-org10c30ea" class="outline-2">
+<h2 id="org10c30ea">From R to S</h2>
+<div class="outline-text-2" id="text-org10c30ea">
 <p>
-Let's begin with a simple expression in R. Adding two numbers together.
+What happens under the hood when we do simple arithmetic in R? Let's begin with a simple expression. Adding two numbers together.
 </p>
 
 <div class="org-src-container">
@@ -139,7 +139,7 @@ S-expressions are a hallmark of an even older programming language called LISP (
 
 
 <p>
-You can see that it's an S-expression, like the one we made in R, but using parentheses. S-expressions can get pretty gnarly looking to the untrained eye. Let's say I wanted to do something like this:
+You can see that it's an S-expression, like the one we made in R, but using parentheses. S-expressions are a completely different notation than we are used to, so they can be difficult to read at first. Let's say I wanted to do something like this:
 </p>
 
 <p>
@@ -202,9 +202,9 @@ So now you can see objectively that R's arithmetic is using S-expressions, the w
 </div>
 </div>
 
-<div id="outline-container-org07e1ff9" class="outline-2">
-<h2 id="org07e1ff9">From S to C</h2>
-<div class="outline-text-2" id="text-org07e1ff9">
+<div id="outline-container-org9ac1394" class="outline-2">
+<h2 id="org9ac1394">From S to C</h2>
+<div class="outline-text-2" id="text-org9ac1394">
 <p>
 Ok, this is all well and good, but how do I know that R specifically has S-expressions in mind? In order to answer that, we can download the <a href="https://cran.r-project.org/src/base/R-4/">source code</a> of the R programming language and have a look at it. We can see if any S-expressions are explicitly declared here. Below is the source code from R 4.4.0.
 </p>
@@ -283,7 +283,7 @@ Where this function takes care of many of the arithmetic operations. The SEXP me
 </p>
 
 <p>
-Within this function, we can find a switch statement (think of this as an if statement across multiple cases), where the operators and actions are defined. Again, this is C:
+Within this function, we can find a switch statement (think of this as an if statement across multiple cases), where the operators and actions are defined [1]. Again, the code below is C:
 </p>
 
 <div class="org-src-container">
@@ -302,11 +302,11 @@ Where you can see that "+" is PLUSOP, where x1 + x2 is defined.
 </div>
 </div>
 
-<div id="outline-container-orgf0c4bb4" class="outline-2">
-<h2 id="orgf0c4bb4">From C to Assembly</h2>
-<div class="outline-text-2" id="text-orgf0c4bb4">
+<div id="outline-container-orge36884a" class="outline-2">
+<h2 id="orge36884a">From C to Assembly</h2>
+<div class="outline-text-2" id="text-orge36884a">
 <p>
-So we started with 5 + 7 and now we are looking at an obscure switch statement in C. But if it is written in C, that means it is indirectly written in something deeper: machine code.
+So we started with 5 + 2 and now we are looking at an obscure switch statement in C. But if it is written in C, that means it is indirectly written in something deeper: machine code.
 </p>
 
 <p>
@@ -337,7 +337,7 @@ We did a simple arithmetic operation. Add two numbers together and print it. "in
 </p>
 
 <p>
-Then it returns 0, which is a way of explicitly saying "exit the program." Exiting with 0 indicates that the program ran successfully, by convention. R does this too under the hood, but it is not something that the user has to worry about.
+Then it returns 0, which is a way of explicitly saying "exit the program." Exiting with 0 indicates that the program ran successfully, by convention. R does this too under the hood, and this becomes important if you are running R from the command line. The function quit(), which you can read about in the documentation <a href="https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/quit">here</a>, allows you to explicitly exit in R, also retruning an exit code with the same convention of 0 meaning no errors.
 </p>
 
 <p>
@@ -476,9 +476,9 @@ Another important thing is that within this recipe, while there are a number of 
 </div>
 </div>
 
-<div id="outline-container-org0721e82" class="outline-2">
-<h2 id="org0721e82">Conclusion</h2>
-<div class="outline-text-2" id="text-org0721e82">
+<div id="outline-container-org57ade65" class="outline-2">
+<h2 id="org57ade65">Conclusion</h2>
+<div class="outline-text-2" id="text-org57ade65">
 <p>
 Ok, let's go back to familiarity now.
 </p>
@@ -530,6 +530,12 @@ And of course, we can be grateful for the sheer volume of things we don't have t
 
 <p>
 We truly stand on the shoulders of giants before us.
+</p>
+
+<hr />
+
+<p>
+[1] We note that R has a switch as well, which you can read about in the documentation <a href="https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/switch">here</a>. Note that in R, switch is a function, and not a statement.
 </p>
 </div>
 </div>
