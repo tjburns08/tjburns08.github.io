@@ -423,11 +423,11 @@ library(patchwork)
 cytobank_colors &lt;- colorRampPalette(c(&quot;blue&quot;, &quot;cyan&quot;, &quot;green&quot;, &quot;yellow&quot;, &quot;orange&quot;, &quot;red&quot;))
 
 # Extract embedding and gene expression data
-embedding &lt;- Embeddings(pbmc, reduction = &quot;umap&quot;)  # Replace &quot;umap&quot; with your chosen reduction
-gene_data &lt;- FetchData(pbmc, vars = genes)  # Replace `genes` with your gene of interest
+embedding &lt;- Embeddings(pbmc, reduction = &quot;umap&quot;)   
+gene_data &lt;- FetchData(pbmc, vars = genes)  
 data &lt;- cbind(as.data.frame(embedding), gene_data)
 
-# Rename columns for convenience
+# Rename columns 
 colnames(data) &lt;- c(&quot;UMAP1&quot;, &quot;UMAP2&quot;, genes)
 
 # Initialize an empty list to store plots
