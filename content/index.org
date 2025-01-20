@@ -15,7 +15,7 @@ This website is a place where I can openly share my ideas and non-NDA work, rega
 If you have quesitons or comments, or you're interested in working or collaborating with me, just send me a message (see contact info below). I'm always happy to help. 
 * New
 #+HTML: <a href="#top">Back to top</a>
-** [[./r_rabbit_hole.html][R Rabbit Hole]]
+** [[./r_rabbit_hole.html][The R Rabbit Hole]]
 Article.\\
 
 What happens under the hood when you do something simple in R, like add two numbers together? Here, I start with just that. I then show that arithmetic in R is actually parsed as S-expressions. I then go into LISP, where S-expressions are a hallmark. I then move into the source code of R, where the S-expressions for arithmetic are written, in C. And from there, I go into Assembly, the human-readable version of machine code that C is compiled into. By breaking down these layers, and going down the rabbit hole, this exercise gets us to first principles. These are foundational concepts from which we can reason and solve problems more effectively.
@@ -475,7 +475,7 @@ My current plan for the uncertainty we face due to the pandemic and the events w
 * Computing
 #+HTML: <a href="#top">Back to top</a>
 Me nerding out on general computer science topics.
-** [[./r_rabbit_hole.html][R Rabbit Hole]]
+** [[./r_rabbit_hole.html][The R Rabbit Hole]]
 Article.\\
 
 What happens under the hood when you do something simple in R, like add two numbers together? Here, I start with just that. I then show that arithmetic in R is actually parsed as S-expressions. I then go into LISP, where S-expressions are a hallmark. I then move into the source code of R, where the S-expressions for arithmetic are written, in C. And from there, I go into Assembly, the human-readable version of machine code that C is compiled into. By breaking down these layers, and going down the rabbit hole, this exercise gets us to first principles. These are foundational concepts from which we can reason and solve problems more effectively.
