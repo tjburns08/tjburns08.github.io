@@ -110,7 +110,7 @@ In flow cytometry and CyTOF analysis, we distinguish between "type" and "state" 
   :END:
 #+HTML: <a href="#top">Back to top</a>
 I started out analyzing CyTOF data, as I did my PhD in the lab of Garry Nolan from 2012-2017, where CyTOF was initially being developed and applied to immunology and cancer bilogy. I later broadened to single-cell sequencing and high-parameter imaging (both proteins and genes). The work below consists primarily of markdowns, with code and explanations that allow users to do things that have helped me a lot in my work, but I don't necessarily have the time to turn into publications.
-** [[./annoatate_pbmc_3k.html][Annotate the PBMC 3k dataset]]
+** [[./annotate_pbmc_3k.html][Annotate the PBMC 3k dataset]]
 Markdown.\\
 
 This markdown is for people with PBMC datasets, who want a convenient way to annoate them using the markers specified in Seurat's [[https://satijalab.org/seurat/articles/pbmc3k_tutorial.html][guided clustering tutorial]]. Here, we take the aforementioned tutorial and run the PBMC 3k dataset through it. Then, we have a block of code that loops through each of the populations identified in the tutorial and looks for the relevant markers in the clustering scheme from our run. This allows the user to quickly and conveniently figure out what cluster belongs to what population.
