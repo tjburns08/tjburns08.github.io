@@ -88,9 +88,9 @@ Richard Hamming, <i><a href="https://safari.ethz.ch/digitaltechnik/spring2019/li
 </p>
 <hr />
 
-<div id="outline-container-org0384ceb" class="outline-2">
-<h2 id="org0384ceb">Computer science improved my thinking and my focus</h2>
-<div class="outline-text-2" id="text-org0384ceb">
+<div id="outline-container-org73a028a" class="outline-2">
+<h2 id="org73a028a">Computer science improved my thinking and my focus</h2>
+<div class="outline-text-2" id="text-org73a028a">
 <p>
 I have always been intellectually minded and curious. But one challenge I faced was that I was a classic <a href="https://www.youtube.com/watch?v=U35T-KzfeLk">ADHD kid</a>, who went the path of refusing to take medication. I was easily distracted, and often had racing thoughts that were all over the place. When I found computer science in my late 20s, I discovered that the act of coding had a calming effect on my brain. I could focus <a href="./tao_of_problem_solving.html">on one thing for several hours</a>. Furthermore, when I applied the computational lens to the rest of my life, that calming effect would remain. I attribute computer science to a good chunk of my success at the end of grad school, and my years after graduation, which involved starting a business that I still run at the time of writing.
 </p>
@@ -101,9 +101,9 @@ In short, aside from the practical skills that computer science gave me, compute
 </div>
 </div>
 
-<div id="outline-container-org12ef735" class="outline-2">
-<h2 id="org12ef735">Coding involves the scientific method, done really fast</h2>
-<div class="outline-text-2" id="text-org12ef735">
+<div id="outline-container-org952a55f" class="outline-2">
+<h2 id="org952a55f">Coding involves the scientific method, done really fast</h2>
+<div class="outline-text-2" id="text-org952a55f">
 <p>
 We all learned the scientific method in school.<br />
 </p>
@@ -136,16 +136,16 @@ There is a level above that of the rapid-fire experiments improving your ability
 </div>
 </div>
 
-<div id="outline-container-orgec219a0" class="outline-2">
-<h2 id="orgec219a0">Computer science makes explicit important concepts that are hard to put in words</h2>
-<div class="outline-text-2" id="text-orgec219a0">
+<div id="outline-container-orge6d2114" class="outline-2">
+<h2 id="orge6d2114">Computer science makes explicit important concepts that are hard to put in words</h2>
+<div class="outline-text-2" id="text-orge6d2114">
 <p>
 Here, I will give you a flavor of the various concepts that I came across when learning how to code that I had seen or known before in some form, but not in a way that was as clearly stated as it was through code. In other words, computer science game me a language through which I could reason about concepts that would otherwise be difficult to talk about. The examples below are by no means exhaustive. They are just meant to show you things that I came across in my journey that I found to be somewhere between really cool and really relevant to the types of things I'm working on.
 </p>
 </div>
-<div id="outline-container-org469c9b4" class="outline-3">
-<h3 id="org469c9b4">Emergence and cellular automata</h3>
-<div class="outline-text-3" id="text-org469c9b4">
+<div id="outline-container-orgd1f1eb6" class="outline-3">
+<h3 id="orgd1f1eb6">Emergence and cellular automata</h3>
+<div class="outline-text-3" id="text-orgd1f1eb6">
 <p>
 The concept of emergent complexity or <a href="https://en.wikipedia.org/wiki/Emergence">emergence</a>, which any biologist or chemist will find to be intutive, can be examined in a raw form with computer science, using (among other things) <a href="https://en.wikipedia.org/wiki/Cellular_automaton">cellular automata</a>. Cellualar automata are models of computation where you take a simple set of rules and run them, which produces emergent complexity. Some cellular automata are more elaborate than others despite having a rule set of similar complexity. Want an example: how about <a href="https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life">Conway's Game of Life</a>. Take a grid. Each square on the grid can either be live or dead. For each square in the grid, follow these rules:
 </p>
@@ -162,7 +162,7 @@ That's it. Run it and you can get <a href="https://www.youtube.com/watch?v=cTZkE
 </p>
 
 
-<div id="org386cf47" class="figure">
+<div id="orgf0d0a61" class="figure">
 <p><img src="images/2024-01-20_22-17-35_Screenshot 2024-01-20 at 22.17.16.png" alt="2024-01-20_22-17-35_Screenshot 2024-01-20 at 22.17.16.png" />
 </p>
 </div>
@@ -181,9 +181,9 @@ It wasn't until I was 28 and was learning how to code that I had this feeling ag
 </div>
 </div>
 
-<div id="outline-container-orge618110" class="outline-3">
-<h3 id="orge618110">Levels of abstraction</h3>
-<div class="outline-text-3" id="text-orge618110">
+<div id="outline-container-org3177923" class="outline-3">
+<h3 id="org3177923">Levels of abstraction</h3>
+<div class="outline-text-3" id="text-org3177923">
 <hr />
 <p>
 <i>Email is a wonderful thing for people whose role in life is to be on top of things. But not for me; my role is to be on the bottom of things.</i>
@@ -299,9 +299,9 @@ What do I mean by that? If I run into a bug in python or R, the issue could very
 </p>
 </div>
 </div>
-<div id="outline-container-org6220751" class="outline-3">
-<h3 id="org6220751">Hacking</h3>
-<div class="outline-text-3" id="text-org6220751">
+<div id="outline-container-orgf41a98a" class="outline-3">
+<h3 id="orgf41a98a">Hacking</h3>
+<div class="outline-text-3" id="text-orgf41a98a">
 <p>
 Given our discussion on levels of abstraction, quite a lot of so-called hacking (both security hacking and innovation) works by means of understanding things one or more levels underneath what you're doing. A much larger discussion of this can be found from this amazing <a href="https://gwern.net/unseeing">article</a> written by Gwern that I've read many times (and have since <a href="./on_hacking.html">written about</a>). But let me paste the punchline, as food for thought:
 </p>
@@ -340,9 +340,9 @@ Coding really solidifies this concept and teaches you what it feels like to thin
 </div>
 </div>
 
-<div id="outline-container-orgc67571e" class="outline-3">
-<h3 id="orgc67571e">Recursion</h3>
-<div class="outline-text-3" id="text-orgc67571e">
+<div id="outline-container-org3588fb3" class="outline-3">
+<h3 id="org3588fb3">Recursion</h3>
+<div class="outline-text-3" id="text-org3588fb3">
 <p>
 Computer science gives us data structures and algorithms that don't come easy to standard spoken language. One of these concepts is recursion. In recursion, you're defining a function where the function is executed in the function definition. Ok, that's a mouthful. Let's try again. What is recursion?
 </p>
@@ -361,7 +361,7 @@ Still a bit mind-bending if you've never seen this before. If this is new to you
 </p>
 
 
-<div id="org5c2e570" class="figure">
+<div id="orgcf99890" class="figure">
 <p><img src="images/2024-04-28_10-39-27_Screenshot 2024-04-28 at 10.39.24.png" alt="2024-04-28_10-39-27_Screenshot 2024-04-28 at 10.39.24.png" />
 </p>
 </div>
@@ -371,7 +371,7 @@ Want another example? Just do a Google search on recursion, and they give you th
 </p>
 
 
-<div id="org1b5d4b3" class="figure">
+<div id="orga729cb3" class="figure">
 <p><img src="images/2024-04-28_09-57-37_Screenshot 2024-04-28 at 09.57.33.png" alt="2024-04-28_09-57-37_Screenshot 2024-04-28 at 09.57.33.png" />
 </p>
 </div>
@@ -381,7 +381,7 @@ But where does this mind bending concept show up in the world? All over the plac
 </p>
 
 
-<div id="orge987a8b" class="figure">
+<div id="org2c8ed03" class="figure">
 <p><img src="images/2024-04-28_10-02-38_Screenshot 2024-04-28 at 10.02.35.png" alt="2024-04-28_10-02-38_Screenshot 2024-04-28 at 10.02.35.png" />
 </p>
 </div>
@@ -391,7 +391,7 @@ And where do we see this in the real world? How about snowflakes? One way a snow
 </p>
 
 
-<div id="orge089de9" class="figure">
+<div id="org7e5988b" class="figure">
 <p><img src="images/2024-04-28_10-09-55_Screenshot 2024-04-28 at 10.09.52.png" alt="2024-04-28_10-09-55_Screenshot 2024-04-28 at 10.09.52.png" />
 </p>
 </div>
@@ -401,7 +401,7 @@ In biology, there are examples of recursion that show up in the strangest places
 </p>
 
 
-<div id="org8224cee" class="figure">
+<div id="org20e2349" class="figure">
 <p><img src="images/2024-04-28_10-13-19_Screenshot 2024-04-28 at 10.13.17.png" alt="2024-04-28_10-13-19_Screenshot 2024-04-28 at 10.13.17.png" />
 </p>
 </div>
@@ -441,9 +441,9 @@ If you don't get this stuff right away, don't worry about it. Look at the images
 </div>
 </div>
 
-<div id="outline-container-orgdbe249c" class="outline-3">
-<h3 id="orgdbe249c">Graphs</h3>
-<div class="outline-text-3" id="text-orgdbe249c">
+<div id="outline-container-org6ef5c79" class="outline-3">
+<h3 id="org6ef5c79">Graphs</h3>
+<div class="outline-text-3" id="text-org6ef5c79">
 <p>
 Ok, how about a practical example for biologists. What is a cell signaling pathway? Well, to massively oversimply, you have messages being passed from protein to protein all the way down to the DNA where some sort of effector (eg. a transcription factor) does a thing to the DNA. What if you wanted to model that? How would you do it? Well, in computer science (and discrete math) there is a data structure called a graph that allows for one to wire up a pathway <i>in silico.</i> This is a graph as in a mathematical abstraction of a network, not to be confused with a biaxial plot.
 </p>
@@ -483,7 +483,7 @@ As an example of complicated signaling pathways, anyone who studies biochemistry
 </p>
 
 
-<div id="org620e197" class="figure">
+<div id="orgbe101c7" class="figure">
 <p><img src="images/2024-04-28_10-28-44_Screenshot 2024-04-28 at 10.28.41.png" alt="2024-04-28_10-28-44_Screenshot 2024-04-28 at 10.28.41.png" />
 </p>
 </div>
@@ -495,9 +495,9 @@ Note that this is a map not of the pathway, but a map where the nodes are metabo
 </div>
 </div>
 
-<div id="outline-container-org12ffef3" class="outline-2">
-<h2 id="org12ffef3">Putting it all together, exemplified by Joscha Bach</h2>
-<div class="outline-text-2" id="text-org12ffef3">
+<div id="outline-container-org042b163" class="outline-2">
+<h2 id="org042b163">Putting it all together, exemplified by Joscha Bach</h2>
+<div class="outline-text-2" id="text-org042b163">
 <p>
 Here, we will tie a lot of what we've been talking about above together with the concept of computational thinking. This is something that has been previously described by computer science professor Jeanette Wing in a <a href="https://www.cs.cmu.edu/~15110-s13/Wing06-ct.pdf">2006 essay</a> arguing that it should be a core thing that everyone learns (which I agree with).
 </p>
@@ -549,9 +549,9 @@ I listen to Joscha Bach not necessarily because I fully agree with every view he
 </div>
 </div>
 
-<div id="outline-container-org7abdc97" class="outline-2">
-<h2 id="org7abdc97">Computational thinking and your latticework of mental models</h2>
-<div class="outline-text-2" id="text-org7abdc97">
+<div id="outline-container-org4ae68d2" class="outline-2">
+<h2 id="org4ae68d2">Computational thinking and your latticework of mental models</h2>
+<div class="outline-text-2" id="text-org4ae68d2">
 <p>
 Putting it all together, I wanted to zoom out and note that the computational lens is a powerful lens from which you can view the world and solve important problems. But it is one lens of many. One person who understood this deeply was the late Charlie Munger, the right hand man of Warren Buffett. He saw and acted in the world in terms of a latticework of <a href="https://fs.blog/mental-models/">mental models</a>. He would look at a problem through the lens of an ecomonist and see the network of incentives at play, and then through the lens of a biologist and see the natural selection at play, and so on. We note that Munger's success as Buffett's right-hand man (for <a href="https://www.cnbc.com/2023/11/29/munger-and-buffetts-60-year-partnership-we-never-had-an-argument.html">60 years</a>), and the billions of dollars they made accordingly, is a testament to this kind of thinking. Munger <a href="https://fs.blog/charlie-munger-mental-toolbox/">says</a>:
 </p>
