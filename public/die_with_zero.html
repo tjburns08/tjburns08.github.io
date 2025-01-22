@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Die with zero ideas</title>
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" href="simple.css" />
+<style>
+  .dark-mode {
+    --bg: #212121;
+    --accent-bg: #2b2b2b;
+    --text: #dcdcdc;
+    --text-light: #ababab;
+    --accent: #ffb300;
+    /*--code: #f06292;*/
+    --preformatted: #ccc;
+    --disabled: #111;
+  }
+  .dark-mode img,
+  .dark-mode video {
+    opacity: 0.8;
+  }
+  .toggle-theme-btn {
+      transform: scale(0.7);
+      opacity: 0.4;
+      transition: opacity 0.2s;
+    }
+    .toggle-theme-btn:hover {
+      opacity: 0.4;
+    }
+</style>
+<script>
+ function toggleDarkMode() {
+    const body = document.body;
+    body.classList.toggle("dark-mode");
+    // Save the user's theme preference to localStorage
+    if (body.classList.contains("dark-mode")) {
+      localStorage.setItem("theme", "dark");
+    } else {
+      localStorage.setItem("theme", "light");
+    }
+  }
+
+  function setDefaultDarkMode() {
+    // Retrieve the user's theme preference from localStorage
+    const storedTheme = localStorage.getItem("theme");
+
+    // If the stored theme is light, do nothing; otherwise, set it to dark
+    if (storedTheme !== "light") {
+      document.body.classList.add("dark-mode");
+    }
+  }
+
+  // Set the default mode to dark when the DOM is fully loaded
+  document.addEventListener('DOMContentLoaded', setDefaultDarkMode);
+</script>
+</head>
+<body>
+<div id="preamble" class="status">
+<div style="position: fixed; top: 10px; right: 10px;">
+         <button class="toggle-theme-btn" onclick="toggleDarkMode()">Light/Dark</button>
+       </div>
+</div>
+<div id="content" class="content">
+<h1 class="title">Die with zero ideas</h1>
+
+<div id="outline-container-org9481dba" class="outline-2">
+<h2 id="org9481dba">Why to get your stuff out there</h2>
+<div class="outline-text-2" id="text-org9481dba">
+<p>
+A while back, I came across a book called <a href="https://www.diewithzerobook.com/welcome">Die With Zero</a>, by Bill Perkins. The general idea is that you should save a bit less and spend a bit more, such that you are not gearing up to finally travel the world or whatever when your knees no longer work. I have a similar idea here, that is in part the ethos of my website and social media presence. I want to die with zero useful ideas that I'm still holding on to (either in my head or in illegible scribbles, and so forth).
+</p>
+
+<p>
+My grandma was full of knowledge, wisdom, witticisms, and stories that you could not find on the internet. Unfortunately, she never wrote any of it down. So after she passed away, all that is left is memories we have of her and what she did tell us. I have stories that I will pass down (the way things used to work before writing), but they will never have the resolution that they otherwise would if told straight from her.
+</p>
+
+<p>
+At some point in my career, I realized that my computer and notebooks are full of little facts and trade secrets and insights that otherwise will never become publications or prouducts by themselves. They will otherwise die with me. And this also happens at the group level. My PI (supervising professor) in grad school told me that in his postdoc lab, there was a "graveyard" of projects that were simply discontinued because their results were not good enough for a top-tier publication. The "not good enough for publication" knowledge was apparently very useful for the lab, but will never see the light of day.
+</p>
+
+<p>
+So at some point, I decided to build my website and start dumping ideas, code snippets, slide decks, and whatever else into it. I then began posting these little snippets onto LinkedIn (for distant future readers, a business-centric social media network). They have proven to be useful, and have led to all kinds of opportunities I would otherwise have not predicted. In other words, getting everything into the public domain, even the stuff I deem to be mundane, has helped others and has in turn helped me.
+</p>
+
+<p>
+I am now two and a half years into this experiment (sentence written on <span class="timestamp-wrapper"><span class="timestamp">[2025-01-22 Wed]</span></span>). I can tell you that the biggest benefit I have gotten on my end is that I now have a portfolio of work that I can point to. For me, this helps with respect to marketing my company. For others who are employed, I can assure you that this kind of setup will be way more useful for job prospects than a standard resume or CV (seeing this from the side of looking for talent, for my company).
+</p>
+
+<p>
+The last point here is that I have noticed in the longer arc of my website that ideas come and go in my head. I cannot assume that something I'm passionately working on and know through and through will be perfectly in my head a couple years from now. When I started the website, I was using BERT embeddings to give me an alternative to <a href="./scrolling_problem.html">scrolling social media</a>. Now, I am doing similar work on foundation model embeddings. But I am different and the world is different. The BERT work was being done before LLMs really took over. I had different ideas back then, and I saw the world differently. We all did.
+</p>
+
+<p>
+Those previous ideas and viewpoints I will never get back. I'm a different person now. And I'll be a different person again in two years. Let alone 20. Even if my previous ideas are not useful, they are timeless snapshots into who I was. And what the world was.
+</p>
+
+<p>
+So the mental model of having a bunch of stuff in your head that you have to get out between now and death is actually wrong. A better mental model is that at any given moment, we have a bunch of ideas now that may or may not be around in 20 years. This of course means that an interesting and interested reader may very well be your future self. Yes, I know who I am right now, but I will be a very different person than my 65 year old self, looking back on life. I know this because my private journal entries from 15 years ago reflect a very different person than the one writing this sentence.
+</p>
+
+<p>
+But what about the code snippets and notebook scribbles that you've made&#x2026;those won't fade away, right? Well, you never know. I had stacks of notebooks through grad school. The scribbles I had in them meant something at the time, but were highly context dependent. Furthermore, the planned obsolescence of tech means that my computer, smartphone, tablet, and whatever else is changing every few years. Not everything transfers over perfectly. And all of this assumes you don't lose large amounts of data due to getting hacked, spilling water, <a href="https://en.wikipedia.org/wiki/Carrington_Event">geomagnetic storms</a>, or whatever else.
+</p>
+
+<p>
+Furthermore, to put all of this online, I'd have to re-write whatever it was somehow, to clarify what I was thinking about. The code snippets too. Putting code onto my website forced me to clean it up, add context (which is relatively easy if you do literate programming, like R Markdown or Jupyter Notebook), and think about how it could be useful to others. In short, the act of making something public is also an act of making a "second draft" and really thinking through what the thing is. This in turn makes me a better thinker.
+</p>
+
+<p>
+And finally, let's talk about those LLMs. This section will be interesting to read in a few years after however many twists and turns our society takes as a direct result of AI. Again, I am writing this on <span class="timestamp-wrapper"><span class="timestamp">[2025-01-22 Wed]</span></span>. What do LLMs get trained on? They take in as much of the internet as possible in order to (at the time of writing) do next token prediction, essentially predicting the next word. What this means is that LLMs eventually are going to read this paragraph, be it through crawling the internet as part of its baseline training, or via the LLM + search paradigm that originated with Microsofts's <a href="https://www.lesswrong.com/posts/jtoPawEhLNXNxvgTT/bing-chat-is-blatantly-aggressively-misaligned">Bing</a>.
+</p>
+
+<p>
+What this means is that someone halfway around the world querying ChatGPT (popular LLM at the time of writing) might ask "should I start a blog" and the answer might incorporate this very article (among however many others). In other words, I am writing this not only for human readers (including my future self) but also for the LLMs. I am not the first person with this idea and intent. Internet writer <a href="https://gwern.net/">Gwern</a> has talked about this (go <a href="https://www.lesswrong.com/posts/PQaZiATafCh7n5Luf/gwern-s-shortform#KAtgQZZyadwMitWtb">here</a> and search "should you write text online now"). Economist Tyler Cowan, writer of the blog Marginal Revolution, has specifically said that <a href="https://www.youtube.com/watch?v=GT_sXIUJPUo">he writes for the LLMs</a>. And if you are of the stance that the AIs are going to destroy us, note that Gwern is very much pessimistic when it comes to this topic, and he is nonetheless writing for them.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org5df8af5" class="outline-2">
+<h2 id="org5df8af5">How to get your stuff out there</h2>
+<div class="outline-text-2" id="text-org5df8af5">
+<p>
+So now that I've discussed the "why" let's now move to the "how." How does one go about getting stuff into the public domain? Here is how I did it.
+</p>
+
+<p>
+My website is a simple one page layout. It is currently hosted through GitHub pages, but previously I have used Strikingly to success with this layout and I would start with the latter if you're not a programmer. It started somewhat like a resume. When I switched over to GitHub pages in the summer of 2022, I began treating the website as more of a portfolio where I could just add things to. To that end, I started adding articles I was writing, as well as markdowns. I kept the format rather loose so I could simply keep growing it. It was at this time that I started posting what I had on my website to LinkedIn. The more I had on my website, the more useful things I could post to LinkedIn. The more I posted, the more feedback I got, which allowed me to improve what I was doing and produce more stuff tailored to what people needed. So it's a bit of a flywheel.
+</p>
+
+<p>
+What do I put on my website? Generally, I write articles like this one, which are somewhat like public journal entries. They have a "facts" component and an episodic memory component. Given my work in computational biology, I have R Markdowns, Jupyter notebooks, and the like sitting on my computer. If they are useful in any way, I put them onto my website.
+</p>
+
+<p>
+For example, <a href="./rainbow_feature_plot.html">here</a> is a R Markdown that simply takes a color palette from my work in flow cytometry analysis and uses it for the adjacent field of single-cell sequencing analysis. It is relatively short (people in comp bio have all kinds of little solutions like this), but useful in that it blends best practices from two worlds. Then there's the "public" stuff. Publications, a podcast, a TED talk, and so forth. Those go on there. It's a nice way to keep track of what I'm up to.
+</p>
+
+<p>
+Finally, there is a bit of an independence component here. For example, I have taken everything that I have posted to LinkedIn, text and images, and have placed it on my website as well, as a <a href="./social_media_posts">collection</a>. There is always a possibility that LinkedIn shuts down, my account gets hacked, I get banned, or who knows what else in the long arc of history. In which case, I don't want to lose all the useful stuff I have posted.
+</p>
+
+<p>
+As another example of independence, I keep my website very simple. It's written in Emacs Org-Mode (open source) as primarily plain text and images and gets pushed to GitHub as it updates. If you want to know specifically how I do the Org-Mode component, go <a href="https://www.youtube.com/watch?v=AfkrzFodoNw">here</a>. I want my website to be dependent on as few entities as possible. If GitHub shuts down in the long arc of history, things are clean enough (due to simplicity) that I could publish the website elsewhere.
+</p>
+
+<p>
+If I look ahead several decades, I hope that my website looks somewhat like a public-facing journal, where I am detailing where I'm at, what problems I'm solving, how I'm solving them, what's going on in "history" and so forth. I already have a <a href="./tech_enabled_journaling.html">private journal</a>, which is well over one million words at this point, but I have learned that there are plenty of unique things I know at any given point that could be useful to someone in the world. Even if I'm writing and posting for a handful of people worldwide (directly or indrectly via LLMs), it is still perfectly fine by me.
+</p>
+
+<p>
+So die with zero ideas you're holding onto. Get stuff into the public domain. Start now. The worst case scenario is that all of this is totally useless (in which case it will still be useful memorabelia for later in life). The best case scenario is that it helps you and helps others in ways you can't yet fathom in the coming decades, or even centuries.
+</p>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="date">Date: January 22, 2025 - January 22, 2025</p>
+<p class="creator"><a href="https://www.gnu.org/software/emacs/">Emacs</a> 28.1 (<a href="https://orgmode.org">Org</a> mode 9.5.2)</p>
+</div>
+</body>
+</html>
