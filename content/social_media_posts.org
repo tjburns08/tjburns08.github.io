@@ -367,6 +367,18 @@ I'll acknowledge that there are differences between the fields that may impact w
 * General data analysis
 #+HTML: <a href="#top">Back to top</a>
 The data analysis related posts that I otherwise could not categorize.
+** [[https://www.linkedin.com/posts/tylerjburns_flowcytof-users-who-are-now-doing-single-cell-activity-7287826621862940672-Iv0E?utm_source=share&utm_medium=member_desktop][Cytobank color palette for Seurat's FeaturePlot]]
+Flow/CyTOF users who are now doing single-cell sequencing analysis: I created the blue-to-red color palette (eg. used in FlowJo, Cytobank, OMIQ, etc) for Seurat's FeaturePlot function, which otherwise defaults to gray-to-purple.
+
+Back in the early 2010s, when I was first coloring t-SNE maps for CyTOF data, I got used to a color palette that the main SAAS company in the space, Cytobank, was using. It's basically blue -> cyan -> green -> yellow -> orange -> red.
+
+Anyway, here is a R Markdown (linked in the comments) that has the code to use this color palette for FeaturePlot, but also some code that allows you to replicate the FeaturePlot function with the "Cytobank palette" independent of Seurat. The image is example output.
+
+Feel free to steal the code and do whatever you want with it. I hope you all have a great day.
+
+[[file:images/featureplot_cytobank_colors.png]]
+*** comment
+The markdown is here: https://tjburns08.github.io/rainbow_feature_plot.html
 ** [[https://www.linkedin.com/posts/tylerjburns_in-a-standard-scrna-seq-analysis-pipeline-activity-7254837976428388352-Ki7x?utm_source=share&utm_medium=member_desktop][Don't use top n variable genes for AI foundation models]]
 In a standard scRNA-seq analysis pipeline, you select the top ~2000 variable genes for downstream analysis (eg. clustering). However, my recent experiment suggests that you should not do this for foundation models. Here is what I did...
 
