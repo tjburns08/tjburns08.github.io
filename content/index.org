@@ -15,6 +15,10 @@ This website is a place where I can openly share my ideas and non-NDA work, rega
 If you have quesitons or comments, or you're interested in working or collaborating with me, just send me a message (see contact info below). I'm always happy to help. 
 * New
 #+HTML: <a href="#top">Back to top</a>
+** [[./pbmc_uce_nn_comparison.html][Nearest neighbor similarity between PBMC 3k dataset and its foundation model embedding]]
+Markdown.\\
+
+Universal Cell Embeddings (UCE) is a foundation model that takes a single-cell dataset as input and outputs a 1280 dimensional embedding that is relevant in the context of a large number of single-cell datasets that it was trained on. This model can in turn do things like label transfer between datasets. Here, I looked at the embedding within the PBMC 3k dataset and simply asked how many k-nearest neighbors per cell are shared between the original dataset and its UCE embedding. Specifically, I used the first 50 PCs of the PBMC 3k dataset's top 2000 most variable genes (standard practice), and the first 50 PCs of the UCE model. The results suggest that nearest neighbors are preserved at the labeled cell subset level but the resolution does not go beyond this. Note: I also compared the first 50 PCs of the PBMC 3k dataset with the entire 1280 dimensions of the UCE output, and the results were slightly worse but similar.
 ** [[./annotate_pbmc_3k.html][Annotate the PBMC 3k dataset]]
 Markdown.\\
 
