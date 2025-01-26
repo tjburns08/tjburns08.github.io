@@ -126,6 +126,10 @@ In flow cytometry and CyTOF analysis, we distinguish between "type" and "state" 
   :END:
 #+HTML: <a href="#top">Back to top</a>
 I started out analyzing CyTOF data, as I did my PhD in the lab of Garry Nolan from 2012-2017, where CyTOF was initially being developed and applied to immunology and cancer bilogy. I later broadened to single-cell sequencing and high-parameter imaging (both proteins and genes). The work below consists primarily of markdowns, with code and explanations that allow users to do things that have helped me a lot in my work, but I don't necessarily have the time to turn into publications.
+** [[./case_for_viridis.html][Comparing Color Palettes for scRNA-seq Data Visualization: The Case for Viridis as a Default]]
+Markdown.\\
+
+When using "color" as a dimension (for example, coloring UMAPs by marker expression), flow cytometry users often default to the "jet" color palette, and Seurat users often default to their default light-gray to blue color palette. Here, I present the case for the use of viridis as a default color palette. I show that viridis is more balanced and colorblind friendly than jet, with more resolution than the Seurat default. Using this color scheme will be beneficial for both data interpretation and inclusivity in our field.
 ** [[./annotated_seurat_without_pca.html][Running UMAP on scRNA seq data without PCA reveals importance of cosine distnace in high dimensional data]]
 Markdown.\\
 
