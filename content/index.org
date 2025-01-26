@@ -15,6 +15,10 @@ This website is a place where I can openly share my ideas and non-NDA work, rega
 If you have quesitons or comments, or you're interested in working or collaborating with me, just send me a message (see contact info below). I'm always happy to help. 
 * New
 #+HTML: <a href="#top">Back to top</a>
+** [[./case_for_viridis.html][Comparing Color Palettes for scRNA-seq Data Visualization: The Case for Viridis as a Default]]
+Markdown.\\
+
+When using "color" as a dimension (for example, coloring UMAPs by marker expression), flow cytometry users often default to the "jet" color palette, and Seurat users often default to their default light-gray to blue color palette. Here, I present the case for the use of viridis as a default color palette. I show that viridis is more balanced and colorblind friendly than jet, with more resolution than the Seurat default. Using this color scheme will be beneficial for both data interpretation and inclusivity in our field.
 ** [[./annotated_seurat_without_pca.html][Running UMAP on scRNA seq data without PCA reveals importance of cosine distnace in high dimensional data]]
 Markdown.\\
 
