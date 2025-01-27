@@ -80,9 +80,9 @@ Henry David Thoreau, <i>Walden</i>
 </p>
 <hr />
 
-<div id="outline-container-orgf00a1e6" class="outline-2">
-<h2 id="orgf00a1e6">Introduction</h2>
-<div class="outline-text-2" id="text-orgf00a1e6">
+<div id="outline-container-org807e85f" class="outline-2">
+<h2 id="org807e85f">Introduction</h2>
+<div class="outline-text-2" id="text-org807e85f">
 <p>
 Since the end of 2022, we have been inundated with LLM chatbots in our everyday lives. The typical use involves some sort of interface that we sign into, where our previous chats can be saved, and so forth. At some point early on, these chatbots were available via API. Here, I want to show how I made a chatbot that can be called from the command line anywhere on my computer.
 </p>
@@ -96,9 +96,9 @@ In short, having LLMs available on the command line is useful, and here, I'm goi
 </p>
 </div>
 </div>
-<div id="outline-container-org1bb50c8" class="outline-2">
-<h2 id="org1bb50c8">The command line interface</h2>
-<div class="outline-text-2" id="text-org1bb50c8">
+<div id="outline-container-org3080c9d" class="outline-2">
+<h2 id="org3080c9d">The command line interface</h2>
+<div class="outline-text-2" id="text-org3080c9d">
 <p>
 The first thing we have to do is make a python script where we call an API. At the time of writing <span class="timestamp-wrapper"><span class="timestamp">[2025-01-27 Mon]</span></span>, Deepseek R1 has just come out, which provides chain-of-thought reasoning (currently state of the art), the likes of GPT-o1 (currently state of the art), but for far cheaper in terms of API calls. Not to mention its open source, so it might be down the line if I get enough computational muscle, I can run it locally.
 </p>
@@ -112,7 +112,8 @@ I wrote a python script called chatbot.py, that takes in as input the desired mo
 </p>
 
 <div class="org-src-container">
-<pre class="src src-python"><span class="org-keyword">from</span> openai <span class="org-keyword">import</span> OpenAI
+<pre class="src src-python"><span class="org-comment-delimiter">#</span><span class="org-comment">!/usr/bin/env python3</span>
+<span class="org-keyword">from</span> openai <span class="org-keyword">import</span> OpenAI
 <span class="org-keyword">import</span> sys
 
 <span class="org-variable-name">ds</span> = <span class="org-string">"deepseek/deepseek-r1"</span>
@@ -246,13 +247,13 @@ Thus, the next section will show you how to get this running in a literate progr
 </div>
 </div>
 
-<div id="outline-container-org1e8026b" class="outline-2">
-<h2 id="org1e8026b">The literate programming environment</h2>
-<div class="outline-text-2" id="text-org1e8026b">
+<div id="outline-container-orgf44e580" class="outline-2">
+<h2 id="orgf44e580">The literate programming environment</h2>
+<div class="outline-text-2" id="text-orgf44e580">
 </div>
-<div id="outline-container-org54ce8fe" class="outline-3">
-<h3 id="org54ce8fe">R Markdown and Jupyter Notebooks</h3>
-<div class="outline-text-3" id="text-org54ce8fe">
+<div id="outline-container-org942fec3" class="outline-3">
+<h3 id="org942fec3">R Markdown and Jupyter Notebooks</h3>
+<div class="outline-text-3" id="text-org942fec3">
 <p>
 The spoiler alert upfront is that in order to use the new script in a literate programming environment, you just have to get it to execute shell scripts. In R Markdown, there is an option to run bash. Jupyter notebooks have <a href="https://github.com/dahn-zk/zsh-jupyter-kernel">options</a> as well. One of the key things that I've had to do to get the literate programming environment to recognize the script, is in every code block where I run it, I have to source my zshrc file. Like this:
 </p>
@@ -273,9 +274,9 @@ Maybe you won't have this problem, but if you do, that is how you get around it.
 </p>
 </div>
 </div>
-<div id="outline-container-orga260408" class="outline-3">
-<h3 id="orga260408">Emacs Org-Mode</h3>
-<div class="outline-text-3" id="text-orga260408">
+<div id="outline-container-orgb795585" class="outline-3">
+<h3 id="orgb795585">Emacs Org-Mode</h3>
+<div class="outline-text-3" id="text-orgb795585">
 <p>
 Now this section is for Emacs users who use org mode. This is the literate programming environment that I prefer, and I am writing this article directly in it. I am specifically using <a href="https://orgmode.org/worg/org-contrib/babel/">Babel</a> which allows for active code use in Org. This comes with Doom Emacs (I'm currently using this) and Spacemacs (I started with this).
 </p>
@@ -323,9 +324,9 @@ You'll see that there is an unnecessary line that sits between the chatbot call 
 </div>
 </div>
 </div>
-<div id="outline-container-org882ff8a" class="outline-2">
-<h2 id="org882ff8a">Discussion</h2>
-<div class="outline-text-2" id="text-org882ff8a">
+<div id="outline-container-orge271b43" class="outline-2">
+<h2 id="orge271b43">Discussion</h2>
+<div class="outline-text-2" id="text-orge271b43">
 <p>
 Since I made this command line cool and figured how to use it in a literate programming context, it has increased my productivity especially in the contexts of my German learning (I am American living in Berlin), and my research work. The more general theme is that I write prolifically in my literate programming environment (Org-Mode), and now I can get direct feedback from LLMs directly within this environment.
 </p>

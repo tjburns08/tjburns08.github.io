@@ -367,6 +367,41 @@ I'll acknowledge that there are differences between the fields that may impact w
 * General data analysis
 #+HTML: <a href="#top">Back to top</a>
 The data analysis related posts that I otherwise could not categorize.
+** [[https://www.linkedin.com/posts/tylerjburns_the-case-for-viridis-activity-7289648023238811648-Qh8o?utm_source=share&utm_medium=member_desktop][Comparing Color Palettes for scRNA-seq Data Visualization: The Case for Viridis as a Default]]
+TL;DR: use the viridis color palette for your single-cell data to improve interpretability and colorblind accessibility. Flip through the 3-slide carousel for visuals. Longer post...
+
+It was brought to my attention in a previous post I made, that the "jet" color palette (blue -> red) often used for coloring t-SNE and UMAP plots can exaggerate differences in marker values, and is not colorblind friendly.
+
+In the R markdown linked in the comments, I compare the Jet, Seurat default, and Viridis palettes in terms of balance and colorblind friendliness. The report includes both color spectrum comparisons and UMAP plots colored using each palette, along with colorblind simulations.
+
+The first image in the carousel shows the spectra in side by side comparisons. The second and third images show representative UMAPs colored in the three palettes along with their colorblind simulations.
+
+Observations:
+
+ - Jet: abrupt color transitions exaggerate small differences in marker expression if they occur at these transition points. Colorblind simulations keep these transitions and make the palette overall very unbalanced.
+
+ - Seurat default: smooth transitions and colorblind friendly, but limited resolution due to fewer colors being used.
+
+ - Viridis: smooth transitions and colorblind friendly, but with higher resolution due to more colors. This resolution is at least partially preserved in the colorblind simulations.
+
+Based on these observations, I recommend that researchers and leaders consider using viridis (or palettes in the viridis family) as defaults for your papers, posters, talks, pitch decks, and so forth.
+
+By doing so, we can enhance interpretability, inclusivity, and data literacy across academic and industry settings.
+
+Please see the comments for a talk given at SciPy in 2015 from the creators of the viridis color palette. They do a great job introducing the viewer to the first principles of color theory, from the photons to the neurons. They use that in turn to explain the development of viridis.
+
+Bottom line: use viridis to improve clarity and inclusivity in your single-cell data visualizations.
+
+[[file:images/viridis_post_1.png]]
+[[file:images/viridis_post_2.png]]
+[[file:images/viridis_post_3.png]]
+
+*** comment
+My markdown is here: https://tjburns08.github.io/case_for_viridis.html
+
+A video by the creators of the viridis palette is here: https://www.youtube.com/watch?v=xAoljeRJ3lU
+
+Thank you to Asier Antoranz for making me aware of this video, and therefore inspiring this post. This truly shows the value of posting content to social media.
 ** [[https://www.linkedin.com/posts/tylerjburns_flowcytof-users-who-are-now-doing-single-cell-activity-7287826621862940672-Iv0E?utm_source=share&utm_medium=member_desktop][Cytobank color palette for Seurat's FeaturePlot]]
 Flow/CyTOF users who are now doing single-cell sequencing analysis: I created the blue-to-red color palette (eg. used in FlowJo, Cytobank, OMIQ, etc) for Seurat's FeaturePlot function, which otherwise defaults to gray-to-purple.
 
