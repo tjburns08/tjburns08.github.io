@@ -1,0 +1,169 @@
+#+Title: How I made a command line chatbot
+#+Author: Tyler Burns
+#+Date: January 24, 2025 - January 27, 2025
+
+* Introduction
+Since the end of 2022, we have been inundated with LLM chatbots in our everyday lives. The typical use involves some sort of interface that we sign into, where our previous chats can be saved, and so forth. At some point early on, these chatbots were available via API. Here, I want to show how I made a chatbot that can be called from the command line anywhere on my computer.
+
+The use case I'll show you is that of the literate programming environment, which in turn allows you to basically have and store platonic dialogues that are in turn saved and stored. This helps me with specific use cases, like getting feedback on journal entries and notes in real time. A specific example of this involves my German learning, where I often use LLMs to be a conversational partner that provides feedback in real time. Otherwise, in my line of work, I do a lot of research, so I often use LLMs to bounce ideas off of, and so forth. A literate programming environment helps save this feedback directly into the notes I'm taking.
+
+In short, having LLMs available on the command line is useful, and here, I'm going to show you how I do it. The punchline is that it is not particularly hard to do.
+* The command line interface
+The first thing we have to do is make a python script where we call an API. At the time of writing [2025-01-27 Mon], Deepseek R1 has just come out, which provides chain-of-thought reasoning (currently state of the art), the likes of GPT-o1 (currently state of the art), but for far cheaper in terms of API calls. Not to mention its open source, so it might be down the line if I get enough computational muscle, I can run it locally.
+
+In terms of calling the API, there are plenty of options, but I use [[https://openrouter.ai/][OpenRouter]]. This gives me access to the GPT models, Claude, Deepseek, and a host of other models. You can browse available models [[https://openrouter.ai/models][here]]. When you sign up, you will get an API key, and the ability to buy credits. To give you an idea of how cheap it is, I put down $5 three days ago (date of this sentence: [2025-01-27 Mon]), and after extensive use primarily of Claude, I have $4.74 remaining.
+
+I wrote a python script called chatbot.py, that takes in as input the desired model to use (currently GPT-4o, Claude, Deepseek R1) and the prompt. It turn prints the answer. The script is as follows:
+
+#+begin_src python :eval no#!/usr/bin/env python3
+from openai import OpenAI
+import sys
+
+ds = "deepseek/deepseek-r1"
+gpt3 = "openai/gpt-3.5-turbo"
+gpt4 = "openai/gpt-4o-2024-11-20"
+claude = "anthropic/claude-3.5-sonnet-20240620"
+
+# Ensure the question is passed as a command-line argument
+if len(sys.argv) < 3:
+    print("Usage: python chatbot.py <model> \"<your question>\"")
+    print("Model options: gpt or deepseek")
+    sys.exit(1)
+
+# Get the question from the command-line argument
+model_choice = sys.argv[1].lower()
+user_question = sys.argv[2]
+
+# Map the user's model choice to the appropriate model
+if model_choice == "gpt3":
+    model = gpt3
+elif model_choice == "gpt4":
+    model = gpt4
+elif model_choice == "deepseek":
+    model = ds
+elif model_choice == "claude":
+    model = claude
+else:
+    print("Invalid model choice. Please choose either 'gpt' or 'deepseek'.")
+    sys.exit(1)
+
+
+client = OpenAI(
+  base_url="https://openrouter.ai/api/v1",
+  api_key="YOUR_API_KEY_HERE",
+)
+
+completion = client.chat.completions.create(
+  model=model,
+  messages=[
+    {
+      "role": "user",
+      "content": user_question
+    }
+  ]
+)
+print(completion.choices[0].message.content)
+#+end_src
+
+This is the first step. You can then run this by going to the directly that this script is in and running:
+
+#+begin_src sh
+python chatbot.py "your model here" "your prompt here"
+#+end_src
+
+For example:
+
+#+begin_src sh
+python chatbot.py "gpt3" "What is 5 + 2?"
+#+end_src
+
+#+RESULTS:
+: 5 + 2 = 7
+
+Great. Now the next step is to make this script available anywhere on your computer. The way you do that is to add this script to your PATH. First, I made a directory called scripts that is directly in my PATH.
+
+#+begin_src sh :eval no
+mkdir -p ~/scripts
+#+end_src
+
+Next, I moved the chatbot python script into that new directory:
+
+#+begin_src sh :eval no
+mv chatbot.py ~/scripts/chatbot
+chmod +x ~/scripts/chatbot # permissions
+#+end_src
+
+Then I place this directory into my PATH, which for me is in ~/.zshrc
+
+#+begin_src sh :eval no
+export PATH="$HOME/scripts:$PATH"
+#+end_src
+
+Then, I applied the changes with:
+
+#+begin_src sh :eval no
+source ~/.zshrc
+#+end_src
+
+And from there, I can call chatbot globally by using:
+
+#+begin_src sh
+chatbot "gpt3" "What is 5 + 2?"
+#+end_src
+
+#+RESULTS:
+: 5 + 2 = 7
+
+In terms of using it on the command line, that is all there is to it. But if you note in the example above, this script ran directly in this writeup, because I am writing this article in a literate programming environment. This one of my preferred ways of using LLMs, as a conversational partner in real time.
+
+Thus, the next section will show you how to get this running in a literate programming environment.
+
+* The literate programming environment
+** R Markdown and Jupyter Notebooks
+The spoiler alert upfront is that in order to use the new script in a literate programming environment, you just have to get it to execute shell scripts. In R Markdown, there is an option to run bash. Jupyter notebooks have [[https://github.com/dahn-zk/zsh-jupyter-kernel][options]] as well. One of the key things that I've had to do to get the literate programming environment to recognize the script, is in every code block where I run it, I have to source my zshrc file. Like this:
+
+#+begin_src sh
+source ~/.zshrc
+chatbot "gpt3" "What is 5 + 2?"
+#+end_src
+
+#+RESULTS:
+: 5 + 2 equals 7.
+
+Maybe you won't have this problem, but if you do, that is how you get around it.
+** Emacs Org-Mode
+Now this section is for Emacs users who use org mode. This is the literate programming environment that I prefer, and I am writing this article directly in it. I am specifically using [[https://orgmode.org/worg/org-contrib/babel/][Babel]] which allows for active code use in Org. This comes with Doom Emacs (I'm currently using this) and Spacemacs (I started with this).
+
+The way you start a shell block here is by doing "#+begin_src sh :results output" and then another line underneath the code "#+end_src." There is a keybinding that shortcuts this. Just go to a new line and type "<s + Tab." You'll see why this is important in a minute.
+
+So go ahead and test this out on your computer and then we'll move to the next bit, where we make a keybinding specific to the making and use of our chatbot script.
+
+Now what I have set up is a keybinding that sets up specifically this:
+
+"#+begin_src sh :results output"
+source ~/.zshrc
+chatbot "claude" "test"
+
+"#+end_src"
+
+I can get the above block by typing "<chat + Tab" anywhere I'd otherwise insert a code block within an Org file.
+
+Anyway the way you set up this keyboard shortcut, at least in Doom emacs, is by going into your config file (config.el) within your .doom.d directory, going into your "after 'org" block, and running the following lines.
+
+#+begin_src elisp :eval no
+(require 'org-tempo)
+(add-to-list 'org-structure-template-alist
+        '("chat" . "src sh :results output\nsource ~/.zshrc\nchatbot \"claude\" \"test\""))
+#+end_src
+
+You'll see that there is an unnecessary line that sits between the chatbot call and end_src. I have not yet figured out how to remove that line, but the text cursor automatically sits at that line, so you just have to press delete right after the block has been made and the line goes away. So really just think of it as "<chat + Tab + Delete."
+* Discussion
+Since I made this command line cool and figured how to use it in a literate programming context, it has increased my productivity especially in the contexts of my German learning (I am American living in Berlin), and my research work. The more general theme is that I write prolifically in my literate programming environment (Org-Mode), and now I can get direct feedback from LLMs directly within this environment.
+
+In general, I [[https://www.paulgraham.com/words.html][write to think]]. Thus, now I can think and get real time feedback on my thoughts by LLMs that are becoming increasingly better, and are hallucinating less often. I have seen the occasional comment about how LLMs are going to reduce our ability to think about stuff, because we will end up [[https://hackernoon.com/the-stanford-grad-who-forgot-how-to-think][outsourcing our cognition]] to them. My general goal is to use LLMs as a way to help me think more effectively about stuff, because being good a thinking about stuff is a core value of mine.
+
+This is similar to bench pressing by myself versus with a spotter. As opposed to getting a spotter to do the bench pressing for me while I sit back and watch. That is a sort of litmus test for my LLM use: does it increase brain activity or [[https://paulgraham.com/writes.html][decrease it]]? If my brain activity goes up or at least stays the same, then I will consider it a valid use case for me. If my brain activity goes down, then that is not a valid use case for me.
+
+Future directions with this script involve figuring out how to get this to search the internet, which is what Bing Chat (aka [[https://www.lesswrong.com/posts/jtoPawEhLNXNxvgTT/bing-chat-is-blatantly-aggressively-misaligned][Sydney]]) originally did, and other tools like GPT-4o and perplexity do now. I know that this might seem a bit like reinventing the wheel, but one of the things that I want to do is understand how these things work under the hood. And one way to understand how something works is to [[https://www.youtube.com/watch?v=kCc8FmEb1nY][build it yourself]].
+
+In short, having a LLM in a literate programming environment has done me some good, and I hope it will do some of you some good too. Give this a shot if only for the exercise of knowing how to do it. It's nice to be independent of the interfaces, and it's a "gateway drug" into building your own apps.

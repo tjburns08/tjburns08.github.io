@@ -15,6 +15,10 @@ This website is a place where I can openly share my ideas and non-NDA work, rega
 If you have quesitons or comments, or you're interested in working or collaborating with me, just send me a message (see contact info below). I'm always happy to help. 
 * New
 #+HTML: <a href="#top">Back to top</a>
+** [[./command_line_writeup.html][How I made a command line chatbot]]
+Article.\\
+
+The typical way LLMs are called is through some sort of user interface. Here, I show you how to use the OpenRouter API to call various LLMs (eg. Claude, Deepseek R1, GPT-4o) by simply typing "chatbot" in the command line, followed by the desired model, followed by the prompt. It can be called from anywhere on your computer. I then show how I use this in a literate programming environment, where I often like to get and store real time feedback on whatever I'm writing about. This includes a section for Emacs users for how I got this working in Org-Mode.
 ** [[./case_for_viridis.html][Comparing Color Palettes for scRNA-seq Data Visualization: The Case for Viridis as a Default]]
 Markdown.\\
 
@@ -319,6 +323,10 @@ CyTOF data are transformed using the inverse hyperbolic sine (asinh) of the data
 * Natural language processing
 #+HTML: <a href="#top">Back to top</a>
 A lot of this work is related to natural language embeddings, or taking anything from words to paragraphs and converting them into spatial coordinates that group by context. My most popular work on this is summed up in The Scrolling Problem, which culminated in a TEDx Basel talk in 2023.
+** [[./command_line_writeup.html][How I made a command line chatbot]]
+Article.\\
+
+The typical way LLMs are called is through some sort of user interface. Here, I show you how to use the OpenRouter API to call various LLMs (eg. Claude, Deepseek R1, GPT-4o) by simply typing "chatbot" in the command line, followed by the desired model, followed by the prompt. It can be called from anywhere on your computer. I then show how I use this in a literate programming environment, where I often like to get and store real time feedback on whatever I'm writing about. This includes a section for Emacs users for how I got this working in Org-Mode.
 ** [[./website_internal_link_graph.html][Graph visualization of my website]]
 Visualization.\\
 
