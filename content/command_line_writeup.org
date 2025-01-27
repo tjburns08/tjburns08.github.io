@@ -149,8 +149,8 @@ So go ahead and test this out on your computer and then we'll move to the next b
 Now what I have set up is a keybinding that sets up specifically this:
 
 =#+begin_src sh :results output=
-source ~/.zshrc
-chatbot "claude" "test"
+source ~/.zshrc\\
+chatbot "claude" "test"\\
 
 =#+end_src=
 
