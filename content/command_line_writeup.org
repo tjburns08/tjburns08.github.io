@@ -24,6 +24,7 @@ In terms of calling the API, there are plenty of options, but I use [[https://op
 I wrote a python script called chatbot.py, that takes in as input the desired model to use (currently GPT-4o, Claude, Deepseek R1) and the prompt. It turn prints the answer. The script is as follows:
 
 #+begin_src python :eval no
+#!/usr/bin/env python3
 from openai import OpenAI
 import sys
 
