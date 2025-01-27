@@ -15,7 +15,7 @@ In terms of calling the API, there are plenty of options, but I use [[https://op
 
 I wrote a python script called chatbot.py, that takes in as input the desired model to use (currently GPT-4o, Claude, Deepseek R1) and the prompt. It turn prints the answer. The script is as follows:
 
-#+begin_src python :eval no#!/usr/bin/env python3
+#+begin_src python :eval no
 from openai import OpenAI
 import sys
 
@@ -73,7 +73,7 @@ python chatbot.py "your model here" "your prompt here"
 
 For example:
 
-#+begin_src sh
+#+begin_src sh :exports both
 python chatbot.py "gpt3" "What is 5 + 2?"
 #+end_src
 
@@ -107,7 +107,7 @@ source ~/.zshrc
 
 And from there, I can call chatbot globally by using:
 
-#+begin_src sh
+#+begin_src sh :results output :exports both
 chatbot "gpt3" "What is 5 + 2?"
 #+end_src
 
@@ -122,7 +122,7 @@ Thus, the next section will show you how to get this running in a literate progr
 ** R Markdown and Jupyter Notebooks
 The spoiler alert upfront is that in order to use the new script in a literate programming environment, you just have to get it to execute shell scripts. In R Markdown, there is an option to run bash. Jupyter notebooks have [[https://github.com/dahn-zk/zsh-jupyter-kernel][options]] as well. One of the key things that I've had to do to get the literate programming environment to recognize the script, is in every code block where I run it, I have to source my zshrc file. Like this:
 
-#+begin_src sh
+#+begin_src sh :results output :exports both
 source ~/.zshrc
 chatbot "gpt3" "What is 5 + 2?"
 #+end_src
