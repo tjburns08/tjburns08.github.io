@@ -66,10 +66,23 @@
 </div>
 <div id="content" class="content">
 <h1 class="title">How I made a command line chatbot</h1>
+<p>
+<a href="./index.html">Home</a>
+</p>
 
-<div id="outline-container-orga13c27f" class="outline-2">
-<h2 id="orga13c27f">Introduction</h2>
-<div class="outline-text-2" id="text-orga13c27f">
+<hr />
+<p>
+<i>I went to the woods because I wished to live deliberately, to front only the essential facts of life, and see if I could not learn what it had to teach, and not, when I came to die, discover that I had not lived.</i>
+</p>
+
+<p>
+Henry David Thoreau, <i>Walden</i>
+</p>
+<hr />
+
+<div id="outline-container-org8d12df3" class="outline-2">
+<h2 id="org8d12df3">Introduction</h2>
+<div class="outline-text-2" id="text-org8d12df3">
 <p>
 Since the end of 2022, we have been inundated with LLM chatbots in our everyday lives. The typical use involves some sort of interface that we sign into, where our previous chats can be saved, and so forth. At some point early on, these chatbots were available via API. Here, I want to show how I made a chatbot that can be called from the command line anywhere on my computer.
 </p>
@@ -83,9 +96,9 @@ In short, having LLMs available on the command line is useful, and here, I'm goi
 </p>
 </div>
 </div>
-<div id="outline-container-org08e65d8" class="outline-2">
-<h2 id="org08e65d8">The command line interface</h2>
-<div class="outline-text-2" id="text-org08e65d8">
+<div id="outline-container-org0fbae9d" class="outline-2">
+<h2 id="org0fbae9d">The command line interface</h2>
+<div class="outline-text-2" id="text-org0fbae9d">
 <p>
 The first thing we have to do is make a python script where we call an API. At the time of writing <span class="timestamp-wrapper"><span class="timestamp">[2025-01-27 Mon]</span></span>, Deepseek R1 has just come out, which provides chain-of-thought reasoning (currently state of the art), the likes of GPT-o1 (currently state of the art), but for far cheaper in terms of API calls. Not to mention its open source, so it might be down the line if I get enough computational muscle, I can run it locally.
 </p>
@@ -233,13 +246,13 @@ Thus, the next section will show you how to get this running in a literate progr
 </div>
 </div>
 
-<div id="outline-container-org74fc596" class="outline-2">
-<h2 id="org74fc596">The literate programming environment</h2>
-<div class="outline-text-2" id="text-org74fc596">
+<div id="outline-container-org02cdd7c" class="outline-2">
+<h2 id="org02cdd7c">The literate programming environment</h2>
+<div class="outline-text-2" id="text-org02cdd7c">
 </div>
-<div id="outline-container-org8729b2e" class="outline-3">
-<h3 id="org8729b2e">R Markdown and Jupyter Notebooks</h3>
-<div class="outline-text-3" id="text-org8729b2e">
+<div id="outline-container-orgce101f8" class="outline-3">
+<h3 id="orgce101f8">R Markdown and Jupyter Notebooks</h3>
+<div class="outline-text-3" id="text-orgce101f8">
 <p>
 The spoiler alert upfront is that in order to use the new script in a literate programming environment, you just have to get it to execute shell scripts. In R Markdown, there is an option to run bash. Jupyter notebooks have <a href="https://github.com/dahn-zk/zsh-jupyter-kernel">options</a> as well. One of the key things that I've had to do to get the literate programming environment to recognize the script, is in every code block where I run it, I have to source my zshrc file. Like this:
 </p>
@@ -260,9 +273,9 @@ Maybe you won't have this problem, but if you do, that is how you get around it.
 </p>
 </div>
 </div>
-<div id="outline-container-orgd1fc598" class="outline-3">
-<h3 id="orgd1fc598">Emacs Org-Mode</h3>
-<div class="outline-text-3" id="text-orgd1fc598">
+<div id="outline-container-org07c5773" class="outline-3">
+<h3 id="org07c5773">Emacs Org-Mode</h3>
+<div class="outline-text-3" id="text-org07c5773">
 <p>
 Now this section is for Emacs users who use org mode. This is the literate programming environment that I prefer, and I am writing this article directly in it. I am specifically using <a href="https://orgmode.org/worg/org-contrib/babel/">Babel</a> which allows for active code use in Org. This comes with Doom Emacs (I'm currently using this) and Spacemacs (I started with this).
 </p>
@@ -310,9 +323,9 @@ You'll see that there is an unnecessary line that sits between the chatbot call 
 </div>
 </div>
 </div>
-<div id="outline-container-orgbf12704" class="outline-2">
-<h2 id="orgbf12704">Discussion</h2>
-<div class="outline-text-2" id="text-orgbf12704">
+<div id="outline-container-orgcf9f822" class="outline-2">
+<h2 id="orgcf9f822">Discussion</h2>
+<div class="outline-text-2" id="text-orgcf9f822">
 <p>
 Since I made this command line cool and figured how to use it in a literate programming context, it has increased my productivity especially in the contexts of my German learning (I am American living in Berlin), and my research work. The more general theme is that I write prolifically in my literate programming environment (Org-Mode), and now I can get direct feedback from LLMs directly within this environment.
 </p>

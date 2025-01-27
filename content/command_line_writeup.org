@@ -148,11 +148,11 @@ So go ahead and test this out on your computer and then we'll move to the next b
 
 Now what I have set up is a keybinding that sets up specifically this:
 
-"#+begin_src sh :results output"
+=#+begin_src sh :results output=
 source ~/.zshrc
 chatbot "claude" "test"
 
-"#+end_src"
+=#+end_src=
 
 I can get the above block by typing "<chat + Tab" anywhere I'd otherwise insert a code block within an Org file.
 
