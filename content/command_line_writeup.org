@@ -164,7 +164,7 @@ Anyway the way you set up this keyboard shortcut, at least in Doom emacs, is by 
         '("chat" . "src sh :results output\nsource ~/.zshrc\nchatbot \"claude\" \"test\""))
 #+end_src
 
-You'll see that there is an unnecessary line that sits between the chatbot call and end_src. I have not yet figured out how to remove that line, but the text cursor automatically sits at that line, so you just have to press delete right after the block has been made and the line goes away. So really just think of it as "<chat + Tab + Delete."
+You'll see that there is an unnecessary line that sits between the chatbot call and =end_src=. I have not yet figured out how to remove that line, but the text cursor automatically sits at that line, so you just have to press delete right after the block has been made and the line goes away. So really just think of it as "<chat + Tab + Delete."
 * Discussion
 Since I made this command line cool and figured how to use it in a literate programming context, it has increased my productivity especially in the contexts of my German learning (I am American living in Berlin), and my research work. The more general theme is that I write prolifically in my literate programming environment (Org-Mode), and now I can get direct feedback from LLMs directly within this environment.
 
