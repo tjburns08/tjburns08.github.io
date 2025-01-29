@@ -367,6 +367,40 @@ I'll acknowledge that there are differences between the fields that may impact w
 * General data analysis
 #+HTML: <a href="#top">Back to top</a>
 The data analysis related posts that I otherwise could not categorize.
+** [[https://www.linkedin.com/posts/tylerjburns_when-doing-exploratory-data-analysis-for-activity-7290378848502796288-TYlg?utm_source=share&utm_medium=member_desktop][How I built a LLM chatbot]]
+When doing exploratory data analysis for clients, I have to take very rigorous notes at every step, typically done with literate programming (eg. R Markdown, Jupyter notebook). Accordingly, I built out a way to run and record LLM queries and answers directly within my notebooks. Let me explain...
+
+Why track LLM interactions?
+
+When I am exploring a new dataset, I often will have questions around capabilities of specific packages, or how to do a thing in a specific language (eg. running plotly in R, which I typically do in python). I use LLMs for this, which frequently exposes me to new tools, packages, ways of structuring code, and so forth.
+
+Because my analytical "flow state" can last for several hours, I want a record of exactly what I asked and what the model suggested at any given point. This helps me in terms of reproducibility, not only with respect to code, but also in terms of capturing my thought processes and the LLM feedback in the moment. Rather than flipping between interfaces, I'd much rather see the text, code, and LLM queries all in one notebook.
+
+If down the line I'm sharing work with colleagues and collaborators, then I can include the LLM queries and responses as well, so they can understand how certain ideas and decisions took shape, if they were influenced by the LLM's suggestions. By bundling the conversation with my code and results, everyone has a complete picture of how we arrived at the final outcome.
+
+How I did it:
+
+Accordingly, I created a command line LLM caller that can be run by typing "chatbot" "your-llm-here" "your-prompt-here" in the command line. I use this primarily in literate programming environments (R Studio, Jupyter notebook, Org Mode) where I run a shell code block and type a query.
+
+See the comments for a writeup exactly how to set this up on your end. Note that you'll be able to use Deepseek R1 if you do it like this.
+
+On responsible LLM usage:
+
+This is part of a bigger discussion around how we should responsibly use LLMs in our work. For me, what is important is tracking exactly how I was using them at exactly what step in my work, and exactly what output it gave me.
+
+In terms of when I use them, my general litmus test is: if brain activity stays the same or goes up, I'm using them right. If brain activity goes down, I am using them wrong.
+
+Note that unless you run these things fully locally, you should not put any proprietary information in here. This is not a problem for me, because I'm using them primarily to "expand my horizons" with respect to the analysis I already do. So it's more of a teacher than anything.
+
+The bottom line
+
+For the sake of keeping track of LLM use, you should have the ability to call and run LLMs directly from your jupyter notebooks or R markdowns, so you can see exactly how you were using them at all times.
+
+Give it a shot, and message me if you need help setting it up. If you are integrating LLMs into your work in a unique way, let me know. I hope you all have a great day.
+
+[[file:images/llm_chatbot.png]]
+*** comment
+The writeup can be found here: https://tjburns08.github.io/command_line_writeup.html
 ** [[https://www.linkedin.com/posts/tylerjburns_the-case-for-viridis-activity-7289648023238811648-Qh8o?utm_source=share&utm_medium=member_desktop][Comparing Color Palettes for scRNA-seq Data Visualization: The Case for Viridis as a Default]]
 TL;DR: use the viridis color palette for your single-cell data to improve interpretability and colorblind accessibility. Flip through the 3-slide carousel for visuals. Longer post...
 
