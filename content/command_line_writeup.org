@@ -143,7 +143,7 @@ Maybe you won't have this problem, but if you do, that is how you get around it.
 ** Emacs Org-Mode
 Now this section is for Emacs users who use org mode. This is the literate programming environment that I prefer, and I am writing this article directly in it. I am specifically using [[https://orgmode.org/worg/org-contrib/babel/][Babel]] which allows for active code use in Org. This comes with Doom Emacs (I'm currently using this) and Spacemacs (I started with this).
 
-The way you start a shell block here is by doing "#+begin_src sh :results output" and then another line underneath the code "#+end_src." There is a keybinding that shortcuts this. Just go to a new line and type "<s + Tab." You'll see why this is important in a minute.
+The way you start a shell block here is by doing "=#+begin_src sh :results output=" and then another line underneath the code "=#+end_src=." There is a keybinding that shortcuts this. Just go to a new line and type "<s + Tab." You'll see why this is important in a minute.
 
 So go ahead and test this out on your computer and then we'll move to the next bit, where we make a keybinding specific to the making and use of our chatbot script.
 
@@ -157,7 +157,7 @@ chatbot "claude" "test"\\
 
 I can get the above block by typing "<chat + Tab" anywhere I'd otherwise insert a code block within an Org file.
 
-Anyway the way you set up this keyboard shortcut, at least in Doom emacs, is by going into your config file (config.el) within your .doom.d directory, going into your "after 'org" block, and running the following lines.
+Anyway the way you set up this keyboard shortcut, at least in Doom emacs, is by going into your config file (config.el) within your .doom.d directory, going into your "after 'org" block, and adding the following lines.
 
 #+begin_src elisp :eval no
 (require 'org-tempo)
