@@ -15,7 +15,7 @@ This website is a place where I can openly share my ideas and non-NDA work, rega
 If you have quesitons or comments, or you're interested in working or collaborating with me, just send me a message (see contact info below). I'm always happy to help. 
 * New
 #+HTML: <a href="#top">Back to top</a>
-** [[./run_gprofiler_and_embed.html][How I make a contextual map of (overwhelming) gprofiler output]]
+** [[./run_gprofiler_and_embed.html][From gene lists to interactive contextual maps: enhancing g:Profiler interpretation]]
 Markdown.\\
 
 In my client projects, I often have to make sense of long lists of differentially expressed genes (DEGs). This typically leads to a long list of biologically relevant terms (eg. GO terms, pathways). This too is often overwhelming. Here, I make these terms easier to understand by producing a interactive contextual map of them, where terms that are similar to each other in context are physically near each other on the map. In this R Markdown, I show you both how its done, and how to use python's sentence_transformers package (and python in general) directly in R.
