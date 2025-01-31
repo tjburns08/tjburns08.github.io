@@ -327,6 +327,11 @@ CyTOF data are transformed using the inverse hyperbolic sine (asinh) of the data
 * Natural language processing
 #+HTML: <a href="#top">Back to top</a>
 A lot of this work is related to natural language embeddings, or taking anything from words to paragraphs and converting them into spatial coordinates that group by context. My most popular work on this is summed up in The Scrolling Problem, which culminated in a TEDx Basel talk in 2023.
+** [[./run_gprofiler_and_embed.html][From gene lists to interactive contextual maps: enhancing g:Profiler interpretation]]
+Markdown.\\
+
+In my client projects, I often have to make sense of long lists of differentially expressed genes (DEGs). This typically leads to a long list of biologically relevant terms (eg. GO terms, pathways). This too is often overwhelming. Here, I make these terms easier to understand by producing a interactive contextual map of them, where terms that are similar to each other in context are physically near each other on the map. In this R Markdown, I show you both how its done, and how to use python's sentence-transformers package (and python in general) directly in R.
+
 ** [[./command_line_writeup.html][How I made a command line chatbot]]
 Article.\\
 
