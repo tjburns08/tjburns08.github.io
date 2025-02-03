@@ -80,9 +80,9 @@ Charlie Munger
 </p>
 <hr />
 
-<div id="outline-container-orgfefa9c6" class="outline-2">
-<h2 id="orgfefa9c6">Introduction</h2>
-<div class="outline-text-2" id="text-orgfefa9c6">
+<div id="outline-container-orgcfab70c" class="outline-2">
+<h2 id="orgcfab70c">Introduction</h2>
+<div class="outline-text-2" id="text-orgcfab70c">
 <p>
 One day, back in 2009, I decided to start a typed journal. I called it "the one sentence journal." The idea was that I would write at least one sentence per day for as long as possible. I had a hand-written journal for a few years prior, but because I was always in front of a computer, a typed journal would be an easier thing to do.
 </p>
@@ -100,7 +100,7 @@ Here is the word count up through the beginning of December:
 </p>
 
 
-<div id="org62ff9f1" class="figure">
+<div id="org396b0b5" class="figure">
 <p><img src="images/2023-12-31_12-15-00_Screenshot 2023-12-31 at 12.13.17.png" alt="2023-12-31_12-15-00_Screenshot 2023-12-31 at 12.13.17.png" />
 </p>
 </div>
@@ -118,9 +118,9 @@ In this essay, I will talk about my million word introspection, and I will also 
 </p>
 </div>
 </div>
-<div id="outline-container-org8fe6796" class="outline-2">
-<h2 id="org8fe6796">Anatomy of the journal</h2>
-<div class="outline-text-2" id="text-org8fe6796">
+<div id="outline-container-org7a06408" class="outline-2">
+<h2 id="org7a06408">Anatomy of the journal</h2>
+<div class="outline-text-2" id="text-org7a06408">
 <p>
 My journal was originally typed out in Microsoft Word. At some point, it got so bulky that even Word could not handle its size (it would take a long time to load all the pages so I could start writing). Furthermore, it was simply difficult to scroll through all of it, as it was expanding to hundreds of pages. Initially, I started breaking the document up into chunks with date ranges. Then, I discovered org mode.
 </p>
@@ -134,7 +134,7 @@ But the reason why org mode is applicable to journaling is the use of collapsabl
 </p>
 
 
-<div id="org6bdfdfe" class="figure">
+<div id="orgfa6922c" class="figure">
 <p><img src="images/2023-12-30_12-15-10_Screenshot 2023-12-30 at 12.15.04.png" alt="2023-12-30_12-15-10_Screenshot 2023-12-30 at 12.15.04.png" />
 </p>
 </div>
@@ -152,16 +152,16 @@ But anyway, back to the journal. What happens when you have written all this stu
 </p>
 </div>
 </div>
-<div id="outline-container-orgc130594" class="outline-2">
-<h2 id="orgc130594">Tools for exploration: mapper and nearest neighbor Search</h2>
-<div class="outline-text-2" id="text-orgc130594">
+<div id="outline-container-orgd5ec3da" class="outline-2">
+<h2 id="orgd5ec3da">Tools for exploration: mapper and nearest neighbor Search</h2>
+<div class="outline-text-2" id="text-orgd5ec3da">
 <p>
 Here, we're going to talk about the tools that I have used to review one million words of journaling. I'll give you the general structure here. If you're not interested in the technical details, then please skip to the next section where you'll be able to see the results.
 </p>
 </div>
-<div id="outline-container-org1b39812" class="outline-3">
-<h3 id="org1b39812">Reading in the org mode file</h3>
-<div class="outline-text-3" id="text-org1b39812">
+<div id="outline-container-orgb3dbd94" class="outline-3">
+<h3 id="orgb3dbd94">Reading in the org mode file</h3>
+<div class="outline-text-3" id="text-orgb3dbd94">
 <p>
 In short, I read the org mode file line by line. I have the journal set up such that each paragraph is a single line, separated by an empty line, similar to the way I wrote this essay (which was also written in org mode). To get rid of the year/date/time lines, I exclude anything that starts with an asterisk (which is how you do a bullet point in org mode).
 </p>
@@ -196,9 +196,9 @@ The year is preceeded by one asterisk (<code>* 2023</code>). The day is preceede
 </div>
 </div>
 </div>
-<div id="outline-container-org57ec5ba" class="outline-3">
-<h3 id="org57ec5ba">Create word embeddings</h3>
-<div class="outline-text-3" id="text-org57ec5ba">
+<div id="outline-container-orgfbddf23" class="outline-3">
+<h3 id="orgfbddf23">Create word embeddings</h3>
+<div class="outline-text-3" id="text-orgfbddf23">
 <p>
 The word embeddings are created using the BERT language model. This has been around for a while, but it differs from the GPT-based models in a very important way. While the GPTs function as chatbots, BERT simply takes the strings (words/sentences/paragraphs) its given and embeds them into a high-dimensional vector space, where strings that are similar to each other in context will be physically nearer to each other in this vector space. In other words, the sentence "I played fetch with my dog" will in theory be located nearer to "I walked my dog" than "The clown rode the unicycle." The first two sentences involve things you do with your dog, so they're grouped together.
 </p>
@@ -230,9 +230,9 @@ Specifically, the model I've been using is called <a href="https://huggingface.c
 </div>
 </div>
 </div>
-<div id="outline-container-orgfacee2e" class="outline-3">
-<h3 id="orgfacee2e">Reduce the embedding to 2 dimensions using UMAP</h3>
-<div class="outline-text-3" id="text-orgfacee2e">
+<div id="outline-container-org2f0df14" class="outline-3">
+<h3 id="org2f0df14">Reduce the embedding to 2 dimensions using UMAP</h3>
+<div class="outline-text-3" id="text-org2f0df14">
 <p>
 So now you have a two dimensional array of 768-dimensional vectors that correspond to each paragraph that you upladed. What happens now? Well, my PhD thesis was in high-dimensional single-cell analysis (CyTOF), which is a very visual field. We used nonlinear dimension reduction to visualize our outputs to quickly get a feel for what's there. If you want to see some of my work on that, go <a href="https://tjburns08.github.io/tjb_dimr_talk.pdf">here</a>. Anyway, as critical as I am about these tools (if you look at the previous link), I am still all for the narrow use case of quickly getting a feel for what's there. In the context of creating a map of journal entries, where each entry is a point, you can think of it as "thought space."
 </p>
@@ -256,9 +256,9 @@ The code for doing such a thing is below. Note that we're also saving the umap e
 </div>
 </div>
 </div>
-<div id="outline-container-org73d9cb0" class="outline-3">
-<h3 id="org73d9cb0">Nearest neighbor searches</h3>
-<div class="outline-text-3" id="text-org73d9cb0">
+<div id="outline-container-orgff87d3d" class="outline-3">
+<h3 id="orgff87d3d">Nearest neighbor searches</h3>
+<div class="outline-text-3" id="text-orgff87d3d">
 <p>
 We also want to be able to do nearest neighbor searches on a given journal entry (or new text entrely) that allows us to see if we have written similar things in the past. This allows me to track ideas from their inception to the present moment. This work builds off of some previous work that I did <a href="https://tjburns08.github.io/ask_marcus_writeup.html">here</a>, involving nearest neighbor searches between new text and the Meditations by Marcus Aurelius (when I first started reading the Stoic texts a few years ago). This is in turn built off of my <a href="https://www.biorxiv.org/content/10.1101/337485v1">second publication</a>, which remained a pre-print due to a combination of "reviewer number 3" and just being busy with moving to another country and starting my business. Anyway, my paper used k-nearest neighbors to analyze CyTOF data in many ways, while the rest of the field at the time was fixated on clustering.
 </p>
@@ -279,28 +279,28 @@ Here, I'm taking a given text, and returning the k-nearest neighbor entries from
 </div>
 </div>
 </div>
-<div id="outline-container-orgebd8b64" class="outline-3">
-<h3 id="orgebd8b64">Web interface</h3>
-<div class="outline-text-3" id="text-orgebd8b64">
+<div id="outline-container-orga5206f8" class="outline-3">
+<h3 id="orga5206f8">Web interface</h3>
+<div class="outline-text-3" id="text-orga5206f8">
 <p>
 In order to make these tools easy to use, I built web interface around them. I made two web interfaces. One for the map-based analysis and one for the nearest neighbor search. I did these both using the <a href="https://github.com/plotly/dash">Plotly Dash</a> framework. It was originally quite some work to figure out how everything tied together (here is a <a href="https://dash.plotly.com/layout">tutorial</a> that I used), but now ChatGPT allows me to quickly change the UI/UX to fit my needs. Accordingly, I'll avoid the details here, but you can go the source code that I provide so you can see what the back end looks like. The next section will show you what the front end looks like as a side effect of the main point: the analysis.
 </p>
 </div>
 </div>
 </div>
-<div id="outline-container-orgfd3d527" class="outline-2">
-<h2 id="orgfd3d527">Deep dives into the self</h2>
-<div class="outline-text-2" id="text-orgfd3d527">
+<div id="outline-container-org406d7f3" class="outline-2">
+<h2 id="org406d7f3">Deep dives into the self</h2>
+<div class="outline-text-2" id="text-org406d7f3">
 </div>
-<div id="outline-container-orgce6adfa" class="outline-3">
-<h3 id="orgce6adfa">Thought space</h3>
-<div class="outline-text-3" id="text-orgce6adfa">
+<div id="outline-container-org5a0073e" class="outline-3">
+<h3 id="org5a0073e">Thought space</h3>
+<div class="outline-text-3" id="text-org5a0073e">
 <p>
 The transformed sentences compressed into a UMAP representation present an approximation of what I call thought space. I have a UI that allows for the querying of this thought space, in which paragraphs that are similar to each other in context will physically group near each other. The UI looks like this:
 </p>
 
 
-<div id="org64408a7" class="figure">
+<div id="org367dff4" class="figure">
 <p><img src="images/2024-01-11_17-05-38_Screenshot 2024-01-11 at 17.05.35.png" alt="2024-01-11_17-05-38_Screenshot 2024-01-11 at 17.05.35.png" />
 </p>
 </div>
@@ -315,7 +315,7 @@ When I saw this map, which runs until the end of 2023, the big question on my mi
 
 
 
-<div id="orgd27ea54" class="figure">
+<div id="org1ed31c6" class="figure">
 <p><img src="images/2024-01-11_17-10-09_Screenshot 2024-01-11 at 17.10.06.png" alt="2024-01-11_17-10-09_Screenshot 2024-01-11 at 17.10.06.png" />
 </p>
 </div>
@@ -329,7 +329,7 @@ But for the sake of my readers, let's delve a bit into science, as it is a large
 </p>
 
 
-<div id="org024e931" class="figure">
+<div id="org72d7eaa" class="figure">
 <p><img src="images/2024-01-11_17-31-42_Screenshot 2024-01-11 at 17.31.36.png" alt="2024-01-11_17-31-42_Screenshot 2024-01-11 at 17.31.36.png" />
 </p>
 </div>
@@ -343,7 +343,7 @@ The last observation I'll note is that there are certain keywords that bridge th
 </p>
 
 
-<div id="orgc38709c" class="figure">
+<div id="org2bbe681" class="figure">
 <p><img src="images/2024-01-11_17-44-40_Screenshot 2024-01-11 at 17.44.38.png" alt="2024-01-11_17-44-40_Screenshot 2024-01-11 at 17.44.38.png" />
 </p>
 </div>
@@ -361,7 +361,7 @@ But those who know me well will know that I'm also obsessed with all things heal
 </p>
 
 
-<div id="orgb284576" class="figure">
+<div id="org0344c7b" class="figure">
 <p><img src="images/2024-01-11_17-51-18_Screenshot 2024-01-11 at 17.51.15.png" alt="2024-01-11_17-51-18_Screenshot 2024-01-11 at 17.51.15.png" />
 </p>
 </div>
@@ -369,9 +369,9 @@ But those who know me well will know that I'm also obsessed with all things heal
 </div>
 
 
-<div id="outline-container-org904eb10" class="outline-3">
-<h3 id="org904eb10">You've written about this before</h3>
-<div class="outline-text-3" id="text-org904eb10">
+<div id="outline-container-orgd5c8383" class="outline-3">
+<h3 id="orgd5c8383">You've written about this before</h3>
+<div class="outline-text-3" id="text-orgd5c8383">
 <p>
 In reviewing my entries, I have noticed that there are ideas that I think are new, but I find that I actually wrote about it in the past, sometimes years ago. I also find particular "moods" that I stumble into where I write a particular way about particular things. I want to be able to see these kinds of things in real time. This is where the nearest neighbor search comes in.
 </p>
@@ -396,7 +396,7 @@ Ok, place that into the search bar and we get (the text is small, so I'll explai
 </p>
 
 
-<div id="org43021b3" class="figure">
+<div id="orgac20528" class="figure">
 <p><img src="images/2023-12-30_14-52-11_Screenshot 2023-12-30 at 14.52.06.png" alt="2023-12-30_14-52-11_Screenshot 2023-12-30 at 14.52.06.png" />
 </p>
 </div>
@@ -415,13 +415,13 @@ Note that the same way you can go down rabbit holes on YouTube by simply clickin
 </div>
 </div>
 </div>
-<div id="outline-container-orgb337040" class="outline-2">
-<h2 id="orgb337040">Conclusions</h2>
-<div class="outline-text-2" id="text-orgb337040">
+<div id="outline-container-orgcc8ffa6" class="outline-2">
+<h2 id="orgcc8ffa6">Conclusions</h2>
+<div class="outline-text-2" id="text-orgcc8ffa6">
 </div>
-<div id="outline-container-org1a1bf18" class="outline-3">
-<h3 id="org1a1bf18">Journaling is good</h3>
-<div class="outline-text-3" id="text-org1a1bf18">
+<div id="outline-container-orgc9f97b4" class="outline-3">
+<h3 id="orgc9f97b4">Journaling is good</h3>
+<div class="outline-text-3" id="text-orgc9f97b4">
 <p>
 The most important thing that I want to convey in this article is that keeping a journal for a long time is a very good thing to do. Aside from the benefits of daily journaling, it makes it easier to live an examined life. It is very interesting, and very fun to look at where I was at a decade ago, both in terms of what I was up to, and what I was feeling at the time. There are often contrasts between what I remember and what I actually wrote down. I anticipate that this will continue to become more interesting, beneficial, and fun as time goes by and my journal continues to grow.
 </p>
@@ -431,9 +431,9 @@ The use of plain text and the use of org mode in particular has made it much eas
 </p>
 </div>
 </div>
-<div id="outline-container-orge1a12dd" class="outline-3">
-<h3 id="orge1a12dd">An automated Zettelkasten</h3>
-<div class="outline-text-3" id="text-orge1a12dd">
+<div id="outline-container-org3d46dbc" class="outline-3">
+<h3 id="org3d46dbc">An automated Zettelkasten</h3>
+<div class="outline-text-3" id="text-org3d46dbc">
 <p>
 At the time of writing <span class="timestamp-wrapper"><span class="timestamp">[2023-12-30 Sat] </span></span> there are tools that are making a particular type of linked note taking popular. This is known as the <a href="https://en.wikipedia.org/wiki/Zettelkasten">Zettelkasten</a> (German for slip box) style of note taking. The easiest way to understand what this is would be to browse Obsidian's <a href="https://obsidian.md/">note taking system</a>. You take notes and you link them until you have a personal wiki that you can either click through (like hyperlinks on Wikipedia) or view the entire network.
 </p>
@@ -451,9 +451,9 @@ Of course, the use case that I'm talking about here is my journal. However, if t
 </p>
 </div>
 </div>
-<div id="outline-container-orgbbf8acf" class="outline-3">
-<h3 id="orgbbf8acf">Who am I?</h3>
-<div class="outline-text-3" id="text-orgbbf8acf">
+<div id="outline-container-org3bc8d87" class="outline-3">
+<h3 id="org3bc8d87">Who am I?</h3>
+<div class="outline-text-3" id="text-org3bc8d87">
 <p>
 I am assuming that everyone asks the question "who am I" from time to time. This is a particularly difficult question, as the passage of life makes the self concept rather dynamic. However, a million words of written journal over 15 years can start to get at this question a little bit. Looking each paragraph of my journal entries in a map form, thought space, and later interrogation of what was written in each region of thought space, allowed me to test my self concept against what I actually have been writing down over the years. Doing such a thing only really works if your journal entries are faily unfiltered. Doing this on your social media posts probably will not provide very much insight into who you actually are, though it may offer utility when coloring it by engagement metrics.
 </p>
@@ -467,9 +467,9 @@ So who am I? My tech-enabled journal review suggests that I am a lot of things. 
 </p>
 </div>
 </div>
-<div id="outline-container-orgc58bbf4" class="outline-3">
-<h3 id="orgc58bbf4">Additional use cases and future directions</h3>
-<div class="outline-text-3" id="text-orgc58bbf4">
+<div id="outline-container-org6785934" class="outline-3">
+<h3 id="org6785934">Additional use cases and future directions</h3>
+<div class="outline-text-3" id="text-org6785934">
 <p>
 I take a lot of notes on the computer. I used to keep everything in Evernote, but now I'm keeping everything in org mode files that are orgnized in a way that is similar to my journal: by year/date/time. I use <a href="https://orgmode.org/manual/Tags.html">tags</a> if I want to drill into particular subjects, but otherwise I can use the same software to organize things automatically.
 </p>
