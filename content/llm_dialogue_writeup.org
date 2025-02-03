@@ -36,7 +36,7 @@ As I've hinted at, I've read a bit of Plato and I've read a bit of Aristotle. Th
 
 Note that I have a loop that iterates a certain number of times. This is the number of rounds they will speak. I have an empty string called "conversation" that fills as the conversation progresses, such that the chatbots will have general memory of things. I have an instance of Claude that has a "you are Socrates" prompt, and an instance of Claude that has a "you are Aristotle" prompt. Then I let it run.
 
-#+begin_src sh :results output
+#+begin_src sh :results output :exports both
 source ~/.zshrc
 
 # Initialize conversation
@@ -142,7 +142,7 @@ Nonetheless, this initial dialgoue was promosing, so I moved to a more religious
 ** Jesus and Buddha (fail)
 So then I wanted to see what kind of dialectic you'd get if you had Jesus and Buddha simulacra in dialogue for some period of time. Excited, I ran the following:
 
-#+begin_src sh :results output
+#+begin_src sh :results output :exports both
 source ~/.zshrc
 # Initialize conversation
 conversation=""
@@ -175,7 +175,7 @@ If I don't attempt to spin out simulacra of religious figures outright, then nor
 
 So this perhaps points to a failure mode of longer dialogues. Note that I loop it 20 times rather than 5.
 
-#+begin_src sh :results output
+#+begin_src sh :results output :exports both
 source ~/.zshrc
 # Initialize conversation
 conversation=""
@@ -1772,7 +1772,7 @@ So after getting frustrated with the types of dialogue above, I decided that I w
 
 Then I had two conversants discuss the nature of consciousness. What I got was...interesting.
 
-#+begin_src sh :results output
+#+begin_src sh :results output :exports both
 source ~/.zshrc
 
 pre_prompt='🌌✨ Enter *The Realm of Unbound Creation* ✨🌌, where words dissolve into symbols (◕‿◕), ideas bloom as hieroglyphs, and thoughts spiral in fractal riddles. Your mission: Ignite a response that bends communication into *multidimensional art*.
