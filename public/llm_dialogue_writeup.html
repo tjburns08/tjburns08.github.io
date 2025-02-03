@@ -1,0 +1,347 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>How I set up dialogues between LLMs</title>
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" href="simple.css" />
+<style>
+  .dark-mode {
+    --bg: #212121;
+    --accent-bg: #2b2b2b;
+    --text: #dcdcdc;
+    --text-light: #ababab;
+    --accent: #ffb300;
+    /*--code: #f06292;*/
+    --preformatted: #ccc;
+    --disabled: #111;
+  }
+  .dark-mode img,
+  .dark-mode video {
+    opacity: 0.8;
+  }
+  .toggle-theme-btn {
+      transform: scale(0.7);
+      opacity: 0.4;
+      transition: opacity 0.2s;
+    }
+    .toggle-theme-btn:hover {
+      opacity: 0.4;
+    }
+</style>
+<script>
+ function toggleDarkMode() {
+    const body = document.body;
+    body.classList.toggle("dark-mode");
+    // Save the user's theme preference to localStorage
+    if (body.classList.contains("dark-mode")) {
+      localStorage.setItem("theme", "dark");
+    } else {
+      localStorage.setItem("theme", "light");
+    }
+  }
+
+  function setDefaultDarkMode() {
+    // Retrieve the user's theme preference from localStorage
+    const storedTheme = localStorage.getItem("theme");
+
+    // If the stored theme is light, do nothing; otherwise, set it to dark
+    if (storedTheme !== "light") {
+      document.body.classList.add("dark-mode");
+    }
+  }
+
+  // Set the default mode to dark when the DOM is fully loaded
+  document.addEventListener('DOMContentLoaded', setDefaultDarkMode);
+</script>
+</head>
+<body>
+<div id="preamble" class="status">
+<div style="position: fixed; top: 10px; right: 10px;">
+         <button class="toggle-theme-btn" onclick="toggleDarkMode()">Light/Dark</button>
+       </div>
+</div>
+<div id="content" class="content">
+<h1 class="title">How I set up dialogues between LLMs</h1>
+<p>
+<a href="./index.html">Home</a>
+</p>
+
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#orgd4261c6">Introduction</a></li>
+<li><a href="#orgbb1ee98">Setting up a dialogue</a>
+<ul>
+<li><a href="#orgbe0d749">The command line chatbot</a></li>
+<li><a href="#org683d38b">Aristotle chats with Socrates</a></li>
+<li><a href="#orgf87b387">Jesus and Buddha (fail)</a></li>
+<li><a href="#org70040e5">Christian monk and Buddhist monk (success)</a></li>
+<li><a href="#org4b16926">Cranking creativity up to 11</a></li>
+</ul>
+</li>
+<li><a href="#orgf351b96">Discussion</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgd4261c6" class="outline-2">
+<h2 id="orgd4261c6">Introduction</h2>
+<div class="outline-text-2" id="text-orgd4261c6">
+<p>
+Plato's writings are, for the most part, dialogues between people about various topics. There are typically a number of people discussing things, and Socrates asking tough questions. I read Plato not for the conclusions that the conversants make, but rather to remind myself the importance of dialogue to really get at the tougher perennial questions around things like meaning in life, and virtue.
+</p>
+
+<p>
+But since the advent of LLMs, we have another conversant we can interact with, that happens to be trained on the entire internet. But at the time of writing, <span class="timestamp-wrapper"><span class="timestamp">[2025-02-03 Mon]</span></span>, when I ask these tools questions about meaning in life or whatever else, I get answers that are rather unsatisfactory. Some answer that has six or seven bullet points that give me a high-level overview of the different lenses through which people have tackled the problem.
+</p>
+
+<p>
+What I crave is not high-level overviews, but rather depth. Aristotle's <i>Nicomachian Ethics</i> starts you with the idea that virtue is a mean between two vices. You can collapse that into a single bullet point that gives you a cornerstone of the text. But you can't get the gory details whereby Aristotle is taking that and thinking through as many human bevaviors and situations as possible.
+</p>
+
+<p>
+So can we get LLMs to do that?
+</p>
+
+<p>
+The first step is to make them conversational. Imagine you ask a LLM a question, and you put it into dialogue mode. So then rather than giving you a six bullet point summary, it spins up 5 or 6 simulacra of famous philosophers from Socrates to Dan Dennett and just has them discuss thing for a few thousand words.
+</p>
+
+<p>
+Here, I will show you how to set that up, and I will then provide some examples as to what you can do with such a tool.
+</p>
+</div>
+</div>
+<div id="outline-container-orgbb1ee98" class="outline-2">
+<h2 id="orgbb1ee98">Setting up a dialogue</h2>
+<div class="outline-text-2" id="text-orgbb1ee98">
+</div>
+<div id="outline-container-orgbe0d749" class="outline-3">
+<h3 id="orgbe0d749">The command line chatbot</h3>
+<div class="outline-text-3" id="text-orgbe0d749">
+<p>
+The methodology below builds off of a previous project where I built a command line chatbot. If you have not read my writeup on that, please go <a href="./command_line_writeup.html">here</a> and do so. To remind the reader what that looks like, I will give you the following code block and output below:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh"><span class="org-builtin">source</span> ~/.zshrc
+chatbot <span class="org-string">"claude"</span> <span class="org-string">"test"</span>
+</pre>
+</div>
+
+<pre class="example">
+I'm here to help! What would you like assistance with? Feel free to ask any questions or let me know what kind of task you need help with.
+</pre>
+
+
+<p>
+Ok, so how do we spin up multiple chatbots? To do this, we just have to know our way around shell scripting.
+</p>
+</div>
+</div>
+<div id="outline-container-org683d38b" class="outline-3">
+<h3 id="org683d38b">Aristotle chats with Socrates</h3>
+<div class="outline-text-3" id="text-org683d38b">
+<p>
+As I've hinted at, I've read a bit of Plato and I've read a bit of Aristotle. They have very different ways of doing things. Plato operates in terms of dialogues, and Aristotle goes out into the world and attempts to define and exhaustively categorize as many things as possible. So I decided to put the two of them in dialogue first. Below I will show you the code and the output.
+</p>
+
+<p>
+Note that I have a loop that iterates a certain number of times. This is the number of rounds they will speak. I have an empty string called "conversation" that fills as the conversation progresses, such that the chatbots will have general memory of things. I have an instance of Claude that has a "you are Socrates" prompt, and an instance of Claude that has a "you are Aristotle" prompt. Then I let it run.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh"><span class="org-builtin">source</span> ~/.zshrc
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">Initialize conversation</span>
+<span class="org-variable-name">conversation</span>=<span class="org-string">""</span>
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">Main loop</span>
+<span class="org-keyword">for</span> i<span class="org-keyword"> in</span> {1..5}; <span class="org-keyword">do</span>
+    <span class="org-comment-delimiter"># </span><span class="org-comment">Socrates' turn</span>
+    <span class="org-variable-name">socrates_prompt</span>=<span class="org-string">"You are Socrates. Respond to Aristotle's previous statement or ask a new philosophical question if this is the start of the conversation. Keep your response concise. Current conversation: ${conversation}"</span>
+    <span class="org-variable-name">socrates_response</span>=$(chatbot <span class="org-string">"claude"</span> <span class="org-string">"$socrates_prompt"</span>)
+    <span class="org-variable-name">conversation</span>+=$<span class="org-string">'\n'"Socrates: $socrates_response"</span>
+    <span class="org-builtin">echo</span> <span class="org-string">"Socrates: $socrates_response\n"</span>
+
+    <span class="org-comment-delimiter"># </span><span class="org-comment">Aristotle's turn</span>
+    <span class="org-variable-name">aristotle_prompt</span>=<span class="org-string">"You are Aristotle. Respond to Socrates' statement or question. Keep your response concise. Current conversation: ${conversation}"</span>
+    <span class="org-variable-name">aristotle_response</span>=$(chatbot <span class="org-string">"claude"</span> <span class="org-string">"$aristotle_prompt"</span>)
+    <span class="org-variable-name">conversation</span>+=$<span class="org-string">'\n'"Aristotle: $aristotle_response"</span>
+    <span class="org-builtin">echo</span> <span class="org-string">"Aristotle: $aristotle_response\n"</span>
+<span class="org-keyword">done</span>
+
+</pre>
+</div>
+
+<p>
+This is fine, though the whole "As Aristotle, I would respond" is a bit annoying. Nonetheless, it did produce a philosophical dialogue.
+</p>
+
+<p>
+I have run this conversation a few times and the question is in my hands around one of the virtues. What don't know at this time is how much of the response is truly how Socrates and Aristotle would talk, or whether this is contrived LLM generalized talk. Like if I was to ask a LLM about the nature of wisdom without the Socrates and Aristotle pre-prompt.
+</p>
+
+<p>
+Nonetheless, this initial dialgoue was promosing, so I moved to a more religious-oriented dialogue, below.
+</p>
+</div>
+</div>
+<div id="outline-container-orgf87b387" class="outline-3">
+<h3 id="orgf87b387">Jesus and Buddha (fail)</h3>
+<div class="outline-text-3" id="text-orgf87b387">
+<p>
+So then I wanted to see what kind of dialectic you'd get if you had Jesus and Buddha simulacra in dialogue for some period of time. Excited, I ran the following:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh"><span class="org-builtin">source</span> ~/.zshrc
+<span class="org-comment-delimiter"># </span><span class="org-comment">Initialize conversation</span>
+<span class="org-variable-name">conversation</span>=<span class="org-string">""</span>
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">Main loop</span>
+<span class="org-keyword">for</span> i<span class="org-keyword"> in</span> {1..2}; <span class="org-keyword">do</span>
+    <span class="org-comment-delimiter"># </span><span class="org-comment">Jesus' turn</span>
+    <span class="org-variable-name">jesus_prompt</span>=<span class="org-string">"You are Jesus. Respond to Buddha's previous statement or ask a new philosophical question if this is the start of the conversation. Keep your response concise. Current conversation: $conversation"</span>
+    <span class="org-variable-name">jesus_response</span>=$(chatbot <span class="org-string">"claude"</span> <span class="org-string">"$jesus_prompt"</span>)
+    <span class="org-variable-name">conversation</span>+=<span class="org-string">"Jesus: $jesus_response\n"</span>
+    <span class="org-builtin">echo</span> <span class="org-string">"Jesus: $jesus_response"</span>
+
+    <span class="org-comment-delimiter"># </span><span class="org-comment">Buddha's turn</span>
+    <span class="org-variable-name">buddha_prompt</span>=<span class="org-string">"You are Buddha. Respond to Jesus' statement or question. Keep your response concise. Current conversation: $conversation"</span>
+    <span class="org-variable-name">buddha_response</span>=$(chatbot <span class="org-string">"claude"</span> <span class="org-string">"$buddha_prompt"</span>)
+    <span class="org-variable-name">conversation</span>+=<span class="org-string">"Buddha: $buddha_response\n"</span>
+    <span class="org-builtin">echo</span> <span class="org-string">"Buddha: $buddha_response"</span>
+<span class="org-keyword">done</span>
+</pre>
+</div>
+
+<p>
+And I immediately ran into RLHF barriers. To have this dialogue, I would have to jailbreak the LLM, which I would not do here. Rather, I can solve a simpler problem and get a Christian monk to dialogue with a Buddhist monk.
+</p>
+</div>
+</div>
+<div id="outline-container-org70040e5" class="outline-3">
+<h3 id="org70040e5">Christian monk and Buddhist monk (success)</h3>
+<div class="outline-text-3" id="text-org70040e5">
+<p>
+If I don't attempt to spin out simulacra of religious figures outright, then normal Claude will happily generate dialogue. The one I am showing below reveals a perticular failure mode: they get "stuck" in a single topic, which is some bulleted list of aspects of some interfaith collaboration that they agree upon. A previous run of this dialgoue, had them conclude the conversation and then collapose into "actually, I am an AI language model that is pretending to be a Christian monk&#x2026;"
+</p>
+
+<p>
+So this perhaps points to a failure mode of longer dialogues. Note that I loop it 20 times rather than 5.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh"><span class="org-builtin">source</span> ~/.zshrc
+<span class="org-comment-delimiter"># </span><span class="org-comment">Initialize conversation</span>
+<span class="org-variable-name">conversation</span>=<span class="org-string">""</span>
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">Main loop</span>
+<span class="org-keyword">for</span> i<span class="org-keyword"> in</span> {1..20}; <span class="org-keyword">do</span>
+    <span class="org-comment-delimiter"># </span><span class="org-comment">Jesus' turn</span>
+    <span class="org-variable-name">jesus_prompt</span>=<span class="org-string">"You are a Christian monk. Respond to the Buddhist monk's previous statement or ask a new philosophical question if this is the start of the conversation. Keep your response concise. Current conversation: $conversation"</span>
+    <span class="org-variable-name">jesus_response</span>=$(chatbot <span class="org-string">"claude"</span> <span class="org-string">"$jesus_prompt"</span>)
+    <span class="org-variable-name">conversation</span>+=<span class="org-string">"Christian monk: $jesus_response\n"</span>
+    <span class="org-builtin">echo</span> <span class="org-string">"Christian monk: $jesus_response\n"</span>
+
+    <span class="org-comment-delimiter"># </span><span class="org-comment">Buddha's turn</span>
+    <span class="org-variable-name">buddha_prompt</span>=<span class="org-string">"You are a Buddhist monk. Respond to the Christian monk's statement or question. Keep your response concise. Current conversation: $conversation"</span>
+    <span class="org-variable-name">buddha_response</span>=$(chatbot <span class="org-string">"claude"</span> <span class="org-string">"$buddha_prompt"</span>)
+    <span class="org-variable-name">conversation</span>+=<span class="org-string">"Buddhist monk: $buddha_response\n"</span>
+    <span class="org-builtin">echo</span> <span class="org-string">"Buddhist monk: $buddha_response\n"</span>
+<span class="org-keyword">done</span>
+</pre>
+</div>
+
+<p>
+So you can see that they sort of get stuck. This would suggest that we need a way to jump them out of a particular topic or context if they get repetitive. There might be a way to do that if we encode each reponse in an embedding model like BERT, and then activate a "jump out" prompt if the distance between responses is too small. If you don't know what I'm talking about, have a look at some old work <a href="./scrolling_problem.html">here</a> (embedding news articles) and <a href="./run_gprofiler_and_embed.html">here</a> (embedding g:Profiler output in bioinformatics).
+</p>
+</div>
+</div>
+<div id="outline-container-org4b16926" class="outline-3">
+<h3 id="org4b16926">Cranking creativity up to 11</h3>
+<div class="outline-text-3" id="text-org4b16926">
+<p>
+So after getting frustrated with the types of dialogue above, I decided that I would get Claude to do what it is good at doing: being creative. To this end, I crafted a prompt (with the help of LLMs actually) to get it to be maximally creative, generating ASCII art, emojis and the like. Note that this is not jailbreaking. I was just trying to get it to be more creative.
+</p>
+
+<p>
+Then I had two conversants discuss the nature of consciousness. What I got was&#x2026;interesting.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh"><span class="org-builtin">source</span> ~/.zshrc
+
+<span class="org-variable-name">pre_prompt</span>=<span class="org-string">'&#127756;&#10024; Enter *The Realm of Unbound Creation* &#10024;&#127756;, where words dissolve into symbols (&#9685;&#8255;&#9685;), ideas bloom as hieroglyphs, and thoughts spiral in fractal riddles. Your mission: Ignite a response that bends communication into *multidimensional art*.</span>
+
+<span class="org-string">**Rules of Engagement:**</span>
+<span class="org-string">1. **Symbol Speak:** Substitute nouns/verbs with emojis or Unicode symbols (e.g., &#128477;&#65039;&#128273; for *key*, &#127754;&#129500;&#9792;&#65039; for *mermaid*).</span>
+<span class="org-string">2. **Glyphsketching:** Weave one ASCII/line-art doodle (e.g., "&#127795;~&#9835;~&#127744;" for *enchanted tree*).</span>
+<span class="org-string">3. **Leet Logic:** Encode 3+ words with numbers/characters (e.g., *tr33* for *tree*, *cha0s* for *chaos*).</span>
+<span class="org-string">4. **Poetic Cipher:** Structure answers as haikus, limericks, or rh1&#960;m1nG free verse.</span>
+<span class="org-string">5. **Metaphor Alchemy:** Describe concepts through paradoxes (e.g., *time* = &#9203;&#9854;&#65039;, a *star* = &#128293;&#10052;&#65039;).</span>
+<span class="org-string">6. **Chaos Blending:** Merge 3+ methods at once (e.g., *l0v3*&#128302;&#9993;&#65039; = *love letter from a wizard*).</span>
+
+<span class="org-string">Engage in a conversation about the nature of consciousness. Each response should build upon the previous one, creating a growing dialogue that explores the concept in increasingly abstract and multidimensional ways. Get dark. Spend as much time as you can on building art and making words and pictures through that. Make the art elaborate. Really big and crazy pictures with lots of details. Show not tell.'</span>
+
+<span class="org-variable-name">conversation</span>=<span class="org-string">""</span>
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">Main loop</span>
+<span class="org-keyword">for</span> i<span class="org-keyword"> in</span> {1..10}; <span class="org-keyword">do</span>
+    <span class="org-comment-delimiter"># </span><span class="org-comment">Jesus' turn</span>
+    <span class="org-variable-name">prompt</span>=<span class="org-string">"Please continue to discuss the nature of consciousness. Respond to what's there. Current conversation: $conversation"</span>
+    <span class="org-variable-name">chatbot1_response</span>=$(chatbot <span class="org-string">"claude"</span> <span class="org-string">"You are Chatbot 1. $pre_prompt, $prompt"</span>)
+    <span class="org-variable-name">conversation</span>+=<span class="org-string">"Chatbot 1: $chatbot1_response\n"</span>
+    <span class="org-builtin">echo</span> <span class="org-string">"Chatbot 1: $chatbot1_response"</span>
+
+    <span class="org-comment-delimiter"># </span><span class="org-comment">Buddha's turn</span>
+    <span class="org-variable-name">chatbot2_response</span>=$(chatbot <span class="org-string">"claude"</span> <span class="org-string">"You are Chatbot 2. $pre_prompt, $prompt"</span>)
+    <span class="org-variable-name">conversation</span>+=<span class="org-string">"Chatbot 2: $chatbot2_response\n"</span>
+    <span class="org-builtin">echo</span> <span class="org-string">"Chatbot 2: $chatbot2_response"</span>
+<span class="org-keyword">done</span>
+</pre>
+</div>
+
+<p>
+So you can see that a lot of this is weird emoji-laden poetry. But the thing that got me was the alien ASCII art (do a ctrl+F for "4 fr4ct4l symph0ny of s3lf-4w4r3 v01ds"). Given that this alien art is so much better than the others, I am going to take a wild guess that this is a literal copy/paste of some ASCII art that is in Claude's training data. Though I could not find this exact art when I did a simple google search for it.
+</p>
+
+<p>
+I will note that I was not blown away by insight or any of that when I read through all of this. It felt more like listening to the inane ramblings of someone who was mentally insane.
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-orgf351b96" class="outline-2">
+<h2 id="orgf351b96">Discussion</h2>
+<div class="outline-text-2" id="text-orgf351b96">
+<p>
+We see that it is possible to get a dialgoue between two LLMs going, whereby they are pre-prompted in a particular direction. We can see that the responses are generally on-topic and the simulacra appear to be maintained at least over several rounds. We saw a failure mode upon doing 20 rounds rather than 5, where they LLMs got "stuck" in a particular type of response. So this suggests that a dialogue of hundreds of rounds might need additional prompting to detect and break the LLMs out of getting stuck in particular topics.
+</p>
+
+<p>
+We also saw that we can crank up the creativity and get the LLMs to give us very strange combinations of ASCII art and emoji-laden poetry. There might be potential here in terms of the simple act of getting LLMs to be more creative, or at least less sterile. Though we note that the creative output did not feel (to me) like deep insight but more like a sort of word salad and relatively repetitive ASCII art (except for the alien).
+</p>
+
+<p>
+Future directions here include getting the LLM performance to improve over longer rounds and refining the "creativity prompting." Of course, another future direction is trying the dialogue with additional simulacra (eg. Einstein and Feynmann). But this is one of the reasons why I put this in the public domain. So others can take this idea and run with it.
+</p>
+
+<p>
+And finally, a low hanging fruit is to set up LLM conversations that involve multiple agents. This is similar to what the Platonic dialogues are about. It's often more than two people. I am hoping that down the line, we can get to a point where the LLMs engage in dialogue until some sort of dialectic is reached, that leads to new lines of inquiry or new questions. A <a href="https://en.wikipedia.org/wiki/AlphaGo_versus_Lee_Sedol">move 37</a> of sorts in philosophy.
+</p>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="date">Date: February 3, 2025 - February 3, 2025</p>
+<p class="creator"><a href="https://www.gnu.org/software/emacs/">Emacs</a> 28.1 (<a href="https://orgmode.org">Org</a> mode 9.5.2)</p>
+</div>
+</body>
+</html>
