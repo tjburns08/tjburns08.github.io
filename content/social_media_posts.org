@@ -367,6 +367,52 @@ I'll acknowledge that there are differences between the fields that may impact w
 * General data analysis
 #+HTML: <a href="#top">Back to top</a>
 The data analysis related posts that I otherwise could not categorize.
+** [[https://www.linkedin.com/posts/tylerjburns_if-gsea-leaves-you-with-firehose-of-go-and-activity-7292914924509421570-V_HI?utm_source=share&utm_medium=member_desktop&rcm=ACoAAAbP8M8BYXs_UknoBHnmw2rZ-aRDTJF7L3Y][GSEA context map]]
+If GSEA leaves you with firehose of GO and pathway terms that are hard to navigate, I've developed a free solution you can use that organizes and visualizes them by context, so you know what to do with them. Here is how it works:
+
+The challenge:
+
+GSEA (the category of tools that includes g:Profiler and the Broad's GSEA) produces a long list of terms that make it hard to see the "forest in the trees."
+
+My approach:
+
+- Context mapping: I take the list of terms and feed them into a language embedding model, similar to BERT. This groups the terms spatially, so terms that are similar to each other in context are physically near each other in space.
+
+- Clustering and automated annotation: I then cluster the terms and use a LLM (directly in R) to annotate each cluster with an overarching theme derived from its constituent terms.
+
+- Interactive visualization: Finally, I produce a UMAP embedding from the results, and make it interactive such that you can hover over the data points and get the info you need.
+
+Observations:
+
+- Groupings make sense: you can do a sanity check right on the interface to see that terms are grouping together in the map by context (eg. brain development).
+
+- LLM annotations make sense: I note however that they are not spot-on for every single term within a cluster, suggesting that increasing the resolution to the clustering might be a good idea.
+
+Considerations and limitations:
+
+- LLM output is slightly different each time: This is mainly the wording of the same underlying idea. As an example, one cluster was "Neurological and sensory system development" in one run, and "Developmental neurobiology" in another run. This goes back to my hypothesis that upping the resolution of the clusters will improve performance. Nonetheless, you should run the annotation step multiple times to check the consistency of the LLM output. I provide code for that accordingly.
+
+- My workflow preferences: I generally threshold by p-value, starting stringent and then loosening up. I also prefer pathway terms over GO terms.
+
+Bottom line, for bioinformaticians and data scientists:
+
+Read this markdown if you want to produce sensible visuals with the firehose of GO and pathway terms that you get asked to provide. From a technical standpoint, read this markdown if you want to:
+
+- learn how to run a LLM directly in R
+- annotate clusters with it
+- run python in R
+- produce natural language embeddings
+- produce interactive maps
+
+Bottom line, for leaders:
+
+- Utilizing recent developments in AI/ML to organize GSEA output (and any text-based output, broadly speaking) will allow you to see the big picture, save time on decision making, and make sure you don't miss anything.
+
+The R markdown guide is linked in the comments below. Please let me know if you have questions or comments. Feel free to DM me.
+
+[[file:images/gprofiler_bert_ppt_2_better_colors.gif]]
+*** comment
+The markdown is here: https://tjburns08.github.io/run_gprofiler_and_embed.html
 ** [[https://www.linkedin.com/posts/tylerjburns_when-doing-exploratory-data-analysis-for-activity-7290378848502796288-TYlg?utm_source=share&utm_medium=member_desktop][How I built a LLM chatbot]]
 When doing exploratory data analysis for clients, I have to take very rigorous notes at every step, typically done with literate programming (eg. R Markdown, Jupyter notebook). Accordingly, I built out a way to run and record LLM queries and answers directly within my notebooks. Let me explain...
 
