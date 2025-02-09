@@ -3,8 +3,6 @@
 #+Date: February 9, 2025 - February 9, 2025
 #+HTML: <div id="top"></div>
 
-#+TOC: headlines 2
-
 -----
 /o sweet spontaneous/\\
 /earth how often have/\\
@@ -18,6 +16,8 @@
 
 \E. E. Cummings, /[[https://allpoetry.com/e.e.-cummings][o sweet spontaneous]]/
 -----
+
+#+TOC: headlines 2
 
 * Introduction
 LLMs in my hands are always too broad. Even the best reasoning models underwhelm me with some six bullet point answer that skips across the surface. I like rabbit holes. I like going deep. So to that end, I used the LLM command line chatbot I built (read about it [[./command_line_writeup.html][here]]) to coax a LLM into only going deeper. Think of it as depth first search in the tree of knowldge. I asked it a broad question: tell me about the nature of consciousness. But I ran a loop where the instruction was for each subsequent prompting, which takes the whole conversation as input, to take a piece of the answer and go deeper on that.
