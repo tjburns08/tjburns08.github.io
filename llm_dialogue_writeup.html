@@ -74,24 +74,24 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org8545d3d">Introduction</a></li>
-<li><a href="#org74555ce">Setting up a dialogue</a>
+<li><a href="#org5b3c0d2">Introduction</a></li>
+<li><a href="#org001b533">Setting up a dialogue</a>
 <ul>
-<li><a href="#org6123b15">The command line chatbot</a></li>
-<li><a href="#orgc791104">Aristotle chats with Socrates</a></li>
-<li><a href="#orga03a920">Jesus and Buddha (fail)</a></li>
-<li><a href="#orga421b30">Christian monk and Buddhist monk (success)</a></li>
-<li><a href="#org354a5df">Cranking creativity up to 11</a></li>
+<li><a href="#org38050f9">The command line chatbot</a></li>
+<li><a href="#org8678e51">Aristotle chats with Socrates</a></li>
+<li><a href="#org7071c00">Jesus and Buddha (fail)</a></li>
+<li><a href="#org9266da5">Christian monk and Buddhist monk (success)</a></li>
+<li><a href="#org434576a">Cranking creativity up to 11</a></li>
 </ul>
 </li>
-<li><a href="#orgec7b32f">Discussion</a></li>
+<li><a href="#orgc9ab2c4">Discussion</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-org8545d3d" class="outline-2">
-<h2 id="org8545d3d">Introduction</h2>
-<div class="outline-text-2" id="text-org8545d3d">
+<div id="outline-container-org5b3c0d2" class="outline-2">
+<h2 id="org5b3c0d2">Introduction</h2>
+<div class="outline-text-2" id="text-org5b3c0d2">
 <p>
 Plato's writings are, for the most part, dialogues between people about various topics. There are typically a number of people discussing things, and Socrates asking tough questions. I read Plato not for the conclusions that the conversants make, but rather to remind myself the importance of dialogue to really get at the tougher perennial questions around things like meaning in life, and virtue.
 </p>
@@ -117,13 +117,13 @@ Here, I will show you how to set that up, and I will then provide some examples 
 </p>
 </div>
 </div>
-<div id="outline-container-org74555ce" class="outline-2">
-<h2 id="org74555ce">Setting up a dialogue</h2>
-<div class="outline-text-2" id="text-org74555ce">
+<div id="outline-container-org001b533" class="outline-2">
+<h2 id="org001b533">Setting up a dialogue</h2>
+<div class="outline-text-2" id="text-org001b533">
 </div>
-<div id="outline-container-org6123b15" class="outline-3">
-<h3 id="org6123b15">The command line chatbot</h3>
-<div class="outline-text-3" id="text-org6123b15">
+<div id="outline-container-org38050f9" class="outline-3">
+<h3 id="org38050f9">The command line chatbot</h3>
+<div class="outline-text-3" id="text-org38050f9">
 <p>
 The methodology below builds off of a previous project where I built a command line chatbot. If you have not read my writeup on that, please go <a href="./command_line_writeup.html">here</a> and do so. To remind the reader what that looks like, I will give you the following code block and output below:
 </p>
@@ -144,9 +144,9 @@ Ok, so how do we spin up multiple chatbots? To do this, we just have to know our
 </p>
 </div>
 </div>
-<div id="outline-container-orgc791104" class="outline-3">
-<h3 id="orgc791104">Aristotle chats with Socrates</h3>
-<div class="outline-text-3" id="text-orgc791104">
+<div id="outline-container-org8678e51" class="outline-3">
+<h3 id="org8678e51">Aristotle chats with Socrates</h3>
+<div class="outline-text-3" id="text-org8678e51">
 <p>
 As I've hinted at, I've read a bit of Plato and I've read a bit of Aristotle. They have very different ways of doing things. Plato operates in terms of dialogues, and Aristotle goes out into the world and attempts to define and exhaustively categorize as many things as possible. So I decided to put the two of them in dialogue first. Below I will show you the code and the output.
 </p>
@@ -179,7 +179,7 @@ Note that I have a loop that iterates a certain number of times. This is the num
 </pre>
 </div>
 
-<pre class="example" id="org0cbdb19">
+<pre class="example" id="org023499f">
 Socrates: As Socrates, I will begin the conversation with a philosophical question:
 
 What is the nature of true wisdom, and how can one distinguish it from mere knowledge or opinion?
@@ -266,9 +266,9 @@ Nonetheless, this initial dialgoue was promosing, so I moved to a more religious
 </p>
 </div>
 </div>
-<div id="outline-container-orga03a920" class="outline-3">
-<h3 id="orga03a920">Jesus and Buddha (fail)</h3>
-<div class="outline-text-3" id="text-orga03a920">
+<div id="outline-container-org7071c00" class="outline-3">
+<h3 id="org7071c00">Jesus and Buddha (fail)</h3>
+<div class="outline-text-3" id="text-org7071c00">
 <p>
 So then I wanted to see what kind of dialectic you'd get if you had Jesus and Buddha simulacra in dialogue for some period of time. Excited, I ran the following:
 </p>
@@ -308,9 +308,9 @@ And I immediately ran into RLHF barriers. To have this dialogue, I would have to
 </p>
 </div>
 </div>
-<div id="outline-container-orga421b30" class="outline-3">
-<h3 id="orga421b30">Christian monk and Buddhist monk (success)</h3>
-<div class="outline-text-3" id="text-orga421b30">
+<div id="outline-container-org9266da5" class="outline-3">
+<h3 id="org9266da5">Christian monk and Buddhist monk (success)</h3>
+<div class="outline-text-3" id="text-org9266da5">
 <p>
 If I don't attempt to spin out simulacra of religious figures outright, then normal Claude will happily generate dialogue. The one I am showing below reveals a perticular failure mode: they get "stuck" in a single topic, which is some bulleted list of aspects of some interfaith collaboration that they agree upon. A previous run of this dialgoue, had them conclude the conversation and then collapose into "actually, I am an AI language model that is pretending to be a Christian monk&#x2026;"
 </p>
@@ -341,7 +341,7 @@ So this perhaps points to a failure mode of longer dialogues. Note that I loop i
 </pre>
 </div>
 
-<pre class="example" id="orgf3a699e">
+<pre class="example" id="org35d0629">
 Christian monk: As a Christian monk, I will begin the conversation with a philosophical question:
 
 "What is the nature of suffering, and how can we find true peace in this world?"
@@ -1915,9 +1915,9 @@ So you can see that they sort of get stuck. This would suggest that we need a wa
 </p>
 </div>
 </div>
-<div id="outline-container-org354a5df" class="outline-3">
-<h3 id="org354a5df">Cranking creativity up to 11</h3>
-<div class="outline-text-3" id="text-org354a5df">
+<div id="outline-container-org434576a" class="outline-3">
+<h3 id="org434576a">Cranking creativity up to 11</h3>
+<div class="outline-text-3" id="text-org434576a">
 <p>
 So after getting frustrated with the types of dialogue above, I decided that I would get Claude to do what it is good at doing: being creative. To this end, I crafted a prompt (with the help of LLMs actually) to get it to be maximally creative, generating ASCII art, emojis and the like. Note that this is not jailbreaking. I was just trying to get it to be more creative.
 </p>
@@ -1959,7 +1959,7 @@ Then I had two conversants discuss the nature of consciousness. What I got was&#
 </pre>
 </div>
 
-<pre class="example" id="org83b1101">
+<pre class="example" id="orgc3542a9">
 Chatbot 1: 🧠💭✨ M1nd's 3y3 🌀 unf0lds
 C0nsc10usn3ss: 🌊🔮🌌 dr3am
 (◕‿◕) S3lf observes s3lf
@@ -2526,9 +2526,9 @@ I will note that I was not blown away by insight or any of that when I read thro
 </div>
 </div>
 </div>
-<div id="outline-container-orgec7b32f" class="outline-2">
-<h2 id="orgec7b32f">Discussion</h2>
-<div class="outline-text-2" id="text-orgec7b32f">
+<div id="outline-container-orgc9ab2c4" class="outline-2">
+<h2 id="orgc9ab2c4">Discussion</h2>
+<div class="outline-text-2" id="text-orgc9ab2c4">
 <p>
 We see that it is possible to get a dialgoue between two LLMs going, whereby they are pre-prompted in a particular direction. We can see that the responses are generally on-topic and the simulacra appear to be maintained at least over several rounds. We saw a failure mode upon doing 20 rounds rather than 5, where they LLMs got "stuck" in a particular type of response. So this suggests that a dialogue of hundreds of rounds might need additional prompting to detect and break the LLMs out of getting stuck in particular topics.
 </p>
