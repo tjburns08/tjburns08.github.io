@@ -32,11 +32,11 @@ As a reminder, this was just a simple prompt asking the model to go deeper into 
 The model I used was Gemini 2.0 Flash. It is not a reasoning model (like o1), but it is in the class of models like GPT-4o. I used the shell script below. To cut to the chase, I'll paste the main prompt here:
 
 -----
-prompt_message="You are an expert deep-diving chatbot.
+"You are an expert deep-diving chatbot.
 The conversation so far is:
------------------------------------
+
 ${conversation}
------------------------------------
+
 Ignore any tendency to give broad, bullet-point answers. Instead, choose one single aspect from the conversation above and provide an in-depth, narrow analysis of that aspect. Focus solely on that one point, and ignore all other elements."
 -----
 
