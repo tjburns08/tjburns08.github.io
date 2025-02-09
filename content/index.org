@@ -15,6 +15,10 @@ This website is a place where I can openly share my ideas and non-NDA work, rega
 If you have quesitons or comments, or you're interested in working or collaborating with me, just send me a message (see contact info below). I'm always happy to help. 
 * New
 #+HTML: <a href="#top">Back to top</a>
+** [[./descent_into_madness.html][A LLM's descent into madness]]
+Article.\\
+
+At the time of writing (February 2025) I am frustrated by the best of the LLMs giving me results that are still in my opinion superficial. So I wrote a script that would prompt a LLM to give me an answer on something, and then with each iteration in a loop, take a piece of the answer and go deeper into it. I thought it would either converge upon something fundamental, or continually drift into different topics. I was wrong on both. The model eventually descended into emoji-laden verse, and then word salad, and then a sort of letter salad, where it started making up words, disregarding grammar, and so forth. Something like E. E. Cummings. I encourage the reader to try it on their machine.
 ** [[./run_gprofiler_and_embed.html][From gene lists to interactive contextual maps: enhancing g:Profiler interpretation]]
 Markdown.\\
 
