@@ -331,6 +331,11 @@ CyTOF data are transformed using the inverse hyperbolic sine (asinh) of the data
 * Natural language processing
 #+HTML: <a href="#top">Back to top</a>
 A lot of this work is related to natural language embeddings, or taking anything from words to paragraphs and converting them into spatial coordinates that group by context. My most popular work on this is summed up in The Scrolling Problem, which culminated in a TEDx Basel talk in 2023.
+** [[./descent_into_madness.html][A LLM's descent into madness]]
+Article.\\
+
+At the time of writing (February 2025) I am frustrated by the best of the LLMs giving me results that are still in my opinion superficial. So I wrote a script that would prompt a LLM to give me an answer on something, and then with each iteration in a loop, take a piece of the answer and go deeper into it. I thought it would either converge upon something fundamental, or continually drift into different topics. I was wrong on both. The model eventually descended into emoji-laden verse, and then word salad, and then a sort of letter salad, where it started making up words, disregarding grammar, and so forth. Something like E. E. Cummings. I encourage the reader to try it on their machine.
+
 ** [[./run_gprofiler_and_embed.html][From gene lists to interactive contextual maps: enhancing g:Profiler interpretation]]
 Markdown.\\
 

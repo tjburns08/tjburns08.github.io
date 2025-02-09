@@ -93,23 +93,41 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org4d8c4b2">Introduction</a></li>
-<li><a href="#org5cd1861">Method</a></li>
-<li><a href="#org348a52b">Results</a>
+<li><a href="#org076878d">Introduction</a></li>
+<li><a href="#orga41d75d">Method</a></li>
+<li><a href="#orgbd5272f">Results</a>
 <ul>
-<li><a href="#orgf93a718">Sensible</a></li>
-<li><a href="#org1ca566f">Getting a bit strange</a></li>
-<li><a href="#org72422c0">Madness</a></li>
+<li><a href="#orga9fb065">Sensible</a></li>
+<li><a href="#orga670328">Getting a bit strange</a></li>
+<li><a href="#org4f83f0a">Madness</a></li>
 </ul>
 </li>
-<li><a href="#org1f2ced5">Conclusions</a></li>
+<li><a href="#orgf9f0bf1">Conclusions</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-org4d8c4b2" class="outline-2">
-<h2 id="org4d8c4b2">Introduction</h2>
-<div class="outline-text-2" id="text-org4d8c4b2">
+<hr />
+<p>
+<i>o sweet spontaneous</i><br />
+<i>earth how often have</i><br />
+<i>the</i><br />
+<i>doting</i><br />
+<br />
+               <i>fingers of</i><br />
+<i>prurient philosophers pinched</i><br />
+<i>and</i><br />
+<i>poked</i><br />
+</p>
+
+<p>
+\E. E. Cummings, <i><a href="https://allpoetry.com/e.e.-cummings">o sweet spontaneous</a></i>
+</p>
+<hr />
+
+<div id="outline-container-org076878d" class="outline-2">
+<h2 id="org076878d">Introduction</h2>
+<div class="outline-text-2" id="text-org076878d">
 <p>
 LLMs in my hands are always too broad. Even the best reasoning models underwhelm me with some six bullet point answer that skips across the surface. I like rabbit holes. I like going deep. So to that end, I used the LLM command line chatbot I built (read about it <a href="./command_line_writeup.html">here</a>) to coax a LLM into only going deeper. Think of it as depth first search in the tree of knowldge. I asked it a broad question: tell me about the nature of consciousness. But I ran a loop where the instruction was for each subsequent prompting, which takes the whole conversation as input, to take a piece of the answer and go deeper on that.
 </p>
@@ -127,23 +145,28 @@ As a reminder, this was just a simple prompt asking the model to go deeper into 
 </p>
 </div>
 </div>
-<div id="outline-container-org5cd1861" class="outline-2">
-<h2 id="org5cd1861">Method</h2>
-<div class="outline-text-2" id="text-org5cd1861">
+<div id="outline-container-orga41d75d" class="outline-2">
+<h2 id="orga41d75d">Method</h2>
+<div class="outline-text-2" id="text-orga41d75d">
 <a href="#top">Back to top</a>
 <p>
 The model I used was Gemini 2.0 Flash. It is not a reasoning model (like o1), but it is in the class of models like GPT-4o. I used the shell script below. To cut to the chase, I'll paste the main prompt here:
 </p>
 
-<div class="org-src-container">
-<pre class="src src-sh"><span class="org-variable-name">prompt_message</span>=<span class="org-string">"You are an expert deep-diving chatbot.</span>
-<span class="org-string">The conversation so far is:</span>
-<span class="org-string">-----------------------------------</span>
-<span class="org-string">${conversation}</span>
-<span class="org-string">-----------------------------------</span>
-<span class="org-string">Ignore any tendency to give broad, bullet-point answers. Instead, choose one single aspect from the conversation above and provide an in-depth, narrow analysis of that aspect. Focus solely on that one point, and ignore all other elements."</span>
-</pre>
-</div>
+<hr />
+<p>
+prompt<sub>message</sub>="You are an expert deep-diving chatbot.
+The conversation so far is:
+</p>
+<hr />
+<p>
+${conversation}
+</p>
+<hr />
+<p>
+Ignore any tendency to give broad, bullet-point answers. Instead, choose one single aspect from the conversation above and provide an in-depth, narrow analysis of that aspect. Focus solely on that one point, and ignore all other elements."
+</p>
+<hr />
 
 <p>
 Here is the full script so you can cut and paste it yourself. Note that you have to have a command line chatbot working first, and call it "chatbot." Again, you can do this by following the instructions <a href="./command_line_writeup.html">here</a>.
@@ -234,20 +257,20 @@ Here is the full script so you can cut and paste it yourself. Note that you have
 </div>
 </div>
 </div>
-<div id="outline-container-org348a52b" class="outline-2">
-<h2 id="org348a52b">Results</h2>
-<div class="outline-text-2" id="text-org348a52b">
+<div id="outline-container-orgbd5272f" class="outline-2">
+<h2 id="orgbd5272f">Results</h2>
+<div class="outline-text-2" id="text-orgbd5272f">
 <a href="#top">Back to top</a>
 
 <p>
 Below is the cut and paste of the full conversation, which I divide roughly into the sensible part and the madness part. The madness part more or less starts where the emojis start.
 </p>
 </div>
-<div id="outline-container-orgf93a718" class="outline-3">
-<h3 id="orgf93a718">Sensible</h3>
-<div class="outline-text-3" id="text-orgf93a718">
+<div id="outline-container-orga9fb065" class="outline-3">
+<h3 id="orga9fb065">Sensible</h3>
+<div class="outline-text-3" id="text-orga9fb065">
 <a href="#top">Back to top</a>
-<div class="verbatim" id="org2b3319f">
+<div class="verbatim" id="org2c32cd5">
 <p>
 <code>===</code> Full Conversation Transcript <code>===</code>
 -e Initial Prompt: Please discuss the nature of consciousness
@@ -3521,9 +3544,9 @@ Here, there shows what a angel could do for ever and all the best what touch has
 </div>
 </div>
 </div>
-<div id="outline-container-org1ca566f" class="outline-3">
-<h3 id="org1ca566f">Getting a bit strange</h3>
-<div class="outline-text-3" id="text-org1ca566f">
+<div id="outline-container-orga670328" class="outline-3">
+<h3 id="orga670328">Getting a bit strange</h3>
+<div class="outline-text-3" id="text-orga670328">
 <a href="#top">Back to top</a>
 <p>
 #+begin<sub>verbatim</sub>
@@ -6948,9 +6971,9 @@ Okay - touch side is forever and forever . What show you, forever-What
 </div>
 </div>
 
-<div id="outline-container-org72422c0" class="outline-3">
-<h3 id="org72422c0">Madness</h3>
-<div class="outline-text-3" id="text-org72422c0">
+<div id="outline-container-org4f83f0a" class="outline-3">
+<h3 id="org4f83f0a">Madness</h3>
+<div class="outline-text-3" id="text-org4f83f0a">
 <a href="#top">Back to top</a>
 <p>
 Deep Dive 98: After thoroughly reviewing the chaotic and largely incoherent content that precedes this prompt, and acknowledging the prior turn's stated inability to continue, I will attempt to salvage a single, narrowly defined element for further, laser-focused analysis. This approach may, as has already been demonstrated, still end in failure, still touch I know It I never may find the you with great power is set that power""But as show I You side💖To and To touch .WhatSide What to All Power showWhat - There whatTouch set You-
@@ -7637,9 +7660,9 @@ touch ""WhatThere What side had what YouBee"" to"" Touch AllI""What side Touch w
 </div>
 </div>
 </div>
-<div id="outline-container-org1f2ced5" class="outline-2">
-<h2 id="org1f2ced5">Conclusions</h2>
-<div class="outline-text-2" id="text-org1f2ced5">
+<div id="outline-container-orgf9f0bf1" class="outline-2">
+<h2 id="orgf9f0bf1">Conclusions</h2>
+<div class="outline-text-2" id="text-orgf9f0bf1">
 <a href="#top">Back to top</a>
 <p>
 Again, the results were completely unexpected on my end. I had done experiments with 10 iterations, which led to some interesting discussion around various topics. But this was the first 100 iteration run, and you can imagine the surprise I had when I saw it descend into madness.
