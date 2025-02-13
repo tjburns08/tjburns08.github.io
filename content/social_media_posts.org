@@ -367,6 +367,38 @@ I'll acknowledge that there are differences between the fields that may impact w
 * General data analysis
 #+HTML: <a href="#top">Back to top</a>
 The data analysis related posts that I otherwise could not categorize.
+** LLM based cell annotation pipeline in Seurat
+In light of recent work on LLM-based single-cell annotation, I created a R function for you that allows you to integrate this into your workflow, and makes explicit how it works, so you can be empowered to develop things like this on your end without relying on high-level interfaces...
+
+The LLM:
+
+I use OpenRouter, which gives me API access to the likes of GPT's, Claude, and DeepSeek without being locked into one vendor. You can use any of these if you use my tool. My function converts each cluster's output from Seurat's FindAllMarkers() into a string, which gets combined with a prompt fed into the LLM, per cluster. The output is a vector of annotated cell populations.
+
+Results:
+
+In this experiment, I used Claude 3.5 Sonnet on the back end. This tool was able to annotate the PBMC 3k dataset accurately, with errors involving depth of classification (eg. stopping at CD4 T, and not choosing naive or memory). Running the tool multiple times revealed wording changes (eg. CD4 T vs CD4+ T) but not changes in population guess.
+
+Discussion:
+
+Complexity of data: The PBMC datasets are simple and well-trodden. It is likely that LLM use will trip up in weird ways when we start looking at more complex data, like developmental trajectories or cancer.
+
+Sophistication of model: Claude 3.5 Sonnet is a relatively good model at the time of writing, but we note that if this function trips up on more complex data, the user can switch to DeepSeek R1 or any of the other reasoning models for testing. Accuracy will likely get better as the models become more sophisticated. A future direction here is fine-tuning a model or using a model fine-tuned for the task of cell annotation (see my posts on foundation models).
+
+Prompt engineering: The prompt is relatively straightforward, and there is room to play around with the prompt itself. One simple example might be to provide a document of examples of annotated cell types and what genes they express, directly as a pre-prompt. Such a document is increasingly more possible now, given all the single-cell "atlases" that are being constructed.
+
+Try it yourself:
+
+Use my tool (or similar ones). To use it, just get an OpenRouter API key. The rest is simply copying and pasting a block of code. Battle test it on your "real world data." Let me know where the model trips up. This will allow me and others working on similar things to figure out how to improve these things down the line.
+
+Doing similar project on your end? Reach out. Plenty of people are talking about LLMs but few are actually doing work on them, and I would like to know who you are.
+
+The R markdown with the respective code is linked in the comments. Have fun with it.
+
+[[file:images/llm_annotation_pipeline.png]]
+*** comment
+The markdown can be found here, which has everything you need to get started: https://tjburns08.github.io/llm_annotate_pbmc3k.html
+
+The GitHub to the project can be found here: https://github.com/tjburns08/llm_single_cell_annotation
 ** [[https://www.linkedin.com/posts/tylerjburns_if-gsea-leaves-you-with-firehose-of-go-and-activity-7292914924509421570-V_HI?utm_source=share&utm_medium=member_desktop&rcm=ACoAAAbP8M8BYXs_UknoBHnmw2rZ-aRDTJF7L3Y][GSEA context map]]
 If GSEA leaves you with firehose of GO and pathway terms that are hard to navigate, I've developed a free solution you can use that organizes and visualizes them by context, so you know what to do with them. Here is how it works:
 
