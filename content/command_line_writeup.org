@@ -32,7 +32,9 @@ import sys
 ds = "deepseek/deepseek-r1"
 gpt3 = "openai/gpt-3.5-turbo"
 gpt4 = "openai/gpt-4o-2024-11-20"
+o3mh = "openai/o3-mini-high"
 claude = "anthropic/claude-3.5-sonnet-20240620"
+gemini = "google/gemini-2.0-flash-001"
 
 # Ensure the question is passed as a command-line argument
 if len(sys.argv) < 3:
@@ -53,8 +55,12 @@ elif model_choice == "deepseek":
     model = ds
 elif model_choice == "claude":
     model = claude
+elif model_choice == "gemini":
+    model = gemini
+elif model_choice == "o3mh":
+    model = o3mh
 else:
-    print("Invalid model choice. Please choose either 'gpt' or 'deepseek'.")
+    print("Invalid model choice.")
     sys.exit(1)
 
 
