@@ -89,9 +89,9 @@ Henry David Thoreau, <i>Walden</i>
 </p>
 <hr />
 
-<div id="outline-container-org4240e04" class="outline-2">
-<h2 id="org4240e04">Introduction</h2>
-<div class="outline-text-2" id="text-org4240e04">
+<div id="outline-container-orgcd7f374" class="outline-2">
+<h2 id="orgcd7f374">Introduction</h2>
+<div class="outline-text-2" id="text-orgcd7f374">
 <p>
 Since the end of 2022, we have been inundated with LLM chatbots in our everyday lives. The typical use involves some sort of interface that we sign into, where our previous chats can be saved, and so forth. At some point early on, these chatbots were available via API. Here, I want to show how I made a chatbot that can be called from the command line anywhere on my computer.
 </p>
@@ -105,13 +105,13 @@ In short, having LLMs available on the command line is useful, and here, I'm goi
 </p>
 </div>
 </div>
-<div id="outline-container-orgaf76918" class="outline-2">
-<h2 id="orgaf76918">The command line interface</h2>
-<div class="outline-text-2" id="text-orgaf76918">
+<div id="outline-container-orgcbb6646" class="outline-2">
+<h2 id="orgcbb6646">The command line interface</h2>
+<div class="outline-text-2" id="text-orgcbb6646">
 </div>
-<div id="outline-container-org2660d0a" class="outline-3">
-<h3 id="org2660d0a">Chatbot</h3>
-<div class="outline-text-3" id="text-org2660d0a">
+<div id="outline-container-orgb66c852" class="outline-3">
+<h3 id="orgb66c852">Chatbot</h3>
+<div class="outline-text-3" id="text-orgb66c852">
 <p>
 The first thing we have to do is make a python script where we call an API. At the time of writing <span class="timestamp-wrapper"><span class="timestamp">[2025-01-27 Mon]</span></span>, Deepseek R1 has just come out, which provides chain-of-thought reasoning (currently state of the art), the likes of GPT-o1 (currently state of the art), but for far cheaper in terms of API calls. Not to mention its open source, so it might be down the line if I get enough computational muscle, I can run it locally.
 </p>
@@ -259,9 +259,9 @@ Thus, the next section will show you how to get this running in a literate progr
 </p>
 </div>
 </div>
-<div id="outline-container-org04dfa2e" class="outline-3">
-<h3 id="org04dfa2e">Searchbot</h3>
-<div class="outline-text-3" id="text-org04dfa2e">
+<div id="outline-container-orgdd1ba06" class="outline-3">
+<h3 id="orgdd1ba06">Searchbot</h3>
+<div class="outline-text-3" id="text-orgdd1ba06">
 <p>
 If we are querying a LLM, we are often at the mercy of the cutoff of the given LLM's training data. At the time of writing <span class="timestamp-wrapper"><span class="timestamp">[2025-02-16 Sun]</span></span>, ChatGPT (as an example) has the option of incorporating internet search in a given query. However, calling LLMs from an API, as per the previous section, does not mean that you get an internet search baked in.
 </p>
@@ -352,9 +352,9 @@ You can see that it is a bit of a mess right now because I have the bot return e
 </div>
 </div>
 </div>
-<div id="outline-container-org876c939" class="outline-2">
-<h2 id="org876c939">Prompt scripting: the next level of prompt engineering</h2>
-<div class="outline-text-2" id="text-org876c939">
+<div id="outline-container-orge9a9db4" class="outline-2">
+<h2 id="orge9a9db4">Prompt scripting: the next level of prompt engineering</h2>
+<div class="outline-text-2" id="text-orge9a9db4">
 <p>
 Now that we are able to call chatbot and searchbot from the command line, we now have to talk about what is possible that otherwise cannot be done in the LLM UI/UX. Here is where knowing how to code (as opposed to knowing how to prompt LLMs to code) really comes in handy. Because to understand the next level of prompt engineering, you need to be able to think algorithmically.
 </p>
@@ -370,14 +370,21 @@ Below, we are going to use searchbot and chatbot in a simple manner. We are goin
 <div class="org-src-container">
 <pre class="src src-sh"><span class="org-builtin">source</span> ~/.zshrc
 
+<span class="org-comment-delimiter"># </span><span class="org-comment">Architecture:</span>
+<span class="org-comment-delimiter"># </span><span class="org-comment">Terminal goal: Produce a newsletter</span>
+<span class="org-comment-delimiter"># </span><span class="org-comment">(user)--[prompt]--&gt;(internet search agent)--[research notes]--&gt;(reasoning agent)--&gt; *newsletter*</span>
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">Internet searching agent produces research notes</span>
 <span class="org-variable-name">news</span>=$(searchbot <span class="org-string">"Please give me the lastest news around LLM developments. Focus on things that have happened as of February 1, 2025 and after. Use the most reputable sources possible."</span>)
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">Reasoning agent produces the newsletter</span>
 <span class="org-variable-name">newsletter</span>=$(chatbot <span class="org-string">"deepseek"</span> <span class="org-string">"You are to produce a newsletter given the latest updates around LLM developments as of February 1, 2025. A researcher, perplexity, has compiled notes for you to use. You will take these as input and produce the newsletter. Make it academic in style. Include citations as you would an academic journal, both in the report with footnotes along with a citations section. Begin with an abstract that summarizes these developments. The research notes you will use, along with sources, is here: $news"</span>)
 
 <span class="org-builtin">echo</span> <span class="org-string">"$newsletter"</span>
 </pre>
 </div>
 
-<pre class="example" id="org5986ef5">
+<pre class="example" id="orgeb4017d">
 **LLM Research Bulletin: February 2025 Advancements**
 **Volume 3, Issue 1**
 
@@ -450,9 +457,15 @@ I'd like to show you one more thing you can do when you start thinking in terms 
 <div class="org-src-container">
 <pre class="src src-sh"><span class="org-builtin">source</span> ~/.zshrc
 
-<span class="org-variable-name">cmd</span>=$(chatbot <span class="org-string">"claude"</span> <span class="org-string">"Please produce a shell command to give me today's date and time. Just produce the command. Do not produce anything else."</span>)
+<span class="org-comment-delimiter"># </span><span class="org-comment">Architecture:</span>
+<span class="org-comment-delimiter"># </span><span class="org-comment">Terminal goal: execute code based on the user's natural language query</span>
+<span class="org-comment-delimiter"># </span><span class="org-comment">(user)--[prompt]--&gt;(code producing agent)--[code]--&gt;(code executing agent)--&gt; *code output*</span>
 
+<span class="org-comment-delimiter"># </span><span class="org-comment">Make the code</span>
+<span class="org-variable-name">cmd</span>=$(chatbot <span class="org-string">"claude"</span> <span class="org-string">"Please produce a shell command to give me today's date and time. Just produce the command. Do not produce anything else."</span>)
 <span class="org-builtin">echo</span> <span class="org-string">"$cmd"</span>
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">Execute the code (rather than copy/paste)</span>
 <span class="org-builtin">eval</span> <span class="org-string">"$cmd"</span>
 </pre>
 </div>
@@ -476,13 +489,13 @@ We will now move to the related topic of how to get these commands working in a 
 </p>
 </div>
 </div>
-<div id="outline-container-org8bac163" class="outline-2">
-<h2 id="org8bac163">The literate programming environment</h2>
-<div class="outline-text-2" id="text-org8bac163">
+<div id="outline-container-org2ece5d2" class="outline-2">
+<h2 id="org2ece5d2">The literate programming environment</h2>
+<div class="outline-text-2" id="text-org2ece5d2">
 </div>
-<div id="outline-container-orgb3a0125" class="outline-3">
-<h3 id="orgb3a0125">R Markdown and Jupyter Notebooks</h3>
-<div class="outline-text-3" id="text-orgb3a0125">
+<div id="outline-container-org1a1f134" class="outline-3">
+<h3 id="org1a1f134">R Markdown and Jupyter Notebooks</h3>
+<div class="outline-text-3" id="text-org1a1f134">
 <p>
 The spoiler alert upfront is that in order to use the new script in a literate programming environment, you just have to get it to execute shell scripts. In R Markdown, there is an option to run bash. Jupyter notebooks have <a href="https://github.com/dahn-zk/zsh-jupyter-kernel">options</a> as well. One of the key things that I've had to do to get the literate programming environment to recognize the script, is in every code block where I run it, I have to source my zshrc file. Like this:
 </p>
@@ -503,9 +516,9 @@ Maybe you won't have this problem, but if you do, that is how you get around it.
 </p>
 </div>
 </div>
-<div id="outline-container-org534bef2" class="outline-3">
-<h3 id="org534bef2">Emacs Org-Mode</h3>
-<div class="outline-text-3" id="text-org534bef2">
+<div id="outline-container-org4c50357" class="outline-3">
+<h3 id="org4c50357">Emacs Org-Mode</h3>
+<div class="outline-text-3" id="text-org4c50357">
 <p>
 Now this section is for Emacs users who use org mode. This is the literate programming environment that I prefer, and I am writing this article directly in it. I am specifically using <a href="https://orgmode.org/worg/org-contrib/babel/">Babel</a> which allows for active code use in Org. This comes with Doom Emacs (I'm currently using this) and Spacemacs (I started with this).
 </p>
@@ -553,9 +566,9 @@ You'll see that there is an unnecessary line that sits between the chatbot call 
 </div>
 </div>
 </div>
-<div id="outline-container-orga71f593" class="outline-2">
-<h2 id="orga71f593">Discussion</h2>
-<div class="outline-text-2" id="text-orga71f593">
+<div id="outline-container-org1d516e8" class="outline-2">
+<h2 id="org1d516e8">Discussion</h2>
+<div class="outline-text-2" id="text-org1d516e8">
 <p>
 Since I made this command line cool and figured how to use it in a literate programming context, it has increased my productivity especially in the contexts of my German learning (I am American living in Berlin), and my research work. The more general theme is that I write prolifically in my literate programming environment (Org-Mode), and now I can get direct feedback from LLMs directly within this environment.
 </p>
