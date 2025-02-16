@@ -31,6 +31,15 @@
     .toggle-theme-btn:hover {
       opacity: 0.4;
     }
+
+  /* Code block wrapping: experiment */
+    pre, code {
+      white-space: pre-wrap;
+      white-space: -moz-pre-wrap;
+      white-space: -pre-wrap;
+      white-space: -o-pre-wrap;
+      word-wrap: break-word;
+    }
 </style>
 <script>
  function toggleDarkMode() {
@@ -80,9 +89,9 @@ Lewis Carroll, Alice's Adventures in Wonderland
 </p>
 <hr />
 
-<div id="outline-container-orgde6ce1c" class="outline-2">
-<h2 id="orgde6ce1c">From R to S</h2>
-<div class="outline-text-2" id="text-orgde6ce1c">
+<div id="outline-container-orgdf485cc" class="outline-2">
+<h2 id="orgdf485cc">From R to S</h2>
+<div class="outline-text-2" id="text-orgdf485cc">
 <p>
 What happens under the hood when we do simple arithmetic in R? Let's begin with a simple expression. Adding two numbers together.
 </p>
@@ -202,9 +211,9 @@ So now you can see objectively that R's arithmetic is using S-expressions, the w
 </div>
 </div>
 
-<div id="outline-container-orgb963a83" class="outline-2">
-<h2 id="orgb963a83">From S to C</h2>
-<div class="outline-text-2" id="text-orgb963a83">
+<div id="outline-container-orgfbf4f79" class="outline-2">
+<h2 id="orgfbf4f79">From S to C</h2>
+<div class="outline-text-2" id="text-orgfbf4f79">
 <p>
 Ok, this is all well and good, but how do I know that R specifically has S-expressions in mind? In order to answer that, we can download the <a href="https://cran.r-project.org/src/base/R-4/">source code</a> of the R programming language and have a look at it. We can see if any S-expressions are explicitly declared here. Below is the source code from R 4.4.0.
 </p>
@@ -302,9 +311,9 @@ Where you can see that "+" is PLUSOP, where x1 + x2 is defined.
 </div>
 </div>
 
-<div id="outline-container-orgfdcf314" class="outline-2">
-<h2 id="orgfdcf314">From C to Assembly</h2>
-<div class="outline-text-2" id="text-orgfdcf314">
+<div id="outline-container-orgd183cd0" class="outline-2">
+<h2 id="orgd183cd0">From C to Assembly</h2>
+<div class="outline-text-2" id="text-orgd183cd0">
 <p>
 So we started with 5 + 2 and now we are looking at an obscure switch statement in C. But if it is written in C, that means it is indirectly written in something deeper: machine code.
 </p>
@@ -476,9 +485,9 @@ Another important thing is that within this recipe, while there are a number of 
 </div>
 </div>
 
-<div id="outline-container-orge20788e" class="outline-2">
-<h2 id="orge20788e">Conclusion</h2>
-<div class="outline-text-2" id="text-orge20788e">
+<div id="outline-container-org821dd14" class="outline-2">
+<h2 id="org821dd14">Conclusion</h2>
+<div class="outline-text-2" id="text-org821dd14">
 <p>
 Ok, let's go back to familiarity now.
 </p>

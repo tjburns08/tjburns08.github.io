@@ -31,6 +31,15 @@
     .toggle-theme-btn:hover {
       opacity: 0.4;
     }
+
+  /* Code block wrapping: experiment */
+    pre, code {
+      white-space: pre-wrap;
+      white-space: -moz-pre-wrap;
+      white-space: -pre-wrap;
+      white-space: -o-pre-wrap;
+      word-wrap: break-word;
+    }
 </style>
 <script>
  function toggleDarkMode() {
@@ -80,9 +89,9 @@ Henry David Thoreau, <i>Walden</i>
 </p>
 <hr />
 
-<div id="outline-container-orgb840617" class="outline-2">
-<h2 id="orgb840617">Introduction</h2>
-<div class="outline-text-2" id="text-orgb840617">
+<div id="outline-container-org4240e04" class="outline-2">
+<h2 id="org4240e04">Introduction</h2>
+<div class="outline-text-2" id="text-org4240e04">
 <p>
 Since the end of 2022, we have been inundated with LLM chatbots in our everyday lives. The typical use involves some sort of interface that we sign into, where our previous chats can be saved, and so forth. At some point early on, these chatbots were available via API. Here, I want to show how I made a chatbot that can be called from the command line anywhere on my computer.
 </p>
@@ -96,13 +105,13 @@ In short, having LLMs available on the command line is useful, and here, I'm goi
 </p>
 </div>
 </div>
-<div id="outline-container-org0286963" class="outline-2">
-<h2 id="org0286963">The command line interface</h2>
-<div class="outline-text-2" id="text-org0286963">
+<div id="outline-container-orgaf76918" class="outline-2">
+<h2 id="orgaf76918">The command line interface</h2>
+<div class="outline-text-2" id="text-orgaf76918">
 </div>
-<div id="outline-container-org4d5ff6b" class="outline-3">
-<h3 id="org4d5ff6b">chatbot</h3>
-<div class="outline-text-3" id="text-org4d5ff6b">
+<div id="outline-container-org2660d0a" class="outline-3">
+<h3 id="org2660d0a">Chatbot</h3>
+<div class="outline-text-3" id="text-org2660d0a">
 <p>
 The first thing we have to do is make a python script where we call an API. At the time of writing <span class="timestamp-wrapper"><span class="timestamp">[2025-01-27 Mon]</span></span>, Deepseek R1 has just come out, which provides chain-of-thought reasoning (currently state of the art), the likes of GPT-o1 (currently state of the art), but for far cheaper in terms of API calls. Not to mention its open source, so it might be down the line if I get enough computational muscle, I can run it locally.
 </p>
@@ -250,9 +259,9 @@ Thus, the next section will show you how to get this running in a literate progr
 </p>
 </div>
 </div>
-<div id="outline-container-org29e67ce" class="outline-3">
-<h3 id="org29e67ce">searchbot</h3>
-<div class="outline-text-3" id="text-org29e67ce">
+<div id="outline-container-org04dfa2e" class="outline-3">
+<h3 id="org04dfa2e">Searchbot</h3>
+<div class="outline-text-3" id="text-org04dfa2e">
 <p>
 If we are querying a LLM, we are often at the mercy of the cutoff of the given LLM's training data. At the time of writing <span class="timestamp-wrapper"><span class="timestamp">[2025-02-16 Sun]</span></span>, ChatGPT (as an example) has the option of incorporating internet search in a given query. However, calling LLMs from an API, as per the previous section, does not mean that you get an internet search baked in.
 </p>
@@ -332,15 +341,20 @@ searchbot <span class="org-string">"What is the latest news around Open AI's pot
 </pre>
 </div>
 
+<pre class="example">
+ChatCompletion(id='5963f9db-5ca6-430a-a3ff-4cb9281df979', choices=[Choice(finish_reason='stop', index=0, logprobs=None, message=ChatCompletionMessage(content='OpenAI has recently announced plans to release GPT-4.5 and GPT-5 in the near future. According to CEO Sam Altman\'s statements on February 12, 2025, GPT-4.5 is expected to launch within weeks, while GPT-5 is slated for release within months[1][3].\n\nKey points about the upcoming releases include:\n\n1. GPT-4.5, internally called "Orion," will be OpenAI\'s last non-chain-of-thought model[1][5]. This suggests a significant shift in AI capabilities moving forward.\n\n2. GPT-5 will integrate various technologies, including the previously planned o3 model, which will no longer be released as a standalone product[1][5].\n\n3. OpenAI aims to simplify its product offerings, creating a more unified AI experience that "just works" for users without requiring them to choose between different models[1][5].\n\n4. Free users of ChatGPT will have unlimited access to GPT-5 at a standard intelligence setting, while Plus and Pro subscribers will have access to higher intelligence levels[1][5].\n\n5. GPT-5 is expected to incorporate advanced features such as improved reasoning capabilities, multimodal understanding (text, image, audio, video), and enhanced customization options[4].\n\n6. The release of these models reflects OpenAI\'s strategy to maintain its competitive edge in the AI industry, particularly in light of advancements from other companies like China\'s DeepSeek[5].\n\nIt\'s important to note that while these announcements have generated significant excitement, specific details about the capabilities and exact release dates of GPT-4.5 and GPT-5 remain limited. As with previous releases, OpenAI is likely to prioritize safety testing and responsible deployment of these new models[4].', refusal=None, role='assistant', audio=None, function_call=None, tool_calls=None), delta={'role': 'assistant', 'content': ''})], created=1739693949, model='sonar-pro', object='chat.completion', service_tier=None, system_fingerprint=None, usage=CompletionUsage(completion_tokens=409, prompt_tokens=40, total_tokens=449, completion_tokens_details=None, prompt_tokens_details=None, citation_tokens=5566, num_search_queries=1), citations=['https://www.pymnts.com/artificial-intelligence-2/2025/openai-to-release-gpt-4-5-within-weeks-gpt-5-within-months/', 'https://opentools.ai/news/openai-unleashes-gpt-5-with-free-unlimited-access-for-all', 'https://www.axios.com/2025/02/12/openai-chatgpt-roadmap-gpt5', 'https://www.chatbase.co/blog/gpt-5', 'https://www.maginative.com/article/gpt-5-is-the-omnimodel-weve-been-waiting-for-heres-why/', 'https://lonelybrand.com/blog/openai-unveils-development-plan-for-gpt-4-5-and-gpt-5-launch/', 'https://www.youtube.com/watch?v=KtwK3hBAjDY', 'https://pylessons.com/news/openai-gpt-4-5-gpt-5-release-update', 'https://topmostads.com/gpt-4-5-vs-gpt-5-release/', 'https://community.openai.com/t/openai-roadmap-and-characters/1119160'])
+</pre>
+
+
 <p>
 You can see that it is a bit of a mess right now because I have the bot return everything. As of now, I use these search results to feed back into the chatbots to produce reports. I'll explain in the next section.
 </p>
 </div>
 </div>
 </div>
-<div id="outline-container-org11e9db4" class="outline-2">
-<h2 id="org11e9db4">Prompt scripting: the next level of prompt engineering</h2>
-<div class="outline-text-2" id="text-org11e9db4">
+<div id="outline-container-org876c939" class="outline-2">
+<h2 id="org876c939">Prompt scripting: the next level of prompt engineering</h2>
+<div class="outline-text-2" id="text-org876c939">
 <p>
 Now that we are able to call chatbot and searchbot from the command line, we now have to talk about what is possible that otherwise cannot be done in the LLM UI/UX. Here is where knowing how to code (as opposed to knowing how to prompt LLMs to code) really comes in handy. Because to understand the next level of prompt engineering, you need to be able to think algorithmically.
 </p>
@@ -363,6 +377,68 @@ Below, we are going to use searchbot and chatbot in a simple manner. We are goin
 </pre>
 </div>
 
+<pre class="example" id="org5986ef5">
+**LLM Research Bulletin: February 2025 Advancements**
+**Volume 3, Issue 1**
+
+---
+
+### Abstract
+Recent advancements in large language models (LLMs) underscore rapid progress in computational efficiency, domain specialization, and multilingual capabilities. This bulletin examines four pivotal releases: DeepSeek R1 (January 2025), Rakuten AI 2.0 and 2.0 mini (February 2025), Qwen2.5-Max (January 2025), and EXAONE 3.0 (December 2024). These models emphasize parameter efficiency, cost-effective training, and task-specific optimization, with notable applications in mathematics, coding, cross-lingual generation, and edge-device deployment. Innovations include hybrid architectures like mixture-of-experts (MoE), reduced inference costs, and open-source availability, reflecting broader industry trends toward scalable, domain-adaptive AI systems[1,5,9].
+
+---
+
+### Introduction
+The first quarter of 2025 has witnessed significant strides in LLM development, driven by demand for specialized performance and operational efficiency. Key themes include competitive benchmarking in STEM tasks, multilingual model diversification, and hardware-optimized deployment. This bulletin synthesizes technical specifications, benchmark outcomes, and strategic implications of four leading models, contextualized within the evolving LLM research landscape.
+
+---
+
+### Model Overviews
+
+#### **DeepSeek R1**
+Released in January 2025, DeepSeek R1 combines a 671-billion-parameter total architecture with 37 billion active parameters per inference, leveraging dynamic sparse activation[1]. The model achieves state-of-the-art performance on MATH-500 (85.3% accuracy) and AIME 2024 (72.1%), surpassing equivalent OpenAI models in arithmetic reasoning and code synthesis[1]. Notably, its training cost—reported at $8.2 million—represents a 40% reduction compared to similarly sized predecessors[1]. Open-source availability under the Apache-2.0 license has accelerated community-driven fine-tuning efforts, particularly in educational applications[4].
+
+#### **Rakuten AI 2.0 Series**
+Rakuten AI 2.0, launched February 12, 2025, is Japan’s first MoE-style LLM, integrating eight 7-billion-parameter expert networks[5]. Specialized for low-resource language processing, it achieves a 3.8% perplexity reduction over GPT-4 Turbo in Japanese-to-English translation tasks[5]. The companion model, Rakuten AI 2.0 mini (1.5B dense parameters), targets edge-device deployment, sustaining 30 tokens/second on consumer-grade GPUs while retaining 92% of 2.0’s accuracy in summarization benchmarks[5].
+
+#### **Alibaba Qwen2.5-Max**
+Qwen2.5-Max (January 2025) focuses on latency-sensitive applications, excelling in GPQA-Diamond (89.7%) and LiveCodeBench (94.3%)[9]. Though parameter counts remain undisclosed, Alibaba reports a 55% inference speed improvement over Qwen2.0, attributed to tensor parallelism optimizations[9]. Industry adopters highlight its utility in real-time fraud detection and high-frequency trading systems, where sub-200ms response times are critical[9].
+
+#### **LG EXAONE 3.0**
+Debuting in December 2024, EXAONE 3.0 (7.8B parameters) supports Korean and English, specializing in technical domains like patent analysis and chemical synthesis[9]. Its “layer pruning” algorithm reduces memory usage by 44% during inference, enabling cost-effective deployment in industrial R&amp;D pipelines[9]. Benchmark results include a 91.5% F1 score on organic reaction prediction (USPTO-2023) and 83.4% accuracy on semiconductor patent prior-art retrieval[9].
+
+---
+
+### Comparative Analysis
+1. **Architectural Trends**: MoE adoption (e.g., Rakuten AI 2.0) highlights trade-offs between computational cost and task specificity, whereas dense models (Qwen2.5-Max) prioritize determinism for latency-critical use cases[5,9].
+2. **Efficiency Metrics**: Collective emphasis on reducing training/inference costs—seen in DeepSeek’s sparse activation and EXAONE’s layer pruning—reflects industry prioritization of ROI over sheer parameter scale[1,9].
+3. **Edge Deployment**: Rakuten AI 2.0 mini and Qwen2.5-Max signal growing investment in decentralized AI, circumventing cloud dependency for privacy-sensitive applications[5,9].
+
+---
+
+### Future Directions
+1. **Dynamic MoE Routing**: Improving expert-network selection via reinforcement learning.
+2. **Cross-Modal Integration**: Expanding LLM utility through unified text-code-molecule frameworks (e.g., EXAONE’s chemistry extensions).
+3. **Regulatory Adaptation**: Addressing compliance challenges as open-source models (DeepSeek R1) proliferate in sensitive sectors[1,2].
+
+---
+
+### Conclusion
+2025’s early LLM advancements reveal a maturation focus: optimizing existing paradigms rather than scaling parameters. Innovations in efficiency, language/code specialization, and decentralized deployment are poised to drive commercial adoption across education, finance, and R&amp;D sectors.
+
+---
+
+### Citations
+1. “Top Emerging Large Language Models (LLMs) 2025,” *Exploding Topics*, 2025. Available: https://explodingtopics.com/blog/list-of-llms
+5. “Rakuten AI 2.0 Release Announcement,” *Rakuten Group Press Release*, Feb. 12, 2025. Available: https://global.rakuten.com/corp/news/press/2025/0212_02.html
+9. “2025 LLM Technical Review: Performance and Applications,” *Shakudo Blog*, 2025. Available: https://www.shakudo.io/blog/top-9-large-language-models
+4. “DeepSeek Architecture and Cost Analysis,” *TechTarget*, 2025. Available: https://www.techtarget.com/whatis/feature/DeepSeek-explained-Everything-you-need-to-know
+2. “2025 AI Regulation Forecast,” *National Law Review*, 2025. Available: https://natlawreview.com/article/what-expect-2025-ai-legal-tech-and-regulation-65-expert-predictions
+
+---
+*Prepared by the LLM Research Bulletin editorial team. For inquiries, contact research@llm-bulletin.ai.*
+</pre>
+
 <p>
 You get the picture. Here, I had the overall goal of making a newsletter. To this end, I set up an "agent" to do internet search and prepare research notes that would in turn be used by a reasoning model to turn it into an academic style newsletter. This is a very simple version of this, and I note that if you really read the output, it is informative but not perfect. Further improvements could be made on the prompt, or adding additional agents to do more research, edit the report, check for errors, and so forth. But I'll leave additional layers of complexity as an exercise to the reader.
 </p>
@@ -381,6 +457,12 @@ I'd like to show you one more thing you can do when you start thinking in terms 
 </pre>
 </div>
 
+<pre class="example">
+date
+Sun Feb 16 10:05:20 CET 2025
+</pre>
+
+
 <p>
 In the case of shell scripting, you simply use the "eval" command to run any code passed into it as a string, which is what I can get the chatbot to do.
 </p>
@@ -394,13 +476,13 @@ We will now move to the related topic of how to get these commands working in a 
 </p>
 </div>
 </div>
-<div id="outline-container-org4bd06d5" class="outline-2">
-<h2 id="org4bd06d5">The literate programming environment</h2>
-<div class="outline-text-2" id="text-org4bd06d5">
+<div id="outline-container-org8bac163" class="outline-2">
+<h2 id="org8bac163">The literate programming environment</h2>
+<div class="outline-text-2" id="text-org8bac163">
 </div>
-<div id="outline-container-org7eba3e5" class="outline-3">
-<h3 id="org7eba3e5">R Markdown and Jupyter Notebooks</h3>
-<div class="outline-text-3" id="text-org7eba3e5">
+<div id="outline-container-orgb3a0125" class="outline-3">
+<h3 id="orgb3a0125">R Markdown and Jupyter Notebooks</h3>
+<div class="outline-text-3" id="text-orgb3a0125">
 <p>
 The spoiler alert upfront is that in order to use the new script in a literate programming environment, you just have to get it to execute shell scripts. In R Markdown, there is an option to run bash. Jupyter notebooks have <a href="https://github.com/dahn-zk/zsh-jupyter-kernel">options</a> as well. One of the key things that I've had to do to get the literate programming environment to recognize the script, is in every code block where I run it, I have to source my zshrc file. Like this:
 </p>
@@ -421,9 +503,9 @@ Maybe you won't have this problem, but if you do, that is how you get around it.
 </p>
 </div>
 </div>
-<div id="outline-container-orgd76b774" class="outline-3">
-<h3 id="orgd76b774">Emacs Org-Mode</h3>
-<div class="outline-text-3" id="text-orgd76b774">
+<div id="outline-container-org534bef2" class="outline-3">
+<h3 id="org534bef2">Emacs Org-Mode</h3>
+<div class="outline-text-3" id="text-org534bef2">
 <p>
 Now this section is for Emacs users who use org mode. This is the literate programming environment that I prefer, and I am writing this article directly in it. I am specifically using <a href="https://orgmode.org/worg/org-contrib/babel/">Babel</a> which allows for active code use in Org. This comes with Doom Emacs (I'm currently using this) and Spacemacs (I started with this).
 </p>
@@ -471,9 +553,9 @@ You'll see that there is an unnecessary line that sits between the chatbot call 
 </div>
 </div>
 </div>
-<div id="outline-container-orgeaf1952" class="outline-2">
-<h2 id="orgeaf1952">Discussion</h2>
-<div class="outline-text-2" id="text-orgeaf1952">
+<div id="outline-container-orga71f593" class="outline-2">
+<h2 id="orga71f593">Discussion</h2>
+<div class="outline-text-2" id="text-orga71f593">
 <p>
 Since I made this command line cool and figured how to use it in a literate programming context, it has increased my productivity especially in the contexts of my German learning (I am American living in Berlin), and my research work. The more general theme is that I write prolifically in my literate programming environment (Org-Mode), and now I can get direct feedback from LLMs directly within this environment.
 </p>

@@ -205,7 +205,14 @@ Below, we are going to use searchbot and chatbot in a simple manner. We are goin
 #+begin_src sh :results output :exports both
 source ~/.zshrc
 
+# Architecture:
+# Terminal goal: Produce a newsletter
+# (user)--[prompt]-->(internet search agent)--[research notes]-->(reasoning agent)--> *newsletter*
+
+# Internet searching agent produces research notes
 news=$(searchbot "Please give me the lastest news around LLM developments. Focus on things that have happened as of February 1, 2025 and after. Use the most reputable sources possible.")
+
+# Reasoning agent produces the newsletter
 newsletter=$(chatbot "deepseek" "You are to produce a newsletter given the latest updates around LLM developments as of February 1, 2025. A researcher, perplexity, has compiled notes for you to use. You will take these as input and produce the newsletter. Make it academic in style. Include citations as you would an academic journal, both in the report with footnotes along with a citations section. Begin with an abstract that summarizes these developments. The research notes you will use, along with sources, is here: $news")
 
 echo "$newsletter"
@@ -281,9 +288,15 @@ I'd like to show you one more thing you can do when you start thinking in terms 
 #+begin_src sh :results output :exports both
 source ~/.zshrc
 
-cmd=$(chatbot "claude" "Please produce a shell command to give me today's date and time. Just produce the command. Do not produce anything else.")
+# Architecture:
+# Terminal goal: execute code based on the user's natural language query
+# (user)--[prompt]-->(code producing agent)--[code]-->(code executing agent)--> *code output*
 
+# Make the code
+cmd=$(chatbot "claude" "Please produce a shell command to give me today's date and time. Just produce the command. Do not produce anything else.")
 echo "$cmd"
+
+# Execute the code (rather than copy/paste)
 eval "$cmd"
 #+end_src
 
