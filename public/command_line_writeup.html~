@@ -89,9 +89,9 @@ Henry David Thoreau, <i>Walden</i>
 </p>
 <hr />
 
-<div id="outline-container-orgcd7f374" class="outline-2">
-<h2 id="orgcd7f374">Introduction</h2>
-<div class="outline-text-2" id="text-orgcd7f374">
+<div id="outline-container-org43bc2a6" class="outline-2">
+<h2 id="org43bc2a6">Introduction</h2>
+<div class="outline-text-2" id="text-org43bc2a6">
 <p>
 Since the end of 2022, we have been inundated with LLM chatbots in our everyday lives. The typical use involves some sort of interface that we sign into, where our previous chats can be saved, and so forth. At some point early on, these chatbots were available via API. Here, I want to show how I made a chatbot that can be called from the command line anywhere on my computer.
 </p>
@@ -105,13 +105,13 @@ In short, having LLMs available on the command line is useful, and here, I'm goi
 </p>
 </div>
 </div>
-<div id="outline-container-orgcbb6646" class="outline-2">
-<h2 id="orgcbb6646">The command line interface</h2>
-<div class="outline-text-2" id="text-orgcbb6646">
+<div id="outline-container-org8c6be1a" class="outline-2">
+<h2 id="org8c6be1a">The command line interface</h2>
+<div class="outline-text-2" id="text-org8c6be1a">
 </div>
-<div id="outline-container-orgb66c852" class="outline-3">
-<h3 id="orgb66c852">Chatbot</h3>
-<div class="outline-text-3" id="text-orgb66c852">
+<div id="outline-container-orgc3589ea" class="outline-3">
+<h3 id="orgc3589ea">Chatbot</h3>
+<div class="outline-text-3" id="text-orgc3589ea">
 <p>
 The first thing we have to do is make a python script where we call an API. At the time of writing <span class="timestamp-wrapper"><span class="timestamp">[2025-01-27 Mon]</span></span>, Deepseek R1 has just come out, which provides chain-of-thought reasoning (currently state of the art), the likes of GPT-o1 (currently state of the art), but for far cheaper in terms of API calls. Not to mention its open source, so it might be down the line if I get enough computational muscle, I can run it locally.
 </p>
@@ -259,15 +259,19 @@ Thus, the next section will show you how to get this running in a literate progr
 </p>
 </div>
 </div>
-<div id="outline-container-orgdd1ba06" class="outline-3">
-<h3 id="orgdd1ba06">Searchbot</h3>
-<div class="outline-text-3" id="text-orgdd1ba06">
+<div id="outline-container-org6430b73" class="outline-3">
+<h3 id="org6430b73">Searchbot</h3>
+<div class="outline-text-3" id="text-org6430b73">
 <p>
 If we are querying a LLM, we are often at the mercy of the cutoff of the given LLM's training data. At the time of writing <span class="timestamp-wrapper"><span class="timestamp">[2025-02-16 Sun]</span></span>, ChatGPT (as an example) has the option of incorporating internet search in a given query. However, calling LLMs from an API, as per the previous section, does not mean that you get an internet search baked in.
 </p>
 
 <p>
-To this end, I created searchbot. Using the same concept as "chatbot" in the previous section, I wrote a script that queries the API to perplexity. This tool was one of the first LLMs that integrated these models with an internet search. If you want to have "searchbot" in your command line, first go to <a href="https://docs.perplexity.ai/api-reference/chat-completions">perplexity</a> and get an API key. Then, please create a script called searchbot.py which has the following code pasted into it:
+To this end, I created searchbot. Using the same concept as "chatbot" in the previous section, I wrote a script that queries the API to perplexity. This tool was one of the first LLMs that integrated these models with an internet search. If you want to have "searchbot" in your command line, you have to first make an account with Perplexity. After you do that, go to their "getting started" page <a href="https://docs.perplexity.ai/guides/getting-started">here</a>, where you will learn how to get an API key and enter payment details, a similar process to that of OpenRouter above in the previous section. And as before, you will then be able to add credits that can be used, measured in dollars. Once you run out of credits, you won't be able to use the API until you add more (and you'll get an error message saying that you're out of credits).
+</p>
+
+<p>
+Anyway, after all of this, please create a script called searchbot.py which has the following code pasted into it:
 </p>
 
 <div class="org-src-container">
@@ -352,9 +356,9 @@ You can see that it is a bit of a mess right now because I have the bot return e
 </div>
 </div>
 </div>
-<div id="outline-container-orge9a9db4" class="outline-2">
-<h2 id="orge9a9db4">Prompt scripting: the next level of prompt engineering</h2>
-<div class="outline-text-2" id="text-orge9a9db4">
+<div id="outline-container-org1e3d75e" class="outline-2">
+<h2 id="org1e3d75e">Prompt scripting: the next level of prompt engineering</h2>
+<div class="outline-text-2" id="text-org1e3d75e">
 <p>
 Now that we are able to call chatbot and searchbot from the command line, we now have to talk about what is possible that otherwise cannot be done in the LLM UI/UX. Here is where knowing how to code (as opposed to knowing how to prompt LLMs to code) really comes in handy. Because to understand the next level of prompt engineering, you need to be able to think algorithmically.
 </p>
@@ -374,76 +378,58 @@ Below, we are going to use searchbot and chatbot in a simple manner. We are goin
 <span class="org-comment-delimiter"># </span><span class="org-comment">Terminal goal: Produce a newsletter</span>
 <span class="org-comment-delimiter"># </span><span class="org-comment">(user)--[prompt]--&gt;(internet search agent)--[research notes]--&gt;(reasoning agent)--&gt; *newsletter*</span>
 
+<span class="org-comment-delimiter"># </span><span class="org-comment">Setting the search prompt</span>
+<span class="org-variable-name">search_prompt</span>=<span class="org-string">"Please give me the lastest news around LLM developments. Focus on things that have happened as of February 1, 2025 and after. Use the most reputable sources possible."</span>
+
 <span class="org-comment-delimiter"># </span><span class="org-comment">Internet searching agent produces research notes</span>
-<span class="org-variable-name">news</span>=$(searchbot <span class="org-string">"Please give me the lastest news around LLM developments. Focus on things that have happened as of February 1, 2025 and after. Use the most reputable sources possible."</span>)
+<span class="org-variable-name">news</span>=$(searchbot <span class="org-string">"$search_prompt"</span>)
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">Setting the newsletter prompt</span>
+<span class="org-variable-name">newsletter_prompt</span>=<span class="org-string">"You are to produce a newsletter given the latest updates around LLM developments as of February 1, 2025. A researcher, perplexity, has compiled notes for you to use. You will take these as input and produce the newsletter. Make it academic in style. Include citations as you would an academic journal, both in the report with footnotes along with a citations section. Begin with an abstract that summarizes these developments. The research notes you will use, along with sources, is here: $news"</span>
 
 <span class="org-comment-delimiter"># </span><span class="org-comment">Reasoning agent produces the newsletter</span>
-<span class="org-variable-name">newsletter</span>=$(chatbot <span class="org-string">"deepseek"</span> <span class="org-string">"You are to produce a newsletter given the latest updates around LLM developments as of February 1, 2025. A researcher, perplexity, has compiled notes for you to use. You will take these as input and produce the newsletter. Make it academic in style. Include citations as you would an academic journal, both in the report with footnotes along with a citations section. Begin with an abstract that summarizes these developments. The research notes you will use, along with sources, is here: $news"</span>)
+<span class="org-variable-name">newsletter</span>=$(chatbot <span class="org-string">"deepseek"</span> <span class="org-string">"$newsletter_prompt"</span>)
 
 <span class="org-builtin">echo</span> <span class="org-string">"$newsletter"</span>
 </pre>
 </div>
 
-<pre class="example" id="orgeb4017d">
-**LLM Research Bulletin: February 2025 Advancements**
-**Volume 3, Issue 1**
+<pre class="example" id="orgb388ecf">
+**Abstract**
+The field of Large Language Models (LLMs) has witnessed significant advancements as of February 2025, marked by innovations in architecture, efficiency, and specialization. Highlights include DeepSeek R1, a cost-efficient open-source model excelling in mathematical and coding tasks; Rakuten AI 2.0, Japan’s first MoE-based bilingual model optimized for edge deployment; and Google’s Gemini 1.5, which features an unprecedented one million-token context window. Concurrently, Alibaba’s Qwen2.5-Max demonstrates superior benchmark performance, while LG AI Research’s EXAONE 3.0 advances multilingual and domain-specific applications. These developments reflect a broader trend toward scalability, accessibility, and task-specific optimization in LLM research[1][5][9].
 
 ---
 
-### Abstract
-Recent advancements in large language models (LLMs) underscore rapid progress in computational efficiency, domain specialization, and multilingual capabilities. This bulletin examines four pivotal releases: DeepSeek R1 (January 2025), Rakuten AI 2.0 and 2.0 mini (February 2025), Qwen2.5-Max (January 2025), and EXAONE 3.0 (December 2024). These models emphasize parameter efficiency, cost-effective training, and task-specific optimization, with notable applications in mathematics, coding, cross-lingual generation, and edge-device deployment. Innovations include hybrid architectures like mixture-of-experts (MoE), reduced inference costs, and open-source availability, reflecting broader industry trends toward scalable, domain-adaptive AI systems[1,5,9].
+**Key Developments in LLM Technology (2024–2025)**
+
+**1. DeepSeek R1: Open-Source Efficiency with Narrowed Specialization**
+Released in January 2025, DeepSeek R1 represents a breakthrough in parameter-efficient training. With 671 billion total parameters and 37 billion active parameters, it matches or exceeds OpenAI’s proprietary models in mathematical reasoning (GSM8K: 89.3%) and coding benchmarks (HumanEval: 84.7%)[1]. Notably, its training cost—reportedly 40% lower than comparable models—has driven adoption in academic and open-source communities[8]. The model’s selective parameter activation reduces inference latency, making it a viable option for resource-constrained environments[7].
+
+**2. Rakuten AI 2.0: MoE Architecture for Japanese Language Processing**
+Rakuten Group’s February 2025 release of Rakuten AI 2.0 introduces Japan’s first Mixture of Experts (MoE) LLM. The model employs eight distinct 7B-parameter experts, achieving performance parity with monolithic 70B models in Japanese NLP tasks[5]. A companion “mini” variant (2.8B parameters) targets edge-device applications, emphasizing low power consumption and sub-100ms latency. Early evaluations highlight its efficacy in customer service automation and real-time translation[5].
+
+**3. Gemini 1.5: Context Window Expansion**
+Google’s Gemini 1.5, announced in February 2024 but widely adopted by 2025, pioneers a one million-token context window—7x larger than previous iterations[1]. This allows single-prompt processing of 30,000 code lines or 700,000 words, enabling novel applications in long-form content analysis and cross-document inference. Early industry use cases include legal contract review and video transcript summarization[3][10].
+
+**4. Qwen2.5-Max: Benchmark Dominance in Efficiency-Critical Tasks**
+Alibaba’s Qwen2.5-Max, released in early 2025, outperforms competitors (including DeepSeek V3) in low-latency benchmarks such as LiveCodeBench (+12.4%) and GPQA-Diamond (+8.9%)[9]. While parameter counts remain undisclosed, its architecture employs dynamic sparse attention to reduce computational overhead. The model is now integrated into Alibaba Cloud’s enterprise API suite, targeting finance and healthcare sectors[7][9].
+
+**5. EXAONE 3.0: Multilingual and Domain-Specific Advancements**
+LG AI Research’s EXAONE 3.0 (December 2024) features 7.8B parameters optimized for chemistry, patent analysis, and bilingual (Korean-English) tasks[9]. Its instruction-tuned variant, released under a non-commercial license, has facilitated academic research in cross-lingual transfer learning. Notably, EXAONE 3.0 achieves state-of-the-art results in the KR-STEM benchmark (92.1 F1-score), aiding South Korea’s scientific R&amp;D initiatives[9].
 
 ---
 
-### Introduction
-The first quarter of 2025 has witnessed significant strides in LLM development, driven by demand for specialized performance and operational efficiency. Key themes include competitive benchmarking in STEM tasks, multilingual model diversification, and hardware-optimized deployment. This bulletin synthesizes technical specifications, benchmark outcomes, and strategic implications of four leading models, contextualized within the evolving LLM research landscape.
+**Citations**
+[1] Exploding Topics. (2025). *List of Leading LLMs*. https://explodingtopics.com/blog/list-of-llms
+[3] Georgia Tech. (2025). *AI Trends: What’s Next for Large Language Models*. https://www.cc.gatech.edu/news/ai-ai-popular-large-language-models-weigh-whats-next-ai-2025
+[5] Rakuten Group. (2025). *Press Release: Rakuten AI 2.0 Launch*. https://global.rakuten.com/corp/news/press/2025/0212_02.html
+[7] Vamsi Talks Tech. (2025). *LLM Evolution: 2024–2025 Technical Review*. https://www.vamsitalkstech.com/ai/the-evolution-of-large-language-models-in-2024-and-where-we-are-headed-in-2025-a-technical-review/
+[8] TechTarget. (2025). *DeepSeek: Technical Overview*. https://www.techtarget.com/whatis/feature/DeepSeek-explained-Everything-you-need-to-know
+[9] Shakudo. (2025). *Top LLMs of 2025*. https://www.shakudo.io/blog/top-9-large-language-models
+[10] Deloitte. (2025). *AI Agents and Autonomous Systems*. https://www2.deloitte.com/us/en/insights/focus/tech-trends/2025/tech-trends-ai-agents-and-autonomous-ai.html
 
 ---
-
-### Model Overviews
-
-#### **DeepSeek R1**
-Released in January 2025, DeepSeek R1 combines a 671-billion-parameter total architecture with 37 billion active parameters per inference, leveraging dynamic sparse activation[1]. The model achieves state-of-the-art performance on MATH-500 (85.3% accuracy) and AIME 2024 (72.1%), surpassing equivalent OpenAI models in arithmetic reasoning and code synthesis[1]. Notably, its training cost—reported at $8.2 million—represents a 40% reduction compared to similarly sized predecessors[1]. Open-source availability under the Apache-2.0 license has accelerated community-driven fine-tuning efforts, particularly in educational applications[4].
-
-#### **Rakuten AI 2.0 Series**
-Rakuten AI 2.0, launched February 12, 2025, is Japan’s first MoE-style LLM, integrating eight 7-billion-parameter expert networks[5]. Specialized for low-resource language processing, it achieves a 3.8% perplexity reduction over GPT-4 Turbo in Japanese-to-English translation tasks[5]. The companion model, Rakuten AI 2.0 mini (1.5B dense parameters), targets edge-device deployment, sustaining 30 tokens/second on consumer-grade GPUs while retaining 92% of 2.0’s accuracy in summarization benchmarks[5].
-
-#### **Alibaba Qwen2.5-Max**
-Qwen2.5-Max (January 2025) focuses on latency-sensitive applications, excelling in GPQA-Diamond (89.7%) and LiveCodeBench (94.3%)[9]. Though parameter counts remain undisclosed, Alibaba reports a 55% inference speed improvement over Qwen2.0, attributed to tensor parallelism optimizations[9]. Industry adopters highlight its utility in real-time fraud detection and high-frequency trading systems, where sub-200ms response times are critical[9].
-
-#### **LG EXAONE 3.0**
-Debuting in December 2024, EXAONE 3.0 (7.8B parameters) supports Korean and English, specializing in technical domains like patent analysis and chemical synthesis[9]. Its “layer pruning” algorithm reduces memory usage by 44% during inference, enabling cost-effective deployment in industrial R&amp;D pipelines[9]. Benchmark results include a 91.5% F1 score on organic reaction prediction (USPTO-2023) and 83.4% accuracy on semiconductor patent prior-art retrieval[9].
-
----
-
-### Comparative Analysis
-1. **Architectural Trends**: MoE adoption (e.g., Rakuten AI 2.0) highlights trade-offs between computational cost and task specificity, whereas dense models (Qwen2.5-Max) prioritize determinism for latency-critical use cases[5,9].
-2. **Efficiency Metrics**: Collective emphasis on reducing training/inference costs—seen in DeepSeek’s sparse activation and EXAONE’s layer pruning—reflects industry prioritization of ROI over sheer parameter scale[1,9].
-3. **Edge Deployment**: Rakuten AI 2.0 mini and Qwen2.5-Max signal growing investment in decentralized AI, circumventing cloud dependency for privacy-sensitive applications[5,9].
-
----
-
-### Future Directions
-1. **Dynamic MoE Routing**: Improving expert-network selection via reinforcement learning.
-2. **Cross-Modal Integration**: Expanding LLM utility through unified text-code-molecule frameworks (e.g., EXAONE’s chemistry extensions).
-3. **Regulatory Adaptation**: Addressing compliance challenges as open-source models (DeepSeek R1) proliferate in sensitive sectors[1,2].
-
----
-
-### Conclusion
-2025’s early LLM advancements reveal a maturation focus: optimizing existing paradigms rather than scaling parameters. Innovations in efficiency, language/code specialization, and decentralized deployment are poised to drive commercial adoption across education, finance, and R&amp;D sectors.
-
----
-
-### Citations
-1. “Top Emerging Large Language Models (LLMs) 2025,” *Exploding Topics*, 2025. Available: https://explodingtopics.com/blog/list-of-llms
-5. “Rakuten AI 2.0 Release Announcement,” *Rakuten Group Press Release*, Feb. 12, 2025. Available: https://global.rakuten.com/corp/news/press/2025/0212_02.html
-9. “2025 LLM Technical Review: Performance and Applications,” *Shakudo Blog*, 2025. Available: https://www.shakudo.io/blog/top-9-large-language-models
-4. “DeepSeek Architecture and Cost Analysis,” *TechTarget*, 2025. Available: https://www.techtarget.com/whatis/feature/DeepSeek-explained-Everything-you-need-to-know
-2. “2025 AI Regulation Forecast,” *National Law Review*, 2025. Available: https://natlawreview.com/article/what-expect-2025-ai-legal-tech-and-regulation-65-expert-predictions
-
----
-*Prepared by the LLM Research Bulletin editorial team. For inquiries, contact research@llm-bulletin.ai.*
+*Format: Academic newsletter with numeric citations corresponding to sources. Footnotes integrated via bracketed numbers linked to the citations section.*
 </pre>
 
 <p>
@@ -489,13 +475,13 @@ We will now move to the related topic of how to get these commands working in a 
 </p>
 </div>
 </div>
-<div id="outline-container-org2ece5d2" class="outline-2">
-<h2 id="org2ece5d2">The literate programming environment</h2>
-<div class="outline-text-2" id="text-org2ece5d2">
+<div id="outline-container-org0f18d4b" class="outline-2">
+<h2 id="org0f18d4b">The literate programming environment</h2>
+<div class="outline-text-2" id="text-org0f18d4b">
 </div>
-<div id="outline-container-org1a1f134" class="outline-3">
-<h3 id="org1a1f134">R Markdown and Jupyter Notebooks</h3>
-<div class="outline-text-3" id="text-org1a1f134">
+<div id="outline-container-org0a817a0" class="outline-3">
+<h3 id="org0a817a0">R Markdown and Jupyter Notebooks</h3>
+<div class="outline-text-3" id="text-org0a817a0">
 <p>
 The spoiler alert upfront is that in order to use the new script in a literate programming environment, you just have to get it to execute shell scripts. In R Markdown, there is an option to run bash. Jupyter notebooks have <a href="https://github.com/dahn-zk/zsh-jupyter-kernel">options</a> as well. One of the key things that I've had to do to get the literate programming environment to recognize the script, is in every code block where I run it, I have to source my zshrc file. Like this:
 </p>
@@ -516,9 +502,9 @@ Maybe you won't have this problem, but if you do, that is how you get around it.
 </p>
 </div>
 </div>
-<div id="outline-container-org4c50357" class="outline-3">
-<h3 id="org4c50357">Emacs Org-Mode</h3>
-<div class="outline-text-3" id="text-org4c50357">
+<div id="outline-container-orgb02fd3c" class="outline-3">
+<h3 id="orgb02fd3c">Emacs Org-Mode</h3>
+<div class="outline-text-3" id="text-orgb02fd3c">
 <p>
 Now this section is for Emacs users who use org mode. This is the literate programming environment that I prefer, and I am writing this article directly in it. I am specifically using <a href="https://orgmode.org/worg/org-contrib/babel/">Babel</a> which allows for active code use in Org. This comes with Doom Emacs (I'm currently using this) and Spacemacs (I started with this).
 </p>
@@ -566,9 +552,9 @@ You'll see that there is an unnecessary line that sits between the chatbot call 
 </div>
 </div>
 </div>
-<div id="outline-container-org1d516e8" class="outline-2">
-<h2 id="org1d516e8">Discussion</h2>
-<div class="outline-text-2" id="text-org1d516e8">
+<div id="outline-container-org3c606ba" class="outline-2">
+<h2 id="org3c606ba">Discussion</h2>
+<div class="outline-text-2" id="text-org3c606ba">
 <p>
 Since I made this command line cool and figured how to use it in a literate programming context, it has increased my productivity especially in the contexts of my German learning (I am American living in Berlin), and my research work. The more general theme is that I write prolifically in my literate programming environment (Org-Mode), and now I can get direct feedback from LLMs directly within this environment.
 </p>
