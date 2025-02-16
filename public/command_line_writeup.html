@@ -80,9 +80,9 @@ Henry David Thoreau, <i>Walden</i>
 </p>
 <hr />
 
-<div id="outline-container-org5ca1195" class="outline-2">
-<h2 id="org5ca1195">Introduction</h2>
-<div class="outline-text-2" id="text-org5ca1195">
+<div id="outline-container-orgb840617" class="outline-2">
+<h2 id="orgb840617">Introduction</h2>
+<div class="outline-text-2" id="text-orgb840617">
 <p>
 Since the end of 2022, we have been inundated with LLM chatbots in our everyday lives. The typical use involves some sort of interface that we sign into, where our previous chats can be saved, and so forth. At some point early on, these chatbots were available via API. Here, I want to show how I made a chatbot that can be called from the command line anywhere on my computer.
 </p>
@@ -96,9 +96,13 @@ In short, having LLMs available on the command line is useful, and here, I'm goi
 </p>
 </div>
 </div>
-<div id="outline-container-org34f76f3" class="outline-2">
-<h2 id="org34f76f3">The command line interface</h2>
-<div class="outline-text-2" id="text-org34f76f3">
+<div id="outline-container-org0286963" class="outline-2">
+<h2 id="org0286963">The command line interface</h2>
+<div class="outline-text-2" id="text-org0286963">
+</div>
+<div id="outline-container-org4d5ff6b" class="outline-3">
+<h3 id="org4d5ff6b">chatbot</h3>
+<div class="outline-text-3" id="text-org4d5ff6b">
 <p>
 The first thing we have to do is make a python script where we call an API. At the time of writing <span class="timestamp-wrapper"><span class="timestamp">[2025-01-27 Mon]</span></span>, Deepseek R1 has just come out, which provides chain-of-thought reasoning (currently state of the art), the likes of GPT-o1 (currently state of the art), but for far cheaper in terms of API calls. Not to mention its open source, so it might be down the line if I get enough computational muscle, I can run it locally.
 </p>
@@ -246,14 +250,157 @@ Thus, the next section will show you how to get this running in a literate progr
 </p>
 </div>
 </div>
+<div id="outline-container-org29e67ce" class="outline-3">
+<h3 id="org29e67ce">searchbot</h3>
+<div class="outline-text-3" id="text-org29e67ce">
+<p>
+If we are querying a LLM, we are often at the mercy of the cutoff of the given LLM's training data. At the time of writing <span class="timestamp-wrapper"><span class="timestamp">[2025-02-16 Sun]</span></span>, ChatGPT (as an example) has the option of incorporating internet search in a given query. However, calling LLMs from an API, as per the previous section, does not mean that you get an internet search baked in.
+</p>
 
-<div id="outline-container-org2d378e6" class="outline-2">
-<h2 id="org2d378e6">The literate programming environment</h2>
-<div class="outline-text-2" id="text-org2d378e6">
+<p>
+To this end, I created searchbot. Using the same concept as "chatbot" in the previous section, I wrote a script that queries the API to perplexity. This tool was one of the first LLMs that integrated these models with an internet search. If you want to have "searchbot" in your command line, first go to <a href="https://docs.perplexity.ai/api-reference/chat-completions">perplexity</a> and get an API key. Then, please create a script called searchbot.py which has the following code pasted into it:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span class="org-comment-delimiter">#</span><span class="org-comment">!/usr/bin/env python3</span>
+<span class="org-keyword">import</span> sys
+<span class="org-keyword">from</span> openai <span class="org-keyword">import</span> OpenAI
+
+<span class="org-keyword">if</span> <span class="org-builtin">len</span>(sys.argv) &lt; 2:
+    <span class="org-builtin">print</span>(<span class="org-string">"searchbot \"your_prompt\""</span>)
+    sys.<span class="org-constant">exit</span>(1)
+
+<span class="org-variable-name">user_query</span> = <span class="org-string">" "</span>.join(sys.argv[1:])
+
+<span class="org-variable-name">YOUR_API_KEY</span> = <span class="org-string">"YOUR_API_KEY_HERE"</span>
+
+<span class="org-variable-name">messages</span> = [
+    {
+        <span class="org-string">"role"</span>: <span class="org-string">"system"</span>,
+        <span class="org-string">"content"</span>: (
+            <span class="org-string">"You are an artificial intelligence assistant and you need to "</span>
+            <span class="org-string">"engage in a helpful, detailed, polite conversation with a user."</span>
+        ),
+    },
+    {
+        <span class="org-string">"role"</span>: <span class="org-string">"user"</span>,
+        <span class="org-string">"content"</span>: user_query,
+    },
+]
+
+<span class="org-variable-name">client</span> = OpenAI(api_key=YOUR_API_KEY, base_url=<span class="org-string">"https://api.perplexity.ai"</span>)
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">chat completion without streaming</span>
+response = client.chat.completions.create(
+    model=<span class="org-string">"sonar-pro"</span>,
+    messages=messages,
+)
+<span class="org-builtin">print</span>(response)
+</pre>
 </div>
-<div id="outline-container-orga1f71a8" class="outline-3">
-<h3 id="orga1f71a8">R Markdown and Jupyter Notebooks</h3>
-<div class="outline-text-3" id="text-orga1f71a8">
+
+<p>
+In the above script, please add your api key to the variable YOUR<sub>API</sub><sub>KEY</sub>.
+</p>
+
+<p>
+From here, you do the same procedure as before. You get this script into your PATH. Here is how I do it on my 2022 MacBook Pro:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">mv searchbot.py ~/scripts/searchbot
+chmod +x ~/scripts/searchbot <span class="org-comment-delimiter"># </span><span class="org-comment">permissions</span>
+</pre>
+</div>
+
+<p>
+Then once again I apply the changes with:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh"><span class="org-builtin">source</span> ~/.zshrc
+</pre>
+</div>
+
+<p>
+And from here, I can call searchbot globally, like this:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh"><span class="org-builtin">source</span> ~/.zshrc
+searchbot <span class="org-string">"What is the latest news around Open AI's potential release of GPT-5?"</span>
+</pre>
+</div>
+
+<p>
+You can see that it is a bit of a mess right now because I have the bot return everything. As of now, I use these search results to feed back into the chatbots to produce reports. I'll explain in the next section.
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org11e9db4" class="outline-2">
+<h2 id="org11e9db4">Prompt scripting: the next level of prompt engineering</h2>
+<div class="outline-text-2" id="text-org11e9db4">
+<p>
+Now that we are able to call chatbot and searchbot from the command line, we now have to talk about what is possible that otherwise cannot be done in the LLM UI/UX. Here is where knowing how to code (as opposed to knowing how to prompt LLMs to code) really comes in handy. Because to understand the next level of prompt engineering, you need to be able to think algorithmically.
+</p>
+
+<p>
+What we can do now is what I call prompt scripting. This is where you write scripts (in whatever programming language) where the data structures are LLM agents, rather than just strings and ints, for example. In order to help you understand what I'm talking about, I'm going to go right into a simple example.
+</p>
+
+<p>
+Below, we are going to use searchbot and chatbot in a simple manner. We are going to produce a prompt for searchbot. We are then going to feed the searchbot results and the original prompt directly into chatbot, which will then produce a report.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh"><span class="org-builtin">source</span> ~/.zshrc
+
+<span class="org-variable-name">news</span>=$(searchbot <span class="org-string">"Please give me the lastest news around LLM developments. Focus on things that have happened as of February 1, 2025 and after. Use the most reputable sources possible."</span>)
+<span class="org-variable-name">newsletter</span>=$(chatbot <span class="org-string">"deepseek"</span> <span class="org-string">"You are to produce a newsletter given the latest updates around LLM developments as of February 1, 2025. A researcher, perplexity, has compiled notes for you to use. You will take these as input and produce the newsletter. Make it academic in style. Include citations as you would an academic journal, both in the report with footnotes along with a citations section. Begin with an abstract that summarizes these developments. The research notes you will use, along with sources, is here: $news"</span>)
+
+<span class="org-builtin">echo</span> <span class="org-string">"$newsletter"</span>
+</pre>
+</div>
+
+<p>
+You get the picture. Here, I had the overall goal of making a newsletter. To this end, I set up an "agent" to do internet search and prepare research notes that would in turn be used by a reasoning model to turn it into an academic style newsletter. This is a very simple version of this, and I note that if you really read the output, it is informative but not perfect. Further improvements could be made on the prompt, or adding additional agents to do more research, edit the report, check for errors, and so forth. But I'll leave additional layers of complexity as an exercise to the reader.
+</p>
+
+<p>
+I'd like to show you one more thing you can do when you start thinking in terms of prompt scripting. And that is adding a code execution layer to these prompts. Below is a simple script where a LLM produces code that is in turn executed. The user sees just the execution.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh"><span class="org-builtin">source</span> ~/.zshrc
+
+<span class="org-variable-name">cmd</span>=$(chatbot <span class="org-string">"claude"</span> <span class="org-string">"Please produce a shell command to give me today's date and time. Just produce the command. Do not produce anything else."</span>)
+
+<span class="org-builtin">echo</span> <span class="org-string">"$cmd"</span>
+<span class="org-builtin">eval</span> <span class="org-string">"$cmd"</span>
+</pre>
+</div>
+
+<p>
+In the case of shell scripting, you simply use the "eval" command to run any code passed into it as a string, which is what I can get the chatbot to do.
+</p>
+
+<p>
+You can imagine that we could get the chatbot to produce much more complex commands for whichever language as part of a much more complex pipeline. Again, I'll leave that as an exercise to the reader, now that you have the toolkit to do so.
+</p>
+
+<p>
+We will now move to the related topic of how to get these commands working in a literate programming environment.
+</p>
+</div>
+</div>
+<div id="outline-container-org4bd06d5" class="outline-2">
+<h2 id="org4bd06d5">The literate programming environment</h2>
+<div class="outline-text-2" id="text-org4bd06d5">
+</div>
+<div id="outline-container-org7eba3e5" class="outline-3">
+<h3 id="org7eba3e5">R Markdown and Jupyter Notebooks</h3>
+<div class="outline-text-3" id="text-org7eba3e5">
 <p>
 The spoiler alert upfront is that in order to use the new script in a literate programming environment, you just have to get it to execute shell scripts. In R Markdown, there is an option to run bash. Jupyter notebooks have <a href="https://github.com/dahn-zk/zsh-jupyter-kernel">options</a> as well. One of the key things that I've had to do to get the literate programming environment to recognize the script, is in every code block where I run it, I have to source my zshrc file. Like this:
 </p>
@@ -274,9 +421,9 @@ Maybe you won't have this problem, but if you do, that is how you get around it.
 </p>
 </div>
 </div>
-<div id="outline-container-org9fb8c4c" class="outline-3">
-<h3 id="org9fb8c4c">Emacs Org-Mode</h3>
-<div class="outline-text-3" id="text-org9fb8c4c">
+<div id="outline-container-orgd76b774" class="outline-3">
+<h3 id="orgd76b774">Emacs Org-Mode</h3>
+<div class="outline-text-3" id="text-orgd76b774">
 <p>
 Now this section is for Emacs users who use org mode. This is the literate programming environment that I prefer, and I am writing this article directly in it. I am specifically using <a href="https://orgmode.org/worg/org-contrib/babel/">Babel</a> which allows for active code use in Org. This comes with Doom Emacs (I'm currently using this) and Spacemacs (I started with this).
 </p>
@@ -324,9 +471,9 @@ You'll see that there is an unnecessary line that sits between the chatbot call 
 </div>
 </div>
 </div>
-<div id="outline-container-orgee49b8b" class="outline-2">
-<h2 id="orgee49b8b">Discussion</h2>
-<div class="outline-text-2" id="text-orgee49b8b">
+<div id="outline-container-orgeaf1952" class="outline-2">
+<h2 id="orgeaf1952">Discussion</h2>
+<div class="outline-text-2" id="text-orgeaf1952">
 <p>
 Since I made this command line cool and figured how to use it in a literate programming context, it has increased my productivity especially in the contexts of my German learning (I am American living in Berlin), and my research work. The more general theme is that I write prolifically in my literate programming environment (Org-Mode), and now I can get direct feedback from LLMs directly within this environment.
 </p>
@@ -340,7 +487,11 @@ This is similar to bench pressing by myself versus with a spotter. As opposed to
 </p>
 
 <p>
-Future directions with this script involve figuring out how to get this to search the internet, which is what Bing Chat (aka <a href="https://www.lesswrong.com/posts/jtoPawEhLNXNxvgTT/bing-chat-is-blatantly-aggressively-misaligned">Sydney</a>) originally did, and other tools like GPT-4o and perplexity do now. I know that this might seem a bit like reinventing the wheel, but one of the things that I want to do is understand how these things work under the hood. And one way to understand how something works is to <a href="https://www.youtube.com/watch?v=kCc8FmEb1nY">build it yourself</a>.
+Adding the capability to have API access to internet-searching LLMs, which is what Bing Chat (aka <a href="https://www.lesswrong.com/posts/jtoPawEhLNXNxvgTT/bing-chat-is-blatantly-aggressively-misaligned">Sydney</a>) originally did, makes it possible to have even more complexity in your LLM use. The example I used was that of having an internet search agent act produce research notes on a topic and then to have a reasoning-based agent convert that into a newsletter. Given new tools like OpenAI's <a href="https://openai.com/index/introducing-deep-research/">Deep Research</a> out there, I know that all of this this might seem a bit like reinventing the wheel, but one of the things that I want to do is understand how these things work under the hood. And one way to understand how something works is to <a href="https://www.youtube.com/watch?v=kCc8FmEb1nY">build it yourself</a>.
+</p>
+
+<p>
+Finally, the bigger picture here is that there is a level above prompt engineering that I'm calling prompt scripting, where you start to think less in terms of prompts to LLMs and rather in terms of flow charts where each nodes is a LLM that has a different function and pre-prompt, passing output into other LLMs as input. This can allow for much you to achieve much more complex goals than that of a simple prompt. I gave a simple example of a 2-agent prompt script that produces a newsletter, and another example of an agent that produces a shell command that then gets directly executed. Think of these are simplest legos, from which you can build all kinds of complex things, the way you can build <a href="https://www.nand2tetris.org/">Tetris</a> from <a href="https://tjburns08.github.io/logic_gates.html">NAND gates</a>.
 </p>
 
 <p>
@@ -350,7 +501,7 @@ In short, having a LLM in a literate programming environment has done me some go
 </div>
 </div>
 <div id="postamble" class="status">
-<p class="date">Date: January 24, 2025 - January 27, 2025</p>
+<p class="date">Date: January 24, 2025 - February 16, 2025</p>
 <p class="creator"><a href="https://www.gnu.org/software/emacs/">Emacs</a> 28.1 (<a href="https://orgmode.org">Org</a> mode 9.5.2)</p>
 </div>
 </body>

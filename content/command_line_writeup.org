@@ -1,6 +1,6 @@
 #+Title: How I made a command line chatbot
 #+Author: Tyler Burns
-#+Date: January 24, 2025 - January 27, 2025
+#+Date: January 24, 2025 - February 16, 2025
 
 [[./index.html][Home]]
 
@@ -17,6 +17,7 @@ The use case I'll show you is that of the literate programming environment, whic
 
 In short, having LLMs available on the command line is useful, and here, I'm going to show you how I do it. The punchline is that it is not particularly hard to do.
 * The command line interface
+** chatbot
 The first thing we have to do is make a python script where we call an API. At the time of writing [2025-01-27 Mon], Deepseek R1 has just come out, which provides chain-of-thought reasoning (currently state of the art), the likes of GPT-o1 (currently state of the art), but for far cheaper in terms of API calls. Not to mention its open source, so it might be down the line if I get enough computational muscle, I can run it locally.
 
 In terms of calling the API, there are plenty of options, but I use [[https://openrouter.ai/][OpenRouter]]. This gives me access to the GPT models, Claude, Deepseek, and a host of other models. You can browse available models [[https://openrouter.ai/models][here]]. When you sign up, you will get an API key, and the ability to buy credits. To give you an idea of how cheap it is, I put down $5 three days ago (date of this sentence: [2025-01-27 Mon]), and after extensive use primarily of Claude, I have $4.74 remaining.
@@ -126,7 +127,175 @@ chatbot "gpt3" "What is 5 + 2?"
 In terms of using it on the command line, that is all there is to it. But if you note in the example above, this script ran directly in this writeup, because I am writing this article in a literate programming environment. This one of my preferred ways of using LLMs, as a conversational partner in real time.
 
 Thus, the next section will show you how to get this running in a literate programming environment.
+** searchbot
+If we are querying a LLM, we are often at the mercy of the cutoff of the given LLM's training data. At the time of writing [2025-02-16 Sun], ChatGPT (as an example) has the option of incorporating internet search in a given query. However, calling LLMs from an API, as per the previous section, does not mean that you get an internet search baked in.
 
+To this end, I created searchbot. Using the same concept as "chatbot" in the previous section, I wrote a script that queries the API to perplexity. This tool was one of the first LLMs that integrated these models with an internet search. If you want to have "searchbot" in your command line, first go to [[https://docs.perplexity.ai/api-reference/chat-completions][perplexity]] and get an API key. Then, please create a script called searchbot.py which has the following code pasted into it:
+
+#+begin_src python
+#!/usr/bin/env python3
+import sys
+from openai import OpenAI
+
+if len(sys.argv) < 2:
+    print("searchbot \"your_prompt\"")
+    sys.exit(1)
+
+user_query = " ".join(sys.argv[1:])
+
+YOUR_API_KEY = "YOUR_API_KEY_HERE"
+
+messages = [
+    {
+        "role": "system",
+        "content": (
+            "You are an artificial intelligence assistant and you need to "
+            "engage in a helpful, detailed, polite conversation with a user."
+        ),
+    },
+    {
+        "role": "user",
+        "content": user_query,
+    },
+]
+
+client = OpenAI(api_key=YOUR_API_KEY, base_url="https://api.perplexity.ai")
+
+# chat completion without streaming
+response = client.chat.completions.create(
+    model="sonar-pro",
+    messages=messages,
+)
+print(response)
+#+end_src
+
+In the above script, please add your api key to the variable YOUR_API_KEY.
+
+From here, you do the same procedure as before. You get this script into your PATH. Here is how I do it on my 2022 MacBook Pro:
+
+#+begin_src sh :eval no
+mv searchbot.py ~/scripts/searchbot
+chmod +x ~/scripts/searchbot # permissions
+#+end_src
+
+Then once again I apply the changes with:
+
+#+begin_src sh :eval no
+source ~/.zshrc
+#+end_src
+
+And from here, I can call searchbot globally, like this:
+
+#+begin_src sh :results output
+source ~/.zshrc
+searchbot "What is the latest news around Open AI's potential release of GPT-5?"
+#+end_src
+
+#+RESULTS:
+: ChatCompletion(id='5963f9db-5ca6-430a-a3ff-4cb9281df979', choices=[Choice(finish_reason='stop', index=0, logprobs=None, message=ChatCompletionMessage(content='OpenAI has recently announced plans to release GPT-4.5 and GPT-5 in the near future. According to CEO Sam Altman\'s statements on February 12, 2025, GPT-4.5 is expected to launch within weeks, while GPT-5 is slated for release within months[1][3].\n\nKey points about the upcoming releases include:\n\n1. GPT-4.5, internally called "Orion," will be OpenAI\'s last non-chain-of-thought model[1][5]. This suggests a significant shift in AI capabilities moving forward.\n\n2. GPT-5 will integrate various technologies, including the previously planned o3 model, which will no longer be released as a standalone product[1][5].\n\n3. OpenAI aims to simplify its product offerings, creating a more unified AI experience that "just works" for users without requiring them to choose between different models[1][5].\n\n4. Free users of ChatGPT will have unlimited access to GPT-5 at a standard intelligence setting, while Plus and Pro subscribers will have access to higher intelligence levels[1][5].\n\n5. GPT-5 is expected to incorporate advanced features such as improved reasoning capabilities, multimodal understanding (text, image, audio, video), and enhanced customization options[4].\n\n6. The release of these models reflects OpenAI\'s strategy to maintain its competitive edge in the AI industry, particularly in light of advancements from other companies like China\'s DeepSeek[5].\n\nIt\'s important to note that while these announcements have generated significant excitement, specific details about the capabilities and exact release dates of GPT-4.5 and GPT-5 remain limited. As with previous releases, OpenAI is likely to prioritize safety testing and responsible deployment of these new models[4].', refusal=None, role='assistant', audio=None, function_call=None, tool_calls=None), delta={'role': 'assistant', 'content': ''})], created=1739693949, model='sonar-pro', object='chat.completion', service_tier=None, system_fingerprint=None, usage=CompletionUsage(completion_tokens=409, prompt_tokens=40, total_tokens=449, completion_tokens_details=None, prompt_tokens_details=None, citation_tokens=5566, num_search_queries=1), citations=['https://www.pymnts.com/artificial-intelligence-2/2025/openai-to-release-gpt-4-5-within-weeks-gpt-5-within-months/', 'https://opentools.ai/news/openai-unleashes-gpt-5-with-free-unlimited-access-for-all', 'https://www.axios.com/2025/02/12/openai-chatgpt-roadmap-gpt5', 'https://www.chatbase.co/blog/gpt-5', 'https://www.maginative.com/article/gpt-5-is-the-omnimodel-weve-been-waiting-for-heres-why/', 'https://lonelybrand.com/blog/openai-unveils-development-plan-for-gpt-4-5-and-gpt-5-launch/', 'https://www.youtube.com/watch?v=KtwK3hBAjDY', 'https://pylessons.com/news/openai-gpt-4-5-gpt-5-release-update', 'https://topmostads.com/gpt-4-5-vs-gpt-5-release/', 'https://community.openai.com/t/openai-roadmap-and-characters/1119160'])
+
+You can see that it is a bit of a mess right now because I have the bot return everything. As of now, I use these search results to feed back into the chatbots to produce reports. I'll explain in the next section.
+* Prompt scripting: the next level of prompt engineering
+Now that we are able to call chatbot and searchbot from the command line, we now have to talk about what is possible that otherwise cannot be done in the LLM UI/UX. Here is where knowing how to code (as opposed to knowing how to prompt LLMs to code) really comes in handy. Because to understand the next level of prompt engineering, you need to be able to think algorithmically.
+
+What we can do now is what I call prompt scripting. This is where you write scripts (in whatever programming language) where the data structures are LLM agents, rather than just strings and ints, for example. In order to help you understand what I'm talking about, I'm going to go right into a simple example.
+
+Below, we are going to use searchbot and chatbot in a simple manner. We are going to produce a prompt for searchbot. We are then going to feed the searchbot results and the original prompt directly into chatbot, which will then produce a report.
+
+#+begin_src sh :results output
+source ~/.zshrc
+
+news=$(searchbot "Please give me the lastest news around LLM developments. Focus on things that have happened as of February 1, 2025 and after. Use the most reputable sources possible.")
+newsletter=$(chatbot "deepseek" "You are to produce a newsletter given the latest updates around LLM developments as of February 1, 2025. A researcher, perplexity, has compiled notes for you to use. You will take these as input and produce the newsletter. Make it academic in style. Include citations as you would an academic journal, both in the report with footnotes along with a citations section. Begin with an abstract that summarizes these developments. The research notes you will use, along with sources, is here: $news")
+
+echo "$newsletter"
+#+end_src
+
+#+RESULTS:
+#+begin_example
+,**LLM Research Bulletin: February 2025 Advancements**
+,**Volume 3, Issue 1**
+
+---
+
+### Abstract
+Recent advancements in large language models (LLMs) underscore rapid progress in computational efficiency, domain specialization, and multilingual capabilities. This bulletin examines four pivotal releases: DeepSeek R1 (January 2025), Rakuten AI 2.0 and 2.0 mini (February 2025), Qwen2.5-Max (January 2025), and EXAONE 3.0 (December 2024). These models emphasize parameter efficiency, cost-effective training, and task-specific optimization, with notable applications in mathematics, coding, cross-lingual generation, and edge-device deployment. Innovations include hybrid architectures like mixture-of-experts (MoE), reduced inference costs, and open-source availability, reflecting broader industry trends toward scalable, domain-adaptive AI systems[1,5,9].
+
+---
+
+### Introduction
+The first quarter of 2025 has witnessed significant strides in LLM development, driven by demand for specialized performance and operational efficiency. Key themes include competitive benchmarking in STEM tasks, multilingual model diversification, and hardware-optimized deployment. This bulletin synthesizes technical specifications, benchmark outcomes, and strategic implications of four leading models, contextualized within the evolving LLM research landscape.
+
+---
+
+### Model Overviews
+
+#### **DeepSeek R1**
+Released in January 2025, DeepSeek R1 combines a 671-billion-parameter total architecture with 37 billion active parameters per inference, leveraging dynamic sparse activation[1]. The model achieves state-of-the-art performance on MATH-500 (85.3% accuracy) and AIME 2024 (72.1%), surpassing equivalent OpenAI models in arithmetic reasoning and code synthesis[1]. Notably, its training cost—reported at $8.2 million—represents a 40% reduction compared to similarly sized predecessors[1]. Open-source availability under the Apache-2.0 license has accelerated community-driven fine-tuning efforts, particularly in educational applications[4].
+
+#### **Rakuten AI 2.0 Series**
+Rakuten AI 2.0, launched February 12, 2025, is Japan’s first MoE-style LLM, integrating eight 7-billion-parameter expert networks[5]. Specialized for low-resource language processing, it achieves a 3.8% perplexity reduction over GPT-4 Turbo in Japanese-to-English translation tasks[5]. The companion model, Rakuten AI 2.0 mini (1.5B dense parameters), targets edge-device deployment, sustaining 30 tokens/second on consumer-grade GPUs while retaining 92% of 2.0’s accuracy in summarization benchmarks[5].
+
+#### **Alibaba Qwen2.5-Max**
+Qwen2.5-Max (January 2025) focuses on latency-sensitive applications, excelling in GPQA-Diamond (89.7%) and LiveCodeBench (94.3%)[9]. Though parameter counts remain undisclosed, Alibaba reports a 55% inference speed improvement over Qwen2.0, attributed to tensor parallelism optimizations[9]. Industry adopters highlight its utility in real-time fraud detection and high-frequency trading systems, where sub-200ms response times are critical[9].
+
+#### **LG EXAONE 3.0**
+Debuting in December 2024, EXAONE 3.0 (7.8B parameters) supports Korean and English, specializing in technical domains like patent analysis and chemical synthesis[9]. Its “layer pruning” algorithm reduces memory usage by 44% during inference, enabling cost-effective deployment in industrial R&D pipelines[9]. Benchmark results include a 91.5% F1 score on organic reaction prediction (USPTO-2023) and 83.4% accuracy on semiconductor patent prior-art retrieval[9].
+
+---
+
+### Comparative Analysis
+1. **Architectural Trends**: MoE adoption (e.g., Rakuten AI 2.0) highlights trade-offs between computational cost and task specificity, whereas dense models (Qwen2.5-Max) prioritize determinism for latency-critical use cases[5,9].
+2. **Efficiency Metrics**: Collective emphasis on reducing training/inference costs—seen in DeepSeek’s sparse activation and EXAONE’s layer pruning—reflects industry prioritization of ROI over sheer parameter scale[1,9].
+3. **Edge Deployment**: Rakuten AI 2.0 mini and Qwen2.5-Max signal growing investment in decentralized AI, circumventing cloud dependency for privacy-sensitive applications[5,9].
+
+---
+
+### Future Directions
+1. **Dynamic MoE Routing**: Improving expert-network selection via reinforcement learning.
+2. **Cross-Modal Integration**: Expanding LLM utility through unified text-code-molecule frameworks (e.g., EXAONE’s chemistry extensions).
+3. **Regulatory Adaptation**: Addressing compliance challenges as open-source models (DeepSeek R1) proliferate in sensitive sectors[1,2].
+
+---
+
+### Conclusion
+2025’s early LLM advancements reveal a maturation focus: optimizing existing paradigms rather than scaling parameters. Innovations in efficiency, language/code specialization, and decentralized deployment are poised to drive commercial adoption across education, finance, and R&D sectors.
+
+---
+
+### Citations
+1. “Top Emerging Large Language Models (LLMs) 2025,” *Exploding Topics*, 2025. Available: https://explodingtopics.com/blog/list-of-llms
+5. “Rakuten AI 2.0 Release Announcement,” *Rakuten Group Press Release*, Feb. 12, 2025. Available: https://global.rakuten.com/corp/news/press/2025/0212_02.html
+9. “2025 LLM Technical Review: Performance and Applications,” *Shakudo Blog*, 2025. Available: https://www.shakudo.io/blog/top-9-large-language-models
+4. “DeepSeek Architecture and Cost Analysis,” *TechTarget*, 2025. Available: https://www.techtarget.com/whatis/feature/DeepSeek-explained-Everything-you-need-to-know
+2. “2025 AI Regulation Forecast,” *National Law Review*, 2025. Available: https://natlawreview.com/article/what-expect-2025-ai-legal-tech-and-regulation-65-expert-predictions
+
+---
+,*Prepared by the LLM Research Bulletin editorial team. For inquiries, contact research@llm-bulletin.ai.*
+#+end_example
+
+You get the picture. Here, I had the overall goal of making a newsletter. To this end, I set up an "agent" to do internet search and prepare research notes that would in turn be used by a reasoning model to turn it into an academic style newsletter. This is a very simple version of this, and I note that if you really read the output, it is informative but not perfect. Further improvements could be made on the prompt, or adding additional agents to do more research, edit the report, check for errors, and so forth. But I'll leave additional layers of complexity as an exercise to the reader.
+
+I'd like to show you one more thing you can do when you start thinking in terms of prompt scripting. And that is adding a code execution layer to these prompts. Below is a simple script where a LLM produces code that is in turn executed. The user sees just the execution.
+
+#+begin_src sh :results output
+source ~/.zshrc
+
+cmd=$(chatbot "claude" "Please produce a shell command to give me today's date and time. Just produce the command. Do not produce anything else.")
+
+echo "$cmd"
+eval "$cmd"
+#+end_src
+
+#+RESULTS:
+: date
+: Sun Feb 16 10:05:20 CET 2025
+
+In the case of shell scripting, you simply use the "eval" command to run any code passed into it as a string, which is what I can get the chatbot to do.
+
+You can imagine that we could get the chatbot to produce much more complex commands for whichever language as part of a much more complex pipeline. Again, I'll leave that as an exercise to the reader, now that you have the toolkit to do so.
+
+We will now move to the related topic of how to get these commands working in a literate programming environment.
 * The literate programming environment
 ** R Markdown and Jupyter Notebooks
 The spoiler alert upfront is that in order to use the new script in a literate programming environment, you just have to get it to execute shell scripts. In R Markdown, there is an option to run bash. Jupyter notebooks have [[https://github.com/dahn-zk/zsh-jupyter-kernel][options]] as well. One of the key things that I've had to do to get the literate programming environment to recognize the script, is in every code block where I run it, I have to source my zshrc file. Like this:
@@ -173,6 +342,8 @@ In general, I [[https://www.paulgraham.com/words.html][write to think]]. Thus, n
 
 This is similar to bench pressing by myself versus with a spotter. As opposed to getting a spotter to do the bench pressing for me while I sit back and watch. That is a sort of litmus test for my LLM use: does it increase brain activity or [[https://paulgraham.com/writes.html][decrease it]]? If my brain activity goes up or at least stays the same, then I will consider it a valid use case for me. If my brain activity goes down, then that is not a valid use case for me.
 
-Future directions with this script involve figuring out how to get this to search the internet, which is what Bing Chat (aka [[https://www.lesswrong.com/posts/jtoPawEhLNXNxvgTT/bing-chat-is-blatantly-aggressively-misaligned][Sydney]]) originally did, and other tools like GPT-4o and perplexity do now. I know that this might seem a bit like reinventing the wheel, but one of the things that I want to do is understand how these things work under the hood. And one way to understand how something works is to [[https://www.youtube.com/watch?v=kCc8FmEb1nY][build it yourself]].
+Adding the capability to have API access to internet-searching LLMs, which is what Bing Chat (aka [[https://www.lesswrong.com/posts/jtoPawEhLNXNxvgTT/bing-chat-is-blatantly-aggressively-misaligned][Sydney]]) originally did, makes it possible to have even more complexity in your LLM use. The example I used was that of having an internet search agent act produce research notes on a topic and then to have a reasoning-based agent convert that into a newsletter. Given new tools like OpenAI's [[https://openai.com/index/introducing-deep-research/][Deep Research]] out there, I know that all of this this might seem a bit like reinventing the wheel, but one of the things that I want to do is understand how these things work under the hood. And one way to understand how something works is to [[https://www.youtube.com/watch?v=kCc8FmEb1nY][build it yourself]].
+
+Finally, the bigger picture here is that there is a level above prompt engineering that I'm calling prompt scripting, where you start to think less in terms of prompts to LLMs and rather in terms of flow charts where each nodes is a LLM that has a different function and pre-prompt, passing output into other LLMs as input. This can allow for much you to achieve much more complex goals than that of a simple prompt. I gave a simple example of a 2-agent prompt script that produces a newsletter, and another example of an agent that produces a shell command that then gets directly executed. Think of these are simplest legos, from which you can build all kinds of complex things, the way you can build [[https://www.nand2tetris.org/][Tetris]] from [[https://tjburns08.github.io/logic_gates.html][NAND gates]].
 
 In short, having a LLM in a literate programming environment has done me some good, and I hope it will do some of you some good too. Give this a shot if only for the exercise of knowing how to do it. It's nice to be independent of the interfaces, and it's a "gateway drug" into building your own apps.
