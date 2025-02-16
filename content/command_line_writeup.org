@@ -17,7 +17,7 @@ The use case I'll show you is that of the literate programming environment, whic
 
 In short, having LLMs available on the command line is useful, and here, I'm going to show you how I do it. The punchline is that it is not particularly hard to do.
 * The command line interface
-** chatbot
+** Chatbot
 The first thing we have to do is make a python script where we call an API. At the time of writing [2025-01-27 Mon], Deepseek R1 has just come out, which provides chain-of-thought reasoning (currently state of the art), the likes of GPT-o1 (currently state of the art), but for far cheaper in terms of API calls. Not to mention its open source, so it might be down the line if I get enough computational muscle, I can run it locally.
 
 In terms of calling the API, there are plenty of options, but I use [[https://openrouter.ai/][OpenRouter]]. This gives me access to the GPT models, Claude, Deepseek, and a host of other models. You can browse available models [[https://openrouter.ai/models][here]]. When you sign up, you will get an API key, and the ability to buy credits. To give you an idea of how cheap it is, I put down $5 three days ago (date of this sentence: [2025-01-27 Mon]), and after extensive use primarily of Claude, I have $4.74 remaining.
@@ -127,7 +127,7 @@ chatbot "gpt3" "What is 5 + 2?"
 In terms of using it on the command line, that is all there is to it. But if you note in the example above, this script ran directly in this writeup, because I am writing this article in a literate programming environment. This one of my preferred ways of using LLMs, as a conversational partner in real time.
 
 Thus, the next section will show you how to get this running in a literate programming environment.
-** searchbot
+** Searchbot
 If we are querying a LLM, we are often at the mercy of the cutoff of the given LLM's training data. At the time of writing [2025-02-16 Sun], ChatGPT (as an example) has the option of incorporating internet search in a given query. However, calling LLMs from an API, as per the previous section, does not mean that you get an internet search baked in.
 
 To this end, I created searchbot. Using the same concept as "chatbot" in the previous section, I wrote a script that queries the API to perplexity. This tool was one of the first LLMs that integrated these models with an internet search. If you want to have "searchbot" in your command line, first go to [[https://docs.perplexity.ai/api-reference/chat-completions][perplexity]] and get an API key. Then, please create a script called searchbot.py which has the following code pasted into it:
@@ -186,7 +186,7 @@ source ~/.zshrc
 
 And from here, I can call searchbot globally, like this:
 
-#+begin_src sh :results output
+#+begin_src sh :results output :exports both
 source ~/.zshrc
 searchbot "What is the latest news around Open AI's potential release of GPT-5?"
 #+end_src
@@ -202,7 +202,7 @@ What we can do now is what I call prompt scripting. This is where you write scri
 
 Below, we are going to use searchbot and chatbot in a simple manner. We are going to produce a prompt for searchbot. We are then going to feed the searchbot results and the original prompt directly into chatbot, which will then produce a report.
 
-#+begin_src sh :results output
+#+begin_src sh :results output :exports both
 source ~/.zshrc
 
 news=$(searchbot "Please give me the lastest news around LLM developments. Focus on things that have happened as of February 1, 2025 and after. Use the most reputable sources possible.")
@@ -278,7 +278,7 @@ You get the picture. Here, I had the overall goal of making a newsletter. To thi
 
 I'd like to show you one more thing you can do when you start thinking in terms of prompt scripting. And that is adding a code execution layer to these prompts. Below is a simple script where a LLM produces code that is in turn executed. The user sees just the execution.
 
-#+begin_src sh :results output
+#+begin_src sh :results output :exports both
 source ~/.zshrc
 
 cmd=$(chatbot "claude" "Please produce a shell command to give me today's date and time. Just produce the command. Do not produce anything else.")

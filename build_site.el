@@ -63,6 +63,15 @@
     .toggle-theme-btn:hover {
       opacity: 0.4;
     }
+
+  /* Code block wrapping: experiment */
+    pre, code {
+      white-space: pre-wrap;
+      white-space: -moz-pre-wrap;
+      white-space: -pre-wrap;
+      white-space: -o-pre-wrap;
+      word-wrap: break-word;
+    }
 </style>
 <script>
  function toggleDarkMode() {
