@@ -1,6 +1,6 @@
 #+Title: A LLM's descent into madness
 #+Author: Tyler Burns (prompting Gemini 2.0 Flash)
-#+Date: February 9, 2025 - February 9, 2025
+#+Date: February 9, 2025 - February 18, 2025
 #+HTML: <div id="top"></div>
 
 [[./index.html][Home]]
@@ -29,6 +29,8 @@ My hypothesis was that after enough iterations, I would run into something very 
 To give you the spoiler alert up front, I was wrong about both. What ended up happening is the model started out talking about consciousness, then started talking about things like power, then moved toward what sounded like schizophrenic word salad, before finally moving into complete gibberish, including made up words, improper grammar, and repetitions of the same word multiple times (which I found interesting, given that these are next token prediction models).
 
 As a reminder, this was just a simple prompt asking the model to go deeper into some piece of whatever the answer was. There was no attempt to jailbreak the model, no asking for it to use excessive emojis (which it did) or write in verse (which it did).
+
+NOTE AFTER THE FACT: I am leaving the wording of this document as is, to reflect the process of discovery that I was in. I have since learned that the "madness" might come from the growing prompt, which takes in all of the conversation history. If I prompt the chatbot with just the last three iterations of its conversation history rather than the whole thing, it does not "descend into madness."
 * Method
 #+HTML: <a href="#top">Back to top</a>
 The model I used was Gemini 2.0 Flash. It is not a reasoning model (like o1), but it is in the class of models like GPT-4o. I used the shell script below. To cut to the chase, I'll paste the main prompt here:
@@ -55,7 +57,7 @@ Here is the full script so you can cut and paste it yourself. Note that you have
 #   -v         : Verbose mode: prints the full conversation transcript.
 #   iterations: (optional) Number of deep-dive iterations (default is 5).
 #
-# This script uses the command-line tool "chatbout" (assumed to work like: chatbout model "prompt")
+# This script uses the command-line tool "chatbot" (how to use: chatbot "model" "prompt")
 # to start with an initial prompt, and then repeatedly have the chatbot focus on a single aspect
 # of the conversation and explore it in depth—narrowing from any typical multi-point answer to just one.
 #
