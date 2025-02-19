@@ -367,7 +367,37 @@ I'll acknowledge that there are differences between the fields that may impact w
 * General data analysis
 #+HTML: <a href="#top">Back to top</a>
 The data analysis related posts that I otherwise could not categorize.
-** LLM based cell annotation pipeline in Seurat
+** Searchbot and prompt scripting
+In light of OpenAI's Deep Research, I updated my command line chatbot to include internet search. Armed with this feature, you can see a meta-level of prompt engineering involving "social networks" of chatbots, which I am calling prompt scripting. And you can do it today...
+
+At the simplest level, you have a chatbot that has a prompt. It outputs something, and its output gets fed into one or more chatbots that are pre-prompted to do a thing. The network of however many bots produce some final output in service of a higher goal.
+
+You can do this by making a shell script, and storing the chatbot outputs as bash strings. If you know how to code, and can think algorithmically, this will serve you well here.
+
+The simplest example is a newsletter producer (see the image):
+
+Step 1: prompt a searchbot to give you research notes and sources around (for example) the latest updates in single-cell foundation models in the past 3 months.
+
+Step 2: take the output from Step 1, and feed it into a reasoning model (eg. DeepSeek R1, or o3-mini-high) along with a prompt to produce a newsletter that contains footnotes and citations.
+
+You can make this infinitely more complex. I have workflows where I pass a research prompt to searchbots that are pre-prompted to specialize in a particular sub-topic, all of which pass their output into a final report-producing bot, for example. You can have additional bots that take in the report and do something with it, or multiple "layers" of research bots. The possibilities are endless.
+
+Again, you can do this today. Just go to my writeup (link in the comments). The code and instructions are spelled out. You need to sign up for perplexity and OpenRouter, and get respective API keys. At which point you can start to "play."
+
+Finally, a prediction:
+
+If you've ever used visual workflow tools like OMIQ or Scratch, I think this is what ChatGPT is going to look like down the line. Where you have a flowchart, where each node is a LLM that has a particular prompt, that passes output to other nodes, which are LLMs with a particular prompt. Have a look at LangGraph Studio if you want to see what I'm talking about.
+
+One low hanging fruit here is UIs like this specific to your domain (for me: flow/CyTOF, single-cell and spatial). I can imagine a community where people share their agentic workflows that solve problems specific to their domain, or companies that have some complex workflow as part of their "moat."
+
+So go build it, and tell me about it.
+
+And to the rest of you, reach out if you need help configuring the tool or want to chat about related topics.
+
+[[file:images/prompt_scripting.png]]
+*** comment
+The writeup on how to do this can be found here: https://tjburns08.github.io/command_line_writeup.html
+** [[https://www.linkedin.com/feed/update/urn:li:activity:7295449514847432704/][LLM based cell annotation pipeline in Seurat]]
 In light of recent work on LLM-based single-cell annotation, I created a R function for you that allows you to integrate this into your workflow, and makes explicit how it works, so you can be empowered to develop things like this on your end without relying on high-level interfaces...
 
 The LLM:
