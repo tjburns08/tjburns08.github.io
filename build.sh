@@ -9,7 +9,7 @@ original_dir=$(pwd)
 emacs -Q --script build_site.el
 
 # Run the site graph builder
-cd /Users/tylerburns/Desktop/projects/tech_projects/active/website/website_graph_view
+cd /Users/tylerburns/Desktop/ongoing/professional/website/website_graph_view
 source .wg_venv/bin/activate
 cd src || exit
 python3 make_website_graph.py

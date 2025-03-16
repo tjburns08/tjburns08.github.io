@@ -15,6 +15,10 @@ This website is a place where I can openly share my ideas and non-NDA work, rega
 If you have quesitons or comments, or you're interested in working or collaborating with me, just send me a message (see contact info below). I'm always happy to help. 
 * New
 #+HTML: <a href="#top">Back to top</a>
+** [[./seurat_pbmc_cluster_stability.html][Cluster stability as an evaluation metric for single-cell workflows]]
+Markdown.\\
+
+Clustering is a critical piece of any single-cell analysis workflow, be it suspension or spatial, transcript or protein. But after clusters have been computed, how sure is any given user that the clusters most accurrately represent cell subset partitions? Are there any element of arbitrariness of a given clustering scheme? One way to get at that question is to run your clustering algorithm multiple times across multiple random seeds, and look at how similar any one scheme is to the others by stringing the cluster visualizations (in this case, the cluster centroids) together into an animation. Here, we do this with the PBMC 3k dataset and standard Louvain clustering. We show that some subsets are less stable than others, and stability will differ based on what resolution you choose for your clustering scheme.
 ** [[./command_line_writeup.html][How I made a command line chatbot]]
 Article.\\
 
@@ -143,6 +147,10 @@ In flow cytometry and CyTOF analysis, we distinguish between "type" and "state" 
   :END:
 #+HTML: <a href="#top">Back to top</a>
 I started out analyzing CyTOF data, as I did my PhD in the lab of Garry Nolan from 2012-2017, where CyTOF was initially being developed and applied to immunology and cancer bilogy. I later broadened to single-cell sequencing and high-parameter imaging (both proteins and genes). The work below consists primarily of markdowns, with code and explanations that allow users to do things that have helped me a lot in my work, but I don't necessarily have the time to turn into publications.
+** [[./seurat_pbmc_cluster_stability.html][Cluster stability as an evaluation metric for single-cell workflows]]
+Markdown.\\
+
+Clustering is a critical piece of any single-cell analysis workflow, be it suspension or spatial, transcript or protein. But after clusters have been computed, how sure is any given user that the clusters most accurrately represent cell subset partitions? Are there any element of arbitrariness of a given clustering scheme? One way to get at that question is to run your clustering algorithm multiple times across multiple random seeds, and look at how similar any one scheme is to the others by stringing the cluster visualizations (in this case, the cluster centroids) together into an animation. Here, we do this with the PBMC 3k dataset and standard Louvain clustering. We show that some subsets are less stable than others, and stability will differ based on what resolution you choose for your clustering scheme.
 ** [[./llm_annotate_pbmc3k.html][Automated LLM-based annotation of single-cell sequencing data, directly in a R workflow]]
 Markdown.\\
 
