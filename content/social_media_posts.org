@@ -367,7 +367,32 @@ I'll acknowledge that there are differences between the fields that may impact w
 * General data analysis
 #+HTML: <a href="#top">Back to top</a>
 The data analysis related posts that I otherwise could not categorize.
-** Searchbot and prompt scripting
+** [[https://www.linkedin.com/feed/update/urn:li:activity:7307398833943011328/][Cluster stability as an evaluation metric for your clustering scheme's performance on single-cell data]]
+Cluster stability as an evaluation metric for your clustering scheme's performance on single-cell data:
+
+Here, I took the PBMC 3k dataset (from scRNA seq), and clustered it using the standard KNN graph-based clustering in Seurat with the default parameters (done on the top 10 principal components, not the UMAP). But then I did it multiple times over multiple random seeds. I then computed the centroids of each clustering and visualized them in UMAP plots. I then strung these together to run as an animation, which you can see in the image below.
+
+I define cluster stability as the amount the clusters "move around" in subsequent clusterings. While I stop at the animations for this post, this metric can in turn be quantified using information theory metrics.
+
+Here, we can see that the CD4 T cell subclusters are less stable than the rest of the clusters in the dataset. We already know that the T cells are harder to cluster for scRNA seq data, as compared to having data from an antibody panel (CITE-seq or flow/CyTOF), so this serves as a sanity check.
+
+If you have a new data modality, or you're testing some new clustering algorithm, or you're simply optimizing whatever existing clustering scheme you've got, it might help to run it many times just to see whether the clusters are stable, or whether some clusters are more stable than others. This will help you optimize your clustering scheme and make sure that the populations that you end up selecting are not arbitrary.
+
+Take home message for bioinformaticians:
+
+Here is an evaluation metric (code is in the comments) that allows you to be a bit more sure about whatever clustering algorithm you are running on whatever dataset, to allow you to distinguish signal from noise and make you more confident with respect to what you end up using in downstream steps.
+
+Take home message for leaders:
+
+As the adage goes, what can be measured can be managed. For your research team, you want to be able to pepper in as many of these evaluation metrics as you can into your workflows. You already know that it helps if they are quantitative, but here I show that it helps if they are visual. The code in the comments will allow your team to produce these animations for your respective projects.
+
+If you want to chat with me more about this kind of thing, feel free to send me a DM. Otherwise, I hope you got something out of this post and I wish you a great rest of the day.
+
+[[file:images/ppt_pbmc3k_raw_fps30.gif]]
+
+*** comment
+Code and data can be found here: https://tjburns08.github.io/seurat_pbmc_cluster_stability.html
+** [[https://www.linkedin.com/feed/update/urn:li:activity:7297975993489616897/][Searchbot and prompt scripting]]
 In light of OpenAI's Deep Research, I updated my command line chatbot to include internet search. Armed with this feature, you can see a meta-level of prompt engineering involving "social networks" of chatbots, which I am calling prompt scripting. And you can do it today...
 
 At the simplest level, you have a chatbot that has a prompt. It outputs something, and its output gets fed into one or more chatbots that are pre-prompted to do a thing. The network of however many bots produce some final output in service of a higher goal.
