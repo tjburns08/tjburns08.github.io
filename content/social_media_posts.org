@@ -367,6 +367,39 @@ I'll acknowledge that there are differences between the fields that may impact w
 * General data analysis
 #+HTML: <a href="#top">Back to top</a>
 The data analysis related posts that I otherwise could not categorize.
+** [[https://www.linkedin.com/posts/tylerjburns_spatial-omics-analysis-is-complicated-but-activity-7310656950818496512-9D5a?utm_source=share&utm_medium=member_desktop&rcm=ACoAAAbP8M8BYXs_UknoBHnmw2rZ-aRDTJF7L3Y][Neighbor graphs in spatial analysis]]
+Spatial -omics analysis is complicated. But there is a powerful concept that unifies many seemingly unrelated methods: neighbor graphs. A neighbor graph simply connects cells to their closest neighbors— either based on similarity of gene/protein expression profiles or on physical proximity. If you grasp this idea, you'll quickly gain intuition across key steps like integration, clustering, niche finding, and dimensionality reduction.
+
+Here is how neighbor graphs underpin a typical spatial analysis pipeline:
+
+Integration:
+
+You might be integrating multiple datasets early on. While there are many ways to do this, one of them, called weighted nearest neighbor analysis, or wnn, uses a knn graph of multimodal datasets to predict the "weights" of each modality (eg. RNA vs protein), to determine how each modality should influence cell similarity.
+
+Clustering:
+
+At some point, you cluster the data. To do this, you make a knn graph, and then do what is known as community detection (which regions of the graph are more connected and which regions are less connected), and assign clusters accordingly. You may have seen the words "Louvain" or "Leiden" in the tutorials. That is what this is.
+
+Niche finding:
+
+After you annotate the cells (e.g. labeling B cells, T cells, etc), you generally want to look for spatial "niches" that contain enrichment of specific cell types. To do this, you now make a neighbor graph of physical spatial coordinates so that each node is a cell label. You then do permutation tests (comparing to a randomized neighbor graph) to add statistical rigor.
+
+Dimensionality reduction:
+
+And finally, just about every single-cell publication has a t-SNE or UMAP these days. How do those work? To massively simplify, both methods take the cells, make respective constructs that are similar to a neighbor graph, and produce a 2D layout that preserves each cell's local relationships by minimizing an information theoretic "loss" (KL divergence for t-SNE, cross-entropy for UMAP) compared to the high-dimensional coordinates.
+
+If you want to prove all of this for yourself, just go through Giotto's code base and search for terms like knn, neighbor, graph, and delaunay (see image below), and/or go to the original Giotto paper (link in comments) and search for "neighborhood network."
+
+What does this mean for leaders and researchers alike?
+
+Neighbor graphs help tie a lot of spatial analysis together. They are not the only thing you have to know, but you should get in the habit of finding these through lines and doubling down on them. This will allow you to both move fast and really understand what is happening under the hood.
+
+If you want to talk to me more about any of this stuff, just send a DM. If you've been doing this a while and there are some other deep through lines you like (e.g. Fourier transform), please mention them in the comments. Otherwise, I hope you have a great day.
+
+[[file:images/neighbor_graphs_spatial.png]]
+*** comment
+Giotto paper is here: https://genomebiology.biomedcentral.com/articles/10.1186/s13059-021-02286-2
+Giotto suite paper is here: https://www.biorxiv.org/content/10.1101/2023.11.26.568752v1.full.pdf
 ** [[https://www.linkedin.com/feed/update/urn:li:activity:7307398833943011328/][Cluster stability as an evaluation metric for your clustering scheme's performance on single-cell data]]
 Cluster stability as an evaluation metric for your clustering scheme's performance on single-cell data:
 
