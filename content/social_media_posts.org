@@ -85,6 +85,44 @@ If you want a more in-depth look at this KNN-based solution and things you can d
 * UMAP and t-SNE manipulation animations
 #+HTML: <a href="#top">Back to top</a>
 Here, I ask various questions around the nature of t-SNE and UMAP, which are often well answered by manipulating the input and examining the output.
+** Following a cell's position across multiple t-SNE and UMAP runs
+If you run t-SNE or UMAP multiple times, you can see the maps change. To properly use these tools, you need to run them more than once. Let me explain.
+
+I ran 100 t-SNEs and 100 UMAPs on the same CyTOF dataset (Samusik bone marrow, 10,000 cells), tracking the position of a single cell across runs.
+
+Here's what happened:
+
+t-SNE: The cell formed a diffuse ring across runs, showing many plausible placements.
+
+UMAP: The cell jumped between two distinct regions, showing more constraint.
+
+Why this matters:
+
+t-SNE has a very large solution space. The tool optimizes for local neighborhood structure, so the global structure can shift dramatically.
+
+UMAP appears to be tighter, but still not deterministic.
+
+Visual islands are stable (monocytes will have their own "island" throughout runs), but the total layout isn’t.
+
+Key takeaway for researchers and team leads:
+
+Run your dimensionality reduction multiple times.
+
+Compare not just what islands form, but whether and how relative positions between islands change. Look for patterns that survive the shift.
+
+As I've talked about in previous posts, t-SNE and UMAP are useful in terms of seeing the "forest in the trees," but they should not be taken as ground truth (I'll link some of my relevant work in the comments).
+
+In future research: I’ll look at how relative island positioning changes when we control for global flips and rotations (something that you see a bit in the gifs below).
+
+Seen weird variability in other tools? Leave a comment. I’d love to learn from your observations too.
+
+I hope you all have a great day.
+
+[[file:images/tsne_umap_cell_tracking.gif]]
+*** comment
+A webinar I gave on the limits of dimensionality reduction analysis: https://watershed.bio/resources/the-limits-of-dimensionality-reduction-tools-for-single-cell-analysis
+
+My KnnSleepwalk tool, which you all should use: https://github.com/tjburns08/KnnSleepwalk
 ** [[https://www.linkedin.com/posts/tylerjburns_in-reviewing-the-recent-seeing-data-as-t-sne-activity-7201194319930675201-YFrF?utm_source=share&utm_medium=member_desktop][t-SNE and UMAP exist on a spectrum]]
 In reviewing the recent "Seeing data as t-SNE and UMAP do" paper, I found out that t-SNE and UMAP are on a spectrum. Let me explain:
 
