@@ -89,9 +89,9 @@
 </p>
 <hr />
 
-<div id="outline-container-org17ff8cf" class="outline-2">
-<h2 id="org17ff8cf">Introduction</h2>
-<div class="outline-text-2" id="text-org17ff8cf">
+<div id="outline-container-orgc8e36b2" class="outline-2">
+<h2 id="orgc8e36b2">Introduction</h2>
+<div class="outline-text-2" id="text-orgc8e36b2">
 <p>
 This article is written for biologists and research team directors with a biology background. If you are a bioinformatician, then perhaps you can be entertained by my perspective, here. Everyone has a slightly or massively different path, afterall.
 </p>
@@ -106,9 +106,9 @@ For an audio version of my journey from biologist to bioinformatician, plus some
 </div>
 </div>
 
-<div id="outline-container-orgd8800bf" class="outline-2">
-<h2 id="orgd8800bf">Learning how to code</h2>
-<div class="outline-text-2" id="text-orgd8800bf">
+<div id="outline-container-orga5af5b7" class="outline-2">
+<h2 id="orga5af5b7">Learning how to code</h2>
+<div class="outline-text-2" id="text-orga5af5b7">
 <p>
 I had two attempts at learning how to code. The first was a genomics class in 2012, done in <a href="https://xkcd.com/224/">Perl</a>. The class was too much too fast. I had to learn the basics of genomics (it wasn't my background), I had to learn how to code, and I had to learn how to analyze genomics datasets. The whole thing was a big blur of cortisol. So I'm not going to talk about it except for here, only to say that if you've had a similar experience, know that you might have simply been in the wrong environment.
 </p>
@@ -118,15 +118,15 @@ My second attempt was in 2015, when I took Stanford's <a href="https://web.stanf
 </p>
 </div>
 
-<div id="outline-container-orgbbf2621" class="outline-3">
-<h3 id="orgbbf2621">Karel the Robot</h3>
-<div class="outline-text-3" id="text-orgbbf2621">
+<div id="outline-container-org987bc39" class="outline-3">
+<h3 id="org987bc39">Karel the Robot</h3>
+<div class="outline-text-3" id="text-org987bc39">
 <p>
 We started with <a href="https://en.wikipedia.org/wiki/Karel_(programming_language)">Karel the Robot</a>, available to the public <a href="https://compedu.stanford.edu/karel-reader/docs/python/en/chapter1.html">here</a>. It's such a simple concept, but was surprisingly deep in terms of just how much it taught me, and how much confidence it gave me. Let me try to distill some of the magic here. Have a look at the image below, so you can get a feel for what Karel is.
 </p>
 
 
-<div id="org9d7aa7b" class="figure">
+<div id="orgaab247a" class="figure">
 <p><img src="images/karel1.png" alt="karel1.png" width="500px" />
 </p>
 </div>
@@ -150,7 +150,7 @@ Then Karel ends up here:
 </p>
 
 
-<div id="org64e584e" class="figure">
+<div id="org5426b86" class="figure">
 <p><img src="images/karel2.png" alt="karel2.png" width="500px" />
 </p>
 </div>
@@ -165,9 +165,9 @@ And that was coding! You gave Karel a set of instructions, written in a particul
 </div>
 </div>
 
-<div id="outline-container-org192b656" class="outline-3">
-<h3 id="org192b656">Functions</h3>
-<div class="outline-text-3" id="text-org192b656">
+<div id="outline-container-org379935d" class="outline-3">
+<h3 id="org379935d">Functions</h3>
+<div class="outline-text-3" id="text-org379935d">
 <p>
 Ok, here is where it gets interesting. We're going to look at functions, which one can think of as a fundamental unit of innovation. Suppose Karel wants to walk along that wall, and end up at xy position (4, 2). What does he have to do?
 </p>
@@ -226,9 +226,9 @@ Final point: you'll hear the phrase "don't <a href="https://en.wikipedia.org/wik
 </div>
 </div>
 
-<div id="outline-container-org7459a32" class="outline-3">
-<h3 id="org7459a32">Problem decomposition</h3>
-<div class="outline-text-3" id="text-org7459a32">
+<div id="outline-container-orgdbb5c98" class="outline-3">
+<h3 id="orgdbb5c98">Problem decomposition</h3>
+<div class="outline-text-3" id="text-orgdbb5c98">
 <p>
 Another key concept embedded in here is <a href="https://en.wikipedia.org/wiki/Decomposition_(computer_science)">problem decomposition</a>. This is the idea that when you're dealing with a complex problem, you break it down into pieces. Here, we were initially using high-level abstractions like turning right, prior to even thinking about how we're going to implement <code>turn_right</code> in python. Perhaps thinking about how we're going to implement <code>turn_right</code> would make us nervous because it's just too much to think about. Problems are hard. Even today, I will get overwhelmed if I don't properly decompose these problems prior to attacking.
 </p>
@@ -243,9 +243,9 @@ A variant of problem decomposition is something I use quite a bit, and something
 </div>
 </div>
 
-<div id="outline-container-org221b5b7" class="outline-3">
-<h3 id="org221b5b7">Loops</h3>
-<div class="outline-text-3" id="text-org221b5b7">
+<div id="outline-container-orgcf0feb2" class="outline-3">
+<h3 id="orgcf0feb2">Loops</h3>
+<div class="outline-text-3" id="text-orgcf0feb2">
 <p>
 Ok, now let's introduce one more concept. <a href="https://en.wikipedia.org/wiki/Control_flow#Loops">Loops</a>.
 </p>
@@ -255,7 +255,7 @@ Let's suppose you have Karel in the following 8x8 grid:
 </p>
 
 
-<div id="org536f9d1" class="figure">
+<div id="orgd99dd31" class="figure">
 <p><img src="images/karel4.png" alt="karel4.png" width="500px" />
 </p>
 </div>
@@ -313,9 +313,9 @@ I encourage you to play around with Karel the Robot. I did so for 3 weeks in CS1
 </div>
 </div>
 
-<div id="outline-container-org1b513c6" class="outline-3">
-<h3 id="org1b513c6">On languages</h3>
-<div class="outline-text-3" id="text-org1b513c6">
+<div id="outline-container-orgfa49399" class="outline-3">
+<h3 id="orgfa49399">On languages</h3>
+<div class="outline-text-3" id="text-orgfa49399">
 <p>
 I remember having the misconception that after learning my first programming language, the next one would be just as hard and take just as long. This is not true. When you learn python, learning R will simply be a matter of learning the syntax and learning the specific quirks of the language itself. This is because within python, and within Karel, you will have learned many of the core concepts in computer science. These concepts are used in every language, in higher and lower level abstractions. It will be work to learn a new programming language, but it won't be like learning German after learning Spanish (I speak from literal experience).
 </p>
@@ -327,9 +327,9 @@ The next section, on mass cytometry analysis, initially involved <a href="https:
 </div>
 </div>
 
-<div id="outline-container-org52811b8" class="outline-2">
-<h2 id="org52811b8">Mass cytometry and the first principles of bioinformatics</h2>
-<div class="outline-text-2" id="text-org52811b8">
+<div id="outline-container-orgd50824e" class="outline-2">
+<h2 id="orgd50824e">Mass cytometry and the first principles of bioinformatics</h2>
+<div class="outline-text-2" id="text-orgd50824e">
 <p>
 Let's talk about <a href="https://en.wikipedia.org/wiki/Mass_cytometry">mass cytometry</a>, also known as CyTOF. This was a tool developed in the late 2000s by Scott Tanner at University of Toronto, but whose potential was fully realized by <a href="https://www.youtube.com/watch?v=uTCc2-1tbBQ">Garry Nolan</a>, my thesis advisor. The landmark <a href="https://pubmed.ncbi.nlm.nih.gov/21551058/">mass cytometry for immunology</a> paper came out in 2011, and I joined the lab in 2012. The technology was still new, and there were no best practices for analyzing this type of data in biology aside from those developed by the lab and its collaborators.
 </p>
@@ -347,7 +347,7 @@ Unlike single-cell sequencing frameworks like <a href="https://satijalab.org/seu
 </p>
 
 
-<div id="orgf86c20a" class="figure">
+<div id="org668297c" class="figure">
 <p><img src="images/cytof_matrix.png" alt="cytof_matrix.png" width="800px" />
 </p>
 </div>
@@ -365,7 +365,7 @@ If we roll the clock back to 2011, one of the images that arguably sold the immu
 </p>
 
 
-<div id="orgbacb4e6" class="figure">
+<div id="org0a4fe2a" class="figure">
 <p><img src="images/spade_trees.png" alt="spade_trees.png" width="800px" />
 </p>
 </div>
@@ -412,9 +412,9 @@ Bioinformaticians, biologists, and research team leaders need to be able to look
 </div>
 </div>
 
-<div id="outline-container-org843490b" class="outline-2">
-<h2 id="org843490b">Summary and conclusions</h2>
-<div class="outline-text-2" id="text-org843490b">
+<div id="outline-container-orgecc219a" class="outline-2">
+<h2 id="orgecc219a">Summary and conclusions</h2>
+<div class="outline-text-2" id="text-orgecc219a">
 <p>
 To learn bioinformatics, you have to learn the basics of code. Luckily, programs like Karel the Robot can teach you the core concepts in a matter of weeks. A basic class like Stanford's CS106A will give you this and more. You can find old <a href="https://www.youtube.com/watch?v=KkMDCCdjyW8&amp;list=PL84A56BC7F4A1F852">lectures on YouTube</a> that are perfectly relevant today (though they are in Java, the core concepts are the same). If you don't plan to actually code, you should at least learn it to the point where you can run scripts if you're a biologist, or effectively communicate to comp bio teams if you're a biologist or a research team leader.
 </p>
