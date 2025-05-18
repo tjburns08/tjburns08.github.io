@@ -79,9 +79,19 @@
 <a href="./index.html">Home</a>
 </p>
 
-<div id="outline-container-orgdaf1fea" class="outline-2">
-<h2 id="orgdaf1fea">Levels of analysis: atoms</h2>
-<div class="outline-text-2" id="text-orgdaf1fea">
+<hr />
+<p>
+<i>In hacking, a computer pretends to be made out of things like ‘buffers’ and ‘lists’ and ‘objects’ with rich meaningful semantics, but really, it’s just made out of bits which mean nothing and only accidentally can be interpreted as things like ‘web browsers’ or ‘passwords’, and if you move some bits around and rewrite these other bits in a particular order and read one string of bits in a different way, now you have bypassed the password.</i><br />
+</p>
+
+<p>
+Gwern, <i><a href="https://gwern.net/unseeing">On Seeing Through and Unseeing: the Hacker Mindset</a></i>
+</p>
+<hr />
+
+<div id="outline-container-org2a8d82a" class="outline-2">
+<h2 id="org2a8d82a">Levels of analysis: atoms</h2>
+<div class="outline-text-2" id="text-org2a8d82a">
 <p>
 When we go to college (at least at the time of writing <span class="timestamp-wrapper"><span class="timestamp">[2025-05-18 Sun]</span></span>, in the United States), we take a bunch of general education classes and then after one or two years, we pick a major. In the sciences, this is often divided by levels of analysis. At the lowest level, we have math. Then there is physics, which is heavily math-reliant to tell us about big stuff (galaxies) and small stuff (subatomic particles). If we focus on the latter, from the subatomic particles, we move to atoms and molecules, which gives us chemistry. From atoms and molecules, we move to their combinations in replicators, which gives us biology. Within biology, when it comes to studying the brain, we move to the study of the mind, which brings us psychology. From a single mind, we move to groups of minds, and that gives us sociology. There is a classic xkcd comic that explains this <a href="https://xkcd.com/435/">here</a>, calling it "levels of purity" rather than levels of analysis, but the concept is similar enough.
 </p>
@@ -95,19 +105,19 @@ But lately I have been thinking that perhaps this push to learn how to code, and
 </p>
 </div>
 </div>
-<div id="outline-container-org25e6b4e" class="outline-2">
-<h2 id="org25e6b4e">Levels of analysis: bits</h2>
-<div class="outline-text-2" id="text-org25e6b4e">
+<div id="outline-container-org9dd3329" class="outline-2">
+<h2 id="org9dd3329">Levels of analysis: bits</h2>
+<div class="outline-text-2" id="text-org9dd3329">
 <p>
 To go into this more, let's talk about where computer science fits in the levels of analysis that we were just talking about. My gut reaction is to place it somewhere between math and physics. But I think that the recent developments in AI are giving us a bit more clarity here, and I think this might help us re-frame the problem.
 </p>
 
 <p>
-I propose that there may be an analogous "levels of analysis" hierarchy to the "bits" side of things to the one that I laid out in terms of "atoms." Computing also starts with math, but it especially focuses on discrete math. From here, we get information theory, which is grounded in the algebra of 0's and 1's, also known as boolean algebra. Information theory gives us the very fundamental theories of computation, that include things like <a href="https://en.wikipedia.org/wiki/Turing_machine">Turing machines</a> and the <a href="https://en.wikipedia.org/wiki/Halting_problem">halting problem</a>. Then we move up a level to digital electronics and computer architecture. This might be analogous to physics. This in turn leads us to the study of programming languages that can implement sequences of computation, and the algorithms that they implment, which might be similar to that of chemistry. A level up from that, we have AI/ML and adaptive software systems at large (e.g. genetic algorithms), which might be thought of as the biology of the "bits" world. And perhaps a level up from that, we have the psychology of agentic and generalist (LLM) systems. And perhaps a level up from that, we have the sociology of multi-agent systems, swarms, and bot nets.
+I propose that there may be an analogous "levels of analysis" hierarchy to the "bits" side of things to the one that I laid out in terms of "atoms." First, I'll start with an explicit mapping, which I will explain in the subsequent paragraphs.
 </p>
 
 <p>
-To make this more explicit:
+The mapping is as follows:
 </p>
 <ul class="org-ul">
 <li>math -&gt; discrete math, theories of computation</li>
@@ -117,12 +127,36 @@ To make this more explicit:
 <li>psychology -&gt; Agentic AI studies</li>
 <li>sociology -&gt; Multi-agent, swarm, and bot net studies</li>
 </ul>
+
+<p>
+Computing also starts with math, but it especially focuses on discrete math. Lingering at the math level, we get information theory, which is grounded in the algebra of 0's and 1's, also known as Boolean algebra. Information theory gives us the very fundamental theories of computation, that include things like <a href="https://en.wikipedia.org/wiki/Turing_machine">Turing machines</a> and the <a href="https://en.wikipedia.org/wiki/Halting_problem">halting problem</a>.
+</p>
+
+<p>
+Then we move up a level to digital electronics and computer architecture. Things like <a href="./logic_gates.html">logic gates</a>. This might be analogous to physics.
+</p>
+
+<p>
+This in turn leads us to the study of <a href="./r_rabbit_hole.html">programming languages</a> that can implement sequences of computation, and the algorithms that they implement, which might be similar to that of the rules and molecular motifs of chemistry.
+</p>
+
+<p>
+A level up from that, we have AI/ML and adaptive software systems at large (e.g. genetic algorithms). A lot of <a href="https://watershed.bio/resources/the-limits-of-dimensionality-reduction-tools-for-single-cell-analysis">my work</a> on non-linear dimensionality reduction tools fit in here. This might be thought of as the biology of the "bits" world.
+</p>
+
+<p>
+And perhaps a level up from that, we have the psychology of <a href="./command_line_writeup.html">agentic</a> and generalist (LLM) systems. Anyone who has messed around with <a href="./descent_into_madness.html">changing the prompt</a> to see what output a LLM will give you has done this.
+</p>
+
+<p>
+And perhaps a level up from that, we have the sociology of multi-agent systems, <a href="https://en.wikipedia.org/wiki/Swarm_intelligence">swarms</a>, and bot nets. An example here is the stock market <a href="https://en.wikipedia.org/wiki/2010_flash_crash">flash crash</a> of 2010, where some emergent pattern in the automated trading bots being used on Wall Street led to an almost 9% drop in the Dow Jones Industrial Average in a few minutes. A more often talked about example is the use of <a href="https://en.wikipedia.org/wiki/Dead_Internet_theory">bots</a> on social media to influence the masses.
+</p>
 </div>
 </div>
 
-<div id="outline-container-org00f4765" class="outline-2">
-<h2 id="org00f4765">Practical implications</h2>
-<div class="outline-text-2" id="text-org00f4765">
+<div id="outline-container-org3876790" class="outline-2">
+<h2 id="org3876790">The right speciality for the person</h2>
+<div class="outline-text-2" id="text-org3876790">
 <p>
 What does this mean, from a practical standpoint? A lot of the above has yet to be really fleshed out (at the time of writing <span class="timestamp-wrapper"><span class="timestamp">[2025-05-18 Sun]</span></span>). But I think what you can do, assuming this is inevitable, is to think about where you fit in the stack. For example, I am a biologist by training, so although I love to nerd out at the lower levels, I find myself doing biology-like experiments (e.g. knock-out, knock-in) on relevant ML algorithms in my field (an example <a href="https://tjburns08.github.io/annotated_seurat_without_pca.html">here</a>). On the AI side, I am particularly drawn to some of the "interpretability" studies that Anthropic is doing, <a href="https://www.anthropic.com/research/tracing-thoughts-language-model">here</a>.
 </p>
@@ -142,19 +176,23 @@ And if we go back to how we learn stuff in school, it might be that there is som
 <p>
 So you can ask yourself: in the levels of analysis on the "bits" side, what lights you up? What are you naturally drawn to? If you don't know yet, then what is the "bits" equivalent of where you are at on the "atoms" side?
 </p>
-
+</div>
+</div>
+<div id="outline-container-org0ff0a92" class="outline-2">
+<h2 id="org0ff0a92">The right person for the job</h2>
+<div class="outline-text-2" id="text-org0ff0a92">
 <p>
 And for the sake of solving problems in general, this framing might help us in terms of bringing together technical working groups to address major issues (e.g. climate change, cancer) as they evolve. If the big problem is the way bot nets are affecting the cultural zeitgeist on social media, and you need some bits-level experts, then perhaps you need to look beyond someone's ability to code. Yes, you'll need an algorithms expert, but you might also need a bot net expert too, and that might be a completely different way of thinking, the same way sociology is a completely different way of thinking than chemistry.
 </p>
 
 <p>
-Furthermore, this has applications in recruiting, something <a href="https://tjburns08.github.io/burns_lsc.html">my company</a> is doing a lot of right now. Familiarity with R or Python is way too vague of a reqirement. Same with arbitrary "checklist" words, like AI/ML, React, Flask, and so forth. Or for that matter, familiarity with LLMs. I think we need to get a lot more granular here. So you do code-based stuff. Do you develop analysis pipelines? Or do you tinker under the hood of analysis pipelines? Do you speed up algorithms? Do you manage large code bases? Do you write packages and libraries or do you do one-off scripts? But then it gets interesting when you add the AI layer. Because perhaps in the future, we'll get questions like: do you use LLMs or do you tinker under the hood of LLMs? Do you operate at the LLM level, or the "clusters of LLMs working together" layer? Have you done ablation studies in agentic systems? Do you do interpretability work in general? Do you have any experience with bot net management?
+Furthermore, this has applications in recruiting, something <a href="https://tjburns08.github.io/burns_lsc.html">my company</a> is doing a lot of right now. Familiarity with R or Python is way too vague of a requirement. Same with arbitrary "checklist" words, like AI/ML, React, Flask, and so forth. Or for that matter, familiarity with LLMs. I think we need to get a lot more granular here. So you do code-based stuff. Do you develop analysis pipelines? Or do you tinker under the hood of analysis pipelines? Do you speed up algorithms? Do you manage large code bases? Do you write packages and libraries or do you do one-off scripts? But then it gets interesting when you add the AI layer. Because perhaps in the future, we'll get questions like: do you use LLMs or do you tinker under the hood of LLMs? Do you operate at the LLM level, or the "clusters of LLMs working together" layer? Have you done ablation studies in agentic systems? Do you do interpretability work in general? Do you have any experience with bot net management?
 </p>
 </div>
 </div>
-<div id="outline-container-org81f428c" class="outline-2">
-<h2 id="org81f428c">Conclusions</h2>
-<div class="outline-text-2" id="text-org81f428c">
+<div id="outline-container-org68e8b85" class="outline-2">
+<h2 id="org68e8b85">Conclusions</h2>
+<div class="outline-text-2" id="text-org68e8b85">
 <p>
 To wrap this all up, I think as the field of AI gets more fleshed out, it is going to change the way we look at the "bits" side of things, such that we will think in terms of distinct levels of analysis as specialities different enough to have different names, rather than being sub-specialties of computer science. Imagine what it would be like if "science" was a single major, and there were sub-specialities you could choose once you're in, like physics or psychology. That's what computer science is like right now. And I think once it divides into distinct fields the same way science did, then it might be easier to wrap our heads around where we fit into it, how we solve problems within it, and how we teach it to the next generation.
 </p>
