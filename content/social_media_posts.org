@@ -1,6 +1,6 @@
 #+Title: Social media posts
 #+Author: Tyler Burns
-#+Date: May 17, 2024 - September 22, 2024
+#+Date: May 17, 2024 - present
 #+HTML: <div id="top"></div>
 
 [[./index.org][Home]]
@@ -16,6 +16,38 @@ Dr. Seuss, [[https://en.wikipedia.org/wiki/Horton_Hatches_the_Egg][/Horton Hatch
 * KNN sleepwalk and related
 #+HTML: <a href="#top">Back to top</a>
 A lot of my social media content has revolved around a tool I build called KNN sleepwalk, which allows you to look at the difference between K-nearest neighbors (KNN) of a given data point in the embedding space versus the original high-dimensional space. This kind of intuition is important especially in high-dimensional flow/CyTOF data, where there is sometimes temptation to gate directly on the embedding itself. These posts show you that one should exercise caution when doing such a thing. You can use the method [[https://github.com/tjburns08/KnnSleepwalk][here]].
+** [[https://www.linkedin.com/posts/tylerjburns_umap-shuffles-nearest-neighbor-rank-check-activity-7330937919156760578-VTee?utm_source=share&utm_medium=member_desktop&rcm=ACoAAAbP8M8BYXs_UknoBHnmw2rZ-aRDTJF7L3Y][KNN Sleepwalk colored by ranks]]
+UMAP shuffles nearest neighbor rank. Check out David Novak's update to my KNN Sleepwalk package, which shows this.
+
+Quick review of KNN Sleepwalk:
+
+- Purpose: determine how well nonlinear dimensionality reduction tools preserve a cell's nearest neighbors from the original feature space, cell by cell.
+- Inputs: original feature matrix (markers if flow/CyTOF, top n PCs if single-cell sequencing).
+- Output: an interactive map that runs in the browser. Hover your cursor over a cell and it highlights its neighbors in embedding space, and neighbors in original feature space (often quite different).
+
+What we see in this version:
+
+- The rank of nearest neighbors (closest, second closest, etc) is not preserved, at least in this example of UMAP with CyTOF data.
+
+What this means for users:
+
+- In general, I would discourage subsetting/gating directly in UMAP space
+- If you have to do this, I would not trust any distinctions made within islands, unless they are made in the original feature space (e.g. Naive vs Memory CD4 in the PBMC 3k dataset, if you know what I'm talking about).
+
+What I am pushing for:
+
+- Native plugins in FlowJo, Cytobank, OMIQ, Seurat, and whichever other tools people are using to analyze their flow/CyTOF/single-cell data.
+- More "interpretability" work for the tools that we regularly use. For inspiration, look at what Anthropic is doing to try to understand its LLMs (link in comments).
+
+Next step:
+
+If you do single-cell analysis, use my package (link in comments). If you are a bioinformatics tool builder or researcher, look into interpretability work. If you have any feedback, comment, DM me, or sign up for my online office hours.
+
+[[file:images/knn_sleepwalk_with_ranks_ppt.gif]]
+*** comment
+KNN Sleepwalk can be found here: https://github.com/tjburns08/KnnSleepwalk
+Anthropic's interpretability work can be found here: https://www.anthropic.com/research/tracing-thoughts-language-model
+My office hours: https://calendly.com/burnslsc-info/30min
 ** [[https://www.linkedin.com/posts/tylerjburns_do-you-need-quick-and-easy-intuition-around-activity-6998611378068430848-BSrt?utm_source=share&utm_medium=member_desktop][Original KNN sleepwalk reveal]]
 
 Do you need quick and easy intuition around how exact your single-cell embeddings are? Check out =knn_sleepwalk=, a wrapper I wrote around the sleepwalk R package. Hover the cursor over any cell in your embedding, and it will show you the cell's k-nearest neighbors computed from the original feature space (as opposed to the embedding space). Below is a UMAP of 10,000 cells in CyTOF data with a k of 100. Note that the neighbors are not always nearby. Be careful if you want to gate/cluster on the embedding! https://lnkd.in/eeqRBdSn
@@ -405,6 +437,44 @@ I'll acknowledge that there are differences between the fields that may impact w
 * General data analysis
 #+HTML: <a href="#top">Back to top</a>
 The data analysis related posts that I otherwise could not categorize.
+** [[https://www.linkedin.com/posts/tylerjburns_ever-wonder-if-a-boundary-cell-in-a-clustering-activity-7328409514074857472-Op_5?utm_source=share&utm_medium=member_desktop&rcm=ACoAAAbP8M8BYXs_UknoBHnmw2rZ-aRDTJF7L3Y][Cells at the boundary of two clusters]]
+Ever wonder if a "boundary" cell in a clustering scheme really fits its assigned cluster, versus the adjacent cluster? Below is one straightforward approach to identify these boundary cells in your data.
+
+The problem:
+
+A lot of our clustering tools assume that a cell assigned to a cluster is for sure in that cluster. But anyone who has worked with PBMC scRNA seq data knows that there are populations (e.g. CD4 T cells) that are difficult to subset, and therefore hard cut-offs might not be accurate. Same goes for trajectory data. So we need to scrutinize the cells at the boundary regions between clusters.
+
+My solution:
+
+For each cell, I took it and its four nearest neighbors in PC space (not UMAP space), took their assigned clusters, and computed the Shannon entropy of that. This gives us a value of 0 if they belong to the same cluster and a higher value when the neighborhood is mixed.
+
+What you can do with this:
+
+- A visual QC: Visualize the high-entropy boundary regions directly with e.g. UMAP (see image below).
+- Better downstream analysis: Use the entropy values to down-weight cells in (for example) a ML classifier.
+- Cluster purity score: Use the mean value of each cluster's per-cell entropy scores (see markdown linked in comments) to determine which clusters need more scrutiny.
+
+Ideas that this builds off of:
+
+Spot Entropy (Søren Helweg Dam, PhD thesis 2025), ROGUE (Liu et al. 2020) and LISI (Korsunsky et al. 2019). See details in comments.
+
+The bottom line:
+
+Take my code from the R Markdown attached in the comments to determine which cells in your single-cell or spatial data need a second look.
+
+If there are any similar things you do for your data (e.g. cluster silhouette score), let me know in the comments or via DM.
+
+[[file:images/cluster_boundaries.png]]
+*** comment
+My longer report, containing code you can use: https://tjburns08.github.io/soft_clustering.html
+
+Details on pre-existing methods:
+- Spot entropy, Soren Helweg Dam PhD thesis, 2025: a similar KNN-based entropy tool is used for consensus clustering of spatial datasets (the method that inspired this post).
+- ROGUE, Baolin Liu et al, Nat. Comm, 2020: uses entropy of gene expression in a cluster (rather than cluster IDs of KNN) to develop a cluster purity score.
+- LISI/Harmony, Korsunsky et al, Nat. Meth, 2019: a similar KNN "diversity" index used in the context of benchmarking data integration methods (and could in theory be used here).
+
+A related topic worth reading about:
+Soft clustering (aka fuzzy clustering). This is where cells are not assigned to a single cluster, but rather have a "membership-ness" score for every cluster. This is done in practice using tools like Gaussian mixture models.
 ** [[https://www.linkedin.com/posts/tylerjburns_spatial-omics-analysis-is-complicated-but-activity-7310656950818496512-9D5a?utm_source=share&utm_medium=member_desktop&rcm=ACoAAAbP8M8BYXs_UknoBHnmw2rZ-aRDTJF7L3Y][Neighbor graphs in spatial analysis]]
 Spatial -omics analysis is complicated. But there is a powerful concept that unifies many seemingly unrelated methods: neighbor graphs. A neighbor graph simply connects cells to their closest neighbors— either based on similarity of gene/protein expression profiles or on physical proximity. If you grasp this idea, you'll quickly gain intuition across key steps like integration, clustering, niche finding, and dimensionality reduction.
 
