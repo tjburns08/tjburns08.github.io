@@ -16,6 +16,27 @@ Dr. Seuss, [[https://en.wikipedia.org/wiki/Horton_Hatches_the_Egg][/Horton Hatch
 * KNN sleepwalk and related
 #+HTML: <a href="#top">Back to top</a>
 A lot of my social media content has revolved around a tool I build called KNN sleepwalk, which allows you to look at the difference between K-nearest neighbors (KNN) of a given data point in the embedding space versus the original high-dimensional space. This kind of intuition is important especially in high-dimensional flow/CyTOF data, where there is sometimes temptation to gate directly on the embedding itself. These posts show you that one should exercise caution when doing such a thing. You can use the method [[https://github.com/tjburns08/KnnSleepwalk][here]].
+** [[https://www.linkedin.com/posts/tylerjburns_spatialtranscriptomics-spatialbiology-activity-7336012823308689409-3h3c?utm_source=share&utm_medium=member_desktop&rcm=ACoAAAbP8M8BYXs_UknoBHnmw2rZ-aRDTJF7L3Y][KNN Sleepwalk for spatial]]
+You can now use my KnnSleepwalk package to interrogate your spatial data. KnnSleepwalk allows you to interact with your data simply by hovering your cursor over the visualizations. The gif below shows an Imaging Mass Cytometry cancer dataset.
+
+Left: a biaxial with CDH1 (E-Cadherin) on the x axis and CD68 on the y axis.
+Right: the spatial coordinates of each cell.
+
+Simply dragging the cursor shows you spatial differences that you might have missed if you were simply manually gating on the left, or relying on a color palette on the right.
+
+If you work with spatial data: what UI/UX features would you want to see? The feedback I've already gotten is that this needs to work with very, very large datasets.
+
+If you are leading a team: let's talk strategy. Tools like this could save you lots of time and provide more clarity in each decision cycle.
+
+The big picture: based on the reception this tool and similar of mine have gotten in the past few years, there is an unmet need around interactive hover-and-see tools in single-cell and spatial. We need to add this kind of functionality to our UI/UX's.
+
+The link to the package is in the comments. Thank you and I hope you all have a great day.
+[[file:images/cdh1_cd68_imc_pt5_ppt.gif]]
+*** comment
+Link to KnnSleepwalk: https://github.com/tjburns08/KnnSleepwalk
+Link to virtual office hours: https://calendly.com/burnslsc-info/30min
+
+Also: I'm collecting public spatial datasets, and it's not straightforward. Any help here would be appreciated.
 ** [[https://www.linkedin.com/posts/tylerjburns_umap-shuffles-nearest-neighbor-rank-check-activity-7330937919156760578-VTee?utm_source=share&utm_medium=member_desktop&rcm=ACoAAAbP8M8BYXs_UknoBHnmw2rZ-aRDTJF7L3Y][KNN Sleepwalk colored by ranks]]
 UMAP shuffles nearest neighbor rank. Check out David Novak's update to my KNN Sleepwalk package, which shows this.
 
