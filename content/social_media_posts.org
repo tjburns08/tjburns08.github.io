@@ -316,6 +316,35 @@ If you know anyone who could use this post or my teaching/advice, please share i
 * Journal club
 #+HTML: <a href="#top">Back to top</a>
 Sometimes I read papers and like to talk about them.
+** The KRONOS patch based spatial foundation model
+If you do spatial, you know QC is a headache. There's a new spatial foundation model called KRONOS out this week that can help with that. I read the pre-print and spoke with the corresponding author. Here is what I found:
+
+Quick overview:
+
+This foundation model is a vision transformer (similar to the LLMs, but can "see") trained on high-parameter imaging datasets (e.g. Akoya CODEX). Specifically, it is trained on "patches" rather than cells: 47M patches, across 175 protein markers, across 8 imaging platforms. The interesting thing here is that operating at the patch level can bypass cell segmentation entirely. This helps avoid a lot of headache for the personnel involved, and allows for the capture of nuances (e.g. in neurons that are not perfectly segmented).
+
+Deep dive:
+
+The part that I was drawn to was Figure 3G-I in the paper (see image), which shows the model detecting and flagging artifacts. These are problems with the image that would harm downstream analysis, like tissue folding, blurring, or signal saturation. This model can be inserted into the quality control section of a pipeline and assist in detecting these issues early on. My previous LinkedIn surveys on single-cell analysis suggest that my audience has much more "headache" around quality control than downstream analysis (and it's the same for me), so I think this is definitely for you.
+
+Why I take this seriously:
+
+While I have yet to use this model myself, I spoke with one of the corresponding authors Sizun Jiang directly about this, whom I have known since my grad school days. He told me that the model is becoming a mainstay in current analysis pipelines in the lab, and is being used to augment the analysis of previous datasets and ongoing studies. In other words, there is skin in the game here: the better the model, the better his lab's research output, which leads to better publications and more meaningful clinical discoveries, which leads to more grant funding and talent to work on these key questions, and so forth.
+
+The big picture:
+
+If you are a researcher or a leader, you should look into at least trying these models out, and getting a feel for how they work. Benchmark them to existing analysis pipelines. If you've seen my other posts on foundation models, you'll know that this field is growing fast in single-cell. Now they are being developed in spatial.
+
+You'll also know my hypothesis that given the parameter size of the foundation models right now, they may still be equivalent to GPT-2 on the LLM side. Things like larger model architectures or richer training data (e.g. more tissue types, multi-omics) could lead to a "GPT-3 moment." So I would get familiar with these models before we hit this inflection point.
+
+What I need from you:
+
+Let me know what the most absolutely annoying aspects of spatial QC are for you. Be specific. If I'm going to use this model and similar for my spatial work, I want to direct it toward the nastiest issues and take it to its limits.
+
+[[file:kronos_fm.png]]
+*** comment
+The KRONOS pre-print is here: https://www.arxiv.org/pdf/2506.03373
+The GitHub is here: https://github.com/mahmoodlab/KRONOS
 ** [[https://www.linkedin.com/posts/tylerjburns_in-light-of-recent-work-i-am-doing-that-requires-activity-7285315114067517440-tGpT?utm_source=share&utm_medium=member_desktop][Reproducibility of Jupyter notebooks from biomedical publications]]
 In light of recent work I am doing that requires me to reproduce results from GitHub repos associated with papers (eg. foundation models), I wanted to highlight a paper by Sheeba Samuel and Daniel Mietchen that discusses reproducibility of Jupyter notebooks associated with the biomedical literature (peer reviewed papers, not pre-prints). The results are nothing to be proud of.
 
