@@ -16,7 +16,37 @@ Dr. Seuss, [[https://en.wikipedia.org/wiki/Horton_Hatches_the_Egg][/Horton Hatch
 * KNN sleepwalk and related
 #+HTML: <a href="#top">Back to top</a>
 A lot of my social media content has revolved around a tool I build called KNN sleepwalk, which allows you to look at the difference between K-nearest neighbors (KNN) of a given data point in the embedding space versus the original high-dimensional space. This kind of intuition is important especially in high-dimensional flow/CyTOF data, where there is sometimes temptation to gate directly on the embedding itself. These posts show you that one should exercise caution when doing such a thing. You can use the method [[https://github.com/tjburns08/KnnSleepwalk][here]].
-** [[https://www.linkedin.com/posts/tylerjburns_spatialtranscriptomics-spatialbiology-activity-7336012823308689409-3h3c?utm_source=share&utm_medium=member_desktop&rcm=ACoAAAbP8M8BYXs_UknoBHnmw2rZ-aRDTJF7L3Y][KNN Sleepwalk for spatial]]
+** [[https://www.linkedin.com/posts/tylerjburns_below-is-a-quick-way-to-get-hover-linked-activity-7341093015492485120-j-lq?utm_source=share&utm_medium=member_desktop&rcm=ACoAAAbP8M8BYXs_UknoBHnmw2rZ-aRDTJF7L3Y][KNN Sleepwalk for spatial: Xenium]]
+Below is a quick way to get hover-linked interaction between UMAP coordinates (or similar) and XY coordinates for your spatial data to see patterns that you may have missed.
+
+What this is:
+
+The image below is a 10x Xenium brain dataset. The left side is a UMAP from the expression data. The right side is the XY coordinates.
+
+With this tool, you hover your cursor over the UMAP and it lights up the corresponding XY coordinates for those cells, changing in real time. This allows you to find subtleties that you might otherwise miss at the cluster level.
+
+You can use this today. Just go to my KnnSleepwalk package (GitHub link in comments) and run the BiaxialSleepwalk function.
+
+The bigger picture:
+
+Based on recent conversations with spatial experts, we need more hover-based interactive data analysis in our pipelines. The Vitessce package shows what's possible, but it does one-to-one linking rather than neighborhood-to-neighborhood linking, which makes it harder to see patterns (example in comments).
+
+DM me or comment if:
+
+- You're good with interactive data frameworks (e.g. d3.js) especially those which allow for GPU acceleration (anything involving WebGL, like regl-scatterplot).
+
+- You have ideas/feature requests.
+
+- You want help implementing this type of infrastructure into your workflows.
+
+Thank you and I hope you all have a great day.
+
+[[file:images/xenium_brain_ppt.gif]]
+*** comment
+My KnnSleepwalk package is here: https://github.com/tjburns08/KnnSleepwalk. You'll want to use the function BiaxialSleepwalk for this one.
+
+Vitessce example of umap-to-image correspondance without nearest neighbor functionality: https://vitessce.io/#?dataset=marshall-2022
+** [[https://www.linkedin.com/posts/tylerjburns_spatialtranscriptomics-spatialbiology-activity-7336012823308689409-3h3c?utm_source=share&utm_medium=member_desktop&rcm=ACoAAAbP8M8BYXs_UknoBHnmw2rZ-aRDTJF7L3Y][KNN Sleepwalk for spatial: IMC]]
 You can now use my KnnSleepwalk package to interrogate your spatial data. KnnSleepwalk allows you to interact with your data simply by hovering your cursor over the visualizations. The gif below shows an Imaging Mass Cytometry cancer dataset.
 
 Left: a biaxial with CDH1 (E-Cadherin) on the x axis and CD68 on the y axis.
