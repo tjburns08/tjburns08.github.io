@@ -85,28 +85,28 @@ For Tyler's company website, go <a href="./burns_lsc.html">here</a>.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgd14aa63">About me</a></li>
-<li><a href="#org4aab5de">New</a></li>
-<li><a href="#org57ee4bf">Popular</a></li>
+<li><a href="#org7f777fd">About me</a></li>
+<li><a href="#org0bd8378">New</a></li>
+<li><a href="#orgab9b95c">Popular</a></li>
 <li><a href="#single_cell">Single-cell analysis</a></li>
-<li><a href="#orgab88ddd">Natural language processing</a></li>
-<li><a href="#orgfba8870">Philosophy and rationality</a></li>
-<li><a href="#org54ef6b5">Computing</a></li>
-<li><a href="#orgc325c12">Statistics</a></li>
-<li><a href="#org1d834aa">Health</a></li>
-<li><a href="#orgf363214">Snapshots</a></li>
-<li><a href="#org4709fec">Collections</a></li>
-<li><a href="#orgfbb66ca">Where I was featured</a></li>
-<li><a href="#orgb874e12">Fun stuff</a></li>
-<li><a href="#org36e68ba">Other contributions</a></li>
-<li><a href="#org68f6905">Links and contact info</a></li>
+<li><a href="#org2027e61">Natural language processing</a></li>
+<li><a href="#org0b752fb">Philosophy and rationality</a></li>
+<li><a href="#org8cfc55f">Computing</a></li>
+<li><a href="#orgcf5b72b">Statistics</a></li>
+<li><a href="#org747da08">Health</a></li>
+<li><a href="#org95648f6">Snapshots</a></li>
+<li><a href="#org962df8c">Collections</a></li>
+<li><a href="#org8749254">Where I was featured</a></li>
+<li><a href="#org24334f3">Fun stuff</a></li>
+<li><a href="#orgf0dd28d">Other contributions</a></li>
+<li><a href="#orgd47e33e">Links and contact info</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-orgd14aa63" class="outline-2">
-<h2 id="orgd14aa63">About me</h2>
-<div class="outline-text-2" id="text-orgd14aa63">
+<div id="outline-container-org7f777fd" class="outline-2">
+<h2 id="org7f777fd">About me</h2>
+<div class="outline-text-2" id="text-org7f777fd">
 <p>
 <a href="./meditations_chapter_one.html">I</a> am an American CEO and computational biologist who lives in Berlin, Germany. I am best known for my 12 years of work in the single-cell field, and more recently, my work in biosecurity. I am informally known for my passion for fitness, which gives me the balance and energy to do the rest of the work.
 </p>
@@ -124,14 +124,58 @@ If you have quesitons or comments, or you're interested in working or collaborat
 </p>
 </div>
 </div>
-<div id="outline-container-org4aab5de" class="outline-2">
-<h2 id="org4aab5de">New</h2>
-<div class="outline-text-2" id="text-org4aab5de">
+<div id="outline-container-org0bd8378" class="outline-2">
+<h2 id="org0bd8378">New</h2>
+<div class="outline-text-2" id="text-org0bd8378">
 <a href="#top">Back to top</a>
 </div>
-<div id="outline-container-org7b1540d" class="outline-3">
-<h3 id="org7b1540d"><a href="./levels_of_analysis.html">Levels of analysis in bits and atoms</a></h3>
-<div class="outline-text-3" id="text-org7b1540d">
+<div id="outline-container-orgdecb7f4" class="outline-3">
+<h3 id="orgdecb7f4">LLM-augmented PCA loadings (first author: <a href="https://www.linkedin.com/in/arianna-aalami-328576231/">Arianna Aalami</a>)</h3>
+<div class="outline-text-3" id="text-orgdecb7f4">
+<p>
+This project was driven by my intern Arianna Aalami, a Stanford bioengineering graduate, with both wet-lab and dry-lab capabilities, interested in applying these to study the microbiome.
+</p>
+</div>
+<div id="outline-container-orgc067853" class="outline-4">
+<h4 id="orgc067853"><a href="./BLSC_PCA_loading_LLMs_final.html">R Markdown</a></h4>
+<div class="outline-text-4" id="text-orgc067853">
+<p>
+Markdown.<br />
+</p>
+
+<p>
+Here is the code, comments, and explanations needed to generated the reports below. In order to repeat this yourself, you need an OpenAI API key. We note that the cost to run all of these experiments in the markdown, using o4-mini, is around 30 cents.
+</p>
+</div>
+</div>
+<div id="outline-container-orga1887ff" class="outline-4">
+<h4 id="orga1887ff"><a href="./blsc_pc_loadings_by_llm_interpretation.pdf">PC loading by interpretation report</a></h4>
+<div class="outline-text-4" id="text-orga1887ff">
+<p>
+Report.<br />
+</p>
+
+<p>
+Here is the primary output from the aforementioned R Markdown, whereby we have the left column that shows a biaxial plot of PC1 and PCN where N is any number between 2 and 10. This already is something that is not often viewed in single-cell sequencing workflows. The right column shows the LLM-generated biological interpretation. The first few PCs are sanity checks in this regard, and the later PCs, while not yet rigorously checked, are thought provoking.
+</p>
+</div>
+</div>
+<div id="outline-container-orge87b0f8" class="outline-4">
+<h4 id="orge87b0f8"><a href="./blsc_llm_consistency_check.pdf">LLM consistency experiment</a></h4>
+<div class="outline-text-4" id="text-orge87b0f8">
+<p>
+Report.<br />
+</p>
+
+<p>
+Here, we aimed to check whether the output of our LLM-based biological interpretation is consistent. We tried PC1 (which is straightforward), and PC20 (which we expect to be a bit messier). We note that with the o4-mini model the results were indeed relatively consistent between the multiple runs, with the 4o-mini model (does not do reasoning), the results for PC20 were quite inconsistent (data not shown). The results suggest a degree of consistency when using reasoning models, but we would still recommend doing these runs more than once, just in case.
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org009c50b" class="outline-3">
+<h3 id="org009c50b"><a href="./levels_of_analysis.html">Levels of analysis in bits and atoms</a></h3>
+<div class="outline-text-3" id="text-org009c50b">
 <p>
 Article.<br />
 </p>
@@ -142,9 +186,9 @@ In the world of atoms, we have distinct fields of science that follow specific l
 </div>
 </div>
 
-<div id="outline-container-orgb86af3d" class="outline-3">
-<h3 id="orgb86af3d"><a href="./soft_clustering.html">Cluster membership purity score for single cells</a></h3>
-<div class="outline-text-3" id="text-orgb86af3d">
+<div id="outline-container-org29f3aef" class="outline-3">
+<h3 id="org29f3aef"><a href="./soft_clustering.html">Cluster membership purity score for single cells</a></h3>
+<div class="outline-text-3" id="text-org29f3aef">
 <p>
 Markdown.<br />
 </p>
@@ -159,9 +203,9 @@ At the per-cell level, you can interrogate these cells or factor this score into
 </div>
 </div>
 
-<div id="outline-container-orgc581f84" class="outline-3">
-<h3 id="orgc581f84"><a href="https://www.youtube.com/watch?v=wRVOyYse5ug">Interview with Ramji Srinivasan, CEO of Teiko</a></h3>
-<div class="outline-text-3" id="text-orgc581f84">
+<div id="outline-container-org6416639" class="outline-3">
+<h3 id="org6416639"><a href="https://www.youtube.com/watch?v=wRVOyYse5ug">Interview with Ramji Srinivasan, CEO of Teiko</a></h3>
+<div class="outline-text-3" id="text-org6416639">
 <p>
 Video.<br />
 </p>
@@ -175,9 +219,9 @@ To give credit where credit is due, I talk about the MEM paper (Diggins et al, 2
 </p>
 </div>
 </div>
-<div id="outline-container-org1f71cfa" class="outline-3">
-<h3 id="org1f71cfa"><a href="./seurat_pbmc_cluster_stability.html">Cluster stability as an evaluation metric for single-cell workflows</a></h3>
-<div class="outline-text-3" id="text-org1f71cfa">
+<div id="outline-container-org7d9f494" class="outline-3">
+<h3 id="org7d9f494"><a href="./seurat_pbmc_cluster_stability.html">Cluster stability as an evaluation metric for single-cell workflows</a></h3>
+<div class="outline-text-3" id="text-org7d9f494">
 <p>
 Markdown.<br />
 </p>
@@ -187,9 +231,9 @@ Clustering is a critical piece of any single-cell analysis workflow, be it suspe
 </p>
 </div>
 </div>
-<div id="outline-container-orgb3bf283" class="outline-3">
-<h3 id="orgb3bf283"><a href="./command_line_writeup.html">How I made a command line chatbot</a></h3>
-<div class="outline-text-3" id="text-orgb3bf283">
+<div id="outline-container-orgc0a624b" class="outline-3">
+<h3 id="orgc0a624b"><a href="./command_line_writeup.html">How I made a command line chatbot</a></h3>
+<div class="outline-text-3" id="text-orgc0a624b">
 <p>
 Article.<br />
 </p>
@@ -199,9 +243,9 @@ The typical way LLMs are called is through some sort of user interface. Here, I 
 </p>
 </div>
 </div>
-<div id="outline-container-org0e3dfa3" class="outline-3">
-<h3 id="org0e3dfa3"><a href="./llm_annotate_pbmc3k.html">Automated LLM-based annotation of single-cell sequencing data, directly in a R workflow</a></h3>
-<div class="outline-text-3" id="text-org0e3dfa3">
+<div id="outline-container-org74bd4dd" class="outline-3">
+<h3 id="org74bd4dd"><a href="./llm_annotate_pbmc3k.html">Automated LLM-based annotation of single-cell sequencing data, directly in a R workflow</a></h3>
+<div class="outline-text-3" id="text-org74bd4dd">
 <p>
 Markdown.<br />
 </p>
@@ -212,9 +256,9 @@ A typical single-cell sequencing pipeline involves clustering the data, and then
 </div>
 </div>
 
-<div id="outline-container-orgc17da49" class="outline-3">
-<h3 id="orgc17da49"><a href="./descent_into_madness.html">A LLM's descent into madness</a></h3>
-<div class="outline-text-3" id="text-orgc17da49">
+<div id="outline-container-org973775f" class="outline-3">
+<h3 id="org973775f"><a href="./descent_into_madness.html">A LLM's descent into madness</a></h3>
+<div class="outline-text-3" id="text-org973775f">
 <p>
 Article.<br />
 </p>
@@ -224,9 +268,9 @@ At the time of writing (February 2025) I am frustrated by the best of the LLMs g
 </p>
 </div>
 </div>
-<div id="outline-container-org91ca65e" class="outline-3">
-<h3 id="org91ca65e"><a href="./run_gprofiler_and_embed.html">From gene lists to interactive contextual maps: enhancing g:Profiler interpretation</a></h3>
-<div class="outline-text-3" id="text-org91ca65e">
+<div id="outline-container-orgdcc65c9" class="outline-3">
+<h3 id="orgdcc65c9"><a href="./run_gprofiler_and_embed.html">From gene lists to interactive contextual maps: enhancing g:Profiler interpretation</a></h3>
+<div class="outline-text-3" id="text-orgdcc65c9">
 <p>
 Markdown.<br />
 </p>
@@ -236,9 +280,9 @@ In my client projects, I often have to make sense of long lists of differentiall
 </p>
 </div>
 </div>
-<div id="outline-container-org5053522" class="outline-3">
-<h3 id="org5053522"><a href="./case_for_viridis.html">Comparing Color Palettes for scRNA-seq Data Visualization: The Case for Viridis as a Default</a></h3>
-<div class="outline-text-3" id="text-org5053522">
+<div id="outline-container-org3b2e28e" class="outline-3">
+<h3 id="org3b2e28e"><a href="./case_for_viridis.html">Comparing Color Palettes for scRNA-seq Data Visualization: The Case for Viridis as a Default</a></h3>
+<div class="outline-text-3" id="text-org3b2e28e">
 <p>
 Markdown.<br />
 </p>
@@ -248,9 +292,9 @@ When using "color" as a dimension (for example, coloring UMAPs by marker express
 </p>
 </div>
 </div>
-<div id="outline-container-orga24a889" class="outline-3">
-<h3 id="orga24a889"><a href="./annotated_seurat_without_pca.html">Running UMAP on scRNA seq data without PCA reveals importance of cosine distnace in high dimensional data</a></h3>
-<div class="outline-text-3" id="text-orga24a889">
+<div id="outline-container-org087b689" class="outline-3">
+<h3 id="org087b689"><a href="./annotated_seurat_without_pca.html">Running UMAP on scRNA seq data without PCA reveals importance of cosine distnace in high dimensional data</a></h3>
+<div class="outline-text-3" id="text-org087b689">
 <p>
 Markdown.<br />
 </p>
@@ -260,9 +304,9 @@ What happens when you omit PCA from a Seurat scRNA-seq pipeline? Here, Using the
 </p>
 </div>
 </div>
-<div id="outline-container-org97086e2" class="outline-3">
-<h3 id="org97086e2"><a href="./die_with_zero.html">Die with zero ideas</a></h3>
-<div class="outline-text-3" id="text-org97086e2">
+<div id="outline-container-org29bdd50" class="outline-3">
+<h3 id="org29bdd50"><a href="./die_with_zero.html">Die with zero ideas</a></h3>
+<div class="outline-text-3" id="text-org29bdd50">
 <p>
 Article.<br />
 </p>
@@ -272,9 +316,9 @@ At any given point, there are ideas in my head or rough pieces of text and code 
 </p>
 </div>
 </div>
-<div id="outline-container-org21c57fd" class="outline-3">
-<h3 id="org21c57fd"><a href="./pbmc_uce_nn_comparison.html">Nearest neighbor similarity between PBMC 3k dataset and its foundation model embedding</a></h3>
-<div class="outline-text-3" id="text-org21c57fd">
+<div id="outline-container-org7a07776" class="outline-3">
+<h3 id="org7a07776"><a href="./pbmc_uce_nn_comparison.html">Nearest neighbor similarity between PBMC 3k dataset and its foundation model embedding</a></h3>
+<div class="outline-text-3" id="text-org7a07776">
 <p>
 Markdown.<br />
 </p>
@@ -284,9 +328,9 @@ Universal Cell Embeddings (UCE) is a foundation model that takes a single-cell d
 </p>
 </div>
 </div>
-<div id="outline-container-org8222be3" class="outline-3">
-<h3 id="org8222be3"><a href="./annotate_pbmc_3k.html">Annotate the PBMC 3k dataset</a></h3>
-<div class="outline-text-3" id="text-org8222be3">
+<div id="outline-container-orgdbf971c" class="outline-3">
+<h3 id="orgdbf971c"><a href="./annotate_pbmc_3k.html">Annotate the PBMC 3k dataset</a></h3>
+<div class="outline-text-3" id="text-orgdbf971c">
 <p>
 Markdown.<br />
 </p>
@@ -297,9 +341,9 @@ This markdown is for people with PBMC datasets, who want a convenient way to ann
 </div>
 </div>
 
-<div id="outline-container-org9fd0c52" class="outline-3">
-<h3 id="org9fd0c52"><a href="./rainbow_feature_plot.html">Flow cytometry color scheme for Seurat's FeaturePlot</a></h3>
-<div class="outline-text-3" id="text-org9fd0c52">
+<div id="outline-container-orgee48547" class="outline-3">
+<h3 id="orgee48547"><a href="./rainbow_feature_plot.html">Flow cytometry color scheme for Seurat's FeaturePlot</a></h3>
+<div class="outline-text-3" id="text-orgee48547">
 <p>
 Markdown.<br />
 </p>
@@ -310,9 +354,9 @@ Seurat's FeaturePlot has a built in color scheme that goes from grey (zero expre
 </div>
 </div>
 
-<div id="outline-container-org20c7bce" class="outline-3">
-<h3 id="org20c7bce"><a href="./r_rabbit_hole.html">The R Rabbit Hole</a></h3>
-<div class="outline-text-3" id="text-org20c7bce">
+<div id="outline-container-orga42ecb6" class="outline-3">
+<h3 id="orga42ecb6"><a href="./r_rabbit_hole.html">The R Rabbit Hole</a></h3>
+<div class="outline-text-3" id="text-orga42ecb6">
 <p>
 Article.<br />
 </p>
@@ -323,9 +367,9 @@ What happens under the hood when you do something simple in R, like add two numb
 </div>
 </div>
 
-<div id="outline-container-org60dcadd" class="outline-3">
-<h3 id="org60dcadd"><a href="./episodic_memory.html">Episodic memory is the new semantic memory</a></h3>
-<div class="outline-text-3" id="text-org60dcadd">
+<div id="outline-container-org73661bf" class="outline-3">
+<h3 id="org73661bf"><a href="./episodic_memory.html">Episodic memory is the new semantic memory</a></h3>
+<div class="outline-text-3" id="text-org73661bf">
 <p>
 Article.<br />
 </p>
@@ -336,9 +380,9 @@ First, we valued having information. After the rise of the internet and search e
 </div>
 </div>
 
-<div id="outline-container-org0f7570f" class="outline-3">
-<h3 id="org0f7570f"><a href="./praise_the_ideal.html">Buddhism is to mindfulness, as Christianity is to&#x2026;</a></h3>
-<div class="outline-text-3" id="text-org0f7570f">
+<div id="outline-container-org1ecf836" class="outline-3">
+<h3 id="org1ecf836"><a href="./praise_the_ideal.html">Buddhism is to mindfulness, as Christianity is to&#x2026;</a></h3>
+<div class="outline-text-3" id="text-org1ecf836">
 <p>
 Article.<br />
 </p>
@@ -349,9 +393,9 @@ I make a connection between idealizing my father during the "Dad is superman" ph
 </div>
 </div>
 
-<div id="outline-container-org6937e87" class="outline-3">
-<h3 id="org6937e87"><a href="./boring.html">The most boring man in the world</a></h3>
-<div class="outline-text-3" id="text-org6937e87">
+<div id="outline-container-org98a07e1" class="outline-3">
+<h3 id="org98a07e1"><a href="./boring.html">The most boring man in the world</a></h3>
+<div class="outline-text-3" id="text-org98a07e1">
 <p>
 Article.<br />
 </p>
@@ -362,9 +406,9 @@ I had a fascination with the Dos Equis "Most Interesting Man In The World" ad ca
 </div>
 </div>
 
-<div id="outline-container-org8965830" class="outline-3">
-<h3 id="org8965830"><a href="./compare_full_vs_filtered_uce.html">Running only the most variable genes through UCE leads to worse cell separation than running the whole dataset</a></h3>
-<div class="outline-text-3" id="text-org8965830">
+<div id="outline-container-orgf97d13f" class="outline-3">
+<h3 id="orgf97d13f"><a href="./compare_full_vs_filtered_uce.html">Running only the most variable genes through UCE leads to worse cell separation than running the whole dataset</a></h3>
+<div class="outline-text-3" id="text-orgf97d13f">
 <p>
 Markdown.<br />
 </p>
@@ -375,9 +419,9 @@ In a standard single cell RNA sequencing analysis pipeline, one of the first thi
 </div>
 </div>
 
-<div id="outline-container-org7bcffd7" class="outline-3">
-<h3 id="org7bcffd7"><a href="./stick_shift_mindset.html">Zen and the art of driving stick</a></h3>
-<div class="outline-text-3" id="text-org7bcffd7">
+<div id="outline-container-org8491d63" class="outline-3">
+<h3 id="org8491d63"><a href="./stick_shift_mindset.html">Zen and the art of driving stick</a></h3>
+<div class="outline-text-3" id="text-org8491d63">
 <p>
 Article.<br />
 </p>
@@ -388,9 +432,9 @@ I find that if I'm driving stick rather than automatic, I'm much more connected 
 </div>
 </div>
 
-<div id="outline-container-orgd62f664" class="outline-3">
-<h3 id="orgd62f664"><a href="./explore_uce_output_3k_10k.html">Universal Cell Embeddings with two PBMC datasets: how to test whether it grokked integration</a></h3>
-<div class="outline-text-3" id="text-orgd62f664">
+<div id="outline-container-orgdfe3e30" class="outline-3">
+<h3 id="orgdfe3e30"><a href="./explore_uce_output_3k_10k.html">Universal Cell Embeddings with two PBMC datasets: how to test whether it grokked integration</a></h3>
+<div class="outline-text-3" id="text-orgdfe3e30">
 <p>
 Markdown.<br />
 </p>
@@ -401,9 +445,9 @@ In this markdown, we import two PBMC datasets, the PBMC 3k and the PBMC 10k data
 </div>
 </div>
 
-<div id="outline-container-orgd226ee3" class="outline-3">
-<h3 id="orgd226ee3"><a href="./human_universal_cell_embeddings.html">UMAP does not capture the proper center and outer edges of human CNS portion of the Univesal Cell Embeddings (UCE) transformer foundation model</a></h3>
-<div class="outline-text-3" id="text-orgd226ee3">
+<div id="outline-container-org6796b50" class="outline-3">
+<h3 id="org6796b50"><a href="./human_universal_cell_embeddings.html">UMAP does not capture the proper center and outer edges of human CNS portion of the Univesal Cell Embeddings (UCE) transformer foundation model</a></h3>
+<div class="outline-text-3" id="text-org6796b50">
 <p>
 Markdown.<br />
 </p>
@@ -413,9 +457,9 @@ This is a jupyter notebook that looks at the Universal Cell Embeddings transform
 </p>
 </div>
 </div>
-<div id="outline-container-org365a5a5" class="outline-3">
-<h3 id="org365a5a5"><a href="./signal_there.html">There's some signal there</a></h3>
-<div class="outline-text-3" id="text-org365a5a5">
+<div id="outline-container-orgfe517db" class="outline-3">
+<h3 id="orgfe517db"><a href="./signal_there.html">There's some signal there</a></h3>
+<div class="outline-text-3" id="text-orgfe517db">
 <p>
 Article.<br />
 </p>
@@ -426,9 +470,9 @@ This is an expression I use a lot in casual conversation. In essence, when I com
 </div>
 </div>
 
-<div id="outline-container-org10eefc0" class="outline-3">
-<h3 id="org10eefc0"><a href="https://watershed.bio/resources/the-limits-of-dimensionality-reduction-tools-for-single-cell-analysis">The limits of dimensionality reduction tools for single-cell analysis</a></h3>
-<div class="outline-text-3" id="text-org10eefc0">
+<div id="outline-container-org46f9e56" class="outline-3">
+<h3 id="org46f9e56"><a href="https://watershed.bio/resources/the-limits-of-dimensionality-reduction-tools-for-single-cell-analysis">The limits of dimensionality reduction tools for single-cell analysis</a></h3>
+<div class="outline-text-3" id="text-org46f9e56">
 <p>
 Webinar.<br />
 </p>
@@ -439,14 +483,14 @@ This webinar is the latest iteration of my "dimensionality reduction interrogati
 </div>
 </div>
 </div>
-<div id="outline-container-org57ee4bf" class="outline-2">
-<h2 id="org57ee4bf">Popular</h2>
-<div class="outline-text-2" id="text-org57ee4bf">
+<div id="outline-container-orgab9b95c" class="outline-2">
+<h2 id="orgab9b95c">Popular</h2>
+<div class="outline-text-2" id="text-orgab9b95c">
 <a href="#top">Back to top</a>
 </div>
-<div id="outline-container-org351ec9c" class="outline-3">
-<h3 id="org351ec9c"><a href="./learn_bioinformatics.html">How I transitioned from biologist to biology-leveraged bioinformatician</a></h3>
-<div class="outline-text-3" id="text-org351ec9c">
+<div id="outline-container-org1630ff1" class="outline-3">
+<h3 id="org1630ff1"><a href="./learn_bioinformatics.html">How I transitioned from biologist to biology-leveraged bioinformatician</a></h3>
+<div class="outline-text-3" id="text-org1630ff1">
 <p>
 Article.<br />
 </p>
@@ -456,9 +500,9 @@ In this article, I summarize my journey from biologist at the beginning of grad 
 </p>
 </div>
 </div>
-<div id="outline-container-org1d62777" class="outline-3">
-<h3 id="org1d62777"><a href="./its_more_complicated_than_that.html">It's more complicated than that</a></h3>
-<div class="outline-text-3" id="text-org1d62777">
+<div id="outline-container-org70e2537" class="outline-3">
+<h3 id="org70e2537"><a href="./its_more_complicated_than_that.html">It's more complicated than that</a></h3>
+<div class="outline-text-3" id="text-org70e2537">
 <p>
 Article.<br />
 </p>
@@ -469,9 +513,9 @@ This is the observation I run into with just about every line of scientific inqu
 </div>
 </div>
 
-<div id="outline-container-org132599e" class="outline-3">
-<h3 id="org132599e"><a href="./run_cytof_with_seurat.html">Run CyTOF analysis with Seurat</a></h3>
-<div class="outline-text-3" id="text-org132599e">
+<div id="outline-container-org2270e02" class="outline-3">
+<h3 id="org2270e02"><a href="./run_cytof_with_seurat.html">Run CyTOF analysis with Seurat</a></h3>
+<div class="outline-text-3" id="text-org2270e02">
 <p>
 Markdown.<br />
 </p>
@@ -481,9 +525,9 @@ Seurat is an R package that runs single-cell sequencing and related data. Here, 
 </p>
 </div>
 </div>
-<div id="outline-container-org99f7402" class="outline-3">
-<h3 id="org99f7402"><a href="https://github.com/tjburns08/knn_sleepwalk">Knn sleepwalk</a></h3>
-<div class="outline-text-3" id="text-org99f7402">
+<div id="outline-container-org94f72bc" class="outline-3">
+<h3 id="org94f72bc"><a href="https://github.com/tjburns08/knn_sleepwalk">Knn sleepwalk</a></h3>
+<div class="outline-text-3" id="text-org94f72bc">
 <p>
 Software.<br />
 </p>
@@ -493,9 +537,9 @@ A wrapper I wrote around the <a href="https://anders-biostat.github.io/sleepwalk
 </p>
 </div>
 </div>
-<div id="outline-container-org73715a6" class="outline-3">
-<h3 id="org73715a6"><a href="https://www.youtube.com/watch?v=U35T-KzfeLk">TEDx Basel talk: my scrolling problem, and how I fixed it</a></h3>
-<div class="outline-text-3" id="text-org73715a6">
+<div id="outline-container-org8556bda" class="outline-3">
+<h3 id="org8556bda"><a href="https://www.youtube.com/watch?v=U35T-KzfeLk">TEDx Basel talk: my scrolling problem, and how I fixed it</a></h3>
+<div class="outline-text-3" id="text-org8556bda">
 <p>
 YouTube video of my TED talk.<br />
 </p>
@@ -505,9 +549,9 @@ In this talk, I introduce the idea of the Scrolling Problem, which is the incomp
 </p>
 </div>
 </div>
-<div id="outline-container-orgf84e14d" class="outline-3">
-<h3 id="orgf84e14d"><a href="./scrolling_problem.html">The Scrolling Problem</a></h3>
-<div class="outline-text-3" id="text-orgf84e14d">
+<div id="outline-container-org71de7e3" class="outline-3">
+<h3 id="org71de7e3"><a href="./scrolling_problem.html">The Scrolling Problem</a></h3>
+<div class="outline-text-3" id="text-org71de7e3">
 <p>
 Article.<br />
 </p>
@@ -517,9 +561,9 @@ The article behind my <a href="https://www.youtube.com/watch?v=U35T-KzfeLk">TEDx
 </p>
 </div>
 </div>
-<div id="outline-container-org36a2b62" class="outline-3">
-<h3 id="org36a2b62"><a href="./scrna_seq_analyze_and_integrate.html">Single-cell sequencing analysis: the importance of data integration</a></h3>
-<div class="outline-text-3" id="text-org36a2b62">
+<div id="outline-container-orge00ec4a" class="outline-3">
+<h3 id="orge00ec4a"><a href="./scrna_seq_analyze_and_integrate.html">Single-cell sequencing analysis: the importance of data integration</a></h3>
+<div class="outline-text-3" id="text-orge00ec4a">
 <p>
 Markdown.<br />
 </p>
@@ -538,9 +582,9 @@ In flow cytometry and CyTOF analysis, we distinguish between "type" and "state" 
 I started out analyzing CyTOF data, as I did my PhD in the lab of Garry Nolan from 2012-2017, where CyTOF was initially being developed and applied to immunology and cancer bilogy. I later broadened to single-cell sequencing and high-parameter imaging (both proteins and genes). The work below consists primarily of markdowns, with code and explanations that allow users to do things that have helped me a lot in my work, but I don't necessarily have the time to turn into publications.
 </p>
 </div>
-<div id="outline-container-org666b636" class="outline-3">
-<h3 id="org666b636"><a href="./soft_clustering.html">Cluster membership purity score for single cells</a></h3>
-<div class="outline-text-3" id="text-org666b636">
+<div id="outline-container-orgcde52bd" class="outline-3">
+<h3 id="orgcde52bd"><a href="./soft_clustering.html">Cluster membership purity score for single cells</a></h3>
+<div class="outline-text-3" id="text-orgcde52bd">
 <p>
 Markdown.<br />
 </p>
@@ -555,9 +599,9 @@ At the per-cell level, you can interrogate these cells or factor this score into
 </div>
 </div>
 
-<div id="outline-container-org01605a8" class="outline-3">
-<h3 id="org01605a8"><a href="./seurat_pbmc_cluster_stability.html">Cluster stability as an evaluation metric for single-cell workflows</a></h3>
-<div class="outline-text-3" id="text-org01605a8">
+<div id="outline-container-orgaeeaf72" class="outline-3">
+<h3 id="orgaeeaf72"><a href="./seurat_pbmc_cluster_stability.html">Cluster stability as an evaluation metric for single-cell workflows</a></h3>
+<div class="outline-text-3" id="text-orgaeeaf72">
 <p>
 Markdown.<br />
 </p>
@@ -567,9 +611,9 @@ Clustering is a critical piece of any single-cell analysis workflow, be it suspe
 </p>
 </div>
 </div>
-<div id="outline-container-org1fdda5c" class="outline-3">
-<h3 id="org1fdda5c"><a href="./llm_annotate_pbmc3k.html">Automated LLM-based annotation of single-cell sequencing data, directly in a R workflow</a></h3>
-<div class="outline-text-3" id="text-org1fdda5c">
+<div id="outline-container-org51b7afb" class="outline-3">
+<h3 id="org51b7afb"><a href="./llm_annotate_pbmc3k.html">Automated LLM-based annotation of single-cell sequencing data, directly in a R workflow</a></h3>
+<div class="outline-text-3" id="text-org51b7afb">
 <p>
 Markdown.<br />
 </p>
@@ -579,9 +623,9 @@ A typical single-cell sequencing pipeline involves clustering the data, and then
 </p>
 </div>
 </div>
-<div id="outline-container-orgab76bbb" class="outline-3">
-<h3 id="orgab76bbb"><a href="./case_for_viridis.html">Comparing Color Palettes for scRNA-seq Data Visualization: The Case for Viridis as a Default</a></h3>
-<div class="outline-text-3" id="text-orgab76bbb">
+<div id="outline-container-orgf93c5ea" class="outline-3">
+<h3 id="orgf93c5ea"><a href="./case_for_viridis.html">Comparing Color Palettes for scRNA-seq Data Visualization: The Case for Viridis as a Default</a></h3>
+<div class="outline-text-3" id="text-orgf93c5ea">
 <p>
 Markdown.<br />
 </p>
@@ -591,9 +635,9 @@ When using "color" as a dimension (for example, coloring UMAPs by marker express
 </p>
 </div>
 </div>
-<div id="outline-container-org422ae08" class="outline-3">
-<h3 id="org422ae08"><a href="./annotated_seurat_without_pca.html">Running UMAP on scRNA seq data without PCA reveals importance of cosine distnace in high dimensional data</a></h3>
-<div class="outline-text-3" id="text-org422ae08">
+<div id="outline-container-org8b6ef31" class="outline-3">
+<h3 id="org8b6ef31"><a href="./annotated_seurat_without_pca.html">Running UMAP on scRNA seq data without PCA reveals importance of cosine distnace in high dimensional data</a></h3>
+<div class="outline-text-3" id="text-org8b6ef31">
 <p>
 Markdown.<br />
 </p>
@@ -604,9 +648,9 @@ What happens when you omit PCA from a Seurat scRNA-seq pipeline? Here, Using the
 </div>
 </div>
 
-<div id="outline-container-org813ba53" class="outline-3">
-<h3 id="org813ba53"><a href="./pbmc_uce_nn_comparison.html">Nearest neighbor similarity between PBMC 3k dataset and its foundation model embedding</a></h3>
-<div class="outline-text-3" id="text-org813ba53">
+<div id="outline-container-orgcc3c0f5" class="outline-3">
+<h3 id="orgcc3c0f5"><a href="./pbmc_uce_nn_comparison.html">Nearest neighbor similarity between PBMC 3k dataset and its foundation model embedding</a></h3>
+<div class="outline-text-3" id="text-orgcc3c0f5">
 <p>
 Markdown.<br />
 </p>
@@ -617,9 +661,9 @@ Universal Cell Embeddings (UCE) is a foundation model that takes a single-cell d
 </div>
 </div>
 
-<div id="outline-container-org3a4c47f" class="outline-3">
-<h3 id="org3a4c47f"><a href="./annotate_pbmc_3k.html">Annotate the PBMC 3k dataset</a></h3>
-<div class="outline-text-3" id="text-org3a4c47f">
+<div id="outline-container-org86b8be9" class="outline-3">
+<h3 id="org86b8be9"><a href="./annotate_pbmc_3k.html">Annotate the PBMC 3k dataset</a></h3>
+<div class="outline-text-3" id="text-org86b8be9">
 <p>
 Markdown.<br />
 </p>
@@ -629,9 +673,9 @@ This markdown is for people with PBMC datasets, who want a convenient way to ann
 </p>
 </div>
 </div>
-<div id="outline-container-org6e28594" class="outline-3">
-<h3 id="org6e28594"><a href="./rainbow_feature_plot.html">Flow cytometry color scheme for Seurat's FeaturePlot</a></h3>
-<div class="outline-text-3" id="text-org6e28594">
+<div id="outline-container-org77d5038" class="outline-3">
+<h3 id="org77d5038"><a href="./rainbow_feature_plot.html">Flow cytometry color scheme for Seurat's FeaturePlot</a></h3>
+<div class="outline-text-3" id="text-org77d5038">
 <p>
 Markdown.<br />
 </p>
@@ -641,9 +685,9 @@ Seurat's FeaturePlot has a built in color scheme that goes from grey (zero expre
 </p>
 </div>
 </div>
-<div id="outline-container-orgf5192fd" class="outline-3">
-<h3 id="orgf5192fd"><a href="./compare_full_vs_filtered_uce.html">Running only the most variable genes through UCE leads to worse cell separation than running the whole dataset</a></h3>
-<div class="outline-text-3" id="text-orgf5192fd">
+<div id="outline-container-orgb88cd6d" class="outline-3">
+<h3 id="orgb88cd6d"><a href="./compare_full_vs_filtered_uce.html">Running only the most variable genes through UCE leads to worse cell separation than running the whole dataset</a></h3>
+<div class="outline-text-3" id="text-orgb88cd6d">
 <p>
 Markdown.<br />
 </p>
@@ -653,17 +697,17 @@ In a standard single cell RNA sequencing analysis pipeline, one of the first thi
 </p>
 </div>
 </div>
-<div id="outline-container-orgd353027" class="outline-3">
-<h3 id="orgd353027"><a href="./explore_uce_output_3k_10k.html">Universal Cell Embeddings with two PBMC datasets: how to test whether it grokked integration</a></h3>
-<div class="outline-text-3" id="text-orgd353027">
+<div id="outline-container-org328b78d" class="outline-3">
+<h3 id="org328b78d"><a href="./explore_uce_output_3k_10k.html">Universal Cell Embeddings with two PBMC datasets: how to test whether it grokked integration</a></h3>
+<div class="outline-text-3" id="text-org328b78d">
 <p>
 In this markdown, we import two PBMC datasets, the PBMC 3k and the PBMC 10k datasets. The 3k dataset is a flagship dataset used in the early days of Seurat. The 10k dataset is the default that is run through the model if you don't specify another dataset. Here, I show that if we look at a UMAP embedding, the datasets do not sit on each other. However, if we use my KnnSleepwalk package, we find that the distances on the UMAP are distorted. What we find is that, for example, the T cell island for the 3k datset sits much closer to the T cell island for the 10k dataset. This in turn suggests that we should be careful using UMAP to assess foundation models in single-cell and in any field.
 </p>
 </div>
 </div>
-<div id="outline-container-orgcb56a5b" class="outline-3">
-<h3 id="orgcb56a5b"><a href="./human_universal_cell_embeddings.html">UMAP does not capture the proper center and outer edges of human CNS portion of the Univesal Cell Embeddings (UCE) transformer foundation model</a></h3>
-<div class="outline-text-3" id="text-orgcb56a5b">
+<div id="outline-container-orgc18a23b" class="outline-3">
+<h3 id="orgc18a23b"><a href="./human_universal_cell_embeddings.html">UMAP does not capture the proper center and outer edges of human CNS portion of the Univesal Cell Embeddings (UCE) transformer foundation model</a></h3>
+<div class="outline-text-3" id="text-orgc18a23b">
 <p>
 Markdown.<br />
 </p>
@@ -673,9 +717,9 @@ This is a jupyter notebook that looks at the Universal Cell Embeddings transform
 </p>
 </div>
 </div>
-<div id="outline-container-org030b3c2" class="outline-3">
-<h3 id="org030b3c2"><a href="./learn_bioinformatics.html">How I transitioned from biologist to biology-leveraged bioinformatician</a></h3>
-<div class="outline-text-3" id="text-org030b3c2">
+<div id="outline-container-orgd354a70" class="outline-3">
+<h3 id="orgd354a70"><a href="./learn_bioinformatics.html">How I transitioned from biologist to biology-leveraged bioinformatician</a></h3>
+<div class="outline-text-3" id="text-orgd354a70">
 <p>
 Article.<br />
 </p>
@@ -685,9 +729,9 @@ In this article, I summarize my journey from biologist at the beginning of grad 
 </p>
 </div>
 </div>
-<div id="outline-container-orgded5858" class="outline-3">
-<h3 id="orgded5858"><a href="./how_xshift_works.html">How X-shift works</a></h3>
-<div class="outline-text-3" id="text-orgded5858">
+<div id="outline-container-org17c3c8f" class="outline-3">
+<h3 id="org17c3c8f"><a href="./how_xshift_works.html">How X-shift works</a></h3>
+<div class="outline-text-3" id="text-org17c3c8f">
 <p>
 Markdown.<br />
 </p>
@@ -697,9 +741,9 @@ X-shift is a popular clustering algorithm for CyTOF and related high-dimensional
 </p>
 </div>
 </div>
-<div id="outline-container-orga87160e" class="outline-3">
-<h3 id="orga87160e"><a href="./scrna_seq_analyze_and_integrate.html">Single-cell sequencing: integrated vs not integrated</a></h3>
-<div class="outline-text-3" id="text-orga87160e">
+<div id="outline-container-orgf7e067d" class="outline-3">
+<h3 id="orgf7e067d"><a href="./scrna_seq_analyze_and_integrate.html">Single-cell sequencing: integrated vs not integrated</a></h3>
+<div class="outline-text-3" id="text-orgf7e067d">
 <p>
 Markdown.<br />
 </p>
@@ -709,9 +753,9 @@ In flow cytometry and CyTOF analysis, we distinguish between "type" and "state" 
 </p>
 </div>
 </div>
-<div id="outline-container-org38f9349" class="outline-3">
-<h3 id="org38f9349"><a href="./cytof_mnn_experiment.html">CyTOF mutual nearest neighbors experiment</a></h3>
-<div class="outline-text-3" id="text-org38f9349">
+<div id="outline-container-org4dccb95" class="outline-3">
+<h3 id="org4dccb95"><a href="./cytof_mnn_experiment.html">CyTOF mutual nearest neighbors experiment</a></h3>
+<div class="outline-text-3" id="text-org4dccb95">
 <p>
 Markdown.<br />
 </p>
@@ -722,9 +766,9 @@ Phenograph is a popular CyTOF clustering algorithm, which is really Louvain comm
 </div>
 </div>
 
-<div id="outline-container-org6695ed7" class="outline-3">
-<h3 id="org6695ed7"><a href="./charite_covid_figure_2.html">Single-cell sequencing: Schulte-Schrepping et al. Cell 2020</a></h3>
-<div class="outline-text-3" id="text-org6695ed7">
+<div id="outline-container-orgfe53135" class="outline-3">
+<h3 id="orgfe53135"><a href="./charite_covid_figure_2.html">Single-cell sequencing: Schulte-Schrepping et al. Cell 2020</a></h3>
+<div class="outline-text-3" id="text-orgfe53135">
 <p>
 Markdown.<br />
 </p>
@@ -734,9 +778,9 @@ In this markdown, I take a Seurat object provided by the aforementioned paper, a
 </p>
 </div>
 </div>
-<div id="outline-container-org1001677" class="outline-3">
-<h3 id="org1001677"><a href="./scrna_seq_piepline_pbmc_3k.html">Single-cell sequencing pipeline, PBMC 3k in depth</a></h3>
-<div class="outline-text-3" id="text-org1001677">
+<div id="outline-container-org14332c8" class="outline-3">
+<h3 id="org14332c8"><a href="./scrna_seq_piepline_pbmc_3k.html">Single-cell sequencing pipeline, PBMC 3k in depth</a></h3>
+<div class="outline-text-3" id="text-org14332c8">
 <p>
 Markdown.<br />
 </p>
@@ -747,9 +791,9 @@ I use the classic Seurat PBMC 3k vignette as a foundation to explore the guts of
 </div>
 </div>
 
-<div id="outline-container-org9c5228f" class="outline-3">
-<h3 id="org9c5228f"><a href="./cytof_analysis_language_tour.html">CyTOF analysis langauge tour in R Markdown</a></h3>
-<div class="outline-text-3" id="text-org9c5228f">
+<div id="outline-container-org4af2f09" class="outline-3">
+<h3 id="org4af2f09"><a href="./cytof_analysis_language_tour.html">CyTOF analysis langauge tour in R Markdown</a></h3>
+<div class="outline-text-3" id="text-org4af2f09">
 <p>
 Markdown.<br />
 </p>
@@ -760,9 +804,9 @@ I typically analyze CyTOF data in R. However, there are plenty of reasons why on
 </div>
 </div>
 
-<div id="outline-container-org6730cf1" class="outline-3">
-<h3 id="org6730cf1"><a href="./julia_cytof_pipeline_one_file.html">CyTOF UMAP with Julia: an experiment</a></h3>
-<div class="outline-text-3" id="text-org6730cf1">
+<div id="outline-container-org5baf485" class="outline-3">
+<h3 id="org5baf485"><a href="./julia_cytof_pipeline_one_file.html">CyTOF UMAP with Julia: an experiment</a></h3>
+<div class="outline-text-3" id="text-org5baf485">
 <p>
 Markdown.<br />
 </p>
@@ -772,9 +816,9 @@ Here, we compare the UMAP implementation from R with the UMAP implementation fro
 </p>
 </div>
 </div>
-<div id="outline-container-org1cc19ec" class="outline-3">
-<h3 id="org1cc19ec"><a href="./run_cytof_with_seurat.html">Run CyTOF analysis with Seurat</a></h3>
-<div class="outline-text-3" id="text-org1cc19ec">
+<div id="outline-container-org2965b08" class="outline-3">
+<h3 id="org2965b08"><a href="./run_cytof_with_seurat.html">Run CyTOF analysis with Seurat</a></h3>
+<div class="outline-text-3" id="text-org2965b08">
 <p>
 Markdown.<br />
 </p>
@@ -784,9 +828,9 @@ Seurat is an R package that runs single-cell sequencing and related data. Here, 
 </p>
 </div>
 </div>
-<div id="outline-container-org29bf44e" class="outline-3">
-<h3 id="org29bf44e"><a href="./anatomy_of_fcs_file.html">Anatomy of a fcs file</a></h3>
-<div class="outline-text-3" id="text-org29bf44e">
+<div id="outline-container-org6d5fa4b" class="outline-3">
+<h3 id="org6d5fa4b"><a href="./anatomy_of_fcs_file.html">Anatomy of a fcs file</a></h3>
+<div class="outline-text-3" id="text-org6d5fa4b">
 <p>
 Markdown.<br />
 </p>
@@ -796,9 +840,9 @@ You can parse a fcs file from scratch without flowCore. I read in a fcs file lin
 </p>
 </div>
 </div>
-<div id="outline-container-org50ca3e1" class="outline-3">
-<h3 id="org50ca3e1"><a href="https://www.biorxiv.org/content/10.1101/337485v1">Continuous Visualization of Multiple Biological Conditions In Single-Cell Data</a></h3>
-<div class="outline-text-3" id="text-org50ca3e1">
+<div id="outline-container-orge521416" class="outline-3">
+<h3 id="orge521416"><a href="https://www.biorxiv.org/content/10.1101/337485v1">Continuous Visualization of Multiple Biological Conditions In Single-Cell Data</a></h3>
+<div class="outline-text-3" id="text-orge521416">
 <p>
 First author pre-print.<br />
 </p>
@@ -813,9 +857,9 @@ I've been asked recently why this is still a pre-print. So I published the peer 
 </div>
 </div>
 
-<div id="outline-container-org2429a78" class="outline-3">
-<h3 id="org2429a78"><a href="https://pubmed.ncbi.nlm.nih.gov/28094900/">High Throughput Precision Measurement of Subcellular Localization in Single Cells</a></h3>
-<div class="outline-text-3" id="text-org2429a78">
+<div id="outline-container-orgb534679" class="outline-3">
+<h3 id="orgb534679"><a href="https://pubmed.ncbi.nlm.nih.gov/28094900/">High Throughput Precision Measurement of Subcellular Localization in Single Cells</a></h3>
+<div class="outline-text-3" id="text-orgb534679">
 <p>
 First author publication.<br />
 </p>
@@ -829,9 +873,9 @@ My summer students are co-authors on this paper! Undergrads and high school stud
 </p>
 </div>
 </div>
-<div id="outline-container-org36a86cf" class="outline-3">
-<h3 id="org36a86cf"><a href="./Burns.Dissertation.Final.pdf">Expanding the Capabilities of Mass Cytometry Data Acquisition and Analysis</a></h3>
-<div class="outline-text-3" id="text-org36a86cf">
+<div id="outline-container-orga620bce" class="outline-3">
+<h3 id="orga620bce"><a href="./Burns.Dissertation.Final.pdf">Expanding the Capabilities of Mass Cytometry Data Acquisition and Analysis</a></h3>
+<div class="outline-text-3" id="text-orga620bce">
 <p>
 PhD Thesis.<br />
 </p>
@@ -849,9 +893,9 @@ In parallel, I was taking computer science classes as a side hobby. I reached a 
 </p>
 </div>
 </div>
-<div id="outline-container-org3989bcf" class="outline-3">
-<h3 id="org3989bcf"><a href="./tjb_dimr_talk.pdf">A visual interrogation of dimension reduction tools for single-cell analysis</a></h3>
-<div class="outline-text-3" id="text-org3989bcf">
+<div id="outline-container-org70bd6cd" class="outline-3">
+<h3 id="org70bd6cd"><a href="./tjb_dimr_talk.pdf">A visual interrogation of dimension reduction tools for single-cell analysis</a></h3>
+<div class="outline-text-3" id="text-org70bd6cd">
 <p>
 Slide deck.<br />
 </p>
@@ -862,9 +906,9 @@ In this talk, I measured the accurracy of dimension reduction tools (PCA, t-SNE,
 </p>
 </div>
 </div>
-<div id="outline-container-org51f55cd" class="outline-3">
-<h3 id="org51f55cd"><a href="./visual_capabilities_of_som.pdf">Neighborhood-based analysis of self-organizing maps</a></h3>
-<div class="outline-text-3" id="text-org51f55cd">
+<div id="outline-container-orgb59bf57" class="outline-3">
+<h3 id="orgb59bf57"><a href="./visual_capabilities_of_som.pdf">Neighborhood-based analysis of self-organizing maps</a></h3>
+<div class="outline-text-3" id="text-orgb59bf57">
 <p>
 Slide deck.<br />
 </p>
@@ -875,9 +919,9 @@ This slide deck summarizes some work I did with Sofie Van Gassen, developer of <
 </p>
 </div>
 </div>
-<div id="outline-container-org892b5bf" class="outline-3">
-<h3 id="org892b5bf"><a href="./mass.cytometry.analysis.history.pdf">A history of mass cytometry data analysis, and where the field is going</a></h3>
-<div class="outline-text-3" id="text-org892b5bf">
+<div id="outline-container-orge304bdd" class="outline-3">
+<h3 id="orge304bdd"><a href="./mass.cytometry.analysis.history.pdf">A history of mass cytometry data analysis, and where the field is going</a></h3>
+<div class="outline-text-3" id="text-orge304bdd">
 <p>
 Slide deck.<br />
 </p>
@@ -888,9 +932,9 @@ I talk about how CyTOF data analysis developed from its inception at the beginni
 </p>
 </div>
 </div>
-<div id="outline-container-org09b90b2" class="outline-3">
-<h3 id="org09b90b2"><a href="./drfz_tsne_interrogation_talk_final.pdf">A comprehensive interrogation of the t-SNE algorithm for mass cytometry analysis</a></h3>
-<div class="outline-text-3" id="text-org09b90b2">
+<div id="outline-container-org65b2018" class="outline-3">
+<h3 id="org65b2018"><a href="./drfz_tsne_interrogation_talk_final.pdf">A comprehensive interrogation of the t-SNE algorithm for mass cytometry analysis</a></h3>
+<div class="outline-text-3" id="text-org65b2018">
 <p>
 Slide deck.<br />
 </p>
@@ -901,9 +945,9 @@ This talk was a response to a member of the research institue who was simply not
 </p>
 </div>
 </div>
-<div id="outline-container-orgce56323" class="outline-3">
-<h3 id="orgce56323"><a href="./burns_cytof_user_forum_talk_for_pdf.pdf">Nearest neighborhood comparisons across biological conditions in single cell data</a></h3>
-<div class="outline-text-3" id="text-orgce56323">
+<div id="outline-container-orgf50bf66" class="outline-3">
+<h3 id="orgf50bf66"><a href="./burns_cytof_user_forum_talk_for_pdf.pdf">Nearest neighborhood comparisons across biological conditions in single cell data</a></h3>
+<div class="outline-text-3" id="text-orgf50bf66">
 <p>
 Slide deck.<br />
 </p>
@@ -914,9 +958,9 @@ This is the talk version of my 2018 Sconify paper, that ended up being the final
 </p>
 </div>
 </div>
-<div id="outline-container-orgaa38529" class="outline-3">
-<h3 id="orgaa38529"><a href="./final_distance.project.poster.pdf">Determining which distance metrics are ideal within a mass cytometry data analysis pipeline</a></h3>
-<div class="outline-text-3" id="text-orgaa38529">
+<div id="outline-container-org38fc0ca" class="outline-3">
+<h3 id="org38fc0ca"><a href="./final_distance.project.poster.pdf">Determining which distance metrics are ideal within a mass cytometry data analysis pipeline</a></h3>
+<div class="outline-text-3" id="text-org38fc0ca">
 <p>
 Poster.<br />
 </p>
@@ -928,9 +972,9 @@ Abstract: Due to the rise of high-dimensional single cell technologies in the pa
 </div>
 </div>
 
-<div id="outline-container-org768a2ac" class="outline-3">
-<h3 id="org768a2ac"><a href="./0117TylerCytobankBlog.pdf">Fine-Tune viSNE to Get the Most of Your Single-Cell Data Analysis</a></h3>
-<div class="outline-text-3" id="text-org768a2ac">
+<div id="outline-container-org66080aa" class="outline-3">
+<h3 id="org66080aa"><a href="./0117TylerCytobankBlog.pdf">Fine-Tune viSNE to Get the Most of Your Single-Cell Data Analysis</a></h3>
+<div class="outline-text-3" id="text-org66080aa">
 <p>
 Guest blog post.<br />
 </p>
@@ -940,9 +984,9 @@ This is a guest blog post I wrote for Cytobank. The formatting of the post has s
 </p>
 </div>
 </div>
-<div id="outline-container-org89e7080" class="outline-3">
-<h3 id="org89e7080"><a href="https://github.com/tjburns08/dimension_reduction_add_noise">Dimension reduction add noise</a></h3>
-<div class="outline-text-3" id="text-org89e7080">
+<div id="outline-container-orgdb7f06c" class="outline-3">
+<h3 id="orgdb7f06c"><a href="https://github.com/tjburns08/dimension_reduction_add_noise">Dimension reduction add noise</a></h3>
+<div class="outline-text-3" id="text-orgdb7f06c">
 <p>
 Software.<br />
 </p>
@@ -957,9 +1001,9 @@ If you have one or two bad markers in your panel (noise), does it completely rui
 </ol>
 </div>
 </div>
-<div id="outline-container-org5d92361" class="outline-3">
-<h3 id="org5d92361"><a href="https://github.com/tjburns08/dimension_reduction_island_placement">Dimension reduction island placement</a></h3>
-<div class="outline-text-3" id="text-org5d92361">
+<div id="outline-container-orgca04ddc" class="outline-3">
+<h3 id="orgca04ddc"><a href="https://github.com/tjburns08/dimension_reduction_island_placement">Dimension reduction island placement</a></h3>
+<div class="outline-text-3" id="text-orgca04ddc">
 <p>
 Software.<br />
 </p>
@@ -973,9 +1017,9 @@ The spoiler alert is that the island placement of UMAP appears to be more stable
 </p>
 </div>
 </div>
-<div id="outline-container-org23fa5ff" class="outline-3">
-<h3 id="org23fa5ff"><a href="https://github.com/tjburns08/KnnSleepwalk">Knn sleepwalk</a></h3>
-<div class="outline-text-3" id="text-org23fa5ff">
+<div id="outline-container-org12accb6" class="outline-3">
+<h3 id="org12accb6"><a href="https://github.com/tjburns08/KnnSleepwalk">Knn sleepwalk</a></h3>
+<div class="outline-text-3" id="text-org12accb6">
 <p>
 Software.<br />
 </p>
@@ -985,9 +1029,9 @@ A wrapper I wrote around the <a href="https://anders-biostat.github.io/sleepwalk
 </p>
 </div>
 </div>
-<div id="outline-container-orgda2d223" class="outline-3">
-<h3 id="orgda2d223"><a href="https://www.bioconductor.org/packages/release/bioc/html/Sconify.html">Bioconductor package Sconify</a></h3>
-<div class="outline-text-3" id="text-orgda2d223">
+<div id="outline-container-orgf032624" class="outline-3">
+<h3 id="orgf032624"><a href="https://www.bioconductor.org/packages/release/bioc/html/Sconify.html">Bioconductor package Sconify</a></h3>
+<div class="outline-text-3" id="text-orgf032624">
 <p>
 Software.<br />
 </p>
@@ -997,9 +1041,9 @@ Official description: This package does k-nearest neighbor based statistics and 
 </p>
 </div>
 </div>
-<div id="outline-container-org24b448b" class="outline-3">
-<h3 id="org24b448b">CyTOF analysis pipeline</h3>
-<div class="outline-text-3" id="text-org24b448b">
+<div id="outline-container-org2e12f25" class="outline-3">
+<h3 id="org2e12f25">CyTOF analysis pipeline</h3>
+<div class="outline-text-3" id="text-org2e12f25">
 <p>
 Markdowns.<br />
 </p>
@@ -1008,26 +1052,26 @@ Markdowns.<br />
 CyTOF analysis has come a long way. Along with single-cell sequencing analysis, a lot of it is high-level functions that do what needs to be done. I prefer a guts-level analysis, where I can see the low-level the details of how my data are being manipulated. This is important for understanding and innovation. 
 </p>
 </div>
-<div id="outline-container-org5ee387d" class="outline-4">
-<h4 id="org5ee387d"><a href="./cytof_pipeline_one_file.html">One fcs file</a></h4>
-<div class="outline-text-4" id="text-org5ee387d">
+<div id="outline-container-org0dc2ed9" class="outline-4">
+<h4 id="org0dc2ed9"><a href="./cytof_pipeline_one_file.html">One fcs file</a></h4>
+<div class="outline-text-4" id="text-org0dc2ed9">
 <p>
 Keeping it to one fcs file, we can focus on what happens when a fcs file is read into R, how it is transformed, and what the best practices of clustering, dimension reduction, and visualization are. These foundations can be built upon when looking at multiple fcs files to determine where there are differences in your control versus experiment group. 
 </p>
 </div>
 </div>
-<div id="outline-container-orgf19aec5" class="outline-4">
-<h4 id="orgf19aec5"><a href="./cytof_pipeline_many_files.html">Multiple fcs files</a></h4>
-<div class="outline-text-4" id="text-orgf19aec5">
+<div id="outline-container-orga939541" class="outline-4">
+<h4 id="orga939541"><a href="./cytof_pipeline_many_files.html">Multiple fcs files</a></h4>
+<div class="outline-text-4" id="text-orga939541">
 <p>
 This markdown uses the <a href="https://www.bioconductor.org/packages/release/bioc/html/diffcyt.html">diffcyt</a> package to help us do statistics between groups, though I show you how to do per-cluster statistics yourself. We make box plots group-level comparisons for clusters we care about. We also color our dimension reduction maps by the p-value information. This pipeline requires a sample metadata file, as well as a marker file. I show you what these look like directly in the pipeline.
 </p>
 </div>
 </div>
 </div>
-<div id="outline-container-org6b109b3" class="outline-3">
-<h3 id="org6b109b3">KNN sleepwalk examples</h3>
-<div class="outline-text-3" id="text-org6b109b3">
+<div id="outline-container-org7c80d51" class="outline-3">
+<h3 id="org7c80d51">KNN sleepwalk examples</h3>
+<div class="outline-text-3" id="text-org7c80d51">
 <p>
 Software.<br />
 </p>
@@ -1040,37 +1084,37 @@ Some examples of output for my <a href="https://github.com/tjburns08/knn_sleepwa
 <li>K-farthest neighbors (KFN) will give you intuition around how well the embedding preserves global structure.</li>
 </ul>
 </div>
-<div id="outline-container-org20d667a" class="outline-4">
-<h4 id="org20d667a">CyTOF PBMCs</h4>
-<div class="outline-text-4" id="text-org20d667a">
+<div id="outline-container-orga926fad" class="outline-4">
+<h4 id="orga926fad">CyTOF PBMCs</h4>
+<div class="outline-text-4" id="text-orga926fad">
 <p>
 The dataset is internal, from the German Rheumatism Research Center in Berlin. These take a bit to load after you click on them, but its worth the wait. 
 </p>
 </div>
 <ul class="org-ul">
-<li><a id="org4afe9cd"></a><a href="./knn_sleepwalk_cytof.html">KNN from original marker space</a><br /></li>
-<li><a id="orge96920c"></a><a href="./kfn_sleepwalk_cytof.html">KFN from original marker space</a><br /></li>
+<li><a id="orgdcb5add"></a><a href="./knn_sleepwalk_cytof.html">KNN from original marker space</a><br /></li>
+<li><a id="org4a71695"></a><a href="./kfn_sleepwalk_cytof.html">KFN from original marker space</a><br /></li>
 </ul>
 </div>
-<div id="outline-container-org87a14a3" class="outline-4">
-<h4 id="org87a14a3">single-cell RNA sequencing PBMCs</h4>
-<div class="outline-text-4" id="text-org87a14a3">
+<div id="outline-container-org9f726e4" class="outline-4">
+<h4 id="org9f726e4">single-cell RNA sequencing PBMCs</h4>
+<div class="outline-text-4" id="text-org9f726e4">
 <p>
 The dataset is from <a href="https://satijalab.org/seurat/articles/pbmc3k_tutorial.html">this vignette</a>. The dimension reduction was done on the top 10 principal components of the top 2000 most variable genes.
 </p>
 </div>
 <ul class="org-ul">
-<li><a id="org6db09ae"></a><a href="./knn_sleepwalk_scrna_seq_pca.html">KNN from PCA space</a><br /></li>
-<li><a id="org7079b9a"></a><a href="./kfn_sleepwalk_scrna_seq_pca.html">KFN from PCA space</a><br /></li>
-<li><a id="orge15bbe0"></a><a href="./knn_sleepwalk_scrna_seq_var_genes.html">KNN from variable genes space</a><br /></li>
-<li><a id="org6b55b1c"></a><a href="./kfn_sleepwalk_scrna_seq_var_genes.html">KFN from variable genes space</a><br /></li>
+<li><a id="orgaea4289"></a><a href="./knn_sleepwalk_scrna_seq_pca.html">KNN from PCA space</a><br /></li>
+<li><a id="org7714caf"></a><a href="./kfn_sleepwalk_scrna_seq_pca.html">KFN from PCA space</a><br /></li>
+<li><a id="org97d0d74"></a><a href="./knn_sleepwalk_scrna_seq_var_genes.html">KNN from variable genes space</a><br /></li>
+<li><a id="org80e51e9"></a><a href="./kfn_sleepwalk_scrna_seq_var_genes.html">KFN from variable genes space</a><br /></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-org4d3c184" class="outline-3">
-<h3 id="org4d3c184"><a href="./distance_matrix_correlation.html">Distance matrix metric correlations</a></h3>
-<div class="outline-text-3" id="text-org4d3c184">
+<div id="outline-container-orgbb36d2b" class="outline-3">
+<h3 id="orgbb36d2b"><a href="./distance_matrix_correlation.html">Distance matrix metric correlations</a></h3>
+<div class="outline-text-3" id="text-orgbb36d2b">
 <p>
 Markdown.<br />
 </p>
@@ -1080,9 +1124,9 @@ Which distance metrics are right for your data analysis. While I've created a po
 </p>
 </div>
 </div>
-<div id="outline-container-org8311daf" class="outline-3">
-<h3 id="org8311daf"><a href="./asinh_mean_vs_mean_asinh.html">asinh(mean(x)) vs mean(asinh(x))</a></h3>
-<div class="outline-text-3" id="text-org8311daf">
+<div id="outline-container-org692aca6" class="outline-3">
+<h3 id="org692aca6"><a href="./asinh_mean_vs_mean_asinh.html">asinh(mean(x)) vs mean(asinh(x))</a></h3>
+<div class="outline-text-3" id="text-org692aca6">
 <p>
 Markdown.<br />
 </p>
@@ -1092,9 +1136,9 @@ If you want the means of your markers per cluster, be careful how you export the
 </p>
 </div>
 </div>
-<div id="outline-container-org17a7aed" class="outline-3">
-<h3 id="org17a7aed"><a href="./cytof_data_transformations.html">Data transformations for CyTOF</a></h3>
-<div class="outline-text-3" id="text-org17a7aed">
+<div id="outline-container-org21c094e" class="outline-3">
+<h3 id="org21c094e"><a href="./cytof_data_transformations.html">Data transformations for CyTOF</a></h3>
+<div class="outline-text-3" id="text-org21c094e">
 <p>
 Markdown.<br />
 </p>
@@ -1106,17 +1150,17 @@ CyTOF data are transformed using the inverse hyperbolic sine (asinh) of the data
 </div>
 </div>
 
-<div id="outline-container-orgab88ddd" class="outline-2">
-<h2 id="orgab88ddd">Natural language processing</h2>
-<div class="outline-text-2" id="text-orgab88ddd">
+<div id="outline-container-org2027e61" class="outline-2">
+<h2 id="org2027e61">Natural language processing</h2>
+<div class="outline-text-2" id="text-org2027e61">
 <a href="#top">Back to top</a>
 <p>
 A lot of this work is related to natural language embeddings, or taking anything from words to paragraphs and converting them into spatial coordinates that group by context. My most popular work on this is summed up in The Scrolling Problem, which culminated in a TEDx Basel talk in 2023.
 </p>
 </div>
-<div id="outline-container-orgfb09749" class="outline-3">
-<h3 id="orgfb09749"><a href="./descent_into_madness.html">A LLM's descent into madness</a></h3>
-<div class="outline-text-3" id="text-orgfb09749">
+<div id="outline-container-orgb7f9d0f" class="outline-3">
+<h3 id="orgb7f9d0f"><a href="./descent_into_madness.html">A LLM's descent into madness</a></h3>
+<div class="outline-text-3" id="text-orgb7f9d0f">
 <p>
 Article.<br />
 </p>
@@ -1127,9 +1171,9 @@ At the time of writing (February 2025) I am frustrated by the best of the LLMs g
 </div>
 </div>
 
-<div id="outline-container-org35cd429" class="outline-3">
-<h3 id="org35cd429"><a href="./run_gprofiler_and_embed.html">From gene lists to interactive contextual maps: enhancing g:Profiler interpretation</a></h3>
-<div class="outline-text-3" id="text-org35cd429">
+<div id="outline-container-org2cb1aa4" class="outline-3">
+<h3 id="org2cb1aa4"><a href="./run_gprofiler_and_embed.html">From gene lists to interactive contextual maps: enhancing g:Profiler interpretation</a></h3>
+<div class="outline-text-3" id="text-org2cb1aa4">
 <p>
 Markdown.<br />
 </p>
@@ -1140,9 +1184,9 @@ In my client projects, I often have to make sense of long lists of differentiall
 </div>
 </div>
 
-<div id="outline-container-org8fc020e" class="outline-3">
-<h3 id="org8fc020e"><a href="./command_line_writeup.html">How I made a command line chatbot</a></h3>
-<div class="outline-text-3" id="text-org8fc020e">
+<div id="outline-container-org684c2fe" class="outline-3">
+<h3 id="org684c2fe"><a href="./command_line_writeup.html">How I made a command line chatbot</a></h3>
+<div class="outline-text-3" id="text-org684c2fe">
 <p>
 Article.<br />
 </p>
@@ -1152,9 +1196,9 @@ The typical way LLMs are called is through some sort of user interface. Here, I 
 </p>
 </div>
 </div>
-<div id="outline-container-org49bbdf7" class="outline-3">
-<h3 id="org49bbdf7"><a href="./website_internal_link_graph.html">Graph visualization of my website</a></h3>
-<div class="outline-text-3" id="text-org49bbdf7">
+<div id="outline-container-org1930a06" class="outline-3">
+<h3 id="org1930a06"><a href="./website_internal_link_graph.html">Graph visualization of my website</a></h3>
+<div class="outline-text-3" id="text-org1930a06">
 <p>
 Visualization.<br />
 </p>
@@ -1165,9 +1209,9 @@ My website functions a bit like a personal wiki, with content linking internally
 </div>
 </div>
 
-<div id="outline-container-org2c63c7a" class="outline-3">
-<h3 id="org2c63c7a"><a href="./tech_enabled_journaling.html">One million words: a tech-enabled review of 15 years of journaling</a></h3>
-<div class="outline-text-3" id="text-org2c63c7a">
+<div id="outline-container-org98c1bb8" class="outline-3">
+<h3 id="org98c1bb8"><a href="./tech_enabled_journaling.html">One million words: a tech-enabled review of 15 years of journaling</a></h3>
+<div class="outline-text-3" id="text-org98c1bb8">
 <p>
 Article.<br />
 </p>
@@ -1178,9 +1222,9 @@ I started a typed journal back in 2009. It recently hit one million words. It is
 </div>
 </div>
 
-<div id="outline-container-orgc3af874" class="outline-3">
-<h3 id="orgc3af874"><a href="./cnn_fox_ap_map.html">CNN, FoxNews, and AP: a News Space study</a></h3>
-<div class="outline-text-3" id="text-orgc3af874">
+<div id="outline-container-org01f0e8e" class="outline-3">
+<h3 id="org01f0e8e"><a href="./cnn_fox_ap_map.html">CNN, FoxNews, and AP: a News Space study</a></h3>
+<div class="outline-text-3" id="text-org01f0e8e">
 <p>
 Markdown.<br />
 </p>
@@ -1190,9 +1234,9 @@ In this study, we take news articles that correspond to CNN, FoxNews, and AP, fr
 </p>
 </div>
 </div>
-<div id="outline-container-org59e069e" class="outline-3">
-<h3 id="org59e069e"><a href="./how_i_curate_content.html">How I curate content</a></h3>
-<div class="outline-text-3" id="text-org59e069e">
+<div id="outline-container-orgc3fd630" class="outline-3">
+<h3 id="orgc3fd630"><a href="./how_i_curate_content.html">How I curate content</a></h3>
+<div class="outline-text-3" id="text-orgc3fd630">
 <p>
 Article.<br />
 </p>
@@ -1202,9 +1246,9 @@ We should all be active content curators. We should all be actively discussing h
 </p>
 </div>
 </div>
-<div id="outline-container-org573a8e0" class="outline-3">
-<h3 id="org573a8e0"><a href="./scrolling_problem.html">The Scrolling Problem</a></h3>
-<div class="outline-text-3" id="text-org573a8e0">
+<div id="outline-container-org24ae25a" class="outline-3">
+<h3 id="org24ae25a"><a href="./scrolling_problem.html">The Scrolling Problem</a></h3>
+<div class="outline-text-3" id="text-org24ae25a">
 <p>
 Article.<br />
 </p>
@@ -1214,9 +1258,9 @@ The article behind my <a href="https://www.youtube.com/watch?v=U35T-KzfeLk">TEDx
 </p>
 </div>
 </div>
-<div id="outline-container-org8ce3ca6" class="outline-3">
-<h3 id="org8ce3ca6"><a href="./gpt3_student.html">GPT-3 simulating students</a></h3>
-<div class="outline-text-3" id="text-org8ce3ca6">
+<div id="outline-container-org6ea08f5" class="outline-3">
+<h3 id="org6ea08f5"><a href="./gpt3_student.html">GPT-3 simulating students</a></h3>
+<div class="outline-text-3" id="text-org6ea08f5">
 <p>
 Article.<br />
 </p>
@@ -1226,9 +1270,9 @@ This is a report I wrote for my uncle, who is a professor at the University of M
 </p>
 </div>
 </div>
-<div id="outline-container-org8450c5d" class="outline-3">
-<h3 id="org8450c5d"><a href="./context_problem_bfx.html">The Context Problem in Bioinformatics</a></h3>
-<div class="outline-text-3" id="text-org8450c5d">
+<div id="outline-container-org07d8497" class="outline-3">
+<h3 id="org07d8497"><a href="./context_problem_bfx.html">The Context Problem in Bioinformatics</a></h3>
+<div class="outline-text-3" id="text-org07d8497">
 <p>
 Article.<br />
 </p>
@@ -1238,9 +1282,9 @@ In the age of big data, my bioinformatics analyses often lead to output that is 
 </p>
 </div>
 </div>
-<div id="outline-container-org1f93a11" class="outline-3">
-<h3 id="org1f93a11"><a href="./ask_marcus_writeup.html">What would Marcus Aurelius say?</a></h3>
-<div class="outline-text-3" id="text-org1f93a11">
+<div id="outline-container-org9b37d2d" class="outline-3">
+<h3 id="org9b37d2d"><a href="./ask_marcus_writeup.html">What would Marcus Aurelius say?</a></h3>
+<div class="outline-text-3" id="text-org9b37d2d">
 <p>
 Article.<br />
 </p>
@@ -1250,9 +1294,9 @@ I turn the Meditations by Marcus Aurelius into a semantic search based language 
 </p>
 </div>
 </div>
-<div id="outline-container-orgce6813d" class="outline-3">
-<h3 id="orgce6813d"><a href="https://medium.com/@tjburns_72591/how-to-utilize-scientific-literature-trends-to-gain-intuition-about-a-topic-b5c554e3d280">How to utilize scientific literature trends to gain intuition around a topic</a></h3>
-<div class="outline-text-3" id="text-orgce6813d">
+<div id="outline-container-orge6d10ea" class="outline-3">
+<h3 id="orge6d10ea"><a href="https://medium.com/@tjburns_72591/how-to-utilize-scientific-literature-trends-to-gain-intuition-about-a-topic-b5c554e3d280">How to utilize scientific literature trends to gain intuition around a topic</a></h3>
+<div class="outline-text-3" id="text-orge6d10ea">
 <p>
 Medium post.<br />
 </p>
@@ -1262,9 +1306,9 @@ The scientific literature is overwhelming, and knowing how to utilize text minin
 </p>
 </div>
 </div>
-<div id="outline-container-orgf900a9d" class="outline-3">
-<h3 id="orgf900a9d"><a href="https://medium.com/coinmonks/how-to-identify-thought-leaders-and-visualize-their-influence-c01aa218090e">How to identify thought leaders and visualize their influence</a></h3>
-<div class="outline-text-3" id="text-orgf900a9d">
+<div id="outline-container-orgca3af68" class="outline-3">
+<h3 id="orgca3af68"><a href="https://medium.com/coinmonks/how-to-identify-thought-leaders-and-visualize-their-influence-c01aa218090e">How to identify thought leaders and visualize their influence</a></h3>
+<div class="outline-text-3" id="text-orgca3af68">
 <p>
 Medium post.<br />
 </p>
@@ -1274,9 +1318,9 @@ Understanding how authors of a given field are connected can help you identify k
 </p>
 </div>
 </div>
-<div id="outline-container-org569c108" class="outline-3">
-<h3 id="org569c108"><a href="https://medium.com/@tjburns_72591/using-and-mining-pre-prints-to-stay-ahead-of-your-field-with-the-help-of-twitter-50d5bdc528de">Using and mining pre-prints to stay ahead of your field, with the help of Twitter</a></h3>
-<div class="outline-text-3" id="text-org569c108">
+<div id="outline-container-org4558fb4" class="outline-3">
+<h3 id="org4558fb4"><a href="https://medium.com/@tjburns_72591/using-and-mining-pre-prints-to-stay-ahead-of-your-field-with-the-help-of-twitter-50d5bdc528de">Using and mining pre-prints to stay ahead of your field, with the help of Twitter</a></h3>
+<div class="outline-text-3" id="text-org4558fb4">
 <p>
 Medium post.<br />
 </p>
@@ -1286,9 +1330,9 @@ I explain why pre-prints are important to staying ahead of the technology and ge
 </p>
 </div>
 </div>
-<div id="outline-container-org2af672f" class="outline-3">
-<h3 id="org2af672f"><a href="https://github.com/tjburns08/rss_map">RSS map</a></h3>
-<div class="outline-text-3" id="text-org2af672f">
+<div id="outline-container-org6e09df9" class="outline-3">
+<h3 id="org6e09df9"><a href="https://github.com/tjburns08/rss_map">RSS map</a></h3>
+<div class="outline-text-3" id="text-org6e09df9">
 <p>
 Software.<br />
 </p>
@@ -1298,9 +1342,9 @@ Associated with <a href="https://tjburns08.github.io/scrolling_problem.html">The
 </p>
 </div>
 </div>
-<div id="outline-container-org7705d67" class="outline-3">
-<h3 id="org7705d67">(temporarily suspended) <a href="https://gwasmap.herokuapp.com/">Gwasmap</a></h3>
-<div class="outline-text-3" id="text-org7705d67">
+<div id="outline-container-org2449280" class="outline-3">
+<h3 id="org2449280">(temporarily suspended) <a href="https://gwasmap.herokuapp.com/">Gwasmap</a></h3>
+<div class="outline-text-3" id="text-org2449280">
 <p>
 Software.<br />
 </p>
@@ -1310,9 +1354,9 @@ Associated with my article <a href="https://tjburns08.github.io/context_problem_
 </p>
 </div>
 </div>
-<div id="outline-container-org0d373df" class="outline-3">
-<h3 id="org0d373df"><a href="https://huggingface.co/spaces/tjburns/ask_marcus_aurelius">Ask Marcus Aurelius</a></h3>
-<div class="outline-text-3" id="text-org0d373df">
+<div id="outline-container-org2f5f2fd" class="outline-3">
+<h3 id="org2f5f2fd"><a href="https://huggingface.co/spaces/tjburns/ask_marcus_aurelius">Ask Marcus Aurelius</a></h3>
+<div class="outline-text-3" id="text-org2f5f2fd">
 <p>
 Software.<br />
 </p>
@@ -1322,9 +1366,9 @@ Associated with <a href="https://tjburns08.github.io/ask_marcus_writeup.html">Wh
 </p>
 </div>
 </div>
-<div id="outline-container-org3d81bc0" class="outline-3">
-<h3 id="org3d81bc0"><a href="https://huggingface.co/spaces/tjburns/find_your_biases">Find your biases</a></h3>
-<div class="outline-text-3" id="text-org3d81bc0">
+<div id="outline-container-orgcf8b5ac" class="outline-3">
+<h3 id="orgcf8b5ac"><a href="https://huggingface.co/spaces/tjburns/find_your_biases">Find your biases</a></h3>
+<div class="outline-text-3" id="text-orgcf8b5ac">
 <p>
 Software.<br />
 </p>
@@ -1334,9 +1378,9 @@ Write your thoughts into the text box, and the app will give you a list of cogni
 </p>
 </div>
 </div>
-<div id="outline-container-orge453a7e" class="outline-3">
-<h3 id="orge453a7e"><a href="https://github.com/tjburns08/twitter_archive_and_embed">Twitter archive and embed</a></h3>
-<div class="outline-text-3" id="text-orge453a7e">
+<div id="outline-container-orgde12d1a" class="outline-3">
+<h3 id="orgde12d1a"><a href="https://github.com/tjburns08/twitter_archive_and_embed">Twitter archive and embed</a></h3>
+<div class="outline-text-3" id="text-orgde12d1a">
 <p>
 Software.<br />
 </p>
@@ -1350,9 +1394,9 @@ A pipeline that takes as input a list of twitter user names that you supply. Fir
 </p>
 </div>
 </div>
-<div id="outline-container-org7fc4d76" class="outline-3">
-<h3 id="org7fc4d76"><a href="https://huggingface.co/spaces/tjburns/duckduckgo_2d_search">DuckDuckGo 2-D Search</a></h3>
-<div class="outline-text-3" id="text-org7fc4d76">
+<div id="outline-container-org7b43451" class="outline-3">
+<h3 id="org7b43451"><a href="https://huggingface.co/spaces/tjburns/duckduckgo_2d_search">DuckDuckGo 2-D Search</a></h3>
+<div class="outline-text-3" id="text-org7b43451">
 <p>
 Software.<br />
 </p>
@@ -1362,9 +1406,9 @@ For web searches of broad topics, where you need the first hundred results rathe
 </p>
 </div>
 </div>
-<div id="outline-container-orgc98d700" class="outline-3">
-<h3 id="orgc98d700"><a href="./biorxiv_medrxiv_history.html">Preprint server archive</a></h3>
-<div class="outline-text-3" id="text-orgc98d700">
+<div id="outline-container-orgc743966" class="outline-3">
+<h3 id="orgc743966"><a href="./biorxiv_medrxiv_history.html">Preprint server archive</a></h3>
+<div class="outline-text-3" id="text-orgc743966">
 <p>
 Software.<br />
 </p>
@@ -1374,17 +1418,17 @@ A searchable and sortable table of every biorxiv and medrxiv pre-print to date (
 </p>
 </div>
 </div>
-<div id="outline-container-orgea60aa7" class="outline-3">
-<h3 id="orgea60aa7">Likes vs retweets</h3>
-<div class="outline-text-3" id="text-orgea60aa7">
+<div id="outline-container-org8a06a2d" class="outline-3">
+<h3 id="org8a06a2d">Likes vs retweets</h3>
+<div class="outline-text-3" id="text-org8a06a2d">
 <p>
 Markdown.<br />
 </p>
 </div>
 
-<div id="outline-container-orgf4263ba" class="outline-4">
-<h4 id="orgf4263ba"><a href="./single cell sequencing OR single-cell sequencing.csv_likes_vs_retweets.html">Search term: single cell sequencing OR single-cell sequencing</a></h4>
-<div class="outline-text-4" id="text-orgf4263ba">
+<div id="outline-container-orgf5164a0" class="outline-4">
+<h4 id="orgf5164a0"><a href="./single cell sequencing OR single-cell sequencing.csv_likes_vs_retweets.html">Search term: single cell sequencing OR single-cell sequencing</a></h4>
+<div class="outline-text-4" id="text-orgf5164a0">
 <p>
 We find three regions:
 </p>
@@ -1396,9 +1440,9 @@ We find three regions:
 </div>
 </div>
 </div>
-<div id="outline-container-org92a4cb6" class="outline-3">
-<h3 id="org92a4cb6"><a href="./question_graph_writeup.html">Question graph</a></h3>
-<div class="outline-text-3" id="text-org92a4cb6">
+<div id="outline-container-orgef9b3e6" class="outline-3">
+<h3 id="orgef9b3e6"><a href="./question_graph_writeup.html">Question graph</a></h3>
+<div class="outline-text-3" id="text-orgef9b3e6">
 <p>
 Markdown.<br />
 </p>
@@ -1409,14 +1453,14 @@ You are only as good as the questions you ask yourself and others. My uncle told
 </div>
 </div>
 </div>
-<div id="outline-container-orgfba8870" class="outline-2">
-<h2 id="orgfba8870">Philosophy and rationality</h2>
-<div class="outline-text-2" id="text-orgfba8870">
+<div id="outline-container-org0b752fb" class="outline-2">
+<h2 id="org0b752fb">Philosophy and rationality</h2>
+<div class="outline-text-2" id="text-org0b752fb">
 <a href="#top">Back to top</a>
 </div>
-<div id="outline-container-orgabe323b" class="outline-3">
-<h3 id="orgabe323b"><a href="./die_with_zero.html">Die with zero ideas</a></h3>
-<div class="outline-text-3" id="text-orgabe323b">
+<div id="outline-container-orge5fed57" class="outline-3">
+<h3 id="orge5fed57"><a href="./die_with_zero.html">Die with zero ideas</a></h3>
+<div class="outline-text-3" id="text-orge5fed57">
 <p>
 Article.<br />
 </p>
@@ -1426,9 +1470,9 @@ At any given point, there are ideas in my head or rough pieces of text and code 
 </p>
 </div>
 </div>
-<div id="outline-container-org67401c8" class="outline-3">
-<h3 id="org67401c8"><a href="./praise_the_ideal.html">Buddhism is to mindfulness, as Christianity is to&#x2026;</a></h3>
-<div class="outline-text-3" id="text-org67401c8">
+<div id="outline-container-orgaf46923" class="outline-3">
+<h3 id="orgaf46923"><a href="./praise_the_ideal.html">Buddhism is to mindfulness, as Christianity is to&#x2026;</a></h3>
+<div class="outline-text-3" id="text-orgaf46923">
 <p>
 Article.<br />
 </p>
@@ -1439,9 +1483,9 @@ I make a connection between idealizing my father during the "Dad is superman" ph
 </div>
 </div>
 
-<div id="outline-container-orgb9f2bed" class="outline-3">
-<h3 id="orgb9f2bed"><a href="./boring.html">The most boring man in the world</a></h3>
-<div class="outline-text-3" id="text-orgb9f2bed">
+<div id="outline-container-orgc7c971d" class="outline-3">
+<h3 id="orgc7c971d"><a href="./boring.html">The most boring man in the world</a></h3>
+<div class="outline-text-3" id="text-orgc7c971d">
 <p>
 Article.<br />
 </p>
@@ -1452,9 +1496,9 @@ I had a fascination with the Dos Equis "Most Interesting Man In The World" ad ca
 </div>
 </div>
 
-<div id="outline-container-orgffb9f76" class="outline-3">
-<h3 id="orgffb9f76"><a href="./signal_there.html">There's some signal there</a></h3>
-<div class="outline-text-3" id="text-orgffb9f76">
+<div id="outline-container-orgf153f8d" class="outline-3">
+<h3 id="orgf153f8d"><a href="./signal_there.html">There's some signal there</a></h3>
+<div class="outline-text-3" id="text-orgf153f8d">
 <p>
 Article.<br />
 </p>
@@ -1464,9 +1508,9 @@ This is an expression I use a lot in casual conversation. In essence, when I com
 </p>
 </div>
 </div>
-<div id="outline-container-org2b1c293" class="outline-3">
-<h3 id="org2b1c293"><a href="./i_saw_the_northern_lights.html">I saw the northern lights</a></h3>
-<div class="outline-text-3" id="text-org2b1c293">
+<div id="outline-container-org7ebec84" class="outline-3">
+<h3 id="org7ebec84"><a href="./i_saw_the_northern_lights.html">I saw the northern lights</a></h3>
+<div class="outline-text-3" id="text-org7ebec84">
 <p>
 Article.<br />
 </p>
@@ -1477,9 +1521,9 @@ A reflection of the first time I saw the northern lights, in Iceland in 2019. A 
 </div>
 </div>
 
-<div id="outline-container-org9d8e27c" class="outline-3">
-<h3 id="org9d8e27c"><a href="./fear_the_unword.html">Fear of the un-word is the beginning of wisdom</a></h3>
-<div class="outline-text-3" id="text-org9d8e27c">
+<div id="outline-container-org974f324" class="outline-3">
+<h3 id="org974f324"><a href="./fear_the_unword.html">Fear of the un-word is the beginning of wisdom</a></h3>
+<div class="outline-text-3" id="text-org974f324">
 <p>
 Article.<br />
 </p>
@@ -1490,9 +1534,9 @@ An un-word is a word that points to that which cannot be put into words. We see 
 </div>
 </div>
 
-<div id="outline-container-org4a26887" class="outline-3">
-<h3 id="org4a26887"><a href="./limbic_language_learning.html">Limbic language learning</a></h3>
-<div class="outline-text-3" id="text-org4a26887">
+<div id="outline-container-org5de6973" class="outline-3">
+<h3 id="org5de6973"><a href="./limbic_language_learning.html">Limbic language learning</a></h3>
+<div class="outline-text-3" id="text-org5de6973">
 <p>
 Article.<br />
 </p>
@@ -1503,9 +1547,9 @@ In the years I've lived in Germany, I have realized that a lot of my success in 
 </div>
 </div>
 
-<div id="outline-container-org8167b2b" class="outline-3">
-<h3 id="org8167b2b"><a href="./getting_life_done.html">Getting life done</a></h3>
-<div class="outline-text-3" id="text-org8167b2b">
+<div id="outline-container-org9824b1e" class="outline-3">
+<h3 id="org9824b1e"><a href="./getting_life_done.html">Getting life done</a></h3>
+<div class="outline-text-3" id="text-org9824b1e">
 <p>
 Article.<br />
 </p>
@@ -1516,9 +1560,9 @@ There are two modes that we operate in: the doing mode and the getting-done mode
 </div>
 </div>
 
-<div id="outline-container-org4657b83" class="outline-3">
-<h3 id="org4657b83"><a href="./episodic_memory.html">Episodic memory is the new semantic memory</a></h3>
-<div class="outline-text-3" id="text-org4657b83">
+<div id="outline-container-orge4abb82" class="outline-3">
+<h3 id="orge4abb82"><a href="./episodic_memory.html">Episodic memory is the new semantic memory</a></h3>
+<div class="outline-text-3" id="text-orge4abb82">
 <p>
 Article.<br />
 </p>
@@ -1528,9 +1572,9 @@ First, we valued having information. After the rise of the internet and search e
 </p>
 </div>
 </div>
-<div id="outline-container-org4b4bb29" class="outline-3">
-<h3 id="org4b4bb29"><a href="./zelda.html">Zelda, the hero instinct, and narratives</a></h3>
-<div class="outline-text-3" id="text-org4b4bb29">
+<div id="outline-container-org5ab5d67" class="outline-3">
+<h3 id="org5ab5d67"><a href="./zelda.html">Zelda, the hero instinct, and narratives</a></h3>
+<div class="outline-text-3" id="text-org5ab5d67">
 <p>
 Article.<br />
 </p>
@@ -1541,9 +1585,9 @@ I take the classic game Zelda: A Link to the Past, and draw parallels between th
 </div>
 </div>
 
-<div id="outline-container-org874e01c" class="outline-3">
-<h3 id="org874e01c"><a href="./enjoyment_arbitrage.html">Enjoyment arbitrage: you can do what you love, if everyone else hates it</a></h3>
-<div class="outline-text-3" id="text-org874e01c">
+<div id="outline-container-orge3c1671" class="outline-3">
+<h3 id="orge3c1671"><a href="./enjoyment_arbitrage.html">Enjoyment arbitrage: you can do what you love, if everyone else hates it</a></h3>
+<div class="outline-text-3" id="text-orge3c1671">
 <p>
 Article.<br />
 </p>
@@ -1554,9 +1598,9 @@ I think it is possible to do what you love, if you put yourself into an environm
 </div>
 </div>
 
-<div id="outline-container-orgfa149fd" class="outline-3">
-<h3 id="orgfa149fd"><a href="./fight_complexity_with_complexity.html">Fight complexity with complexity</a></h3>
-<div class="outline-text-3" id="text-orgfa149fd">
+<div id="outline-container-orgc048bcf" class="outline-3">
+<h3 id="orgc048bcf"><a href="./fight_complexity_with_complexity.html">Fight complexity with complexity</a></h3>
+<div class="outline-text-3" id="text-orgc048bcf">
 <p>
 Article.<br />
 </p>
@@ -1567,9 +1611,9 @@ A new paradigm that seems to be emerging from the bottom up, linking my work on 
 </div>
 </div>
 
-<div id="outline-container-orgee2aaa1" class="outline-3">
-<h3 id="orgee2aaa1"><a href="./finite_infinite_life_games.html">Finite and infinite-life games</a></h3>
-<div class="outline-text-3" id="text-orgee2aaa1">
+<div id="outline-container-org41ea0ce" class="outline-3">
+<h3 id="org41ea0ce"><a href="./finite_infinite_life_games.html">Finite and infinite-life games</a></h3>
+<div class="outline-text-3" id="text-org41ea0ce">
 <p>
 Article.<br />
 </p>
@@ -1580,9 +1624,9 @@ I make a comparison between the older 2-D platforming games from the 16-bit era 
 </div>
 </div>
 
-<div id="outline-container-org65d5086" class="outline-3">
-<h3 id="org65d5086"><a href="./add_beauty.html">Replace the word "value" with "beauty"</a></h3>
-<div class="outline-text-3" id="text-org65d5086">
+<div id="outline-container-org66e7a43" class="outline-3">
+<h3 id="org66e7a43"><a href="./add_beauty.html">Replace the word "value" with "beauty"</a></h3>
+<div class="outline-text-3" id="text-org66e7a43">
 <p>
 Article.<br />
 </p>
@@ -1592,9 +1636,9 @@ A dialectic between my rational and my emotional/spiritual side that took a whil
 </p>
 </div>
 </div>
-<div id="outline-container-org878f34f" class="outline-3">
-<h3 id="org878f34f"><a href="./virtue_of_depth.html">The virtue of depth</a></h3>
-<div class="outline-text-3" id="text-org878f34f">
+<div id="outline-container-org90ebb51" class="outline-3">
+<h3 id="org90ebb51"><a href="./virtue_of_depth.html">The virtue of depth</a></h3>
+<div class="outline-text-3" id="text-org90ebb51">
 <p>
 Article.<br />
 </p>
@@ -1604,9 +1648,9 @@ It starts as a lament. In the real world I'm pulled many more directions than in
 </p>
 </div>
 </div>
-<div id="outline-container-org8f8a328" class="outline-3">
-<h3 id="org8f8a328"><a href="./occams_razor.html">But what is Occam's razor really?</a></h3>
-<div class="outline-text-3" id="text-org8f8a328">
+<div id="outline-container-orgf1592b7" class="outline-3">
+<h3 id="orgf1592b7"><a href="./occams_razor.html">But what is Occam's razor really?</a></h3>
+<div class="outline-text-3" id="text-orgf1592b7">
 <p>
 Article.<br />
 </p>
@@ -1616,9 +1660,9 @@ Occam's razor states that for a given phenomenon, the simplest explanation is th
 </p>
 </div>
 </div>
-<div id="outline-container-orgda5a39a" class="outline-3">
-<h3 id="orgda5a39a"><a href="./how_to_solve_problems.html">What I learned about problem solving from my thesis lab</a></h3>
-<div class="outline-text-3" id="text-orgda5a39a">
+<div id="outline-container-org8ebd882" class="outline-3">
+<h3 id="org8ebd882"><a href="./how_to_solve_problems.html">What I learned about problem solving from my thesis lab</a></h3>
+<div class="outline-text-3" id="text-org8ebd882">
 <p>
 Article.<br />
 </p>
@@ -1628,9 +1672,9 @@ A collection of stories from my time in graduate school. The people in my thesis
 </p>
 </div>
 </div>
-<div id="outline-container-org4fd5fa8" class="outline-3">
-<h3 id="org4fd5fa8"><a href="./on_hacking.html">Hacking: examples of seeing through and unseeing in my life</a></h3>
-<div class="outline-text-3" id="text-org4fd5fa8">
+<div id="outline-container-org749d16e" class="outline-3">
+<h3 id="org749d16e"><a href="./on_hacking.html">Hacking: examples of seeing through and unseeing in my life</a></h3>
+<div class="outline-text-3" id="text-org749d16e">
 <p>
 Article.<br />
 </p>
@@ -1640,9 +1684,9 @@ A lot of hacking is seeing through and unseeing the everyday abstractions we pre
 </p>
 </div>
 </div>
-<div id="outline-container-org8fa6ea4" class="outline-3">
-<h3 id="org8fa6ea4"><a href="./coding_as_philosophical_project.html">Learning how to code improved how I think</a></h3>
-<div class="outline-text-3" id="text-org8fa6ea4">
+<div id="outline-container-org63b7417" class="outline-3">
+<h3 id="org63b7417"><a href="./coding_as_philosophical_project.html">Learning how to code improved how I think</a></h3>
+<div class="outline-text-3" id="text-org63b7417">
 <p>
 Article.<br />
 </p>
@@ -1652,9 +1696,9 @@ Learning computer science improved both my focus and my thinking, which has cont
 </p>
 </div>
 </div>
-<div id="outline-container-org446b146" class="outline-3">
-<h3 id="org446b146"><a href="./its_more_complicated_than_that.html">It's more complicated than that</a></h3>
-<div class="outline-text-3" id="text-org446b146">
+<div id="outline-container-orgc8c16e7" class="outline-3">
+<h3 id="orgc8c16e7"><a href="./its_more_complicated_than_that.html">It's more complicated than that</a></h3>
+<div class="outline-text-3" id="text-orgc8c16e7">
 <p>
 Article.<br />
 </p>
@@ -1664,9 +1708,9 @@ This is the observation I run into with just about every line of scientific inqu
 </p>
 </div>
 </div>
-<div id="outline-container-org55c12fd" class="outline-3">
-<h3 id="org55c12fd"><a href="./purpose_driven_vs_purposeless.html">The way is the way</a></h3>
-<div class="outline-text-3" id="text-org55c12fd">
+<div id="outline-container-orgbb18660" class="outline-3">
+<h3 id="orgbb18660"><a href="./purpose_driven_vs_purposeless.html">The way is the way</a></h3>
+<div class="outline-text-3" id="text-orgbb18660">
 <p>
 Article.<br />
 </p>
@@ -1676,9 +1720,9 @@ I spent a large portion of my life being goal-driven. I have realized more recen
 </p>
 </div>
 </div>
-<div id="outline-container-orgab700a0" class="outline-3">
-<h3 id="orgab700a0"><a href="./dialectic.html">Making sense of the (messy) real world</a></h3>
-<div class="outline-text-3" id="text-orgab700a0">
+<div id="outline-container-orge8ab847" class="outline-3">
+<h3 id="orge8ab847"><a href="./dialectic.html">Making sense of the (messy) real world</a></h3>
+<div class="outline-text-3" id="text-orge8ab847">
 <p>
 Article.<br />
 </p>
@@ -1688,9 +1732,9 @@ Finding truth in the real world is much different than finding truth in grad sch
 </p>
 </div>
 </div>
-<div id="outline-container-orgb066fe5" class="outline-3">
-<h3 id="orgb066fe5"><a href="./tao_of_problem_solving.html">The Tao of problem solving</a></h3>
-<div class="outline-text-3" id="text-orgb066fe5">
+<div id="outline-container-org87b0b2b" class="outline-3">
+<h3 id="org87b0b2b"><a href="./tao_of_problem_solving.html">The Tao of problem solving</a></h3>
+<div class="outline-text-3" id="text-org87b0b2b">
 <p>
 Article.<br />
 </p>
@@ -1701,9 +1745,9 @@ One of the key components to my method of solving problems is to get into the fl
 </div>
 </div>
 
-<div id="outline-container-org747372d" class="outline-3">
-<h3 id="org747372d"><a href="./the_beauty_is_truth_delusion.html">The beauty is truth delusion</a></h3>
-<div class="outline-text-3" id="text-org747372d">
+<div id="outline-container-org57a4f4a" class="outline-3">
+<h3 id="org57a4f4a"><a href="./the_beauty_is_truth_delusion.html">The beauty is truth delusion</a></h3>
+<div class="outline-text-3" id="text-org57a4f4a">
 <p>
 Article.<br />
 </p>
@@ -1713,9 +1757,9 @@ This is the idea that data visualizations that look prettier than others don't n
 </p>
 </div>
 </div>
-<div id="outline-container-org92f2837" class="outline-3">
-<h3 id="org92f2837"><a href="./stick_shift_mindset.html">Zen and the art of driving stick</a></h3>
-<div class="outline-text-3" id="text-org92f2837">
+<div id="outline-container-org02cdb71" class="outline-3">
+<h3 id="org02cdb71"><a href="./stick_shift_mindset.html">Zen and the art of driving stick</a></h3>
+<div class="outline-text-3" id="text-org02cdb71">
 <p>
 Article.<br />
 </p>
@@ -1725,9 +1769,9 @@ I find that if I'm driving stick rather than automatic, I'm much more connected 
 </p>
 </div>
 </div>
-<div id="outline-container-org11b2372" class="outline-3">
-<h3 id="org11b2372"><a href="./minimize_and_sustain.html">How I'm applying the mindset around sustainability to everyday life</a></h3>
-<div class="outline-text-3" id="text-org11b2372">
+<div id="outline-container-org2af4358" class="outline-3">
+<h3 id="org2af4358"><a href="./minimize_and_sustain.html">How I'm applying the mindset around sustainability to everyday life</a></h3>
+<div class="outline-text-3" id="text-org2af4358">
 <p>
 Article.<br />
 </p>
@@ -1738,17 +1782,17 @@ My current plan for the uncertainty we face due to the pandemic and the events w
 </div>
 </div>
 </div>
-<div id="outline-container-org54ef6b5" class="outline-2">
-<h2 id="org54ef6b5">Computing</h2>
-<div class="outline-text-2" id="text-org54ef6b5">
+<div id="outline-container-org8cfc55f" class="outline-2">
+<h2 id="org8cfc55f">Computing</h2>
+<div class="outline-text-2" id="text-org8cfc55f">
 <a href="#top">Back to top</a>
 <p>
 Me nerding out on general computer science topics.
 </p>
 </div>
-<div id="outline-container-org60e2e5d" class="outline-3">
-<h3 id="org60e2e5d"><a href="./levels_of_analysis.html">Levels of analysis in bits and atoms</a></h3>
-<div class="outline-text-3" id="text-org60e2e5d">
+<div id="outline-container-orgf5ddfb1" class="outline-3">
+<h3 id="orgf5ddfb1"><a href="./levels_of_analysis.html">Levels of analysis in bits and atoms</a></h3>
+<div class="outline-text-3" id="text-orgf5ddfb1">
 <p>
 Article.<br />
 </p>
@@ -1758,9 +1802,9 @@ In the world of atoms, we have distinct fields of science that follow specific l
 </p>
 </div>
 </div>
-<div id="outline-container-orgb02952a" class="outline-3">
-<h3 id="orgb02952a"><a href="./r_rabbit_hole.html">The R Rabbit Hole</a></h3>
-<div class="outline-text-3" id="text-orgb02952a">
+<div id="outline-container-org1c94e10" class="outline-3">
+<h3 id="org1c94e10"><a href="./r_rabbit_hole.html">The R Rabbit Hole</a></h3>
+<div class="outline-text-3" id="text-org1c94e10">
 <p>
 Article.<br />
 </p>
@@ -1770,9 +1814,9 @@ What happens under the hood when you do something simple in R, like add two numb
 </p>
 </div>
 </div>
-<div id="outline-container-orgf66ccb9" class="outline-3">
-<h3 id="orgf66ccb9"><a href="./lisp_machine_of_babel.html">The Lisp machine of Babel</a></h3>
-<div class="outline-text-3" id="text-orgf66ccb9">
+<div id="outline-container-org6019678" class="outline-3">
+<h3 id="org6019678"><a href="./lisp_machine_of_babel.html">The Lisp machine of Babel</a></h3>
+<div class="outline-text-3" id="text-org6019678">
 <p>
 Fiction.<br />
 </p>
@@ -1782,9 +1826,9 @@ I am learning Lisp at the moment. In learning about the history of the language,
 </p>
 </div>
 </div>
-<div id="outline-container-orga00931e" class="outline-3">
-<h3 id="orga00931e"><a href="./metaprogramming_in_R.html">Metaprogramming in R</a></h3>
-<div class="outline-text-3" id="text-orga00931e">
+<div id="outline-container-org2a8f0f4" class="outline-3">
+<h3 id="org2a8f0f4"><a href="./metaprogramming_in_R.html">Metaprogramming in R</a></h3>
+<div class="outline-text-3" id="text-org2a8f0f4">
 <p>
 Markdown.<br />
 </p>
@@ -1794,9 +1838,9 @@ When I started learning Lisp, I learned of the concept of metaprogramming. This 
 </p>
 </div>
 </div>
-<div id="outline-container-org293386a" class="outline-3">
-<h3 id="org293386a"><a href="./ca_rule_space.html">Elementary cellular automata rule space</a></h3>
-<div class="outline-text-3" id="text-org293386a">
+<div id="outline-container-orga0d454a" class="outline-3">
+<h3 id="orga0d454a"><a href="./ca_rule_space.html">Elementary cellular automata rule space</a></h3>
+<div class="outline-text-3" id="text-orga0d454a">
 <p>
 Markdown.<br />
 </p>
@@ -1806,9 +1850,9 @@ I lay out the rule space of elementary cellular automata as an eight dimensional
 </p>
 </div>
 </div>
-<div id="outline-container-org15c4f18" class="outline-3">
-<h3 id="org15c4f18"><a href="./xai_and_us.html">Explainable AI and understanding ourselves</a></h3>
-<div class="outline-text-3" id="text-org15c4f18">
+<div id="outline-container-orgaeb8cd4" class="outline-3">
+<h3 id="orgaeb8cd4"><a href="./xai_and_us.html">Explainable AI and understanding ourselves</a></h3>
+<div class="outline-text-3" id="text-orgaeb8cd4">
 <p>
 Article.<br />
 </p>
@@ -1818,9 +1862,9 @@ I make the connection between understanding a black box AI algorithm (a hot topi
 </p>
 </div>
 </div>
-<div id="outline-container-org56c548d" class="outline-3">
-<h3 id="org56c548d"><a href="./logic_gates.html">Logic gates</a></h3>
-<div class="outline-text-3" id="text-org56c548d">
+<div id="outline-container-orga135c9d" class="outline-3">
+<h3 id="orga135c9d"><a href="./logic_gates.html">Logic gates</a></h3>
+<div class="outline-text-3" id="text-orga135c9d">
 <p>
 Markdown.<br />
 </p>
@@ -1830,9 +1874,9 @@ What are the fundamental units of a computer? Logic gates. I show what these are
 </p>
 </div>
 </div>
-<div id="outline-container-org5f13b71" class="outline-3">
-<h3 id="org5f13b71"><a href="./1d_ca.html">1-D Cellular Automata</a></h3>
-<div class="outline-text-3" id="text-org5f13b71">
+<div id="outline-container-org1648f78" class="outline-3">
+<h3 id="org1648f78"><a href="./1d_ca.html">1-D Cellular Automata</a></h3>
+<div class="outline-text-3" id="text-org1648f78">
 <p>
 Markdown.<br />
 </p>
@@ -1842,9 +1886,9 @@ Here, I write some code to produce each of the 256 Wolfram cellular automata rul
 </p>
 </div>
 </div>
-<div id="outline-container-org0a53175" class="outline-3">
-<h3 id="org0a53175"><a href="./explore_rule_110.html">Explore Wolfram Rule 110</a></h3>
-<div class="outline-text-3" id="text-org0a53175">
+<div id="outline-container-orgbcd1fe6" class="outline-3">
+<h3 id="orgbcd1fe6"><a href="./explore_rule_110.html">Explore Wolfram Rule 110</a></h3>
+<div class="outline-text-3" id="text-orgbcd1fe6">
 <p>
 Markdown.<br />
 </p>
@@ -1855,17 +1899,17 @@ Here, I write some code to produce Rule 110, a Class 4 1-D cellular automata. I 
 </div>
 </div>
 </div>
-<div id="outline-container-orgc325c12" class="outline-2">
-<h2 id="orgc325c12">Statistics</h2>
-<div class="outline-text-2" id="text-orgc325c12">
+<div id="outline-container-orgcf5b72b" class="outline-2">
+<h2 id="orgcf5b72b">Statistics</h2>
+<div class="outline-text-2" id="text-orgcf5b72b">
 <a href="#top">Back to top</a>
 <p>
 There is a lot that you can figure out on your own if you simulate coin tosses and dice rolls.
 </p>
 </div>
-<div id="outline-container-org2235ec9" class="outline-3">
-<h3 id="org2235ec9"><a href="./1_law_large_numbers_central_limit_theorem.html">Coin toss series 1: The law of large numbers and the central limit theorem</a></h3>
-<div class="outline-text-3" id="text-org2235ec9">
+<div id="outline-container-orgf37bbf7" class="outline-3">
+<h3 id="orgf37bbf7"><a href="./1_law_large_numbers_central_limit_theorem.html">Coin toss series 1: The law of large numbers and the central limit theorem</a></h3>
+<div class="outline-text-3" id="text-orgf37bbf7">
 <p>
 Markdown.<br />
 </p>
@@ -1875,9 +1919,9 @@ I taught one of my high school summer students the basics of probability by simu
 </p>
 </div>
 </div>
-<div id="outline-container-orgcbc2bbe" class="outline-3">
-<h3 id="orgcbc2bbe"><a href="./2_runs_of_luck.html">Coin toss series 2: Runs of luck</a></h3>
-<div class="outline-text-3" id="text-orgcbc2bbe">
+<div id="outline-container-org340c538" class="outline-3">
+<h3 id="org340c538"><a href="./2_runs_of_luck.html">Coin toss series 2: Runs of luck</a></h3>
+<div class="outline-text-3" id="text-org340c538">
 <p>
 Markdown.<br />
 </p>
@@ -1887,9 +1931,9 @@ Here, we build on the initial piece in the series by looking at the properties o
 </p>
 </div>
 </div>
-<div id="outline-container-orga7e9f64" class="outline-3">
-<h3 id="orga7e9f64"><a href="./3_fair_vs_unfair_coins.html">Coin toss series 3: Fair versus unfair coins</a></h3>
-<div class="outline-text-3" id="text-orga7e9f64">
+<div id="outline-container-org56c5319" class="outline-3">
+<h3 id="org56c5319"><a href="./3_fair_vs_unfair_coins.html">Coin toss series 3: Fair versus unfair coins</a></h3>
+<div class="outline-text-3" id="text-org56c5319">
 <p>
 Markdown.<br />
 </p>
@@ -1899,9 +1943,9 @@ Here, we examine the properties of unfair coins, where the odds of getting heads
 </p>
 </div>
 </div>
-<div id="outline-container-orgb55c461" class="outline-3">
-<h3 id="orgb55c461"><a href="./4_random_walk.html">Coin toss series 4: Random walks</a></h3>
-<div class="outline-text-3" id="text-orgb55c461">
+<div id="outline-container-orgf6025ab" class="outline-3">
+<h3 id="orgf6025ab"><a href="./4_random_walk.html">Coin toss series 4: Random walks</a></h3>
+<div class="outline-text-3" id="text-orgf6025ab">
 <p>
 Markdown.<br />
 </p>
@@ -1911,9 +1955,9 @@ Here, we show that if we simulate flipping coins, but we keep a record of the nu
 </p>
 </div>
 </div>
-<div id="outline-container-org2b586c4" class="outline-3">
-<h3 id="org2b586c4"><a href="./5_dice_roll.html">Coin toss series 5: Dice rolls</a></h3>
-<div class="outline-text-3" id="text-org2b586c4">
+<div id="outline-container-org13f0ee0" class="outline-3">
+<h3 id="org13f0ee0"><a href="./5_dice_roll.html">Coin toss series 5: Dice rolls</a></h3>
+<div class="outline-text-3" id="text-org13f0ee0">
 <p>
 Markdown.<br />
 </p>
@@ -1923,9 +1967,9 @@ Here, we do an abstraction of the coin tosses we have been simulating, by coinsi
 </p>
 </div>
 </div>
-<div id="outline-container-org4bbea89" class="outline-3">
-<h3 id="org4bbea89"><a href="./6_is_this_sequence_random.html">Coin toss series 6: Is this sequence random?</a></h3>
-<div class="outline-text-3" id="text-org4bbea89">
+<div id="outline-container-orgcb5a1d2" class="outline-3">
+<h3 id="orgcb5a1d2"><a href="./6_is_this_sequence_random.html">Coin toss series 6: Is this sequence random?</a></h3>
+<div class="outline-text-3" id="text-orgcb5a1d2">
 <p>
 Markdown.<br />
 </p>
@@ -1936,17 +1980,17 @@ Here, we look at fair coin tosses, unfair coin tosses, and random walks, and exp
 </div>
 </div>
 </div>
-<div id="outline-container-org1d834aa" class="outline-2">
-<h2 id="org1d834aa">Health</h2>
-<div class="outline-text-2" id="text-org1d834aa">
+<div id="outline-container-org747da08" class="outline-2">
+<h2 id="org747da08">Health</h2>
+<div class="outline-text-2" id="text-org747da08">
 <a href="#top">Back to top</a>
 <p>
 I value having good health, and I have been fortunate enough to work out and eat right for several decades, and I have worked as a certified personal trainer in the past at three gyms. Accordingly, I want to get my perspective off my chest and out there for others.
 </p>
 </div>
-<div id="outline-container-org17f3448" class="outline-3">
-<h3 id="org17f3448"><a href="./boring_diet.html">The boring diet: how I prevent food addiction</a></h3>
-<div class="outline-text-3" id="text-org17f3448">
+<div id="outline-container-orgb368a0d" class="outline-3">
+<h3 id="orgb368a0d"><a href="./boring_diet.html">The boring diet: how I prevent food addiction</a></h3>
+<div class="outline-text-3" id="text-orgb368a0d">
 <p>
 Article.<br />
 </p>
@@ -1957,9 +2001,9 @@ I talk about the hypothesis that the existence and wide availability really good
 </div>
 </div>
 
-<div id="outline-container-orga4c83c3" class="outline-3">
-<h3 id="orga4c83c3"><a href="./pursuit_of_health.html">The Tao of good health</a></h3>
-<div class="outline-text-3" id="text-orga4c83c3">
+<div id="outline-container-org817039e" class="outline-3">
+<h3 id="org817039e"><a href="./pursuit_of_health.html">The Tao of good health</a></h3>
+<div class="outline-text-3" id="text-org817039e">
 <p>
 Article.<br />
 </p>
@@ -1970,9 +2014,9 @@ My approach to health and fitness is not the goal-directed approach that seems t
 </div>
 </div>
 
-<div id="outline-container-org30c9c95" class="outline-3">
-<h3 id="org30c9c95"><a href="./how_to_get_fit_long_term.html">How to get fit in 20 years</a></h3>
-<div class="outline-text-3" id="text-org30c9c95">
+<div id="outline-container-org5d066b6" class="outline-3">
+<h3 id="org5d066b6"><a href="./how_to_get_fit_long_term.html">How to get fit in 20 years</a></h3>
+<div class="outline-text-3" id="text-org5d066b6">
 <p>
 Article.<br />
 </p>
@@ -1982,9 +2026,9 @@ Over the years, I have seen people who want to get in shape develop fitness goal
 </p>
 </div>
 </div>
-<div id="outline-container-orgfc74e98" class="outline-3">
-<h3 id="orgfc74e98"><a href="./psychotherapy_and_fitness.html">Psychotherapy should be as normal as going to the gym</a></h3>
-<div class="outline-text-3" id="text-orgfc74e98">
+<div id="outline-container-org861d458" class="outline-3">
+<h3 id="org861d458"><a href="./psychotherapy_and_fitness.html">Psychotherapy should be as normal as going to the gym</a></h3>
+<div class="outline-text-3" id="text-org861d458">
 <p>
 Article.<br />
 </p>
@@ -1994,9 +2038,9 @@ There is a renewed interest in Stoic philosophy as of late. It's a great set of 
 </p>
 </div>
 </div>
-<div id="outline-container-orgc3adc31" class="outline-3">
-<h3 id="orgc3adc31"><a href="./just_paint.html">Just paint</a></h3>
-<div class="outline-text-3" id="text-orgc3adc31">
+<div id="outline-container-org508a033" class="outline-3">
+<h3 id="org508a033"><a href="./just_paint.html">Just paint</a></h3>
+<div class="outline-text-3" id="text-org508a033">
 <p>
 Article.<br />
 </p>
@@ -2007,38 +2051,38 @@ An anecdote from my aunt evolves into a motivational article (mainly written for
 </div>
 </div>
 </div>
-<div id="outline-container-orgf363214" class="outline-2">
-<h2 id="orgf363214">Snapshots</h2>
-<div class="outline-text-2" id="text-orgf363214">
+<div id="outline-container-org95648f6" class="outline-2">
+<h2 id="org95648f6">Snapshots</h2>
+<div class="outline-text-2" id="text-org95648f6">
 <a href="#top">Back to top</a>
 <p>
 Think of these as both newsletters and time capsules. They are not exhaustive, but they do represent the bigger insights and ideas on my end from that time period. I'll note that I was going to do this monthly, but life caught up with me and I stopped early. I leave these articles here as a snapshot of a particular period of time that was actually pretty interesting in terms of the long arc of human history: AI (particularly generative AI, like LLMs) was really taking off. Maybe at the time of reading this, AI has plateaued, or maybe it is still exponentially increasing, with all the debate around it that it had here, or maybe some alien is reading this a hundred thousand years after some rogue AGI killed us all. But either way, these are time capsules that maybe I'll add to here and there for the rest of my life.
 </p>
 </div>
-<div id="outline-container-org7ec4cd1" class="outline-3">
-<h3 id="org7ec4cd1"><a href="./2024_may.html">May 2024</a></h3>
+<div id="outline-container-org9befb84" class="outline-3">
+<h3 id="org9befb84"><a href="./2024_may.html">May 2024</a></h3>
 </div>
-<div id="outline-container-orgcc433cb" class="outline-3">
-<h3 id="orgcc433cb"><a href="./2023_may.html">May 2023</a></h3>
+<div id="outline-container-orgc508d53" class="outline-3">
+<h3 id="orgc508d53"><a href="./2023_may.html">May 2023</a></h3>
 </div>
-<div id="outline-container-orga0661a9" class="outline-3">
-<h3 id="orga0661a9"><a href="./2023_april.html">April 2023</a></h3>
+<div id="outline-container-org62368df" class="outline-3">
+<h3 id="org62368df"><a href="./2023_april.html">April 2023</a></h3>
 </div>
-<div id="outline-container-orgfe61015" class="outline-3">
-<h3 id="orgfe61015"><a href="./2023_march.html">March 2023</a></h3>
+<div id="outline-container-org2bbc4c4" class="outline-3">
+<h3 id="org2bbc4c4"><a href="./2023_march.html">March 2023</a></h3>
 </div>
 </div>
-<div id="outline-container-org4709fec" class="outline-2">
-<h2 id="org4709fec">Collections</h2>
-<div class="outline-text-2" id="text-org4709fec">
+<div id="outline-container-org962df8c" class="outline-2">
+<h2 id="org962df8c">Collections</h2>
+<div class="outline-text-2" id="text-org962df8c">
 <a href="#top">Back to top</a>
 <p>
 These are growing lists of things that I find important.
 </p>
 </div>
-<div id="outline-container-orgcdd7e3f" class="outline-3">
-<h3 id="orgcdd7e3f"><a href="./question_bank.html">Question Bank</a></h3>
-<div class="outline-text-3" id="text-orgcdd7e3f">
+<div id="outline-container-orgbac853d" class="outline-3">
+<h3 id="orgbac853d"><a href="./question_bank.html">Question Bank</a></h3>
+<div class="outline-text-3" id="text-orgbac853d">
 <p>
 Collection.<br />
 </p>
@@ -2049,9 +2093,9 @@ I find that asking good questions is key to orienting you in the right direction
 </div>
 </div>
 
-<div id="outline-container-org99d566c" class="outline-3">
-<h3 id="org99d566c"><a href="./social_media_posts.html">Social media posts</a></h3>
-<div class="outline-text-3" id="text-org99d566c">
+<div id="outline-container-orgdd94803" class="outline-3">
+<h3 id="orgdd94803"><a href="./social_media_posts.html">Social media posts</a></h3>
+<div class="outline-text-3" id="text-orgdd94803">
 <p>
 Collection.<br />
 </p>
@@ -2062,14 +2106,14 @@ Social media is a way for me to get things off my chest that I think are valuabl
 </div>
 </div>
 </div>
-<div id="outline-container-orgfbb66ca" class="outline-2">
-<h2 id="orgfbb66ca">Where I was featured</h2>
-<div class="outline-text-2" id="text-orgfbb66ca">
+<div id="outline-container-org8749254" class="outline-2">
+<h2 id="org8749254">Where I was featured</h2>
+<div class="outline-text-2" id="text-org8749254">
 <a href="#top">Back to top</a>
 </div>
-<div id="outline-container-org9179a6c" class="outline-3">
-<h3 id="org9179a6c"><a href="https://www.youtube.com/watch?v=wRVOyYse5ug">Interview with Ramji Srinivasan, CEO of Teiko</a></h3>
-<div class="outline-text-3" id="text-org9179a6c">
+<div id="outline-container-orgcc616bf" class="outline-3">
+<h3 id="orgcc616bf"><a href="https://www.youtube.com/watch?v=wRVOyYse5ug">Interview with Ramji Srinivasan, CEO of Teiko</a></h3>
+<div class="outline-text-3" id="text-orgcc616bf">
 <p>
 Video.<br />
 </p>
@@ -2083,9 +2127,9 @@ To give credit where credit is due, I talk about the MEM paper (Diggins et al, 2
 </p>
 </div>
 </div>
-<div id="outline-container-org11f35b1" class="outline-3">
-<h3 id="org11f35b1"><a href="https://watershed.bio/resources/the-limits-of-dimensionality-reduction-tools-for-single-cell-analysis">The limits of dimensionality reduction tools for single-cell analysis</a></h3>
-<div class="outline-text-3" id="text-org11f35b1">
+<div id="outline-container-org20932f0" class="outline-3">
+<h3 id="org20932f0"><a href="https://watershed.bio/resources/the-limits-of-dimensionality-reduction-tools-for-single-cell-analysis">The limits of dimensionality reduction tools for single-cell analysis</a></h3>
+<div class="outline-text-3" id="text-org20932f0">
 <p>
 Webinar.<br />
 </p>
@@ -2095,9 +2139,9 @@ This webinar is the latest iteration of my "dimensionality reduction interrogati
 </p>
 </div>
 </div>
-<div id="outline-container-orgf675209" class="outline-3">
-<h3 id="orgf675209"><a href="https://rseng.github.io/devstories/2023/tyler-burns-part-2/">Developer Stories Podcast: Part 2: Be the flame, not the moth</a></h3>
-<div class="outline-text-3" id="text-orgf675209">
+<div id="outline-container-org747a4da" class="outline-3">
+<h3 id="org747a4da"><a href="https://rseng.github.io/devstories/2023/tyler-burns-part-2/">Developer Stories Podcast: Part 2: Be the flame, not the moth</a></h3>
+<div class="outline-text-3" id="text-org747a4da">
 <p>
 Guest on a Podcast.<br />
 </p>
@@ -2108,9 +2152,9 @@ Here is part 2 of my appearance on the Developer Stories podcast. In part 1, I t
 </div>
 </div>
 
-<div id="outline-container-org39b1a9b" class="outline-3">
-<h3 id="org39b1a9b"><a href="https://rseng.github.io/devstories/2023/tyler-burns-part-1/">Developer Stories Podcast: Part 1: Heavenly light emanating from line 37</a></h3>
-<div class="outline-text-3" id="text-org39b1a9b">
+<div id="outline-container-org9a766c3" class="outline-3">
+<h3 id="org9a766c3"><a href="https://rseng.github.io/devstories/2023/tyler-burns-part-1/">Developer Stories Podcast: Part 1: Heavenly light emanating from line 37</a></h3>
+<div class="outline-text-3" id="text-org9a766c3">
 <p>
 Guest on a podcast.<br />
 </p>
@@ -2120,9 +2164,9 @@ I talk with software developer Vanessa Sochat about my time in graduate school. 
 </p>
 </div>
 </div>
-<div id="outline-container-org5697e4d" class="outline-3">
-<h3 id="org5697e4d"><a href="https://www.youtube.com/watch?v=U35T-KzfeLk">TEDx Basel talk: my scrolling problem, and how I fixed it</a></h3>
-<div class="outline-text-3" id="text-org5697e4d">
+<div id="outline-container-org770cd89" class="outline-3">
+<h3 id="org770cd89"><a href="https://www.youtube.com/watch?v=U35T-KzfeLk">TEDx Basel talk: my scrolling problem, and how I fixed it</a></h3>
+<div class="outline-text-3" id="text-org770cd89">
 <p>
 YouTube video of my TED talk.<br />
 </p>
@@ -2132,9 +2176,9 @@ In this talk, I introduce the idea of the Scrolling Problem, which is the incomp
 </p>
 </div>
 </div>
-<div id="outline-container-org01901e4" class="outline-3">
-<h3 id="org01901e4"><a href="./burns_tedx_caricature.pdf">TEDx Basel: caricature of my talk</a></h3>
-<div class="outline-text-3" id="text-org01901e4">
+<div id="outline-container-org73e543b" class="outline-3">
+<h3 id="org73e543b"><a href="./burns_tedx_caricature.pdf">TEDx Basel: caricature of my talk</a></h3>
+<div class="outline-text-3" id="text-org73e543b">
 <p>
 Work of art.<br />
 </p>
@@ -2144,9 +2188,9 @@ While I was giving my TED talk, unbeknownst to me an artist in the audience was 
 </p>
 </div>
 </div>
-<div id="outline-container-orgde84661" class="outline-3">
-<h3 id="orgde84661"><a href="./life_and_love_during_coronazeit.pdf">Life and love in Berlin during the Coronazeit</a></h3>
-<div class="outline-text-3" id="text-orgde84661">
+<div id="outline-container-orgb42dcdc" class="outline-3">
+<h3 id="orgb42dcdc"><a href="./life_and_love_during_coronazeit.pdf">Life and love in Berlin during the Coronazeit</a></h3>
+<div class="outline-text-3" id="text-orgb42dcdc">
 <p>
 Feature.<br />
 </p>
@@ -2157,9 +2201,9 @@ An article I wrote in 2020 for the annual Krupp Internship e-newsletter. It was 
 </div>
 </div>
 
-<div id="outline-container-orgfdf9ae8" class="outline-3">
-<h3 id="orgfdf9ae8"><a href="./tyler_alumni_im_portrait.pdf">Tyler Alumni Im Portrait</a></h3>
-<div class="outline-text-3" id="text-orgfdf9ae8">
+<div id="outline-container-org4fdd015" class="outline-3">
+<h3 id="org4fdd015"><a href="./tyler_alumni_im_portrait.pdf">Tyler Alumni Im Portrait</a></h3>
+<div class="outline-text-3" id="text-org4fdd015">
 <p>
 Feature.<br />
 </p>
@@ -2170,14 +2214,14 @@ Feature.<br />
 </div>
 </div>
 </div>
-<div id="outline-container-orgb874e12" class="outline-2">
-<h2 id="orgb874e12">Fun stuff</h2>
-<div class="outline-text-2" id="text-orgb874e12">
+<div id="outline-container-org24334f3" class="outline-2">
+<h2 id="org24334f3">Fun stuff</h2>
+<div class="outline-text-2" id="text-org24334f3">
 <a href="#top">Back to top</a>
 </div>
-<div id="outline-container-org0318f5b" class="outline-3">
-<h3 id="org0318f5b"><a href="./speech_memorization_helper.html">Speech memorization helper</a></h3>
-<div class="outline-text-3" id="text-org0318f5b">
+<div id="outline-container-org1efd3bd" class="outline-3">
+<h3 id="org1efd3bd"><a href="./speech_memorization_helper.html">Speech memorization helper</a></h3>
+<div class="outline-text-3" id="text-org1efd3bd">
 <p>
 Web page.<br />
 </p>
@@ -2188,9 +2232,9 @@ Take the text you want to memorize and paste it into the box. The text will be s
 </div>
 </div>
 
-<div id="outline-container-org3a9d0cc" class="outline-3">
-<h3 id="org3a9d0cc"><a href="./gol_navigate.html">Conway's Game of Life Cellvivor</a></h3>
-<div class="outline-text-3" id="text-org3a9d0cc">
+<div id="outline-container-orgc3a083c" class="outline-3">
+<h3 id="orgc3a083c"><a href="./gol_navigate.html">Conway's Game of Life Cellvivor</a></h3>
+<div class="outline-text-3" id="text-orgc3a083c">
 <p>
 Game.<br />
 </p>
@@ -2200,9 +2244,9 @@ A game within Conway's Game of Life. You are a blue square that you can move (wi
 </p>
 </div>
 </div>
-<div id="outline-container-org1cb0733" class="outline-3">
-<h3 id="org1cb0733"><a href="./breakout.html">Breakout</a></h3>
-<div class="outline-text-3" id="text-org1cb0733">
+<div id="outline-container-org1e4078b" class="outline-3">
+<h3 id="org1e4078b"><a href="./breakout.html">Breakout</a></h3>
+<div class="outline-text-3" id="text-org1e4078b">
 <p>
 Game.<br />
 </p>
@@ -2212,9 +2256,9 @@ A game that will always be of significance to me, because it was the assignment 
 </p>
 </div>
 </div>
-<div id="outline-container-org057d97f" class="outline-3">
-<h3 id="org057d97f"><a href="./conways_gol.html">Conway's Game of Life</a></h3>
-<div class="outline-text-3" id="text-org057d97f">
+<div id="outline-container-orge603b4f" class="outline-3">
+<h3 id="orge603b4f"><a href="./conways_gol.html">Conway's Game of Life</a></h3>
+<div class="outline-text-3" id="text-orge603b4f">
 <p>
 Web page.<br />
 </p>
@@ -2243,9 +2287,9 @@ I have also added the ability to modify the size of the grid.
 </p>
 </div>
 </div>
-<div id="outline-container-orgbc1ea28" class="outline-3">
-<h3 id="orgbc1ea28"><a href="./mandelbrot_set.html">Mandelbrot Set</a></h3>
-<div class="outline-text-3" id="text-orgbc1ea28">
+<div id="outline-container-orgc7e999a" class="outline-3">
+<h3 id="orgc7e999a"><a href="./mandelbrot_set.html">Mandelbrot Set</a></h3>
+<div class="outline-text-3" id="text-orgc7e999a">
 <p>
 Web page.<br />
 </p>
@@ -2256,42 +2300,42 @@ I first came across this in one of my old math books, perhaps in middle school. 
 </div>
 </div>
 </div>
-<div id="outline-container-org36e68ba" class="outline-2">
-<h2 id="org36e68ba">Other contributions</h2>
-<div class="outline-text-2" id="text-org36e68ba">
+<div id="outline-container-orgf0dd28d" class="outline-2">
+<h2 id="orgf0dd28d">Other contributions</h2>
+<div class="outline-text-2" id="text-orgf0dd28d">
 <a href="#top">Back to top</a>
 </div>
 <ul class="org-ul">
-<li><a id="org56511fb"></a>Former computational biologist, now guest researcher, at the German Rheumatism Research Center in Berlin, Germany. I will always stay connected to my academic roots.<br /></li>
-<li><a id="orgda0f487"></a>Developing software to interrogate and visualize the local similarities between original manifolds and lower dimensional embeddings. Important for anyone wanting to determine which of these methods is the right tool for the job.<br /></li>
-<li><a id="orgedea468"></a>Solved a long-standing data visualization problem for mass cytometry, and developed a Bioconductor package for it, with a visual description here, and this publication&#x2026;<br /></li>
-<li><a id="org8bc1f3f"></a>Set the best practices in my PhD thesis lab for learning bioinformatics as a classical biologist.<br /></li>
-<li><a id="org1c7b5e4"></a>Helped develop a wet-lab implementation for a cutting-edge bioinformatics concept, which became part of a patent.<br /></li>
-<li><a id="orgf415dc6"></a>Led an international collaboration between my thesis lab (USA) and a laboratory in Uppsala, Sweden, whose biochemical foundations turned into <a href="https://pubmed.ncbi.nlm.nih.gov/28094900/">this publication</a>, and helped <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4767631/">this one</a>.<br /></li>
-<li><a id="org083f740"></a>Mentored several high school students and undergraduates throughout my thesis work, teaching them biology, computer science, statistics, and importantly how to integrate these fields.<br /></li>
-<li><a id="orgcceb579"></a>Built a website for my PhD program using HTML, JavaScript, and SQL, that helped first year students connect with current and previous members of a given research laboratory (I'd link it but you have to be a Stanford student to view it).<br /></li>
+<li><a id="org5a1a5dd"></a>Former computational biologist, now guest researcher, at the German Rheumatism Research Center in Berlin, Germany. I will always stay connected to my academic roots.<br /></li>
+<li><a id="org039cc2c"></a>Developing software to interrogate and visualize the local similarities between original manifolds and lower dimensional embeddings. Important for anyone wanting to determine which of these methods is the right tool for the job.<br /></li>
+<li><a id="org4d93105"></a>Solved a long-standing data visualization problem for mass cytometry, and developed a Bioconductor package for it, with a visual description here, and this publication&#x2026;<br /></li>
+<li><a id="org259645c"></a>Set the best practices in my PhD thesis lab for learning bioinformatics as a classical biologist.<br /></li>
+<li><a id="org325fd5e"></a>Helped develop a wet-lab implementation for a cutting-edge bioinformatics concept, which became part of a patent.<br /></li>
+<li><a id="org7322407"></a>Led an international collaboration between my thesis lab (USA) and a laboratory in Uppsala, Sweden, whose biochemical foundations turned into <a href="https://pubmed.ncbi.nlm.nih.gov/28094900/">this publication</a>, and helped <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4767631/">this one</a>.<br /></li>
+<li><a id="orgce34f27"></a>Mentored several high school students and undergraduates throughout my thesis work, teaching them biology, computer science, statistics, and importantly how to integrate these fields.<br /></li>
+<li><a id="orgbde7645"></a>Built a website for my PhD program using HTML, JavaScript, and SQL, that helped first year students connect with current and previous members of a given research laboratory (I'd link it but you have to be a Stanford student to view it).<br /></li>
 </ul>
 </div>
 
-<div id="outline-container-org68f6905" class="outline-2">
-<h2 id="org68f6905">Links and contact info</h2>
-<div class="outline-text-2" id="text-org68f6905">
+<div id="outline-container-orgd47e33e" class="outline-2">
+<h2 id="orgd47e33e">Links and contact info</h2>
+<div class="outline-text-2" id="text-orgd47e33e">
 <a href="#top">Back to top</a>
 </div>
-<div id="outline-container-orgef111ad" class="outline-4">
-<h4 id="orgef111ad"><a href="./tyler_burns_resume.pdf">Resume</a></h4>
+<div id="outline-container-orgc396661" class="outline-4">
+<h4 id="orgc396661"><a href="./tyler_burns_resume.pdf">Resume</a></h4>
 </div>
-<div id="outline-container-orge84e81d" class="outline-4">
-<h4 id="orge84e81d"><a href="https://www.linkedin.com/in/tylerjburns/">LinkedIn</a></h4>
+<div id="outline-container-org59f59f8" class="outline-4">
+<h4 id="org59f59f8"><a href="https://www.linkedin.com/in/tylerjburns/">LinkedIn</a></h4>
 </div>
-<div id="outline-container-org2b55552" class="outline-4">
-<h4 id="org2b55552"><a href="https://twitter.com/tjburns08">Twitter</a></h4>
+<div id="outline-container-orgca7de8d" class="outline-4">
+<h4 id="orgca7de8d"><a href="https://twitter.com/tjburns08">Twitter</a></h4>
 </div>
-<div id="outline-container-org272b0b7" class="outline-4">
-<h4 id="org272b0b7"><a href="https://github.com/tjburns08">GitHub</a></h4>
+<div id="outline-container-orgeb77d89" class="outline-4">
+<h4 id="orgeb77d89"><a href="https://github.com/tjburns08">GitHub</a></h4>
 </div>
-<div id="outline-container-org0c223c8" class="outline-4">
-<h4 id="org0c223c8"><a href="./burns_lsc.html">Company Website</a></h4>
+<div id="outline-container-orgcb9550b" class="outline-4">
+<h4 id="orgcb9550b"><a href="./burns_lsc.html">Company Website</a></h4>
 </div>
 </div>
 </div>

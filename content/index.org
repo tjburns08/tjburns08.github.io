@@ -15,19 +15,13 @@ This website is a place where I can openly share my ideas and non-NDA work, rega
 If you have quesitons or comments, or you're interested in working or collaborating with me, just send me a message (see contact info below). I'm always happy to help. 
 * New
 #+HTML: <a href="#top">Back to top</a>
-** LLM-augmented PCA loadings (first author: [[https://www.linkedin.com/in/arianna-aalami-328576231/][Arianna Aalami]])
-This project was driven by my intern Arianna Aalami, a Stanford bioengineering graduate, with both wet-lab and dry-lab capabilities, interested in applying these to study the microbiome.
+** LLM-augmented PCA loadings
+This project was driven by my intern [[https://www.linkedin.com/in/arianna-aalami-328576231/][Arianna Aalami]] (think of her as the first author and me as the last author), a Stanford bioengineering graduate, with both wet-lab and dry-lab capabilities, interested in applying these to study the microbiome.
 *** [[./BLSC_PCA_loading_LLMs_final.html][R Markdown]]
-Markdown.\\
-
 Here is the code, comments, and explanations needed to generated the reports below. In order to repeat this yourself, you need an OpenAI API key. We note that the cost to run all of these experiments in the markdown, using o4-mini, is around 30 cents.
 *** [[./blsc_pc_loadings_by_llm_interpretation.pdf][PC loading by interpretation report]]
-Report.\\
-
 Here is the primary output from the aforementioned R Markdown, whereby we have the left column that shows a biaxial plot of PC1 and PCN where N is any number between 2 and 10. This already is something that is not often viewed in single-cell sequencing workflows. The right column shows the LLM-generated biological interpretation. The first few PCs are sanity checks in this regard, and the later PCs, while not yet rigorously checked, are thought provoking.
 *** [[./blsc_llm_consistency_check.pdf][LLM consistency experiment]]
-Report.\\
-
 Here, we aimed to check whether the output of our LLM-based biological interpretation is consistent. We tried PC1 (which is straightforward), and PC20 (which we expect to be a bit messier). We note that with the o4-mini model the results were indeed relatively consistent between the multiple runs, with the 4o-mini model (does not do reasoning), the results for PC20 were quite inconsistent (data not shown). The results suggest a degree of consistency when using reasoning models, but we would still recommend doing these runs more than once, just in case.
 ** [[./levels_of_analysis.html][Levels of analysis in bits and atoms]]
 Article.\\
