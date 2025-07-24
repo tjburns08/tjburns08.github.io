@@ -517,6 +517,41 @@ I'll acknowledge that there are differences between the fields that may impact w
 * General data analysis
 #+HTML: <a href="#top">Back to top</a>
 The data analysis related posts that I otherwise could not categorize.
+** The use of LLMs to help interpret PCA loadings
+Friends, leaders, and scientists: how often do you actually use the PCA loadings that come for free in your single-cell and spatial analysis pipelines? Here, we have developed a lightweight pipeline that feeds these loadings (gene lists relevant to each principal component) into a reasoning LLM, to give you a biological interpretation. You can think of this as a supplement to GO/GSEA.
+
+How it works:
+
+Each principal component outputs a set of genes. When you feed these into a LLM, which can be automated via API use and scripting (see comments), it gives you its best guess as to what a given PC axis is "splitting" phenotypically.
+
+Results:
+
+As a sanity check, PC1 splits the monocytes from the lymphocytes. But in the picture, you can see that PC9 and its loadings separate out the dendritic cells, and the LLM helped us confirm this. Our report (link in comments) shows that higher-up PCs provide loadings that confirm but might also transcend demarcated cluster boundaries.
+
+The bottom line for scientists:
+
+Reasoning LLMs have given you an opportunity to fully utilize the PCA loadings that you automatically have in any given single-cell or spatial analysis pipeline, which could potentially give you phenotypic information that goes beyond the standard per-cluster DEG analysis.
+
+The bottom line for leaders:
+
+This is part of a bigger concept of how the use of AI might help us do biological interpretation of otherwise overwhelming output. At the least, this kind of thing is a nice supplement to the longstanding GO and pathway analysis.
+
+Have your comp bio team use the attached markdown to add automated reasoning LLM querying to your data analysis pipelines. PCA loadings are a very low hanging fruit, so start there.
+
+Where to find more:
+
+The markdown is in the comments below, along with a report that shows you everything the model outputted with respect to loadings 1 to 10, including experiments where we run the same list through the model to see if the output changes.
+
+Please let me know if you have any questions or comments. Feel free to DM me. Let me know if you need help setting this up, or if you are doing similar things in your lab/organization.
+
+Thank you to my intern Arianna Aalami for driving this project (think of her as the first author and me as the last author).
+
+To the rest of you, thank you and I hope you all have a great day.
+
+[[file:llm_pca_loadings_post.jpeg]]
+*** comment
+The markdown that allows you to do it on your end, so long as you have an OpenAI API key, is here: https://tjburns08.github.io/BLSC_PCA_loading_LLMs_final.html
+The report of what we found is here: https://tjburns08.github.io/blsc_pc_loadings_by_llm_interpretation.pdf
 ** [[https://www.linkedin.com/posts/tylerjburns_case-study-an-issue-with-a-bulk-sequencing-activity-7333478597971603456-370y?utm_source=share&utm_medium=member_desktop&rcm=ACoAAAbP8M8BYXs_UknoBHnmw2rZ-aRDTJF7L3Y][The need for wet lab and dry lab integration]]
 Case study: an issue with a bulk sequencing analysis project was quickly found and fixed because of the understanding that "the cell type in question does not behave like that." I can't emphasize this enough: you need bioinformaticians who have wet-lab experience.
 
