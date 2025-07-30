@@ -1,0 +1,361 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Microbiome Questions</title>
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" href="simple.css" />
+<style>
+  .dark-mode {
+    --bg: #212121;
+    --accent-bg: #2b2b2b;
+    --text: #dcdcdc;
+    --text-light: #ababab;
+    --accent: #ffb300;
+    /*--code: #f06292;*/
+    --preformatted: #ccc;
+    --disabled: #111;
+  }
+  .dark-mode img,
+  .dark-mode video {
+    opacity: 0.8;
+  }
+  .toggle-theme-btn {
+      transform: scale(0.7);
+      opacity: 0.4;
+      transition: opacity 0.2s;
+    }
+    .toggle-theme-btn:hover {
+      opacity: 0.4;
+    }
+
+  /* Code block wrapping: experiment */
+    pre, code {
+      white-space: pre-wrap;
+      white-space: -moz-pre-wrap;
+      white-space: -pre-wrap;
+      white-space: -o-pre-wrap;
+      word-wrap: break-word;
+    }
+</style>
+<script>
+ function toggleDarkMode() {
+    const body = document.body;
+    body.classList.toggle("dark-mode");
+    // Save the user's theme preference to localStorage
+    if (body.classList.contains("dark-mode")) {
+      localStorage.setItem("theme", "dark");
+    } else {
+      localStorage.setItem("theme", "light");
+    }
+  }
+
+  function setDefaultDarkMode() {
+    // Retrieve the user's theme preference from localStorage
+    const storedTheme = localStorage.getItem("theme");
+
+    // If the stored theme is light, do nothing; otherwise, set it to dark
+    if (storedTheme !== "light") {
+      document.body.classList.add("dark-mode");
+    }
+  }
+
+  // Set the default mode to dark when the DOM is fully loaded
+  document.addEventListener('DOMContentLoaded', setDefaultDarkMode);
+</script>
+</head>
+<body>
+<div id="preamble" class="status">
+<div style="position: fixed; top: 10px; right: 10px;">
+         <button class="toggle-theme-btn" onclick="toggleDarkMode()">Light/Dark</button>
+       </div>
+</div>
+<div id="content" class="content">
+<h1 class="title">Microbiome Questions</h1>
+<p>
+<a href="./index.html">Home</a>
+</p>
+
+<hr />
+
+<p>
+<i>Mystics claim that their ecstasies reveal to them a circular chamber containing an enormous circular book with a continuous spine that goes completely around the walls. But their testimony is suspect, their words obscure. That cyclical book is God.</i>
+</p>
+
+<p>
+Jorge Luis Borges, <i>The Library of Babel</i>
+</p>
+
+<hr />
+
+<div id="outline-container-orga63b90e" class="outline-2">
+<h2 id="orga63b90e">Introduction</h2>
+<div class="outline-text-2" id="text-orga63b90e">
+<p>
+This writeup contains the code and instructions necessary to get a LLM to generate however many questions you like (as constrined by price and time). There are numerous unexplored applications to this at the time of writing <span class="timestamp-wrapper"><span class="timestamp">[2025-07-30 Wed]</span></span>, with a practical one discussed here being the ability to plumb the latent of questions around a particular domain.
+</p>
+
+<p>
+To this end, we have chosen the microbiome. This is an integrative field, which involves the relationship between the microbiome and a number of organisms, diseases, and conditions (including astronauts in space). Furthermore, my talented intern intends to pursue a PhD in this domain, so I am compelled to help her in what little ways I can. Her relevance filter guides the product. What helps a burgeoning microbiome student?
+</p>
+</div>
+</div>
+
+<div id="outline-container-org27e311f" class="outline-2">
+<h2 id="org27e311f">Generating the questions</h2>
+<div class="outline-text-2" id="text-org27e311f">
+<p>
+The first thing you need to do is to be able to call LLMs from the command line, and thus shell scripts. To this end, I ask the reader to go <a href="./command_line_writeup.html">here</a>, where I instruct accordingly. Following this, the shell script used is relatively straightforward. I will copy it below:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh"><span class="org-comment-delimiter">#</span><span class="org-comment">!/usr/bin/</span><span class="org-keyword">env</span><span class="org-comment"> bash</span>
+<span class="org-variable-name">num_iter</span>=10
+<span class="org-variable-name">prompt</span>=<span class="org-string">"Please generate a random research question about the microbiome. Output only the question. No extra stuff."</span>
+<span class="org-builtin">echo</span> <span class="org-string">"The prompt is: $prompt"</span>
+<span class="org-builtin">echo</span>
+
+<span class="org-keyword">for</span> (( <span class="org-variable-name">i</span> = 0; i &lt; $<span class="org-variable-name">num_iter</span>; i++ ))
+<span class="org-keyword">do</span>
+    chatbot geminifl <span class="org-string">"$prompt"</span>
+    <span class="org-builtin">echo</span> <span class="org-string">"$i"</span> &gt;&amp;2
+    <span class="org-builtin">echo</span>
+<span class="org-keyword">done</span>
+</pre>
+</div>
+
+<p>
+It is a matter of copying this code into a shell script and letting it run. I have the default num<sub>iter</sub> (iterations) at 10 for you, for the sake of testing. But in the primary experiment that makes up this report, I increase to 10,000.
+</p>
+
+<p>
+What you will do is run this script and create an textfile that it outputs into. The results are the initial prompt, and then all the quetions, each separated by a blank line. In the command line, you will run (assume you call your script get<sub>questions.sh</sub>):
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">./get_questions.sh &gt; your_output_file.txt
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org127db34" class="outline-2">
+<h2 id="org127db34">Make the embeddings</h2>
+<div class="outline-text-2" id="text-org127db34">
+<p>
+From here, you will run a python script to convert these quesitons into spatial coordinates, and then UMAP coordinates. The code necessary for that is here:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span class="org-comment-delimiter">#</span><span class="org-comment">!/usr/bin/env python3</span>
+
+<span class="org-doc">"""</span>
+<span class="org-doc">question_map_umap_cluster.py</span>
+
+<span class="org-doc">Visualise research questions **and** colour points by clustering performed *on</span>
+<span class="org-doc">the 2&#8209;D UMAP coordinates* (so what you see is what was clustered).</span>
+
+<span class="org-doc">Pipeline</span>
+<span class="org-doc">--------</span>
+<span class="org-doc">1. Split blank&#8209;line&#8211;separated questions.</span>
+<span class="org-doc">2. Embed with Sentence&#8209;Transformers.</span>
+<span class="org-doc">3. UMAP &#8594; 2&#8209;D.</span>
+<span class="org-doc">4. **K&#8209;means on the UMAP coords** (k&#160;=&#160;5 by default).</span>
+<span class="org-doc">5. Plot with Plotly; hover shows cluster + wrapped question.</span>
+
+<span class="org-doc">Usage</span>
+<span class="org-doc">-----</span>
+<span class="org-doc">```bash</span>
+<span class="org-doc">python question_map_umap_cluster.py            # sample questions</span>
+<span class="org-doc">python question_map_umap_cluster.py my_qs.txt  # your own list</span>
+<span class="org-doc">```</span>
+
+<span class="org-doc">Dependencies</span>
+<span class="org-doc">------------</span>
+<span class="org-doc">```bash</span>
+<span class="org-doc">pip install sentence-transformers umap-learn scikit-learn plotly pandas</span>
+<span class="org-doc">```</span>
+<span class="org-doc">"""</span>
+
+<span class="org-keyword">import</span> sys
+<span class="org-keyword">from</span> pathlib <span class="org-keyword">import</span> Path
+<span class="org-keyword">import</span> textwrap
+<span class="org-keyword">from</span> typing <span class="org-keyword">import</span> List
+
+<span class="org-keyword">import</span> pandas <span class="org-keyword">as</span> pd
+<span class="org-keyword">import</span> plotly.express <span class="org-keyword">as</span> px
+<span class="org-keyword">from</span> sentence_transformers <span class="org-keyword">import</span> SentenceTransformer
+<span class="org-keyword">import</span> umap
+<span class="org-keyword">from</span> sklearn.cluster <span class="org-keyword">import</span> KMeans
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">&#9472;&#9472; sample questions &#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;</span>
+<span class="org-variable-name">TEXT</span> = <span class="org-string">"""</span>
+<span class="org-string">How do early-life microbial colonizers influence the development of allergen sensitization in infants?</span>
+
+<span class="org-string">How does the gut microbiome composition in elderly individuals correlate with their susceptibility to seasonal influenza infections?</span>
+
+<span class="org-string">How do changes in gut microbiome composition influence cognitive function and mood regulation in aging adults?</span>
+
+<span class="org-string">How does the gut microbiome composition of endurance athletes influence their response to carbohydrate loading protocols?</span>
+
+<span class="org-string">How does the gut microbiome composition of astronauts change during long-duration space missions and what are the potential implications for their immune function and nutrient absorption upon return to Earth?</span>
+<span class="org-string">"""</span>
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">&#9472;&#9472; constants / tunables &#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;</span>
+<span class="org-variable-name">MODEL_NAME</span> = <span class="org-string">"all-mpnet-base-v2"</span>
+<span class="org-variable-name">WRAP_WIDTH</span> = 80
+<span class="org-variable-name">UMAP_RANDOM_STATE</span> = 42
+
+<span class="org-variable-name">N_CLUSTERS</span> = 20          <span class="org-comment-delimiter"># </span><span class="org-comment">k for kmeans</span>
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">&#9472;&#9472; helpers &#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;</span>
+
+<span class="org-variable-name">split_by_blank</span> = <span class="org-keyword">lambda</span> t: [p.strip() <span class="org-keyword">for</span> p <span class="org-keyword">in</span> t.strip().split(<span class="org-string">"\n\n"</span>) <span class="org-keyword">if</span> p.strip()]
+
+
+<span class="org-keyword">def</span> <span class="org-function-name">embed</span>(texts: List[<span class="org-builtin">str</span>]):
+    <span class="org-keyword">return</span> SentenceTransformer(MODEL_NAME).encode(texts, convert_to_numpy=<span class="org-constant">True</span>, normalize_embeddings=<span class="org-constant">True</span>)
+
+
+<span class="org-keyword">def</span> <span class="org-function-name">umap_2d</span>(embeddings):
+    reducer = umap.UMAP(n_components=2, metric=<span class="org-string">"cosine"</span>, random_state=UMAP_RANDOM_STATE)
+    <span class="org-keyword">return</span> reducer.fit_transform(embeddings)
+
+<span class="org-keyword">def</span> <span class="org-function-name">cluster_coords</span>(coords):
+    <span class="org-keyword">return</span> KMeans(n_clusters=N_CLUSTERS, random_state=UMAP_RANDOM_STATE, n_init=<span class="org-string">"auto"</span>).fit_predict(coords)
+
+<span class="org-keyword">def</span> <span class="org-function-name">wrap</span>(text: <span class="org-builtin">str</span>) -&gt; <span class="org-builtin">str</span>:
+    <span class="org-keyword">return</span> textwrap.fill(text, width=WRAP_WIDTH).replace(<span class="org-string">"\n"</span>, <span class="org-string">"&lt;br&gt;"</span>)
+
+
+<span class="org-keyword">def</span> <span class="org-function-name">build_df</span>(questions, coords, labels):
+    df = pd.DataFrame({<span class="org-string">"x"</span>: coords[:, 0], <span class="org-string">"y"</span>: coords[:, 1],
+                       <span class="org-string">"question"</span>: questions, <span class="org-string">"cluster"</span>: labels})
+    df = df.reset_index(drop=<span class="org-constant">True</span>)
+    df[<span class="org-string">"cluster_label"</span>] = df[<span class="org-string">"cluster"</span>].<span class="org-builtin">apply</span>(<span class="org-keyword">lambda</span> n: f<span class="org-string">"C</span>{n}<span class="org-string">"</span>)
+    df[<span class="org-string">"hover"</span>] = df[<span class="org-string">"question"</span>].<span class="org-builtin">apply</span>(wrap) <span class="org-comment-delimiter"># </span><span class="org-comment">control: this does not jumble shit</span>
+    <span class="org-keyword">return</span> df
+
+<span class="org-keyword">def</span> <span class="org-function-name">plot</span>(df):
+    fig = px.scatter(
+        df,
+        x=<span class="org-string">"x"</span>,
+        y=<span class="org-string">"y"</span>,
+        color=<span class="org-string">"cluster_label"</span>,          <span class="org-comment-delimiter"># </span><span class="org-comment">keeps the colours</span>
+        custom_data=[<span class="org-string">"hover"</span>],          <span class="org-comment-delimiter"># </span><span class="org-comment">let PX attach the right slice to each trace</span>
+        template=<span class="org-string">"plotly_white"</span>,
+        title=<span class="org-string">"UMAP of research questions (clustered on UMAP coords)"</span>,
+    )
+
+    fig.update_traces(
+        marker=<span class="org-builtin">dict</span>(size=9, opacity=0.8),
+        hovertemplate=<span class="org-string">"%{customdata[0]}&lt;extra&gt;&lt;/extra&gt;"</span>,
+    )
+    fig.write_html(<span class="org-string">"umap_questions_with_clustering.html"</span>, auto_open=<span class="org-constant">True</span>)
+<span class="org-comment-delimiter"># </span><span class="org-comment">&#9472;&#9472; main &#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;</span>
+
+<span class="org-keyword">def</span> <span class="org-function-name">main</span>():
+    text_source = Path(sys.argv[1]).read_text(encoding=<span class="org-string">"utf-8"</span>) <span class="org-keyword">if</span> <span class="org-builtin">len</span>(sys.argv) &gt; 1 <span class="org-keyword">else</span> TEXT
+    questions = split_by_blank(text_source)
+    <span class="org-keyword">if</span> <span class="org-keyword">not</span> questions:
+        sys.<span class="org-constant">exit</span>(<span class="org-string">"No questions found."</span>)
+
+    <span class="org-builtin">print</span>(f<span class="org-string">"</span>{<span class="org-builtin">len</span>(questions)}<span class="org-string"> questions &#8594; embed &#8594; UMAP &#8594; K&#8209;means (on coords) &#8594; plot &#8230;"</span>)
+
+    emb = embed(questions)
+    coords = umap_2d(emb)
+    labels = cluster_coords(coords)
+
+    df = build_df(questions, coords, labels)
+    plot(df)
+
+    <span class="org-comment-delimiter"># </span><span class="org-comment">Output</span>
+    emb = pd.DataFrame(emb)
+    emb.columns = [f<span class="org-string">"emb_</span>{i + 1}<span class="org-string">"</span> <span class="org-keyword">for</span> i <span class="org-keyword">in</span> <span class="org-builtin">range</span>(emb.shape[1])]
+    emb.to_csv(<span class="org-string">"question_map_embeddings.csv"</span>)
+    df.to_csv(<span class="org-string">"question_map_with_clustering_df.csv"</span>)
+
+
+<span class="org-keyword">if</span> <span class="org-builtin">__name__</span> == <span class="org-string">"__main__"</span>:
+    main()
+</pre>
+</div>
+
+<p>
+This will give you an output data frame, "question<sub>map</sub><sub>with</sub><sub>clustering</sub><sub>df.csv</sub>" that has the necessary info to proceed to the next step. It will also give you an interactive plot (not the final one) that can allow you to sanity check your results.
+</p>
+</div>
+</div>
+<div id="outline-container-orgbded2b1" class="outline-2">
+<h2 id="orgbded2b1">Label the clusters</h2>
+<div class="outline-text-2" id="text-orgbded2b1">
+<p>
+For this stretch, we used a R markdown. To find this, you can go here. In essence, we have an OpenRouter API caller that is used as a function directly within R, which we call Chatbot(). This is the LLM (at the time of writing <span class="timestamp-wrapper"><span class="timestamp">[2025-07-30 Wed] </span></span> the same model, Gemini 2.5 flash lite) that is used to take in the questions associated with each cluster above and generate a label that is in the form of a metaquestion.
+</p>
+</div>
+</div>
+<div id="outline-container-org14518d0" class="outline-2">
+<h2 id="org14518d0">Make the final plot</h2>
+<div class="outline-text-2" id="text-org14518d0">
+<p>
+From here, you take the output from the R Markdown, which is the same data frame that we made but now with the metaclusters, and you run the following python script. Note that the incoming data frame must be named "question<sub>map</sub><sub>with</sub><sub>labeled</sub><sub>clusters.csv</sub>". I have it formatted so it needs to  be in the same directory:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span class="org-comment-delimiter">#</span><span class="org-comment">!/usr/bin/env python3</span>
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">Libraries</span>
+<span class="org-keyword">import</span> pandas <span class="org-keyword">as</span> pd
+<span class="org-keyword">import</span> plotly.express <span class="org-keyword">as</span> px
+<span class="org-keyword">import</span> textwrap
+
+<span class="org-keyword">def</span> <span class="org-function-name">wrap</span>(text: <span class="org-builtin">str</span>) -&gt; <span class="org-builtin">str</span>:
+    <span class="org-keyword">return</span> textwrap.fill(text, width=80).replace(<span class="org-string">"\n"</span>, <span class="org-string">"&lt;br&gt;"</span>)
+
+<span class="org-keyword">def</span> <span class="org-function-name">main</span>():
+    df = pd.read_csv(<span class="org-string">"question_map_with_labeled_clusters.csv"</span>)
+    df[<span class="org-string">"meta_question_wrap"</span>] = df[<span class="org-string">"meta_question"</span>].<span class="org-builtin">apply</span>(wrap)
+
+    fig = px.scatter(df,
+                     x = <span class="org-string">"x"</span>,
+                     y = <span class="org-string">"y"</span>,
+                     color = <span class="org-string">"cluster_label"</span>,
+                     hover_data = {<span class="org-string">"x"</span>: <span class="org-constant">False</span>, <span class="org-string">"y"</span>: <span class="org-constant">False</span>, <span class="org-string">"hover"</span>: <span class="org-constant">True</span>, <span class="org-string">"cluster_label"</span>: <span class="org-constant">True</span>, <span class="org-string">"meta_question_wrap"</span>: <span class="org-constant">True</span>})
+
+    fig.update_layout(legend=<span class="org-builtin">dict</span>(
+        yanchor=<span class="org-string">"top"</span>,
+        y=0.99,
+        xanchor=<span class="org-string">"left"</span>,
+        x=0.01,
+    ))
+
+    fig.update_traces(
+        hoverlabel = <span class="org-builtin">dict</span>(font_size=20),
+    )
+
+    fig.write_html(<span class="org-string">"umap_questions_with_mq.html"</span>, auto_open=<span class="org-constant">True</span>)
+
+<span class="org-keyword">if</span> <span class="org-builtin">__name__</span> == <span class="org-string">"__main__"</span>:
+    main()
+</pre>
+</div>
+
+<p>
+The final output that you will open/use is "umap<sub>questions</sub><sub>with</sub><sub>mq.html</sub>." This will contain a clustered UMAP of the questions. Hover text will include both the question the cursor is on, and the cluster label, which is the metaquestion that we generated earlier.
+</p>
+
+<p>
+Play around with this. After you replicate my work, try different domains. Try different models. So far as I am aware, this is largely uncharted territory.
+</p>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="date">Date: July 30, 2025 - July 30, 2025</p>
+<p class="creator"><a href="https://www.gnu.org/software/emacs/">Emacs</a> 28.1 (<a href="https://orgmode.org">Org</a> mode 9.5.2)</p>
+</div>
+</body>
+</html>
