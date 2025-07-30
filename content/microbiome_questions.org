@@ -1,0 +1,229 @@
+#+Title: Microbiome Questions
+#+Author: Tyler Burns
+#+Date: July 30, 2025 - July 30, 2025
+
+[[./index.org][Home]]
+
+-----
+
+/Mystics claim that their ecstasies reveal to them a circular chamber containing an enormous circular book with a continuous spine that goes completely around the walls. But their testimony is suspect, their words obscure. That cyclical book is God./
+
+Jorge Luis Borges, /The Library of Babel/
+
+-----
+
+* Introduction
+This writeup contains the code and instructions necessary to get a LLM to generate however many questions you like (as constrined by price and time). There are numerous unexplored applications to this at the time of writing [2025-07-30 Wed], with a practical one discussed here being the ability to plumb the latent of questions around a particular domain.
+
+To this end, we have chosen the microbiome. This is an integrative field, which involves the relationship between the microbiome and a number of organisms, diseases, and conditions (including astronauts in space). Furthermore, my talented intern intends to pursue a PhD in this domain, so I am compelled to help her in what little ways I can. Her relevance filter guides the product. What helps a burgeoning microbiome student?
+
+* Generating the questions
+The first thing you need to do is to be able to call LLMs from the command line, and thus shell scripts. To this end, I ask the reader to go [[./command_line_writeup.html][here]], where I instruct accordingly. Following this, the shell script used is relatively straightforward. I will copy it below:
+
+#+begin_src sh
+#!/usr/bin/env bash
+num_iter=10
+prompt="Please generate a random research question about the microbiome. Output only the question. No extra stuff."
+echo "The prompt is: $prompt"
+echo
+
+for (( i = 0; i < $num_iter; i++ ))
+do
+    chatbot geminifl "$prompt"
+    echo "$i" >&2
+    echo
+done
+#+end_src
+
+It is a matter of copying this code into a shell script and letting it run. I have the default num_iter (iterations) at 10 for you, for the sake of testing. But in the primary experiment that makes up this report, I increase to 10,000.
+
+What you will do is run this script and create an textfile that it outputs into. The results are the initial prompt, and then all the quetions, each separated by a blank line. In the command line, you will run (assume you call your script get_questions.sh):
+
+#+begin_src sh
+./get_questions.sh > your_output_file.txt
+#+end_src
+
+* Make the embeddings
+From here, you will run a python script to convert these quesitons into spatial coordinates, and then UMAP coordinates. The code necessary for that is here:
+
+#+begin_src python
+#!/usr/bin/env python3
+
+"""
+question_map_umap_cluster.py
+
+Visualise research questions **and** colour points by clustering performed *on
+the 2‑D UMAP coordinates* (so what you see is what was clustered).
+
+Pipeline
+--------
+1. Split blank‑line–separated questions.
+2. Embed with Sentence‑Transformers.
+3. UMAP → 2‑D.
+4. **K‑means on the UMAP coords** (k = 5 by default).
+5. Plot with Plotly; hover shows cluster + wrapped question.
+
+Usage
+-----
+```bash
+python question_map_umap_cluster.py            # sample questions
+python question_map_umap_cluster.py my_qs.txt  # your own list
+```
+
+Dependencies
+------------
+```bash
+pip install sentence-transformers umap-learn scikit-learn plotly pandas
+```
+"""
+
+import sys
+from pathlib import Path
+import textwrap
+from typing import List
+
+import pandas as pd
+import plotly.express as px
+from sentence_transformers import SentenceTransformer
+import umap
+from sklearn.cluster import KMeans
+
+# ── sample questions ────────────────────────────────────────────────────
+TEXT = """
+How do early-life microbial colonizers influence the development of allergen sensitization in infants?
+
+How does the gut microbiome composition in elderly individuals correlate with their susceptibility to seasonal influenza infections?
+
+How do changes in gut microbiome composition influence cognitive function and mood regulation in aging adults?
+
+How does the gut microbiome composition of endurance athletes influence their response to carbohydrate loading protocols?
+
+How does the gut microbiome composition of astronauts change during long-duration space missions and what are the potential implications for their immune function and nutrient absorption upon return to Earth?
+"""
+
+# ── constants / tunables ───────────────────────────────────────────────
+MODEL_NAME = "all-mpnet-base-v2"
+WRAP_WIDTH = 80
+UMAP_RANDOM_STATE = 42
+
+N_CLUSTERS = 20          # k for kmeans
+
+# ── helpers ─────────────────────────────────────────────────────────────
+
+split_by_blank = lambda t: [p.strip() for p in t.strip().split("\n\n") if p.strip()]
+
+
+def embed(texts: List[str]):
+    return SentenceTransformer(MODEL_NAME).encode(texts, convert_to_numpy=True, normalize_embeddings=True)
+
+
+def umap_2d(embeddings):
+    reducer = umap.UMAP(n_components=2, metric="cosine", random_state=UMAP_RANDOM_STATE)
+    return reducer.fit_transform(embeddings)
+
+def cluster_coords(coords):
+    return KMeans(n_clusters=N_CLUSTERS, random_state=UMAP_RANDOM_STATE, n_init="auto").fit_predict(coords)
+
+def wrap(text: str) -> str:
+    return textwrap.fill(text, width=WRAP_WIDTH).replace("\n", "<br>")
+
+
+def build_df(questions, coords, labels):
+    df = pd.DataFrame({"x": coords[:, 0], "y": coords[:, 1],
+                       "question": questions, "cluster": labels})
+    df = df.reset_index(drop=True)
+    df["cluster_label"] = df["cluster"].apply(lambda n: f"C{n}")
+    df["hover"] = df["question"].apply(wrap) # control: this does not jumble shit
+    return df
+
+def plot(df):
+    fig = px.scatter(
+        df,
+        x="x",
+        y="y",
+        color="cluster_label",          # keeps the colours
+        custom_data=["hover"],          # let PX attach the right slice to each trace
+        template="plotly_white",
+        title="UMAP of research questions (clustered on UMAP coords)",
+    )
+
+    fig.update_traces(
+        marker=dict(size=9, opacity=0.8),
+        hovertemplate="%{customdata[0]}<extra></extra>",
+    )
+    fig.write_html("umap_questions_with_clustering.html", auto_open=True)
+# ── main ────────────────────────────────────────────────────────────────
+
+def main():
+    text_source = Path(sys.argv[1]).read_text(encoding="utf-8") if len(sys.argv) > 1 else TEXT
+    questions = split_by_blank(text_source)
+    if not questions:
+        sys.exit("No questions found.")
+
+    print(f"{len(questions)} questions → embed → UMAP → K‑means (on coords) → plot …")
+
+    emb = embed(questions)
+    coords = umap_2d(emb)
+    labels = cluster_coords(coords)
+
+    df = build_df(questions, coords, labels)
+    plot(df)
+
+    # Output
+    emb = pd.DataFrame(emb)
+    emb.columns = [f"emb_{i + 1}" for i in range(emb.shape[1])]
+    emb.to_csv("question_map_embeddings.csv")
+    df.to_csv("question_map_with_clustering_df.csv")
+
+
+if __name__ == "__main__":
+    main()
+#+end_src
+
+This will give you an output data frame, "question_map_with_clustering_df.csv" that has the necessary info to proceed to the next step. It will also give you an interactive plot (not the final one) that can allow you to sanity check your results.
+* Label the clusters
+For this stretch, we used a R markdown. To find this, you can go here. In essence, we have an OpenRouter API caller that is used as a function directly within R, which we call Chatbot(). This is the LLM (at the time of writing [2025-07-30 Wed] the same model, Gemini 2.5 flash lite) that is used to take in the questions associated with each cluster above and generate a label that is in the form of a metaquestion.
+* Make the final plot
+From here, you take the output from the R Markdown, which is the same data frame that we made but now with the metaclusters, and you run the following python script. Note that the incoming data frame must be named "question_map_with_labeled_clusters.csv". I have it formatted so it needs to  be in the same directory:
+
+#+begin_src python
+#!/usr/bin/env python3
+
+# Libraries
+import pandas as pd
+import plotly.express as px
+import textwrap
+
+def wrap(text: str) -> str:
+    return textwrap.fill(text, width=80).replace("\n", "<br>")
+
+def main():
+    df = pd.read_csv("question_map_with_labeled_clusters.csv")
+    df["meta_question_wrap"] = df["meta_question"].apply(wrap)
+
+    fig = px.scatter(df,
+                     x = "x",
+                     y = "y",
+                     color = "cluster_label",
+                     hover_data = {"x": False, "y": False, "hover": True, "cluster_label": True, "meta_question_wrap": True})
+
+    fig.update_layout(legend=dict(
+        yanchor="top",
+        y=0.99,
+        xanchor="left",
+        x=0.01,
+    ))
+
+    fig.update_traces(
+        hoverlabel = dict(font_size=20),
+    )
+
+    fig.write_html("umap_questions_with_mq.html", auto_open=True)
+
+if __name__ == "__main__":
+    main()
+#+end_src
+
+The final output that you will open/use is "umap_questions_with_mq.html." This will contain a clustered UMAP of the questions. Hover text will include both the question the cursor is on, and the cluster label, which is the metaquestion that we generated earlier.
+
+Play around with this. After you replicate my work, try different domains. Try different models. So far as I am aware, this is largely uncharted territory.
