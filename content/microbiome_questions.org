@@ -1,5 +1,5 @@
 #+Title: Microbiome Questions
-#+Author: Tyler Burns
+#+Author: Tyler Burns and Arianna Aalami
 #+Date: July 30, 2025 - July 30, 2025
 
 [[./index.org][Home]]
@@ -15,7 +15,7 @@ Jorge Luis Borges, /The Library of Babel/
 * Introduction
 This writeup contains the code and instructions necessary to get a LLM to generate however many questions you like (as constrined by price and time). There are numerous unexplored applications to this at the time of writing [2025-07-30 Wed], with a practical one discussed here being the ability to plumb the latent of questions around a particular domain.
 
-To this end, we have chosen the microbiome. This is an integrative field, which involves the relationship between the microbiome and a number of organisms, diseases, and conditions (including astronauts in space). Furthermore, my talented intern intends to pursue a PhD in this domain, so I am compelled to help her in what little ways I can. Her relevance filter guides the product. What helps a burgeoning microbiome student?
+To this end, we have chosen the microbiome. This is an integrative field, which involves the relationship between the microbiome and a number of organisms, diseases, and conditions (including astronauts in space). Furthermore, my talented intern (the co-author of this project) intends to pursue a PhD in this domain, so I am compelled to help her in what little ways I can. Her relevance filter guides the product. What helps a burgeoning microbiome student?
 
 * Generating the questions
 The first thing you need to do is to be able to call LLMs from the command line, and thus shell scripts. To this end, I ask the reader to go [[./command_line_writeup.html][here]], where I instruct accordingly. Following this, the shell script used is relatively straightforward. I will copy it below:
