@@ -91,9 +91,9 @@ Jorge Luis Borges, <i>The Library of Babel</i>
 
 <hr />
 
-<div id="outline-container-orga63b90e" class="outline-2">
-<h2 id="orga63b90e">Introduction</h2>
-<div class="outline-text-2" id="text-orga63b90e">
+<div id="outline-container-org7b7dd6d" class="outline-2">
+<h2 id="org7b7dd6d">Introduction</h2>
+<div class="outline-text-2" id="text-org7b7dd6d">
 <p>
 This writeup contains the code and instructions necessary to get a LLM to generate however many questions you like (as constrined by price and time). There are numerous unexplored applications to this at the time of writing <span class="timestamp-wrapper"><span class="timestamp">[2025-07-30 Wed]</span></span>, with a practical one discussed here being the ability to plumb the latent of questions around a particular domain.
 </p>
@@ -104,9 +104,9 @@ To this end, we have chosen the microbiome. This is an integrative field, which 
 </div>
 </div>
 
-<div id="outline-container-org27e311f" class="outline-2">
-<h2 id="org27e311f">Generating the questions</h2>
-<div class="outline-text-2" id="text-org27e311f">
+<div id="outline-container-orgb26cb96" class="outline-2">
+<h2 id="orgb26cb96">Generating the questions</h2>
+<div class="outline-text-2" id="text-orgb26cb96">
 <p>
 The first thing you need to do is to be able to call LLMs from the command line, and thus shell scripts. To this end, I ask the reader to go <a href="./command_line_writeup.html">here</a>, where I instruct accordingly. Following this, the shell script used is relatively straightforward. I will copy it below:
 </p>
@@ -142,9 +142,9 @@ What you will do is run this script and create an textfile that it outputs into.
 </div>
 </div>
 
-<div id="outline-container-org127db34" class="outline-2">
-<h2 id="org127db34">Make the embeddings</h2>
-<div class="outline-text-2" id="text-org127db34">
+<div id="outline-container-orga2cc1d0" class="outline-2">
+<h2 id="orga2cc1d0">Make the embeddings</h2>
+<div class="outline-text-2" id="text-orga2cc1d0">
 <p>
 From here, you will run a python script to convert these quesitons into spatial coordinates, and then UMAP coordinates. The code necessary for that is here:
 </p>
@@ -289,17 +289,17 @@ This will give you an output data frame, "question<sub>map</sub><sub>with</sub><
 </p>
 </div>
 </div>
-<div id="outline-container-orgbded2b1" class="outline-2">
-<h2 id="orgbded2b1">Label the clusters</h2>
-<div class="outline-text-2" id="text-orgbded2b1">
+<div id="outline-container-org2c1a4c4" class="outline-2">
+<h2 id="org2c1a4c4">Label the clusters</h2>
+<div class="outline-text-2" id="text-org2c1a4c4">
 <p>
 For this stretch, we used a R markdown. To find this, you can go here. In essence, we have an OpenRouter API caller that is used as a function directly within R, which we call Chatbot(). This is the LLM (at the time of writing <span class="timestamp-wrapper"><span class="timestamp">[2025-07-30 Wed] </span></span> the same model, Gemini 2.5 flash lite) that is used to take in the questions associated with each cluster above and generate a label that is in the form of a metaquestion.
 </p>
 </div>
 </div>
-<div id="outline-container-org14518d0" class="outline-2">
-<h2 id="org14518d0">Make the final plot</h2>
-<div class="outline-text-2" id="text-org14518d0">
+<div id="outline-container-org56d45ce" class="outline-2">
+<h2 id="org56d45ce">Make the final plot</h2>
+<div class="outline-text-2" id="text-org56d45ce">
 <p>
 From here, you take the output from the R Markdown, which is the same data frame that we made but now with the metaclusters, and you run the following python script. Note that the incoming data frame must be named "question<sub>map</sub><sub>with</sub><sub>labeled</sub><sub>clusters.csv</sub>". I have it formatted so it needs to  be in the same directory:
 </p>
@@ -344,7 +344,7 @@ From here, you take the output from the R Markdown, which is the same data frame
 </div>
 
 <p>
-The final output that you will open/use is "umap<sub>questions</sub><sub>with</sub><sub>mq.html</sub>." This will contain a clustered UMAP of the questions. Hover text will include both the question the cursor is on, and the cluster label, which is the metaquestion that we generated earlier.
+The final output that you will open/use is <code>"umap_questions_with_mq.html."</code> This will contain a clustered UMAP of the questions. Hover text will include both the question the cursor is on, and the cluster label, which is the metaquestion that we generated earlier.
 </p>
 
 <p>
