@@ -37,10 +37,10 @@ done
 
 It is a matter of copying this code into a shell script and letting it run. I have the default num_iter (iterations) at 10 for you, for the sake of testing. But in the primary experiment that makes up this report, I increase to 10,000.
 
-What you will do is run this script and create an textfile that it outputs into. The results are the initial prompt, and then all the quetions, each separated by a blank line. In the command line, you will run (assume you call your script get_questions.sh):
+What you will do is run this script and create an textfile that it outputs into. The results are the initial prompt, and then all the quetions, each separated by a blank line. In the command line, you will run (assume you call your script iterative_monolog.sh):
 
 #+begin_src sh
-./get_questions.sh > your_output_file.txt
+./iterative_monolog.sh > your_output_file.txt
 #+end_src
 
 * Make the embeddings
