@@ -27,7 +27,7 @@ This project was inspired by the LLM-generated random numbers [[https://sanand0.
 This report shows you how to generate the questions, embed them, cluster them, reduce them to UMAP coordinates, and plot the results, saving it as a html.
 *** [[./make_metaquestions.html][R Markdown]]
 This piece is the code to take the above output and label the clusters.
-*** [[./microbiome_questions_with_mq.html][Example output: microbiome]]
+*** [[./umap_questions_with_mq.html][Example output: microbiome]]
 This is a html file that is a map of microbiome questions, where questions that are similar to each other in context are grouped near to each other on the map.
 
 ** LLM-augmented PCA loadings
