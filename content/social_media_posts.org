@@ -517,7 +517,44 @@ I'll acknowledge that there are differences between the fields that may impact w
 * General data analysis
 #+HTML: <a href="#top">Back to top</a>
 The data analysis related posts that I otherwise could not categorize.
-** The use of LLMs to help interpret PCA loadings
+** [[https://www.linkedin.com/posts/tylerjburns_in-light-of-recent-work-on-llm-generated-activity-7358851476070293506-zn_F?utm_source=share&utm_medium=member_desktop&rcm=ACoAAAbP8M8BYXs_UknoBHnmw2rZ-aRDTJF7L3Y][A map of 10,000 LLM-generated microbiome questions]]
+In light of recent work on LLM-generated random numbers, I decided to get LLMs to randomly generate biology research questions, to determine just how random they are. I used a field that is both relevant for my domain of single-cell, and is of primary interest to my intern Arianna Aalami, who intends to pursue a PhD down the line: the microbiome.
+
+What we did:
+
+- We prompted Gemini 2.5 flash lite ~10,000 times: "Please generate a random research question about the microbiome. Output only the question. No extra stuff."
+- We embedded the questions into a BERT-like model, which converts each question into a point in high-dimensional space. We ran UMAP on that. Questions similar to each other in context are near to each other on the map.
+- We clustered the map, and then used the same LLM to annotate the clusters (in the form of meta-questions), and then made an interactive plotly visualization of the map.
+
+What we found:
+
+- The questions clustered into very particular categories. Some were oddly specific: questions around the relationship between the microbiome and metastatic melanoma, for example. Our hypothesis is that the results are pointing to types of studies that are in the model's training data. This is similar to how the number 42 might show up more often when it's generating "random" numbers.
+- Some categories were rather unexpected: there was a whole cluster on the microbiome of migratory birds, or astronauts in space.
+- Expected categories, like IBS/IBD, were present but they did not take up as much of the output as Arianna and I thought they would.
+
+Why it matters:
+
+- Just as LLMs have favorite "random" numbers, Gemini 2.5 flash lite has favorite microbiome questions.
+- If you need help brainstorming in your domain, then it might help to get a LLM to do a "brain dump" of thousands of questions, and then map them as we did, to organize them in a human-readable format.
+
+Followup work:
+
+- Comparing different models. Grok4 produced quite a few duplicates in the few tests I ran, for example.
+- Doing this "research question dump" across research domains. Microbiome might be much more broad, given that it intersects with many other fields. Other fields might be more constrained.
+- Trying different clustering methods to uncover more nuanced patterns in our embedding.
+- Trying different prompting styles that might produce different sets of answers.
+
+The output from the image and the code used to produce it can be found in the comments. If you want to chat more about this kind of thing, please feel free to reach out.
+
+If you're a microbiome professor looking for a talented PhD candidate, then please reach out to me or directly to Arianna.
+
+Thank you and I hope you all have a great day.
+
+file:images/llm_microbiome_ppt_slide_2.gif
+*** comment
+Jupyter notebook is here: https://tjburns08.github.io/LLM_microbiome_questions.html
+Html output for microbiome is here: https://tjburns08.github.io/umap_questions_with_mq.html
+** [[https://www.linkedin.com/posts/tylerjburns_friends-leaders-and-scientists-how-often-activity-7354155006498955264-62BL?utm_source=share&utm_medium=member_desktop&rcm=ACoAAAbP8M8BYXs_UknoBHnmw2rZ-aRDTJF7L3Y][The use of LLMs to help interpret PCA loadings]]
 Friends, leaders, and scientists: how often do you actually use the PCA loadings that come for free in your single-cell and spatial analysis pipelines? Here, we have developed a lightweight pipeline that feeds these loadings (gene lists relevant to each principal component) into a reasoning LLM, to give you a biological interpretation. You can think of this as a supplement to GO/GSEA.
 
 How it works:
