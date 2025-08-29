@@ -79,9 +79,9 @@
 <a href="./index.html">Home</a>
 </p>
 
-<div id="outline-container-orgff18292" class="outline-2">
-<h2 id="orgff18292">Commentary</h2>
-<div class="outline-text-2" id="text-orgff18292">
+<div id="outline-container-org72f04ec" class="outline-2">
+<h2 id="org72f04ec">Commentary</h2>
+<div class="outline-text-2" id="text-org72f04ec">
 <p>
 The following is a peer review (November 17, 2017) for <a href="https://www.biorxiv.org/content/10.1101/337485v1">a bioinformatics pre-print</a> that I wrote in graduate school, and submitted to <i>Cytometry Part A</i>. We went through one round of revise and resubmit, where we addressed reviewer comments. When the reviews came back, reviewers 2 and 3 had favorable responses, but reviewer 1 had a negative response, and it was difficult to determine if any revision could change that.
 </p>
@@ -136,13 +136,13 @@ So all of that said, here are the reviewer comments for my pre-print.
 </div>
 </div>
 
-<div id="outline-container-org03f03bd" class="outline-2">
-<h2 id="org03f03bd">Reviewer comments</h2>
-<div class="outline-text-2" id="text-org03f03bd">
+<div id="outline-container-org14f3d22" class="outline-2">
+<h2 id="org14f3d22">Reviewer comments</h2>
+<div class="outline-text-2" id="text-org14f3d22">
 </div>
-<div id="outline-container-org5e7a155" class="outline-3">
-<h3 id="org5e7a155">Reviewer 1</h3>
-<div class="outline-text-3" id="text-org5e7a155">
+<div id="outline-container-org6e26de8" class="outline-3">
+<h3 id="org6e26de8">Reviewer 1</h3>
+<div class="outline-text-3" id="text-org6e26de8">
 <p>
 Comments to the Author
 Burns et al. provide a revised manuscript describing their SCONE (or sconify?) method.  While I acknowledge that the method and manuscript have drastically improved (statistics used, comparisons across conditions of the markers used for kNN, explicit normalisation steps described), I still have serious concerns on the validity of the method and on the quality of the software provided.
@@ -191,9 +191,9 @@ COMPASS: <a href="https://www.ncbi.nlm.nih.gov/pubmed/26006008">https://www.ncbi
 </ol>
 </div>
 </div>
-<div id="outline-container-org8fd1077" class="outline-3">
-<h3 id="org8fd1077">Reviewer 2</h3>
-<div class="outline-text-3" id="text-org8fd1077">
+<div id="outline-container-orge1b4359" class="outline-3">
+<h3 id="orge1b4359">Reviewer 2</h3>
+<div class="outline-text-3" id="text-orge1b4359">
 <p>
 Comments to the Author
 The article was originally written as a general methodology that would work with any dimension reduction algorithm (page 4, line 27 - original manuscript), and one that addressed the biases of clustering algorithms (page 5, line 11 - original manuscript). In fact, it was presented as “the next logical step to the clustering paradigm” (page 4, line 25 - original manuscript) and a tool for functional categorization (page 4 line 45 - original manuscript). We suggested that these claims should be scientifically verified. We suggested comparison with current state-of-the-art algorithms, on a number of different datasets, and using quantitative and objective tests. The authors have responded by removing these claims and have focused the text on visualization. The manuscript now also includes a visual comparison with kmeans using one sample, and the authors suggest that further evaluation is not needed because the purpose of the article is to facilitate visualization. We will defer to the editorial board in this regard. We suggest that at a minimum, the need for proper quantitative evaluation should be discussed in the limitations and future work section.
@@ -215,9 +215,9 @@ Minor comments:
 </ol>
 </div>
 </div>
-<div id="outline-container-org1e41118" class="outline-3">
-<h3 id="org1e41118">Reviewer 3</h3>
-<div class="outline-text-3" id="text-org1e41118">
+<div id="outline-container-org2772d68" class="outline-3">
+<h3 id="org2772d68">Reviewer 3</h3>
+<div class="outline-text-3" id="text-org2772d68">
 <p>
 Comments to the Author
 I appreciate the effort of the authors in improving the quality of the manuscript, which I think is now substantially higher than the original submission.  Most importantly, the authors have toned down some of the original claims that were not backed up by any data, and for others have provided more rigorous ways of parameter tuning and making the method more useable for real-world applications.  These improvements include making better use of statistics, pre-processing and normalisation that all contribute to, in the end, a better tool that will be much more useful for the scientific community.
