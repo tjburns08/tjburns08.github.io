@@ -255,6 +255,35 @@ A relevant interrogation of dimension reduction with lots of pictures here: http
 * Teaching and learning bioinformatics
 #+HTML: <a href="#top">Back to top</a>
 Some of my work involves teaching bioinformatics, especially to biologists who are currently learning. I am good at this in particular because I started out as a biologist and learned bioinformatics later in life. The posts here are reflections and insights in this direction.
+** [[https://www.linkedin.com/posts/tylerjburns_turn-the-knobs-see-how-the-output-changes-activity-7367177068553461761-yPpK?utm_source=share&utm_medium=member_desktop&rcm=ACoAAAbP8M8BYXs_UknoBHnmw2rZ-aRDTJF7L3Y][Scanpy analysis intuition building app]]
+Turn the knobs, see how the output changes.
+
+When you are analyzing single-cell and spatial data, you can gain intuition by changing the parameters of the pipeline, and seeing how the output changes. To help you to this end, we made a small app that allows you to change some of the critical settings in a given pipeline, and see how that affects downstream output.
+
+The app runs the PBMC 3k dataset through a standard analysis pipeline via scanpy. The UI allows you to change the dataset, number of highly variable genes, number of PCs, and number of KNN for the UMAP. The output is a UMAP that is colored by the pre-made cell annotations. You can therefore look at how the shape of the UMAP changes, and how distinguished the annotations are (in optimal circumstances, they should be maximally separate).
+
+One observation we made is that for this dataset, changing the number of highly variable genes produced modest visual changes, but not as substantial as I previously thought (with the exception of going down to a very small number, like 100). Knowing this kind of thing is important, per dataset. For example, it could be that for other data types going from 2000 to 5000 HVGs would produce very different results.
+
+You have to try it yourself in order to see for yourself, and that's what this app is all about.
+
+This is a "version 0" and there are many things that we would like to add down the line. One of them is the ability to drag and drop in your own dataset. This is a low hanging fruit. Things like coloring by cluster ID, with the choice of various clustering algorithms and their respective settings (e.g. Louvain, Leiden, k-means).
+
+Additional downstream metrics would do well too, like how good the UMAP is (via our KnnSleepwalk tool), or things like a F1 score between pre-made cell annotations and new clusters. Later apps could tackle things like testing data integration methods across two flagship datasets.
+
+To use the app, you simply have to clone the github repo, pip install the requirements.txt file, and run the "app" python script. This will produce a link you can open in your browser, and you are good to go.
+
+We are currently in the process of building out front-end interfaces to the work we have done in the past and the work we are currently doing. We think that this will make our work more accessible and usable to a larger audience with fewer steps.
+
+If you are a member of the single-cell and/or spatial community and have any requests for custom-tailored apps (or extensions of apps, modules I can build into existing SaaS products, etc, please let me know.
+
+Link to the app is in the comments below. Credit to Arianna Aalami for fleshing out a lot of the code. Thank you, and I hope you all have a great day.
+
+[[file:images/scanpy_first_app.gif]]
+*** comment
+The GitHub link to the project is here: https://github.com/ariannaaalami/interactive_scanpy_pipeline
+
+I managed to host it on Plotly Cloud (I'm an early access member), though the link has been currently a bit wishy washy. I'll link it nonetheless: https://interactive-scanpy-pipeline.plotly.app/
+
 ** [[https://www.linkedin.com/posts/tylerjburns_here-is-a-post-i-wrote-for-biologists-and-activity-7090282332749717504-XTkW?utm_source=share&utm_medium=member_desktop][How I went from biologist to biology-leveraged bioinformatician]]
 Here is a post I wrote for biologists and team leaders about my journey from wet-lab biologist to biology-leveraged bioinformatician. In short, I think you can do it too, and if you're working in the life sciences, you SHOULD do it too. You can quickly get to a level where you can understand and communicate effectively with your comp bio team, something that is essential for any project that contains any -omics data. To summarize:
 
