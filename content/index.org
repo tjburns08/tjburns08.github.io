@@ -50,48 +50,10 @@ Article.\\
 
 In the world of atoms, we have distinct fields of science that follow specific levels of analysis. Math leads to physics, then chemistry, biology, psychology, and sociology. But right now computer science is one single thing. But perhaps down the line, computer science will divide into distinct fields depending on levels of analysis too. From information theory, upwards to programming languages, algorithms, AI/ML, agentic AI psychology, and bot net sociology. This has implications for what it means when you tell a biology they should "learn how to code," with further implications in recruiting, problem solving, and education.
 
-** [[./soft_clustering.html][Cluster membership purity score for single cells]]
-Markdown.\\
-
-When clustering single-cell or spatial data, there is a built-in assumption that the clusters are final. That a CD4 T cell at a CD4/CD8 boundary is nonetheless a CD4 T cell. This may not be the case every time. Here, I developed a simple way to identify and interrogate these boundary regions. I do this by taking each cell's k-nearest neighbors (KNN) and calculating the Shannon entropy of each neighborhood. Zero entropy means you're in the thicket of a cluster. Higher entropy means you are at a boundary region.
-
-At the per-cell level, you can interrogate these cells or factor this score into downstream analyses (e.g. ML algorithms). At the per-cluster level, you can calcualte a purity score based on the mean KNN entropy for each cell in the given cluster. This has applications like determining whether clusters should be merged.
-
-** [[https://www.youtube.com/watch?v=wRVOyYse5ug][Interview with Ramji Srinivasan, CEO of Teiko]]
-Video.\\
-
-This interview took place at AACR 2025 in Chicago. The interview was spur of the moment. We discussed a variety of topics related to flow/mass cytometry and single-cell analysis.
-
-To give credit where credit is due, I talk about the MEM paper (Diggins et al, 2018). In the interview, I say that this paper algorithmically gives you a way to determine a gating strategy given a cluster. I'll correct that here and say that the MEM paper is able to convert clusters into descriptions of what markers are positive and negative. Later work, like hypergate (Becht et al, 2019), and gatefinder (Aghaeepour et al, 2018) do the algorithmic gating strategy maker step.
-** [[./seurat_pbmc_cluster_stability.html][Cluster stability as an evaluation metric for single-cell workflows]]
-Markdown.\\
-
-Clustering is a critical piece of any single-cell analysis workflow, be it suspension or spatial, transcript or protein. But after clusters have been computed, how sure is any given user that the clusters most accurrately represent cell subset partitions? Are there any element of arbitrariness of a given clustering scheme? One way to get at that question is to run your clustering algorithm multiple times across multiple random seeds, and look at how similar any one scheme is to the others by stringing the cluster visualizations (in this case, the cluster centroids) together into an animation. Here, we do this with the PBMC 3k dataset and standard Louvain clustering. We show that some subsets are less stable than others, and stability will differ based on what resolution you choose for your clustering scheme.
-** [[./command_line_writeup.html][How I made a command line chatbot]]
-Article.\\
-
-The typical way LLMs are called is through some sort of user interface. Here, I show you how to use the OpenRouter API to call various LLMs (eg. Claude, Deepseek R1, GPT-4o) by simply typing "chatbot" in the command line, followed by the desired model, followed by the prompt. It can be called from anywhere on your computer. I then show how I use this in a literate programming environment, where I often like to get and store real time feedback on whatever I'm writing about. This includes a section for Emacs users for how I got this working in Org-Mode.
-** [[./llm_annotate_pbmc3k.html][Automated LLM-based annotation of single-cell sequencing data, directly in a R workflow]]
-Markdown.\\
-
-A typical single-cell sequencing pipeline involves clustering the data, and then using prior biological knowledge to annotate the clusters given unique marker expression. Here, I develop a workflow that calls a LLM directly in R, with a pre-specified prompt, to annotate the PBMC 3k data, storing the results as an R object, directly in a Seurat workflow, in R. I then run it multiple times to check for stabiity of the annotations. I find that it annotates the PBMC 3k dataset accurrately, with subtle errors (eg. not going deep enough in the naming of a subset) likely able to be overcome by prompt engineering and/or model selection.
-
 ** [[./descent_into_madness.html][A LLM's descent into madness]]
 Article.\\
 
 At the time of writing (February 2025) I am frustrated by the best of the LLMs giving me results that are still in my opinion superficial. So I wrote a script that would prompt a LLM to give me an answer on something, and then with each iteration in a loop, take a piece of the answer and go deeper into it. I thought it would either converge upon something fundamental, or continually drift into different topics. I was wrong on both. The model eventually descended into emoji-laden verse, and then word salad, and then a sort of letter salad, where it started making up words, disregarding grammar, and so forth. Something like E. E. Cummings. I encourage the reader to try it on their machine.
-** [[./run_gprofiler_and_embed.html][From gene lists to interactive contextual maps: enhancing g:Profiler interpretation]]
-Markdown.\\
-
-In my client projects, I often have to make sense of long lists of differentially expressed genes (DEGs). This typically leads to a long list of biologically relevant terms (eg. GO terms, pathways). This too is often overwhelming. Here, I make these terms easier to understand by producing a interactive contextual map of them, where terms that are similar to each other in context are physically near each other on the map. In this R Markdown, I show you both how its done, using python's sentence-transformers package directly in R. Furthermore, I cluster the map and show you how to automatically annotate the clusters by feeding the per-cluster terms into a LLM directly in R, and asking it to return an underlying theme for each cluster given the terms.
-** [[./case_for_viridis.html][Comparing Color Palettes for scRNA-seq Data Visualization: The Case for Viridis as a Default]]
-Markdown.\\
-
-When using "color" as a dimension (for example, coloring UMAPs by marker expression), flow cytometry users often default to the "jet" color palette, and Seurat users often default to their default light-gray to blue color palette. Here, I present the case for the use of viridis as a default color palette. I show that viridis is more balanced and colorblind friendly than jet, with more resolution than the Seurat default. Using this color scheme will be beneficial for both data interpretation and inclusivity in our field.
-** [[./annotated_seurat_without_pca.html][Running UMAP on scRNA seq data without PCA reveals importance of cosine distnace in high dimensional data]]
-Markdown.\\
-
-What happens when you omit PCA from a Seurat scRNA-seq pipeline? Here, Using the flagship pre-annotated PBMC 3k dataset, I tested this by inputting the top 2000 variable genes directly into UMAP, bypassing PCA. The results showed less spatially resolved subsets, particularly among CD4 T cells. Furthermore, I found that in the no-PCA condition, performance (measured by how well cell subsets could be resolved) was substantially worse when using Euclidean distance rather than cosine distance. These differences went away when the top 10 PCs were used as input (which again is standard best practices). These results suggest that in this context, the choice of distance metric matters more in higher dimensions. Thus, I recommend defaulting to cosine distance or testing both metrics side by side when using UMAP or similar tools on high-dimensional datasets.
 ** [[./die_with_zero.html][Die with zero ideas]]
 Article.\\
 
@@ -100,21 +62,6 @@ At any given point, there are ideas in my head or rough pieces of text and code 
 Markdown.\\
 
 Universal Cell Embeddings (UCE) is a foundation model that takes a single-cell dataset as input and outputs a 1280 dimensional embedding that is relevant in the context of a large number of single-cell datasets that it was trained on. This model can in turn do things like label transfer between datasets. Here, I looked at the embedding within the PBMC 3k dataset and simply asked how many k-nearest neighbors per cell are shared between the original dataset and its UCE embedding. Specifically, I used the first 50 PCs of the PBMC 3k dataset's top 2000 most variable genes (standard practice), and the first 50 PCs of the UCE model. The results suggest that nearest neighbors are preserved at the labeled cell subset level but the resolution does not go beyond this. Note: I also compared the first 50 PCs of the PBMC 3k dataset with the entire 1280 dimensions of the UCE output, and the results were slightly worse but similar.
-** [[./annotate_pbmc_3k.html][Annotate the PBMC 3k dataset]]
-Markdown.\\
-
-This markdown is for people with PBMC datasets, who want a convenient way to annoate them using the markers specified in Seurat's [[https://satijalab.org/seurat/articles/pbmc3k_tutorial.html][guided clustering tutorial]]. Here, we take the aforementioned tutorial and run the PBMC 3k dataset through it. Then, we have a block of code that loops through each of the populations identified in the tutorial and looks for the relevant markers in the clustering scheme from our run. This allows the user to quickly and conveniently figure out what cluster belongs to what population.
-
-** [[./rainbow_feature_plot.html][Flow cytometry color scheme for Seurat's FeaturePlot]]
-Markdown.\\
-
-Seurat's FeaturePlot has a built in color scheme that goes from grey (zero expression) through violet, to a deep blue for the highest expression. People like me who started with CyTOF in Cytobank or similar tools are used to a color scheme that starts with blue, then goes through cyan, green, yellow, orange, then red. Here, I re-make that color palette for use in Seurat's FeaturePlot. Then, I further show how to make the FeaturePlot output with the altered color palette independent of Seurat.
-
-** [[./r_rabbit_hole.html][The R Rabbit Hole]]
-Article.\\
-
-What happens under the hood when you do something simple in R, like add two numbers together? Here, I start with just that. I then show that arithmetic in R is actually parsed as S-expressions. I then go into LISP, where S-expressions are a hallmark. I then move into the source code of R, where the S-expressions for arithmetic are written, in C. And from there, I go into Assembly, the human-readable version of machine code that C is compiled into. By breaking down these layers, and going down the rabbit hole, this exercise gets us to first principles. These are foundational concepts from which we can reason and solve problems more effectively.
-
 ** [[./episodic_memory.html][Episodic memory is the new semantic memory]]
 Article.\\
 
@@ -125,39 +72,16 @@ Article.\\
 
 I make a connection between idealizing my father during the "Dad is superman" phase of my childhood, and the Christian practice of imagining the ideal form of good (perfect kindness, perfect virtue, etc) and trying to move in that direction. The phrase "what would Jesus do" is pretty much this. The same way we have taken mindfulness out of Buddhism, I think this practice can be taken out of Christianity and also practiced in a perfectly secular way. It has benefitted me my whole life, so it's worth trying on for size.
 
-** [[./boring.html][The most boring man in the world]]
-Article.\\
-
-I had a fascination with the Dos Equis "Most Interesting Man In The World" ad campaign, which ran through my 20s. In this article, I xexplore what it really means to be interesting. I conclude that a lot of the aspects of my life that are interesting have been a result of doing a boring slog of hard work for a long time. I conclude that part of being interesting is the willingness to be boring.
-
-** [[./compare_full_vs_filtered_uce.html][Running only the most variable genes through UCE leads to worse cell separation than running the whole dataset]]
-Markdown.\\
-
-In a standard single cell RNA sequencing analysis pipeline, one of the first things you do is find and use only the most variable genes, as measured by gene expression and dispersion. These variable genes are sufficient to be used in downstream analysis, like clustering and dimensionality reduction. Here, I test whether I can do the same thing for the Universal Cell Embeddings (UCE) foundation model, which in theory could save time and compute. I find that running only the variable genes through UCE leads to poorer cell type separation, as measured by both UMAP and PCA. This suggests that those who use UCE should use the full datasets, not filtered ones.
-
 ** [[./stick_shift_mindset.html][Zen and the art of driving stick]]
 Article.\\
 
 I find that if I'm driving stick rather than automatic, I'm much more connected to what I'm doing, much more satisfied in the moment, and I'm objectively a better driver as a result.This concept generalizes. Pick an endeavor. Complete the analogy: automatic transmission is to your endeavor as manual transmission is to X. If you know how to do X, do it when you can. If you don't know how to do X, then learn it. I give several examples of this in my life, and I conclude by encouraging others to embody this way of doing things.
 
-** [[./explore_uce_output_3k_10k.html][Universal Cell Embeddings with two PBMC datasets: how to test whether it grokked integration]]
-Markdown.\\
-
-In this markdown, we import two PBMC datasets, the PBMC 3k and the PBMC 10k datasets. The 3k dataset is a flagship dataset used in the early days of Seurat. The 10k dataset is the default that is run through the model if you don't specify another dataset. Here, I show that if we look at a UMAP embedding, the datasets do not sit on top of each other. However, if we use my KnnSleepwalk package, we find that the distances on the UMAP are distorted. What we find is that, for example, the T cell island for the 3k datset sits much closer to the T cell island for the 10k dataset. This in turn suggests that we should be careful using UMAP to assess foundation models in single-cell and in any field.
-
-** [[./human_universal_cell_embeddings.html][UMAP does not capture the proper center and outer edges of human CNS portion of the Univesal Cell Embeddings (UCE) transformer foundation model]]
-Markdown.\\
-
-This is a jupyter notebook that looks at the Universal Cell Embeddings transformer foundation model for single-cell sequencing. It is part of an emerging sub-field of foundation model building within single-cell sequencing. The output of the model is a 1280 dimensional embedding. Here, to get a sense of the geometry of the embedding, I look at the center and the outer edges. I visualize this in the context of UMAP space, and find that UMAP does not properly capture center-ness. I further find that center-ness is positively associated with both frequency of cell subset and per-subset density. I conclude that center-ness is a worthwhile feature to look at in the context of these models, and that it is not something that UMAP can be relied upon to capture.
 ** [[./signal_there.html][There's some signal there]]
 Article.\\
 
 This is an expression I use a lot in casual conversation. In essence, when I come across something that feels like its part of the path forward, but can't fully articulate why, I say "there's some signal there" and then I put it in my back pocket. This essay tells the story of how doing this from my teenage years onwards, has contributed to a lot of my good decisions thus far.
 
-** [[https://watershed.bio/resources/the-limits-of-dimensionality-reduction-tools-for-single-cell-analysis][The limits of dimensionality reduction tools for single-cell analysis]]
-Webinar.\\
-
-This webinar is the latest iteration of my "dimensionality reduction interrogation" work, which has spanned six years. In this talk, I show the limits of these tools by looking at the K-nearest neighbors (KNN) of a given cell in the 2-D embedding space, and compare it to the K-nearest neighbors of that same cell in the high-dimensional feature space. I look at the averages across a given dataset for a given method to compare t-SNE, UMAP and PCA. I then color the maps by each cell's KNN preservation to look for patterns across the dataset. While I point out some general trends, I conclude that at least some of this depends on the dataset. Thus, I demo my free [[https://github.com/tjburns08/KnnSleepwalk][KnnSleepwalk]] tool, which allows users to deterine the performance of their t-SNE's and UMAPs for their data accordingly.
 * Popular
 #+HTML: <a href="#top">Back to top</a>
 ** [[./learn_bioinformatics.html][How I transitioned from biologist to biology-leveraged bioinformatician]]
