@@ -16,6 +16,43 @@ Dr. Seuss, [[https://en.wikipedia.org/wiki/Horton_Hatches_the_Egg][/Horton Hatch
 * KNN sleepwalk and related
 #+HTML: <a href="#top">Back to top</a>
 A lot of my social media content has revolved around a tool I build called KNN sleepwalk, which allows you to look at the difference between K-nearest neighbors (KNN) of a given data point in the embedding space versus the original high-dimensional space. This kind of intuition is important especially in high-dimensional flow/CyTOF data, where there is sometimes temptation to gate directly on the embedding itself. These posts show you that one should exercise caution when doing such a thing. You can use the method [[https://github.com/tjburns08/KnnSleepwalk][here]].
+** [[https://www.linkedin.com/posts/tylerjburns_hi-friends-i-finally-after-several-years-activity-7369363128763002882-VdIM?utm_source=share&utm_medium=member_desktop&rcm=ACoAAAbP8M8BYXs_UknoBHnmw2rZ-aRDTJF7L3Y][KNN Sleepwalk Dash app]]
+Hi friends, I finally (after several years) turned my KnnSleepwalk package into a web app that anyone can use with a single click. This will give you intuition as to what "resolution" your embeddings (e.g. UMAP) are for each region of each dataset.
+
+Backstory:
+
+KnnSleepwalk was an answer I had to a question posed to me in the fall of 2017: "yes, but how precise are those (t-SNE at the time) maps actually?" Since the All Of Us dataset issues in early 2024, this question has become mainstream, and has led to many shouting matches online.
+
+How I solved it:
+
+My solution was to visualize the K-nearest neighborhoods (KNN) of the embedding space (gif, left side) and compare them to the KNN of the original feature space, as visualized on the embedding (gif, right side). You can see that the resolution is often not that great, and this differs depending on where you are on the map.
+
+What's new here:
+
+The package was originally a "hack" of the distance matrix and coloring scheme of the brilliant "sleepwalk" app developed by Anders Biostat that I became aware of in the late 2010s.
+
+Here, I re-wrote the whole thing from scratch in python and JavaScript, which allowed me to turn it into a Dash app. This in turn allowed me to host it on Plotly Cloud, which gives all of you access in a single click.
+
+How to use:
+
+The local version is available via GitHub, which I link in the comments. This allows you to scale up to large (100k+ cells) datasets. The online version is good to 50k cells, and you will have the option to subsample your dataset accordingly. While this is not ideal, it does give you the intuition that my program is intended to do.
+
+What you need: csv files of your original feature space (e.g. surface markers for flow/CyTOF, top n PCs if single-cell sequencing). Upload them to the app and run it. If you press the "run" button without any dataset uploaded, it will run it on an example 1000 cell CyTOF dataset.
+
+This is a version 0. I am probably posting this too early, but I am so excited that this actually works that I'm just giving it out now (there were tons of revisions to make it functional beyond a few thousand cells). So if you run into any issues, just send me a DM. Or a pull request.
+
+I have a very talented bioengineering intern (Arianna Aalami) till the end of the month, so the more iterations we can do now, the better.
+
+Questions, comments, or feature requests? Just comment below or send a DM.
+
+Thanks, and I hope you all have a great day.
+
+[[file:images/knn_sleepwalk_app_post_upload.gif]]
+*** comment
+Web app is here: https://knn-sleepwalk-dash-app.plotly.app/
+GitHub repo is here: https://github.com/tjburns08/knn_sleepwalk_dash_app
+
+If you want to talk further, book a call (see link under my profile tab).
 ** [[https://www.linkedin.com/posts/tylerjburns_below-is-a-quick-way-to-get-hover-linked-activity-7341093015492485120-j-lq?utm_source=share&utm_medium=member_desktop&rcm=ACoAAAbP8M8BYXs_UknoBHnmw2rZ-aRDTJF7L3Y][KNN Sleepwalk for spatial: Xenium]]
 Below is a quick way to get hover-linked interaction between UMAP coordinates (or similar) and XY coordinates for your spatial data to see patterns that you may have missed.
 
