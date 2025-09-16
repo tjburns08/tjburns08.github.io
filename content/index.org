@@ -13,7 +13,7 @@ I run a company called [[./burns_lsc.html][Burns Life Sciences Consulting, GmbH]
 
 This website is a place where I can openly share my ideas and non-NDA work, regardless of how "finished" it is. I have uploaded written work, code, posters and powerpoint slides of various projects I have driven or contributed to. I intend for a lot of my work here to be "long content" slowly evolving over years if not decades. What matters most is that my thoughts and the work I do that I find meaningful is uploaded here, so when I die (hopefully way down the line) others can easily build off of any worthwhile groundwork I have laid out.
 
-If you have quesitons or comments, or you're interested in working or collaborating with me, just send me a message (see contact info below). I'm always happy to help. 
+If you have quesitons or comments, or you're interested in working or collaborating with me, just send me a message (see contact info below). I'm always happy to help.
 * New
 #+HTML: <a href="#top">Back to top</a>
 ** [[https://github.com/ariannaaalami/interactive_scanpy_pipeline][Scanpy pipeline intuition building app]]
@@ -24,7 +24,7 @@ One of the ways that I developed intuition around single-cell and spatial analys
 ** [[./doomer_good_life.html][If the doomers are right, then be a giver]]
 Article.\\
 
-If the doomers are right, and we are barreling toward collapose, then how do we live a good life in these conditions? The answer I'm taking is to look back to the Greeks, and specifically the word eudaimonia, or flourishing by means of virtue. I go into the idea of giving more than you take, as one tool to move us toward eudaimonia. This way of doing things is robust to both a good future and a bad future, and leads to both flourishing both at the individual level and community level.
+If the doomers are right, and we are barreling toward collapse, then how do we live a good life in these conditions? The answer I'm taking is to look back to the Greeks, and specifically the word eudaimonia, or flourishing by means of virtue. I go into the idea of giving more than you take, as one tool to move us toward eudaimonia. This way of doing things is robust to both a good future and a bad future, and leads to both flourishing both at the individual level and community level.
 ** [[./we_choose_to_think.html][We choose to think about stuff]]
 Article.\\
 
@@ -228,17 +228,17 @@ First author pre-print.\\
 Abstract: In high-dimensional single cell data, comparing changes in functional markers between conditions is typically done across manual or algorithm-derived partitions based on population-defining markers. Visualizations of these partitions is commonly done on low-dimensional embeddings (eg. t-SNE), colored by per-partition changes. Here, we provide an analysis and visualization tool that performs these comparisons across overlapping k-nearest neighbor (KNN) groupings. This allows one to color low-dimensional embeddings by marker changes without hard boundaries imposed by partitioning. We devised an objective optimization of k based on minimizing functional marker KNN imputation error. Proof-of-concept work visualized the exact location of an IL-7 responsive subset in a B cell developmental trajectory on a t-SNE map independent of clustering. Per-condition cell frequency analysis revealed that KNN is sensitive to detecting artifacts due to marker shift, and therefore can also be valuable in a quality control pipeline. Overall, we found that KNN groupings lead to useful multiple condition visualizations and efficiently extract a large amount of information from mass cytometry data. Our software is publicly available through the Bioconductor package Sconify.
 
 I've been asked recently why this is still a pre-print. So I published the peer review for this manuscript with some commentary [[./sconify_peer_review.html][here]].
- 
+
 ** [[https://pubmed.ncbi.nlm.nih.gov/28094900/][High Throughput Precision Measurement of Subcellular Localization in Single Cells]]
 First author publication.\\
 
 Abstract: To quantify visual and spatial information in single cells with a throughput of thousands of cells per second, we developed Subcellular Localization Assay (SLA). This adaptation of Proximity Ligation Assay expands the capabilities of flow cytometry to include data relating to localization of proteins to and within organelles. We used SLA to detect the nuclear import of transcription factors across cell subsets in complex samples. We further measured intranuclear re-localization of target proteins across the cell cycle and upon DNA damage induction. SLA combines multiple single-cell methods to bring about a new dimension of inquiry and analysis in complex cell populations. © 2017 International Society for Advancement of Cytometry.
 
-My summer students are co-authors on this paper! Undergrads and high school students. They worked very hard and learned a lot. I am proud of each and every one of them. 
+My summer students are co-authors on this paper! Undergrads and high school students. They worked very hard and learned a lot. I am proud of each and every one of them.
 ** [[./Burns.Dissertation.Final.pdf][Expanding the Capabilities of Mass Cytometry Data Acquisition and Analysis]]
 PhD Thesis.\\
 
-My PhD thesis dissertation, from the laboratory of Garry P. Nolan at Stanford University School of Medicine. 
+My PhD thesis dissertation, from the laboratory of Garry P. Nolan at Stanford University School of Medicine.
 
 In sum: I started by developing a method to enable flow and mass cytometry to detect and quantify nuclear localization, called Subcellular Localization Assay (SLA), which came out of a collaboration with the lab of Ola Soederberg at University of Uppsala, Sweden.
 
@@ -257,7 +257,7 @@ This slide deck summarizes some work I did with Sofie Van Gassen, developer of [
 Slide deck.\\
 
 [[https://www.drfz.de/en/aktuelles/veranstaltungen/cytof-forum-2020/][German Rheumatism Research Center]]; Berlin, Germany; March 2019.
-I talk about how CyTOF data analysis developed from its inception at the beginning of 2010 to now. In doing so, I provide a template for proper CyTOF data analysis in terms of how we got there. In doing so, I test various assumptions: I show visualizations of data transformations other than asinh(x/5), and I show what a SPADE tree looks like with completely random inputs. I like to show these slides to people new to CyTOF data analysis to properly orient them. 
+I talk about how CyTOF data analysis developed from its inception at the beginning of 2010 to now. In doing so, I provide a template for proper CyTOF data analysis in terms of how we got there. In doing so, I test various assumptions: I show visualizations of data transformations other than asinh(x/5), and I show what a SPADE tree looks like with completely random inputs. I like to show these slides to people new to CyTOF data analysis to properly orient them.
 ** [[./drfz_tsne_interrogation_talk_final.pdf][A comprehensive interrogation of the t-SNE algorithm for mass cytometry analysis]]
 Slide deck.\\
 
@@ -277,7 +277,7 @@ Abstract: Due to the rise of high-dimensional single cell technologies in the pa
 ** [[./0117TylerCytobankBlog.pdf][Fine-Tune viSNE to Get the Most of Your Single-Cell Data Analysis]]
 Guest blog post.\\
 
-This is a guest blog post I wrote for Cytobank. The formatting of the post has since been messed up (image links are broken) since Beckman acquired Cytobank and moved all the web content over. Until it gets fixed, I'm linking you to the original PDF. At the time of writing, there was still a lot of work to be done in terms of really understanding dimension reduction for CyTOF data. As such, I spent a lot of time adjusting inputs (eg. number of cells) and parameters (eg. perplexity) to understand how that affects the resulting map. 
+This is a guest blog post I wrote for Cytobank. The formatting of the post has since been messed up (image links are broken) since Beckman acquired Cytobank and moved all the web content over. Until it gets fixed, I'm linking you to the original PDF. At the time of writing, there was still a lot of work to be done in terms of really understanding dimension reduction for CyTOF data. As such, I spent a lot of time adjusting inputs (eg. number of cells) and parameters (eg. perplexity) to understand how that affects the resulting map.
 ** [[https://github.com/tjburns08/dimension_reduction_add_noise][Dimension reduction add noise]]
 Software.\\
 
@@ -302,9 +302,9 @@ Official description: This package does k-nearest neighbor based statistics and 
 ** CyTOF analysis pipeline
 Markdowns.\\
 
-CyTOF analysis has come a long way. Along with single-cell sequencing analysis, a lot of it is high-level functions that do what needs to be done. I prefer a guts-level analysis, where I can see the low-level the details of how my data are being manipulated. This is important for understanding and innovation. 
+CyTOF analysis has come a long way. Along with single-cell sequencing analysis, a lot of it is high-level functions that do what needs to be done. I prefer a guts-level analysis, where I can see the low-level the details of how my data are being manipulated. This is important for understanding and innovation.
 *** [[./cytof_pipeline_one_file.html][One fcs file]]
-Keeping it to one fcs file, we can focus on what happens when a fcs file is read into R, how it is transformed, and what the best practices of clustering, dimension reduction, and visualization are. These foundations can be built upon when looking at multiple fcs files to determine where there are differences in your control versus experiment group. 
+Keeping it to one fcs file, we can focus on what happens when a fcs file is read into R, how it is transformed, and what the best practices of clustering, dimension reduction, and visualization are. These foundations can be built upon when looking at multiple fcs files to determine where there are differences in your control versus experiment group.
 *** [[./cytof_pipeline_many_files.html][Multiple fcs files]]
 This markdown uses the [[https://www.bioconductor.org/packages/release/bioc/html/diffcyt.html][diffcyt]] package to help us do statistics between groups, though I show you how to do per-cluster statistics yourself. We make box plots group-level comparisons for clusters we care about. We also color our dimension reduction maps by the p-value information. This pipeline requires a sample metadata file, as well as a marker file. I show you what these look like directly in the pipeline.
 ** KNN sleepwalk examples
@@ -312,9 +312,9 @@ Software.\\
 
 Some examples of output for my [[https://github.com/tjburns08/knn_sleepwalk][KNN sleepwalk tool]]. These are interactive, and are here to give the user intuition around the nature of dimension reduction maps. From the README: "My wrapper allows for the visualization of a given cell's K-nearest (and K-farthest) neighbors. In other words, the cursor is on a given cell, and the cells on the map that change color correspond to a pre-specified number of nearest neighbors in the original high-dimensional space." See notebooks in my repo to see the data and code. What to do with the visuals below:
 - K-nearest neighbors (KNN) will give you intuition around how exact the embedding is.
-- K-farthest neighbors (KFN) will give you intuition around how well the embedding preserves global structure. 
+- K-farthest neighbors (KFN) will give you intuition around how well the embedding preserves global structure.
 *** CyTOF PBMCs
-The dataset is internal, from the German Rheumatism Research Center in Berlin. These take a bit to load after you click on them, but its worth the wait. 
+The dataset is internal, from the German Rheumatism Research Center in Berlin. These take a bit to load after you click on them, but its worth the wait.
 **** [[./knn_sleepwalk_cytof.html][KNN from original marker space]]
 **** [[./kfn_sleepwalk_cytof.html][KFN from original marker space]]
 *** single-cell RNA sequencing PBMCs
@@ -331,7 +331,7 @@ Which distance metrics are right for your data analysis. While I've created a po
 ** [[./asinh_mean_vs_mean_asinh.html][asinh(mean(x)) vs mean(asinh(x))]]
 Markdown.\\
 
-If you want the means of your markers per cluster, be careful how you export the data. If you export the means of the raw values per cluster, and take the asinh(x/5) transform of that, the values will be different than if you take the means of the asinh(x/5) transformed data per cluster. The latter is the right way to do it. But don't take my word for it. Look at the markdown yourself. 
+If you want the means of your markers per cluster, be careful how you export the data. If you export the means of the raw values per cluster, and take the asinh(x/5) transform of that, the values will be different than if you take the means of the asinh(x/5) transformed data per cluster. The latter is the right way to do it. But don't take my word for it. Look at the markdown yourself.
 ** [[./cytof_data_transformations.html][Data transformations for CyTOF]]
 Markdown.\\
 
@@ -386,15 +386,15 @@ The article behind my [[https://www.youtube.com/watch?v=U35T-KzfeLk][TEDx Basel 
 ** [[./gpt3_student.org][GPT-3 simulating students]]
 Article.\\
 
-This is a report I wrote for my uncle, who is a professor at the University of Michigan Ross School of Business. The concern was that generative language models would be able to simulate student's responses to essay questions good enough that tech-savvy students would simply offload their homework to GPT-3. I explore this option using my early access to GPT-3, with a conclusion heavily inspired by an article by [[https://www.gwern.net/GPT-3#weaknesses][Gwern]]. You pretty much have to at this point. 
+This is a report I wrote for my uncle, who is a professor at the University of Michigan Ross School of Business. The concern was that generative language models would be able to simulate student's responses to essay questions good enough that tech-savvy students would simply offload their homework to GPT-3. I explore this option using my early access to GPT-3, with a conclusion heavily inspired by an article by [[https://www.gwern.net/GPT-3#weaknesses][Gwern]]. You pretty much have to at this point.
 ** [[./context_problem_bfx.html][The Context Problem in Bioinformatics]]
 Article.\\
 
-In the age of big data, my bioinformatics analyses often lead to output that is still too much for a human to extract insight from. My use case here, common in my work: what GWAS traits do two or more genes have in common? I produce a context map of GWAS traits using an AI language model based on BERT. I then subset the map by traits associated with the genes the user inputs, coloring the points accordingly. One can quickly know what contexts, rather than traits, the genes share. 
+In the age of big data, my bioinformatics analyses often lead to output that is still too much for a human to extract insight from. My use case here, common in my work: what GWAS traits do two or more genes have in common? I produce a context map of GWAS traits using an AI language model based on BERT. I then subset the map by traits associated with the genes the user inputs, coloring the points accordingly. One can quickly know what contexts, rather than traits, the genes share.
 ** [[./ask_marcus_writeup.html][What would Marcus Aurelius say?]]
 Article.\\
 
-I turn the Meditations by Marcus Aurelius into a semantic search based language model, where I ask a question and it returns the most relevant passages in the book as answers. This helps me with the study of stoic philosophy, but this approach can be used in any sort of book that is structured as aphorisms. 
+I turn the Meditations by Marcus Aurelius into a semantic search based language model, where I ask a question and it returns the most relevant passages in the book as answers. This helps me with the study of stoic philosophy, but this approach can be used in any sort of book that is structured as aphorisms.
 ** [[https://medium.com/@tjburns_72591/how-to-utilize-scientific-literature-trends-to-gain-intuition-about-a-topic-b5c554e3d280][How to utilize scientific literature trends to gain intuition around a topic]]
 Medium post.\\
 
@@ -422,7 +422,7 @@ Associated with [[https://tjburns08.github.io/ask_marcus_writeup.html][What Woul
 ** [[https://huggingface.co/spaces/tjburns/find_your_biases][Find your biases]]
 Software.\\
 
-Write your thoughts into the text box, and the app will give you a list of cognitive biases that match the thoughts. The app does this using an AI embedding model to embed both your input and Wikipedia's [[https://en.wikipedia.org/wiki/List_of_cognitive_biases][list of cognitive biases]], and then perform a nearest neighbor search. 
+Write your thoughts into the text box, and the app will give you a list of cognitive biases that match the thoughts. The app does this using an AI embedding model to embed both your input and Wikipedia's [[https://en.wikipedia.org/wiki/List_of_cognitive_biases][list of cognitive biases]], and then perform a nearest neighbor search.
 ** [[https://github.com/tjburns08/twitter_archive_and_embed][Twitter archive and embed]]
 Software.\\
 
@@ -432,7 +432,7 @@ A pipeline that takes as input a list of twitter user names that you supply. Fir
 ** [[https://huggingface.co/spaces/tjburns/duckduckgo_2d_search][DuckDuckGo 2-D Search]]
 Software.\\
 
-For web searches of broad topics, where you need the first hundred results rather than the first page. Type in your search term of interest, and it will give you an interactive context map of search results and a results table with clickable links. 
+For web searches of broad topics, where you need the first hundred results rather than the first page. Type in your search term of interest, and it will give you an interactive context map of search results and a results table with clickable links.
 ** [[./biorxiv_medrxiv_history.html][Preprint server archive]]
 Software.\\
 
@@ -448,13 +448,13 @@ We find three regions:
 ** [[./question_graph_writeup.html][Question graph]]
 Markdown.\\
 
-You are only as good as the questions you ask yourself and others. My uncle told me that many years ago when I was getting started with my career and it stuck. This has been relevant to me in terms of having and maintaining good friendships, being a good husband, being a good family member, being a good businessman, and when I was in graduate school, being a good scientist, and simply being an interesting person. I have a very large list of questions now that is very overwhelming. So I turned them into an embedding using the BERT language model, turned that into a nearest neighbor graph, and then derived insight from looking at the questions in terms of "communities." 
+You are only as good as the questions you ask yourself and others. My uncle told me that many years ago when I was getting started with my career and it stuck. This has been relevant to me in terms of having and maintaining good friendships, being a good husband, being a good family member, being a good businessman, and when I was in graduate school, being a good scientist, and simply being an interesting person. I have a very large list of questions now that is very overwhelming. So I turned them into an embedding using the BERT language model, turned that into a nearest neighbor graph, and then derived insight from looking at the questions in terms of "communities."
 * Philosophy and rationality
 #+HTML: <a href="#top">Back to top</a>
 ** [[./doomer_good_life.html][If the doomers are right, then be a giver]]
 Article.\\
 
-If the doomers are right, and we are barreling toward collapose, then how do we live a good life in these conditions? The answer I'm taking is to look back to the Greeks, and specifically the word eudaimonia, or flourishing by means of virtue. I go into the idea of giving more than you take, as one tool to move us toward eudaimonia. This way of doing things is robust to both a good future and a bad future, and leads to both flourishing both at the individual level and community level.
+If the doomers are right, and we are barreling toward collapse, then how do we live a good life in these conditions? The answer I'm taking is to look back to the Greeks, and specifically the word eudaimonia, or flourishing by means of virtue. I go into the idea of giving more than you take, as one tool to move us toward eudaimonia. This way of doing things is robust to both a good future and a bad future, and leads to both flourishing both at the individual level and community level.
 ** [[./we_choose_to_think.html][We choose to think about stuff]]
 Article.\\
 
@@ -560,12 +560,12 @@ Finding truth in the real world is much different than finding truth in grad sch
 ** [[./tao_of_problem_solving.html][The Tao of problem solving]]
 Article.\\
 
-One of the key components to my method of solving problems is to get into the flow state. When I'm there, some or all of the problem at hand solves itself. And it feels great. I show examples of me doing this. I talk about Taoism as an ancient philosophy built around flow state, but at the macro level rather than the "within-game" level. This is the ideal of being in a perpetual flow state that lasts one's entire lifetime. 
+One of the key components to my method of solving problems is to get into the flow state. When I'm there, some or all of the problem at hand solves itself. And it feels great. I show examples of me doing this. I talk about Taoism as an ancient philosophy built around flow state, but at the macro level rather than the "within-game" level. This is the ideal of being in a perpetual flow state that lasts one's entire lifetime.
 
 ** [[./the_beauty_is_truth_delusion.html][The beauty is truth delusion]]
 Article.\\
 
-This is the idea that data visualizations that look prettier than others don't necessarily convey more truth. I use SPADE and t-SNE as examples that can produce this delusion. This article serves as a call to action for the bioinformatics community to help users distinguish between truth and beauty as data visualization tools come out and become widely used. 
+This is the idea that data visualizations that look prettier than others don't necessarily convey more truth. I use SPADE and t-SNE as examples that can produce this delusion. This article serves as a call to action for the bioinformatics community to help users distinguish between truth and beauty as data visualization tools come out and become widely used.
 ** [[./stick_shift_mindset.html][Zen and the art of driving stick]]
 Article.\\
 
@@ -612,30 +612,30 @@ Here, I write some code to produce each of the 256 Wolfram cellular automata rul
 ** [[./explore_rule_110.html][Explore Wolfram Rule 110]]
 Markdown.\\
 
-Here, I write some code to produce Rule 110, a Class 4 1-D cellular automata. I then enhance the gliders to make them easier to see. I explore how the output changes if I make the rule probabilistic (eg. 99.99% chance the rule will be followed. 
+Here, I write some code to produce Rule 110, a Class 4 1-D cellular automata. I then enhance the gliders to make them easier to see. I explore how the output changes if I make the rule probabilistic (eg. 99.99% chance the rule will be followed.
 * Statistics
 #+HTML: <a href="#top">Back to top</a>
 There is a lot that you can figure out on your own if you simulate coin tosses and dice rolls.
 ** [[./1_law_large_numbers_central_limit_theorem.html][Coin toss series 1: The law of large numbers and the central limit theorem]]
 Markdown.\\
 
-I taught one of my high school summer students the basics of probability by simulating coin tosses in R. Here, we "discover" the law of large numbers and the central limit theorem using simulated coin tosses. 
+I taught one of my high school summer students the basics of probability by simulating coin tosses in R. Here, we "discover" the law of large numbers and the central limit theorem using simulated coin tosses.
 ** [[./2_runs_of_luck.html][Coin toss series 2: Runs of luck]]
 Markdown.\\
 
-Here, we build on the initial piece in the series by looking at the properties of runs of luck. If we flip a coin a million times, how often will we get 10 heads in a row? How many times do we need to flip a coin to get 20 heads in a row on average? Related to sports. How often, statistically, would you expect Steph Curry to make 10 three pointers in a row given his 3-point shot percentage? 
+Here, we build on the initial piece in the series by looking at the properties of runs of luck. If we flip a coin a million times, how often will we get 10 heads in a row? How many times do we need to flip a coin to get 20 heads in a row on average? Related to sports. How often, statistically, would you expect Steph Curry to make 10 three pointers in a row given his 3-point shot percentage?
 ** [[./3_fair_vs_unfair_coins.html][Coin toss series 3: Fair versus unfair coins]]
 Markdown.\\
 
-Here, we examine the properties of unfair coins, where the odds of getting heads or tails does not equal 50%. Can we figure out whether a coin is a fair coin? 
+Here, we examine the properties of unfair coins, where the odds of getting heads or tails does not equal 50%. Can we figure out whether a coin is a fair coin?
 ** [[./4_random_walk.html][Coin toss series 4: Random walks]]
 Markdown.\\
 
-Here, we show that if we simulate flipping coins, but we keep a record of the number of heads and the number of tails, we end up doing a random walk. We visualize these walks (they look somewhat like stock market data), and ask questions like how often a random walker crosses zero.  
+Here, we show that if we simulate flipping coins, but we keep a record of the number of heads and the number of tails, we end up doing a random walk. We visualize these walks (they look somewhat like stock market data), and ask questions like how often a random walker crosses zero.
 ** [[./5_dice_roll.html][Coin toss series 5: Dice rolls]]
 Markdown.\\
 
-Here, we do an abstraction of the coin tosses we have been simulating, by coinsidering dice of three or more faces. We simulate these dice rolls and examine their properties. How often does a six sided dice land on the number 3? We can figure that out with simple math, but if you roll a dice 1000 times, and you do that again, and you do that again, what will be the standard deviation of the number of times the dice lands on 3? 
+Here, we do an abstraction of the coin tosses we have been simulating, by coinsidering dice of three or more faces. We simulate these dice rolls and examine their properties. How often does a six sided dice land on the number 3? We can figure that out with simple math, but if you roll a dice 1000 times, and you do that again, and you do that again, what will be the standard deviation of the number of times the dice lands on 3?
 ** [[./6_is_this_sequence_random.html][Coin toss series 6: Is this sequence random?]]
 Markdown.\\
 
