@@ -580,6 +580,27 @@ My recommendation: we build our commercial tools with our open-source ecosystem 
 I'll acknowledge that there are differences between the fields that may impact what has and can get done, like open source community engagement levels, available funding, and the relationship between open-source and commercial solutions in either domain. However, seeing just how much the single-cell sequencing community got right, they can serve as a north star for how we build out our tools from here.
 
 [[file:images/single_cell_best_practices.jpeg]]
+** Pareto fronts for cluster benchmarking
+In light of recent benchmarking work I've been doing, I was introduced to a paper that uses Pareto fronts to look at multiple metrics, rather than one at a time. This helped me think through some issues I've been dealing with in dimensionality reduction, where local and global preservation present as tradeoffs.
+
+In short, Putri and colleagues (link in the comments) look at what the maximum possible scores are along these tradeoffs. This is the Pareto front (see figure 1a from the paper in the image below).
+
+The authors use this type of analysis for cluster benchmarking. They look at FlowSOM, PhenoGraph, and their own method, ChronoClust. They look at the Pareto front of four evaluation metrics.
+
+They note that their ChronoClust method underperforms, which shows that they are doing a critical evaluation, as opposed to trying to promote their own tool.
+
+The bigger picture:
+
+- If you're benchmarking and using metrics where there are trade-offs, consider using a Pareto front-based approach.
+- You should probably be benchmarking your pipelines internally. At the minimum, look at what public benchmarking dataset most closely "maps" to your internal data, and look at the benchmarking reports for that dataset.
+
+Thank you David Novak for bringing this paper to my attention.
+
+I hope you all have a great day.
+
+[[file:images/pareto_front_clustering.png]]
+*** comment
+Paper is here: https://academic.oup.com/bioinformatics/article/37/14/1972/6122691
 * General data analysis
 #+HTML: <a href="#top">Back to top</a>
 The data analysis related posts that I otherwise could not categorize.
