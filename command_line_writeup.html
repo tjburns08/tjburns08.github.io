@@ -89,9 +89,9 @@ Henry David Thoreau, <i>Walden</i>
 </p>
 <hr />
 
-<div id="outline-container-org0699c99" class="outline-2">
-<h2 id="org0699c99">Introduction</h2>
-<div class="outline-text-2" id="text-org0699c99">
+<div id="outline-container-orgd5a2f76" class="outline-2">
+<h2 id="orgd5a2f76">Introduction</h2>
+<div class="outline-text-2" id="text-orgd5a2f76">
 <p>
 Since the end of 2022, we have been inundated with LLM chatbots in our everyday lives. The typical use involves some sort of interface that we sign into, where our previous chats can be saved, and so forth. At some point early on, these chatbots were available via API. Here, I want to show how I made a chatbot that can be called from the command line anywhere on my computer.
 </p>
@@ -105,13 +105,13 @@ In short, having LLMs available on the command line is useful, and here, I'm goi
 </p>
 </div>
 </div>
-<div id="outline-container-org84fff61" class="outline-2">
-<h2 id="org84fff61">The command line interface</h2>
-<div class="outline-text-2" id="text-org84fff61">
+<div id="outline-container-orgd6d6898" class="outline-2">
+<h2 id="orgd6d6898">The command line interface</h2>
+<div class="outline-text-2" id="text-orgd6d6898">
 </div>
-<div id="outline-container-org87146c8" class="outline-3">
-<h3 id="org87146c8">Chatbot</h3>
-<div class="outline-text-3" id="text-org87146c8">
+<div id="outline-container-org662fcb3" class="outline-3">
+<h3 id="org662fcb3">Chatbot</h3>
+<div class="outline-text-3" id="text-org662fcb3">
 <p>
 The first thing we have to do is make a python script where we call an API. At the time of writing <span class="timestamp-wrapper"><span class="timestamp">[2025-01-27 Mon]</span></span>, Deepseek R1 has just come out, which provides chain-of-thought reasoning (currently state of the art), the likes of GPT-o1 (currently state of the art), but for far cheaper in terms of API calls. Not to mention its open source, so it might be down the line if I get enough computational muscle, I can run it locally.
 </p>
@@ -265,9 +265,9 @@ Thus, the next section will show you how to get this running in a literate progr
 </p>
 </div>
 </div>
-<div id="outline-container-org5a3aa7f" class="outline-3">
-<h3 id="org5a3aa7f">Searchbot</h3>
-<div class="outline-text-3" id="text-org5a3aa7f">
+<div id="outline-container-org10fba25" class="outline-3">
+<h3 id="org10fba25">Searchbot</h3>
+<div class="outline-text-3" id="text-org10fba25">
 <p>
 If we are querying a LLM, we are often at the mercy of the cutoff of the given LLM's training data. At the time of writing <span class="timestamp-wrapper"><span class="timestamp">[2025-02-16 Sun]</span></span>, ChatGPT (as an example) has the option of incorporating internet search in a given query. However, calling LLMs from an API, as per the previous section, does not mean that you get an internet search baked in.
 </p>
@@ -362,9 +362,9 @@ You can see that it is a bit of a mess right now because I have the bot return e
 </div>
 </div>
 </div>
-<div id="outline-container-org814df21" class="outline-2">
-<h2 id="org814df21">Prompt scripting: the next level of prompt engineering</h2>
-<div class="outline-text-2" id="text-org814df21">
+<div id="outline-container-orgde42025" class="outline-2">
+<h2 id="orgde42025">Prompt scripting: the next level of prompt engineering</h2>
+<div class="outline-text-2" id="text-orgde42025">
 <p>
 Now that we are able to call chatbot and searchbot from the command line, we now have to talk about what is possible that otherwise cannot be done in the LLM UI/UX. Here is where knowing how to code (as opposed to knowing how to prompt LLMs to code) really comes in handy. Because to understand the next level of prompt engineering, you need to be able to think algorithmically.
 </p>
@@ -400,7 +400,7 @@ Below, we are going to use searchbot and chatbot in a simple manner. We are goin
 </pre>
 </div>
 
-<pre class="example" id="org2a1ceb6">
+<pre class="example" id="org47ebf3a">
 **Abstract**
 The field of Large Language Models (LLMs) has witnessed significant advancements as of February 2025, marked by innovations in architecture, efficiency, and specialization. Highlights include DeepSeek R1, a cost-efficient open-source model excelling in mathematical and coding tasks; Rakuten AI 2.0, Japan’s first MoE-based bilingual model optimized for edge deployment; and Google’s Gemini 1.5, which features an unprecedented one million-token context window. Concurrently, Alibaba’s Qwen2.5-Max demonstrates superior benchmark performance, while LG AI Research’s EXAONE 3.0 advances multilingual and domain-specific applications. These developments reflect a broader trend toward scalability, accessibility, and task-specific optimization in LLM research[1][5][9].
 
@@ -481,13 +481,13 @@ We will now move to the related topic of how to get these commands working in a 
 </p>
 </div>
 </div>
-<div id="outline-container-orgc59db36" class="outline-2">
-<h2 id="orgc59db36">The literate programming environment</h2>
-<div class="outline-text-2" id="text-orgc59db36">
+<div id="outline-container-orgf8bd732" class="outline-2">
+<h2 id="orgf8bd732">The literate programming environment</h2>
+<div class="outline-text-2" id="text-orgf8bd732">
 </div>
-<div id="outline-container-orgbd7a188" class="outline-3">
-<h3 id="orgbd7a188">R Markdown and Jupyter Notebooks</h3>
-<div class="outline-text-3" id="text-orgbd7a188">
+<div id="outline-container-org1c10920" class="outline-3">
+<h3 id="org1c10920">R Markdown and Jupyter Notebooks</h3>
+<div class="outline-text-3" id="text-org1c10920">
 <p>
 The spoiler alert upfront is that in order to use the new script in a literate programming environment, you just have to get it to execute shell scripts. In R Markdown, there is an option to run bash. Jupyter notebooks have <a href="https://github.com/dahn-zk/zsh-jupyter-kernel">options</a> as well. One of the key things that I've had to do to get the literate programming environment to recognize the script, is in every code block where I run it, I have to source my zshrc file. Like this:
 </p>
@@ -508,9 +508,9 @@ Maybe you won't have this problem, but if you do, that is how you get around it.
 </p>
 </div>
 </div>
-<div id="outline-container-orga0f7074" class="outline-3">
-<h3 id="orga0f7074">Emacs Org-Mode</h3>
-<div class="outline-text-3" id="text-orga0f7074">
+<div id="outline-container-org404e9f5" class="outline-3">
+<h3 id="org404e9f5">Emacs Org-Mode</h3>
+<div class="outline-text-3" id="text-org404e9f5">
 <p>
 Now this section is for Emacs users who use org mode. This is the literate programming environment that I prefer, and I am writing this article directly in it. I am specifically using <a href="https://orgmode.org/worg/org-contrib/babel/">Babel</a> which allows for active code use in Org. This comes with Doom Emacs (I'm currently using this) and Spacemacs (I started with this).
 </p>
@@ -558,9 +558,9 @@ You'll see that there is an unnecessary line that sits between the chatbot call 
 </div>
 </div>
 </div>
-<div id="outline-container-org02f7a8f" class="outline-2">
-<h2 id="org02f7a8f">Discussion</h2>
-<div class="outline-text-2" id="text-org02f7a8f">
+<div id="outline-container-orgce21173" class="outline-2">
+<h2 id="orgce21173">Discussion</h2>
+<div class="outline-text-2" id="text-orgce21173">
 <p>
 Since I made this command line cool and figured how to use it in a literate programming context, it has increased my productivity especially in the contexts of my German learning (I am American living in Berlin), and my research work. The more general theme is that I write prolifically in my literate programming environment (Org-Mode), and now I can get direct feedback from LLMs directly within this environment.
 </p>
