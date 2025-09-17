@@ -604,6 +604,35 @@ Paper is [[https://academic.oup.com/bioinformatics/article/37/14/1972/6122691][h
 * General data analysis
 #+HTML: <a href="#top">Back to top</a>
 The data analysis related posts that I otherwise could not categorize.
+** [[https://www.linkedin.com/posts/tylerjburns_in-light-of-the-recent-work-i-have-been-doing-activity-7374066902265978880-Kt6A?utm_source=share&utm_medium=member_desktop&rcm=ACoAAAbP8M8BYXs_UknoBHnmw2rZ-aRDTJF7L3Y][A review of CyteType: LLM-based annotator]]
+In light of the recent work I have been doing on LLM-based annotation, I wanted to highlight a package I tried that does this quite well: CyteType. Two things really stand out 1) No need for user API key, and 2) the structure is agentic.
+
+On the first point:
+
+While this package does API calls to at least GPT-4o-mini (and many others, if you read the code base), it does not require the user to produce an API key because the author Parashar Dhapola takes care of all of that for you under the hood. This means you don't have to add however much money to (for example) OpenAI, which you drain with each call.
+
+It takes a deep understanding of computational infrastructure to engineer this and have the confidence that you will be able to front the cost of all of your users.
+
+On the second point:
+
+If you study the figure in the Python version's README (shown in my image below, linked in the comments), you can start to understand what "agentic AI for biology" might look like under the hood. Here, you have an annotator, a reviewer, and a summarizer, feedback loops between them, and context engineering for each step.
+
+This "multiple pre-prompted LLMs" concept is currently missing from ChatGPT's public facing interface. However, as per CyteType and tools like it, the agentic layer is inevitable, so I would study it now while the agents are relatively simple.
+
+If you're a researcher:
+
+Try this package on your single-cell data. The barrier to entry is literally copy/paste the code into your pipelines. Bonus points: try it on flow/CyTOF data (which I don't think it was designed for, but you can stuff CyTOF data into a Seurat object so it's compatible...I've done it).
+
+If you're a director or research lead:
+
+Study the structure of the tool, and start thinking about LLMs in terms of flow charts, where a ChatGPT call is a single node. This will allow you to catch the agentic AI wave as it arrives, and think about what kinds of designs you want your team to implement across your pipelines.
+
+Thank you Parashar for producing this tool for the community. Link to the python and R versions of the tool is in the comments below. I hope you all have a great day.
+
+[[file:images/cytetype_annotation.png]]
+*** comment
+The python package is here: https://github.com/NygenAnalytics/CyteType
+The R version (CyteTypeR) is here: https://github.com/NygenAnalytics/CyteTypeR
 ** [[https://www.linkedin.com/posts/tylerjburns_in-light-of-recent-work-on-llm-generated-activity-7358851476070293506-zn_F?utm_source=share&utm_medium=member_desktop&rcm=ACoAAAbP8M8BYXs_UknoBHnmw2rZ-aRDTJF7L3Y][A map of 10,000 LLM-generated microbiome questions]]
 In light of recent work on LLM-generated random numbers, I decided to get LLMs to randomly generate biology research questions, to determine just how random they are. I used a field that is both relevant for my domain of single-cell, and is of primary interest to my intern Arianna Aalami, who intends to pursue a PhD down the line: the microbiome.
 
