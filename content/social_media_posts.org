@@ -604,6 +604,44 @@ I'll acknowledge that there are differences between the fields that may impact w
 * General data analysis
 #+HTML: <a href="#top">Back to top</a>
 The data analysis related posts that I otherwise could not categorize.
+** [[https://www.linkedin.com/posts/tylerjburns_hack-you-can-run-scrna-seq-data-inside-omiq-activity-7376963107434250240-CA6f?utm_source=share&utm_medium=member_desktop&rcm=ACoAAAbP8M8BYXs_UknoBHnmw2rZ-aRDTJF7L3Y][Doing single-cell sequencing analysis in OMIQ]]
+Hack: you can run scRNA-seq data inside OMIQ. This gives you cytometry-grade visualization capabilities and analysis tools (e.g. FlowSOM, OptSNE), otherwise difficult or not available in Seurat/Scanpy.
+
+What I did:
+
+This morning, inspired by an OMIQ tutorial video that Eric Haas made, I figured out how to upload the pbmc3k dataset into OMIQ, software that is originally designed for flow/mass cytometry. I then tested OMIQ's capabilities on the dataset.
+
+How I did it:
+
+- I ran the the Seurat object through the standard analysis up to PCA.
+
+- I combined the gene expression (scale.data) and the PCs into a single matrix. You have to transpose the gene expression data so the features are columns and the cell ID is rows (this is standard flow cytometry format).
+
+- I outputted this as a csv, which I could then upload into OMIQ.
+
+What I found:
+
+- Through OMIQ, I was able to try flow cytometry methods on the pbmc3k dataset, including FlowSOM clustering, and OptSNE and EmbedSOM with dimensionality reduction.
+
+- I was also able to utilize OMIQ's figure builder, which does a good job producing publication or pitch deck-ready plots.
+
+- There was an occasional lag between clicking and something happening, perhaps because OMIQ is not designed to handle csv files of this type.
+
+Takeaways for leaders and research teams:
+
+- Cytometry platforms like OMIQ can be used in single-cell sequencing workflows.
+
+- If nothing else, you can use this as a visualization front end, and keep Seurat/Scanpy for the rest.
+
+Disclaimer:
+
+I used OMIQ as an example here because of my familiarity with it, but for other tools like it, the same concept will likely apply.
+
+Thank you and I hope you all have a great day.
+
+[[file:images/sc_seq_with_omiq.png]]
+*** comment
+The opposite is also possible, running flow/mass cytometry data in Seurat. If you want to see how I was able to do that, please look at my R Markdown here: https://tjburns08.github.io/run_cytof_with_seurat.html
 ** [[https://www.linkedin.com/posts/tylerjburns_in-light-of-the-recent-work-i-have-been-doing-activity-7374066902265978880-Kt6A?utm_source=share&utm_medium=member_desktop&rcm=ACoAAAbP8M8BYXs_UknoBHnmw2rZ-aRDTJF7L3Y][A review of CyteType: LLM-based annotator]]
 In light of the recent work I have been doing on LLM-based annotation, I wanted to highlight a package I tried that does this quite well: CyteType. Two things really stand out 1) No need for user API key, and 2) the structure is agentic.
 
