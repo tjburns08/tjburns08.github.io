@@ -604,6 +604,47 @@ I'll acknowledge that there are differences between the fields that may impact w
 * General data analysis
 #+HTML: <a href="#top">Back to top</a>
 The data analysis related posts that I otherwise could not categorize.
+** [[https://www.linkedin.com/posts/tylerjburns_to-gauge-llm-progress-in-my-domain-i-prompted-activity-7379503790162534401-C-Zj?utm_source=share&utm_medium=member_desktop&rcm=ACoAAAbP8M8BYXs_UknoBHnmw2rZ-aRDTJF7L3Y][LLM-based CyTOF analysis pipeline design choices]]
+To gauge LLM progress in my domain, I prompted 4 models 10 times each to generate CyTOF analysis pipelines, keeping prompts vague to assess baseline rigor and design choices.
+
+Method:
+
+- I ran a shell script that would loop through the same prompt over and over for a given model, producing a new output txt file with each run that had the LLM answer accordingly.
+- The models I used: GPT-5, Grok4, Gemini-2.5-Pro, Claude 4.5 Sonnet. These were accessed through the OpenRouter API.
+- The prompt I used was as follows: "Please produce a CyTOF analysis pipeline for one file."
+- I extracted packages used in each run to create binary matrix (package x run). See image below.
+- I read through each output myself, thousands of lines of code, for expert subjective interpretation.
+- I had Claude 4.5 Sonnet critique select outputs, to find flaws that I might have missed.
+
+Results:
+
+- Grok4 output was heavily flawed. The others were decent.
+- The best outputs were good "skeletons" of pipelines. A human-in-the-loop piece missing was the paranoid sanity checks that happen at every step (e.g printing and visualizing every possible thing, trying different hyperparameters).
+- R was almost always chosen. Grok4 chose Python twice, but outputs were useless (eg. hallucinated packages).
+- CATALYST was frequently chosen, but newer tools like Spectre were absent. This plus references to FlowJo/Cytobank but not CellEngine/OMIQ suggest older training data bias.
+- FlowSOM was preferred for clustering, PhenoGraph was mentioned occasionally.
+- Some manual gating attempts were included (e.g. for DNA, viability), but seemed overengineered. There was minimal commentary around "hey, you should just do this piece in a GUI, it's way easier."
+
+Discussion:
+
+- Broad prompt for one file was a good first pass to assess default choices. Next step: multiple files, real projects with panel info.
+- I did not attempt to run any of the code myself. The outputs are linked in the comments for those who want to do this.
+- Claude's output-critique also hallucinated, once "reading" nonexistent code from an incomplete prompt. Be vigilant with these tools.
+
+For leaders: pay attention to context engineering
+
+The heterogeneity of the design choices and the other flaws uncovered suggest a need for context engineering. A good prompt may be several pages long and include:
+
+- Both high-level structure and nit picky details of exactly what is needed.
+- Examples of pipelines that were viable in the past, and examples of flawed pipelines and other failure modes relevant to the project.
+- Internal data, trade secrets, and so forth (if you have a model running locally). This will become more relevant as open-weight models get more powerful.
+- Lots and lots of print statements and visualizations.
+- LLM "critic" passes that are designed to find flaws in whatever output was given.
+- Human experts that can validate each piece.
+
+Please let me know if you have questions/comments. I hope you all have a great day.
+
+[[file:images/llm_pipeline_design_choices.png]]
 ** [[https://www.linkedin.com/posts/tylerjburns_hack-you-can-run-scrna-seq-data-inside-omiq-activity-7376963107434250240-CA6f?utm_source=share&utm_medium=member_desktop&rcm=ACoAAAbP8M8BYXs_UknoBHnmw2rZ-aRDTJF7L3Y][Doing single-cell sequencing analysis in OMIQ]]
 Hack: you can run scRNA-seq data inside OMIQ. This gives you cytometry-grade visualization capabilities and analysis tools (e.g. FlowSOM, OptSNE), otherwise difficult or not available in Seurat/Scanpy.
 
