@@ -409,9 +409,37 @@ If you're a student, postdoc, tech, or scientist in academia or industry, DM me 
 If you know anyone who could use this post or my teaching/advice, please share it. I hope you all have a great day.
 
 [[file:images/have_done_teach.jpeg]]
-* Journal club
+* Journal club and related
 #+HTML: <a href="#top">Back to top</a>
 Sometimes I read papers and like to talk about them.
+** [[https://www.linkedin.com/posts/tylerjburns_essb2025-spatialbiology-embl-activity-7386022173758386177-h9VB?utm_source=share&utm_medium=member_desktop&rcm=ACoAAAbP8M8BYXs_UknoBHnmw2rZ-aRDTJF7L3Y][Thoughts about ESSB 2025]]
+I had a great time at ESSB2025 in Heidelberg, where I caught up with and met great spatial bio researchers, and got up to speed on the bleeding edge of both wet lab and dry lab practices. A few things that stood out to me:
+
+Very high -plex:
+
+There was a talk that had an antibody panel of 1133 proteins. Up until this point, I had seen at most a few hundred. With my roots in CyTOF, I know how much work can go into building a panel of 30 antibodies, so I think antibody validation might be a bottleneck here unless we have robotic arms coupled to vision transformers doing 5-point titrations and such (now there's a startup idea).
+
+Multiple modalities:
+
+There was an interesting focus on metabolites. One direction was pure mass spec. This gets you a large number of readouts, but you don't yet get single-cell resolution. Another interesting strategy I saw was the construction of aptamer-oligo conjugates that bind to metabolites, that can in turn be sequenced. Think CITE-seq for metabolites.
+
+Analysis, appearance versus reality:
+
+One talk emphasized how hard it was to segment microglia in particular because of their weird shape. Thus, a lot of it was done manually. This is despite the fact that there is a perception that segmentation is a solved problem with all the AI developments. It is not.
+
+From 2-D to 3-D:
+
+There were a number of talks that went into 3-D imaging (e.g. making a bone clear so you can "fly through" it after you stain), and one where an interesting 2-D image observation needs a 3-D image as followup. There is a whole world of anlaysis problems to solve here when this comes to fruition, from new algorithms to data management. Might be worth doing some theoretical work here. And along those lines...
+
+Math and human interpretability:
+
+One talk was using topology to create human readable analysis outputs. This group has a "product market fit" at their institute right now because they were working out the theory behind a lot of the current issues (multiple modalities, etc) 5 years ago. This leads to both human-readable output, and interesting parameters that can be fed into foundation models and the like. So for the rest of us: what types of data are inevitable, and what can we do now to prepare for that? It will help to have mathematicians in your circles for this theoretical work.
+
+Conclusion:
+
+There is absolutely a gap between what you learn at conferences, versus what shows up on the open internet. In sum, this conference gave me a better impression as to what is going on in the spatial field than any papers or anything shared on social media has given me. I look forward to seeing how things develop between now and the next conference from the European Society for Spatial Biology (ESSB) e.V. in Barcelona.
+
+file:images/essb_pics.png
 ** [[https://www.linkedin.com/posts/tylerjburns_in-light-of-recent-benchmarking-work-ive-activity-7373737973080731648-ImSh?utm_source=share&utm_medium=member_desktop&rcm=ACoAAAbP8M8BYXs_UknoBHnmw2rZ-aRDTJF7L3Y][Pareto fronts for cluster benchmarking]]
 In light of recent benchmarking work I've been doing, I was introduced to a paper that uses Pareto fronts to look at multiple metrics, rather than one at a time. This helped me think through some issues I've been dealing with in dimensionality reduction, where local and global preservation present as tradeoffs.
 
