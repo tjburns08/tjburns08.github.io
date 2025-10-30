@@ -412,6 +412,44 @@ If you know anyone who could use this post or my teaching/advice, please share i
 * Journal club and related
 #+HTML: <a href="#top">Back to top</a>
 Sometimes I read papers and like to talk about them.
+** [[https://www.linkedin.com/posts/tylerjburns_as-a-followup-to-my-earlier-posts-about-single-cell-activity-7389671614948388864-v7D1?utm_source=share&utm_medium=member_desktop&rcm=ACoAAAbP8M8BYXs_UknoBHnmw2rZ-aRDTJF7L3Y][Cell2Sentence update: 27B parameters]]
+As a followup to my earlier posts about single-cell foundation models, I wanted to do a post-length journal club on a recently updated cell2sentence (C2S) model, that now has 27B parameters, and now has some spatial capabilities. Here is what stands out and what it means for you:
+
+Some spatial reasoning capabilities:
+
+Figure 6 shows C2S being used to predict niche neighborhoods for CosMx data. CellPhoneDB and BioGRID interaction data were folded in, which gave an accuracy of 70% (to 55% if C2S alone). This is interesting, and it does make me wonder how far spatial reasoning can be pushed.
+
+However, I also wonder whether it would just be easier to loop in a foundation model trained only on spatial data for spatial tasks rather than trying to make an everything model. I covered one such spatial model, KRONOS, last summer.
+
+Querying, predictions, but no citations:
+
+Figure 2C shows that this model in particular has cell embeddings (like UCE which I recently covered), but also has LLM querying capabilities. This is because part of the training process is converting single-cell data into long "sentences" consisting of a rank-ordered list of genes by expression, per cell. This gets mishmashed in with data from publications.
+
+Figure 9 shows that this scaled-up model in particular was able to make a validated prediction about kinase inhibitor silmitasertib that anyone in pharma might want to take a look at.
+
+This said, the frustrating thing is that the answers do not have "citations" back to the training data (such is how these things work). As a NotebookLM user, this kind of thing frustrates me. Maybe the model could at least have a post-hoc matching function that would pull forth datasets and abstracts from whence the answer most likely came.
+
+Benchmarking AI models based on latent spaces of other AI models:
+
+Such a matching function might having the output and the training data embedded in the latent space of some other model, and doing a nearest neighbor search. Such an idea shows up in the benchmarking section of the paper...
+
+The authors have evaluation metrics in the paper, that actually require the latent space of other foundation models. One way to understand this, is to think of how you would determine how lexically close two sentences were to each other, perhaps in comparison to another pair of sentences. You'd throw these sentences into a BERT embedding (see my TED talk) and measure the physical distance between points in the embedding space.
+
+This is called the BERTscore, and you can see it's use in Figure 4C and 4D, where they evaluate the "scaling" of the model.
+
+The point is: you have an evaluation metric for AI models, which is really a distance function within an embedding space of another AI model. This is a clever idea, but I just hope that in 10 years we won't have evaluation metrics that consist of the latent space of another model, evaluated on the latent space of another model, all the way down.
+
+Conclusion:
+
+As I said in the KRONOS post four months ago, I am waiting for the possibility that foundation models have their "GPT-3 moment" where with enough scale, they are suddenly in every lab everywhere.
+
+This said, it's pretty much impossible for me to evaluate every the quality of every dataset that goes into these models. So I intend to use these things as hypothesis generators, but also to stick with the old fashioned way of looking things up myself. A sort of barbell strategy between old and new.
+
+Aside from that, the model is runnable on google collab (though I haven't gone beyond the starter code they give you), and you should try it. Thank you and I hope you all have a great day.
+
+The pre-print is here: https://www.biorxiv.org/content/10.1101/2025.04.14.648850v2
+
+file:images/cell2sentence_27b.png
 ** [[https://www.linkedin.com/posts/tylerjburns_essb2025-spatialbiology-embl-activity-7386022173758386177-h9VB?utm_source=share&utm_medium=member_desktop&rcm=ACoAAAbP8M8BYXs_UknoBHnmw2rZ-aRDTJF7L3Y][Thoughts about ESSB 2025]]
 I had a great time at ESSB2025 in Heidelberg, where I caught up with and met great spatial bio researchers, and got up to speed on the bleeding edge of both wet lab and dry lab practices. A few things that stood out to me:
 
