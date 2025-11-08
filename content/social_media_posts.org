@@ -670,6 +670,24 @@ I'll acknowledge that there are differences between the fields that may impact w
 * General data analysis
 #+HTML: <a href="#top">Back to top</a>
 The data analysis related posts that I otherwise could not categorize.
+** LLM make-it-better experiment for UMAP plotting
+Can you use LLM's to create self-refactoring code? Here, I broadly asked a LLM to take six lines of R code plotting a UMAP and iteratively "make it better." What I found was that the number of lines of code go way up, but the plot itself does not change much.
+
+I hypothesized going in that at least density would be added, but rather the simple aesthetics around the points, background, and labeling changed, and the dots got much smaller.
+
+I note that in later experiments I attempted to spell out categories of refactoring it could choose from, and in doing so it made density (at iteration 9). When I explicitly told the LLM to "be creative" it produced code that did not run.
+
+All of this to say that even with a frontier model (Claude 4.5 Sonnet), the "taste" to determine what "better" is, is not there by default. Clever prompt engineering is needed here at baseline. Perhaps a bundle of examples of useful plots in figures of relevant papers, for example.
+
+Immediate action items for research teams integrating AI into their workflows:
+- Audit any LLM-generated code for overengineering. Consider providing examples of non-overengineered code in your prompts.
+- Carefully design and test refactoring prompts to be shared across the org. Look at the GitHubs for "Claude skills" as motivation.
+
+If you are experimenting with "dynamic" code like this, please don't hesitate to reach out. A lot of experiments in this direction can be done with shell scripting of LLM API calls.
+
+Thank you and I hope you all have a great day.
+
+[[file:images/llm_make_it_better.png]]
 ** [[https://www.linkedin.com/posts/tylerjburns_to-gauge-llm-progress-in-my-domain-i-prompted-activity-7379503790162534401-C-Zj?utm_source=share&utm_medium=member_desktop&rcm=ACoAAAbP8M8BYXs_UknoBHnmw2rZ-aRDTJF7L3Y][LLM-based CyTOF analysis pipeline design choices]]
 To gauge LLM progress in my domain, I prompted 4 models 10 times each to generate CyTOF analysis pipelines, keeping prompts vague to assess baseline rigor and design choices.
 
