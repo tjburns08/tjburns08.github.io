@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Be different, now more important than ever</title>
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" href="simple.css" />
+<style>
+  .dark-mode {
+    --bg: #212121;
+    --accent-bg: #2b2b2b;
+    --text: #dcdcdc;
+    --text-light: #ababab;
+    --accent: #ffb300;
+    /*--code: #f06292;*/
+    --preformatted: #ccc;
+    --disabled: #111;
+  }
+  .dark-mode img,
+  .dark-mode video {
+    opacity: 0.8;
+  }
+  .toggle-theme-btn {
+      transform: scale(0.7);
+      opacity: 0.4;
+      transition: opacity 0.2s;
+    }
+    .toggle-theme-btn:hover {
+      opacity: 0.4;
+    }
+
+  /* Code block wrapping: experiment */
+    pre, code {
+      white-space: pre-wrap;
+      white-space: -moz-pre-wrap;
+      white-space: -pre-wrap;
+      white-space: -o-pre-wrap;
+      word-wrap: break-word;
+    }
+</style>
+<script>
+ function toggleDarkMode() {
+    const body = document.body;
+    body.classList.toggle("dark-mode");
+    // Save the user's theme preference to localStorage
+    if (body.classList.contains("dark-mode")) {
+      localStorage.setItem("theme", "dark");
+    } else {
+      localStorage.setItem("theme", "light");
+    }
+  }
+
+  function setDefaultDarkMode() {
+    // Retrieve the user's theme preference from localStorage
+    const storedTheme = localStorage.getItem("theme");
+
+    // If the stored theme is light, do nothing; otherwise, set it to dark
+    if (storedTheme !== "light") {
+      document.body.classList.add("dark-mode");
+    }
+  }
+
+  // Set the default mode to dark when the DOM is fully loaded
+  document.addEventListener('DOMContentLoaded', setDefaultDarkMode);
+</script>
+</head>
+<body>
+<div id="preamble" class="status">
+<div style="position: fixed; top: 10px; right: 10px;">
+         <button class="toggle-theme-btn" onclick="toggleDarkMode()">Light/Dark</button>
+       </div>
+</div>
+<div id="content" class="content">
+<h1 class="title">Be different, now more important than ever</h1>
+<hr />
+
+<p>
+<i>Here's to the crazy ones. The misfits. The rebels. The troublemakers. The round pegs in the square holes. The ones who see things differently. They're not fond of rules. And they have no respect for the status quo. You can quote them, disagree with them, glorify or vilify them. About the only thing you can't do is ignore them. Because they change things. They push the human race forward. And while some may see them as the crazy ones, we see genius. Because the people who are crazy enough to think they can change the world, are the ones who do.</i>
+</p>
+
+<p>
+Steve Jobs, <a href="https://www.youtube.com/watch?v=-z4NS2zdrZc">Apple ad campaign</a> 1997
+</p>
+
+<hr />
+
+<p>
+Last weekend, a friend of mine introduced me to <a href="https://www.youtube.com/watch?v=aQLJ4j2d2k4&amp;list=RDaQLJ4j2d2k4&amp;start_radio=1">Funktallica</a>, which is basically the AI-generated output of the question "what if Metallica were a 70s funk band?" It was at the time of writing <span class="timestamp-wrapper"><span class="timestamp">[2025-11-16 Sun] </span></span> very convincing. Note that this AI music thing is relatively new as of now. It could be that future readers see this and say "yeah duh that kind of thing exists."
+</p>
+
+<p>
+But this brought forth a very interesting question: if you're a musician right now, what do you do if AI is going to make infinite remixes of your song across adjacent possible genres, variations, and so forth? What is the thing that is going to be valued in this new reality? And I think the answer is that the Funktallica output exists because Metallica exists. They produced amazing music for decades, and this serves as a "seed" from which AI can explore all the latent space around it.
+</p>
+
+<p>
+So then what seems to matter if you are a musician is that you produce some swath of music that is completely different than anything that came before it. The opposite of this would be if you are a cover band. Or if you produce music that the AI could effectively "grok" given all the related songs that came before it.
+</p>
+
+<p>
+There are musicians and songs that seem to transcend whatever the trends are at the time. In the 90s, Red Hot Chili Peppers was doing a weird rock/rap/funk <a href="https://www.youtube.com/watch?v=Mr_uHJPUlO8&amp;list=RDMr_uHJPUlO8&amp;start_radio=1">hybrid</a> thing during a time where everything was split between rock and rap. In the 2000s, hip hop duo Outkast came out with <a href="https://www.youtube.com/watch?v=PWgvGjAhvIw&amp;list=RDPWgvGjAhvIw&amp;start_radio=1">Hey Ya</a>, which was so different than anything in the hip hop genre at that time that it was being played on just about every radio station I listened to. It completely transcended genre itself. Around the same time, on the rock side, Coldplay came out with <a href="https://www.youtube.com/watch?v=d020hcWA_Wg&amp;list=RDd020hcWA_Wg&amp;start_radio=1">Clocks</a>. Which was kinda rock, but piano centric, and simply put, just different. In a very good way.
+</p>
+
+<p>
+Each of these are examples of songs that show up and etch out new regions of "music space" that are not obvious adjacent possible songs of anything else. And I think this is what we should double down on now. Because I think the lowest hanging fruit for AI is to "fill out" music space's unrealized potential. In other words, it will take every artist and impute their songs across genres. It will take songs and remix them in every possible way. But it making new genres? Maybe. But that's a harder task. And even if it can, I think this is where humans can contribute the most.
+</p>
+
+<p>
+Now let's jump one meta- out from music. Let's look at all things that are creative. We know that LLMs can write. This is what they are designed to do. And they can make fiction and poetry too. But what are the odds that one of these things would make Blood Meridian, or anything else written by Cormac McCarthy, with no "seeds" from him to start with? Or what about Shakespeare, if he hadn't existed? There is art that forges its own genre, or is trans-genre. Stephen King is sort of horror, but also has that whole Dark Tower series that is more fantasy. And his tome The Stand is horror but there is also a "hero's journey" aspect to the novel too. Would AI come up with the transgenre corpus that is Stephen King on its own? I would guess that remixing existing books and genres is a lower hanging fruit.
+</p>
+
+<p>
+I'm going to guess that from music to visual art to vibe code to literature, the AIs are going to do a great job making variants of existing pieces of existing genres. It is a much lower hanging fruit than the act of creating a completely new genre or paradigm out of nothing.
+</p>
+
+<p>
+So I think this is where we the humans should play ball. I think that for whatever we create, we should seed the latent space of human output with things that are different than whatever came before us. That we should really swing for the fences and try to come up with truly new, truly unique stuff. Then we let the AIs remix the heck out of it.
+</p>
+
+<p>
+Perhaps that is our value from here on out. A trailblazer in the latent space of possible output. So if you're producing anything, don't settle for something similar to whatever exists (like pretty much the entire film industry right now). Go for the Clocks and the Hey Ya's, and see how far you can get.
+</p>
+</div>
+<div id="postamble" class="status">
+<p class="date">Date: November 16, 2025</p>
+<p class="creator"><a href="https://www.gnu.org/software/emacs/">Emacs</a> 28.1 (<a href="https://orgmode.org">Org</a> mode 9.5.2)</p>
+</div>
+</body>
+</html>
