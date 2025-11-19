@@ -16,6 +16,11 @@ This website is a place where I can openly share my ideas and non-NDA work, rega
 If you have quesitons or comments, or you're interested in working or collaborating with me, just send me a message (see contact info below). I'm always happy to help.
 * New
 #+HTML: <a href="#top">Back to top</a>
+** [[./louvain_leiden_cluster_stability.html][Louvain versus Leiden cluster stability]]
+Markdown.\\
+
+Seurat defaults to Louvain clustering, and Scanpy defaults to the newer and improved Leiden clustering. Here, I try Leiden clustering in Seurat over 20 random seeds, assessing cluster stability by visualizing the cluster centroids on a UMAP as gifs. I find that Leiden clustering in Seurat requires additional parameter turning. In other words, if the settings work for Louvain, they won't necessarily work for Leiden.
+
 ** [[./be_different.html][Be different, now more important than ever]]
 Article.\\
 
