@@ -91,9 +91,9 @@ Jorge Luis Borges, <i>The Library of Babel</i>
 
 <hr />
 
-<div id="outline-container-org739e428" class="outline-2">
-<h2 id="org739e428">Introduction</h2>
-<div class="outline-text-2" id="text-org739e428">
+<div id="outline-container-orgfb891b4" class="outline-2">
+<h2 id="orgfb891b4">Introduction</h2>
+<div class="outline-text-2" id="text-orgfb891b4">
 <p>
 This writeup contains the code and instructions necessary to get a LLM to generate however many questions you like (as constrined by price and time). There are numerous unexplored applications to this at the time of writing <span class="timestamp-wrapper"><span class="timestamp">[2025-07-30 Wed]</span></span>, with a practical one discussed here being the ability to plumb the latent of questions around a particular domain.
 </p>
@@ -104,9 +104,9 @@ To this end, we have chosen the microbiome. This is an integrative field, which 
 </div>
 </div>
 
-<div id="outline-container-org935555a" class="outline-2">
-<h2 id="org935555a">Generating the questions</h2>
-<div class="outline-text-2" id="text-org935555a">
+<div id="outline-container-orgdd2dcbb" class="outline-2">
+<h2 id="orgdd2dcbb">Generating the questions</h2>
+<div class="outline-text-2" id="text-orgdd2dcbb">
 <p>
 The first thing you need to do is to be able to call LLMs from the command line, and thus shell scripts. To this end, I ask the reader to go <a href="./command_line_writeup.html">here</a>, where I instruct accordingly. Following this, the shell script used is relatively straightforward. I will copy it below:
 </p>
@@ -142,9 +142,9 @@ What you will do is run this script and create an textfile that it outputs into.
 </div>
 </div>
 
-<div id="outline-container-org627bcd8" class="outline-2">
-<h2 id="org627bcd8">Make the embeddings</h2>
-<div class="outline-text-2" id="text-org627bcd8">
+<div id="outline-container-orga505404" class="outline-2">
+<h2 id="orga505404">Make the embeddings</h2>
+<div class="outline-text-2" id="text-orga505404">
 <p>
 From here, you will run a python script to convert these quesitons into spatial coordinates, and then UMAP coordinates. The code necessary for that is here:
 </p>
@@ -289,17 +289,17 @@ This will give you an output data frame, "question<sub>map</sub><sub>with</sub><
 </p>
 </div>
 </div>
-<div id="outline-container-org88b7566" class="outline-2">
-<h2 id="org88b7566">Label the clusters</h2>
-<div class="outline-text-2" id="text-org88b7566">
+<div id="outline-container-org9170c38" class="outline-2">
+<h2 id="org9170c38">Label the clusters</h2>
+<div class="outline-text-2" id="text-org9170c38">
 <p>
 For this stretch, we used a R markdown. To find this, you can go here. In essence, we have an OpenRouter API caller that is used as a function directly within R, which we call Chatbot(). This is the LLM (at the time of writing <span class="timestamp-wrapper"><span class="timestamp">[2025-07-30 Wed] </span></span> the same model, Gemini 2.5 flash lite) that is used to take in the questions associated with each cluster above and generate a label that is in the form of a metaquestion.
 </p>
 </div>
 </div>
-<div id="outline-container-orga82413d" class="outline-2">
-<h2 id="orga82413d">Make the final plot</h2>
-<div class="outline-text-2" id="text-orga82413d">
+<div id="outline-container-org58c5f77" class="outline-2">
+<h2 id="org58c5f77">Make the final plot</h2>
+<div class="outline-text-2" id="text-org58c5f77">
 <p>
 From here, you take the output from the R Markdown, which is the same data frame that we made but now with the metaclusters, and you run the following python script. Note that the incoming data frame must be named "question<sub>map</sub><sub>with</sub><sub>labeled</sub><sub>clusters.csv</sub>". I have it formatted so it needs to  be in the same directory:
 </p>
