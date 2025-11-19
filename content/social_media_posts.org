@@ -670,7 +670,36 @@ I'll acknowledge that there are differences between the fields that may impact w
 * General data analysis
 #+HTML: <a href="#top">Back to top</a>
 The data analysis related posts that I otherwise could not categorize.
-** LLM make-it-better experiment for UMAP plotting
+** [[https://www.linkedin.com/posts/tylerjburns_you-may-have-noticed-the-emergence-of-leiden-activity-7396949129756721153--CwY?utm_source=share&utm_medium=member_desktop&rcm=ACoAAAbP8M8BYXs_UknoBHnmw2rZ-aRDTJF7L3Y][Louvain versus Leiden cluster stability in Seurat]]
+You may have noticed the emergence of Leiden clustering (as opposed to Louvain clustering) a few years ago in single-cell analysis. If you are using Seurat, be careful if you decide to transition...
+
+Louvain and Leiden clustering are both community detection algorithms on (in Seurat's particular case) a shared nearest neighbor graph of your data. The Leiden algorithm, in 2019, added additional refinements upon the shoulders of Louvain. In theory, making the switch could improve your clustering schemes.
+
+But in practice...
+
+When I switched from Seurat's implementation of Louvain to Leiden using the default settings of the classic Guided Clustering Tutorial on the PBMC 3k dataset, across 20 random seeds, Leiden did not detect the platelets that Louvain easily detects.
+
+This suggested that the given clustering parameters worked for Louvain, but needed to be re-tweaked for Leiden.
+
+The image below is this initial output, with cluster centroids being visualized in a gif across the 20 runs, a visual way I developed to assess cluster stability (hence the jiggling of the yellow dots).
+
+Accordingly, when I increased the resolution, Leiden detected the platelets, but the cluster stability got worse in the T cells.
+
+Lowering the number of nearest neighbors from the default 20 to 10 also got Leiden to detect the platelets with decent stability, but I also got an extra cluster in the CD4 T compartment, similar to the one that "flickers" in on the left panel below. Note that the extra cluster is not a bug, just the result of that particular setting, which may well be a defensible subset.
+
+So there is still a bit of tweaking left to do on my end. And I'd expect you'll have to do the same on your end.
+
+In short, if you switch from Louvain to Leiden specifically in Seurat, don't assume that you can use the same default parameters for both.
+
+In contrast, Scanpy's clustering is Leiden-centric, so its defaults may work better with Leiden than with Louvain.
+
+And more generally speaking, never assume the default parameters are the right ones, for whatever you're doing!
+
+Thank you and I hope you all have a great day.
+
+[[file:images/louvain_leiden.gif]]
+
+** [[https://www.linkedin.com/posts/tylerjburns_can-you-use-llms-to-create-self-refactoring-activity-7392201680521560064-IIQm?utm_source=share&utm_medium=member_desktop&rcm=ACoAAAbP8M8BYXs_UknoBHnmw2rZ-aRDTJF7L3Y][LLM make-it-better experiment for UMAP plotting]]
 Can you use LLM's to create self-refactoring code? Here, I broadly asked a LLM to take six lines of R code plotting a UMAP and iteratively "make it better." What I found was that the number of lines of code go way up, but the plot itself does not change much.
 
 I hypothesized going in that at least density would be added, but rather the simple aesthetics around the points, background, and labeling changed, and the dots got much smaller.
