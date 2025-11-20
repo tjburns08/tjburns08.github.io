@@ -129,6 +129,10 @@ In flow cytometry and CyTOF analysis, we distinguish between "type" and "state" 
   :END:
 #+HTML: <a href="#top">Back to top</a>
 I started out analyzing CyTOF data, as I did my PhD in the lab of Garry Nolan from 2012-2017, where CyTOF was initially being developed and applied to immunology and cancer bilogy. I later broadened to single-cell sequencing and high-parameter imaging (both proteins and genes). The work below consists primarily of markdowns, with code and explanations that allow users to do things that have helped me a lot in my work, but I don't necessarily have the time to turn into publications.
+** [[./louvain_leiden_cluster_stability.html][Louvain versus Leiden cluster stability]]
+Markdown.\\
+
+Seurat defaults to Louvain clustering, and Scanpy defaults to the newer and improved Leiden clustering. Here, I try Leiden clustering in Seurat over 20 random seeds, assessing cluster stability by visualizing the cluster centroids on a UMAP as gifs. I find that Leiden clustering in Seurat requires additional parameter turning. In other words, if the settings work for Louvain, they won't necessarily work for Leiden.
 ** [[https://github.com/ariannaaalami/interactive_scanpy_pipeline][Scanpy pipeline intuition building app]]
 GitHub project.\\
 
@@ -461,6 +465,11 @@ Markdown.\\
 You are only as good as the questions you ask yourself and others. My uncle told me that many years ago when I was getting started with my career and it stuck. This has been relevant to me in terms of having and maintaining good friendships, being a good husband, being a good family member, being a good businessman, and when I was in graduate school, being a good scientist, and simply being an interesting person. I have a very large list of questions now that is very overwhelming. So I turned them into an embedding using the BERT language model, turned that into a nearest neighbor graph, and then derived insight from looking at the questions in terms of "communities."
 * Philosophy and rationality
 #+HTML: <a href="#top">Back to top</a>
+** [[./be_different.html][Be different, now more important than ever]]
+Article.\\
+
+AI is starting to produce remixes of popular songs, that sound quite believable. We have seen this across art in general. Here, I argue that our value as humans now is to be the trend setters, the trailblazers, and the forgers of new genres and paradigms, in everything we do. Then, we can let the AI's fill them out. In short, now is a great time to be different.
+
 ** [[./doomer_good_life.html][If the doomers are right, then be a giver]]
 Article.\\
 
