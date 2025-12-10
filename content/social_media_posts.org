@@ -670,6 +670,36 @@ I'll acknowledge that there are differences between the fields that may impact w
 * General data analysis
 #+HTML: <a href="#top">Back to top</a>
 The data analysis related posts that I otherwise could not categorize.
+** [[https://www.linkedin.com/posts/tylerjburns_fcs-files-outputted-by-flow-and-mass-cytometers-activity-7404524653811056640-jaOW?utm_source=share&utm_medium=member_desktop&rcm=ACoAAAbP8M8BYXs_UknoBHnmw2rZ-aRDTJF7L3Y][Byte order matters when reading in fcs files]]
+Fcs files, outputted by flow and mass cytometers, are typically read into R or Python for analysis. If you're going to do this without the likes of FlowCore, you need to take care to read the bytes in the DATA section the right way, or the matrix will be gibberish.
+
+Multi-byte numbers (e.g. 32-bit ints) can be stored in computer memory in two ways, known as little-endian or big-endian (simplified explanation below). The key thing here is that some computers do it one way, and some do it the other. And it might be that the flow cytometry acquisition computer is incompatible with yours.
+
+There is a flag in the TEXT section called $BYTEORD, that will tell you which it is.
+
+$BYTEORD/1,2,3,4/ is little-endian. This is where the least significant byte would be stored first.
+
+$BYTEORD/4,3,2,1/ is big-endian. This is where the most significant byte would be stored first.
+
+Here, most significant means highest "place" value. So in decimal, the number 135, would have 1 as the most significant digit (the hundreds place), and 5 as the least significant digit (the ones place).
+
+Let's keep it simplified with standard decimal, and say the number 135 had to be stored into memory into three boxes [ ][ ][ ]. In big-endian, it would be stored as [1][3][5], which makes intuitive sense. But little-endian would have it stored as [5][3][1]. So now if your computer picks up [1][3][5] stored in big-endian, and assumes its little-endian, it will read it it as 531. And so it is with your flow cytometery data matrices.
+
+When you store multi-byte numbers into memory, via the likes of readBin() in R, you can specify the byte order as a function argument, as per the $BYTEORD flag in the fcs file.
+
+I made a tutorial a few years ago where I learned of this topic (link in the comments below). If you follow it, you can convert a fcs file into a data matrix without any software packages.
+
+The image associated with this post summarizes the binary reading step, where you select endian-ness, and what it looks like if you select the wrong one.
+
+Why does this matter? Because at least in R, FlowCore::read.FCS(), is a bit of a choke point. It's incredibly useful and I'm grateful on behalf of the community to have it. But it's also a single point of failure. So it would behoove you to know how to read in your fcs files independently, just in case something were to happen to it or its dependencies (and the python programmers among you will know what I'm talking about).
+
+I'm revisiting this now due to a low level project I'm currently working on, but I think that any bioinformatician should know their craft one level of abstraction deeper than what is required of them. It pays dividends long term.
+
+Leaders, look for these choke points in your workflows and prepare for the worst, just in case.
+
+Thank you, and I hope you all have a great day.
+
+file:images/byte_order_matters.png
 ** [[https://www.linkedin.com/posts/tylerjburns_you-may-have-noticed-the-emergence-of-leiden-activity-7396949129756721153--CwY?utm_source=share&utm_medium=member_desktop&rcm=ACoAAAbP8M8BYXs_UknoBHnmw2rZ-aRDTJF7L3Y][Louvain versus Leiden cluster stability in Seurat]]
 You may have noticed the emergence of Leiden clustering (as opposed to Louvain clustering) a few years ago in single-cell analysis. If you are using Seurat, be careful if you decide to transition...
 
