@@ -89,9 +89,9 @@ Lewis Carroll, Alice's Adventures in Wonderland
 </p>
 <hr />
 
-<div id="outline-container-org7bc362a" class="outline-2">
-<h2 id="org7bc362a">From R to S</h2>
-<div class="outline-text-2" id="text-org7bc362a">
+<div id="outline-container-orga735d86" class="outline-2">
+<h2 id="orga735d86">From R to S</h2>
+<div class="outline-text-2" id="text-orga735d86">
 <p>
 What happens under the hood when we do simple arithmetic in R? Let's begin with a simple expression. Adding two numbers together.
 </p>
@@ -211,9 +211,9 @@ So now you can see objectively that R's arithmetic is using S-expressions, the w
 </div>
 </div>
 
-<div id="outline-container-org0aae840" class="outline-2">
-<h2 id="org0aae840">From S to C</h2>
-<div class="outline-text-2" id="text-org0aae840">
+<div id="outline-container-org91fe97d" class="outline-2">
+<h2 id="org91fe97d">From S to C</h2>
+<div class="outline-text-2" id="text-org91fe97d">
 <p>
 Ok, this is all well and good, but how do I know that R specifically has S-expressions in mind? In order to answer that, we can download the <a href="https://cran.r-project.org/src/base/R-4/">source code</a> of the R programming language and have a look at it. We can see if any S-expressions are explicitly declared here. Below is the source code from R 4.4.0.
 </p>
@@ -311,9 +311,9 @@ Where you can see that "+" is PLUSOP, where x1 + x2 is defined.
 </div>
 </div>
 
-<div id="outline-container-org9752a7b" class="outline-2">
-<h2 id="org9752a7b">From C to Assembly</h2>
-<div class="outline-text-2" id="text-org9752a7b">
+<div id="outline-container-org75da136" class="outline-2">
+<h2 id="org75da136">From C to Assembly</h2>
+<div class="outline-text-2" id="text-org75da136">
 <p>
 So we started with 5 + 2 and now we are looking at an obscure switch statement in C. But if it is written in C, that means it is indirectly written in something deeper: machine code.
 </p>
@@ -485,9 +485,9 @@ Another important thing is that within this recipe, while there are a number of 
 </div>
 </div>
 
-<div id="outline-container-org4ec0b98" class="outline-2">
-<h2 id="org4ec0b98">Conclusion</h2>
-<div class="outline-text-2" id="text-org4ec0b98">
+<div id="outline-container-org4564462" class="outline-2">
+<h2 id="org4564462">Conclusion</h2>
+<div class="outline-text-2" id="text-org4564462">
 <p>
 Ok, let's go back to familiarity now.
 </p>

@@ -16,6 +16,11 @@ This website is a place where I can openly share my ideas and non-NDA work, rega
 If you have quesitons or comments, or you're interested in working or collaborating with me, just send me a message (see contact info below). I'm always happy to help.
 * New
 #+HTML: <a href="#top">Back to top</a>
+** [[https://github.com/tjburns08/cytof_agentic_prompting_experiments][Experiments with Claude Code and Codex for CyTOF analysis]]
+GitHub Repo.\\
+
+At the time of writing [2026-01-26 Mon], AI agents are becoming much more capable. To this end, I tested them on CyTOF analysis, a domain I know quite well. I did 5 runs for Claude Code and ChatGPT Codex (both regular and xhigh) respectively. The task was to analyze 1 file, the Samusik_01 dataset (from the X-Shift paper). The agents were able to generate code, run the code, and fix issues in real time. The code ran to completion. The output was almost always sensible. The design choices were hit or miss. Future directions include analyzing multi-file datasets (and see if they can find batch effects, and so forth). Overall, this direction looks promising, but needs work. Have a look for further details.
+
 ** [[./Krupp-Stanford_E-Newsletter_2025_9MB.pdf][Krupp Stanford Newsletter 2025, featuring my intern]]
 Feature.\\
 
@@ -134,6 +139,10 @@ In flow cytometry and CyTOF analysis, we distinguish between "type" and "state" 
   :END:
 #+HTML: <a href="#top">Back to top</a>
 I started out analyzing CyTOF data, as I did my PhD in the lab of Garry Nolan from 2012-2017, where CyTOF was initially being developed and applied to immunology and cancer bilogy. I later broadened to single-cell sequencing and high-parameter imaging (both proteins and genes). The work below consists primarily of markdowns, with code and explanations that allow users to do things that have helped me a lot in my work, but I don't necessarily have the time to turn into publications.
+** [[https://github.com/tjburns08/cytof_agentic_prompting_experiments][Experiments with Claude Code and Codex for CyTOF analysis]]
+GitHub Repo.\\
+
+At the time of writing [2026-01-26 Mon], AI agents are becoming much more capable. To this end, I tested them on CyTOF analysis, a domain I know quite well. I did 5 runs for Claude Code and ChatGPT Codex (both regular and xhigh) respectively. The task was to analyze 1 file, the Samusik_01 dataset (from the X-Shift paper). The agents were able to generate code, run the code, and fix issues in real time. The code ran to completion. The output was almost always sensible. The design choices were hit or miss. Future directions include analyzing multi-file datasets (and see if they can find batch effects, and so forth). Overall, this direction looks promising, but needs work. Have a look for further details.
 ** [[./louvain_leiden_cluster_stability.html][Louvain versus Leiden cluster stability]]
 Markdown.\\
 
