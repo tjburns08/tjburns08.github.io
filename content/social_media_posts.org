@@ -670,6 +670,78 @@ I'll acknowledge that there are differences between the fields that may impact w
 * General data analysis
 #+HTML: <a href="#top">Back to top</a>
 The data analysis related posts that I otherwise could not categorize.
+** [[https://www.linkedin.com/posts/tylerjburns_hi-friends-here-is-what-happens-when-i-context-activity-7424088272919965696-54Gz?utm_source=share&utm_medium=member_desktop&rcm=ACoAAAbP8M8BYXs_UknoBHnmw2rZ-aRDTJF7L3Y][Claude Code experiments for manual gating]]
+Hi friends, here is what happens when I context engineer Claude Code to do manual gating for CyTOF data.
+
+As you know, there has been interest in automated gating for quite some time, as manual gating can be quite laborious (with obvious human intervention for "harder" populations). To this end, I tested agentic AI systems with the task, and iteratively improved them each run by tweaking the context engineering.
+
+So you all can pick up where I left off, here is what I found.
+
+Methods:
+
+I used the Samusik_01 dataset (around 80,000 mouse bone marrow cells run through CyTOF). This has an expert manual gating control built in that I was able to use for comparison.
+
+I tried both ChatGPT codex and Claude Code, but later stuck with Claude Code because it was giving me much better results.
+
+My "context engineering" was a series of documents in a directory that I "pointed" Claude Code to (e.g. please go to prompt[dot]md and follow everything there). Initially it was just a prompt, but later I added a pre-made gating strategy and a quality assurance document (e.g. do it again if >50% of cells are unlabeled) as well.
+
+Results:
+
+If we set the expert manual gates as ground truth, Claude Code got 1 in 2 correctly. If we look at mutually assigned cells (labeled by both the LLM and the human), its closer to 3 in 5. If we look at within-lineage accuracy of mutually assigned cells, it's over 4 in 5 (which makes sense: you wouldn't "oops" miscategorize a monocyte as pro-B cell).
+
+Adding a quality assurance document that defined specific thresholds got Claude Code to work iteratively. In the final experiment, it iterated 11 times in a loop, adjusting thresholds.
+
+If I add Figure S5 from the X-Shift paper (the visual gating strategy), we got another increase in accuracy. Note that Claude Code can read images, but it cannot yet read videos without breaking them down into a collage of frames (I tried).
+
+There was per-population variance in how accurate the gates were, with lymphoid cells being gated more accurately than myeloid cells and stem/progenitors. This suggest population level tweaks that can be done.
+
+The big picture, for decision makers:
+
+These results are by no means perfect, but they show that there is a path. New models are coming that will in theory improve results, but we should optimize the context engineering now. Internal data will serve as a "moat" in this regard.
+
+One future direction: currently, the gates are made in series in a giant R script. But if we were dealing with a real gating interface (e.g. a bespoke R script, or the API to a SAAS), then Claude Code might be able to adjust the gates in a more "natural" way.
+
+The GitHub for the final experiment is in the comments. I hope you all have a great day.
+[[file:images/claude_code_gating.png]]
+*** comment
+The GitHub to the most recent experiment is here: https://github.com/tjburns08/claude-cytof-gating
+** [[https://www.linkedin.com/posts/tylerjburns_hi-friends-following-my-previous-work-on-activity-7421554989552254978-0WpC?utm_source=share&utm_medium=member_desktop&rcm=ACoAAAbP8M8BYXs_UknoBHnmw2rZ-aRDTJF7L3Y][Agentic AI for analyzing CyTOF data]]
+Hi friends, following my previous work on LLM design choices in CyTOF analysis, I re-ran the experiments with agentic coding tools: Claude Code and ChatGPT Codex Xhigh. I prompted each agent to create and execute a CyTOF analysis pipeline from scratch, five times per agent.
+
+Key results:
+
+Execution: All pipelines ran successfully for both agents.
+
+Clustering: Claude Code favored FlowSOM (3/5) over kmeans (2/5). Codex was more varied: FlowSOM (2/5), kmeans (1/5), and PhenoGraph-like approaches via Seurat or igraph (2/5).
+
+Dimensionality reduction: Both used UMAP exclusively, no t-SNE.
+
+Output quality: Claude Code produced sensible UMAPs 5/5 times. Codex had one run that produced cluster IDs that looked like they were put in the blender on the UMAP, suggesting an undetected bug.
+
+Other observations:
+
+- Codex showed more defensive programming (e.g., TryCatch usage)
+- Claude Code provides reasoning traces; Codex doesn't allow for that (though you can copy/paste from the command line interface to get this)
+- Claude Code hits token limits much faster despite similar subscription pricing
+
+Discussion:
+
+It's promising that these agents can write, execute, and debug code on the fly. Claude Code made more domain-appropriate choices (FlowSOM, not forcing data into Seurat), but I was surprised either touched kmeans, rarely used in CyTOF literature outside (in theory) deliberate overclustering workflows like SPADE.
+
+It's interesting that Codex implemented KNN graph + Louvain (essentially PhenoGraph) rather than using PhenoGraph directly.
+
+Key limitation of this work: one-file dataset. Future work will test larger, more complex data, perhaps pushing agents toward the likes of CATALYST or Spectre. Open questions remain: can an agent discover batch effects unprompted, or flag that "something isn't right"?
+
+The community might benefit from comprehensive context engineering documents for different CyTOF analysis scenarios. I'm working on this now.
+
+For leaders: These agents aren't going anywhere. We need best practices now: prompting toward domain-specific strategies, detecting errors, and keeping human experts engaged where it matters.
+
+Link to the full results in comments. If you're running similar experiments, I'd love to hear from you. Thank you and I hope you all have a great day.
+[[file:images/agentic_ai_cytof.png]]
+*** comments
+One potential use case for this would be through the CyTOF SAAS products directly (not going to name them, but you know the popular ones). It might be via API access (assuming we figure out the cybersecurity), or that the SAAS products themselves embed the agents directly into the software. Either way, this is something I would watch out for, for programmers and non-programmers alike.
+
+The GitHub link to the project is here: https://github.com/tjburns08/cytof_agentic_prompting_experiments
 ** [[https://www.linkedin.com/posts/tylerjburns_fcs-files-outputted-by-flow-and-mass-cytometers-activity-7404524653811056640-jaOW?utm_source=share&utm_medium=member_desktop&rcm=ACoAAAbP8M8BYXs_UknoBHnmw2rZ-aRDTJF7L3Y][Byte order matters when reading in fcs files]]
 Fcs files, outputted by flow and mass cytometers, are typically read into R or Python for analysis. If you're going to do this without the likes of FlowCore, you need to take care to read the bytes in the DATA section the right way, or the matrix will be gibberish.
 
