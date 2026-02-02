@@ -16,6 +16,11 @@ This website is a place where I can openly share my ideas and non-NDA work, rega
 If you have quesitons or comments, or you're interested in working or collaborating with me, just send me a message (see contact info below). I'm always happy to help.
 * New
 #+HTML: <a href="#top">Back to top</a>
+** [[https://github.com/tjburns08/claude-cytof-gating][Experiment with Claude Code for manual gating CyTOF data]]
+GitHub Repo.\\
+
+Manual gating is an important process for cell subsetting in flow and mass cytometry data. Despite over a decade of innovations in clustering, manual gating has not been replaced. Automated gating has been of interest for a few years now at the time of writing [2026-02-02 Mon]. Here, I tested whether Claude Code could do manual gating on the Samusik mouse bone marrow CyTOF dataset. I found that while lots of work needs to be done, there seems to be a path here, and plenty more things to try. Thus, I present my work in this repo for others to build off of. Hints: try building out an actual interface where individual gates can be adjusted in real time, rather than a script it executes top to bottom. And try getting it to process its own plot images.
+
 ** [[https://github.com/tjburns08/cytof_agentic_prompting_experiments][Experiments with Claude Code and Codex for CyTOF analysis]]
 GitHub Repo.\\
 
@@ -139,6 +144,10 @@ In flow cytometry and CyTOF analysis, we distinguish between "type" and "state" 
   :END:
 #+HTML: <a href="#top">Back to top</a>
 I started out analyzing CyTOF data, as I did my PhD in the lab of Garry Nolan from 2012-2017, where CyTOF was initially being developed and applied to immunology and cancer bilogy. I later broadened to single-cell sequencing and high-parameter imaging (both proteins and genes). The work below consists primarily of markdowns, with code and explanations that allow users to do things that have helped me a lot in my work, but I don't necessarily have the time to turn into publications.
+** [[https://github.com/tjburns08/claude-cytof-gating][Experiment with Claude Code for manual gating CyTOF data]]
+GitHub Repo.\\
+
+Manual gating is an important process for cell subsetting in flow and mass cytometry data. Despite over a decade of innovations in clustering, manual gating has not been replaced. Automated gating has been of interest for a few years now at the time of writing [2026-02-02 Mon]. Here, I tested whether Claude Code could do manual gating on the Samusik mouse bone marrow CyTOF dataset. I found that while lots of work needs to be done, there seems to be a path here, and plenty more things to try. Thus, I present my work in this repo for others to build off of. Hints: try building out an actual interface where individual gates can be adjusted in real time, rather than a script it executes top to bottom. And try getting it to process its own plot images.
 ** [[https://github.com/tjburns08/cytof_agentic_prompting_experiments][Experiments with Claude Code and Codex for CyTOF analysis]]
 GitHub Repo.\\
 
