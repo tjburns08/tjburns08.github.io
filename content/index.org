@@ -16,6 +16,11 @@ This website is a place where I can openly share my ideas and non-NDA work, rega
 If you have quesitons or comments, or you're interested in working or collaborating with me, just send me a message (see contact info below). I'm always happy to help.
 * New
 #+HTML: <a href="#top">Back to top</a>
+** [[./samusik_llm_mishmash.html][Experiment with LLM-generated CyTOF data]]
+R Markdown.\\
+
+What would happen if I asked a frontier-level LLM to simulate CyTOF data, one cell at a time? Would it "rip" a dataset, number by number? Would it create convincing simulated cells that fit marker distributions, and cell frequency distributions? Would it create a bunch of numbers that make no sense? Here, we tested that by getting Claude Sonnet 4.6 to simulate the Samusik dataset, cell by cell. We provided minimal instructions. We found that for the most part, the cells produced were not in line with the Saumisik dataset. This suggests that either Claude Sonnet is not yet good enough to output simulated Samusik data, or that better prompt engineering is needed to this end.
+
 ** [[https://github.com/tjburns08/claude-cytof-seurat-harmony][Experiment with Claude Code for data integration in Seurat]]
 GitHub repo.\\
 
@@ -148,6 +153,10 @@ In flow cytometry and CyTOF analysis, we distinguish between "type" and "state" 
   :END:
 #+HTML: <a href="#top">Back to top</a>
 I started out analyzing CyTOF data, as I did my PhD in the lab of Garry Nolan from 2012-2017, where CyTOF was initially being developed and applied to immunology and cancer bilogy. I later broadened to single-cell sequencing and high-parameter imaging (both proteins and genes). The work below consists primarily of markdowns, with code and explanations that allow users to do things that have helped me a lot in my work, but I don't necessarily have the time to turn into publications.
+** [[./samusik_llm_mishmash.html][Experiment with LLM-generated CyTOF data]]
+R Markdown.\\
+
+What would happen if I asked a frontier-level LLM to simulate CyTOF data, one cell at a time? Would it "rip" a dataset, number by number? Would it create convincing simulated cells that fit marker distributions, and cell frequency distributions? Would it create a bunch of numbers that make no sense? Here, we tested that by getting Claude Sonnet 4.6 to simulate the Samusik dataset, cell by cell. We provided minimal instructions. We found that for the most part, the cells produced were not in line with the Saumisik dataset. This suggests that either Claude Sonnet is not yet good enough to output simulated Samusik data, or that better prompt engineering is needed to this end.
 ** [[https://github.com/tjburns08/claude-cytof-seurat-harmony][Experiment with Claude Code for data integration in Seurat]]
 GitHub repo.\\
 

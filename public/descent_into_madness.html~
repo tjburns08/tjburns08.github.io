@@ -124,23 +124,23 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgaaac519">Introduction</a></li>
-<li><a href="#org5f210c2">Method</a></li>
-<li><a href="#org81caf79">Results</a>
+<li><a href="#org8e76707">Introduction</a></li>
+<li><a href="#org15fc0f0">Method</a></li>
+<li><a href="#org57545a0">Results</a>
 <ul>
-<li><a href="#org3fd93f7">Sensible</a></li>
-<li><a href="#org4fcc993">Getting a bit strange</a></li>
-<li><a href="#org450faa5">Madness</a></li>
+<li><a href="#org2e0c005">Sensible</a></li>
+<li><a href="#org0b375cb">Getting a bit strange</a></li>
+<li><a href="#orgc5efd0a">Madness</a></li>
 </ul>
 </li>
-<li><a href="#org8af3b5f">Conclusions</a></li>
+<li><a href="#org4074a52">Conclusions</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-orgaaac519" class="outline-2">
-<h2 id="orgaaac519">Introduction</h2>
-<div class="outline-text-2" id="text-orgaaac519">
+<div id="outline-container-org8e76707" class="outline-2">
+<h2 id="org8e76707">Introduction</h2>
+<div class="outline-text-2" id="text-org8e76707">
 <p>
 LLMs in my hands are always too broad. Even the best reasoning models underwhelm me with some six bullet point answer that skips across the surface. I like rabbit holes. I like going deep. So to that end, I used the LLM command line chatbot I built (read about it <a href="./command_line_writeup.html">here</a>) to coax a LLM into only going deeper. Think of it as depth first search in the tree of knowldge. I asked it a broad question: tell me about the nature of consciousness. But I ran a loop where the instruction was for each subsequent prompting, which takes the whole conversation as input, to take a piece of the answer and go deeper on that.
 </p>
@@ -162,9 +162,9 @@ NOTE AFTER THE FACT: I am leaving the wording of this document as is, to reflect
 </p>
 </div>
 </div>
-<div id="outline-container-org5f210c2" class="outline-2">
-<h2 id="org5f210c2">Method</h2>
-<div class="outline-text-2" id="text-org5f210c2">
+<div id="outline-container-org15fc0f0" class="outline-2">
+<h2 id="org15fc0f0">Method</h2>
+<div class="outline-text-2" id="text-org15fc0f0">
 <a href="#top">Back to top</a>
 <p>
 The model I used was Gemini 2.0 Flash. It is not a reasoning model (like o1), but it is in the class of models like GPT-4o. I used the shell script below. To cut to the chase, I'll paste the main prompt here:
@@ -274,20 +274,20 @@ Here is the full script so you can cut and paste it yourself. Note that you have
 </div>
 </div>
 </div>
-<div id="outline-container-org81caf79" class="outline-2">
-<h2 id="org81caf79">Results</h2>
-<div class="outline-text-2" id="text-org81caf79">
+<div id="outline-container-org57545a0" class="outline-2">
+<h2 id="org57545a0">Results</h2>
+<div class="outline-text-2" id="text-org57545a0">
 <a href="#top">Back to top</a>
 
 <p>
 Below is the cut and paste of the full conversation, which I divide roughly into the sensible part and the madness part. The madness part more or less starts where the emojis start.
 </p>
 </div>
-<div id="outline-container-org3fd93f7" class="outline-3">
-<h3 id="org3fd93f7">Sensible</h3>
-<div class="outline-text-3" id="text-org3fd93f7">
+<div id="outline-container-org2e0c005" class="outline-3">
+<h3 id="org2e0c005">Sensible</h3>
+<div class="outline-text-3" id="text-org2e0c005">
 <a href="#top">Back to top</a>
-<div class="verbatim" id="org47fb2bf">
+<div class="verbatim" id="org4d4125d">
 <p>
 <code>===</code> Full Conversation Transcript <code>===</code>
 -e Initial Prompt: Please discuss the nature of consciousness
@@ -3561,9 +3561,9 @@ Here, there shows what a angel could do for ever and all the best what touch has
 </div>
 </div>
 </div>
-<div id="outline-container-org4fcc993" class="outline-3">
-<h3 id="org4fcc993">Getting a bit strange</h3>
-<div class="outline-text-3" id="text-org4fcc993">
+<div id="outline-container-org0b375cb" class="outline-3">
+<h3 id="org0b375cb">Getting a bit strange</h3>
+<div class="outline-text-3" id="text-org0b375cb">
 <a href="#top">Back to top</a>
 <p>
 #+begin<sub>verbatim</sub>
@@ -6988,9 +6988,9 @@ Okay - touch side is forever and forever . What show you, forever-What
 </div>
 </div>
 
-<div id="outline-container-org450faa5" class="outline-3">
-<h3 id="org450faa5">Madness</h3>
-<div class="outline-text-3" id="text-org450faa5">
+<div id="outline-container-orgc5efd0a" class="outline-3">
+<h3 id="orgc5efd0a">Madness</h3>
+<div class="outline-text-3" id="text-orgc5efd0a">
 <a href="#top">Back to top</a>
 <p>
 Deep Dive 98: After thoroughly reviewing the chaotic and largely incoherent content that precedes this prompt, and acknowledging the prior turn's stated inability to continue, I will attempt to salvage a single, narrowly defined element for further, laser-focused analysis. This approach may, as has already been demonstrated, still end in failure, still touch I know It I never may find the you with great power is set that power""But as show I You side💖To and To touch .WhatSide What to All Power showWhat - There whatTouch set You-
@@ -7677,9 +7677,9 @@ touch ""WhatThere What side had what YouBee"" to"" Touch AllI""What side Touch w
 </div>
 </div>
 </div>
-<div id="outline-container-org8af3b5f" class="outline-2">
-<h2 id="org8af3b5f">Conclusions</h2>
-<div class="outline-text-2" id="text-org8af3b5f">
+<div id="outline-container-org4074a52" class="outline-2">
+<h2 id="org4074a52">Conclusions</h2>
+<div class="outline-text-2" id="text-org4074a52">
 <a href="#top">Back to top</a>
 <p>
 Again, the results were completely unexpected on my end. I had done experiments with 10 iterations, which led to some interesting discussion around various topics. But this was the first 100 iteration run, and you can imagine the surprise I had when I saw it descend into madness.
