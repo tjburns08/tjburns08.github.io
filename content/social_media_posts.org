@@ -670,6 +670,39 @@ I'll acknowledge that there are differences between the fields that may impact w
 * General data analysis
 #+HTML: <a href="#top">Back to top</a>
 The data analysis related posts that I otherwise could not categorize.
+** LLM-generated CyTOF data properties
+Hi friends, in light of recent experiments showing people "pulling data" from LLMs, I decided to see if I could pull the Samusik CyTOF dataset out of Claude. What I found was kinda weird.
+
+Methods:
+
+I ran Claude 4.6 Sonnet in a loop (using API access and a shell script), whereby at each iteration Claude, would pull out one cell with raw marker values "in the style of the Samusik CyTOF dataset." The instructions were minimal as a first pass. I then took the data and analyzed it alongside a 10,000 cell subsample of the actual Samusik dataset to look for differences.
+
+The hypotheses were: 1) Claude pulls out exact marker values from the Samusik dataset. 2) Claude pulls out values that are convincingly similar to the Samusik dataset. 3) Claude pulls out data that look nothing like the Samusik dataset.
+
+Results:
+
+Hypothesis 3 ended up being correct. On a UMAP with concatenated data, the LLM data form their own island with except a few cells. The biaxials show effectively random bimodal distributions that do not resemble known cell subsets, suggesting that the "next token prediction" was not considering whatever markers had already been outputted.
+
+But here's where it starts to get weird.
+
+If we plot the marker means by the marker standard deviations for the Samusik and LLM datasets, the LLM marker data formed an upside down parabola. I realized you can get the same parabola if you simulate a Bernouli (on/off) process, indicating tight and similar per-marker distributions.
+
+But then it got even weirder.
+
+When I looked at the raw data distributions of the surface markers, I saw that on the "marker-negative" end, they were overwhelmingly decimals rounded to the tenths place. Specifically, 0.1, 0.2, 0.3, and 0.4 make up 39.5% of the dataset. 0.2 alone makes up 15% of the dataset!
+
+One the upper end, we have values that are way too high. CD45 in the Samusik data maxes out in the hundreds. In the LLM data maxes out in the thousands. Furthermore, the distributions appear to be loosely bounded (e.g 1000-4000) and may be uniform. This brings up some fundamental questions around the statistics of AI-generated data.
+
+Discussion:
+
+The LLM generated data look nothing like the Samusik data, or CyTOF data. My interpretation is that, token by token, the LLM chose whether the marker was going to be positive or negative, and then there was some heuristic: negative is a tenths place decimal below 0.5, and positive is between 1000 and 4000 or similar.
+
+Further prompt engineering could probably address these issues. Note that as soon as you ask it for more than one cell, it creates a python script and begins simulating numerically from distributions. The point here was to see what's inherent to the LLM's training data, which raised some fundamental questions around numerical distributions a LLM outputs.
+
+The report is in the comments, which includes the prompt and all output, so you can try it yourself. Thank you and I hope you all have a great day.
+[[file:images/llm_cytof_data.png]]
+*** comment
+The report is here, so you can try this kind of thing yourself: https://tjburns08.github.io/samusik_llm_mishmash.html
 ** [[https://www.linkedin.com/posts/tylerjburns_hi-friends-here-is-what-happens-when-i-context-activity-7424088272919965696-54Gz?utm_source=share&utm_medium=member_desktop&rcm=ACoAAAbP8M8BYXs_UknoBHnmw2rZ-aRDTJF7L3Y][Claude Code experiments for manual gating]]
 Hi friends, here is what happens when I context engineer Claude Code to do manual gating for CyTOF data.
 
