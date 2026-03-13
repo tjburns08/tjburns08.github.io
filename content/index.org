@@ -16,6 +16,10 @@ This website is a place where I can openly share my ideas and non-NDA work, rega
 If you have quesitons or comments, or you're interested in working or collaborating with me, just send me a message (see contact info below). I'm always happy to help.
 * New
 #+HTML: <a href="#top">Back to top</a>
+** [[./cytof_llm_selection_experiment.html][CyTOF clustering algorithms selected at random by LLMs]]
+R Markdown.\\
+
+If I ask a LLM to select a CyTOF clustering algorithm at random, what do I get? In this experiment, I did that in a 50-iteration loop across a number of models from Anthropic, Google, and xAI's Grok4. The models only chose FlowSOM or PhenoGraph, suggesting a "winner take all" bias in terms of how often the tools are used in the literature. I found that the Antrhopic models prefer FlowSOM, the Google models are mixed, but still lean toward FlowSOM, and Grok4 prefers PhenoGraph. This suggests that similar experiments must be done by anyone who is looking to use AI to assist them in CyTOF analysis pipeliens, to determine where the models might be biased.
 ** [[./samusik_llm_mishmash.html][Experiment with LLM-generated CyTOF data]]
 R Markdown.\\
 
@@ -153,6 +157,10 @@ In flow cytometry and CyTOF analysis, we distinguish between "type" and "state" 
   :END:
 #+HTML: <a href="#top">Back to top</a>
 I started out analyzing CyTOF data, as I did my PhD in the lab of Garry Nolan from 2012-2017, where CyTOF was initially being developed and applied to immunology and cancer bilogy. I later broadened to single-cell sequencing and high-parameter imaging (both proteins and genes). The work below consists primarily of markdowns, with code and explanations that allow users to do things that have helped me a lot in my work, but I don't necessarily have the time to turn into publications.
+** [[./cytof_llm_selection_experiment.html][CyTOF clustering algorithms selected at random by LLMs]]
+R Markdown.\\
+
+If I ask a LLM to select a CyTOF clustering algorithm at random, what do I get? In this experiment, I did that in a 50-iteration loop across a number of models from Anthropic, Google, and xAI's Grok4. The models only chose FlowSOM or PhenoGraph, suggesting a "winner take all" bias in terms of how often the tools are used in the literature. I found that the Antrhopic models prefer FlowSOM, the Google models are mixed, but still lean toward FlowSOM, and Grok4 prefers PhenoGraph. This suggests that similar experiments must be done by anyone who is looking to use AI to assist them in CyTOF analysis pipeliens, to determine where the models might be biased.
 ** [[./samusik_llm_mishmash.html][Experiment with LLM-generated CyTOF data]]
 R Markdown.\\
 
