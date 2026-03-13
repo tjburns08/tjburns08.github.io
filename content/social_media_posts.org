@@ -670,7 +670,34 @@ I'll acknowledge that there are differences between the fields that may impact w
 * General data analysis
 #+HTML: <a href="#top">Back to top</a>
 The data analysis related posts that I otherwise could not categorize.
-** LLM-generated CyTOF data properties
+** [[https://www.linkedin.com/posts/tylerjburns_hi-friends-in-light-of-recent-llm-bioinformatics-activity-7438223292014018560-1U9U?utm_source=share&utm_medium=member_desktop&rcm=ACoAAAbP8M8BYXs_UknoBHnmw2rZ-aRDTJF7L3Y][LLM CyTOF clustering algorithm choices]]
+Hi friends, in light of recent LLM bioinformatics "design choice" experiments I've been doing, I asked a simpler question: if I prompt a LLM to output a randomly selected CyTOF clustering algorithm, what will the distribution look like, and will it vary between LLMs.
+
+The experiment:
+
+Here, I ran that prompt in a 50-iteration loop, where with each iteration, one CyTOF clustering algorthm was selected. Each iteration was a fresh instance with no memory of the previous iterations.
+
+Observations:
+
+Only FlowSOM or PhenoGraph were selected, suggesting a bias toward tools that are more often used, which might lead to exclusion of newer or more bespoke tools that might be fit for your task.
+
+Antrhopic's models selected primarily FlowSOM, Google's tools selected a mix but still tilted slightly toward FlowSOM, and Grok4 choose exclusively PhenoGraph (did one of the FlowSOM authors tweet something mean about Elon?), suggesting that different LLMs have different "preferences."
+
+Takeaways:
+
+While there are plenty of followup experiments to do, I am posting this preliminary result today because it speaks to concrete actions for leaders and scientists alike.
+
+If you are going to use AI assistance to code up some analysis pipeline, you should do two things:
+- run the prompt more than once on the same model and look for differences in design choices
+- run the same prompt on multiple models and look at per-model differences in design choices
+
+Furthermore, you should do your research and look for newer or more bespoke tools that are suited for your task. This means you should have a bioinformatician grounded in first principles look at what you're doing.
+
+Thanks and I hope you all have a great day.
+[[file:images/cytof_algo_choice.png]]
+*** comment
+The report is here: https://tjburns08.github.io/cytof_llm_selection_experiment.html
+** [[https://www.linkedin.com/posts/tylerjburns_hi-friends-in-light-of-recent-experiments-activity-7434239530603483137-TDRH?utm_source=share&utm_medium=member_desktop&rcm=ACoAAAbP8M8BYXs_UknoBHnmw2rZ-aRDTJF7L3Y][LLM-generated CyTOF data properties]]
 Hi friends, in light of recent experiments showing people "pulling data" from LLMs, I decided to see if I could pull the Samusik CyTOF dataset out of Claude. What I found was kinda weird.
 
 Methods:
