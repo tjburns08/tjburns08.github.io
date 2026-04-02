@@ -16,6 +16,11 @@ This website is a place where I can openly share my ideas and non-NDA work, rega
 If you have quesitons or comments, or you're interested in working or collaborating with me, just send me a message (see contact info below). I'm always happy to help.
 * New
 #+HTML: <a href="#top">Back to top</a>
+** [[https://blog.lamin.ai/intro-to-laminr][An Introduction to LaminR]]
+Guest blog post.\\
+
+One of the longer term issues I've run into in my consulting work is that of coming back to old projects, handing off my work, or receiving work others have handed off to me. There is inevitable confusion as to what was done previously. Lamin solves this problem by tracking every data artifact, in terms of what was done to it when. I think this will become increasingly important, especially when we get to a point where there are AI agents doing work alongside you. LaminR is Lamin's R interface, which I use here to analyze the PBMC 3k dataset, in order to show you what Lamin does.
+
 ** [[./cytof_llm_selection_experiment.html][CyTOF clustering algorithms selected at random by LLMs]]
 R Markdown.\\
 
@@ -157,6 +162,10 @@ In flow cytometry and CyTOF analysis, we distinguish between "type" and "state" 
   :END:
 #+HTML: <a href="#top">Back to top</a>
 I started out analyzing CyTOF data, as I did my PhD in the lab of Garry Nolan from 2012-2017, where CyTOF was initially being developed and applied to immunology and cancer bilogy. I later broadened to single-cell sequencing and high-parameter imaging (both proteins and genes). The work below consists primarily of markdowns, with code and explanations that allow users to do things that have helped me a lot in my work, but I don't necessarily have the time to turn into publications.
+** [[https://blog.lamin.ai/intro-to-laminr][An Introduction to LaminR]]
+Guest blog post.\\
+
+One of the longer term issues I've run into in my consulting work is that of coming back to old projects, handing off my work, or receiving work others have handed off to me. There is inevitable confusion as to what was done previously. Lamin solves this problem by tracking every data artifact, in terms of what was done to it when. I think this will become increasingly important, especially when we get to a point where there are AI agents doing work alongside you. LaminR is Lamin's R interface, which I use here to analyze the PBMC 3k dataset, in order to show you what Lamin does.
 ** [[./cytof_llm_selection_experiment.html][CyTOF clustering algorithms selected at random by LLMs]]
 R Markdown.\\
 
