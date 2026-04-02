@@ -670,6 +670,17 @@ I'll acknowledge that there are differences between the fields that may impact w
 * General data analysis
 #+HTML: <a href="#top">Back to top</a>
 The data analysis related posts that I otherwise could not categorize.
+** [[https://www.linkedin.com/posts/tylerjburns_hi-friends-i-wrote-a-guest-post-for-lamin-activity-7445459712386514944-wU4s?utm_source=share&utm_medium=member_desktop&rcm=ACoAAAbP8M8BYXs_UknoBHnmw2rZ-aRDTJF7L3Y][Guest blog post: an introduction to LaminR]]
+Hi friends, I wrote a guest post for Lamin on using the open-source LaminR package in an R workflow with the PBMC 3k dataset. The link is in the comments.
+
+What drew me in was a familiar handoff problem: coming back to an analysis, or inheriting one from someone else, and not being fully sure what was done, in what order, or in which environment. I have some "scar tissue" here from my consulting projects over the years.
+
+In the post, I walk through a standard single-cell workflow and show what LaminR stores along the way. What I found most interesting was the provenance side of it: being able to inspect the code, report, and environment tied to a data object later.
+
+That feels increasingly important as datasets, tools, and teams get more complex (e.g. when some of your "colleagues" are OpenClaw agents).
+
+Thanks to Luke Zappia, Robrecht Cannoodt, and Alex Wolf for collaborating on this.
+[[file:images/lamin_guest_blog_post.png]]
 ** [[https://www.linkedin.com/posts/tylerjburns_hi-friends-in-light-of-recent-llm-bioinformatics-activity-7438223292014018560-1U9U?utm_source=share&utm_medium=member_desktop&rcm=ACoAAAbP8M8BYXs_UknoBHnmw2rZ-aRDTJF7L3Y][LLM CyTOF clustering algorithm choices]]
 Hi friends, in light of recent LLM bioinformatics "design choice" experiments I've been doing, I asked a simpler question: if I prompt a LLM to output a randomly selected CyTOF clustering algorithm, what will the distribution look like, and will it vary between LLMs.
 
