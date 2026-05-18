@@ -17,48 +17,78 @@ If you have quesitons or comments, or you're interested in working or collaborat
 * New
 #+HTML: <a href="#top">Back to top</a>
 ** [[./dr_provenance_interactive_v4.html][Provenance of CyTOF dimension reduction algorithms]]
+:PROPERTIES:
+:UNNUMBERED: notoc
+:END:
 Interactive html.\\
 
 If you want to understand the algorithms used in analyzing data specific to a given field, you need to understand the history of their development. Knowing that Leiden clustering was built on top of Louvain matters, for example. Knowing that UMAP was built after t-SNE matters. Here, I built provenance graph of CyTOF dimensionality reduction/visualization algorithms, from SPADE to UMAP and later. I turned it into an interactive html. We can see that while the field has "collapsed" into UMAP, there are a number of other methods developed after or in parallel to UMAP that could be equally useful or if not useful to your bespoke situation. The bigger picture: this does to the intro section of a paper what SPADE did to the immune system.
 ** [[https://blog.lamin.ai/intro-to-laminr][An Introduction to LaminR]]
+:PROPERTIES:
+:UNNUMBERED: notoc
+:END:
 Guest blog post.\\
 
 One of the longer term issues I've run into in my consulting work is that of coming back to old projects, handing off my work, or receiving work others have handed off to me. There is inevitable confusion as to what was done previously. Lamin solves this problem by tracking every data artifact, in terms of what was done to it when. I think this will become increasingly important, especially when we get to a point where there are AI agents doing work alongside you. LaminR is Lamin's R interface, which I use here to analyze the PBMC 3k dataset, in order to show you what Lamin does.
 
 ** [[./cytof_llm_selection_experiment.html][CyTOF clustering algorithms selected at random by LLMs]]
+:PROPERTIES:
+:UNNUMBERED: notoc
+:END:
 R Markdown.\\
 
 If I ask a LLM to select a CyTOF clustering algorithm at random, what do I get? In this experiment, I did that in a 50-iteration loop across a number of models from Anthropic, Google, and xAI's Grok4. The models only chose FlowSOM or PhenoGraph, suggesting a "winner take all" bias in terms of how often the tools are used in the literature. I found that the Antrhopic models prefer FlowSOM, the Google models are mixed, but still lean toward FlowSOM, and Grok4 prefers PhenoGraph. This suggests that similar experiments must be done by anyone who is looking to use AI to assist them in CyTOF analysis pipeliens, to determine where the models might be biased.
 ** [[./samusik_llm_mishmash.html][Experiment with LLM-generated CyTOF data]]
+:PROPERTIES:
+:UNNUMBERED: notoc
+:END:
 R Markdown.\\
 
 What would happen if I asked a frontier-level LLM to simulate CyTOF data, one cell at a time? Would it "rip" a dataset, number by number? Would it create convincing simulated cells that fit marker distributions, and cell frequency distributions? Would it create a bunch of numbers that make no sense? Here, we tested that by getting Claude Sonnet 4.6 to simulate the Samusik dataset, cell by cell. We provided minimal instructions. We found that for the most part, the cells produced were not in line with the Saumisik dataset. This suggests that either Claude Sonnet is not yet good enough to output simulated Samusik data, or that better prompt engineering is needed to this end.
 
 ** [[https://github.com/tjburns08/claude-cytof-seurat-harmony][Experiment with Claude Code for data integration in Seurat]]
+:PROPERTIES:
+:UNNUMBERED: notoc
+:END:
 GitHub repo.\\
 
 Data integration is something that has been well-trodden in both flow cytometry and single-cell RNA sequencing (at the time of writing [2026-02-16 Mon]) due to batch effects that can form. Here, we use Claude Code to ask two questions. 1) Can we place multiple CyTOF files into Seurat? And 2) Can we use Harmony within this Seurat object ot integrate the data? Claude Code figured out a way to do both. There are plenty of limitations in this experiment, especially that of needing to determine whether we lose biological signal in the integration. But this at least is a first step (of many) that can be built off of.
 ** [[https://github.com/tjburns08/claude-cytof-gating][Experiment with Claude Code for manual gating CyTOF data]]
+:PROPERTIES:
+:UNNUMBERED: notoc
+:END:
 GitHub Repo.\\
 
 Manual gating is an important process for cell subsetting in flow and mass cytometry data. Despite over a decade of innovations in clustering, manual gating has not been replaced. Automated gating has been of interest for a few years now at the time of writing [2026-02-02 Mon]. Here, I tested whether Claude Code could do manual gating on the Samusik mouse bone marrow CyTOF dataset. I found that while lots of work needs to be done, there seems to be a path here, and plenty more things to try. Thus, I present my work in this repo for others to build off of. Hints: try building out an actual interface where individual gates can be adjusted in real time, rather than a script it executes top to bottom. And try getting it to process its own plot images.
 
 ** [[https://github.com/tjburns08/cytof_agentic_prompting_experiments][Experiments with Claude Code and Codex for CyTOF analysis]]
+:PROPERTIES:
+:UNNUMBERED: notoc
+:END:
 GitHub Repo.\\
 
 At the time of writing [2026-01-26 Mon], AI agents are becoming much more capable. To this end, I tested them on CyTOF analysis, a domain I know quite well. I did 5 runs for Claude Code and ChatGPT Codex (both regular and xhigh) respectively. The task was to analyze 1 file, the Samusik_01 dataset (from the X-Shift paper). The agents were able to generate code, run the code, and fix issues in real time. The code ran to completion. The output was almost always sensible. The design choices were hit or miss. Future directions include analyzing multi-file datasets (and see if they can find batch effects, and so forth). Overall, this direction looks promising, but needs work. Have a look for further details.
 
 ** [[./Krupp-Stanford_E-Newsletter_2025_9MB.pdf][Krupp Stanford Newsletter 2025, featuring my intern]]
+:PROPERTIES:
+:UNNUMBERED: notoc
+:END:
 Feature.\\
 
 In the summer of 2025, I had a Krupp intern from the Stanford in Berlin program. This was special because I did this same internship when I was in the Stanford in Berlin program in 2007. Here, I got the chance to give back. On page 6 of this pdf, my intern Arianna gives her reflection of how the internship and her summer in general went. I thank the program for giving me the opportunity to mentor Arianna, and I hope for many more Krupp interns to come.
 
 ** [[./louvain_leiden_cluster_stability.html][Louvain versus Leiden cluster stability]]
+:PROPERTIES:
+:UNNUMBERED: notoc
+:END:
 Markdown.\\
 
 Seurat defaults to Louvain clustering, and Scanpy defaults to the newer and improved Leiden clustering. Here, I try Leiden clustering in Seurat over 20 random seeds, assessing cluster stability by visualizing the cluster centroids on a UMAP as gifs. I find that Leiden clustering in Seurat requires additional parameter turning. In other words, if the settings work for Louvain, they won't necessarily work for Leiden.
 
 ** [[https://github.com/ariannaaalami/interactive_scanpy_pipeline][Scanpy pipeline intuition building app]]
+:PROPERTIES:
+:UNNUMBERED: notoc
+:END:
 GitHub project.\\
 
 One of the ways that I developed intuition around single-cell and spatial analysis over the years is by changing the settings of a given analysis pipeline and seeing how it changes the output. Here, my intern Arianna and I built an app that allows a user to do that with a simple scanpy analysis of single-cell data. The interface has a couple of "knobs" you can turn, like changing the number of highly variable genes, or the number of PCs, and seeing how that affects the shape of the UMAP downstream, and the placement of pre-annotated cells therein.
@@ -81,21 +111,33 @@ Here is the primary output from the aforementioned R Markdown, whereby we have t
 Here, we aimed to check whether the output of our LLM-based biological interpretation is consistent. We tried PC1 (which is straightforward), and PC20 (which we expect to be a bit messier). We note that with the o4-mini model the results were indeed relatively consistent between the multiple runs, with the 4o-mini model (does not do reasoning), the results for PC20 were quite inconsistent (data not shown). The results suggest a degree of consistency when using reasoning models, but we would still recommend doing these runs more than once, just in case.
 
 ** [[./descent_into_madness.html][A LLM's descent into madness]]
+:PROPERTIES:
+:UNNUMBERED: notoc
+:END:
 Article.\\
 February 9, 2025 - February 18, 2025.
 
 At the time of writing (February 2025) I am frustrated by the best of the LLMs giving me results that are still in my opinion superficial. So I wrote a script that would prompt a LLM to give me an answer on something, and then with each iteration in a loop, take a piece of the answer and go deeper into it. I thought it would either converge upon something fundamental, or continually drift into different topics. I was wrong on both. The model eventually descended into emoji-laden verse, and then word salad, and then a sort of letter salad, where it started making up words, disregarding grammar, and so forth. Something like E. E. Cummings. I encourage the reader to try it on their machine.
 ** [[./die_with_zero.html][Die with zero ideas]]
+:PROPERTIES:
+:UNNUMBERED: notoc
+:END:
 Article.\\
 January 22, 2025 - January 22, 2025.
 
 At any given point, there are ideas in my head or rough pieces of text and code on my computer that could prove useful for someone in the world. To this end, I created this website and I began posting about the stuff I put on here. This has helped my life and career immensely. My general stance these days is I want all my useful stuff to be in the public domain by the time I die. This article details both the "why" and the "how" of this effort.
 ** [[./pbmc_uce_nn_comparison.html][Nearest neighbor similarity between PBMC 3k dataset and its foundation model embedding]]
+:PROPERTIES:
+:UNNUMBERED: notoc
+:END:
 Markdown.\\
 
 Universal Cell Embeddings (UCE) is a foundation model that takes a single-cell dataset as input and outputs a 1280 dimensional embedding that is relevant in the context of a large number of single-cell datasets that it was trained on. This model can in turn do things like label transfer between datasets. Here, I looked at the embedding within the PBMC 3k dataset and simply asked how many k-nearest neighbors per cell are shared between the original dataset and its UCE embedding. Specifically, I used the first 50 PCs of the PBMC 3k dataset's top 2000 most variable genes (standard practice), and the first 50 PCs of the UCE model. The results suggest that nearest neighbors are preserved at the labeled cell subset level but the resolution does not go beyond this. Note: I also compared the first 50 PCs of the PBMC 3k dataset with the entire 1280 dimensions of the UCE output, and the results were slightly worse but similar.
 
 ** [[./praise_the_ideal.html][Buddhism is to mindfulness, as Christianity is to...]]
+:PROPERTIES:
+:UNNUMBERED: notoc
+:END:
 Article.\\
 January 8, 2025 - January 8, 2025.
 
@@ -103,6 +145,9 @@ I make a connection between idealizing my father during the "Dad is superman" ph
 
 
 ** [[./signal_there.html][There's some signal there]]
+:PROPERTIES:
+:UNNUMBERED: notoc
+:END:
 Article.\\
 August 6, 2024 - August 6, 2024.
 
@@ -111,34 +156,55 @@ This is an expression I use a lot in casual conversation. In essence, when I com
 * Popular
 #+HTML: <a href="#top">Back to top</a>
 ** [[./learn_bioinformatics.html][How I transitioned from biologist to biology-leveraged bioinformatician]]
+:PROPERTIES:
+:UNNUMBERED: notoc
+:END:
 Article.\\
 July 23, 2023 - July 23, 2023.
 
 In this article, I summarize my journey from biologist at the beginning of grad school to bioinformatician at the end. On top of that, I show you some of the key insights that empowered me to get to where I am now. I link out to a number of references in bioinformatics and computer science that I find meaningful. In short, I hope that anyone in the life sciences reading this article can use it as a resource on their journey to learn bioinformatics.
 ** [[./its_more_complicated_than_that.html][It's more complicated than that]]
+:PROPERTIES:
+:UNNUMBERED: notoc
+:END:
 Article.\\
 December 27, 2022 - December 27, 2022.
 
 This is the observation I run into with just about every line of scientific inquiry. This is despite a revolution of new technologies that allow us to look at much more data, and new algorithms to make sense of these huge datasets. I repeat this phrase every time I start to feel like I've figured it all out.
 
 ** [[./run_cytof_with_seurat.html][Run CyTOF analysis with Seurat]]
+:PROPERTIES:
+:UNNUMBERED: notoc
+:END:
 Markdown.\\
 
 Seurat is an R package that runs single-cell sequencing and related data. Here, I trick Seurat into thinking my CyTOF PBMC data is single-cell sequencing data. I find out that the effective dimensionality of my CyTOF data appears to be much less than the surface markers I am using (15). This is a counter-intuitive result because our features are carefully curated before the experiment is done.
 ** [[https://github.com/tjburns08/knn_sleepwalk][Knn sleepwalk]]
+:PROPERTIES:
+:UNNUMBERED: notoc
+:END:
 Software.\\
 
 A wrapper I wrote around the [[https://anders-biostat.github.io/sleepwalk/][sleepwalk]] R package. Hover the cursor over any cell in your embedding, and it will show you the cell's k-nearest neighbors computed from the original feature space (as opposed to the embedding space). This allows you to test your assumptions around how exact a low-dimensional embedding (eg. t-SNE, UMAP) is.
 ** [[https://www.youtube.com/watch?v=U35T-KzfeLk][TEDx Basel talk: my scrolling problem, and how I fixed it]]
+:PROPERTIES:
+:UNNUMBERED: notoc
+:END:
 YouTube video of my TED talk.\\
 
 In this talk, I introduce the idea of the Scrolling Problem, which is the incompatiblity of my ADD brain and modern technology built around the infinite scroll. I talk about some work I'm doing to counteract that, which can be found [[https://github.com/tjburns08/twitter_archive_and_embed][here]]. It was originally Twitter, but I switched to RSS mapping, [[https://github.com/tjburns08/rss_map][here]], after Twitter started blocking scrapers.
 ** [[./scrolling_problem.org][The Scrolling Problem]]
+:PROPERTIES:
+:UNNUMBERED: notoc
+:END:
 Article.\\
 July 15, 2022 - February 7, 2023.
 
 The article behind my [[https://www.youtube.com/watch?v=U35T-KzfeLk][TEDx Basel talk]]. We spend a large fraction of our lives endlessly scrolling through our feeds, with no control over what hypernormal, outrage-inducing content will appear next. I call this the scrolling problem. I define it, and I have a crack at it by viewing my news feed as map with the help of an AI language model based on BERT.
 ** [[./scrna_seq_analyze_and_integrate.html][Single-cell sequencing analysis: the importance of data integration]]
+:PROPERTIES:
+:UNNUMBERED: notoc
+:END:
 Markdown.\\
 
 In flow cytometry and CyTOF analysis, we distinguish between "type" and "state" markers, so we can cluster on the former and analyze per-cluster expression changes in the latter. For single-cell RNA sequencing, we cannot make this distinguishment. Thus, we have to rely on data integration algorithms when we are analyzing pre-treatment and post-treatment datasets. I show how this is done, and I show how failure to do so can lead research teams to falsely interpret the data, and make false conclusions. Thus, understanding data integration is critical to keeping research teams on track.
@@ -584,119 +650,185 @@ I explain why pre-prints are important to staying ahead of the technology and ge
 * Philosophy and rationality
 #+HTML: <a href="#top">Back to top</a>
 ** [[./doomer_good_life.html][If the doomers are right, then be a giver]]
+:PROPERTIES:
+:UNNUMBERED: notoc
+:END:
 Article.\\
 August 23, 2025 - August 23, 2025.
 
 If the doomers are right, and we are barreling toward collapse, then how do we live a good life in these conditions? The answer I'm taking is to look back to the Greeks, and specifically the word eudaimonia, or flourishing by means of virtue. I go into the idea of giving more than you take, as one tool to move us toward eudaimonia. This way of doing things is robust to both a good future and a bad future, and leads to both flourishing both at the individual level and community level.
 ** [[./die_with_zero.html][Die with zero ideas]]
+:PROPERTIES:
+:UNNUMBERED: notoc
+:END:
 Article.\\
 January 22, 2025 - January 22, 2025.
 
 At any given point, there are ideas in my head or rough pieces of text and code on my computer that could prove useful for someone in the world. To this end, I created this website and I began posting about the stuff I put on here. This has helped my life and career immensely. My general stance these days is I want all my useful stuff to be in the public domain by the time I die. This article details both the "why" and the "how" of this effort.
 ** [[./praise_the_ideal.html][Buddhism is to mindfulness, as Christianity is to...]]
+:PROPERTIES:
+:UNNUMBERED: notoc
+:END:
 Article.\\
 January 8, 2025 - January 8, 2025.
 
 I make a connection between idealizing my father during the "Dad is superman" phase of my childhood, and the Christian practice of imagining the ideal form of good (perfect kindness, perfect virtue, etc) and trying to move in that direction. The phrase "what would Jesus do" is pretty much this. The same way we have taken mindfulness out of Buddhism, I think this practice can be taken out of Christianity and also practiced in a perfectly secular way. It has benefitted me my whole life, so it's worth trying on for size.
 
 ** [[./boring.html][The most boring man in the world]]
+:PROPERTIES:
+:UNNUMBERED: notoc
+:END:
 Article.\\
 January 3, 2025 - January 8, 2025.
 
 I had a fascination with the Dos Equis "Most Interesting Man In The World" ad campaign, which ran through my 20s. In this article, I explore what it really means to be interesting. I conclude that a lot of the aspects of my life that are interesting have been a result of doing a boring slog of hard work for a long time. I conclude that part of being interesting is the willingness to be boring.
 
 ** [[./signal_there.html][There's some signal there]]
+:PROPERTIES:
+:UNNUMBERED: notoc
+:END:
 Article.\\
 August 6, 2024 - August 6, 2024.
 
 This is an expression I use a lot in casual conversation. In essence, when I come across something that feels like its part of the path forward, but can't fully articulate why, I say "there's some signal there" and then I put it in my back pocket. This essay tells the story of how doing this from my teenage years onwards, has contributed to a lot of my good decisions thus far.
 ** [[./fear_the_unword.html][Fear of the un-word is the beginning of wisdom]]
+:PROPERTIES:
+:UNNUMBERED: notoc
+:END:
 Article.\\
 November 11, 2023 - January 20, 2024.
 
 An un-word is a word that points to that which cannot be put into words. We see examples of this in religion, where words like Tao and God are meant to point us to a vastness that is beyond anything we can possibly understand. The Christian concept of fear of God, as seen through this lens, reflects the horror and awe that comes from admitting ignorance and embracing the unknown. This is the beginning of wisdom.
 
 ** [[./getting_life_done.html][Getting life done]]
+:PROPERTIES:
+:UNNUMBERED: notoc
+:END:
 Article.\\
 September 14, 2023 - January 20, 2024.
 
 There are two modes that we operate in: the doing mode and the getting-done mode. The doing mode is like a hike, where the focus is on the hike itself and not point A to point B. The is opposed to a commute, the getting-done mode, where you're focused on getting from point A to point B. Here, I argue that the doing mode is being wrestled away from us, and we are wasting our lives in the getting-done mode. We are going to deeply regret this.
 
 ** [[./enjoyment_arbitrage.html][Enjoyment arbitrage: you can do what you love, if everyone else hates it]]
+:PROPERTIES:
+:UNNUMBERED: notoc
+:END:
 Article.\\
 May 23, 2023 - May 23, 2023.
 
 I think it is possible to do what you love, if you put yourself into an environment where others simply don't want to do what you do. I show how this works in my world, where many people are simply not interested in learning or doing bioinformatics at my level of depth and involvement.
 
 ** [[./fight_complexity_with_complexity.html][Fight complexity with complexity]]
+:PROPERTIES:
+:UNNUMBERED: notoc
+:END:
 Article.\\
 May 16, 2023 - May 16, 2023.
 
 A new paradigm that seems to be emerging from the bottom up, linking my work on dimensionality reduction interpretation with GPT-based interpretations of the human brain and cancer immunotherapy. We use something complex to understand or fight something complex. This is opposed to the older ideal of having perfect mechanistic understanding of what we're doing.
 
 ** [[./finite_infinite_life_games.html][Finite and infinite-life games]]
+:PROPERTIES:
+:UNNUMBERED: notoc
+:END:
 Article.\\
 April 20, 2023 - January 20, 2024.
 
 I make a comparison between the older 2-D platforming games from the 16-bit era and a newer game called Celeste. The key difference is that in Celeste, the gameplay is incredibly difficult, but you have infinite lives. I argue that this type of gameplay is an efficient route to flow state. I describe how this type of gameplay mirrors a lot of problem solving in my professional life. I end by saying that Celeste gameplay is an empowering mental model for doing things outside your competence and comfort zone.
 
 ** [[./add_beauty.html][Replace the word "value" with "beauty"]]
+:PROPERTIES:
+:UNNUMBERED: notoc
+:END:
 Article.\\
 April 23, 2023 - April 23, 2023.
 
 A dialectic between my rational and my emotional/spiritual side that took a while to build up. In my professional life, I think in terms of value (value-add, ROI, etc). But if we get rid of the word "value" in all my rational calculations and replace it with "beauty," it solves a much larger swath of problems and helps me make decisions that allow for, well, a beautiful life lived.
 ** [[./virtue_of_depth.html][The virtue of depth]]
+:PROPERTIES:
+:UNNUMBERED: notoc
+:END:
 Article.\\
 April 7, 2023 - April 7, 2023.
 
 It starts as a lament. In the real world I'm pulled many more directions than in graduate school. As such, I cannot always go deep with respect to whatever I'm doing. In my longing for depth, I can describe what depth is to me. The way the modern world is set up, I think a lot of us are missing depth in our lives. In this regard, I argue that depth should be a virtue that we strive for.
 ** [[./occams_razor.html][But what is Occam's razor really?]]
+:PROPERTIES:
+:UNNUMBERED: notoc
+:END:
 Article.\\
 March 24, 2023 - March 24, 2023.
 
 Occam's razor states that for a given phenomenon, the simplest explanation is the most likely explanation. I explore this with a fun example from my life. I then look at a computational formalization of this, which I use today for sensemaking.
 ** [[./how_to_solve_problems.html][What I learned about problem solving from my thesis lab]]
+:PROPERTIES:
+:UNNUMBERED: notoc
+:END:
 Article.\\
 March 24, 2023 - March 24, 2023.
 
 A collection of stories from my time in graduate school. The people in my thesis lab had one perplexing thing in common. They would come in as biologists and then literally invent new hardware and software, without any prior relevant background. They would just figure it out as they went. I learned the ways of the lab and learned several themes around how to solve problems, some of which fly in the face of traditional mainstream advice. So I figured I'd write them down.
 ** [[./on_hacking.html][Hacking: examples of seeing through and unseeing in my life]]
+:PROPERTIES:
+:UNNUMBERED: notoc
+:END:
 Article.\\
 March 15, 2023 - March 15, 2023.
 
 A lot of hacking is seeing through and unseeing the everyday abstractions we pretend to be true. Hacking is sometimes malicious (the Hollywood stereotype), and sometimes it is productive (known as innovation or ingenuity). It is not limited to computers, and it is definitely not limited to coding. Here, I lay out my favorite framework for what hacking is, and I provide examples that range from business to sports to computing.
 ** [[./coding_as_philosophical_project.html][Learning how to code improved how I think]]
+:PROPERTIES:
+:UNNUMBERED: notoc
+:END:
 Article.\\
 January 15, 2023 - April 28, 2024.
 
 Learning computer science improved both my focus and my thinking, which has contributed to a lot of my success from the end of graduate school until now. This matters because I think one should still learn the basics of how to code even if AI automates all of it in the future. This is because inherent in computer science education is the concept of computational thinking, a skill which you should have whether you use it to code, organize your thoughts, or prompt the latest AI. Even the first few months of computer science drastically helped me improve my thinking in this regard. This essay goes into the concepts around computational thinking, and tells you how you can learn it too, in a shorter time than you think.
 ** [[./its_more_complicated_than_that.html][It's more complicated than that]]
+:PROPERTIES:
+:UNNUMBERED: notoc
+:END:
 Article.\\
 December 27, 2022 - December 27, 2022.
 
 This is the observation I run into with just about every line of scientific inquiry. This is despite a revolution of new technologies that allow us to look at much more data, and new algorithms to make sense of these huge datasets. I repeat this phrase every time I start to feel like I've figured it all out.
 ** [[./purpose_driven_vs_purposeless.html][The way is the way]]
+:PROPERTIES:
+:UNNUMBERED: notoc
+:END:
 Article.\\
 December 18, 2022 - February 8, 2023.
 
 I spent a large portion of my life being goal-driven. I have realized more recently that being focused on the process rather than the goal is more beneficial in many respects. This essay is about my journey to that realization.
 ** [[./dialectic.html][Making sense of the (messy) real world]]
+:PROPERTIES:
+:UNNUMBERED: notoc
+:END:
 Article.\\
 December 10, 2022 - December 10, 2022.
 
 Finding truth in the real world is much different than finding truth in grad school. Grad school had me working on non-controversial, dry topics that few people in the world worked on. The real world is a lot messier. I talk about the idea of collecting opposing perspectives, steelmanning them, and putting them in dielectic to find higher truth. It's simple in theory, but hard in practice.
 ** [[./tao_of_problem_solving.html][The Tao of problem solving]]
+:PROPERTIES:
+:UNNUMBERED: notoc
+:END:
 Article.\\
 December 4, 2022 - December 5, 2022.
 
 One of the key components to my method of solving problems is to get into the flow state. When I'm there, some or all of the problem at hand solves itself. And it feels great. I show examples of me doing this. I talk about Taoism as an ancient philosophy built around flow state, but at the macro level rather than the "within-game" level. This is the ideal of being in a perpetual flow state that lasts one's entire lifetime.
 
 ** [[./the_beauty_is_truth_delusion.html][The beauty is truth delusion]]
+:PROPERTIES:
+:UNNUMBERED: notoc
+:END:
 Article.\\
 November 29, 2022 - November 29, 2022.
 
 This is the idea that data visualizations that look prettier than others don't necessarily convey more truth. I use SPADE and t-SNE as examples that can produce this delusion. This article serves as a call to action for the bioinformatics community to help users distinguish between truth and beauty as data visualization tools come out and become widely used.
 ** [[./minimize_and_sustain.html][How I'm applying the mindset around sustainability to everyday life]]
+:PROPERTIES:
+:UNNUMBERED: notoc
+:END:
 Article.\\
 October 13, 2022 - April 5, 2024.
 
@@ -705,36 +837,60 @@ My current plan for the uncertainty we face due to the pandemic and the events w
 #+HTML: <a href="#top">Back to top</a>
 Me nerding out on general computer science topics.
 ** [[./levels_of_analysis.html][Levels of analysis in bits and atoms]]
+:PROPERTIES:
+:UNNUMBERED: notoc
+:END:
 Article.\\
 May 18, 2025 - May 18, 2025.
 
 In the world of atoms, we have distinct fields of science that follow specific levels of analysis. Math leads to physics, then chemistry, biology, psychology, and sociology. But right now computer science is one single thing. But perhaps down the line, computer science will divide into distinct fields depending on levels of analysis too. From information theory, upwards to programming languages, algorithms, AI/ML, agentic AI psychology, and bot net sociology. This has implications for what it means when you tell a biology they should "learn how to code," with further implications in recruiting, problem solving, and education.
 ** [[./r_rabbit_hole.html][The R Rabbit Hole]]
+:PROPERTIES:
+:UNNUMBERED: notoc
+:END:
 Article.\\
 January 19, 2025 - January 20, 2025.
 
 What happens under the hood when you do something simple in R, like add two numbers together? Here, I start with just that. I then show that arithmetic in R is actually parsed as S-expressions. I then go into LISP, where S-expressions are a hallmark. I then move into the source code of R, where the S-expressions for arithmetic are written, in C. And from there, I go into Assembly, the human-readable version of machine code that C is compiled into. By breaking down these layers, and going down the rabbit hole, this exercise gets us to first principles. These are foundational concepts from which we can reason and solve problems more effectively.
 ** [[./lisp_machine_of_babel.html][The Lisp machine of Babel]]
+:PROPERTIES:
+:UNNUMBERED: notoc
+:END:
 Fiction.\\
 
 I am learning Lisp at the moment. In learning about the history of the language, I realized that the story of Lisp is analogous to the Tower of Babel. I am not the first person to realize this by any means, but I saw it in a way that I haven't seen anywhere else. So I decided to put it into words here.
 ** [[./metaprogramming_in_R.html][Metaprogramming in R]]
+:PROPERTIES:
+:UNNUMBERED: notoc
+:END:
 Markdown.\\
 
 When I started learning Lisp, I learned of the concept of metaprogramming. This means using code to change the programming language itself. A practical example of this in English is using "they/them" to denote gender-neutral singular pronouns, overriding the plural default. Here, I show you how to change the syntax of R to fit your fancy. I show you how to change the "+" operator in ggplot2, and to zero-index vectors, as they're done in many other programming languages. The goal of this markdown is to get you to see through and unsee the arbitrary constraints that any language, spoken/written or programming, will give you.
 ** [[./ca_rule_space.html][Elementary cellular automata rule space]]
+:PROPERTIES:
+:UNNUMBERED: notoc
+:END:
 Markdown.\\
 
 I lay out the rule space of elementary cellular automata as an eight dimensional dataset. I perform UMAP on rule space and color by complexity measures, the most interesting being the labeled Wolfram class of each rule. Class 3, the most chaotic behavior, shows up as little pockets in rule space. Class 4, where things like Turing completeness happen, shows up at or near these pockets, surrounded by Class 2 (repetitive, orderly). This supports the idea of Class 4 being "at the edge of chaos."
 ** [[./logic_gates.html][Logic gates]]
+:PROPERTIES:
+:UNNUMBERED: notoc
+:END:
 Markdown.\\
 
 What are the fundamental units of a computer? Logic gates. I show what these are. I then show that they can be created with combinations of a single type of logic gate: NAND (Not AND). In other words, you can make a general-purpose computer if you had enough NAND gates and wires. In the spirit of this, I combine NAND gates to create a calculator that can add large numbers. One of the key points in this exercise is that it does not take much to get from NAND gates to complex computations.
 ** [[./1d_ca.html][1-D Cellular Automata]]
+:PROPERTIES:
+:UNNUMBERED: notoc
+:END:
 Markdown.\\
 
 Here, I write some code to produce each of the 256 Wolfram cellular automata rules, and visualize the output.
 ** [[./explore_rule_110.html][Explore Wolfram Rule 110]]
+:PROPERTIES:
+:UNNUMBERED: notoc
+:END:
 Markdown.\\
 
 Here, I write some code to produce Rule 110, a Class 4 1-D cellular automata. I then enhance the gliders to make them easier to see. I explore how the output changes if I make the rule probabilistic (eg. 99.99% chance the rule will be followed.
@@ -742,26 +898,44 @@ Here, I write some code to produce Rule 110, a Class 4 1-D cellular automata. I 
 #+HTML: <a href="#top">Back to top</a>
 There is a lot that you can figure out on your own if you simulate coin tosses and dice rolls.
 ** [[./1_law_large_numbers_central_limit_theorem.html][Coin toss series 1: The law of large numbers and the central limit theorem]]
+:PROPERTIES:
+:UNNUMBERED: notoc
+:END:
 Markdown.\\
 
 I taught one of my high school summer students the basics of probability by simulating coin tosses in R. Here, we "discover" the law of large numbers and the central limit theorem using simulated coin tosses.
 ** [[./2_runs_of_luck.html][Coin toss series 2: Runs of luck]]
+:PROPERTIES:
+:UNNUMBERED: notoc
+:END:
 Markdown.\\
 
 Here, we build on the initial piece in the series by looking at the properties of runs of luck. If we flip a coin a million times, how often will we get 10 heads in a row? How many times do we need to flip a coin to get 20 heads in a row on average? Related to sports. How often, statistically, would you expect Steph Curry to make 10 three pointers in a row given his 3-point shot percentage?
 ** [[./3_fair_vs_unfair_coins.html][Coin toss series 3: Fair versus unfair coins]]
+:PROPERTIES:
+:UNNUMBERED: notoc
+:END:
 Markdown.\\
 
 Here, we examine the properties of unfair coins, where the odds of getting heads or tails does not equal 50%. Can we figure out whether a coin is a fair coin?
 ** [[./4_random_walk.html][Coin toss series 4: Random walks]]
+:PROPERTIES:
+:UNNUMBERED: notoc
+:END:
 Markdown.\\
 
 Here, we show that if we simulate flipping coins, but we keep a record of the number of heads and the number of tails, we end up doing a random walk. We visualize these walks (they look somewhat like stock market data), and ask questions like how often a random walker crosses zero.
 ** [[./5_dice_roll.html][Coin toss series 5: Dice rolls]]
+:PROPERTIES:
+:UNNUMBERED: notoc
+:END:
 Markdown.\\
 
 Here, we do an abstraction of the coin tosses we have been simulating, by coinsidering dice of three or more faces. We simulate these dice rolls and examine their properties. How often does a six sided dice land on the number 3? We can figure that out with simple math, but if you roll a dice 1000 times, and you do that again, and you do that again, what will be the standard deviation of the number of times the dice lands on 3?
 ** [[./6_is_this_sequence_random.html][Coin toss series 6: Is this sequence random?]]
+:PROPERTIES:
+:UNNUMBERED: notoc
+:END:
 Markdown.\\
 
 Here, we look at fair coin tosses, unfair coin tosses, and random walks, and explore the randomness of the sequences by doing convolutions on the sequences with kernel size 2.
@@ -769,30 +943,45 @@ Here, we look at fair coin tosses, unfair coin tosses, and random walks, and exp
 #+HTML: <a href="#top">Back to top</a>
 Memoir-style essays drawn from specific moments and experiences in my life.
 ** [[./i_saw_the_northern_lights.html][I saw the northern lights]]
+:PROPERTIES:
+:UNNUMBERED: notoc
+:END:
 Article.\\
 May 24, 2024 - May 24, 2024.
 
 A reflection of the first time I saw the northern lights, in Iceland in 2019. A reminder that for whatever moment you're immersed in, really take it in before you reach for your camera or whatever else.
 
 ** [[./limbic_language_learning.html][Limbic language learning]]
+:PROPERTIES:
+:UNNUMBERED: notoc
+:END:
 Article.\\
 December 2, 2023 - December 2, 2023.
 
 In the years I've lived in Germany, I have realized that a lot of my success in speaking the language has come from connecting my brain's emotion center (limbic system) with my language center. In short, I think that anyone learning a foreign language should start speaking that language with emotion sooner than later. Here, I go into personal experiences and practical advice for what I call limbic language learning.
 
 ** [[./stick_shift_mindset.html][Zen and the art of driving stick]]
+:PROPERTIES:
+:UNNUMBERED: notoc
+:END:
 Article.\\
 October 9, 2022 - October 13, 2024.
 
 I find that if I'm driving stick rather than automatic, I'm much more connected to what I'm doing, much more satisfied in the moment, and I'm objectively a better driver as a result.This concept generalizes. Pick an endeavor. Complete the analogy: automatic transmission is to your endeavor as manual transmission is to X. If you know how to do X, do it when you can. If you don't know how to do X, then learn it. I give several examples of this in my life, and I conclude by encouraging others to embody this way of doing things.
 
 ** [[./zelda.html][Zelda, the hero instinct, and narratives]]
+:PROPERTIES:
+:UNNUMBERED: notoc
+:END:
 Article.\\
 June 19, 2023 - June 21, 2023.
 
 I take the classic game Zelda: A Link to the Past, and draw parallels between the gameplay and many aspects of my life. I talk especially about our "hero instinct," in terms of how we really vibe with hero-centric games like Zelda, and I go into the general concept of narratives. How do these mesh with the complex, interconnected modern world, in the workplace and beyond?
 
 ** [[./life_and_love_during_coronazeit.pdf][Life and love in Berlin during the Coronazeit]]
+:PROPERTIES:
+:UNNUMBERED: notoc
+:END:
 Feature.\\
 
 An article I wrote in 2020 for the annual Krupp Internship e-newsletter. It was written just after the first wave of the COVID-19 pandemic. It serves as a time capsule for that period, in which many of our basic assumptions about the stability and the future of the modern world were upended. I enjoy looking at it again now and then, as it captures a very unique state of mind. It also captures my wedding, which took place the day before the first lockdown, and included toilet paper as a wedding present.
@@ -801,28 +990,43 @@ An article I wrote in 2020 for the annual Krupp Internship e-newsletter. It was 
 #+HTML: <a href="#top">Back to top</a>
 I value having good health, and I have been fortunate enough to work out and eat right for several decades, and I have worked as a certified personal trainer in the past at three gyms. Accordingly, I want to get my perspective off my chest and out there for others.
 ** [[./boring_diet.html][The boring diet: how I prevent food addiction]]
+:PROPERTIES:
+:UNNUMBERED: notoc
+:END:
 Article.\\
 June 22, 2023.
 
 I talk about the hypothesis that the existence and wide availability really good-tasting food is a contributor to the obesity epidemic. I talk about experiences where I've had food that tastes so good that it makes me feel uneasy, like I'm going to become addicted. I call this hyper-yummy food. From this comes the idea of making your diet more boring, less yummy, as a first step to taking control of your nutrition, as opposed to cutting calories.
 
 ** [[./pursuit_of_health.html][The Tao of good health]]
+:PROPERTIES:
+:UNNUMBERED: notoc
+:END:
 Article.\\
 May 21, 2023 - September 4, 2023.
 
 My approach to health and fitness is not the goal-directed approach that seems to be prevalent everywhere these days. Rather, it's more of a flow-based approach rooted in Taoism, and taking elements from modern books like James Clear's Atomic Habits. This has worked for me for decades, and allows me to get my dopamine from the process of working out rather than the outcome. This is a highly sought after place to be, so I want to share my method in case this helps anyone else find that place too.
 
 ** [[./how_to_get_fit_long_term.html][How to get fit in 20 years]]
+:PROPERTIES:
+:UNNUMBERED: notoc
+:END:
 Article.\\
 March 5, 2023 - May 5, 2024.
 
 Over the years, I have seen people who want to get in shape develop fitness goals that are too much over too little time, which leads to burnout. Here, I provide the opposite perspective, which has worked for me in my adult life. Take your fitness goals and ask: if I had a year to achieve this rather than a month, how would I do it?
 ** [[./psychotherapy_and_fitness.html][Psychotherapy should be as normal as going to the gym]]
+:PROPERTIES:
+:UNNUMBERED: notoc
+:END:
 Article.\\
 February 7 - February 7.
 
 There is a renewed interest in Stoic philosophy as of late. It's a great set of tools that I have used for dealing with hardship. But it's 2000 years old. Where are the modern Stoics? They exist, but under a different name: psychotherapists. If psychotherapy was the successor to Stoicism, and there is so much interest in Stoicism, then shouldn't there be an equal amount of interest in clinical psychology and how it can help us? Shouldn't it be something we learn early, and make these tools part of our daily routine, as the Stoics do?
 ** [[./just_paint.org][Just paint]]
+:PROPERTIES:
+:UNNUMBERED: notoc
+:END:
 Article.\\
 June 27, 2022 - July 15, 2022.
 
@@ -831,74 +1035,128 @@ An anecdote from my aunt evolves into a motivational article (mainly written for
 #+HTML: <a href="#top">Back to top</a>
 Think of these as both newsletters and time capsules. They are not exhaustive, but they do represent the bigger insights and ideas on my end from that time period. I'll note that I was going to do this monthly, but life caught up with me and I stopped early. I leave these articles here as a snapshot of a particular period of time that was actually pretty interesting in terms of the long arc of human history: AI (particularly generative AI, like LLMs) was really taking off. Maybe at the time of reading this, AI has plateaued, or maybe it is still exponentially increasing, with all the debate around it that it had here, or maybe some alien is reading this a hundred thousand years after some rogue AGI killed us all. But either way, these are time capsules that maybe I'll add to here and there for the rest of my life.
 ** [[./2024_may.html][May 2024]]
+:PROPERTIES:
+:UNNUMBERED: notoc
+:END:
 ** [[./2023_may.html][May 2023]]
+:PROPERTIES:
+:UNNUMBERED: notoc
+:END:
 ** [[./2023_april.html][April 2023]]
+:PROPERTIES:
+:UNNUMBERED: notoc
+:END:
 ** [[./2023_march.html][March 2023]]
+:PROPERTIES:
+:UNNUMBERED: notoc
+:END:
 * Collections
 #+HTML: <a href="#top">Back to top</a>
 These are growing lists of things that I find important.
 ** [[./question_bank.html][Question Bank]]
+:PROPERTIES:
+:UNNUMBERED: notoc
+:END:
 Collection.\\
 
 I find that asking good questions is key to orienting you in the right direction. As I get older, I am focusing less on answers and more on questions. Accordingly, here is a growing collection of questions that I have found helpful over the years. It is divided into two categories: lists of questions that have been collected by others, and my independent collection. Most of these questions are attributed to others, as opposed to being unique to me.
 
 ** [[./social_media_posts.html][Social media posts]]
+:PROPERTIES:
+:UNNUMBERED: notoc
+:END:
 Collection.\\
 
 Social media is a way for me to get things off my chest that I think are valuable to the world. Oftentimes, I will have an idea, or a piece of software, or a gif, that will give people unique intuition around a perticular topic, for example in bioinformatics. Rather than spending countless hours turning it into a paper or what not, it is easier to just turn it into a social media post. Having done this for a few years now, I have a collection of social media posts. Rather than having to scroll through each of them yourself, I have organized the ones that matter by topic here.
 * Where I was featured
 #+HTML: <a href="#top">Back to top</a>
 ** [[./Krupp-Stanford_E-Newsletter_2025_9MB.pdf][Krupp Stanford Newsletter 2025, featuring my intern]]
+:PROPERTIES:
+:UNNUMBERED: notoc
+:END:
 Feature.\\
 
 In the summer of 2025, I had a Krupp intern from the Stanford in Berlin program. This was special because I did this same internship when I was in the Stanford in Berlin program in 2007. Here, I got the chance to give back. On page 6 of this pdf, my intern Arianna gives her reflection of how the internship and her summer in general went. I thank the program for giving me the opportunity to mentor Arianna, and I hope for many more Krupp interns to come.
 ** [[https://www.youtube.com/watch?v=wRVOyYse5ug][Interview with Ramji Srinivasan, CEO of Teiko]]
+:PROPERTIES:
+:UNNUMBERED: notoc
+:END:
 Video.\\
 
 This interview took place at AACR 2025 in Chicago. The interview was spur of the moment. We discussed a variety of topics related to flow/mass cytometry and single-cell analysis.
 
 To give credit where credit is due, I talk about the MEM paper (Diggins et al, 2018). In the interview, I say that this paper algorithmically gives you a way to determine a gating strategy given a cluster. I'll correct that here and say that the MEM paper is able to convert clusters into descriptions of what markers are positive and negative. Later work, like hypergate (Becht et al, 2019), and gatefinder (Aghaeepour et al, 2018) do the algorithmic gating strategy maker step.
 ** [[https://watershed.bio/resources/the-limits-of-dimensionality-reduction-tools-for-single-cell-analysis][The limits of dimensionality reduction tools for single-cell analysis]]
+:PROPERTIES:
+:UNNUMBERED: notoc
+:END:
 Webinar.\\
 
 This webinar is the latest iteration of my "dimensionality reduction interrogation" work, which has spanned six years. In this talk, I show the limits of these tools by looking at the K-nearest neighbors (KNN) of a given cell in the 2-D embedding space, and compare it to the K-nearest neighbors of that same cell in the high-dimensional feature space. I look at the averages across a given dataset for a given method to compare t-SNE, UMAP and PCA. I then color the maps by each cell's KNN preservation to look for patterns across the dataset. While I point out some general trends, I conclude that at least some of this depends on the dataset. Thus, I demo my free [[https://github.com/tjburns08/KnnSleepwalk][KnnSleepwalk]] tool, which allows users to deterine the performance of their t-SNE's and UMAPs for their data accordingly.
 ** [[https://rseng.github.io/devstories/2023/tyler-burns-part-2/][Developer Stories Podcast: Part 2: Be the flame, not the moth]]
+:PROPERTIES:
+:UNNUMBERED: notoc
+:END:
 Guest on a Podcast.\\
 
 Here is part 2 of my appearance on the Developer Stories podcast. In part 1, I talked about my transition from biology to programming and bioinformatics in graduate school. In this podcast, I talk about my life after graduation, which started with a big move from Palo Alto, California to Berlin, Germany. I talk about life out here, projects I'm working on, being self-employed, and starting my own company.
 
 ** [[https://rseng.github.io/devstories/2023/tyler-burns-part-1/][Developer Stories Podcast: Part 1: Heavenly light emanating from line 37]]
+:PROPERTIES:
+:UNNUMBERED: notoc
+:END:
 Guest on a podcast.\\
 
 I talk with software developer Vanessa Sochat about my time in graduate school. I started out as a wet-lab biologist. But after taking an intro CS class for fun, I realized that I really enjoyed the dry-lab side of things, and my career trajectory changed accordingly. Have a listen for more details. This is part 1 of 2.
 ** [[https://www.youtube.com/watch?v=U35T-KzfeLk][TEDx Basel talk: my scrolling problem, and how I fixed it]]
+:PROPERTIES:
+:UNNUMBERED: notoc
+:END:
 YouTube video of my TED talk.\\
 
 In this talk, I introduce the idea of the Scrolling Problem, which is the incompatiblity of my ADD brain and modern technology built around the infinite scroll. I talk about some work I'm doing to counteract that, which can be found [[https://github.com/tjburns08/twitter_archive_and_embed][here]]. It was originally Twitter, but I switched to RSS mapping, [[https://github.com/tjburns08/rss_map][here]], after Twitter started blocking scrapers.
 ** [[./burns_tedx_caricature.pdf][TEDx Basel: caricature of my talk]]
+:PROPERTIES:
+:UNNUMBERED: notoc
+:END:
 Work of art.\\
 
 While I was giving my TED talk, unbeknownst to me an artist in the audience was drawing it out in real time, complete with pen and watercolor. He did this for each of the speakers. I was extremely impressed with what he was able to do given the very limited time. My talk is not yet on YouTube, but if you want the gist of it, have a look at this picture.
 ** [[./tyler_alumni_im_portrait.pdf][Tyler Alumni Im Portrait]]
+:PROPERTIES:
+:UNNUMBERED: notoc
+:END:
 Feature.\\
 
 "Im" is short for "in dem" in German. Not a typo. An article I did for the Stanford Krupp Internship Program, which had huge impact on my life and career trajectory. In a nutshell, I was pre-med prior to my medical internship at the Charite Hospital in Berlin in 2007. Through the internship, I realized that I wanted to do research rather than clinical work. I got my PhD and came back to Berlin to work on the Charite Hospital campus once again, this time as a researcher! I will be forever grateful for the Krupp Internship program and Stanford's Bing Overseas Study Program.
 * Fun stuff
 #+HTML: <a href="#top">Back to top</a>
 ** [[./speech_memorization_helper.html][Speech memorization helper]]
+:PROPERTIES:
+:UNNUMBERED: notoc
+:END:
 Web page.\\
 
 Take the text you want to memorize and paste it into the box. The text will be split up into individual sentences. The first sentence will be displayed. Recite as much of the subsequent sentences as you can from memory. Buttons will allow you to move to the next sentence or the previous sentence all the way to the end of the text.
 
 ** [[./gol_navigate.html][Conway's Game of Life Cellvivor]]
+:PROPERTIES:
+:UNNUMBERED: notoc
+:END:
 Game.\\
 
 A game within Conway's Game of Life. You are a blue square that you can move (with arrows), and your goal is to make contact with a "goal" square, colored green, while avoiding all the squares in the Game of Life automata that come at you. Each level up leads to a denser game board. You get five seconds of invincibility (you're colored red) in the beginning of each level, that allows you to get out of the way of any Game of Life objects near you.
 ** [[./breakout.html][Breakout]]
+:PROPERTIES:
+:UNNUMBERED: notoc
+:END:
 Game.\\
 
 A game that will always be of significance to me, because it was the assignment in my intro CS class that made me realize that I really enjoy coding. A simple implementation of breakout that runs on a single html page.
 ** [[./conways_gol.html][Conway's Game of Life]]
+:PROPERTIES:
+:UNNUMBERED: notoc
+:END:
 Web page.\\
 
 I first came across Conway's Game of Life when I was 16. It completely changed the way I think about how the world works. Or, it helped me realize the way I inherently think about the world. One of those. I consider this the first major event that moved me into the world of computer science later in life. I was above to program this up for the first time in my second intro CS class (Stanford CS106B, C++).
@@ -914,6 +1172,9 @@ Aside from that, I have added the ability to modify the rules for the grid. This
 
 I have also added the ability to modify the size of the grid.
 ** [[./mandelbrot_set.html][Mandelbrot Set]]
+:PROPERTIES:
+:UNNUMBERED: notoc
+:END:
 Web page.\\
 
 I first came across this in one of my old math books, perhaps in middle school. I just thought of it as a strange cool looking thing at the time, but what I didn't appreciate until later was how simple it was to implement. This is a single html page, under 80 lines in total. Click on any point on the screen to zoom. Note that you do lose resolution if you zoom in long enough.
