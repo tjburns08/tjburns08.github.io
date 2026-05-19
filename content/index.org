@@ -16,7 +16,7 @@ This website is a place where I can openly share my ideas and non-NDA work, rega
 If you have quesitons or comments, or you're interested in working or collaborating with me, just send me a message (see contact info below). I'm always happy to help.
 * New
 #+HTML: <a href="#top">Back to top</a>
-** [[./dr_provenance_interactive_v4.html][Provenance of CyTOF dimension reduction algorithms]]
+** [[./dr_provenance_interactive.html][Provenance of CyTOF dimension reduction algorithms]]
 :PROPERTIES:
 :UNNUMBERED: notoc
 :END:
@@ -316,7 +316,7 @@ Markdown.\\
 In flow cytometry and CyTOF analysis, we distinguish between "type" and "state" markers, so we can cluster on the former and analyze per-cluster expression changes in the latter. For single-cell RNA sequencing, we cannot make this distinguishment. Thus, we have to rely on data integration algorithms when we are analyzing pre-treatment and post-treatment datasets. I show how this is done, and I show how failure to do so can lead research teams to falsely interpret the data, and make false conclusions. Thus, understanding data integration is critical to keeping research teams on track.
 
 ** Dimension reduction interrogation
-*** [[./dr_provenance_interactive_v4.html][Provenance of CyTOF dimension reduction algorithms]]
+*** [[./dr_provenance_interactive.html][Provenance of CyTOF dimension reduction algorithms]]
 Interactive html.\\
 
 If you want to understand the algorithms used in analyzing data specific to a given field, you need to understand the history of their development. Knowing that Leiden clustering was built on top of Louvain matters, for example. Knowing that UMAP was built after t-SNE matters. Here, I built provenance graph of CyTOF dimensionality reduction/visualization algorithms, from SPADE to UMAP and later. I turned it into an interactive html. We can see that while the field has "collapsed" into UMAP, there are a number of other methods developed after or in parallel to UMAP that could be equally useful or if not useful to your bespoke situation. The bigger picture: this does to the intro section of a paper what SPADE did to the immune system.
