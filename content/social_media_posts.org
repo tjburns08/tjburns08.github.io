@@ -13,9 +13,9 @@ Dr. Seuss, [[https://en.wikipedia.org/wiki/Horton_Hatches_the_Egg][/Horton Hatch
 
 #+TOC: headlines 1
 
-* KNN sleepwalk and related
+* Dimensionality Reduction And Embedding Interpretation
 #+HTML: <a href="#top">Back to top</a>
-A lot of my social media content has revolved around a tool I build called KNN sleepwalk, which allows you to look at the difference between K-nearest neighbors (KNN) of a given data point in the embedding space versus the original high-dimensional space. This kind of intuition is important especially in high-dimensional flow/CyTOF data, where there is sometimes temptation to gate directly on the embedding itself. These posts show you that one should exercise caution when doing such a thing. You can use the method [[https://github.com/tjburns08/KnnSleepwalk][here]].
+Posts on UMAP, t-SNE, KNN/KFN Sleepwalk, map stability, global/local preservation, and visual defaults that affect interpretation.
 ** [[https://www.linkedin.com/posts/tylerjburns_hi-friends-i-finally-after-several-years-activity-7369363128763002882-VdIM?utm_source=share&utm_medium=member_desktop&rcm=ACoAAAbP8M8BYXs_UknoBHnmw2rZ-aRDTJF7L3Y][KNN Sleepwalk Dash app]]
 Hi friends, I finally (after several years) turned my KnnSleepwalk package into a web app that anyone can use with a single click. This will give you intuition as to what "resolution" your embeddings (e.g. UMAP) are for each region of each dataset.
 
@@ -202,9 +202,6 @@ A solution to this problem comes out of my thesis work on CyTOF data. Compute th
 
 If you want a more in-depth look at this KNN-based solution and things you can do with it, go here: https://lnkd.in/eJYTj5s5
 [[file:images/knn_two_conditions.jpeg]]
-* UMAP and t-SNE manipulation animations
-#+HTML: <a href="#top">Back to top</a>
-Here, I ask various questions around the nature of t-SNE and UMAP, which are often well answered by manipulating the input and examining the output.
 ** [[https://www.linkedin.com/posts/tylerjburns_if-you-run-t-sne-or-umap-multiple-times-activity-7317539109864890369-xg0A?utm_source=share&utm_medium=member_desktop&rcm=ACoAAAbP8M8BYXs_UknoBHnmw2rZ-aRDTJF7L3Y][Following a cell's position across multiple t-SNE and UMAP runs]]
 If you run t-SNE or UMAP multiple times, you can see the maps change. To properly use these tools, you need to run them more than once. Let me explain.
 
@@ -289,195 +286,57 @@ https://lnkd.in/ezeZV_Fj
 
 A relevant interrogation of dimension reduction with lots of pictures here: https://lnkd.in/eivsbAfE
 #+HTML: <img src="images/umap_add_noise.gif"/>
-* Teaching and learning bioinformatics
-#+HTML: <a href="#top">Back to top</a>
-Some of my work involves teaching bioinformatics, especially to biologists who are currently learning. I am good at this in particular because I started out as a biologist and learned bioinformatics later in life. The posts here are reflections and insights in this direction.
-** [[https://www.linkedin.com/posts/tylerjburns_turn-the-knobs-see-how-the-output-changes-activity-7367177068553461761-yPpK?utm_source=share&utm_medium=member_desktop&rcm=ACoAAAbP8M8BYXs_UknoBHnmw2rZ-aRDTJF7L3Y][Scanpy analysis intuition building app]]
-Turn the knobs, see how the output changes.
+** [[https://www.linkedin.com/posts/tylerjburns_the-case-for-viridis-activity-7289648023238811648-Qh8o?utm_source=share&utm_medium=member_desktop][Comparing Color Palettes for scRNA-seq Data Visualization: The Case for Viridis as a Default]]
+TL;DR: use the viridis color palette for your single-cell data to improve interpretability and colorblind accessibility. Flip through the 3-slide carousel for visuals. Longer post...
 
-When you are analyzing single-cell and spatial data, you can gain intuition by changing the parameters of the pipeline, and seeing how the output changes. To help you to this end, we made a small app that allows you to change some of the critical settings in a given pipeline, and see how that affects downstream output.
+It was brought to my attention in a previous post I made, that the "jet" color palette (blue -> red) often used for coloring t-SNE and UMAP plots can exaggerate differences in marker values, and is not colorblind friendly.
 
-The app runs the PBMC 3k dataset through a standard analysis pipeline via scanpy. The UI allows you to change the dataset, number of highly variable genes, number of PCs, and number of KNN for the UMAP. The output is a UMAP that is colored by the pre-made cell annotations. You can therefore look at how the shape of the UMAP changes, and how distinguished the annotations are (in optimal circumstances, they should be maximally separate).
+In the R markdown linked in the comments, I compare the Jet, Seurat default, and Viridis palettes in terms of balance and colorblind friendliness. The report includes both color spectrum comparisons and UMAP plots colored using each palette, along with colorblind simulations.
 
-One observation we made is that for this dataset, changing the number of highly variable genes produced modest visual changes, but not as substantial as I previously thought (with the exception of going down to a very small number, like 100). Knowing this kind of thing is important, per dataset. For example, it could be that for other data types going from 2000 to 5000 HVGs would produce very different results.
+The first image in the carousel shows the spectra in side by side comparisons. The second and third images show representative UMAPs colored in the three palettes along with their colorblind simulations.
 
-You have to try it yourself in order to see for yourself, and that's what this app is all about.
+Observations:
 
-This is a "version 0" and there are many things that we would like to add down the line. One of them is the ability to drag and drop in your own dataset. This is a low hanging fruit. Things like coloring by cluster ID, with the choice of various clustering algorithms and their respective settings (e.g. Louvain, Leiden, k-means).
+ - Jet: abrupt color transitions exaggerate small differences in marker expression if they occur at these transition points. Colorblind simulations keep these transitions and make the palette overall very unbalanced.
 
-Additional downstream metrics would do well too, like how good the UMAP is (via our KnnSleepwalk tool), or things like a F1 score between pre-made cell annotations and new clusters. Later apps could tackle things like testing data integration methods across two flagship datasets.
+ - Seurat default: smooth transitions and colorblind friendly, but limited resolution due to fewer colors being used.
 
-To use the app, you simply have to clone the github repo, pip install the requirements.txt file, and run the "app" python script. This will produce a link you can open in your browser, and you are good to go.
+ - Viridis: smooth transitions and colorblind friendly, but with higher resolution due to more colors. This resolution is at least partially preserved in the colorblind simulations.
 
-We are currently in the process of building out front-end interfaces to the work we have done in the past and the work we are currently doing. We think that this will make our work more accessible and usable to a larger audience with fewer steps.
+Based on these observations, I recommend that researchers and leaders consider using viridis (or palettes in the viridis family) as defaults for your papers, posters, talks, pitch decks, and so forth.
 
-If you are a member of the single-cell and/or spatial community and have any requests for custom-tailored apps (or extensions of apps, modules I can build into existing SaaS products, etc, please let me know.
+By doing so, we can enhance interpretability, inclusivity, and data literacy across academic and industry settings.
 
-Link to the app is in the comments below. Credit to Arianna Aalami for fleshing out a lot of the code. Thank you, and I hope you all have a great day.
+Please see the comments for a talk given at SciPy in 2015 from the creators of the viridis color palette. They do a great job introducing the viewer to the first principles of color theory, from the photons to the neurons. They use that in turn to explain the development of viridis.
 
-[[file:images/scanpy_app_demo.gif]]
+Bottom line: use viridis to improve clarity and inclusivity in your single-cell data visualizations.
+
+[[file:images/viridis_post_1.png]]
+[[file:images/viridis_post_2.png]]
+[[file:images/viridis_post_3.png]]
+
 *** comment
-The GitHub link to the project is here: https://github.com/ariannaaalami/interactive_scanpy_pipeline
+My markdown is here: https://tjburns08.github.io/case_for_viridis.html
 
-I managed to host it on Plotly Cloud (I'm an early access member), though the link has been currently a bit wishy washy. I'll link it nonetheless: https://interactive-scanpy-pipeline.plotly.app/
+A video by the creators of the viridis palette is here: https://www.youtube.com/watch?v=xAoljeRJ3lU
 
-** [[https://www.linkedin.com/posts/tylerjburns_here-is-a-post-i-wrote-for-biologists-and-activity-7090282332749717504-XTkW?utm_source=share&utm_medium=member_desktop][How I went from biologist to biology-leveraged bioinformatician]]
-Here is a post I wrote for biologists and team leaders about my journey from wet-lab biologist to biology-leveraged bioinformatician. In short, I think you can do it too, and if you're working in the life sciences, you SHOULD do it too. You can quickly get to a level where you can understand and communicate effectively with your comp bio team, something that is essential for any project that contains any -omics data. To summarize:
+Thank you to Asier Antoranz for making me aware of this video, and therefore inspiring this post. This truly shows the value of posting content to social media.
+** [[https://www.linkedin.com/posts/tylerjburns_flowcytof-users-who-are-now-doing-single-cell-activity-7287826621862940672-Iv0E?utm_source=share&utm_medium=member_desktop][Cytobank color palette for Seurat's FeaturePlot]]
+Flow/CyTOF users who are now doing single-cell sequencing analysis: I created the blue-to-red color palette (eg. used in FlowJo, Cytobank, OMIQ, etc) for Seurat's FeaturePlot function, which otherwise defaults to gray-to-purple.
 
-1. I started with Karel the Robot (link in post). This is the illustration below. It's what every CS106A student at Stanford starts with. It teaches you a surprising amount of general programming principles that I still use today. Importantly, it makes coding less scary.
+Back in the early 2010s, when I was first coloring t-SNE maps for CyTOF data, I got used to a color palette that the main SAAS company in the space, Cytobank, was using. It's basically blue -> cyan -> green -> yellow -> orange -> red.
 
-2. I spent a lot of time just trying things (and still do). This was due to the fact that I was initially working with CyTOF data before there were many established best practices and high-level frameworks. Nassim Taleb calls this "convex tinkering" and in my experience, this is better than hand-waving. In the context of bioinformatics, when I try a thing, I am often either wrong or partially wrong about what I thought I was going to see.
+Anyway, here is a R Markdown (linked in the comments) that has the code to use this color palette for FeaturePlot, but also some code that allows you to replicate the FeaturePlot function with the "Cytobank palette" independent of Seurat. The image is example output.
 
-3. When I am completely stuck on a problem, I solve a simpler but related problem. This is a nice trick to keep the momentum going, and to get me into the flow state. The latter is something essential, if not sacred, to my workday.
+Feel free to steal the code and do whatever you want with it. I hope you all have a great day.
 
-Have a look here for more insights and depth: https://lnkd.in/eQ-2BvNn
-[[file:images/karel_learns_bioinformatics.jpeg]]
-** [[https://www.linkedin.com/posts/tylerjburns_my-survey-has-revealed-that-the-act-of-problem-activity-7193215772448505858-tK7P?utm_source=share&utm_medium=member_desktop][Problem solving as a bottleneck to learning how to code]]
-My survey has revealed that the act of problem solving is a bottleneck for biologists learning how to code. So let me give you a tool that has helped me in the problem solving process over the years, especially when I feel "paralyzed" in the face of a problem:
+[[file:images/featureplot_cytobank_colors.png]]
+*** comment
+The markdown is here: https://tjburns08.github.io/rainbow_feature_plot.html
 
-Simplify.
-
-Sometimes it's simplifying the problem itself, and sometimes it's solving a simpler but related problem. The act of doing so allows you to get some "psychological momentum." What you don't want is to be paralyzed, and not know what to do next.
-
-As an example, I like to tell the story of problem set 3 in CS106A: designing the arcade game Breakout using a Java graphics library. My problem was that even the act of decomposing the problem (standard practice) was stressful, because there were so many pieces that I didn't understand. It was overwhelming to consider everything at once.
-
-So I asked myself, could I make a ball bounce around across the walls. No, too complicated. How about just the game window with nothing in it. Ok. That worked. How about the ball in the center of the screen, in place. Ok, that worked. How about if I could get the ball to move one pixel to the right and then stop? That worked too! Now I was getting some momentum.
-
-It was in that way that I got to a point where I could do the classic problem decomposition and solve the rest of the problem.
-
-So whatever you're trying to solve, try solving a simpler version of the problem, or try solving a simpler but related problem. Keep the momentum going.
-
-More resources in the comments below.
-[[file:images/code_hangups.jpeg]]
-** [[https://www.linkedin.com/posts/tylerjburns_this-image-is-romanesco-broccoli-i-came-activity-7191860234095640576-rGEH?utm_source=share&utm_medium=member_desktop][Learning how to code has improved how I think]]
-This image is romanesco broccoli. I came across it sophomore year in my dorm cafeteria. The pattern at play was amazing, but...hard to put into words. When I was learning how to code, I learned the word for the concept at hand: recursion. Learning how to code has given me many instances of this, where I can reason better about something that was otherwise hard to put into words.
-
-In general, learning how to code has improved how I think. It has given me a new lens, the computational lens, through which I can see the world. I wrote and chiseled away at an article over the past year and three months on this topic, and I'm finally ready to share it with you. The article can be boiled down into three main points.
-
-The first point is that in comparison to standard wet-lab biology, coding and bioinformatic analysis often involves the scientific method, sped up. A lab experiment used to take me on the order of hours to days, whereas computational experiments (eg. when debugging, analyzing data) take me on the order of seconds to minutes. Accordingly, you can get intuition around something really fast, as well as go through the process of being wrong, figuring out where you were wrong, and improving your thinking so you're not wrong about it again.
-
-The second point is that computer science allows you to reason about and operate on topics that are otherwise difficult to put into words. An example of this is "levels of abstraction," where I show you what "hello world" looks like in python (not much stuff), C (a bit more stuff), and assembly (a whole lot of stuff), so you can appreciate the sheer volume of things that get swept under the rug when you write print("hello world") in python.
-
-The third point is that in terms of "computational thinking," the computational lens is not meant to replace all other forms of thinking. It is meant to be added to your "latticework of mental models" to use the framing of the late Charlie Munger (link in comments). In other words, you want to be able to look at a problem through as many lenses as you can. I link more material about this in the article.
-
-Overall, learning how to code takes time, so don't fret if you've moving forward more slowly than you'd like. This is normal. This said, I do offer a class to get biologists started with programming, with an in-person option and a virtual option. Any labs who are interested, please feel free to reach out. Otherwise, if you want quick (free) advice, feel free to reach out too.
-
-The [[https://en.wikipedia.org/wiki/Romanesco_broccoli#/media/File:Romanesco_broccoli_(Brassica_oleracea).jpg][image]] is from the Wikipedia article on romanesco broccoli, by Ivar Leidus, licensed under [[https://creativecommons.org/licenses/by-sa/4.0/][CC BY-SA 4.0]].
-
-The article is [[https://tjburns08.github.io/coding_as_philosophical_project.html][here]].
-
-[[file:images/romanesco_broccoli.jpeg]]
-** [[https://www.linkedin.com/posts/tylerjburns_my-survey-has-already-revealed-that-a-large-activity-7189597924899643392-HXOM?utm_source=share&utm_medium=member_desktop][Biologists becoming bioinformaticians are having the hardest time learning how to code]]
-My survey has already revealed that a large bottleneck for biologists learning bioinformatics is the act of learning how to code, even with plenty of online resources, bootcamps, LLMs, etc out there these days. Let me explain why I think this is the case, based on what I've seen and experienced.
-
-For one to do bioinformatics effectively, one must learn how to think computationally. This generally means that one must know how to apply the basic principles of computer science to a problem, like abstraction, problem decomposition, and turning concepts into code. There's a great essay on this idea from 2006 by Jeannette M. Wing that I'll link in the comments.
-
-To learn how to think computationally, I had to learn how to independently write code. What I mean by independently is that when faced with a computer science or bioinformatics problem, I would really struggle with it before looking for some sort of answer online (something that's easier now given ChatGPT, etc). It's the equivalent of doing the math problems in school without looking up the answer in the back of the book first. I still keep up this practice today, trying to independently think/work through a problem before I look at what others have done.
-
-Coding is a learn-by-doing activity. It is not something that you're spoon-fed. You get better with every problem you solve. I started with very small problems and then I worked my way up. It's a lot of work, and it takes time. But proper guidance early on really helps.
-
-One can get started with the foundations of computational thinking in a few weeks with a program called Karel the Robot. It's what every intro CS student at Stanford starts with. It's what I started with. It's what I have people I teach start with. It not only provides a solid foundation but also demystifies what coding and computational thinking is. The concepts and virtues (eg. patience) I learned with Karel the Robot I still use today, ten years later. I'll link a place to get started in the comments.
-
-You can't simply become a code-fluent, computationally minded bioinformatician in a single short bootcamp. But you can develop the right foundations that allow you to effectively move yourself forward from that point on.
-
-I remember what it feels like to be a wet-lab biologist and be totally overwhelmed with this stuff. As such, I have been teaching people how to learn bioinformatics from the standpoint of a wet-lab biologist. Luckily, my availability is going to open up again this summer, so any labs who are interested, please reach out.
-
-[[file:images/bioinformatics_learning_biggest_hangups.jpeg]]
-** [[https://www.linkedin.com/posts/tylerjburns_bioinformatics-bigdata-collaboration-activity-7177394725853741056-W1of?utm_source=share&utm_medium=member_desktop][Recap on teaching engagement with Zamora Lab at MCW]]
-After speaking with many labs last year, I determined (as many others have) that there is a lack of bioinformatics support in academia. Thus, many biologists are pressured to learn these skills on their own (as if they don't have enough on their plate already). Aside from the additional stress, this can lead to serious mistakes downstream. Anyone who knows about the replication crises in various fields should be concerned at this point.
-
-The good news is, I have also determined that biologists are fully capable of learning these skills. They just need the right guidance. Thus, I have lots of respect for trained bioinformaticians who are going out of their way to teach this material to biologists, and I encourage all of us to teach when we can.
-
-How to do it is a complex topic, and I don't think you can go from neophyte to bioinformatician in a few days. But I think providing the right foundations along with proper followup can go a long way. It did take me a long time to learn bioinformatics myself as a biologist, but it did not take long for me to have a solid foundation from which I could already start adding value.
-
-I saw this first hand with the lab of Anthony Zamora this past week. I spent three days on site with them, and there is plenty of followup planned. If your lab needs training and/or advising, and your local bioinformaticians don't have bandwidth, please contact me. I wish you all the best.
-
-[[file:images/zamora_lab.jpeg]]
-** [[https://www.linkedin.com/posts/tylerjburns_i-am-tired-of-the-phrase-those-who-can-activity-7168606001758257152-5iMu?utm_source=share&utm_medium=member_desktop][Those who can do, do; those who have done, teach]]
-I am tired of the phrase "those who can, do; those who can't, teach." So let me fix it for you. "Those who can, do; those who have done, teach." Three things come out of this:
-
-1. If you have experience in anything (which you do), teach it: Yes, there's a lot more educational content these days, but you are specialized in your own way. Just about everyone I know has something unique to say that has not been formalized or at least put in writing. My grandma had all kinds of wisdom that she sadly never wrote down. Thus, I aim to die with everything on paper.
-
-2. Education is becoming increasingly important: in my corner, from cancer biology to bioinformatics, everything is interdisciplinary now. You have physicians talking to biologists talking to engineers talking to computer scientists, each speaking a different "language" and trying to understand each other. One question I'm asking myself a lot these days: how can I teach in a few hours the mental models that have taken me 10,000 hours to really understand?
-
-3. Respect for educators: teaching is hard. Communication is hard. You have to figure out a way to operationalize things you may never have put into words. You have to remember what it's like to not know the thing, which may be a long time ago. You have to cater to different learning styles. I don't think teachers (especially in the US) get nearly the respect they deserve.
-
-This can/can't do/teach dichotemy held me back for a long time. I have been in the single-cell world for 12 years now, and I do a lot more bioinformatics teaching now than I used to, borne out of all the experience at doing bioinformatics. It has way more impact, and I love every minute of it.
-
-If you're a student, postdoc, tech, or scientist in academia or industry, DM me and I'll give you 15 minutes of free advice about single-cell bioinformatics, any sub-topic you want. Or just say hi. I have nothing to sell you. My paid teaching/training services go to the PIs and group leaders: if you want me to set up a more formal bioinformatics workshop or advisory role for your group/lab, DM me and we'll talk. Site visits are on the table.
-
-If you know anyone who could use this post or my teaching/advice, please share it. I hope you all have a great day.
-
-[[file:images/have_done_teach.jpeg]]
-* Journal club and related
+* Clustering, Gating, And Population Assignment
 #+HTML: <a href="#top">Back to top</a>
-Sometimes I read papers and like to talk about them.
-** [[https://www.linkedin.com/posts/tylerjburns_as-a-followup-to-my-earlier-posts-about-single-cell-activity-7389671614948388864-v7D1?utm_source=share&utm_medium=member_desktop&rcm=ACoAAAbP8M8BYXs_UknoBHnmw2rZ-aRDTJF7L3Y][Cell2Sentence update: 27B parameters]]
-As a followup to my earlier posts about single-cell foundation models, I wanted to do a post-length journal club on a recently updated cell2sentence (C2S) model, that now has 27B parameters, and now has some spatial capabilities. Here is what stands out and what it means for you:
-
-Some spatial reasoning capabilities:
-
-Figure 6 shows C2S being used to predict niche neighborhoods for CosMx data. CellPhoneDB and BioGRID interaction data were folded in, which gave an accuracy of 70% (to 55% if C2S alone). This is interesting, and it does make me wonder how far spatial reasoning can be pushed.
-
-However, I also wonder whether it would just be easier to loop in a foundation model trained only on spatial data for spatial tasks rather than trying to make an everything model. I covered one such spatial model, KRONOS, last summer.
-
-Querying, predictions, but no citations:
-
-Figure 2C shows that this model in particular has cell embeddings (like UCE which I recently covered), but also has LLM querying capabilities. This is because part of the training process is converting single-cell data into long "sentences" consisting of a rank-ordered list of genes by expression, per cell. This gets mishmashed in with data from publications.
-
-Figure 9 shows that this scaled-up model in particular was able to make a validated prediction about kinase inhibitor silmitasertib that anyone in pharma might want to take a look at.
-
-This said, the frustrating thing is that the answers do not have "citations" back to the training data (such is how these things work). As a NotebookLM user, this kind of thing frustrates me. Maybe the model could at least have a post-hoc matching function that would pull forth datasets and abstracts from whence the answer most likely came.
-
-Benchmarking AI models based on latent spaces of other AI models:
-
-Such a matching function might having the output and the training data embedded in the latent space of some other model, and doing a nearest neighbor search. Such an idea shows up in the benchmarking section of the paper...
-
-The authors have evaluation metrics in the paper, that actually require the latent space of other foundation models. One way to understand this, is to think of how you would determine how lexically close two sentences were to each other, perhaps in comparison to another pair of sentences. You'd throw these sentences into a BERT embedding (see my TED talk) and measure the physical distance between points in the embedding space.
-
-This is called the BERTscore, and you can see it's use in Figure 4C and 4D, where they evaluate the "scaling" of the model.
-
-The point is: you have an evaluation metric for AI models, which is really a distance function within an embedding space of another AI model. This is a clever idea, but I just hope that in 10 years we won't have evaluation metrics that consist of the latent space of another model, evaluated on the latent space of another model, all the way down.
-
-Conclusion:
-
-As I said in the KRONOS post four months ago, I am waiting for the possibility that foundation models have their "GPT-3 moment" where with enough scale, they are suddenly in every lab everywhere.
-
-This said, it's pretty much impossible for me to evaluate every the quality of every dataset that goes into these models. So I intend to use these things as hypothesis generators, but also to stick with the old fashioned way of looking things up myself. A sort of barbell strategy between old and new.
-
-Aside from that, the model is runnable on google collab (though I haven't gone beyond the starter code they give you), and you should try it. Thank you and I hope you all have a great day.
-
-The pre-print is here: https://www.biorxiv.org/content/10.1101/2025.04.14.648850v2
-
-file:images/cell2sentence_27b.png
-** [[https://www.linkedin.com/posts/tylerjburns_essb2025-spatialbiology-embl-activity-7386022173758386177-h9VB?utm_source=share&utm_medium=member_desktop&rcm=ACoAAAbP8M8BYXs_UknoBHnmw2rZ-aRDTJF7L3Y][Thoughts about ESSB 2025]]
-I had a great time at ESSB2025 in Heidelberg, where I caught up with and met great spatial bio researchers, and got up to speed on the bleeding edge of both wet lab and dry lab practices. A few things that stood out to me:
-
-Very high -plex:
-
-There was a talk that had an antibody panel of 1133 proteins. Up until this point, I had seen at most a few hundred. With my roots in CyTOF, I know how much work can go into building a panel of 30 antibodies, so I think antibody validation might be a bottleneck here unless we have robotic arms coupled to vision transformers doing 5-point titrations and such (now there's a startup idea).
-
-Multiple modalities:
-
-There was an interesting focus on metabolites. One direction was pure mass spec. This gets you a large number of readouts, but you don't yet get single-cell resolution. Another interesting strategy I saw was the construction of aptamer-oligo conjugates that bind to metabolites, that can in turn be sequenced. Think CITE-seq for metabolites.
-
-Analysis, appearance versus reality:
-
-One talk emphasized how hard it was to segment microglia in particular because of their weird shape. Thus, a lot of it was done manually. This is despite the fact that there is a perception that segmentation is a solved problem with all the AI developments. It is not.
-
-From 2-D to 3-D:
-
-There were a number of talks that went into 3-D imaging (e.g. making a bone clear so you can "fly through" it after you stain), and one where an interesting 2-D image observation needs a 3-D image as followup. There is a whole world of anlaysis problems to solve here when this comes to fruition, from new algorithms to data management. Might be worth doing some theoretical work here. And along those lines...
-
-Math and human interpretability:
-
-One talk was using topology to create human readable analysis outputs. This group has a "product market fit" at their institute right now because they were working out the theory behind a lot of the current issues (multiple modalities, etc) 5 years ago. This leads to both human-readable output, and interesting parameters that can be fed into foundation models and the like. So for the rest of us: what types of data are inevitable, and what can we do now to prepare for that? It will help to have mathematicians in your circles for this theoretical work.
-
-Conclusion:
-
-There is absolutely a gap between what you learn at conferences, versus what shows up on the open internet. In sum, this conference gave me a better impression as to what is going on in the spatial field than any papers or anything shared on social media has given me. I look forward to seeing how things develop between now and the next conference from the European Society for Spatial Biology (ESSB) e.V. in Barcelona.
-
-file:images/essb_pics.png
+Posts about assigning cells to groups, evaluating stability, rare subset detection, automated gating, and methods that can produce convincing but misleading structure.
 ** [[https://www.linkedin.com/posts/tylerjburns_in-light-of-recent-benchmarking-work-ive-activity-7373737973080731648-ImSh?utm_source=share&utm_medium=member_desktop&rcm=ACoAAAbP8M8BYXs_UknoBHnmw2rZ-aRDTJF7L3Y][Pareto fronts for cluster benchmarking]]
 In light of recent benchmarking work I've been doing, I was introduced to a paper that uses Pareto fronts to look at multiple metrics, rather than one at a time. This helped me think through some issues I've been dealing with in dimensionality reduction, where local and global preservation present as tradeoffs.
 
@@ -499,188 +358,150 @@ I hope you all have a great day.
 [[file:images/pareto_front_clustering.png]]
 *** comment
 Paper is [[https://academic.oup.com/bioinformatics/article/37/14/1972/6122691][here]].
-** [[https://www.linkedin.com/feed/update/urn:li:activity:7338549286822993920/][The KRONOS patch based spatial foundation model]]
-If you do spatial, you know QC is a headache. There's a new spatial foundation model called KRONOS out this week that can help with that. I read the pre-print and spoke with the corresponding author. Here is what I found:
+** [[https://www.linkedin.com/posts/tylerjburns_you-may-have-noticed-the-emergence-of-leiden-activity-7396949129756721153--CwY?utm_source=share&utm_medium=member_desktop&rcm=ACoAAAbP8M8BYXs_UknoBHnmw2rZ-aRDTJF7L3Y][Louvain versus Leiden cluster stability in Seurat]]
+You may have noticed the emergence of Leiden clustering (as opposed to Louvain clustering) a few years ago in single-cell analysis. If you are using Seurat, be careful if you decide to transition...
 
-Quick overview:
+Louvain and Leiden clustering are both community detection algorithms on (in Seurat's particular case) a shared nearest neighbor graph of your data. The Leiden algorithm, in 2019, added additional refinements upon the shoulders of Louvain. In theory, making the switch could improve your clustering schemes.
 
-This foundation model is a vision transformer (similar to the LLMs, but can "see") trained on high-parameter imaging datasets (e.g. Akoya CODEX). Specifically, it is trained on "patches" rather than cells: 47M patches, across 175 protein markers, across 8 imaging platforms. The interesting thing here is that operating at the patch level can bypass cell segmentation entirely. This helps avoid a lot of headache for the personnel involved, and allows for the capture of nuances (e.g. in neurons that are not perfectly segmented).
+But in practice...
 
-Deep dive:
+When I switched from Seurat's implementation of Louvain to Leiden using the default settings of the classic Guided Clustering Tutorial on the PBMC 3k dataset, across 20 random seeds, Leiden did not detect the platelets that Louvain easily detects.
 
-The part that I was drawn to was Figure 3G-I in the paper (see image), which shows the model detecting and flagging artifacts. These are problems with the image that would harm downstream analysis, like tissue folding, blurring, or signal saturation. This model can be inserted into the quality control section of a pipeline and assist in detecting these issues early on. My previous LinkedIn surveys on single-cell analysis suggest that my audience has much more "headache" around quality control than downstream analysis (and it's the same for me), so I think this is definitely for you.
+This suggested that the given clustering parameters worked for Louvain, but needed to be re-tweaked for Leiden.
 
-Why I take this seriously:
+The image below is this initial output, with cluster centroids being visualized in a gif across the 20 runs, a visual way I developed to assess cluster stability (hence the jiggling of the yellow dots).
 
-While I have yet to use this model myself, I spoke with one of the corresponding authors Sizun Jiang directly about this, whom I have known since my grad school days. He told me that the model is becoming a mainstay in current analysis pipelines in the lab, and is being used to augment the analysis of previous datasets and ongoing studies. In other words, there is skin in the game here: the better the model, the better his lab's research output, which leads to better publications and more meaningful clinical discoveries, which leads to more grant funding and talent to work on these key questions, and so forth.
+Accordingly, when I increased the resolution, Leiden detected the platelets, but the cluster stability got worse in the T cells.
 
-The big picture:
+Lowering the number of nearest neighbors from the default 20 to 10 also got Leiden to detect the platelets with decent stability, but I also got an extra cluster in the CD4 T compartment, similar to the one that "flickers" in on the left panel below. Note that the extra cluster is not a bug, just the result of that particular setting, which may well be a defensible subset.
 
-If you are a researcher or a leader, you should look into at least trying these models out, and getting a feel for how they work. Benchmark them to existing analysis pipelines. If you've seen my other posts on foundation models, you'll know that this field is growing fast in single-cell. Now they are being developed in spatial.
+So there is still a bit of tweaking left to do on my end. And I'd expect you'll have to do the same on your end.
 
-You'll also know my hypothesis that given the parameter size of the foundation models right now, they may still be equivalent to GPT-2 on the LLM side. Things like larger model architectures or richer training data (e.g. more tissue types, multi-omics) could lead to a "GPT-3 moment." So I would get familiar with these models before we hit this inflection point.
+In short, if you switch from Louvain to Leiden specifically in Seurat, don't assume that you can use the same default parameters for both.
 
-What I need from you:
+In contrast, Scanpy's clustering is Leiden-centric, so its defaults may work better with Leiden than with Louvain.
 
-Let me know what the most absolutely annoying aspects of spatial QC are for you. Be specific. If I'm going to use this model and similar for my spatial work, I want to direct it toward the nastiest issues and take it to its limits.
+And more generally speaking, never assume the default parameters are the right ones, for whatever you're doing!
 
-[[file:kronos_fm.png]]
+Thank you and I hope you all have a great day.
+
+[[file:images/louvain_leiden.gif]]
+** [[https://www.linkedin.com/posts/tylerjburns_ever-wonder-if-a-boundary-cell-in-a-clustering-activity-7328409514074857472-Op_5?utm_source=share&utm_medium=member_desktop&rcm=ACoAAAbP8M8BYXs_UknoBHnmw2rZ-aRDTJF7L3Y][Cells at the boundary of two clusters]]
+Ever wonder if a "boundary" cell in a clustering scheme really fits its assigned cluster, versus the adjacent cluster? Below is one straightforward approach to identify these boundary cells in your data.
+
+The problem:
+
+A lot of our clustering tools assume that a cell assigned to a cluster is for sure in that cluster. But anyone who has worked with PBMC scRNA seq data knows that there are populations (e.g. CD4 T cells) that are difficult to subset, and therefore hard cut-offs might not be accurate. Same goes for trajectory data. So we need to scrutinize the cells at the boundary regions between clusters.
+
+My solution:
+
+For each cell, I took it and its four nearest neighbors in PC space (not UMAP space), took their assigned clusters, and computed the Shannon entropy of that. This gives us a value of 0 if they belong to the same cluster and a higher value when the neighborhood is mixed.
+
+What you can do with this:
+
+- A visual QC: Visualize the high-entropy boundary regions directly with e.g. UMAP (see image below).
+- Better downstream analysis: Use the entropy values to down-weight cells in (for example) a ML classifier.
+- Cluster purity score: Use the mean value of each cluster's per-cell entropy scores (see markdown linked in comments) to determine which clusters need more scrutiny.
+
+Ideas that this builds off of:
+
+Spot Entropy (Søren Helweg Dam, PhD thesis 2025), ROGUE (Liu et al. 2020) and LISI (Korsunsky et al. 2019). See details in comments.
+
+The bottom line:
+
+Take my code from the R Markdown attached in the comments to determine which cells in your single-cell or spatial data need a second look.
+
+If there are any similar things you do for your data (e.g. cluster silhouette score), let me know in the comments or via DM.
+
+[[file:images/cluster_boundaries.png]]
 *** comment
-The KRONOS pre-print is here: https://www.arxiv.org/pdf/2506.03373
-The GitHub is here: https://github.com/mahmoodlab/KRONOS
-** [[https://www.linkedin.com/posts/tylerjburns_in-light-of-recent-work-i-am-doing-that-requires-activity-7285315114067517440-tGpT?utm_source=share&utm_medium=member_desktop][Reproducibility of Jupyter notebooks from biomedical publications]]
-In light of recent work I am doing that requires me to reproduce results from GitHub repos associated with papers (eg. foundation models), I wanted to highlight a paper by Sheeba Samuel and Daniel Mietchen that discusses reproducibility of Jupyter notebooks associated with the biomedical literature (peer reviewed papers, not pre-prints). The results are nothing to be proud of.
+My longer report, containing code you can use: https://tjburns08.github.io/soft_clustering.html
 
-The authors looked at 27,271 Jupyter notebooks across 2660 GitHub repos linked from 3467 publications.
+Details on pre-existing methods:
+- Spot entropy, Soren Helweg Dam PhD thesis, 2025: a similar KNN-based entropy tool is used for consensus clustering of spatial datasets (the method that inspired this post).
+- ROGUE, Baolin Liu et al, Nat. Comm, 2020: uses entropy of gene expression in a cluster (rather than cluster IDs of KNN) to develop a cluster purity score.
+- LISI/Harmony, Korsunsky et al, Nat. Meth, 2019: a similar KNN "diversity" index used in the context of benchmarking data integration methods (and could in theory be used here).
 
-Specifically, the authors looked at:
-- 22,578 Jupyter notebooks written in python. Of these:
-- 15,817 had dependencies declared. Of these:
-- 10,388 had dependencies that could be installed successfully. Of these:
-- 1203 notebooks ran without any errors. Of these:
-- 879 produced results identical to those reported in the original notebook, and
-- 324 produced results that differed from those reported in the original notebook
+A related topic worth reading about:
+Soft clustering (aka fuzzy clustering). This is where cells are not assigned to a single cluster, but rather have a "membership-ness" score for every cluster. This is done in practice using tools like Gaussian mixture models.
+** [[https://www.linkedin.com/feed/update/urn:li:activity:7307398833943011328/][Cluster stability as an evaluation metric for your clustering scheme's performance on single-cell data]]
+Cluster stability as an evaluation metric for your clustering scheme's performance on single-cell data:
 
-In other words, 5.3% of notebooks ran without errors, and 3.9% produced results identical to the paper.
+Here, I took the PBMC 3k dataset (from scRNA seq), and clustered it using the standard KNN graph-based clustering in Seurat with the default parameters (done on the top 10 principal components, not the UMAP). But then I did it multiple times over multiple random seeds. I then computed the centroids of each clustering and visualized them in UMAP plots. I then strung these together to run as an animation, which you can see in the image below.
 
-One thing (of many) that the authors bring up, and what struck me here, is that the results suggest that the available code had little bearing on the peer review process. And perhaps it should have.
+I define cluster stability as the amount the clusters "move around" in subsequent clusterings. While I stop at the animations for this post, this metric can in turn be quantified using information theory metrics.
 
-From a practical standpoint, I've assisted in peer review, and I understand that the reviewers simply don't have time to dig into the code themselves. So there should probably be ways to make this easier.
+Here, we can see that the CD4 T cell subclusters are less stable than the rest of the clusters in the dataset. We already know that the T cells are harder to cluster for scRNA seq data, as compared to having data from an antibody panel (CITE-seq or flow/CyTOF), so this serves as a sanity check.
 
-I think ensuring reproducibility of code in papers could be something that automated tools could do or help do down the line. The methods section of the paper is a testament to this. Given the current "agentic" direction AI is going, this would be an interesting use case to either aid in the peer review process, or be used by the authors themselves to ensure reproducibility at every step of the process.
+If you have a new data modality, or you're testing some new clustering algorithm, or you're simply optimizing whatever existing clustering scheme you've got, it might help to run it many times just to see whether the clusters are stable, or whether some clusters are more stable than others. This will help you optimize your clustering scheme and make sure that the populations that you end up selecting are not arbitrary.
 
-I'll note, given that I use R heavily and therefore use R Markdowns moreso than Jupyter notebooks, I hypothesize that there will be similar issues here. But an important observation from the paper from Figure 19 (attached image, left side) is that the majority of problems were ModuleNotFoundError. This suggests that issues with dependencies cause a lot of the reproducibility problems, something that would generally not surprise python users. R is not without its problems in this regard, but this is especially notorious in python.
+Take home message for bioinformaticians:
 
-If you are a biologist interested in how to ensure reproducibility in your code, please let me know. My friends and I have been through enough of this that I have things to say. If enough are interested, I'll make a more in depth write-up.
+Here is an evaluation metric (code is in the comments) that allows you to be a bit more sure about whatever clustering algorithm you are running on whatever dataset, to allow you to distinguish signal from noise and make you more confident with respect to what you end up using in downstream steps.
 
-Until then, be sure to use virtual environments (I use renv if in R), and in python be sure to run "pip freeze > requirements.txt."
+Take home message for leaders:
 
-The link to the paper is in the comments. You should read it. There are 30 figures and 5 tables. In the "implications" section they bring up nine talking points (and the peer review bit above is implication 2).
+As the adage goes, what can be measured can be managed. For your research team, you want to be able to pepper in as many of these evaluation metrics as you can into your workflows. You already know that it helps if they are quantitative, but here I show that it helps if they are visual. The code in the comments will allow your team to produce these animations for your respective projects.
 
-That's all for now. Happy new year everyone.
+If you want to chat with me more about this kind of thing, feel free to send me a DM. Otherwise, I hope you got something out of this post and I wish you a great rest of the day.
 
-[[file:images/jupyter_notebook_paper.png]]
+[[file:images/ppt_pbmc3k_raw_fps30.gif]]
+
 *** comment
-The link to the paper is here: https://academic.oup.com/gigascience/article/doi/10.1093/gigascience/giad113/7516267#493978474
+Code and data can be found here: https://tjburns08.github.io/seurat_pbmc_cluster_stability.html
+** [[https://www.linkedin.com/posts/tylerjburns_when-you-cluster-your-single-cell-data-do-activity-7198660249229127682-sWlv?utm_source=share&utm_medium=member_desktop][Cluster stability visualization]]
+When you cluster your single-cell data, do you run it multiple times to check for consistency? You should. This is part of an important topic called cluster stability. Let me explain.
 
-And thanks to Mike Leipold for finding this paper and sending it over.
-** [[https://www.linkedin.com/posts/tylerjburns_transformer-based-foundation-models-the-activity-7249759966423646210-5Ba2?utm_source=share&utm_medium=member_desktop][Review on single cell foundation models]]
-Transformer-based foundation models (the stuff of LLMs) are slowly working their way into the single-cell literature. Here is what to know and what to do about it.
+The attached gif is FlowSOM clustering of CyTOF whole blood data, with 20 and 40 consensus clusters selected side by side, run 50 times. These are visualized on a UMAP. The cluster centroids from the UMAP visualization are computed and shown as yellow spots.
 
-For this post, I draw from a neutral review from Artur Szalata and colleagues (last author: Fabian Theis) on the topic, and additional time I have spent testing these models myself. Below are three main points from the paper, and my take on each of the points, followed by a take-home message to make all of this actionable.
+You'll notice that there are some instances where the centroids are relatively stable (especially in the 20 cluster case). There are other instances where they move, appear, disappear, and so on.
 
-1. These models are still quite small. Table 1 shows that most of the models reviewed were trained on 30-100 million cells, which translates to hundreds of millions of parameters. Transformer models in other fields are well into the hundreds of billions of parameters (GPT-3 was 175B).
+The practical takeaway I get from this is that if you're running FlowSOM or similar clustering algorithms where you choose the number of clusters, you should aim to over-cluster rather than trying to get the perfect number of clusters. You can always merge similar clusters later.
 
-   My take: the single-cell models here might still be analogous to GPT-1/2, where they show some promise but the full potential is still down the road.
+Furthermore, it helps to know which clusters are static versus which are moving around, in order to know whether a small "rare" cluster you found is a fluke that showed up one time in 50, or whether it keeps showing up.
 
-2. These models serve are multi-purpose tools, in that they have many applications. These include cell annotation, gene function prediction, perturbation prediction, and inferring gene regulatory networks, among others.
+The data and code for creating this gif is linked in the comments. I just got started on this project, and there is still some work to be done. Future directions include running this on clustering algorithms where the number of clusters are actually computed rather than chosen, like PhenoGraph. If we find that these clusters are moving around all over the place, then it will be worth doing a one-over on relevant clustering strategy.
 
-   My take: once these models have their GPT-3/4 moment, there will be many new things for us to play with and integrate into our workflows.
+#+HTML: <img src="images/cluster_stability.gif"/>
+** [[https://www.linkedin.com/posts/tylerjburns_facing-challenges-with-analyzing-large-flow-activity-7099769574782324736-vjnv?utm_source=share&utm_medium=member_desktop][GigaSOM: FlowSOM in Julia for larger datasets]]
+Facing challenges with analyzing large flow and mass cytometry datasets?
 
-3. There are applications that are still more suited for simpler solutions. An example of this was scTab, a non-transformer model that outperformed scGPT (a transformer model) in cross-organ cell type integration.
+As datasets grow, the need for faster and more efficient tools becomes paramount. If you're looking to run FlowSOM clustering on more cells faster, consider exploring GigaSOM in the Julia programming language:
 
-   My take: from a practical standpoint, I try the simpler solutions first, but in this context, later models trained on more cells could prove to be superior. So I'm keeping tabs on this.
+🚀 It clustered 1.1 billion cells in just under 25 minutes (EmbedSOM image below).\\
+🖥️ Achieved on a relatively small (256 core) compute cluster.\\
 
-I remember when I got early access to GPT-3 in the fall of 2021 (a year before ChatGPT), experimenting with it quite a bit, and simply making sure I was familiar enough with it that I could rapidly adopt it if it got any better. Now, I am spending time working with some of these available foundation models to see what they can do in my hands.
+While I haven't done a side-by-side comparison with this exact dataset on this size compute cluster in R, my experience with Julia has been promising. It combines the ease of R and Python with the speed of a lower-level language.
 
-You can get access to these models too by going to Chan-Zuckerberg Initiative's collection of census models for single-cell (link in comments). They provide links to the model pages and sample embeddings that the models produced.
+Thank you Abhishek Koladiya, PhD for introducing me to this innovative package.
 
-The take home message for leaders and scientists:
+Dive deeper into the details with the paper and package homepage: https://lnkd.in/e9-Bdk3Y
+[[file:images/gigasom.jpeg]]
+** [[https://www.linkedin.com/posts/tylerjburns_i-wanted-to-highlight-a-clustering-method-activity-7087382242867470336-pUbG?utm_source=share&utm_medium=member_desktop][How X-shift works]]
+I wanted to highlight a clustering method specialized in rare subset detection that in my opinion is under-explored with respect to newer, high dimensional data types (eg. single cell sequencing, high-dimensional imaging, spectral flow). It's called X-Shift, written by Nikolay Samusik.
 
-Know how these models work, have some of these tools in your arsenal, and test what kinds of inputs they take and what kinds of outputs they can produce. Keep tabs on their developments. Take their results with a grain of salt, but know that they will get better. I assume that they will only improve from here, as the research around these models improve, and the number of parameters possible per model increase.
+For biologists and directors, if you have any projects that involve the detection of rare cell subsets, then X-shift should be on your radar. X-shift was determined to be the best method for rare cell subset detection, in a 2016 clustering method benchmarking study (the one that put FlowSOM on the map). The paper is linked in the markdown below.
 
-The review and a markdown of me interrogating one of these models is linked in the comments.
+Why isn't X-shift all over the place? The method is computationally expensive (eg. high run-times), and runs in Java, not the more common R or Python (yet), making it more difficult to integrate into existing single-cell pipelines. Thus, the method is not as widely utilized and explored as it otherwise would and should be.
 
-If any of you are currently tinkering at the interface between single-cell/spatial and transformer models, please let me know. I hope you all have a great day.
+How does it work? The method is based on mean-shift clustering. For each cell, move in the direction of higher density until you get to a peak. That peak is your cluster.
 
-[[file:images/2024-10-08_19-09-14_Screenshot 2024-10-08 at 19.09.08.png]]
-*** comment
-The review by Artur Szalata and colleagues can be found here: https://pubmed.ncbi.nlm.nih.gov/39122952/
+For bioinformaticians (and anyone else interested in going deep), I created a massively simplified, hyper-tailored, and highly visual version of X-shift in R, to ground your intuition in how it works. You can see the method in action, code and all, in this markdown: https://lnkd.in/e_mSEzm3. In the markdown, I include links to the X-shift paper, benchmarking study, and X-shift software.
 
-A page from CZI giving you starter code for a number of so-called "census models" which are essentially cells that have been run through transformer models, giving you access to the embedding:
-https://cellxgene.cziscience.com/census-models
+Thank you for your attention, and I hope you all have a great day.
 
-Me interrogating the geometry of a foundation model embedding by trying to find its "center" and "outer edges" and realizing that UMAP does not quite capture this.
-https://tjburns08.github.io/human_universal_cell_embeddings.html
-** [[https://www.linkedin.com/posts/tylerjburns_for-spatial-transcriptomics-data-cell-segmentation-activity-7234553712344465410-NxRX?utm_source=share&utm_medium=member_desktop][Cell segmentation size matters for spatial transcriptomics]]
-For spatial transcriptomics data, cell segmentation size is critical. I recently read a 2024 preprint from Austin Hartman and Rahul Satija about benchmarking in-situ gene expression profiling methods (eg. 10x Xenium). There's a detail in here I was struck by:
+[[file:images/how_xshift_works.jpeg]]
+** [[https://www.linkedin.com/posts/tylerjburns_flow-cytometry-and-cytof-users-here-is-a-activity-7003308800543711232-eAEx?utm_source=share&utm_medium=member_desktop][What happens when you run SPADE on random input]]
+Flow cytometry and CyTOF users: here is a SPADE tree produced from 30 dimensions of random noise. It still looks beautiful, but conveys no truth. This is an example of the beauty is truth delusion, and its behind every bioinformatic corner waiting to pounce. Read more here: https://lnkd.in/ezeZV_Fj
 
-One of the issues with making the comparisons between spatial methods was that the default cell segmentation provided by the authors of the datasets used varied between stringent (only cell boundaries you're sure of, tightly demarcated, small), and not stringent (something of a Voronoi tessellation, with loose and large boundaries). This can be seen in the image below, which comes from Figure 3 (link in comments).
+[[file:images/spade_random_input.jpeg]]
+** [[https://www.linkedin.com/posts/tylerjburns_automated-gating-autogating-has-been-a-activity-7167877080360206336-dDlD?utm_source=share&utm_medium=member_desktop][Survey March 2024, most are not using but are interested in autogating]]
+Automated gating (autogating) has been a topic of discussion for many years, but more recently I'm seeing it in the major flow/cytof analysis SaaS products, and I'm hearing of users requesting it more often. So I am interested in knowing whether it is becoming a standard part of people's workflows, whether there's simply more interest, or whether most people are not interested and there is a selection bias in what I'm seeing. Thank you to everyone who takes the time to answer.
+[[file:images/autogating.png]]
 
-The differences in cell segmentation led to artifacts in gene expression, as measured by what they call the mutually exclusive co-expression rate (MECR). This is where genes that are biologically not expressed together in a cell are nonetheless both expressed. They had to re-segment the cells themselves in order to move forward with the benchmarking.
-
-This means two things. The first is when you're comparing spatial datasets across methods (eg. Xenium vs MERSCOPE), you need to re-segment the cells with the same method and stringency first. The second is that you need to pay close attention to the stringency of cell segmentation when you're doing any sort of spatial analysis, as it has been shown that artifacts can show up in this step.
-
-Do your biological conclusions change if you run the pipeline with loose vs stringent cell segmentation?
-
-The bigger picture is that in bioinformatics (and data analysis at large), the devil is in the details. It's all the little things you have to do to make sure the data are ready for the clustering and whatever else you're going to do.
-
-If you're in leadership, make sure your team is spending sufficient time on the early stages of data analysis (eg. QC, cell segmentation, batch effect finding, data integration). The "headache" steps that seem to delay the insight generation steps. As Marcus Aurelius said, the obstacle is the way.
-
-If you're learning bioinformatics, spend as much time as you can really understanding the raw data. One way to do this is to try to analyze your data outside of any standard package, or take a page from molecular biology and KO (remove) a step in the pipeline and see what happens (eg. what happens to the clustering and UMAP if you don't log or asinh transform the data).
-
-As the datasets and methods get more complicated, these little details will become more important. I hope you all have a great day.
-
-Link to [[https://www.biorxiv.org/content/10.1101/2024.01.11.575135v1][paper]].
-
-file:images/segmentation_size.png
-
-** [[https://www.linkedin.com/posts/tylerjburns_single-cell-protein-data-can-take-many-forms-activity-7166098906634829824-3aSF?utm_source=share&utm_medium=member_desktop][Data integration using CyCombine]]
-Single-cell protein data can take many forms: flow cytometry (spectral or otherwise), mass cytometry, CITE-seq, or protein-based imaging after cell segmentation. Not to mention the multitude of machines (eg. spectral cytometers from different companies, or CyTOF 2 vs CyTOF XT). It is inevitable that there will be a need and efforts to integrate these datasets across modalities to derive actionable insights.
-
-Accordingly, the Single Cell Omics group at Technical University of Denmark (DTU) has solved this problem with a method they call cyCombine. With this method, they are able to integrate a CITE-seq, spectral flow, and CyTOF dataset. They spell it out in a markdown (link in comments) so you can try it yourself.
-
-The UMAPs in the images show that the data, otherwise separate, now sit on top of each other. There are further metrics for evaluating the correction in the markdown (eg. earth mover's distance), and histogram visualizations. If I were using this, I'd want to try gating on the concatenated data, with the points in the biaxials colored by each method.
-
-To sum things up, there is good work being done in this space, and we should be paying attention because this type of work is going to become much more important as high-dimensional cytometry and cytometry-like methods and instrument types increase.
-[[file:images/cycombine.jpeg]]
-** [[https://www.linkedin.com/posts/tylerjburns_leaders-using-single-cell-tech-do-you-have-activity-7164260356083716096-0S0M?utm_source=share&utm_medium=member_desktop][Bridge integration]]
-Leaders using single-cell tech: do you have data across multiple modalities (eg. flow/CyTOF and single-cell sequencing) that you want to combine? Are you making large cell "atlases" internally or externally? Then you should consider integrating these datasets with bridge integration, a new method that came out last year. How does it work?
-
-Say you have a CyTOF dataset, and a single-cell sequencing dataset. Both are PBMCs. If you have a CITE-seq PBMC dataset (both RNA and protein), then you can use that as a multiomic "bridge" to integrate the two datasets. This is one reason why getting your team to produce a CITE-seq dataset or two might be valuable in the long term.
-
-The image attached is a schematic from Hao et al. (link in comments) that shows possible combinations of multimodal integration that go beyond RNA + protein. The method is available in Seurat (in other words, it's standardized and accessible for comp bio). Your team should look critically at figure 5 and S7 in the paper and the text that references it (the page immediately after the figure), as it shows a scRNA-seq + CyTOF integrated dataset using this method, with the text describing sanity checks.
-
-Even if you don't use this method, you should note the emerging trend of integration across modalities, which goes along with the emergence of single-cell multi-omics. Importantly, the authors express interest in doing this with spatially resolved data. They specifically mention CODEX (paragraph 4, discussion section), suggesting that a CODEX + scRNA-seq integration might be a current PhD/Postdoc project in the lab.
-
-Links to the paper and Seurat code in the comments below.
-
-[[file:images/bridge_integration.jpeg]]
-** [[https://www.linkedin.com/posts/tylerjburns_life-science-leaders-using-flowmass-cytometry-activity-7161731050065408000-LN_D?utm_source=share&utm_medium=member_desktop][Flow/CyTOF users could take a page from the best practices in single-cell sequencing]]
-Life science leaders using flow/mass cytometry: do you want to know where the best practices in data analysis will be in 3-5 years (if done right)? As a flow/CyTOF native, I've been looking to single-cell sequencing for this. Here are 3 things that I think this community has gotten right, that the flow/CyTOF world (that I’ve been part of since 2012) could really benefit from:
-
-A dedicated open-source community with well-maintained packages.\\
-On the R side, Seurat is extremely useful, constantly evolving as new methods develop, and well-maintained by the Satija Lab. On the python side, there is scverse, which is a collection of tools that do various things from single-cell sequencing analysis (scanpy) to spatial (squidpy).
-
-My recommendation: we model our ecosystem after scverse (bring it all together in one place) and our "end to end" packages after Seurat. Those working with ISAC and similar organizations should dedicate funding to dedicated individuals. I think with efforts like CyTOForum, the community is in place to do this kind of thing.
-
-A focus on standards and benchmarking\\
-There's a "single cell best practices" consortium that has a huge free jupyter book, showing you what to do with the scverse and how. Furthermore, there is a lot of benchmarking work happening, e.g., with the scib package from the Theis Lab, that allows you to do your own benchmarking for your data. Long-time flow/CyTOF users will remember the uncertainty around which clustering algorithm to use, that didn't clear up until Lukas Weber and Mark Robinson (from the sequencing world) did a benchmarking study and showed that it was FlowSOM all around and X-shift for rare cell detection.
-
-My recommendation: we incentivize benchmarking studies (eg. the FlowCAP project). Especially given the advent of spectral flow, we are going to need an efficient way to redo or build on our prior work as the tools and data evolve.
-
-Integration between commercial and open-source methods.\\
-10x Genomics has a UI for its Xenium data. Then they have a page titled "Continuing your journey after Xenium analyzer" listing relevant open-source tools that can help you analyze your data further. Similarly, on the flow/CyTOF side, with Standard BioTools is promoting Bernd Bodenmiller Lab's HistoCat on their page as something to use beyond their UI for IMC data.
-
-My recommendation: we build our commercial tools with our open-source ecosystem in mind. I think Omiq's modular design and ability  to quickly integrate the latest open-source tools into its interface is a great example.
-
-I'll acknowledge that there are differences between the fields that may impact what has and can get done, like open source community engagement levels, available funding, and the relationship between open-source and commercial solutions in either domain. However, seeing just how much the single-cell sequencing community got right, they can serve as a north star for how we build out our tools from here.
-
-[[file:images/single_cell_best_practices.jpeg]]
-* General data analysis
+* AI-Assisted Bioinformatics
 #+HTML: <a href="#top">Back to top</a>
-The data analysis related posts that I otherwise could not categorize.
-** [[https://www.linkedin.com/posts/tylerjburns_hi-friends-i-wrote-a-guest-post-for-lamin-activity-7445459712386514944-wU4s?utm_source=share&utm_medium=member_desktop&rcm=ACoAAAbP8M8BYXs_UknoBHnmw2rZ-aRDTJF7L3Y][Guest blog post: an introduction to LaminR]]
-Hi friends, I wrote a guest post for Lamin on using the open-source LaminR package in an R workflow with the PBMC 3k dataset. The link is in the comments.
-
-What drew me in was a familiar handoff problem: coming back to an analysis, or inheriting one from someone else, and not being fully sure what was done, in what order, or in which environment. I have some "scar tissue" here from my consulting projects over the years.
-
-In the post, I walk through a standard single-cell workflow and show what LaminR stores along the way. What I found most interesting was the provenance side of it: being able to inspect the code, report, and environment tied to a data object later.
-
-That feels increasingly important as datasets, tools, and teams get more complex (e.g. when some of your "colleagues" are OpenClaw agents).
-
-Thanks to Luke Zappia, Robrecht Cannoodt, and Alex Wolf for collaborating on this.
-[[file:images/lamin_guest_blog_post.png]]
+Posts about LLMs and agents as analysis tools: pipeline generation, annotation, interpretation, prompt scripting, and failure modes.
 ** [[https://www.linkedin.com/posts/tylerjburns_hi-friends-in-light-of-recent-llm-bioinformatics-activity-7438223292014018560-1U9U?utm_source=share&utm_medium=member_desktop&rcm=ACoAAAbP8M8BYXs_UknoBHnmw2rZ-aRDTJF7L3Y][LLM CyTOF clustering algorithm choices]]
 Hi friends, in light of recent LLM bioinformatics "design choice" experiments I've been doing, I asked a simpler question: if I prompt a LLM to output a randomly selected CyTOF clustering algorithm, what will the distribution look like, and will it vary between LLMs.
 
@@ -813,65 +634,6 @@ Link to the full results in comments. If you're running similar experiments, I'd
 One potential use case for this would be through the CyTOF SAAS products directly (not going to name them, but you know the popular ones). It might be via API access (assuming we figure out the cybersecurity), or that the SAAS products themselves embed the agents directly into the software. Either way, this is something I would watch out for, for programmers and non-programmers alike.
 
 The GitHub link to the project is here: https://github.com/tjburns08/cytof_agentic_prompting_experiments
-** [[https://www.linkedin.com/posts/tylerjburns_fcs-files-outputted-by-flow-and-mass-cytometers-activity-7404524653811056640-jaOW?utm_source=share&utm_medium=member_desktop&rcm=ACoAAAbP8M8BYXs_UknoBHnmw2rZ-aRDTJF7L3Y][Byte order matters when reading in fcs files]]
-Fcs files, outputted by flow and mass cytometers, are typically read into R or Python for analysis. If you're going to do this without the likes of FlowCore, you need to take care to read the bytes in the DATA section the right way, or the matrix will be gibberish.
-
-Multi-byte numbers (e.g. 32-bit ints) can be stored in computer memory in two ways, known as little-endian or big-endian (simplified explanation below). The key thing here is that some computers do it one way, and some do it the other. And it might be that the flow cytometry acquisition computer is incompatible with yours.
-
-There is a flag in the TEXT section called $BYTEORD, that will tell you which it is.
-
-$BYTEORD/1,2,3,4/ is little-endian. This is where the least significant byte would be stored first.
-
-$BYTEORD/4,3,2,1/ is big-endian. This is where the most significant byte would be stored first.
-
-Here, most significant means highest "place" value. So in decimal, the number 135, would have 1 as the most significant digit (the hundreds place), and 5 as the least significant digit (the ones place).
-
-Let's keep it simplified with standard decimal, and say the number 135 had to be stored into memory into three boxes [ ][ ][ ]. In big-endian, it would be stored as [1][3][5], which makes intuitive sense. But little-endian would have it stored as [5][3][1]. So now if your computer picks up [1][3][5] stored in big-endian, and assumes its little-endian, it will read it it as 531. And so it is with your flow cytometery data matrices.
-
-When you store multi-byte numbers into memory, via the likes of readBin() in R, you can specify the byte order as a function argument, as per the $BYTEORD flag in the fcs file.
-
-I made a tutorial a few years ago where I learned of this topic (link in the comments below). If you follow it, you can convert a fcs file into a data matrix without any software packages.
-
-The image associated with this post summarizes the binary reading step, where you select endian-ness, and what it looks like if you select the wrong one.
-
-Why does this matter? Because at least in R, FlowCore::read.FCS(), is a bit of a choke point. It's incredibly useful and I'm grateful on behalf of the community to have it. But it's also a single point of failure. So it would behoove you to know how to read in your fcs files independently, just in case something were to happen to it or its dependencies (and the python programmers among you will know what I'm talking about).
-
-I'm revisiting this now due to a low level project I'm currently working on, but I think that any bioinformatician should know their craft one level of abstraction deeper than what is required of them. It pays dividends long term.
-
-Leaders, look for these choke points in your workflows and prepare for the worst, just in case.
-
-Thank you, and I hope you all have a great day.
-
-file:images/byte_order_matters.png
-** [[https://www.linkedin.com/posts/tylerjburns_you-may-have-noticed-the-emergence-of-leiden-activity-7396949129756721153--CwY?utm_source=share&utm_medium=member_desktop&rcm=ACoAAAbP8M8BYXs_UknoBHnmw2rZ-aRDTJF7L3Y][Louvain versus Leiden cluster stability in Seurat]]
-You may have noticed the emergence of Leiden clustering (as opposed to Louvain clustering) a few years ago in single-cell analysis. If you are using Seurat, be careful if you decide to transition...
-
-Louvain and Leiden clustering are both community detection algorithms on (in Seurat's particular case) a shared nearest neighbor graph of your data. The Leiden algorithm, in 2019, added additional refinements upon the shoulders of Louvain. In theory, making the switch could improve your clustering schemes.
-
-But in practice...
-
-When I switched from Seurat's implementation of Louvain to Leiden using the default settings of the classic Guided Clustering Tutorial on the PBMC 3k dataset, across 20 random seeds, Leiden did not detect the platelets that Louvain easily detects.
-
-This suggested that the given clustering parameters worked for Louvain, but needed to be re-tweaked for Leiden.
-
-The image below is this initial output, with cluster centroids being visualized in a gif across the 20 runs, a visual way I developed to assess cluster stability (hence the jiggling of the yellow dots).
-
-Accordingly, when I increased the resolution, Leiden detected the platelets, but the cluster stability got worse in the T cells.
-
-Lowering the number of nearest neighbors from the default 20 to 10 also got Leiden to detect the platelets with decent stability, but I also got an extra cluster in the CD4 T compartment, similar to the one that "flickers" in on the left panel below. Note that the extra cluster is not a bug, just the result of that particular setting, which may well be a defensible subset.
-
-So there is still a bit of tweaking left to do on my end. And I'd expect you'll have to do the same on your end.
-
-In short, if you switch from Louvain to Leiden specifically in Seurat, don't assume that you can use the same default parameters for both.
-
-In contrast, Scanpy's clustering is Leiden-centric, so its defaults may work better with Leiden than with Louvain.
-
-And more generally speaking, never assume the default parameters are the right ones, for whatever you're doing!
-
-Thank you and I hope you all have a great day.
-
-[[file:images/louvain_leiden.gif]]
-
 ** [[https://www.linkedin.com/posts/tylerjburns_can-you-use-llms-to-create-self-refactoring-activity-7392201680521560064-IIQm?utm_source=share&utm_medium=member_desktop&rcm=ACoAAAbP8M8BYXs_UknoBHnmw2rZ-aRDTJF7L3Y][LLM make-it-better experiment for UMAP plotting]]
 Can you use LLM's to create self-refactoring code? Here, I broadly asked a LLM to take six lines of R code plotting a UMAP and iteratively "make it better." What I found was that the number of lines of code go way up, but the plot itself does not change much.
 
@@ -931,44 +693,6 @@ The heterogeneity of the design choices and the other flaws uncovered suggest a 
 Please let me know if you have questions/comments. I hope you all have a great day.
 
 [[file:images/llm_pipeline_design_choices.png]]
-** [[https://www.linkedin.com/posts/tylerjburns_hack-you-can-run-scrna-seq-data-inside-omiq-activity-7376963107434250240-CA6f?utm_source=share&utm_medium=member_desktop&rcm=ACoAAAbP8M8BYXs_UknoBHnmw2rZ-aRDTJF7L3Y][Doing single-cell sequencing analysis in OMIQ]]
-Hack: you can run scRNA-seq data inside OMIQ. This gives you cytometry-grade visualization capabilities and analysis tools (e.g. FlowSOM, OptSNE), otherwise difficult or not available in Seurat/Scanpy.
-
-What I did:
-
-This morning, inspired by an OMIQ tutorial video that Eric Haas made, I figured out how to upload the pbmc3k dataset into OMIQ, software that is originally designed for flow/mass cytometry. I then tested OMIQ's capabilities on the dataset.
-
-How I did it:
-
-- I ran the the Seurat object through the standard analysis up to PCA.
-
-- I combined the gene expression (scale.data) and the PCs into a single matrix. You have to transpose the gene expression data so the features are columns and the cell ID is rows (this is standard flow cytometry format).
-
-- I outputted this as a csv, which I could then upload into OMIQ.
-
-What I found:
-
-- Through OMIQ, I was able to try flow cytometry methods on the pbmc3k dataset, including FlowSOM clustering, and OptSNE and EmbedSOM with dimensionality reduction.
-
-- I was also able to utilize OMIQ's figure builder, which does a good job producing publication or pitch deck-ready plots.
-
-- There was an occasional lag between clicking and something happening, perhaps because OMIQ is not designed to handle csv files of this type.
-
-Takeaways for leaders and research teams:
-
-- Cytometry platforms like OMIQ can be used in single-cell sequencing workflows.
-
-- If nothing else, you can use this as a visualization front end, and keep Seurat/Scanpy for the rest.
-
-Disclaimer:
-
-I used OMIQ as an example here because of my familiarity with it, but for other tools like it, the same concept will likely apply.
-
-Thank you and I hope you all have a great day.
-
-[[file:images/sc_seq_with_omiq.png]]
-*** comment
-The opposite is also possible, running flow/mass cytometry data in Seurat. If you want to see how I was able to do that, please look at my R Markdown here: https://tjburns08.github.io/run_cytof_with_seurat.html
 ** [[https://www.linkedin.com/posts/tylerjburns_in-light-of-the-recent-work-i-have-been-doing-activity-7374066902265978880-Kt6A?utm_source=share&utm_medium=member_desktop&rcm=ACoAAAbP8M8BYXs_UknoBHnmw2rZ-aRDTJF7L3Y][A review of CyteType: LLM-based annotator]]
 In light of the recent work I have been doing on LLM-based annotation, I wanted to highlight a package I tried that does this quite well: CyteType. Two things really stand out 1) No need for user API key, and 2) the structure is agentic.
 
@@ -1070,119 +794,6 @@ To the rest of you, thank you and I hope you all have a great day.
 *** comment
 The markdown that allows you to do it on your end, so long as you have an OpenAI API key, is here: https://tjburns08.github.io/BLSC_PCA_loading_LLMs_final.html
 The report of what we found is here: https://tjburns08.github.io/blsc_pc_loadings_by_llm_interpretation.pdf
-** [[https://www.linkedin.com/posts/tylerjburns_case-study-an-issue-with-a-bulk-sequencing-activity-7333478597971603456-370y?utm_source=share&utm_medium=member_desktop&rcm=ACoAAAbP8M8BYXs_UknoBHnmw2rZ-aRDTJF7L3Y][The need for wet lab and dry lab integration]]
-Case study: an issue with a bulk sequencing analysis project was quickly found and fixed because of the understanding that "the cell type in question does not behave like that." I can't emphasize this enough: you need bioinformaticians who have wet-lab experience.
-
-Aside from finding and fixing issues in the analysis, the "bigger picture" understanding you get serves as a "relevance filter" that sculpts the direction of the project, and how it is communicated (so the client doesn't end up with a bunch of hairball networks that don't clearly answer their biological questions).
-
-One tactic you can put your team through today: read papers associated with the data. Oftentimes, projects are continuations of previous work that has already been published. Sounds obvious, but there is a difference between knowing something and doing something.
-
-Credit to Christine Nguyen, PhD for sharing this tactic. She has used it successfully over many years working at multiple bioinformatics core facilities, and it has saved her a lot of headache.
-
-If you are recruiting, look for people who are cross-trained. This is hard to do. You have to screen for depth on both sides. I am doing this now.
-
-If you are a PI/leader who needs this type of analysis, DM me.
-If you are a cross-trained bioinformatician, let's talk.
-
-Thank you and I hope you all have a great day.
-
-file::images/wet_lab_dry_lab.png
-** [[https://www.linkedin.com/posts/tylerjburns_ever-wonder-if-a-boundary-cell-in-a-clustering-activity-7328409514074857472-Op_5?utm_source=share&utm_medium=member_desktop&rcm=ACoAAAbP8M8BYXs_UknoBHnmw2rZ-aRDTJF7L3Y][Cells at the boundary of two clusters]]
-Ever wonder if a "boundary" cell in a clustering scheme really fits its assigned cluster, versus the adjacent cluster? Below is one straightforward approach to identify these boundary cells in your data.
-
-The problem:
-
-A lot of our clustering tools assume that a cell assigned to a cluster is for sure in that cluster. But anyone who has worked with PBMC scRNA seq data knows that there are populations (e.g. CD4 T cells) that are difficult to subset, and therefore hard cut-offs might not be accurate. Same goes for trajectory data. So we need to scrutinize the cells at the boundary regions between clusters.
-
-My solution:
-
-For each cell, I took it and its four nearest neighbors in PC space (not UMAP space), took their assigned clusters, and computed the Shannon entropy of that. This gives us a value of 0 if they belong to the same cluster and a higher value when the neighborhood is mixed.
-
-What you can do with this:
-
-- A visual QC: Visualize the high-entropy boundary regions directly with e.g. UMAP (see image below).
-- Better downstream analysis: Use the entropy values to down-weight cells in (for example) a ML classifier.
-- Cluster purity score: Use the mean value of each cluster's per-cell entropy scores (see markdown linked in comments) to determine which clusters need more scrutiny.
-
-Ideas that this builds off of:
-
-Spot Entropy (Søren Helweg Dam, PhD thesis 2025), ROGUE (Liu et al. 2020) and LISI (Korsunsky et al. 2019). See details in comments.
-
-The bottom line:
-
-Take my code from the R Markdown attached in the comments to determine which cells in your single-cell or spatial data need a second look.
-
-If there are any similar things you do for your data (e.g. cluster silhouette score), let me know in the comments or via DM.
-
-[[file:images/cluster_boundaries.png]]
-*** comment
-My longer report, containing code you can use: https://tjburns08.github.io/soft_clustering.html
-
-Details on pre-existing methods:
-- Spot entropy, Soren Helweg Dam PhD thesis, 2025: a similar KNN-based entropy tool is used for consensus clustering of spatial datasets (the method that inspired this post).
-- ROGUE, Baolin Liu et al, Nat. Comm, 2020: uses entropy of gene expression in a cluster (rather than cluster IDs of KNN) to develop a cluster purity score.
-- LISI/Harmony, Korsunsky et al, Nat. Meth, 2019: a similar KNN "diversity" index used in the context of benchmarking data integration methods (and could in theory be used here).
-
-A related topic worth reading about:
-Soft clustering (aka fuzzy clustering). This is where cells are not assigned to a single cluster, but rather have a "membership-ness" score for every cluster. This is done in practice using tools like Gaussian mixture models.
-** [[https://www.linkedin.com/posts/tylerjburns_spatial-omics-analysis-is-complicated-but-activity-7310656950818496512-9D5a?utm_source=share&utm_medium=member_desktop&rcm=ACoAAAbP8M8BYXs_UknoBHnmw2rZ-aRDTJF7L3Y][Neighbor graphs in spatial analysis]]
-Spatial -omics analysis is complicated. But there is a powerful concept that unifies many seemingly unrelated methods: neighbor graphs. A neighbor graph simply connects cells to their closest neighbors— either based on similarity of gene/protein expression profiles or on physical proximity. If you grasp this idea, you'll quickly gain intuition across key steps like integration, clustering, niche finding, and dimensionality reduction.
-
-Here is how neighbor graphs underpin a typical spatial analysis pipeline:
-
-Integration:
-
-You might be integrating multiple datasets early on. While there are many ways to do this, one of them, called weighted nearest neighbor analysis, or wnn, uses a knn graph of multimodal datasets to predict the "weights" of each modality (eg. RNA vs protein), to determine how each modality should influence cell similarity.
-
-Clustering:
-
-At some point, you cluster the data. To do this, you make a knn graph, and then do what is known as community detection (which regions of the graph are more connected and which regions are less connected), and assign clusters accordingly. You may have seen the words "Louvain" or "Leiden" in the tutorials. That is what this is.
-
-Niche finding:
-
-After you annotate the cells (e.g. labeling B cells, T cells, etc), you generally want to look for spatial "niches" that contain enrichment of specific cell types. To do this, you now make a neighbor graph of physical spatial coordinates so that each node is a cell label. You then do permutation tests (comparing to a randomized neighbor graph) to add statistical rigor.
-
-Dimensionality reduction:
-
-And finally, just about every single-cell publication has a t-SNE or UMAP these days. How do those work? To massively simplify, both methods take the cells, make respective constructs that are similar to a neighbor graph, and produce a 2D layout that preserves each cell's local relationships by minimizing an information theoretic "loss" (KL divergence for t-SNE, cross-entropy for UMAP) compared to the high-dimensional coordinates.
-
-If you want to prove all of this for yourself, just go through Giotto's code base and search for terms like knn, neighbor, graph, and delaunay (see image below), and/or go to the original Giotto paper (link in comments) and search for "neighborhood network."
-
-What does this mean for leaders and researchers alike?
-
-Neighbor graphs help tie a lot of spatial analysis together. They are not the only thing you have to know, but you should get in the habit of finding these through lines and doubling down on them. This will allow you to both move fast and really understand what is happening under the hood.
-
-If you want to talk to me more about any of this stuff, just send a DM. If you've been doing this a while and there are some other deep through lines you like (e.g. Fourier transform), please mention them in the comments. Otherwise, I hope you have a great day.
-
-[[file:images/neighbor_graphs_spatial.png]]
-*** comment
-Giotto paper is here: https://genomebiology.biomedcentral.com/articles/10.1186/s13059-021-02286-2
-Giotto suite paper is here: https://www.biorxiv.org/content/10.1101/2023.11.26.568752v1.full.pdf
-** [[https://www.linkedin.com/feed/update/urn:li:activity:7307398833943011328/][Cluster stability as an evaluation metric for your clustering scheme's performance on single-cell data]]
-Cluster stability as an evaluation metric for your clustering scheme's performance on single-cell data:
-
-Here, I took the PBMC 3k dataset (from scRNA seq), and clustered it using the standard KNN graph-based clustering in Seurat with the default parameters (done on the top 10 principal components, not the UMAP). But then I did it multiple times over multiple random seeds. I then computed the centroids of each clustering and visualized them in UMAP plots. I then strung these together to run as an animation, which you can see in the image below.
-
-I define cluster stability as the amount the clusters "move around" in subsequent clusterings. While I stop at the animations for this post, this metric can in turn be quantified using information theory metrics.
-
-Here, we can see that the CD4 T cell subclusters are less stable than the rest of the clusters in the dataset. We already know that the T cells are harder to cluster for scRNA seq data, as compared to having data from an antibody panel (CITE-seq or flow/CyTOF), so this serves as a sanity check.
-
-If you have a new data modality, or you're testing some new clustering algorithm, or you're simply optimizing whatever existing clustering scheme you've got, it might help to run it many times just to see whether the clusters are stable, or whether some clusters are more stable than others. This will help you optimize your clustering scheme and make sure that the populations that you end up selecting are not arbitrary.
-
-Take home message for bioinformaticians:
-
-Here is an evaluation metric (code is in the comments) that allows you to be a bit more sure about whatever clustering algorithm you are running on whatever dataset, to allow you to distinguish signal from noise and make you more confident with respect to what you end up using in downstream steps.
-
-Take home message for leaders:
-
-As the adage goes, what can be measured can be managed. For your research team, you want to be able to pepper in as many of these evaluation metrics as you can into your workflows. You already know that it helps if they are quantitative, but here I show that it helps if they are visual. The code in the comments will allow your team to produce these animations for your respective projects.
-
-If you want to chat with me more about this kind of thing, feel free to send me a DM. Otherwise, I hope you got something out of this post and I wish you a great rest of the day.
-
-[[file:images/ppt_pbmc3k_raw_fps30.gif]]
-
-*** comment
-Code and data can be found here: https://tjburns08.github.io/seurat_pbmc_cluster_stability.html
 ** [[https://www.linkedin.com/feed/update/urn:li:activity:7297975993489616897/][Searchbot and prompt scripting]]
 In light of OpenAI's Deep Research, I updated my command line chatbot to include internet search. Armed with this feature, you can see a meta-level of prompt engineering involving "social networks" of chatbots, which I am calling prompt scripting. And you can do it today...
 
@@ -1325,53 +936,121 @@ Give it a shot, and message me if you need help setting it up. If you are integr
 [[file:images/llm_chatbot.png]]
 *** comment
 The writeup can be found here: https://tjburns08.github.io/command_line_writeup.html
-** [[https://www.linkedin.com/posts/tylerjburns_the-case-for-viridis-activity-7289648023238811648-Qh8o?utm_source=share&utm_medium=member_desktop][Comparing Color Palettes for scRNA-seq Data Visualization: The Case for Viridis as a Default]]
-TL;DR: use the viridis color palette for your single-cell data to improve interpretability and colorblind accessibility. Flip through the 3-slide carousel for visuals. Longer post...
+** [[https://www.linkedin.com/posts/tylerjburns_as-per-my-two-polls-placed-11-months-apart-activity-7165771409686827008-k5E2?utm_source=share&utm_medium=member_desktop][Two surveys side by side, 11 months apart on LLM usage (April 2023, March 2024)]]
+As per my two polls placed 11 months apart, most people in the flow/CyTOF community are interested in but not using or experimenting with LLMs in their work, both now and one year ago. Between last year and now, more people appear to be actively using LLMs.
 
-It was brought to my attention in a previous post I made, that the "jet" color palette (blue -> red) often used for coloring t-SNE and UMAP plots can exaggerate differences in marker values, and is not colorblind friendly.
+I have not come across any work using LLMs particularly with flow/CyTOF data analysis (comment or DM me if you have), though I have seen a few papers using them in single-cell sequencing analysis, suggesting that flow/CyTOF might be next. Here is an example study reviewing seven different single-cell LLMs: https://lnkd.in/dTCxxEf5
 
-In the R markdown linked in the comments, I compare the Jet, Seurat default, and Viridis palettes in terms of balance and colorblind friendliness. The report includes both color spectrum comparisons and UMAP plots colored using each palette, along with colorblind simulations.
+[[file:images/llm_surveys.jpeg]]
 
-The first image in the carousel shows the spectra in side by side comparisons. The second and third images show representative UMAPs colored in the three palettes along with their colorblind simulations.
+* Foundation Models For Single-Cell And Spatial
+#+HTML: <a href="#top">Back to top</a>
+Posts focused on transformer and foundation models themselves, separate from general LLM-assisted analysis workflows.
+** [[https://www.linkedin.com/posts/tylerjburns_as-a-followup-to-my-earlier-posts-about-single-cell-activity-7389671614948388864-v7D1?utm_source=share&utm_medium=member_desktop&rcm=ACoAAAbP8M8BYXs_UknoBHnmw2rZ-aRDTJF7L3Y][Cell2Sentence update: 27B parameters]]
+As a followup to my earlier posts about single-cell foundation models, I wanted to do a post-length journal club on a recently updated cell2sentence (C2S) model, that now has 27B parameters, and now has some spatial capabilities. Here is what stands out and what it means for you:
 
-Observations:
+Some spatial reasoning capabilities:
 
- - Jet: abrupt color transitions exaggerate small differences in marker expression if they occur at these transition points. Colorblind simulations keep these transitions and make the palette overall very unbalanced.
+Figure 6 shows C2S being used to predict niche neighborhoods for CosMx data. CellPhoneDB and BioGRID interaction data were folded in, which gave an accuracy of 70% (to 55% if C2S alone). This is interesting, and it does make me wonder how far spatial reasoning can be pushed.
 
- - Seurat default: smooth transitions and colorblind friendly, but limited resolution due to fewer colors being used.
+However, I also wonder whether it would just be easier to loop in a foundation model trained only on spatial data for spatial tasks rather than trying to make an everything model. I covered one such spatial model, KRONOS, last summer.
 
- - Viridis: smooth transitions and colorblind friendly, but with higher resolution due to more colors. This resolution is at least partially preserved in the colorblind simulations.
+Querying, predictions, but no citations:
 
-Based on these observations, I recommend that researchers and leaders consider using viridis (or palettes in the viridis family) as defaults for your papers, posters, talks, pitch decks, and so forth.
+Figure 2C shows that this model in particular has cell embeddings (like UCE which I recently covered), but also has LLM querying capabilities. This is because part of the training process is converting single-cell data into long "sentences" consisting of a rank-ordered list of genes by expression, per cell. This gets mishmashed in with data from publications.
 
-By doing so, we can enhance interpretability, inclusivity, and data literacy across academic and industry settings.
+Figure 9 shows that this scaled-up model in particular was able to make a validated prediction about kinase inhibitor silmitasertib that anyone in pharma might want to take a look at.
 
-Please see the comments for a talk given at SciPy in 2015 from the creators of the viridis color palette. They do a great job introducing the viewer to the first principles of color theory, from the photons to the neurons. They use that in turn to explain the development of viridis.
+This said, the frustrating thing is that the answers do not have "citations" back to the training data (such is how these things work). As a NotebookLM user, this kind of thing frustrates me. Maybe the model could at least have a post-hoc matching function that would pull forth datasets and abstracts from whence the answer most likely came.
 
-Bottom line: use viridis to improve clarity and inclusivity in your single-cell data visualizations.
+Benchmarking AI models based on latent spaces of other AI models:
 
-[[file:images/viridis_post_1.png]]
-[[file:images/viridis_post_2.png]]
-[[file:images/viridis_post_3.png]]
+Such a matching function might having the output and the training data embedded in the latent space of some other model, and doing a nearest neighbor search. Such an idea shows up in the benchmarking section of the paper...
 
+The authors have evaluation metrics in the paper, that actually require the latent space of other foundation models. One way to understand this, is to think of how you would determine how lexically close two sentences were to each other, perhaps in comparison to another pair of sentences. You'd throw these sentences into a BERT embedding (see my TED talk) and measure the physical distance between points in the embedding space.
+
+This is called the BERTscore, and you can see it's use in Figure 4C and 4D, where they evaluate the "scaling" of the model.
+
+The point is: you have an evaluation metric for AI models, which is really a distance function within an embedding space of another AI model. This is a clever idea, but I just hope that in 10 years we won't have evaluation metrics that consist of the latent space of another model, evaluated on the latent space of another model, all the way down.
+
+Conclusion:
+
+As I said in the KRONOS post four months ago, I am waiting for the possibility that foundation models have their "GPT-3 moment" where with enough scale, they are suddenly in every lab everywhere.
+
+This said, it's pretty much impossible for me to evaluate every the quality of every dataset that goes into these models. So I intend to use these things as hypothesis generators, but also to stick with the old fashioned way of looking things up myself. A sort of barbell strategy between old and new.
+
+Aside from that, the model is runnable on google collab (though I haven't gone beyond the starter code they give you), and you should try it. Thank you and I hope you all have a great day.
+
+The pre-print is here: https://www.biorxiv.org/content/10.1101/2025.04.14.648850v2
+
+file:images/cell2sentence_27b.png
+** [[https://www.linkedin.com/feed/update/urn:li:activity:7338549286822993920/][The KRONOS patch based spatial foundation model]]
+If you do spatial, you know QC is a headache. There's a new spatial foundation model called KRONOS out this week that can help with that. I read the pre-print and spoke with the corresponding author. Here is what I found:
+
+Quick overview:
+
+This foundation model is a vision transformer (similar to the LLMs, but can "see") trained on high-parameter imaging datasets (e.g. Akoya CODEX). Specifically, it is trained on "patches" rather than cells: 47M patches, across 175 protein markers, across 8 imaging platforms. The interesting thing here is that operating at the patch level can bypass cell segmentation entirely. This helps avoid a lot of headache for the personnel involved, and allows for the capture of nuances (e.g. in neurons that are not perfectly segmented).
+
+Deep dive:
+
+The part that I was drawn to was Figure 3G-I in the paper (see image), which shows the model detecting and flagging artifacts. These are problems with the image that would harm downstream analysis, like tissue folding, blurring, or signal saturation. This model can be inserted into the quality control section of a pipeline and assist in detecting these issues early on. My previous LinkedIn surveys on single-cell analysis suggest that my audience has much more "headache" around quality control than downstream analysis (and it's the same for me), so I think this is definitely for you.
+
+Why I take this seriously:
+
+While I have yet to use this model myself, I spoke with one of the corresponding authors Sizun Jiang directly about this, whom I have known since my grad school days. He told me that the model is becoming a mainstay in current analysis pipelines in the lab, and is being used to augment the analysis of previous datasets and ongoing studies. In other words, there is skin in the game here: the better the model, the better his lab's research output, which leads to better publications and more meaningful clinical discoveries, which leads to more grant funding and talent to work on these key questions, and so forth.
+
+The big picture:
+
+If you are a researcher or a leader, you should look into at least trying these models out, and getting a feel for how they work. Benchmark them to existing analysis pipelines. If you've seen my other posts on foundation models, you'll know that this field is growing fast in single-cell. Now they are being developed in spatial.
+
+You'll also know my hypothesis that given the parameter size of the foundation models right now, they may still be equivalent to GPT-2 on the LLM side. Things like larger model architectures or richer training data (e.g. more tissue types, multi-omics) could lead to a "GPT-3 moment." So I would get familiar with these models before we hit this inflection point.
+
+What I need from you:
+
+Let me know what the most absolutely annoying aspects of spatial QC are for you. Be specific. If I'm going to use this model and similar for my spatial work, I want to direct it toward the nastiest issues and take it to its limits.
+
+[[file:kronos_fm.png]]
 *** comment
-My markdown is here: https://tjburns08.github.io/case_for_viridis.html
+The KRONOS pre-print is here: https://www.arxiv.org/pdf/2506.03373
+The GitHub is here: https://github.com/mahmoodlab/KRONOS
+** [[https://www.linkedin.com/posts/tylerjburns_transformer-based-foundation-models-the-activity-7249759966423646210-5Ba2?utm_source=share&utm_medium=member_desktop][Review on single cell foundation models]]
+Transformer-based foundation models (the stuff of LLMs) are slowly working their way into the single-cell literature. Here is what to know and what to do about it.
 
-A video by the creators of the viridis palette is here: https://www.youtube.com/watch?v=xAoljeRJ3lU
+For this post, I draw from a neutral review from Artur Szalata and colleagues (last author: Fabian Theis) on the topic, and additional time I have spent testing these models myself. Below are three main points from the paper, and my take on each of the points, followed by a take-home message to make all of this actionable.
 
-Thank you to Asier Antoranz for making me aware of this video, and therefore inspiring this post. This truly shows the value of posting content to social media.
-** [[https://www.linkedin.com/posts/tylerjburns_flowcytof-users-who-are-now-doing-single-cell-activity-7287826621862940672-Iv0E?utm_source=share&utm_medium=member_desktop][Cytobank color palette for Seurat's FeaturePlot]]
-Flow/CyTOF users who are now doing single-cell sequencing analysis: I created the blue-to-red color palette (eg. used in FlowJo, Cytobank, OMIQ, etc) for Seurat's FeaturePlot function, which otherwise defaults to gray-to-purple.
+1. These models are still quite small. Table 1 shows that most of the models reviewed were trained on 30-100 million cells, which translates to hundreds of millions of parameters. Transformer models in other fields are well into the hundreds of billions of parameters (GPT-3 was 175B).
 
-Back in the early 2010s, when I was first coloring t-SNE maps for CyTOF data, I got used to a color palette that the main SAAS company in the space, Cytobank, was using. It's basically blue -> cyan -> green -> yellow -> orange -> red.
+   My take: the single-cell models here might still be analogous to GPT-1/2, where they show some promise but the full potential is still down the road.
 
-Anyway, here is a R Markdown (linked in the comments) that has the code to use this color palette for FeaturePlot, but also some code that allows you to replicate the FeaturePlot function with the "Cytobank palette" independent of Seurat. The image is example output.
+2. These models serve are multi-purpose tools, in that they have many applications. These include cell annotation, gene function prediction, perturbation prediction, and inferring gene regulatory networks, among others.
 
-Feel free to steal the code and do whatever you want with it. I hope you all have a great day.
+   My take: once these models have their GPT-3/4 moment, there will be many new things for us to play with and integrate into our workflows.
 
-[[file:images/featureplot_cytobank_colors.png]]
+3. There are applications that are still more suited for simpler solutions. An example of this was scTab, a non-transformer model that outperformed scGPT (a transformer model) in cross-organ cell type integration.
+
+   My take: from a practical standpoint, I try the simpler solutions first, but in this context, later models trained on more cells could prove to be superior. So I'm keeping tabs on this.
+
+I remember when I got early access to GPT-3 in the fall of 2021 (a year before ChatGPT), experimenting with it quite a bit, and simply making sure I was familiar enough with it that I could rapidly adopt it if it got any better. Now, I am spending time working with some of these available foundation models to see what they can do in my hands.
+
+You can get access to these models too by going to Chan-Zuckerberg Initiative's collection of census models for single-cell (link in comments). They provide links to the model pages and sample embeddings that the models produced.
+
+The take home message for leaders and scientists:
+
+Know how these models work, have some of these tools in your arsenal, and test what kinds of inputs they take and what kinds of outputs they can produce. Keep tabs on their developments. Take their results with a grain of salt, but know that they will get better. I assume that they will only improve from here, as the research around these models improve, and the number of parameters possible per model increase.
+
+The review and a markdown of me interrogating one of these models is linked in the comments.
+
+If any of you are currently tinkering at the interface between single-cell/spatial and transformer models, please let me know. I hope you all have a great day.
+
+[[file:images/2024-10-08_19-09-14_Screenshot 2024-10-08 at 19.09.08.png]]
 *** comment
-The markdown is here: https://tjburns08.github.io/rainbow_feature_plot.html
+The review by Artur Szalata and colleagues can be found here: https://pubmed.ncbi.nlm.nih.gov/39122952/
+
+A page from CZI giving you starter code for a number of so-called "census models" which are essentially cells that have been run through transformer models, giving you access to the embedding:
+https://cellxgene.cziscience.com/census-models
+
+Me interrogating the geometry of a foundation model embedding by trying to find its "center" and "outer edges" and realizing that UMAP does not quite capture this.
+https://tjburns08.github.io/human_universal_cell_embeddings.html
 ** [[https://www.linkedin.com/posts/tylerjburns_in-a-standard-scrna-seq-analysis-pipeline-activity-7254837976428388352-Ki7x?utm_source=share&utm_medium=member_desktop][Don't use top n variable genes for AI foundation models]]
 In a standard scRNA-seq analysis pipeline, you select the top ~2000 variable genes for downstream analysis (eg. clustering). However, my recent experiment suggests that you should not do this for foundation models. Here is what I did...
 
@@ -1453,157 +1132,6 @@ My KNN Sleepwalk package: https://github.com/tjburns08/KnnSleepwalk
 Virtual Cell Initiative: https://arxiv.org/abs/2409.11654
 
 Universal Cell Embeddings: https://www.biorxiv.org/content/10.1101/2023.11.28.568918v1
-** [[https://www.linkedin.com/posts/tylerjburns_in-bioinformatics-sometimes-the-simple-solution-activity-7247585445658685440-aIzc?utm_source=share&utm_medium=member_desktop][Sometimes the simple solution is good enough]]
-In bioinformatics, sometimes the simple solution is good enough.
-
-In a spatial transcriptomics project I'm on, I was researching tools for deconvoluting Visium data to get "pseudo-cell" info out of the "spots." Accordingly, pseudo-cells are inferred from transcriptomic profiles within Visium spots, which typically capture multiple cells. Deconvolution methods help break down these mixed profiles within the spots to estimate gene expression at a more granular, pseudo-cell level per spot.
-
-In a benchmarking study to this end from the lab of Yvan Saeys, one thing stood out that I (and they) found interesting:
-
-Of the 12 methods that were analyzed, a simple regression, known as non-negative least squares (NNLS) did better than almost half of these specialized spatial deconvolution tools in at least one metric, and did better than 1/3 of the methods in a composite score (see image below, which comes from Figure 2 of the paper).
-
-The point I want to bring up here is that in some contexts the simple, rapidly implementable method, even if sub-optimal, is good enough. If you hypothetically had the first Visium dataset in human history and had to figure out a way to deconvolute it, this study shows that you would get pretty far just by running NNLS.
-
-As another example you've seen if you follow my content, I got pretty far using k-nearest neighbors (KNN) to both quantitatively and visually benchmark nonlinear dimensionality reduction tools (before this topic was mainstream). There are many more methods out there to that end, but KNN is intuitive and easy to implement, so tools like this are a good place to start.
-
-The take home message for leaders:
-
-Agile decision making: when you're doing a first pass at something and/or when you're truly in the wild west (no one has written the book on what you're doing), a simple approach will get you insights more quickly, which will inform your next steps.
-
-Resource (e.g. time) management: in projects with many moving parts, doing the most easily implementable things first will allow for a better handle on the problem space. This will help to determine if more sophisticated and time-consuming methods might be necessary down the line.
-
-The take home message for scientists:
-
-Momentum: in my experience, taking any action that moves the project forward, even if it's suboptimal, gives you psychological momentum (motivation) that moves you and the team forward. This is especially important for problems that are hard and intimidating. Just start somewhere.
-
-The paper is linked in the comments, if you want to have a closer look. If I had to "benchmark" the benchmarking studies I've seen, the ones from the Saeys Lab are as good as they get.
-
-I hope you all have a great day.
-
-[[file:images/visium_deconvolution.jpeg]]
-*** comment
-The spatial deconvolution benchmarking paper: https://elifesciences.org/articles/88431
-** [[https://www.linkedin.com/posts/tylerjburns_plenty-of-people-are-talking-about-automation-activity-7242885831139487746-7NxH?utm_source=share&utm_medium=member_desktop][Build automation with user paranoia in mind]]
-Plenty of people are talking about automation as the future of bioinformatics. This is fine, but there is one additional piece that leaders need to be aware of, to produce winning next-gen solutions: the user's paranoia.
-
-A lot of the bioinformatics work I've done in the last 8 years has involved paranoia management, both for myself and for my clients. In other words, every last little piece of the workflow has checks and visual components to make sure there are no issues with the data and/or the algorithms (and believe me, issues come up). This is especially important when your analysis has any sort of novel component (data, tools used, etc).
-
-There appears to be a push toward a "single button solution," be it auto-gating for flow/mass cytometry, or one-and-done cell segmentation in imaging. This is ok, but if you want buy-in from biologists, and especially clinicians (you do the data analysis wrong, bad things happen to sick people), you better have lots of "checks" at every step, both numeric and visual, so we can go through every last little piece of the analysis and look for things that could go wrong.
-
-So embrace the paranoia of the users, learn about it, and speak to it as you build out the next generation of tools. We will thank you in the end.
-
-[[file:images/bioinformatics_automation_paranoia.jpeg]]
-*** comment
-I think that the spotlight on paranoia in my post resonates with a broader field, that may become increasingly relevant: explainable AI (XAI).
-
-In section 2.3.1 of a 2024 review by Longo and colleagues (https://www.sciencedirect.com/science/article/pii/S1566253524000794), highlighting the current challenges in XAI, paranoia is a subtext in the following life sciences related passage:
-
-"The inferences produced by AI-based systems, such as Clinical Decision Support Systems, are often used by doctors and clinicians to inform decision-making, communicate diagnoses to patients, and choose treatment decisions. However, it is essential to adequately trust an AI-supported medical decision, as, for example, a wrong diagnosis can significantly impact patients."
-
-(there is some paranoia that comes with getting clinical work right)
-
-"In this regard, understanding AI-supported decisions can help to calibrate trust and reliance. For this reason, many XAI methods such as LIME, SHAP, and Anchors have been applied in Electronic Medical Records, COVID-19 identification, chronic kidney disease, and fungal or bloodstream infections"
-
-(XAI methods serve as a number of visible checks to mitigate paranoia by identifying issues when AI is being used)
-
-** [[https://www.linkedin.com/posts/tylerjburns_when-you-cluster-your-single-cell-data-do-activity-7198660249229127682-sWlv?utm_source=share&utm_medium=member_desktop][Cluster stability visualization]]
-When you cluster your single-cell data, do you run it multiple times to check for consistency? You should. This is part of an important topic called cluster stability. Let me explain.
-
-The attached gif is FlowSOM clustering of CyTOF whole blood data, with 20 and 40 consensus clusters selected side by side, run 50 times. These are visualized on a UMAP. The cluster centroids from the UMAP visualization are computed and shown as yellow spots.
-
-You'll notice that there are some instances where the centroids are relatively stable (especially in the 20 cluster case). There are other instances where they move, appear, disappear, and so on.
-
-The practical takeaway I get from this is that if you're running FlowSOM or similar clustering algorithms where you choose the number of clusters, you should aim to over-cluster rather than trying to get the perfect number of clusters. You can always merge similar clusters later.
-
-Furthermore, it helps to know which clusters are static versus which are moving around, in order to know whether a small "rare" cluster you found is a fluke that showed up one time in 50, or whether it keeps showing up.
-
-The data and code for creating this gif is linked in the comments. I just got started on this project, and there is still some work to be done. Future directions include running this on clustering algorithms where the number of clusters are actually computed rather than chosen, like PhenoGraph. If we find that these clusters are moving around all over the place, then it will be worth doing a one-over on relevant clustering strategy.
-
-#+HTML: <img src="images/cluster_stability.gif"/>
-** [[https://www.linkedin.com/posts/tylerjburns_facing-challenges-with-analyzing-large-flow-activity-7099769574782324736-vjnv?utm_source=share&utm_medium=member_desktop][GigaSOM: FlowSOM in Julia for larger datasets]]
-Facing challenges with analyzing large flow and mass cytometry datasets?
-
-As datasets grow, the need for faster and more efficient tools becomes paramount. If you're looking to run FlowSOM clustering on more cells faster, consider exploring GigaSOM in the Julia programming language:
-
-🚀 It clustered 1.1 billion cells in just under 25 minutes (EmbedSOM image below).\\
-🖥️ Achieved on a relatively small (256 core) compute cluster.\\
-
-While I haven't done a side-by-side comparison with this exact dataset on this size compute cluster in R, my experience with Julia has been promising. It combines the ease of R and Python with the speed of a lower-level language.
-
-Thank you Abhishek Koladiya, PhD for introducing me to this innovative package.
-
-Dive deeper into the details with the paper and package homepage: https://lnkd.in/e9-Bdk3Y
-[[file:images/gigasom.jpeg]]
-** [[https://www.linkedin.com/posts/tylerjburns_i-wanted-to-highlight-a-clustering-method-activity-7087382242867470336-pUbG?utm_source=share&utm_medium=member_desktop][How X-shift works]]
-I wanted to highlight a clustering method specialized in rare subset detection that in my opinion is under-explored with respect to newer, high dimensional data types (eg. single cell sequencing, high-dimensional imaging, spectral flow). It's called X-Shift, written by Nikolay Samusik.
-
-For biologists and directors, if you have any projects that involve the detection of rare cell subsets, then X-shift should be on your radar. X-shift was determined to be the best method for rare cell subset detection, in a 2016 clustering method benchmarking study (the one that put FlowSOM on the map). The paper is linked in the markdown below.
-
-Why isn't X-shift all over the place? The method is computationally expensive (eg. high run-times), and runs in Java, not the more common R or Python (yet), making it more difficult to integrate into existing single-cell pipelines. Thus, the method is not as widely utilized and explored as it otherwise would and should be.
-
-How does it work? The method is based on mean-shift clustering. For each cell, move in the direction of higher density until you get to a peak. That peak is your cluster.
-
-For bioinformaticians (and anyone else interested in going deep), I created a massively simplified, hyper-tailored, and highly visual version of X-shift in R, to ground your intuition in how it works. You can see the method in action, code and all, in this markdown: https://lnkd.in/e_mSEzm3. In the markdown, I include links to the X-shift paper, benchmarking study, and X-shift software.
-
-Thank you for your attention, and I hope you all have a great day.
-
-[[file:images/how_xshift_works.jpeg]]
-** [[https://www.linkedin.com/posts/tylerjburns_the-following-is-a-warning-for-biologists-activity-7085200486697443330-Zzbc?utm_source=share&utm_medium=member_desktop][Single-cell sequencing analysis: don't forget to integrate your data]]
-The following is a warning for biologists, bioinformaticians, and leaders of research teams, especially those moving from a flow/CyTOF background into single-cell sequencing. Please study the concept of data integration.
-
-Flow and CyTOF users know to cluster on "type" markers (eg. surface), and never on "state" markers (eg. phospho-proteins). However, making this distinction is not possible for scRNA seq data. Thus, we have to rely on data integration, which is a way of algorithmically "aligning" data across multiple conditions.
-
-Here, I show how integration is done, but my main point is to show what the data look like when they're not integrated. Failure to integrate the data can lead to false conclusions, and a whole lot of wasted time and effort.
-
-For biologists and leaders of research teams, please study these pictures. You need to know what un-integrated data look like so you can have intuition around what is a novel cell subset and what is a technical artifact.
-
-For bioinformaticians and those interested in going deeper, the vignette is here: https://lnkd.in/eRJE57i5. I hope you all have a great day.
-
-[[file:images/integrate_your_data.jpeg]]
-** [[https://www.linkedin.com/posts/tylerjburns_activity-7045080240515076096-kXLl?utm_source=share&utm_medium=member_desktop][Survey: QC gives people the most headache in a flow/CyTOF data analysis pipeline]]
-[[file:images/analysis_headache.png]]
-** [[https://www.linkedin.com/posts/tylerjburns_cytof-users-we-use-the-asinh-transform-activity-7009180881546321922-y5qH?utm_source=share&utm_medium=member_desktop][Pictures of different data transforms for CyTOF]]
-CyTOF users: we use the asinh transform, but is that the only one that works? How does the scale argument influence the data transformation? Here is an interrogation of CyTOF data transformed in many different ways: https://lnkd.in/eRgYXzkm
-
-[[file:images/data_transformation.jpeg]]
-** [[https://www.linkedin.com/posts/tylerjburns_flow-cytometry-and-cytof-users-here-is-a-activity-7003308800543711232-eAEx?utm_source=share&utm_medium=member_desktop][What happens when you run SPADE on random input]]
-Flow cytometry and CyTOF users: here is a SPADE tree produced from 30 dimensions of random noise. It still looks beautiful, but conveys no truth. This is an example of the beauty is truth delusion, and its behind every bioinformatic corner waiting to pounce. Read more here: https://lnkd.in/ezeZV_Fj
-
-[[file:images/spade_random_input.jpeg]]
-** [[https://www.linkedin.com/posts/tylerjburns_as-per-my-two-polls-placed-11-months-apart-activity-7165771409686827008-k5E2?utm_source=share&utm_medium=member_desktop][Two surveys side by side, 11 months apart on LLM usage (April 2023, March 2024)]]
-As per my two polls placed 11 months apart, most people in the flow/CyTOF community are interested in but not using or experimenting with LLMs in their work, both now and one year ago. Between last year and now, more people appear to be actively using LLMs.
-
-I have not come across any work using LLMs particularly with flow/CyTOF data analysis (comment or DM me if you have), though I have seen a few papers using them in single-cell sequencing analysis, suggesting that flow/CyTOF might be next. Here is an example study reviewing seven different single-cell LLMs: https://lnkd.in/dTCxxEf5
-
-[[file:images/llm_surveys.jpeg]]
-** [[https://www.linkedin.com/posts/tylerjburns_automated-gating-autogating-has-been-a-activity-7167877080360206336-dDlD?utm_source=share&utm_medium=member_desktop][Survey March 2024, most are not using but are interested in autogating]]
-Automated gating (autogating) has been a topic of discussion for many years, but more recently I'm seeing it in the major flow/cytof analysis SaaS products, and I'm hearing of users requesting it more often. So I am interested in knowing whether it is becoming a standard part of people's workflows, whether there's simply more interest, or whether most people are not interested and there is a selection bias in what I'm seeing. Thank you to everyone who takes the time to answer.
-[[file:images/autogating.png]]
-
-* Bibliometrics
-#+HTML: <a href="#top">Back to top</a>
-Trends in the literature. There is a lot going on here, and very few people actually studying this. Given the [[https://gwern.net/replication][replication crises]] that are emerging in various fields, it is probably a good idea that more people pay attention to analyzing the literature itself in the single-cell field.
-** [[https://www.linkedin.com/posts/tylerjburns_hi-friends-we-have-all-seen-that-the-cytof-activity-7462487719865147392-jh3Y?utm_source=share&utm_medium=member_desktop&rcm=ACoAAAbP8M8BYXs_UknoBHnmw2rZ-aRDTJF7L3Y][Dimensionality reduction provenance app]]
-Hi friends, we have all seen that the CyTOF field has converged on a narrow set of tools (e.g. FlowSOM, UMAP). We can remedy this by seeing the "forest in the trees" around methods, just as SPADE did with the immune system in 2011.
-
-To prevent the field from seeming more "settled" than it should be, I made an interactive provenance graph for CyTOF dimensionality reduction algorithms, and layered on dimensionality reduction research at large.
-
-I observed that while we have converged upon t-SNE and then UMAP as a standard visualization, there are a number of developments that could be better for your dataset, question, or analysis goal. For example, a lot of work has been done with autoencoders lately.
-
-The bigger picture is moving forward:
-- These graphs should be part of intro sections of papers.
-- These graphs should be used to summarize research in literature databases.
-- You can plug novel observations into graphs like this to determine how much novelty there is, versus reinventing the wheel.
-- We can pick up where Thomas Kuhn left off, and look at the structure of scientific revolutions with much more ease.
-
-The bigger question:
-What would change if every computational biology method paper, let alone research laboratory/group and their internal literature database, came with an interactive provenance graph like this?
-
-The app is linked in the comments. Please let me know if you have any questions. I’d especially welcome suggestions for missing methods that should be added, or types of graphs that should be built (e.g. spatial methods).
-
-[[file:images/graph_browse_linkedin.gif]]
-*** comment
-Try the app yourself: https://tjburns08.github.io/dr_provenance_interactive.html
 ** [[https://www.linkedin.com/posts/tylerjburns_keeping-ahead-of-the-single-cell-foundation-activity-7287119420181680128-oxJk?utm_source=share&utm_medium=member_desktop][Keeping ahead of the single-cell foundation model literature with GitHub's "awesome" page]]
 Keeping ahead of the single-cell foundation model literature, using GitHub's "awesome" pages:
 
@@ -1653,6 +1181,502 @@ In terms of first principles, a longer post is warrented (we have exceeded the c
 - What is coming out?
 
 There are a handful of concepts here that intersect with stuff any single-cell researcher would already know. For instance, the output is often a high-dimensional embedding. So things like the curse of dimensionality, distance metrics, dimensionality reduction and its limits, and so forth are relevant here too. If you've ever used BERT (as opposed to a GPT), you have a leg up too.
+
+* Spatial, Multimodal, And Assay Design
+#+HTML: <a href="#top">Back to top</a>
+Posts on spatial assays, multimodal integration, panel design, segmentation, deconvolution, and cross-platform analysis.
+** [[https://www.linkedin.com/posts/tylerjburns_essb2025-spatialbiology-embl-activity-7386022173758386177-h9VB?utm_source=share&utm_medium=member_desktop&rcm=ACoAAAbP8M8BYXs_UknoBHnmw2rZ-aRDTJF7L3Y][Thoughts about ESSB 2025]]
+I had a great time at ESSB2025 in Heidelberg, where I caught up with and met great spatial bio researchers, and got up to speed on the bleeding edge of both wet lab and dry lab practices. A few things that stood out to me:
+
+Very high -plex:
+
+There was a talk that had an antibody panel of 1133 proteins. Up until this point, I had seen at most a few hundred. With my roots in CyTOF, I know how much work can go into building a panel of 30 antibodies, so I think antibody validation might be a bottleneck here unless we have robotic arms coupled to vision transformers doing 5-point titrations and such (now there's a startup idea).
+
+Multiple modalities:
+
+There was an interesting focus on metabolites. One direction was pure mass spec. This gets you a large number of readouts, but you don't yet get single-cell resolution. Another interesting strategy I saw was the construction of aptamer-oligo conjugates that bind to metabolites, that can in turn be sequenced. Think CITE-seq for metabolites.
+
+Analysis, appearance versus reality:
+
+One talk emphasized how hard it was to segment microglia in particular because of their weird shape. Thus, a lot of it was done manually. This is despite the fact that there is a perception that segmentation is a solved problem with all the AI developments. It is not.
+
+From 2-D to 3-D:
+
+There were a number of talks that went into 3-D imaging (e.g. making a bone clear so you can "fly through" it after you stain), and one where an interesting 2-D image observation needs a 3-D image as followup. There is a whole world of anlaysis problems to solve here when this comes to fruition, from new algorithms to data management. Might be worth doing some theoretical work here. And along those lines...
+
+Math and human interpretability:
+
+One talk was using topology to create human readable analysis outputs. This group has a "product market fit" at their institute right now because they were working out the theory behind a lot of the current issues (multiple modalities, etc) 5 years ago. This leads to both human-readable output, and interesting parameters that can be fed into foundation models and the like. So for the rest of us: what types of data are inevitable, and what can we do now to prepare for that? It will help to have mathematicians in your circles for this theoretical work.
+
+Conclusion:
+
+There is absolutely a gap between what you learn at conferences, versus what shows up on the open internet. In sum, this conference gave me a better impression as to what is going on in the spatial field than any papers or anything shared on social media has given me. I look forward to seeing how things develop between now and the next conference from the European Society for Spatial Biology (ESSB) e.V. in Barcelona.
+
+file:images/essb_pics.png
+** [[https://www.linkedin.com/posts/tylerjburns_for-spatial-transcriptomics-data-cell-segmentation-activity-7234553712344465410-NxRX?utm_source=share&utm_medium=member_desktop][Cell segmentation size matters for spatial transcriptomics]]
+For spatial transcriptomics data, cell segmentation size is critical. I recently read a 2024 preprint from Austin Hartman and Rahul Satija about benchmarking in-situ gene expression profiling methods (eg. 10x Xenium). There's a detail in here I was struck by:
+
+One of the issues with making the comparisons between spatial methods was that the default cell segmentation provided by the authors of the datasets used varied between stringent (only cell boundaries you're sure of, tightly demarcated, small), and not stringent (something of a Voronoi tessellation, with loose and large boundaries). This can be seen in the image below, which comes from Figure 3 (link in comments).
+
+The differences in cell segmentation led to artifacts in gene expression, as measured by what they call the mutually exclusive co-expression rate (MECR). This is where genes that are biologically not expressed together in a cell are nonetheless both expressed. They had to re-segment the cells themselves in order to move forward with the benchmarking.
+
+This means two things. The first is when you're comparing spatial datasets across methods (eg. Xenium vs MERSCOPE), you need to re-segment the cells with the same method and stringency first. The second is that you need to pay close attention to the stringency of cell segmentation when you're doing any sort of spatial analysis, as it has been shown that artifacts can show up in this step.
+
+Do your biological conclusions change if you run the pipeline with loose vs stringent cell segmentation?
+
+The bigger picture is that in bioinformatics (and data analysis at large), the devil is in the details. It's all the little things you have to do to make sure the data are ready for the clustering and whatever else you're going to do.
+
+If you're in leadership, make sure your team is spending sufficient time on the early stages of data analysis (eg. QC, cell segmentation, batch effect finding, data integration). The "headache" steps that seem to delay the insight generation steps. As Marcus Aurelius said, the obstacle is the way.
+
+If you're learning bioinformatics, spend as much time as you can really understanding the raw data. One way to do this is to try to analyze your data outside of any standard package, or take a page from molecular biology and KO (remove) a step in the pipeline and see what happens (eg. what happens to the clustering and UMAP if you don't log or asinh transform the data).
+
+As the datasets and methods get more complicated, these little details will become more important. I hope you all have a great day.
+
+Link to [[https://www.biorxiv.org/content/10.1101/2024.01.11.575135v1][paper]].
+
+file:images/segmentation_size.png
+** [[https://www.linkedin.com/posts/tylerjburns_single-cell-protein-data-can-take-many-forms-activity-7166098906634829824-3aSF?utm_source=share&utm_medium=member_desktop][Data integration using CyCombine]]
+Single-cell protein data can take many forms: flow cytometry (spectral or otherwise), mass cytometry, CITE-seq, or protein-based imaging after cell segmentation. Not to mention the multitude of machines (eg. spectral cytometers from different companies, or CyTOF 2 vs CyTOF XT). It is inevitable that there will be a need and efforts to integrate these datasets across modalities to derive actionable insights.
+
+Accordingly, the Single Cell Omics group at Technical University of Denmark (DTU) has solved this problem with a method they call cyCombine. With this method, they are able to integrate a CITE-seq, spectral flow, and CyTOF dataset. They spell it out in a markdown (link in comments) so you can try it yourself.
+
+The UMAPs in the images show that the data, otherwise separate, now sit on top of each other. There are further metrics for evaluating the correction in the markdown (eg. earth mover's distance), and histogram visualizations. If I were using this, I'd want to try gating on the concatenated data, with the points in the biaxials colored by each method.
+
+To sum things up, there is good work being done in this space, and we should be paying attention because this type of work is going to become much more important as high-dimensional cytometry and cytometry-like methods and instrument types increase.
+[[file:images/cycombine.jpeg]]
+** [[https://www.linkedin.com/posts/tylerjburns_leaders-using-single-cell-tech-do-you-have-activity-7164260356083716096-0S0M?utm_source=share&utm_medium=member_desktop][Bridge integration]]
+Leaders using single-cell tech: do you have data across multiple modalities (eg. flow/CyTOF and single-cell sequencing) that you want to combine? Are you making large cell "atlases" internally or externally? Then you should consider integrating these datasets with bridge integration, a new method that came out last year. How does it work?
+
+Say you have a CyTOF dataset, and a single-cell sequencing dataset. Both are PBMCs. If you have a CITE-seq PBMC dataset (both RNA and protein), then you can use that as a multiomic "bridge" to integrate the two datasets. This is one reason why getting your team to produce a CITE-seq dataset or two might be valuable in the long term.
+
+The image attached is a schematic from Hao et al. (link in comments) that shows possible combinations of multimodal integration that go beyond RNA + protein. The method is available in Seurat (in other words, it's standardized and accessible for comp bio). Your team should look critically at figure 5 and S7 in the paper and the text that references it (the page immediately after the figure), as it shows a scRNA-seq + CyTOF integrated dataset using this method, with the text describing sanity checks.
+
+Even if you don't use this method, you should note the emerging trend of integration across modalities, which goes along with the emergence of single-cell multi-omics. Importantly, the authors express interest in doing this with spatially resolved data. They specifically mention CODEX (paragraph 4, discussion section), suggesting that a CODEX + scRNA-seq integration might be a current PhD/Postdoc project in the lab.
+
+Links to the paper and Seurat code in the comments below.
+
+[[file:images/bridge_integration.jpeg]]
+** [[https://www.linkedin.com/posts/tylerjburns_hack-you-can-run-scrna-seq-data-inside-omiq-activity-7376963107434250240-CA6f?utm_source=share&utm_medium=member_desktop&rcm=ACoAAAbP8M8BYXs_UknoBHnmw2rZ-aRDTJF7L3Y][Doing single-cell sequencing analysis in OMIQ]]
+Hack: you can run scRNA-seq data inside OMIQ. This gives you cytometry-grade visualization capabilities and analysis tools (e.g. FlowSOM, OptSNE), otherwise difficult or not available in Seurat/Scanpy.
+
+What I did:
+
+This morning, inspired by an OMIQ tutorial video that Eric Haas made, I figured out how to upload the pbmc3k dataset into OMIQ, software that is originally designed for flow/mass cytometry. I then tested OMIQ's capabilities on the dataset.
+
+How I did it:
+
+- I ran the the Seurat object through the standard analysis up to PCA.
+
+- I combined the gene expression (scale.data) and the PCs into a single matrix. You have to transpose the gene expression data so the features are columns and the cell ID is rows (this is standard flow cytometry format).
+
+- I outputted this as a csv, which I could then upload into OMIQ.
+
+What I found:
+
+- Through OMIQ, I was able to try flow cytometry methods on the pbmc3k dataset, including FlowSOM clustering, and OptSNE and EmbedSOM with dimensionality reduction.
+
+- I was also able to utilize OMIQ's figure builder, which does a good job producing publication or pitch deck-ready plots.
+
+- There was an occasional lag between clicking and something happening, perhaps because OMIQ is not designed to handle csv files of this type.
+
+Takeaways for leaders and research teams:
+
+- Cytometry platforms like OMIQ can be used in single-cell sequencing workflows.
+
+- If nothing else, you can use this as a visualization front end, and keep Seurat/Scanpy for the rest.
+
+Disclaimer:
+
+I used OMIQ as an example here because of my familiarity with it, but for other tools like it, the same concept will likely apply.
+
+Thank you and I hope you all have a great day.
+
+[[file:images/sc_seq_with_omiq.png]]
+*** comment
+The opposite is also possible, running flow/mass cytometry data in Seurat. If you want to see how I was able to do that, please look at my R Markdown here: https://tjburns08.github.io/run_cytof_with_seurat.html
+** [[https://www.linkedin.com/posts/tylerjburns_spatial-omics-analysis-is-complicated-but-activity-7310656950818496512-9D5a?utm_source=share&utm_medium=member_desktop&rcm=ACoAAAbP8M8BYXs_UknoBHnmw2rZ-aRDTJF7L3Y][Neighbor graphs in spatial analysis]]
+Spatial -omics analysis is complicated. But there is a powerful concept that unifies many seemingly unrelated methods: neighbor graphs. A neighbor graph simply connects cells to their closest neighbors— either based on similarity of gene/protein expression profiles or on physical proximity. If you grasp this idea, you'll quickly gain intuition across key steps like integration, clustering, niche finding, and dimensionality reduction.
+
+Here is how neighbor graphs underpin a typical spatial analysis pipeline:
+
+Integration:
+
+You might be integrating multiple datasets early on. While there are many ways to do this, one of them, called weighted nearest neighbor analysis, or wnn, uses a knn graph of multimodal datasets to predict the "weights" of each modality (eg. RNA vs protein), to determine how each modality should influence cell similarity.
+
+Clustering:
+
+At some point, you cluster the data. To do this, you make a knn graph, and then do what is known as community detection (which regions of the graph are more connected and which regions are less connected), and assign clusters accordingly. You may have seen the words "Louvain" or "Leiden" in the tutorials. That is what this is.
+
+Niche finding:
+
+After you annotate the cells (e.g. labeling B cells, T cells, etc), you generally want to look for spatial "niches" that contain enrichment of specific cell types. To do this, you now make a neighbor graph of physical spatial coordinates so that each node is a cell label. You then do permutation tests (comparing to a randomized neighbor graph) to add statistical rigor.
+
+Dimensionality reduction:
+
+And finally, just about every single-cell publication has a t-SNE or UMAP these days. How do those work? To massively simplify, both methods take the cells, make respective constructs that are similar to a neighbor graph, and produce a 2D layout that preserves each cell's local relationships by minimizing an information theoretic "loss" (KL divergence for t-SNE, cross-entropy for UMAP) compared to the high-dimensional coordinates.
+
+If you want to prove all of this for yourself, just go through Giotto's code base and search for terms like knn, neighbor, graph, and delaunay (see image below), and/or go to the original Giotto paper (link in comments) and search for "neighborhood network."
+
+What does this mean for leaders and researchers alike?
+
+Neighbor graphs help tie a lot of spatial analysis together. They are not the only thing you have to know, but you should get in the habit of finding these through lines and doubling down on them. This will allow you to both move fast and really understand what is happening under the hood.
+
+If you want to talk to me more about any of this stuff, just send a DM. If you've been doing this a while and there are some other deep through lines you like (e.g. Fourier transform), please mention them in the comments. Otherwise, I hope you have a great day.
+
+[[file:images/neighbor_graphs_spatial.png]]
+*** comment
+Giotto paper is here: https://genomebiology.biomedcentral.com/articles/10.1186/s13059-021-02286-2
+Giotto suite paper is here: https://www.biorxiv.org/content/10.1101/2023.11.26.568752v1.full.pdf
+** [[https://www.linkedin.com/posts/tylerjburns_in-bioinformatics-sometimes-the-simple-solution-activity-7247585445658685440-aIzc?utm_source=share&utm_medium=member_desktop][Sometimes the simple solution is good enough]]
+In bioinformatics, sometimes the simple solution is good enough.
+
+In a spatial transcriptomics project I'm on, I was researching tools for deconvoluting Visium data to get "pseudo-cell" info out of the "spots." Accordingly, pseudo-cells are inferred from transcriptomic profiles within Visium spots, which typically capture multiple cells. Deconvolution methods help break down these mixed profiles within the spots to estimate gene expression at a more granular, pseudo-cell level per spot.
+
+In a benchmarking study to this end from the lab of Yvan Saeys, one thing stood out that I (and they) found interesting:
+
+Of the 12 methods that were analyzed, a simple regression, known as non-negative least squares (NNLS) did better than almost half of these specialized spatial deconvolution tools in at least one metric, and did better than 1/3 of the methods in a composite score (see image below, which comes from Figure 2 of the paper).
+
+The point I want to bring up here is that in some contexts the simple, rapidly implementable method, even if sub-optimal, is good enough. If you hypothetically had the first Visium dataset in human history and had to figure out a way to deconvolute it, this study shows that you would get pretty far just by running NNLS.
+
+As another example you've seen if you follow my content, I got pretty far using k-nearest neighbors (KNN) to both quantitatively and visually benchmark nonlinear dimensionality reduction tools (before this topic was mainstream). There are many more methods out there to that end, but KNN is intuitive and easy to implement, so tools like this are a good place to start.
+
+The take home message for leaders:
+
+Agile decision making: when you're doing a first pass at something and/or when you're truly in the wild west (no one has written the book on what you're doing), a simple approach will get you insights more quickly, which will inform your next steps.
+
+Resource (e.g. time) management: in projects with many moving parts, doing the most easily implementable things first will allow for a better handle on the problem space. This will help to determine if more sophisticated and time-consuming methods might be necessary down the line.
+
+The take home message for scientists:
+
+Momentum: in my experience, taking any action that moves the project forward, even if it's suboptimal, gives you psychological momentum (motivation) that moves you and the team forward. This is especially important for problems that are hard and intimidating. Just start somewhere.
+
+The paper is linked in the comments, if you want to have a closer look. If I had to "benchmark" the benchmarking studies I've seen, the ones from the Saeys Lab are as good as they get.
+
+I hope you all have a great day.
+
+[[file:images/visium_deconvolution.jpeg]]
+*** comment
+The spatial deconvolution benchmarking paper: https://elifesciences.org/articles/88431
+** [[https://www.linkedin.com/posts/tylerjburns_in-flowmass-cytometry-we-spend-a-lot-of-activity-7245071757269778432-NbjL?utm_source=share&utm_medium=member_desktop][Panel design for Xenium assays]]
+In flow/mass cytometry, we spend a lot of time on panel design. It turns out if you're going to run a spatial transcriptomic assay (e.g. Xenium), panel design is critical too. Let me explain...
+
+The following information comes from a trusted colleague who runs a high-volume Xenium core, and has seen a lot. My general interest in this comes from an increase in spatial work (and the pain points therein) that has come my way recently.
+
+As a preliminary step, it helps to have prior annotated scRNA seq analysis on hand. This can inform what genes you select in the Xenium panels. Accordingly, you have to select markers that can confidently distinguish between cell types/clusters.
+
+If you want to do exploratory work, then something like Visium might be a better idea, given that it covers closer to the whole transcriptome. The downside here, of course, is you don't get the single-cell resolution. I've been helping with a project for almost a year involving trying to get "pseudo-cell" info out of each of the spots. In other words, Xenium has its place.
+
+Anyway, the emphasis on panel design might be changing in the near future due to a Xenium 5000-plex assay that recently came out, presumably because enough people were complaining about the low-plex (300-500 genes) that you'd otherwise get from Xenium at default. I am not familiar with all the methods in the space, but I would guess that others are going to be moving in this direction too.
+
+Assuming the higher-plex assays produce high-quality data, this points to a future where you have a few more markers to play around with.
+
+But until this is widespread and widely validated, I would budget some time into carefully designing your Xenium panels (and panels for related methods), and doing the necessary preliminary experiments (scRNA-seq) accordingly.
+
+[[file:images/2024-09-26_16-13-19_Screenshot 2024-09-26 at 16.13.14.png]]
+
+* Workflow Reliability, QC, And Reproducibility
+#+HTML: <a href="#top">Back to top</a>
+Posts about provenance, file formats, QC, integration mistakes, reproducibility, and building workflows that make failure modes visible.
+** [[https://www.linkedin.com/posts/tylerjburns_in-light-of-recent-work-i-am-doing-that-requires-activity-7285315114067517440-tGpT?utm_source=share&utm_medium=member_desktop][Reproducibility of Jupyter notebooks from biomedical publications]]
+In light of recent work I am doing that requires me to reproduce results from GitHub repos associated with papers (eg. foundation models), I wanted to highlight a paper by Sheeba Samuel and Daniel Mietchen that discusses reproducibility of Jupyter notebooks associated with the biomedical literature (peer reviewed papers, not pre-prints). The results are nothing to be proud of.
+
+The authors looked at 27,271 Jupyter notebooks across 2660 GitHub repos linked from 3467 publications.
+
+Specifically, the authors looked at:
+- 22,578 Jupyter notebooks written in python. Of these:
+- 15,817 had dependencies declared. Of these:
+- 10,388 had dependencies that could be installed successfully. Of these:
+- 1203 notebooks ran without any errors. Of these:
+- 879 produced results identical to those reported in the original notebook, and
+- 324 produced results that differed from those reported in the original notebook
+
+In other words, 5.3% of notebooks ran without errors, and 3.9% produced results identical to the paper.
+
+One thing (of many) that the authors bring up, and what struck me here, is that the results suggest that the available code had little bearing on the peer review process. And perhaps it should have.
+
+From a practical standpoint, I've assisted in peer review, and I understand that the reviewers simply don't have time to dig into the code themselves. So there should probably be ways to make this easier.
+
+I think ensuring reproducibility of code in papers could be something that automated tools could do or help do down the line. The methods section of the paper is a testament to this. Given the current "agentic" direction AI is going, this would be an interesting use case to either aid in the peer review process, or be used by the authors themselves to ensure reproducibility at every step of the process.
+
+I'll note, given that I use R heavily and therefore use R Markdowns moreso than Jupyter notebooks, I hypothesize that there will be similar issues here. But an important observation from the paper from Figure 19 (attached image, left side) is that the majority of problems were ModuleNotFoundError. This suggests that issues with dependencies cause a lot of the reproducibility problems, something that would generally not surprise python users. R is not without its problems in this regard, but this is especially notorious in python.
+
+If you are a biologist interested in how to ensure reproducibility in your code, please let me know. My friends and I have been through enough of this that I have things to say. If enough are interested, I'll make a more in depth write-up.
+
+Until then, be sure to use virtual environments (I use renv if in R), and in python be sure to run "pip freeze > requirements.txt."
+
+The link to the paper is in the comments. You should read it. There are 30 figures and 5 tables. In the "implications" section they bring up nine talking points (and the peer review bit above is implication 2).
+
+That's all for now. Happy new year everyone.
+
+[[file:images/jupyter_notebook_paper.png]]
+*** comment
+The link to the paper is here: https://academic.oup.com/gigascience/article/doi/10.1093/gigascience/giad113/7516267#493978474
+
+And thanks to Mike Leipold for finding this paper and sending it over.
+** [[https://www.linkedin.com/posts/tylerjburns_life-science-leaders-using-flowmass-cytometry-activity-7161731050065408000-LN_D?utm_source=share&utm_medium=member_desktop][Flow/CyTOF users could take a page from the best practices in single-cell sequencing]]
+Life science leaders using flow/mass cytometry: do you want to know where the best practices in data analysis will be in 3-5 years (if done right)? As a flow/CyTOF native, I've been looking to single-cell sequencing for this. Here are 3 things that I think this community has gotten right, that the flow/CyTOF world (that I’ve been part of since 2012) could really benefit from:
+
+A dedicated open-source community with well-maintained packages.\\
+On the R side, Seurat is extremely useful, constantly evolving as new methods develop, and well-maintained by the Satija Lab. On the python side, there is scverse, which is a collection of tools that do various things from single-cell sequencing analysis (scanpy) to spatial (squidpy).
+
+My recommendation: we model our ecosystem after scverse (bring it all together in one place) and our "end to end" packages after Seurat. Those working with ISAC and similar organizations should dedicate funding to dedicated individuals. I think with efforts like CyTOForum, the community is in place to do this kind of thing.
+
+A focus on standards and benchmarking\\
+There's a "single cell best practices" consortium that has a huge free jupyter book, showing you what to do with the scverse and how. Furthermore, there is a lot of benchmarking work happening, e.g., with the scib package from the Theis Lab, that allows you to do your own benchmarking for your data. Long-time flow/CyTOF users will remember the uncertainty around which clustering algorithm to use, that didn't clear up until Lukas Weber and Mark Robinson (from the sequencing world) did a benchmarking study and showed that it was FlowSOM all around and X-shift for rare cell detection.
+
+My recommendation: we incentivize benchmarking studies (eg. the FlowCAP project). Especially given the advent of spectral flow, we are going to need an efficient way to redo or build on our prior work as the tools and data evolve.
+
+Integration between commercial and open-source methods.\\
+10x Genomics has a UI for its Xenium data. Then they have a page titled "Continuing your journey after Xenium analyzer" listing relevant open-source tools that can help you analyze your data further. Similarly, on the flow/CyTOF side, with Standard BioTools is promoting Bernd Bodenmiller Lab's HistoCat on their page as something to use beyond their UI for IMC data.
+
+My recommendation: we build our commercial tools with our open-source ecosystem in mind. I think Omiq's modular design and ability  to quickly integrate the latest open-source tools into its interface is a great example.
+
+I'll acknowledge that there are differences between the fields that may impact what has and can get done, like open source community engagement levels, available funding, and the relationship between open-source and commercial solutions in either domain. However, seeing just how much the single-cell sequencing community got right, they can serve as a north star for how we build out our tools from here.
+
+[[file:images/single_cell_best_practices.jpeg]]
+** [[https://www.linkedin.com/posts/tylerjburns_hi-friends-i-wrote-a-guest-post-for-lamin-activity-7445459712386514944-wU4s?utm_source=share&utm_medium=member_desktop&rcm=ACoAAAbP8M8BYXs_UknoBHnmw2rZ-aRDTJF7L3Y][Guest blog post: an introduction to LaminR]]
+Hi friends, I wrote a guest post for Lamin on using the open-source LaminR package in an R workflow with the PBMC 3k dataset. The link is in the comments.
+
+What drew me in was a familiar handoff problem: coming back to an analysis, or inheriting one from someone else, and not being fully sure what was done, in what order, or in which environment. I have some "scar tissue" here from my consulting projects over the years.
+
+In the post, I walk through a standard single-cell workflow and show what LaminR stores along the way. What I found most interesting was the provenance side of it: being able to inspect the code, report, and environment tied to a data object later.
+
+That feels increasingly important as datasets, tools, and teams get more complex (e.g. when some of your "colleagues" are OpenClaw agents).
+
+Thanks to Luke Zappia, Robrecht Cannoodt, and Alex Wolf for collaborating on this.
+[[file:images/lamin_guest_blog_post.png]]
+** [[https://www.linkedin.com/posts/tylerjburns_fcs-files-outputted-by-flow-and-mass-cytometers-activity-7404524653811056640-jaOW?utm_source=share&utm_medium=member_desktop&rcm=ACoAAAbP8M8BYXs_UknoBHnmw2rZ-aRDTJF7L3Y][Byte order matters when reading in fcs files]]
+Fcs files, outputted by flow and mass cytometers, are typically read into R or Python for analysis. If you're going to do this without the likes of FlowCore, you need to take care to read the bytes in the DATA section the right way, or the matrix will be gibberish.
+
+Multi-byte numbers (e.g. 32-bit ints) can be stored in computer memory in two ways, known as little-endian or big-endian (simplified explanation below). The key thing here is that some computers do it one way, and some do it the other. And it might be that the flow cytometry acquisition computer is incompatible with yours.
+
+There is a flag in the TEXT section called $BYTEORD, that will tell you which it is.
+
+$BYTEORD/1,2,3,4/ is little-endian. This is where the least significant byte would be stored first.
+
+$BYTEORD/4,3,2,1/ is big-endian. This is where the most significant byte would be stored first.
+
+Here, most significant means highest "place" value. So in decimal, the number 135, would have 1 as the most significant digit (the hundreds place), and 5 as the least significant digit (the ones place).
+
+Let's keep it simplified with standard decimal, and say the number 135 had to be stored into memory into three boxes [ ][ ][ ]. In big-endian, it would be stored as [1][3][5], which makes intuitive sense. But little-endian would have it stored as [5][3][1]. So now if your computer picks up [1][3][5] stored in big-endian, and assumes its little-endian, it will read it it as 531. And so it is with your flow cytometery data matrices.
+
+When you store multi-byte numbers into memory, via the likes of readBin() in R, you can specify the byte order as a function argument, as per the $BYTEORD flag in the fcs file.
+
+I made a tutorial a few years ago where I learned of this topic (link in the comments below). If you follow it, you can convert a fcs file into a data matrix without any software packages.
+
+The image associated with this post summarizes the binary reading step, where you select endian-ness, and what it looks like if you select the wrong one.
+
+Why does this matter? Because at least in R, FlowCore::read.FCS(), is a bit of a choke point. It's incredibly useful and I'm grateful on behalf of the community to have it. But it's also a single point of failure. So it would behoove you to know how to read in your fcs files independently, just in case something were to happen to it or its dependencies (and the python programmers among you will know what I'm talking about).
+
+I'm revisiting this now due to a low level project I'm currently working on, but I think that any bioinformatician should know their craft one level of abstraction deeper than what is required of them. It pays dividends long term.
+
+Leaders, look for these choke points in your workflows and prepare for the worst, just in case.
+
+Thank you, and I hope you all have a great day.
+
+file:images/byte_order_matters.png
+** [[https://www.linkedin.com/posts/tylerjburns_case-study-an-issue-with-a-bulk-sequencing-activity-7333478597971603456-370y?utm_source=share&utm_medium=member_desktop&rcm=ACoAAAbP8M8BYXs_UknoBHnmw2rZ-aRDTJF7L3Y][The need for wet lab and dry lab integration]]
+Case study: an issue with a bulk sequencing analysis project was quickly found and fixed because of the understanding that "the cell type in question does not behave like that." I can't emphasize this enough: you need bioinformaticians who have wet-lab experience.
+
+Aside from finding and fixing issues in the analysis, the "bigger picture" understanding you get serves as a "relevance filter" that sculpts the direction of the project, and how it is communicated (so the client doesn't end up with a bunch of hairball networks that don't clearly answer their biological questions).
+
+One tactic you can put your team through today: read papers associated with the data. Oftentimes, projects are continuations of previous work that has already been published. Sounds obvious, but there is a difference between knowing something and doing something.
+
+Credit to Christine Nguyen, PhD for sharing this tactic. She has used it successfully over many years working at multiple bioinformatics core facilities, and it has saved her a lot of headache.
+
+If you are recruiting, look for people who are cross-trained. This is hard to do. You have to screen for depth on both sides. I am doing this now.
+
+If you are a PI/leader who needs this type of analysis, DM me.
+If you are a cross-trained bioinformatician, let's talk.
+
+Thank you and I hope you all have a great day.
+
+file::images/wet_lab_dry_lab.png
+** [[https://www.linkedin.com/posts/tylerjburns_plenty-of-people-are-talking-about-automation-activity-7242885831139487746-7NxH?utm_source=share&utm_medium=member_desktop][Build automation with user paranoia in mind]]
+Plenty of people are talking about automation as the future of bioinformatics. This is fine, but there is one additional piece that leaders need to be aware of, to produce winning next-gen solutions: the user's paranoia.
+
+A lot of the bioinformatics work I've done in the last 8 years has involved paranoia management, both for myself and for my clients. In other words, every last little piece of the workflow has checks and visual components to make sure there are no issues with the data and/or the algorithms (and believe me, issues come up). This is especially important when your analysis has any sort of novel component (data, tools used, etc).
+
+There appears to be a push toward a "single button solution," be it auto-gating for flow/mass cytometry, or one-and-done cell segmentation in imaging. This is ok, but if you want buy-in from biologists, and especially clinicians (you do the data analysis wrong, bad things happen to sick people), you better have lots of "checks" at every step, both numeric and visual, so we can go through every last little piece of the analysis and look for things that could go wrong.
+
+So embrace the paranoia of the users, learn about it, and speak to it as you build out the next generation of tools. We will thank you in the end.
+
+[[file:images/bioinformatics_automation_paranoia.jpeg]]
+*** comment
+I think that the spotlight on paranoia in my post resonates with a broader field, that may become increasingly relevant: explainable AI (XAI).
+
+In section 2.3.1 of a 2024 review by Longo and colleagues (https://www.sciencedirect.com/science/article/pii/S1566253524000794), highlighting the current challenges in XAI, paranoia is a subtext in the following life sciences related passage:
+
+"The inferences produced by AI-based systems, such as Clinical Decision Support Systems, are often used by doctors and clinicians to inform decision-making, communicate diagnoses to patients, and choose treatment decisions. However, it is essential to adequately trust an AI-supported medical decision, as, for example, a wrong diagnosis can significantly impact patients."
+
+(there is some paranoia that comes with getting clinical work right)
+
+"In this regard, understanding AI-supported decisions can help to calibrate trust and reliance. For this reason, many XAI methods such as LIME, SHAP, and Anchors have been applied in Electronic Medical Records, COVID-19 identification, chronic kidney disease, and fungal or bloodstream infections"
+
+(XAI methods serve as a number of visible checks to mitigate paranoia by identifying issues when AI is being used)
+** [[https://www.linkedin.com/posts/tylerjburns_the-following-is-a-warning-for-biologists-activity-7085200486697443330-Zzbc?utm_source=share&utm_medium=member_desktop][Single-cell sequencing analysis: don't forget to integrate your data]]
+The following is a warning for biologists, bioinformaticians, and leaders of research teams, especially those moving from a flow/CyTOF background into single-cell sequencing. Please study the concept of data integration.
+
+Flow and CyTOF users know to cluster on "type" markers (eg. surface), and never on "state" markers (eg. phospho-proteins). However, making this distinction is not possible for scRNA seq data. Thus, we have to rely on data integration, which is a way of algorithmically "aligning" data across multiple conditions.
+
+Here, I show how integration is done, but my main point is to show what the data look like when they're not integrated. Failure to integrate the data can lead to false conclusions, and a whole lot of wasted time and effort.
+
+For biologists and leaders of research teams, please study these pictures. You need to know what un-integrated data look like so you can have intuition around what is a novel cell subset and what is a technical artifact.
+
+For bioinformaticians and those interested in going deeper, the vignette is here: https://lnkd.in/eRJE57i5. I hope you all have a great day.
+
+[[file:images/integrate_your_data.jpeg]]
+** [[https://www.linkedin.com/posts/tylerjburns_activity-7045080240515076096-kXLl?utm_source=share&utm_medium=member_desktop][Survey: QC gives people the most headache in a flow/CyTOF data analysis pipeline]]
+[[file:images/analysis_headache.png]]
+** [[https://www.linkedin.com/posts/tylerjburns_cytof-users-we-use-the-asinh-transform-activity-7009180881546321922-y5qH?utm_source=share&utm_medium=member_desktop][Pictures of different data transforms for CyTOF]]
+CyTOF users: we use the asinh transform, but is that the only one that works? How does the scale argument influence the data transformation? Here is an interrogation of CyTOF data transformed in many different ways: https://lnkd.in/eRgYXzkm
+
+[[file:images/data_transformation.jpeg]]
+
+* Teaching Bioinformatics And Computational Thinking
+#+HTML: <a href="#top">Back to top</a>
+Posts about teaching bioinformatics, learning to code from a biology background, and developing the mental models needed for computational work.
+** [[https://www.linkedin.com/posts/tylerjburns_turn-the-knobs-see-how-the-output-changes-activity-7367177068553461761-yPpK?utm_source=share&utm_medium=member_desktop&rcm=ACoAAAbP8M8BYXs_UknoBHnmw2rZ-aRDTJF7L3Y][Scanpy analysis intuition building app]]
+Turn the knobs, see how the output changes.
+
+When you are analyzing single-cell and spatial data, you can gain intuition by changing the parameters of the pipeline, and seeing how the output changes. To help you to this end, we made a small app that allows you to change some of the critical settings in a given pipeline, and see how that affects downstream output.
+
+The app runs the PBMC 3k dataset through a standard analysis pipeline via scanpy. The UI allows you to change the dataset, number of highly variable genes, number of PCs, and number of KNN for the UMAP. The output is a UMAP that is colored by the pre-made cell annotations. You can therefore look at how the shape of the UMAP changes, and how distinguished the annotations are (in optimal circumstances, they should be maximally separate).
+
+One observation we made is that for this dataset, changing the number of highly variable genes produced modest visual changes, but not as substantial as I previously thought (with the exception of going down to a very small number, like 100). Knowing this kind of thing is important, per dataset. For example, it could be that for other data types going from 2000 to 5000 HVGs would produce very different results.
+
+You have to try it yourself in order to see for yourself, and that's what this app is all about.
+
+This is a "version 0" and there are many things that we would like to add down the line. One of them is the ability to drag and drop in your own dataset. This is a low hanging fruit. Things like coloring by cluster ID, with the choice of various clustering algorithms and their respective settings (e.g. Louvain, Leiden, k-means).
+
+Additional downstream metrics would do well too, like how good the UMAP is (via our KnnSleepwalk tool), or things like a F1 score between pre-made cell annotations and new clusters. Later apps could tackle things like testing data integration methods across two flagship datasets.
+
+To use the app, you simply have to clone the github repo, pip install the requirements.txt file, and run the "app" python script. This will produce a link you can open in your browser, and you are good to go.
+
+We are currently in the process of building out front-end interfaces to the work we have done in the past and the work we are currently doing. We think that this will make our work more accessible and usable to a larger audience with fewer steps.
+
+If you are a member of the single-cell and/or spatial community and have any requests for custom-tailored apps (or extensions of apps, modules I can build into existing SaaS products, etc, please let me know.
+
+Link to the app is in the comments below. Credit to Arianna Aalami for fleshing out a lot of the code. Thank you, and I hope you all have a great day.
+
+[[file:images/scanpy_app_demo.gif]]
+*** comment
+The GitHub link to the project is here: https://github.com/ariannaaalami/interactive_scanpy_pipeline
+
+I managed to host it on Plotly Cloud (I'm an early access member), though the link has been currently a bit wishy washy. I'll link it nonetheless: https://interactive-scanpy-pipeline.plotly.app/
+** [[https://www.linkedin.com/posts/tylerjburns_here-is-a-post-i-wrote-for-biologists-and-activity-7090282332749717504-XTkW?utm_source=share&utm_medium=member_desktop][How I went from biologist to biology-leveraged bioinformatician]]
+Here is a post I wrote for biologists and team leaders about my journey from wet-lab biologist to biology-leveraged bioinformatician. In short, I think you can do it too, and if you're working in the life sciences, you SHOULD do it too. You can quickly get to a level where you can understand and communicate effectively with your comp bio team, something that is essential for any project that contains any -omics data. To summarize:
+
+1. I started with Karel the Robot (link in post). This is the illustration below. It's what every CS106A student at Stanford starts with. It teaches you a surprising amount of general programming principles that I still use today. Importantly, it makes coding less scary.
+
+2. I spent a lot of time just trying things (and still do). This was due to the fact that I was initially working with CyTOF data before there were many established best practices and high-level frameworks. Nassim Taleb calls this "convex tinkering" and in my experience, this is better than hand-waving. In the context of bioinformatics, when I try a thing, I am often either wrong or partially wrong about what I thought I was going to see.
+
+3. When I am completely stuck on a problem, I solve a simpler but related problem. This is a nice trick to keep the momentum going, and to get me into the flow state. The latter is something essential, if not sacred, to my workday.
+
+Have a look here for more insights and depth: https://lnkd.in/eQ-2BvNn
+[[file:images/karel_learns_bioinformatics.jpeg]]
+** [[https://www.linkedin.com/posts/tylerjburns_my-survey-has-revealed-that-the-act-of-problem-activity-7193215772448505858-tK7P?utm_source=share&utm_medium=member_desktop][Problem solving as a bottleneck to learning how to code]]
+My survey has revealed that the act of problem solving is a bottleneck for biologists learning how to code. So let me give you a tool that has helped me in the problem solving process over the years, especially when I feel "paralyzed" in the face of a problem:
+
+Simplify.
+
+Sometimes it's simplifying the problem itself, and sometimes it's solving a simpler but related problem. The act of doing so allows you to get some "psychological momentum." What you don't want is to be paralyzed, and not know what to do next.
+
+As an example, I like to tell the story of problem set 3 in CS106A: designing the arcade game Breakout using a Java graphics library. My problem was that even the act of decomposing the problem (standard practice) was stressful, because there were so many pieces that I didn't understand. It was overwhelming to consider everything at once.
+
+So I asked myself, could I make a ball bounce around across the walls. No, too complicated. How about just the game window with nothing in it. Ok. That worked. How about the ball in the center of the screen, in place. Ok, that worked. How about if I could get the ball to move one pixel to the right and then stop? That worked too! Now I was getting some momentum.
+
+It was in that way that I got to a point where I could do the classic problem decomposition and solve the rest of the problem.
+
+So whatever you're trying to solve, try solving a simpler version of the problem, or try solving a simpler but related problem. Keep the momentum going.
+
+More resources in the comments below.
+[[file:images/code_hangups.jpeg]]
+** [[https://www.linkedin.com/posts/tylerjburns_this-image-is-romanesco-broccoli-i-came-activity-7191860234095640576-rGEH?utm_source=share&utm_medium=member_desktop][Learning how to code has improved how I think]]
+This image is romanesco broccoli. I came across it sophomore year in my dorm cafeteria. The pattern at play was amazing, but...hard to put into words. When I was learning how to code, I learned the word for the concept at hand: recursion. Learning how to code has given me many instances of this, where I can reason better about something that was otherwise hard to put into words.
+
+In general, learning how to code has improved how I think. It has given me a new lens, the computational lens, through which I can see the world. I wrote and chiseled away at an article over the past year and three months on this topic, and I'm finally ready to share it with you. The article can be boiled down into three main points.
+
+The first point is that in comparison to standard wet-lab biology, coding and bioinformatic analysis often involves the scientific method, sped up. A lab experiment used to take me on the order of hours to days, whereas computational experiments (eg. when debugging, analyzing data) take me on the order of seconds to minutes. Accordingly, you can get intuition around something really fast, as well as go through the process of being wrong, figuring out where you were wrong, and improving your thinking so you're not wrong about it again.
+
+The second point is that computer science allows you to reason about and operate on topics that are otherwise difficult to put into words. An example of this is "levels of abstraction," where I show you what "hello world" looks like in python (not much stuff), C (a bit more stuff), and assembly (a whole lot of stuff), so you can appreciate the sheer volume of things that get swept under the rug when you write print("hello world") in python.
+
+The third point is that in terms of "computational thinking," the computational lens is not meant to replace all other forms of thinking. It is meant to be added to your "latticework of mental models" to use the framing of the late Charlie Munger (link in comments). In other words, you want to be able to look at a problem through as many lenses as you can. I link more material about this in the article.
+
+Overall, learning how to code takes time, so don't fret if you've moving forward more slowly than you'd like. This is normal. This said, I do offer a class to get biologists started with programming, with an in-person option and a virtual option. Any labs who are interested, please feel free to reach out. Otherwise, if you want quick (free) advice, feel free to reach out too.
+
+The [[https://en.wikipedia.org/wiki/Romanesco_broccoli#/media/File:Romanesco_broccoli_(Brassica_oleracea).jpg][image]] is from the Wikipedia article on romanesco broccoli, by Ivar Leidus, licensed under [[https://creativecommons.org/licenses/by-sa/4.0/][CC BY-SA 4.0]].
+
+The article is [[https://tjburns08.github.io/coding_as_philosophical_project.html][here]].
+
+[[file:images/romanesco_broccoli.jpeg]]
+** [[https://www.linkedin.com/posts/tylerjburns_my-survey-has-already-revealed-that-a-large-activity-7189597924899643392-HXOM?utm_source=share&utm_medium=member_desktop][Biologists becoming bioinformaticians are having the hardest time learning how to code]]
+My survey has already revealed that a large bottleneck for biologists learning bioinformatics is the act of learning how to code, even with plenty of online resources, bootcamps, LLMs, etc out there these days. Let me explain why I think this is the case, based on what I've seen and experienced.
+
+For one to do bioinformatics effectively, one must learn how to think computationally. This generally means that one must know how to apply the basic principles of computer science to a problem, like abstraction, problem decomposition, and turning concepts into code. There's a great essay on this idea from 2006 by Jeannette M. Wing that I'll link in the comments.
+
+To learn how to think computationally, I had to learn how to independently write code. What I mean by independently is that when faced with a computer science or bioinformatics problem, I would really struggle with it before looking for some sort of answer online (something that's easier now given ChatGPT, etc). It's the equivalent of doing the math problems in school without looking up the answer in the back of the book first. I still keep up this practice today, trying to independently think/work through a problem before I look at what others have done.
+
+Coding is a learn-by-doing activity. It is not something that you're spoon-fed. You get better with every problem you solve. I started with very small problems and then I worked my way up. It's a lot of work, and it takes time. But proper guidance early on really helps.
+
+One can get started with the foundations of computational thinking in a few weeks with a program called Karel the Robot. It's what every intro CS student at Stanford starts with. It's what I started with. It's what I have people I teach start with. It not only provides a solid foundation but also demystifies what coding and computational thinking is. The concepts and virtues (eg. patience) I learned with Karel the Robot I still use today, ten years later. I'll link a place to get started in the comments.
+
+You can't simply become a code-fluent, computationally minded bioinformatician in a single short bootcamp. But you can develop the right foundations that allow you to effectively move yourself forward from that point on.
+
+I remember what it feels like to be a wet-lab biologist and be totally overwhelmed with this stuff. As such, I have been teaching people how to learn bioinformatics from the standpoint of a wet-lab biologist. Luckily, my availability is going to open up again this summer, so any labs who are interested, please reach out.
+
+[[file:images/bioinformatics_learning_biggest_hangups.jpeg]]
+** [[https://www.linkedin.com/posts/tylerjburns_bioinformatics-bigdata-collaboration-activity-7177394725853741056-W1of?utm_source=share&utm_medium=member_desktop][Recap on teaching engagement with Zamora Lab at MCW]]
+After speaking with many labs last year, I determined (as many others have) that there is a lack of bioinformatics support in academia. Thus, many biologists are pressured to learn these skills on their own (as if they don't have enough on their plate already). Aside from the additional stress, this can lead to serious mistakes downstream. Anyone who knows about the replication crises in various fields should be concerned at this point.
+
+The good news is, I have also determined that biologists are fully capable of learning these skills. They just need the right guidance. Thus, I have lots of respect for trained bioinformaticians who are going out of their way to teach this material to biologists, and I encourage all of us to teach when we can.
+
+How to do it is a complex topic, and I don't think you can go from neophyte to bioinformatician in a few days. But I think providing the right foundations along with proper followup can go a long way. It did take me a long time to learn bioinformatics myself as a biologist, but it did not take long for me to have a solid foundation from which I could already start adding value.
+
+I saw this first hand with the lab of Anthony Zamora this past week. I spent three days on site with them, and there is plenty of followup planned. If your lab needs training and/or advising, and your local bioinformaticians don't have bandwidth, please contact me. I wish you all the best.
+
+[[file:images/zamora_lab.jpeg]]
+** [[https://www.linkedin.com/posts/tylerjburns_i-am-tired-of-the-phrase-those-who-can-activity-7168606001758257152-5iMu?utm_source=share&utm_medium=member_desktop][Those who can do, do; those who have done, teach]]
+I am tired of the phrase "those who can, do; those who can't, teach." So let me fix it for you. "Those who can, do; those who have done, teach." Three things come out of this:
+
+1. If you have experience in anything (which you do), teach it: Yes, there's a lot more educational content these days, but you are specialized in your own way. Just about everyone I know has something unique to say that has not been formalized or at least put in writing. My grandma had all kinds of wisdom that she sadly never wrote down. Thus, I aim to die with everything on paper.
+
+2. Education is becoming increasingly important: in my corner, from cancer biology to bioinformatics, everything is interdisciplinary now. You have physicians talking to biologists talking to engineers talking to computer scientists, each speaking a different "language" and trying to understand each other. One question I'm asking myself a lot these days: how can I teach in a few hours the mental models that have taken me 10,000 hours to really understand?
+
+3. Respect for educators: teaching is hard. Communication is hard. You have to figure out a way to operationalize things you may never have put into words. You have to remember what it's like to not know the thing, which may be a long time ago. You have to cater to different learning styles. I don't think teachers (especially in the US) get nearly the respect they deserve.
+
+This can/can't do/teach dichotemy held me back for a long time. I have been in the single-cell world for 12 years now, and I do a lot more bioinformatics teaching now than I used to, borne out of all the experience at doing bioinformatics. It has way more impact, and I love every minute of it.
+
+If you're a student, postdoc, tech, or scientist in academia or industry, DM me and I'll give you 15 minutes of free advice about single-cell bioinformatics, any sub-topic you want. Or just say hi. I have nothing to sell you. My paid teaching/training services go to the PIs and group leaders: if you want me to set up a more formal bioinformatics workshop or advisory role for your group/lab, DM me and we'll talk. Site visits are on the table.
+
+If you know anyone who could use this post or my teaching/advice, please share it. I hope you all have a great day.
+
+[[file:images/have_done_teach.jpeg]]
+
+* Literature Landscapes And Field Trends
+#+HTML: <a href="#top">Back to top</a>
+Posts that analyze the literature, method provenance, publication trends, and field-level health.
+** [[https://www.linkedin.com/posts/tylerjburns_hi-friends-we-have-all-seen-that-the-cytof-activity-7462487719865147392-jh3Y?utm_source=share&utm_medium=member_desktop&rcm=ACoAAAbP8M8BYXs_UknoBHnmw2rZ-aRDTJF7L3Y][Dimensionality reduction provenance app]]
+Hi friends, we have all seen that the CyTOF field has converged on a narrow set of tools (e.g. FlowSOM, UMAP). We can remedy this by seeing the "forest in the trees" around methods, just as SPADE did with the immune system in 2011.
+
+To prevent the field from seeming more "settled" than it should be, I made an interactive provenance graph for CyTOF dimensionality reduction algorithms, and layered on dimensionality reduction research at large.
+
+I observed that while we have converged upon t-SNE and then UMAP as a standard visualization, there are a number of developments that could be better for your dataset, question, or analysis goal. For example, a lot of work has been done with autoencoders lately.
+
+The bigger picture is moving forward:
+- These graphs should be part of intro sections of papers.
+- These graphs should be used to summarize research in literature databases.
+- You can plug novel observations into graphs like this to determine how much novelty there is, versus reinventing the wheel.
+- We can pick up where Thomas Kuhn left off, and look at the structure of scientific revolutions with much more ease.
+
+The bigger question:
+What would change if every computational biology method paper, let alone research laboratory/group and their internal literature database, came with an interactive provenance graph like this?
+
+The app is linked in the comments. Please let me know if you have any questions. I’d especially welcome suggestions for missing methods that should be added, or types of graphs that should be built (e.g. spatial methods).
+
+[[file:images/graph_browse_linkedin.gif]]
+*** comment
+Try the app yourself: https://tjburns08.github.io/dr_provenance_interactive.html
 ** [[https://www.linkedin.com/posts/tylerjburns_if-we-put-2008-as-the-first-cytof-paper-activity-7041804065097281537-nkIM?utm_source=share&utm_medium=member_desktop][IMC vs CyTOF publication rates: surprised IMC is taking off so fast]]
 If we put 2008 as the first CyTOF paper (from Scott Tanner, before Garry Nolan), CyTOF hit 100 publications in 2017, or 9 years. If we put 2014 as the first Imaging Mass Cytometry (IMC) paper, then IMC reached 100 publications in 2022, or 8 years.
 
@@ -1681,9 +1705,10 @@ Funding and policy: I am disheartened by the number of labs that are underserved
 Skepticism: At the beginning of grad school, we would read old seminal papers in our fields and spend an hour picking them apart. This was easier to do when it was western blots. Now, who has the time to look critically at the complex methods, the code and raw data (if these are even provided, see anything posted by Mike Leipold)? This includes the reviewers. I'm hoping that a bit more bioinformatic literacy will allow us to do this better.
 
 In short, this is a complicated problem space, with a lot hinging on it. But I hope the three things above serve as a good starting point.
-* Word embeddings and social media scraping
+
+* Text Embeddings, Social Media, And Information Consumption
 #+HTML: <a href="#top">Back to top</a>
-Branching from my work on t-SNE and UMAP is treating anything from single words to whole paragraphs as spatial coordinates. It's the side of large language models that is less often talked about at the time of writing [2024-05-28 Tue]. Anyway, from the spatial representations of various things, from tweets to sentences in journal entries, you can do some interesting analysis. I'll note that a lot of my work here has been cut short because it is getting harder to scrape social media now.
+Posts that use text embeddings, social media scraping, or map-based interfaces to organize writing, news, and online information.
 ** [[https://www.linkedin.com/posts/tylerjburns_ever-wonder-what-regions-of-news-space-activity-7051174977668042752-G0lC?utm_source=share&utm_medium=member_desktop][Spatial embedding of CNN vs FoxNews vs AP using BERT, viewing on UMAP]]
 Ever wonder what regions of "news space" are more CNN-heavy or more FoxNews-heavy? It turns out that you can get at this by using large language models to convert news article titles into spatial coordinates. I did this for a mix of CNN, Fox, and AP news articles from their respective twitter handles, but you do this analysis for any source.
 
@@ -1743,25 +1768,10 @@ Thank you to my fellow speakers who provided feedback and support through the pr
 
 The video is here: https://lnkd.in/eFPgrJ2V
 I'll link the projects I talk about in the comments.
-* Other
+
+* Career And Consulting
 #+HTML: <a href="#top">Back to top</a>
-Anything else I could not categorize.
-** [[https://www.linkedin.com/posts/tylerjburns_in-flowmass-cytometry-we-spend-a-lot-of-activity-7245071757269778432-NbjL?utm_source=share&utm_medium=member_desktop][Panel design for Xenium assays]]
-In flow/mass cytometry, we spend a lot of time on panel design. It turns out if you're going to run a spatial transcriptomic assay (e.g. Xenium), panel design is critical too. Let me explain...
-
-The following information comes from a trusted colleague who runs a high-volume Xenium core, and has seen a lot. My general interest in this comes from an increase in spatial work (and the pain points therein) that has come my way recently.
-
-As a preliminary step, it helps to have prior annotated scRNA seq analysis on hand. This can inform what genes you select in the Xenium panels. Accordingly, you have to select markers that can confidently distinguish between cell types/clusters.
-
-If you want to do exploratory work, then something like Visium might be a better idea, given that it covers closer to the whole transcriptome. The downside here, of course, is you don't get the single-cell resolution. I've been helping with a project for almost a year involving trying to get "pseudo-cell" info out of each of the spots. In other words, Xenium has its place.
-
-Anyway, the emphasis on panel design might be changing in the near future due to a Xenium 5000-plex assay that recently came out, presumably because enough people were complaining about the low-plex (300-500 genes) that you'd otherwise get from Xenium at default. I am not familiar with all the methods in the space, but I would guess that others are going to be moving in this direction too.
-
-Assuming the higher-plex assays produce high-quality data, this points to a future where you have a few more markers to play around with.
-
-But until this is widespread and widely validated, I would budget some time into carefully designing your Xenium panels (and panels for related methods), and doing the necessary preliminary experiments (scRNA-seq) accordingly.
-
-[[file:images/2024-09-26_16-13-19_Screenshot 2024-09-26 at 16.13.14.png]]
+Posts about self-employment and professional practice in life-science consulting.
 ** [[https://www.linkedin.com/posts/tylerjburns_the-following-is-for-my-friends-from-academia-activity-7160684719934779392-n26f?utm_source=share&utm_medium=member_desktop][Three pointers for doing self employed consulting in the life sciences]]
 The following is for my friends from academia who are in a tough work and/or financial situation. I was living on the paycheck at the end of grad school (2016), when I started doing bioinformatics consulting on the side. This got me out of my financial woes. I kept this up after graduation until I transitioned to full-time self-employed consulting starting in 2018. I haven't stopped, and you can do it too. Here are three things that have kept me in business the past several years.
 
