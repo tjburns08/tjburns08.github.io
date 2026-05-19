@@ -1583,6 +1583,27 @@ Automated gating (autogating) has been a topic of discussion for many years, but
 * Bibliometrics
 #+HTML: <a href="#top">Back to top</a>
 Trends in the literature. There is a lot going on here, and very few people actually studying this. Given the [[https://gwern.net/replication][replication crises]] that are emerging in various fields, it is probably a good idea that more people pay attention to analyzing the literature itself in the single-cell field.
+** [[https://www.linkedin.com/posts/tylerjburns_hi-friends-we-have-all-seen-that-the-cytof-activity-7462487719865147392-jh3Y?utm_source=share&utm_medium=member_desktop&rcm=ACoAAAbP8M8BYXs_UknoBHnmw2rZ-aRDTJF7L3Y][Dimensionality reduction provenance app]]
+Hi friends, we have all seen that the CyTOF field has converged on a narrow set of tools (e.g. FlowSOM, UMAP). We can remedy this by seeing the "forest in the trees" around methods, just as SPADE did with the immune system in 2011.
+
+To prevent the field from seeming more "settled" than it should be, I made an interactive provenance graph for CyTOF dimensionality reduction algorithms, and layered on dimensionality reduction research at large.
+
+I observed that while we have converged upon t-SNE and then UMAP as a standard visualization, there are a number of developments that could be better for your dataset, question, or analysis goal. For example, a lot of work has been done with autoencoders lately.
+
+The bigger picture is moving forward:
+- These graphs should be part of intro sections of papers.
+- These graphs should be used to summarize research in literature databases.
+- You can plug novel observations into graphs like this to determine how much novelty there is, versus reinventing the wheel.
+- We can pick up where Thomas Kuhn left off, and look at the structure of scientific revolutions with much more ease.
+
+The bigger question:
+What would change if every computational biology method paper, let alone research laboratory/group and their internal literature database, came with an interactive provenance graph like this?
+
+The app is linked in the comments. Please let me know if you have any questions. I’d especially welcome suggestions for missing methods that should be added, or types of graphs that should be built (e.g. spatial methods).
+
+[[file:images/graph_browse_linkedin.gif]]
+*** comment
+Try the app yourself: https://tjburns08.github.io/dr_provenance_interactive.html
 ** [[https://www.linkedin.com/posts/tylerjburns_keeping-ahead-of-the-single-cell-foundation-activity-7287119420181680128-oxJk?utm_source=share&utm_medium=member_desktop][Keeping ahead of the single-cell foundation model literature with GitHub's "awesome" page]]
 Keeping ahead of the single-cell foundation model literature, using GitHub's "awesome" pages:
 
