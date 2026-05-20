@@ -559,6 +559,48 @@ Automated gating (autogating) has been a topic of discussion for many years, but
 * AI-Assisted Bioinformatics
 #+HTML: <a href="#top">Back to top</a>
 Posts about LLMs and agents as analysis tools: pipeline generation, annotation, interpretation, prompt scripting, and failure modes.
+** [[https://www.linkedin.com/posts/tylerjburns_one-of-the-metrics-i-have-been-tracking-for-activity-7462852276383162369-Yzld?utm_source=share&utm_medium=member_desktop&rcm=ACoAAAbP8M8BYXs_UknoBHnmw2rZ-aRDTJF7L3Y][Claude Code experiments for manual gating, part 2]]
+One of the metrics I have been tracking for agentic AI is "can it gate my cells?" Here is a followup on my previous manual gating experiment, with Opus 4.7 instead of Opus 4.6.
+
+The task: give an AI agent an 86,864-event CyTOF bone marrow dataset, a manual gating strategy, QA requirements, and ask it to write and iterate a full gating pipeline.
+
+I compared two runs on the same Samusik dataset:
+
+Claude Code, Opus 4.6
+Claude Code, Opus 4.7
+
+Same prompt. Same dataset. Same reference labels for final scoring.
+
+The newer model improved:
+
+- Overall exact-match accuracy: 58.9% -> 61.9%
+- Accurracy on assigned cells: 77.7% -> 82.4%
+- Macro F1 score across named populations: 0.424 -> 0.514
+- Reference-weighted F1: 0.595 -> 0.635
+- It also reached QA acceptance in fewer recorded iterations.
+
+At the population level, Opus 4.7 made large gains on several biologically meaningful failure modes:
+
+- NKT cells: F1 0.15 -> 0.80
+- NK cells: F1 0.21 -> 0.75
+- Classical monocytes: F1 0.42 -> 0.66
+- pDCs: F1 0.77 -> 0.89
+
+It was not uniformly better. It got worse on MEP, mDCs, intermediate monocytes, and some B-cell subsets. That is exactly why this is a useful benchmark: global accuracy hides subset-specific issues.
+
+The biggest caveat: this was not a perfectly blind test. The models had access to a visual gating strategy from the X-shift paper, and QA metrics. So this measures "can an AI agent build and improve a gating pipeline with a reference-informed QA loop?", not yet "can it gate a new unlabeled dataset with no answer key?"
+
+That distinction matters.
+
+In terms of my context engineering, there is still room for improvement. For the next version, I plan to require visual inspection for gate plots, standardize the iteration log, and keep the same global plus population-by-population scoring.
+
+Still, the signal is clear in the context of gating: the newer model did not just get a little better at producing code. It got better at correcting specific biological gating mistakes.
+
+This is progress I care about, but I also care that we all are well-informed around the limits of the models.
+
+[[file:images/claude_opus_4.7_gating.png]]
+*** comment
+My CyTOF gating GitHub project is here (which has an older experiment in the README, if you're wondering why the numbers don't match): https://github.com/tjburns08/claude-cytof-gating
 ** [[https://www.linkedin.com/posts/tylerjburns_hi-friends-in-light-of-recent-llm-bioinformatics-activity-7438223292014018560-1U9U?utm_source=share&utm_medium=member_desktop&rcm=ACoAAAbP8M8BYXs_UknoBHnmw2rZ-aRDTJF7L3Y][LLM CyTOF clustering algorithm choices]]
 March 13, 2026
 
