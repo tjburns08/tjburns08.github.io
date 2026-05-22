@@ -8,64 +8,8 @@
 <title>Buddhism is to mindfulness, as Christianity is to&#x2026;</title>
 <meta name="generator" content="Org Mode" />
 <link rel="stylesheet" href="simple.css" />
-<style>
-  .dark-mode {
-    --bg: #212121;
-    --accent-bg: #2b2b2b;
-    --text: #dcdcdc;
-    --text-light: #ababab;
-    --accent: #ffb300;
-    /*--code: #f06292;*/
-    --preformatted: #ccc;
-    --disabled: #111;
-  }
-  .dark-mode img,
-  .dark-mode video {
-    opacity: 0.8;
-  }
-  .toggle-theme-btn {
-      transform: scale(0.7);
-      opacity: 0.4;
-      transition: opacity 0.2s;
-    }
-    .toggle-theme-btn:hover {
-      opacity: 0.4;
-    }
-
-  /* Code block wrapping: experiment */
-    pre, code {
-      white-space: pre-wrap;
-      white-space: -moz-pre-wrap;
-      white-space: -pre-wrap;
-      white-space: -o-pre-wrap;
-      word-wrap: break-word;
-    }
-</style>
-<script>
- function toggleDarkMode() {
-    const body = document.body;
-    body.classList.toggle("dark-mode");
-    // Save the user's theme preference to localStorage
-    if (body.classList.contains("dark-mode")) {
-      localStorage.setItem("theme", "dark");
-    } else {
-      localStorage.setItem("theme", "light");
-    }
-  }
-
-  function setDefaultDarkMode() {
-    // Retrieve the user's theme preference from localStorage
-    const storedTheme = localStorage.getItem("theme");
-
-    // If the stored theme is light, do nothing; otherwise, set it to dark
-    if (storedTheme !== "light") {
-      document.body.classList.add("dark-mode");
-    }
-  }
-
-  // Set the default mode to dark when the DOM is fully loaded
-  document.addEventListener('DOMContentLoaded', setDefaultDarkMode);
-</script>
+<link rel="stylesheet" href="css/site.css" />
+<script src="js/theme-switcher.js"></script>
 </head>
 <body>
 <div id="preamble" class="status">

@@ -8,64 +8,8 @@
 <title>Explainable AI and understanding ourselves</title>
 <meta name="generator" content="Org Mode" />
 <link rel="stylesheet" href="simple.css" />
-<style>
-  .dark-mode {
-    --bg: #212121;
-    --accent-bg: #2b2b2b;
-    --text: #dcdcdc;
-    --text-light: #ababab;
-    --accent: #ffb300;
-    /*--code: #f06292;*/
-    --preformatted: #ccc;
-    --disabled: #111;
-  }
-  .dark-mode img,
-  .dark-mode video {
-    opacity: 0.8;
-  }
-  .toggle-theme-btn {
-      transform: scale(0.7);
-      opacity: 0.4;
-      transition: opacity 0.2s;
-    }
-    .toggle-theme-btn:hover {
-      opacity: 0.4;
-    }
-
-  /* Code block wrapping: experiment */
-    pre, code {
-      white-space: pre-wrap;
-      white-space: -moz-pre-wrap;
-      white-space: -pre-wrap;
-      white-space: -o-pre-wrap;
-      word-wrap: break-word;
-    }
-</style>
-<script>
- function toggleDarkMode() {
-    const body = document.body;
-    body.classList.toggle("dark-mode");
-    // Save the user's theme preference to localStorage
-    if (body.classList.contains("dark-mode")) {
-      localStorage.setItem("theme", "dark");
-    } else {
-      localStorage.setItem("theme", "light");
-    }
-  }
-
-  function setDefaultDarkMode() {
-    // Retrieve the user's theme preference from localStorage
-    const storedTheme = localStorage.getItem("theme");
-
-    // If the stored theme is light, do nothing; otherwise, set it to dark
-    if (storedTheme !== "light") {
-      document.body.classList.add("dark-mode");
-    }
-  }
-
-  // Set the default mode to dark when the DOM is fully loaded
-  document.addEventListener('DOMContentLoaded', setDefaultDarkMode);
-</script>
+<link rel="stylesheet" href="css/site.css" />
+<script src="js/theme-switcher.js"></script>
 </head>
 <body>
 <div id="preamble" class="status">
@@ -79,9 +23,9 @@
 <a href="./index.html">Home</a>
 </p>
 
-<div id="outline-container-orge66f4ff" class="outline-2">
-<h2 id="orge66f4ff">Explainable AI</h2>
-<div class="outline-text-2" id="text-orge66f4ff">
+<div id="outline-container-org24d444c" class="outline-2">
+<h2 id="org24d444c">Explainable AI</h2>
+<div class="outline-text-2" id="text-org24d444c">
 <p>
 Modern AI (at the time of writing) relies heavily on optimized <a href="https://en.wikipedia.org/wiki/Artificial_neural_network">artificial neural networks</a> that these days do anything from generating <a href="https://www.gwern.net/GPT-3">creative fiction</a> to producing <a href="https://en.wikipedia.org/wiki/DALL-E">images from a verbal description</a>. A common criticism of these types of tools in <a href="https://en.wikipedia.org/wiki/Single-cell_analysis">my field</a> is that they are "black boxes." We can see what they did but we can't see why. We biologists are used to having maximal clarity at every step. Part of our training is is being able to critique prior research, which becomes much harder to do if you just know that some AI tool with some <a href="https://en.wikipedia.org/wiki/List_of_sequence_alignment_software">acronym</a> produced the answer.
 </p>
@@ -104,9 +48,9 @@ Explainable AI is a particularly broad field, and each new tool depends heavily 
 </div>
 </div>
 
-<div id="outline-container-orge149242" class="outline-2">
-<h2 id="orge149242">When the human is the algorithm</h2>
-<div class="outline-text-2" id="text-orge149242">
+<div id="outline-container-org5ff9036" class="outline-2">
+<h2 id="org5ff9036">When the human is the algorithm</h2>
+<div class="outline-text-2" id="text-org5ff9036">
 <p>
 And that is what got me thinking in this context about&#x2026;us. Lets make the assumption for a moment that we are, or at least can be represented as, a set of evolutionarily optimized AI tools lumped together in an Artificial General Intelligence (AGI) we call a brain. This would mean that the chunk of tissue we have behind our eyes is really a set of interacting black box algorithms we're stuck with.
 </p>
@@ -137,9 +81,9 @@ My point here is that "knowing" is complicated, even if you are intelligent agen
 </div>
 </div>
 
-<div id="outline-container-org8eaefe8" class="outline-2">
-<h2 id="org8eaefe8">GPT-3 and prompt-based programming</h2>
-<div class="outline-text-2" id="text-org8eaefe8">
+<div id="outline-container-orgcd12fc9" class="outline-2">
+<h2 id="orgcd12fc9">GPT-3 and prompt-based programming</h2>
+<div class="outline-text-2" id="text-orgcd12fc9">
 <p>
 Asking oneself questions actually has an analogue in the field of AI: prompt-based programming. It is a concept that I came across when <a href="./gpt3_student.html">I got the chance to beta-test OpenAI's GPT-3</a> natural language model. You "program" it by giving it a task or asking it a question, similar to interacting with a chatbot. If you want it to generate a Shakespearean sonnet about grad school life, you lieterally just type in the request to do so. If that sounds crazy, here is a <a href="https://www.gwern.net/GPT-3">rabbit hole from tech writer Gwern</a>. Depending on how you prompt it, you get a feel for what the model is capable of doing and how it operates. There is an XAI layer on top of this, where every word that gets outputted is colored by the probability of that word being generated as opposed to the next word. My point here is that it might be that "explaining" the next generation of AI algorithms might become much closer to what we do every day, trying to explain ourselves and others.
 </p>
@@ -154,9 +98,9 @@ This gets to the point of this article. We do prompt-based queries of AI systems
 </div>
 </div>
 
-<div id="outline-container-orgbae45b0" class="outline-2">
-<h2 id="orgbae45b0">The Shoggoth</h2>
-<div class="outline-text-2" id="text-orgbae45b0">
+<div id="outline-container-org4448ac7" class="outline-2">
+<h2 id="org4448ac7">The Shoggoth</h2>
+<div class="outline-text-2" id="text-org4448ac7">
 <p>
 All of this being said, we have to be careful not to anthropomorphize these AI systems. Understand, but not anthropomorphize. This was the premise of the movie <a href="https://en.wikipedia.org/wiki/Ex_Machina_(film)">Ex-Machina</a>, when an AI system used human vulnerabilities like "empathy" and "falling in love" to social engineer a man to help her escape, in turn leaving him locked in a room to die.
 </p>
@@ -181,9 +125,9 @@ H. P. Lovecraft, At the Mountains of Madness
 </div>
 </div>
 
-<div id="outline-container-org65a06e8" class="outline-2">
-<h2 id="org65a06e8">Conclusions</h2>
-<div class="outline-text-2" id="text-org65a06e8">
+<div id="outline-container-orgc39505d" class="outline-2">
+<h2 id="orgc39505d">Conclusions</h2>
+<div class="outline-text-2" id="text-orgc39505d">
 <p>
 Art, music, moving about the world and experiencing new things, having relationships, all of these are the explainable AI tools of the network of black boxes we call humanity. We have been on this since our <a href="https://en.wikipedia.org/wiki/Timeline_of_human_evolution">emergence</a>. We know what to do here, provided that we don't anthropomorphize these systems. To understand the black box is to see the shoggoth pretending to be a person. This is one reason the XAI focus is so important. 
 </p>

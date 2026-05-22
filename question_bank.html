@@ -8,64 +8,8 @@
 <title>Question bank</title>
 <meta name="generator" content="Org Mode" />
 <link rel="stylesheet" href="simple.css" />
-<style>
-  .dark-mode {
-    --bg: #212121;
-    --accent-bg: #2b2b2b;
-    --text: #dcdcdc;
-    --text-light: #ababab;
-    --accent: #ffb300;
-    /*--code: #f06292;*/
-    --preformatted: #ccc;
-    --disabled: #111;
-  }
-  .dark-mode img,
-  .dark-mode video {
-    opacity: 0.8;
-  }
-  .toggle-theme-btn {
-      transform: scale(0.7);
-      opacity: 0.4;
-      transition: opacity 0.2s;
-    }
-    .toggle-theme-btn:hover {
-      opacity: 0.4;
-    }
-
-  /* Code block wrapping: experiment */
-    pre, code {
-      white-space: pre-wrap;
-      white-space: -moz-pre-wrap;
-      white-space: -pre-wrap;
-      white-space: -o-pre-wrap;
-      word-wrap: break-word;
-    }
-</style>
-<script>
- function toggleDarkMode() {
-    const body = document.body;
-    body.classList.toggle("dark-mode");
-    // Save the user's theme preference to localStorage
-    if (body.classList.contains("dark-mode")) {
-      localStorage.setItem("theme", "dark");
-    } else {
-      localStorage.setItem("theme", "light");
-    }
-  }
-
-  function setDefaultDarkMode() {
-    // Retrieve the user's theme preference from localStorage
-    const storedTheme = localStorage.getItem("theme");
-
-    // If the stored theme is light, do nothing; otherwise, set it to dark
-    if (storedTheme !== "light") {
-      document.body.classList.add("dark-mode");
-    }
-  }
-
-  // Set the default mode to dark when the DOM is fully loaded
-  document.addEventListener('DOMContentLoaded', setDefaultDarkMode);
-</script>
+<link rel="stylesheet" href="css/site.css" />
+<script src="js/theme-switcher.js"></script>
 </head>
 <body>
 <div id="preamble" class="status">
@@ -93,29 +37,29 @@ My uncle Nigel, professor at the University of Michigan Ross School of Business.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org8bf32f6">Pre-made collections of questions</a>
+<li><a href="#org75ace87">Pre-made collections of questions</a>
 <ul>
-<li><a href="#org150245a">Daniel Schmachtenberger's Dharma Inquiry</a></li>
-<li><a href="#org5b2b05f">Tim Ferriss 4 hour workweek</a></li>
-<li><a href="#orgdf5e6d2">Tim Ferriss tribe of mentors</a></li>
+<li><a href="#orgedd4a1e">Daniel Schmachtenberger's Dharma Inquiry</a></li>
+<li><a href="#org89b03f5">Tim Ferriss 4 hour workweek</a></li>
+<li><a href="#orge4c0989">Tim Ferriss tribe of mentors</a></li>
 </ul>
 </li>
-<li><a href="#org6cbf9ba">Lists of questions in different domains</a>
+<li><a href="#orgcd1d0d5">Lists of questions in different domains</a>
 <ul>
-<li><a href="#orgaba7c33">Biology</a></li>
-<li><a href="#orgf2d80c3">Neuroscience</a></li>
-<li><a href="#org8d7f46c">Physics</a></li>
-<li><a href="#org49f1171">Math</a></li>
-<li><a href="#org8432cb7">Computing</a></li>
+<li><a href="#org0b73919">Biology</a></li>
+<li><a href="#org2feb9d1">Neuroscience</a></li>
+<li><a href="#org3e838f6">Physics</a></li>
+<li><a href="#org0bb501c">Math</a></li>
+<li><a href="#org1725e4b">Computing</a></li>
 </ul>
 </li>
-<li><a href="#orgac53f5f">Problems in the single-cell and spatial domain</a>
+<li><a href="#org3aa1b73">Problems in the single-cell and spatial domain</a>
 <ul>
-<li><a href="#orga91f939">My LinkedIn post.</a></li>
-<li><a href="#orgc321bca">Collections of problems in this domain</a></li>
+<li><a href="#org51d5ef1">My LinkedIn post.</a></li>
+<li><a href="#orgfd40651">Collections of problems in this domain</a></li>
 </ul>
 </li>
-<li><a href="#org3719524">General</a></li>
+<li><a href="#org09a3923">General</a></li>
 </ul>
 </div>
 </div>
@@ -128,13 +72,13 @@ The following are questions, or groups of questions, that I have found helpful o
 I have organized the list below by specific people and specific questions associated with them.  Commentary after the question is assumed to be my own unless otherwise stated.
 </p>
 
-<div id="outline-container-org8bf32f6" class="outline-2">
-<h2 id="org8bf32f6">Pre-made collections of questions</h2>
-<div class="outline-text-2" id="text-org8bf32f6">
+<div id="outline-container-org75ace87" class="outline-2">
+<h2 id="org75ace87">Pre-made collections of questions</h2>
+<div class="outline-text-2" id="text-org75ace87">
 </div>
-<div id="outline-container-org150245a" class="outline-3">
-<h3 id="org150245a"><a href="https://civilizationemerging.com/dharma-inquiry/">Daniel Schmachtenberger's Dharma Inquiry</a></h3>
-<div class="outline-text-3" id="text-org150245a">
+<div id="outline-container-orgedd4a1e" class="outline-3">
+<h3 id="orgedd4a1e"><a href="https://civilizationemerging.com/dharma-inquiry/">Daniel Schmachtenberger's Dharma Inquiry</a></h3>
+<div class="outline-text-3" id="text-orgedd4a1e">
 <a href="#top">Back to top</a>
 <p>
 Absolutely brilliant set of questions around the concept of Dharma, which as Daniel defines it:
@@ -246,9 +190,9 @@ And of course, we also have to include the questions that are associated with th
 </div>
 </div>
 
-<div id="outline-container-org5b2b05f" class="outline-3">
-<h3 id="org5b2b05f"><a href="https://tim.blog/wp-content/uploads/2020/01/17-Questions-That-Changed-My-Life.pdf">Tim Ferriss 4 hour workweek</a></h3>
-<div class="outline-text-3" id="text-org5b2b05f">
+<div id="outline-container-org89b03f5" class="outline-3">
+<h3 id="org89b03f5"><a href="https://tim.blog/wp-content/uploads/2020/01/17-Questions-That-Changed-My-Life.pdf">Tim Ferriss 4 hour workweek</a></h3>
+<div class="outline-text-3" id="text-org89b03f5">
 <a href="#top">Back to top</a>
 <p>
 As Tim puts it here, it's about "testing the impossible." I remember the sheer optimism I felt after reading 4HWW for the first time. The world rapidly changing, but without all the existential dread that we have now. Anyway, the questions are still important. Perhaps even moreso to win in a society that is increasingly pessimistic.
@@ -276,9 +220,9 @@ As Tim puts it here, it's about "testing the impossible." I remember the sheer o
 </div>
 </div>
 
-<div id="outline-container-orgdf5e6d2" class="outline-3">
-<h3 id="orgdf5e6d2"><a href="https://www.curatedquestions.com/tim-ferriss-tribe-of-mentors">Tim Ferriss tribe of mentors</a></h3>
-<div class="outline-text-3" id="text-orgdf5e6d2">
+<div id="outline-container-orge4c0989" class="outline-3">
+<h3 id="orge4c0989"><a href="https://www.curatedquestions.com/tim-ferriss-tribe-of-mentors">Tim Ferriss tribe of mentors</a></h3>
+<div class="outline-text-3" id="text-orge4c0989">
 <a href="#top">Back to top</a>
 <p>
 These are more interview questions than self-questions. But you can see that they are also good questions to ask yourself.
@@ -301,18 +245,18 @@ These are more interview questions than self-questions. But you can see that the
 </div>
 </div>
 
-<div id="outline-container-org6cbf9ba" class="outline-2">
-<h2 id="org6cbf9ba">Lists of questions in different domains</h2>
-<div class="outline-text-2" id="text-org6cbf9ba">
+<div id="outline-container-orgcd1d0d5" class="outline-2">
+<h2 id="orgcd1d0d5">Lists of questions in different domains</h2>
+<div class="outline-text-2" id="text-orgcd1d0d5">
 <a href="#top">Back to top</a>
 <p>
 The links are to Wikipedia lists of unsolved problems for the given domain. Way too many questions to copy over and list here, so I'll list the ones that are on my mind from each section. My commentary is indicated, and my questions relevant to the given topic are listed below a line separator.
 </p>
 </div>
 
-<div id="outline-container-orgaba7c33" class="outline-3">
-<h3 id="orgaba7c33"><a href="https://en.wikipedia.org/wiki/List_of_unsolved_problems_in_biology">Biology</a></h3>
-<div class="outline-text-3" id="text-orgaba7c33">
+<div id="outline-container-org0b73919" class="outline-3">
+<h3 id="org0b73919"><a href="https://en.wikipedia.org/wiki/List_of_unsolved_problems_in_biology">Biology</a></h3>
+<div class="outline-text-3" id="text-org0b73919">
 <ul class="org-ul">
 <li>Exactly how, where and when did life on Earth originate? How does life arise from the nonliving?</li>
 <li>Exactly how and when did viruses originate?</li>
@@ -328,9 +272,9 @@ The links are to Wikipedia lists of unsolved problems for the given domain. Way 
 </ul>
 </div>
 </div>
-<div id="outline-container-orgf2d80c3" class="outline-3">
-<h3 id="orgf2d80c3"><a href="https://en.wikipedia.org/wiki/List_of_unsolved_problems_in_neuroscience">Neuroscience</a></h3>
-<div class="outline-text-3" id="text-orgf2d80c3">
+<div id="outline-container-org2feb9d1" class="outline-3">
+<h3 id="org2feb9d1"><a href="https://en.wikipedia.org/wiki/List_of_unsolved_problems_in_neuroscience">Neuroscience</a></h3>
+<div class="outline-text-3" id="text-org2feb9d1">
 <ul class="org-ul">
 <li>What is free will? Is it an illusion? Is there a part of the brain that gives us a sense of free will? (related to but not on the list).</li>
 <li>How can consciousness be defined? What is its function? Can it exist after death?</li>
@@ -342,9 +286,9 @@ The links are to Wikipedia lists of unsolved problems for the given domain. Way 
 </ul>
 </div>
 </div>
-<div id="outline-container-org8d7f46c" class="outline-3">
-<h3 id="org8d7f46c"><a href="https://en.wikipedia.org/wiki/List_of_unsolved_problems_in_physics">Physics</a></h3>
-<div class="outline-text-3" id="text-org8d7f46c">
+<div id="outline-container-org3e838f6" class="outline-3">
+<h3 id="org3e838f6"><a href="https://en.wikipedia.org/wiki/List_of_unsolved_problems_in_physics">Physics</a></h3>
+<div class="outline-text-3" id="text-org3e838f6">
 <ul class="org-ul">
 <li>The diameter of the observable universe is about 93 billion light-years, but what is the size of the whole universe? Is the universe infinite?</li>
 <li>Why does time have a direction?</li>
@@ -359,9 +303,9 @@ The links are to Wikipedia lists of unsolved problems for the given domain. Way 
 </ul>
 </div>
 </div>
-<div id="outline-container-org49f1171" class="outline-3">
-<h3 id="org49f1171"><a href="https://en.wikipedia.org/wiki/List_of_unsolved_problems_in_mathematics">Math</a></h3>
-<div class="outline-text-3" id="text-org49f1171">
+<div id="outline-container-org0bb501c" class="outline-3">
+<h3 id="org0bb501c"><a href="https://en.wikipedia.org/wiki/List_of_unsolved_problems_in_mathematics">Math</a></h3>
+<div class="outline-text-3" id="text-org0bb501c">
 <ul class="org-ul">
 <li>What is the Turing completeness status of all unique elementary cellular automata?</li>
 </ul>
@@ -371,9 +315,9 @@ The links are to Wikipedia lists of unsolved problems for the given domain. Way 
 </ul>
 </div>
 </div>
-<div id="outline-container-org8432cb7" class="outline-3">
-<h3 id="org8432cb7">Computing</h3>
-<div class="outline-text-3" id="text-org8432cb7">
+<div id="outline-container-org1725e4b" class="outline-3">
+<h3 id="org1725e4b">Computing</h3>
+<div class="outline-text-3" id="text-org1725e4b">
 <ul class="org-ul">
 <li>Can we develop human level or superhuman intelligence by means of scaling alone? If we keep feeding training examples into a LLM (or something multi-modal) and the architecture was a transformer with minimal bells and whistles, could we get to AGI? This is related to the <a href="https://gwern.net/scaling-hypothesis">scaling hypotheis</a>.</li>
 <li>Is it possible to align AGI with humanity? There are many who think the answer is no, and either AI will kill us directly, or AI intersecting with profit motives and our inner demons will kill us.</li>
@@ -381,14 +325,14 @@ The links are to Wikipedia lists of unsolved problems for the given domain. Way 
 </div>
 </div>
 </div>
-<div id="outline-container-orgac53f5f" class="outline-2">
-<h2 id="orgac53f5f">Problems in the single-cell and spatial domain</h2>
-<div class="outline-text-2" id="text-orgac53f5f">
+<div id="outline-container-org3aa1b73" class="outline-2">
+<h2 id="org3aa1b73">Problems in the single-cell and spatial domain</h2>
+<div class="outline-text-2" id="text-org3aa1b73">
 <a href="#top">Back to top</a>
 </div>
-<div id="outline-container-orga91f939" class="outline-3">
-<h3 id="orga91f939">My LinkedIn <a href="https://www.linkedin.com/posts/tylerjburns_friends-leaders-and-scientists-please-activity-7342899264856952832-tcKa?utm_source=share&amp;utm_medium=member_desktop&amp;rcm=ACoAAAbP8M8BYXs_UknoBHnmw2rZ-aRDTJF7L3Y">post</a>.</h3>
-<div class="outline-text-3" id="text-orga91f939">
+<div id="outline-container-org51d5ef1" class="outline-3">
+<h3 id="org51d5ef1">My LinkedIn <a href="https://www.linkedin.com/posts/tylerjburns_friends-leaders-and-scientists-please-activity-7342899264856952832-tcKa?utm_source=share&amp;utm_medium=member_desktop&amp;rcm=ACoAAAbP8M8BYXs_UknoBHnmw2rZ-aRDTJF7L3Y">post</a>.</h3>
+<div class="outline-text-3" id="text-org51d5ef1">
 <p>
 Comments and (anonymized) messages are below.
 </p>
@@ -431,18 +375,18 @@ Optical crowding and spot bleed-over in Visium HD and Xenium 5K panels do more t
 </p>
 </div>
 </div>
-<div id="outline-container-orgc321bca" class="outline-3">
-<h3 id="orgc321bca">Collections of problems in this domain</h3>
-<div class="outline-text-3" id="text-orgc321bca">
+<div id="outline-container-orgfd40651" class="outline-3">
+<h3 id="orgfd40651">Collections of problems in this domain</h3>
+<div class="outline-text-3" id="text-orgfd40651">
 <ul class="org-ul">
 <li>Defining and benchmarking open problems in single-cell analysis, Res Sq, 2025 (paper <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC11030530/">here</a>)</li>
 </ul>
 </div>
 </div>
 </div>
-<div id="outline-container-org3719524" class="outline-2">
-<h2 id="org3719524">General</h2>
-<div class="outline-text-2" id="text-org3719524">
+<div id="outline-container-org09a3923" class="outline-2">
+<h2 id="org09a3923">General</h2>
+<div class="outline-text-2" id="text-org09a3923">
 <a href="#top">Back to top</a>
 <p>
 I provide attributions and commentary accordingly after the question. They are in no particular order (yet). If there are no attributions, then the question comes from me (or more likely I think I came up with it, but I heard it somewhere).

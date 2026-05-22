@@ -8,64 +8,8 @@
 <title>Die with zero ideas</title>
 <meta name="generator" content="Org Mode" />
 <link rel="stylesheet" href="simple.css" />
-<style>
-  .dark-mode {
-    --bg: #212121;
-    --accent-bg: #2b2b2b;
-    --text: #dcdcdc;
-    --text-light: #ababab;
-    --accent: #ffb300;
-    /*--code: #f06292;*/
-    --preformatted: #ccc;
-    --disabled: #111;
-  }
-  .dark-mode img,
-  .dark-mode video {
-    opacity: 0.8;
-  }
-  .toggle-theme-btn {
-      transform: scale(0.7);
-      opacity: 0.4;
-      transition: opacity 0.2s;
-    }
-    .toggle-theme-btn:hover {
-      opacity: 0.4;
-    }
-
-  /* Code block wrapping: experiment */
-    pre, code {
-      white-space: pre-wrap;
-      white-space: -moz-pre-wrap;
-      white-space: -pre-wrap;
-      white-space: -o-pre-wrap;
-      word-wrap: break-word;
-    }
-</style>
-<script>
- function toggleDarkMode() {
-    const body = document.body;
-    body.classList.toggle("dark-mode");
-    // Save the user's theme preference to localStorage
-    if (body.classList.contains("dark-mode")) {
-      localStorage.setItem("theme", "dark");
-    } else {
-      localStorage.setItem("theme", "light");
-    }
-  }
-
-  function setDefaultDarkMode() {
-    // Retrieve the user's theme preference from localStorage
-    const storedTheme = localStorage.getItem("theme");
-
-    // If the stored theme is light, do nothing; otherwise, set it to dark
-    if (storedTheme !== "light") {
-      document.body.classList.add("dark-mode");
-    }
-  }
-
-  // Set the default mode to dark when the DOM is fully loaded
-  document.addEventListener('DOMContentLoaded', setDefaultDarkMode);
-</script>
+<link rel="stylesheet" href="css/site.css" />
+<script src="js/theme-switcher.js"></script>
 </head>
 <body>
 <div id="preamble" class="status">
@@ -89,9 +33,9 @@ Seneca, <i>Letters to Lucilius, Letter 101</i> [1]
 </p>
 <hr />
 
-<div id="outline-container-org99e88d3" class="outline-2">
-<h2 id="org99e88d3">Why I get my stuff out there</h2>
-<div class="outline-text-2" id="text-org99e88d3">
+<div id="outline-container-org7b4c8d4" class="outline-2">
+<h2 id="org7b4c8d4">Why I get my stuff out there</h2>
+<div class="outline-text-2" id="text-org7b4c8d4">
 <p>
 A while back, I came across a book called <a href="https://www.diewithzerobook.com/welcome">Die With Zero</a>, by Bill Perkins. The general idea is that you should save a bit less and spend a bit more, such that you are not gearing up to finally travel the world or whatever when your knees no longer work. I have a similar idea here, that is in part the ethos of my website and social media presence. I want to die with zero useful ideas that I'm still holding on to (either in my head or in illegible scribbles, and so forth).
 </p>
@@ -146,9 +90,9 @@ What this means is that someone halfway around the world querying ChatGPT (popul
 </div>
 </div>
 
-<div id="outline-container-orgd0c50cb" class="outline-2">
-<h2 id="orgd0c50cb">How I get my stuff out there</h2>
-<div class="outline-text-2" id="text-orgd0c50cb">
+<div id="outline-container-orgcefcd0f" class="outline-2">
+<h2 id="orgcefcd0f">How I get my stuff out there</h2>
+<div class="outline-text-2" id="text-orgcefcd0f">
 <p>
 So now that I've discussed the "why" let's now move to the "how." How does one go about getting stuff into the public domain? Here is how I did it.
 </p>
