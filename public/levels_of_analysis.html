@@ -8,64 +8,8 @@
 <title>Levels Of Analysis in Bits and Atoms</title>
 <meta name="generator" content="Org Mode" />
 <link rel="stylesheet" href="simple.css" />
-<style>
-  .dark-mode {
-    --bg: #212121;
-    --accent-bg: #2b2b2b;
-    --text: #dcdcdc;
-    --text-light: #ababab;
-    --accent: #ffb300;
-    /*--code: #f06292;*/
-    --preformatted: #ccc;
-    --disabled: #111;
-  }
-  .dark-mode img,
-  .dark-mode video {
-    opacity: 0.8;
-  }
-  .toggle-theme-btn {
-      transform: scale(0.7);
-      opacity: 0.4;
-      transition: opacity 0.2s;
-    }
-    .toggle-theme-btn:hover {
-      opacity: 0.4;
-    }
-
-  /* Code block wrapping: experiment */
-    pre, code {
-      white-space: pre-wrap;
-      white-space: -moz-pre-wrap;
-      white-space: -pre-wrap;
-      white-space: -o-pre-wrap;
-      word-wrap: break-word;
-    }
-</style>
-<script>
- function toggleDarkMode() {
-    const body = document.body;
-    body.classList.toggle("dark-mode");
-    // Save the user's theme preference to localStorage
-    if (body.classList.contains("dark-mode")) {
-      localStorage.setItem("theme", "dark");
-    } else {
-      localStorage.setItem("theme", "light");
-    }
-  }
-
-  function setDefaultDarkMode() {
-    // Retrieve the user's theme preference from localStorage
-    const storedTheme = localStorage.getItem("theme");
-
-    // If the stored theme is light, do nothing; otherwise, set it to dark
-    if (storedTheme !== "light") {
-      document.body.classList.add("dark-mode");
-    }
-  }
-
-  // Set the default mode to dark when the DOM is fully loaded
-  document.addEventListener('DOMContentLoaded', setDefaultDarkMode);
-</script>
+<link rel="stylesheet" href="css/site.css" />
+<script src="js/theme-switcher.js"></script>
 </head>
 <body>
 <div id="preamble" class="status">
@@ -89,9 +33,9 @@ Gwern, <i><a href="https://gwern.net/unseeing">On Seeing Through and Unseeing: t
 </p>
 <hr />
 
-<div id="outline-container-org4e40fb1" class="outline-2">
-<h2 id="org4e40fb1">Levels of analysis: atoms</h2>
-<div class="outline-text-2" id="text-org4e40fb1">
+<div id="outline-container-orgb9cd869" class="outline-2">
+<h2 id="orgb9cd869">Levels of analysis: atoms</h2>
+<div class="outline-text-2" id="text-orgb9cd869">
 <p>
 When we go to college (at least at the time of writing <span class="timestamp-wrapper"><span class="timestamp">[2025-05-18 Sun]</span></span>, in the United States), we take a bunch of general education classes and then after one or two years, we pick a major. In the sciences, this is often divided by levels of analysis.
 </p>
@@ -113,9 +57,9 @@ But lately I have been thinking that perhaps this push to learn how to code, and
 </p>
 </div>
 </div>
-<div id="outline-container-org543bfa2" class="outline-2">
-<h2 id="org543bfa2">Levels of analysis: bits</h2>
-<div class="outline-text-2" id="text-org543bfa2">
+<div id="outline-container-org27eec10" class="outline-2">
+<h2 id="org27eec10">Levels of analysis: bits</h2>
+<div class="outline-text-2" id="text-org27eec10">
 <p>
 To go into this more, let's talk about where computer science fits in the levels of analysis that we were just talking about. My gut reaction is to place it somewhere between math and physics. But I think that the recent developments in AI are giving us a bit more clarity here, and I think this might help us re-frame the problem.
 </p>
@@ -162,9 +106,9 @@ And perhaps a level up from that, we have the sociology of multi-agent systems, 
 </div>
 </div>
 
-<div id="outline-container-orgf36bb51" class="outline-2">
-<h2 id="orgf36bb51">The right speciality for the person</h2>
-<div class="outline-text-2" id="text-orgf36bb51">
+<div id="outline-container-org0771270" class="outline-2">
+<h2 id="org0771270">The right speciality for the person</h2>
+<div class="outline-text-2" id="text-org0771270">
 <p>
 What does this mean, from a practical standpoint? A lot of the above has yet to be really fleshed out (at the time of writing <span class="timestamp-wrapper"><span class="timestamp">[2025-05-18 Sun]</span></span>). But I think what you can do, assuming this is inevitable, is to think about where you fit in the stack. For example, I am a biologist by training, so although I love to nerd out at the lower levels, I find myself doing biology-like experiments (e.g. knock-out, knock-in) on relevant ML algorithms in my field (an example <a href="https://tjburns08.github.io/annotated_seurat_without_pca.html">here</a>). On the AI side, I am particularly drawn to some of the "interpretability" studies that Anthropic is doing, <a href="https://www.anthropic.com/research/tracing-thoughts-language-model">here</a>.
 </p>
@@ -186,9 +130,9 @@ So you can ask yourself: in the levels of analysis on the "bits" side, what ligh
 </p>
 </div>
 </div>
-<div id="outline-container-org438a3f1" class="outline-2">
-<h2 id="org438a3f1">The right person for the job</h2>
-<div class="outline-text-2" id="text-org438a3f1">
+<div id="outline-container-org2e0627a" class="outline-2">
+<h2 id="org2e0627a">The right person for the job</h2>
+<div class="outline-text-2" id="text-org2e0627a">
 <p>
 And for the sake of solving problems in general, this framing might help us in terms of bringing together technical working groups to address major issues (e.g. climate change, cancer) as they evolve. If the big problem is the way bot nets are affecting the cultural zeitgeist on social media, and you need some bits-level experts, then perhaps you need to look beyond someone's ability to code. Yes, you'll need an algorithms expert, but you might also need a bot net expert too, and that might be a completely different way of thinking, the same way sociology is a completely different way of thinking than chemistry.
 </p>
@@ -202,9 +146,9 @@ But then it gets interesting when you add the AI layer. Because perhaps in the f
 </p>
 </div>
 </div>
-<div id="outline-container-orga32f0b3" class="outline-2">
-<h2 id="orga32f0b3">Conclusions</h2>
-<div class="outline-text-2" id="text-orga32f0b3">
+<div id="outline-container-org2e9bcb8" class="outline-2">
+<h2 id="org2e9bcb8">Conclusions</h2>
+<div class="outline-text-2" id="text-org2e9bcb8">
 <p>
 To wrap this all up, I think as the field of AI gets more fleshed out, it is going to change the way we look at the "bits" side of things, such that we will think in terms of distinct levels of analysis as specialities different enough to have different names, rather than being sub-specialties of computer science.
 </p>

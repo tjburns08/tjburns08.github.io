@@ -1,0 +1,31 @@
+.dark-mode {
+  --bg: #212121;
+  --accent-bg: #2b2b2b;
+  --text: #dcdcdc;
+  --text-light: #ababab;
+  --accent: #ffb300;
+  --preformatted: #ccc;
+  --disabled: #111;
+pre,
+code {
+  white-space: pre-wrap;
+  white-space: -moz-pre-wrap;
+  white-space: -pre-wrap;
+  white-space: -o-pre-wrap;
+  word-wrap: break-word;
+}
+
+.dark-mode img,
+.dark-mode video {
+  opacity: 0.8;
+}
+
+.toggle-theme-btn {
+  transform: scale(0.7);
+  opacity: 0.4;
+  transition: opacity 0.2s;
+}
+
+.toggle-theme-btn:hover {
+  opacity: 0.4;
+}

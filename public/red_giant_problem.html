@@ -8,64 +8,8 @@
 <title>The Red Giant Problem</title>
 <meta name="generator" content="Org Mode" />
 <link rel="stylesheet" href="simple.css" />
-<style>
-  .dark-mode {
-    --bg: #212121;
-    --accent-bg: #2b2b2b;
-    --text: #dcdcdc;
-    --text-light: #ababab;
-    --accent: #ffb300;
-    /*--code: #f06292;*/
-    --preformatted: #ccc;
-    --disabled: #111;
-  }
-  .dark-mode img,
-  .dark-mode video {
-    opacity: 0.8;
-  }
-  .toggle-theme-btn {
-      transform: scale(0.7);
-      opacity: 0.4;
-      transition: opacity 0.2s;
-    }
-    .toggle-theme-btn:hover {
-      opacity: 0.4;
-    }
-
-  /* Code block wrapping: experiment */
-    pre, code {
-      white-space: pre-wrap;
-      white-space: -moz-pre-wrap;
-      white-space: -pre-wrap;
-      white-space: -o-pre-wrap;
-      word-wrap: break-word;
-    }
-</style>
-<script>
- function toggleDarkMode() {
-    const body = document.body;
-    body.classList.toggle("dark-mode");
-    // Save the user's theme preference to localStorage
-    if (body.classList.contains("dark-mode")) {
-      localStorage.setItem("theme", "dark");
-    } else {
-      localStorage.setItem("theme", "light");
-    }
-  }
-
-  function setDefaultDarkMode() {
-    // Retrieve the user's theme preference from localStorage
-    const storedTheme = localStorage.getItem("theme");
-
-    // If the stored theme is light, do nothing; otherwise, set it to dark
-    if (storedTheme !== "light") {
-      document.body.classList.add("dark-mode");
-    }
-  }
-
-  // Set the default mode to dark when the DOM is fully loaded
-  document.addEventListener('DOMContentLoaded', setDefaultDarkMode);
-</script>
+<link rel="stylesheet" href="css/site.css" />
+<script src="js/theme-switcher.js"></script>
 </head>
 <body>
 <div id="preamble" class="status">
@@ -76,9 +20,9 @@
 <div id="content" class="content">
 <h1 class="title">The Red Giant Problem</h1>
 
-<div id="outline-container-orga9481bb" class="outline-2">
-<h2 id="orga9481bb">Introduction</h2>
-<div class="outline-text-2" id="text-orga9481bb">
+<div id="outline-container-org78f8209" class="outline-2">
+<h2 id="org78f8209">Introduction</h2>
+<div class="outline-text-2" id="text-org78f8209">
 <p>
 When I moved to Germany in 2017, I went to a handful of huge European cathedrals. They are as grandiose and elaborate as the pictures you've seen, but what I learned when I got here, was that many of these cathedrals took upwards of 100 years to build. Using pre-industrial revolution technology. In a time when the average life span was maybe 50 or 60 years if you survived childhood. If we assume a generation is around 30 years, then this means that if you spent your life building the cathedral, your great grandkids might be able to use it after you're long gone.
 </p>
@@ -100,9 +44,9 @@ I call this the red giant problem. The purpose of this essay is to argue that if
 </p>
 </div>
 </div>
-<div id="outline-container-org4436bbc" class="outline-2">
-<h2 id="org4436bbc">What to do about the problem</h2>
-<div class="outline-text-2" id="text-org4436bbc">
+<div id="outline-container-orga6492bd" class="outline-2">
+<h2 id="orga6492bd">What to do about the problem</h2>
+<div class="outline-text-2" id="text-orga6492bd">
 <p>
 Let's look at how we solve the red giant problem. The first thing is that have to solve long-range space travel. This is something Elon Musk has talked about, and part of his motivation to found SpaceX (and yes he's not super popular right now, but we can at least think in terms of pre-politics Elon Musk and assume his brain got a software update that a lot of people don't like). So this means we have to work on space travel.
 </p>
@@ -136,9 +80,9 @@ Related to ethics, there is the problem of how we should live, and what does a g
 </p>
 </div>
 </div>
-<div id="outline-container-orgc799cb0" class="outline-2">
-<h2 id="orgc799cb0">Conclusions</h2>
-<div class="outline-text-2" id="text-orgc799cb0">
+<div id="outline-container-orga138b67" class="outline-2">
+<h2 id="orga138b67">Conclusions</h2>
+<div class="outline-text-2" id="text-orga138b67">
 <p>
 Here, we introduced the red giant problem. We framed it as a way to get humanity to think long term again. We state that it is absolutely true that humanity and the biosphere will end when the sun becomes a red giant in 5 billion years. So we have between now and then to relocate the entire biosphere. And yes, one might say that we have plenty of time. But if there is anything that I learned in school, it's that humanity is going to wait until the night before to do anything about it. So we have to at least start brainstorming now.
 </p>
@@ -160,13 +104,13 @@ In short, we are already working on a lot of the problems that will allow us to 
 </p>
 </div>
 </div>
-<div id="outline-container-orgf76526a" class="outline-2">
-<h2 id="orgf76526a">AI feedback editing</h2>
-<div class="outline-text-2" id="text-orgf76526a">
+<div id="outline-container-org2e03559" class="outline-2">
+<h2 id="org2e03559">AI feedback editing</h2>
+<div class="outline-text-2" id="text-org2e03559">
 </div>
-<div id="outline-container-orgea00382" class="outline-3">
-<h3 id="orgea00382">first pass</h3>
-<div class="outline-text-3" id="text-orgea00382">
+<div id="outline-container-orgd01d6c9" class="outline-3">
+<h3 id="orgd01d6c9">first pass</h3>
+<div class="outline-text-3" id="text-orgd01d6c9">
 <div class="org-src-container">
 <pre class="src src-sh"><span class="org-builtin">source</span> ~/.zshrc
 <span class="org-variable-name">text</span>=$(sed -n 1,41p red_giant_problem.org)

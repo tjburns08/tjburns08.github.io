@@ -8,64 +8,8 @@
 <title>The R Rabbit Hole</title>
 <meta name="generator" content="Org Mode" />
 <link rel="stylesheet" href="simple.css" />
-<style>
-  .dark-mode {
-    --bg: #212121;
-    --accent-bg: #2b2b2b;
-    --text: #dcdcdc;
-    --text-light: #ababab;
-    --accent: #ffb300;
-    /*--code: #f06292;*/
-    --preformatted: #ccc;
-    --disabled: #111;
-  }
-  .dark-mode img,
-  .dark-mode video {
-    opacity: 0.8;
-  }
-  .toggle-theme-btn {
-      transform: scale(0.7);
-      opacity: 0.4;
-      transition: opacity 0.2s;
-    }
-    .toggle-theme-btn:hover {
-      opacity: 0.4;
-    }
-
-  /* Code block wrapping: experiment */
-    pre, code {
-      white-space: pre-wrap;
-      white-space: -moz-pre-wrap;
-      white-space: -pre-wrap;
-      white-space: -o-pre-wrap;
-      word-wrap: break-word;
-    }
-</style>
-<script>
- function toggleDarkMode() {
-    const body = document.body;
-    body.classList.toggle("dark-mode");
-    // Save the user's theme preference to localStorage
-    if (body.classList.contains("dark-mode")) {
-      localStorage.setItem("theme", "dark");
-    } else {
-      localStorage.setItem("theme", "light");
-    }
-  }
-
-  function setDefaultDarkMode() {
-    // Retrieve the user's theme preference from localStorage
-    const storedTheme = localStorage.getItem("theme");
-
-    // If the stored theme is light, do nothing; otherwise, set it to dark
-    if (storedTheme !== "light") {
-      document.body.classList.add("dark-mode");
-    }
-  }
-
-  // Set the default mode to dark when the DOM is fully loaded
-  document.addEventListener('DOMContentLoaded', setDefaultDarkMode);
-</script>
+<link rel="stylesheet" href="css/site.css" />
+<script src="js/theme-switcher.js"></script>
 </head>
 <body>
 <div id="preamble" class="status">
@@ -89,9 +33,9 @@ Lewis Carroll, Alice's Adventures in Wonderland
 </p>
 <hr />
 
-<div id="outline-container-org5993544" class="outline-2">
-<h2 id="org5993544">From R to S</h2>
-<div class="outline-text-2" id="text-org5993544">
+<div id="outline-container-org957fd76" class="outline-2">
+<h2 id="org957fd76">From R to S</h2>
+<div class="outline-text-2" id="text-org957fd76">
 <p>
 What happens under the hood when we do simple arithmetic in R? Let's begin with a simple expression. Adding two numbers together.
 </p>
@@ -211,9 +155,9 @@ So now you can see objectively that R's arithmetic is using S-expressions, the w
 </div>
 </div>
 
-<div id="outline-container-org3d480b7" class="outline-2">
-<h2 id="org3d480b7">From S to C</h2>
-<div class="outline-text-2" id="text-org3d480b7">
+<div id="outline-container-orge566538" class="outline-2">
+<h2 id="orge566538">From S to C</h2>
+<div class="outline-text-2" id="text-orge566538">
 <p>
 Ok, this is all well and good, but how do I know that R specifically has S-expressions in mind? In order to answer that, we can download the <a href="https://cran.r-project.org/src/base/R-4/">source code</a> of the R programming language and have a look at it. We can see if any S-expressions are explicitly declared here. Below is the source code from R 4.4.0.
 </p>
@@ -311,9 +255,9 @@ Where you can see that "+" is PLUSOP, where x1 + x2 is defined.
 </div>
 </div>
 
-<div id="outline-container-org9309fe4" class="outline-2">
-<h2 id="org9309fe4">From C to Assembly</h2>
-<div class="outline-text-2" id="text-org9309fe4">
+<div id="outline-container-org58ec38e" class="outline-2">
+<h2 id="org58ec38e">From C to Assembly</h2>
+<div class="outline-text-2" id="text-org58ec38e">
 <p>
 So we started with 5 + 2 and now we are looking at an obscure switch statement in C. But if it is written in C, that means it is indirectly written in something deeper: machine code.
 </p>
@@ -485,9 +429,9 @@ Another important thing is that within this recipe, while there are a number of 
 </div>
 </div>
 
-<div id="outline-container-org152d471" class="outline-2">
-<h2 id="org152d471">Conclusion</h2>
-<div class="outline-text-2" id="text-org152d471">
+<div id="outline-container-org0dc2422" class="outline-2">
+<h2 id="org0dc2422">Conclusion</h2>
+<div class="outline-text-2" id="text-org0dc2422">
 <p>
 Ok, let's go back to familiarity now.
 </p>

@@ -8,64 +8,8 @@
 <title>Social media posts</title>
 <meta name="generator" content="Org Mode" />
 <link rel="stylesheet" href="simple.css" />
-<style>
-  .dark-mode {
-    --bg: #212121;
-    --accent-bg: #2b2b2b;
-    --text: #dcdcdc;
-    --text-light: #ababab;
-    --accent: #ffb300;
-    /*--code: #f06292;*/
-    --preformatted: #ccc;
-    --disabled: #111;
-  }
-  .dark-mode img,
-  .dark-mode video {
-    opacity: 0.8;
-  }
-  .toggle-theme-btn {
-      transform: scale(0.7);
-      opacity: 0.4;
-      transition: opacity 0.2s;
-    }
-    .toggle-theme-btn:hover {
-      opacity: 0.4;
-    }
-
-  /* Code block wrapping: experiment */
-    pre, code {
-      white-space: pre-wrap;
-      white-space: -moz-pre-wrap;
-      white-space: -pre-wrap;
-      white-space: -o-pre-wrap;
-      word-wrap: break-word;
-    }
-</style>
-<script>
- function toggleDarkMode() {
-    const body = document.body;
-    body.classList.toggle("dark-mode");
-    // Save the user's theme preference to localStorage
-    if (body.classList.contains("dark-mode")) {
-      localStorage.setItem("theme", "dark");
-    } else {
-      localStorage.setItem("theme", "light");
-    }
-  }
-
-  function setDefaultDarkMode() {
-    // Retrieve the user's theme preference from localStorage
-    const storedTheme = localStorage.getItem("theme");
-
-    // If the stored theme is light, do nothing; otherwise, set it to dark
-    if (storedTheme !== "light") {
-      document.body.classList.add("dark-mode");
-    }
-  }
-
-  // Set the default mode to dark when the DOM is fully loaded
-  document.addEventListener('DOMContentLoaded', setDefaultDarkMode);
-</script>
+<link rel="stylesheet" href="css/site.css" />
+<script src="js/theme-switcher.js"></script>
 </head>
 <body>
 <div id="preamble" class="status">
@@ -95,31 +39,31 @@ Dr. Seuss, <a href="https://en.wikipedia.org/wiki/Horton_Hatches_the_Egg"><i>Hor
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org80f5b4f">Dimensionality Reduction And Embedding Interpretation</a></li>
-<li><a href="#org0c23244">Clustering, Gating, And Population Assignment</a></li>
-<li><a href="#org15fcd38">AI-Assisted Bioinformatics</a></li>
-<li><a href="#orgea1c024">Foundation Models For Single-Cell And Spatial</a></li>
-<li><a href="#org5fa9f4d">Spatial, Multimodal, And Assay Design</a></li>
-<li><a href="#org3ff04af">Workflow Reliability, QC, And Reproducibility</a></li>
-<li><a href="#orgfb24f8e">Teaching Bioinformatics And Computational Thinking</a></li>
-<li><a href="#org7c5d8e7">Literature Landscapes And Field Trends</a></li>
-<li><a href="#org3d17942">Text Embeddings, Social Media, And Information Consumption</a></li>
-<li><a href="#orgbec408d">Career And Consulting</a></li>
+<li><a href="#org50b9713">Dimensionality Reduction And Embedding Interpretation</a></li>
+<li><a href="#org6453dd6">Clustering, Gating, And Population Assignment</a></li>
+<li><a href="#orgb002491">AI-Assisted Bioinformatics</a></li>
+<li><a href="#org78dc4ea">Foundation Models For Single-Cell And Spatial</a></li>
+<li><a href="#org9086b69">Spatial, Multimodal, And Assay Design</a></li>
+<li><a href="#orga16b01d">Workflow Reliability, QC, And Reproducibility</a></li>
+<li><a href="#orgb184331">Teaching Bioinformatics And Computational Thinking</a></li>
+<li><a href="#org9c529c1">Literature Landscapes And Field Trends</a></li>
+<li><a href="#org61d35d7">Text Embeddings, Social Media, And Information Consumption</a></li>
+<li><a href="#org37f1c58">Career And Consulting</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-org80f5b4f" class="outline-2">
-<h2 id="org80f5b4f">Dimensionality Reduction And Embedding Interpretation</h2>
-<div class="outline-text-2" id="text-org80f5b4f">
+<div id="outline-container-org50b9713" class="outline-2">
+<h2 id="org50b9713">Dimensionality Reduction And Embedding Interpretation</h2>
+<div class="outline-text-2" id="text-org50b9713">
 <a href="#top">Back to top</a>
 <p>
 Posts on UMAP, t-SNE, KNN/KFN Sleepwalk, map stability, global/local preservation, and visual defaults that affect interpretation.
 </p>
 </div>
-<div id="outline-container-org1426e5b" class="outline-3">
-<h3 id="org1426e5b"><a href="https://www.linkedin.com/posts/tylerjburns_hi-friends-i-finally-after-several-years-activity-7369363128763002882-VdIM?utm_source=share&amp;utm_medium=member_desktop&amp;rcm=ACoAAAbP8M8BYXs_UknoBHnmw2rZ-aRDTJF7L3Y">KNN Sleepwalk Dash app</a></h3>
-<div class="outline-text-3" id="text-org1426e5b">
+<div id="outline-container-orgc9be174" class="outline-3">
+<h3 id="orgc9be174"><a href="https://www.linkedin.com/posts/tylerjburns_hi-friends-i-finally-after-several-years-activity-7369363128763002882-VdIM?utm_source=share&amp;utm_medium=member_desktop&amp;rcm=ACoAAAbP8M8BYXs_UknoBHnmw2rZ-aRDTJF7L3Y">KNN Sleepwalk Dash app</a></h3>
+<div class="outline-text-3" id="text-orgc9be174">
 <p>
 September 4, 2025
 </p>
@@ -185,14 +129,14 @@ Thanks, and I hope you all have a great day.
 </p>
 
 
-<div id="orgb3909da" class="figure">
+<div id="orgdbbf8e0" class="figure">
 <p><img src="images/knn_sleepwalk_app_post_upload.gif" alt="knn_sleepwalk_app_post_upload.gif" />
 </p>
 </div>
 </div>
-<div id="outline-container-orgd8b93e0" class="outline-4">
-<h4 id="orgd8b93e0">comment</h4>
-<div class="outline-text-4" id="text-orgd8b93e0">
+<div id="outline-container-org2a9c19f" class="outline-4">
+<h4 id="org2a9c19f">comment</h4>
+<div class="outline-text-4" id="text-org2a9c19f">
 <p>
 Web app is here: <a href="https://knn-sleepwalk-dash-app.plotly.app/">https://knn-sleepwalk-dash-app.plotly.app/</a>
 GitHub repo is here: <a href="https://github.com/tjburns08/knn_sleepwalk_dash_app">https://github.com/tjburns08/knn_sleepwalk_dash_app</a>
@@ -204,9 +148,9 @@ If you want to talk further, book a call (see link under my profile tab).
 </div>
 </div>
 </div>
-<div id="outline-container-org119e8e5" class="outline-3">
-<h3 id="org119e8e5"><a href="https://www.linkedin.com/posts/tylerjburns_below-is-a-quick-way-to-get-hover-linked-activity-7341093015492485120-j-lq?utm_source=share&amp;utm_medium=member_desktop&amp;rcm=ACoAAAbP8M8BYXs_UknoBHnmw2rZ-aRDTJF7L3Y">KNN Sleepwalk for spatial: Xenium</a></h3>
-<div class="outline-text-3" id="text-org119e8e5">
+<div id="outline-container-org07ce524" class="outline-3">
+<h3 id="org07ce524"><a href="https://www.linkedin.com/posts/tylerjburns_below-is-a-quick-way-to-get-hover-linked-activity-7341093015492485120-j-lq?utm_source=share&amp;utm_medium=member_desktop&amp;rcm=ACoAAAbP8M8BYXs_UknoBHnmw2rZ-aRDTJF7L3Y">KNN Sleepwalk for spatial: Xenium</a></h3>
+<div class="outline-text-3" id="text-org07ce524">
 <p>
 June 18, 2025
 </p>
@@ -256,14 +200,14 @@ Thank you and I hope you all have a great day.
 </p>
 
 
-<div id="orgd78c33e" class="figure">
+<div id="org8921066" class="figure">
 <p><img src="images/xenium_brain_ppt.gif" alt="xenium_brain_ppt.gif" />
 </p>
 </div>
 </div>
-<div id="outline-container-orga13dee0" class="outline-4">
-<h4 id="orga13dee0">comment</h4>
-<div class="outline-text-4" id="text-orga13dee0">
+<div id="outline-container-orgb61da58" class="outline-4">
+<h4 id="orgb61da58">comment</h4>
+<div class="outline-text-4" id="text-orgb61da58">
 <p>
 My KnnSleepwalk package is here: <a href="https://github.com/tjburns08/KnnSleepwalk">https://github.com/tjburns08/KnnSleepwalk</a>. You'll want to use the function BiaxialSleepwalk for this one.
 </p>
@@ -274,9 +218,9 @@ Vitessce example of umap-to-image correspondance without nearest neighbor functi
 </div>
 </div>
 </div>
-<div id="outline-container-org348a7db" class="outline-3">
-<h3 id="org348a7db"><a href="https://www.linkedin.com/posts/tylerjburns_spatialtranscriptomics-spatialbiology-activity-7336012823308689409-3h3c?utm_source=share&amp;utm_medium=member_desktop&amp;rcm=ACoAAAbP8M8BYXs_UknoBHnmw2rZ-aRDTJF7L3Y">KNN Sleepwalk for spatial: IMC</a></h3>
-<div class="outline-text-3" id="text-org348a7db">
+<div id="outline-container-org89a13aa" class="outline-3">
+<h3 id="org89a13aa"><a href="https://www.linkedin.com/posts/tylerjburns_spatialtranscriptomics-spatialbiology-activity-7336012823308689409-3h3c?utm_source=share&amp;utm_medium=member_desktop&amp;rcm=ACoAAAbP8M8BYXs_UknoBHnmw2rZ-aRDTJF7L3Y">KNN Sleepwalk for spatial: IMC</a></h3>
+<div class="outline-text-3" id="text-org89a13aa">
 <p>
 June 4, 2025
 </p>
@@ -311,9 +255,9 @@ The link to the package is in the comments. Thank you and I hope you all have a 
 <img src="images/cdh1_cd68_imc_pt5_ppt.gif" alt="cdh1_cd68_imc_pt5_ppt.gif" />
 </p>
 </div>
-<div id="outline-container-org3ee48fb" class="outline-4">
-<h4 id="org3ee48fb">comment</h4>
-<div class="outline-text-4" id="text-org3ee48fb">
+<div id="outline-container-org9ebe4ca" class="outline-4">
+<h4 id="org9ebe4ca">comment</h4>
+<div class="outline-text-4" id="text-org9ebe4ca">
 <p>
 Link to KnnSleepwalk: <a href="https://github.com/tjburns08/KnnSleepwalk">https://github.com/tjburns08/KnnSleepwalk</a>
 Link to virtual office hours: <a href="https://calendly.com/burnslsc-info/30min">https://calendly.com/burnslsc-info/30min</a>
@@ -325,9 +269,9 @@ Also: I'm collecting public spatial datasets, and it's not straightforward. Any 
 </div>
 </div>
 </div>
-<div id="outline-container-orgeb441ce" class="outline-3">
-<h3 id="orgeb441ce"><a href="https://www.linkedin.com/posts/tylerjburns_umap-shuffles-nearest-neighbor-rank-check-activity-7330937919156760578-VTee?utm_source=share&amp;utm_medium=member_desktop&amp;rcm=ACoAAAbP8M8BYXs_UknoBHnmw2rZ-aRDTJF7L3Y">KNN Sleepwalk colored by ranks</a></h3>
-<div class="outline-text-3" id="text-orgeb441ce">
+<div id="outline-container-orgb5a409f" class="outline-3">
+<h3 id="orgb5a409f"><a href="https://www.linkedin.com/posts/tylerjburns_umap-shuffles-nearest-neighbor-rank-check-activity-7330937919156760578-VTee?utm_source=share&amp;utm_medium=member_desktop&amp;rcm=ACoAAAbP8M8BYXs_UknoBHnmw2rZ-aRDTJF7L3Y">KNN Sleepwalk colored by ranks</a></h3>
+<div class="outline-text-3" id="text-orgb5a409f">
 <p>
 May 21, 2025
 </p>
@@ -381,14 +325,14 @@ If you do single-cell analysis, use my package (link in comments). If you are a 
 </p>
 
 
-<div id="orgf8bb0cd" class="figure">
+<div id="orgcdb125f" class="figure">
 <p><img src="images/knn_sleepwalk_with_ranks_ppt.gif" alt="knn_sleepwalk_with_ranks_ppt.gif" />
 </p>
 </div>
 </div>
-<div id="outline-container-orga519bb0" class="outline-4">
-<h4 id="orga519bb0">comment</h4>
-<div class="outline-text-4" id="text-orga519bb0">
+<div id="outline-container-orga173437" class="outline-4">
+<h4 id="orga173437">comment</h4>
+<div class="outline-text-4" id="text-orga173437">
 <p>
 KNN Sleepwalk can be found here: <a href="https://github.com/tjburns08/KnnSleepwalk">https://github.com/tjburns08/KnnSleepwalk</a>
 Anthropic's interpretability work can be found here: <a href="https://www.anthropic.com/research/tracing-thoughts-language-model">https://www.anthropic.com/research/tracing-thoughts-language-model</a>
@@ -397,9 +341,9 @@ My office hours: <a href="https://calendly.com/burnslsc-info/30min">https://cale
 </div>
 </div>
 </div>
-<div id="outline-container-org2ec3f59" class="outline-3">
-<h3 id="org2ec3f59"><a href="https://www.linkedin.com/posts/tylerjburns_do-you-need-quick-and-easy-intuition-around-activity-6998611378068430848-BSrt?utm_source=share&amp;utm_medium=member_desktop">Original KNN sleepwalk reveal</a></h3>
-<div class="outline-text-3" id="text-org2ec3f59">
+<div id="outline-container-org515cab6" class="outline-3">
+<h3 id="org515cab6"><a href="https://www.linkedin.com/posts/tylerjburns_do-you-need-quick-and-easy-intuition-around-activity-6998611378068430848-BSrt?utm_source=share&amp;utm_medium=member_desktop">Original KNN sleepwalk reveal</a></h3>
+<div class="outline-text-3" id="text-org515cab6">
 <p>
 November 16, 2022
 </p>
@@ -411,9 +355,9 @@ Do you need quick and easy intuition around how exact your single-cell embedding
 <img src="images/knn_sleepwalk_reveal.gif"/>
 </div>
 </div>
-<div id="outline-container-orgac60a33" class="outline-3">
-<h3 id="orgac60a33"><a href="https://www.linkedin.com/posts/tylerjburns_flowcytof-users-and-leaders-have-you-ever-activity-7183087620942356480-hAHz?utm_source=share&amp;utm_medium=member_desktop">KNN sleepwalk: Biaxial-UMAP interface</a></h3>
-<div class="outline-text-3" id="text-orgac60a33">
+<div id="outline-container-orgbfff64c" class="outline-3">
+<h3 id="orgbfff64c"><a href="https://www.linkedin.com/posts/tylerjburns_flowcytof-users-and-leaders-have-you-ever-activity-7183087620942356480-hAHz?utm_source=share&amp;utm_medium=member_desktop">KNN sleepwalk: Biaxial-UMAP interface</a></h3>
+<div class="outline-text-3" id="text-orgbfff64c">
 <p>
 April 8, 2024
 </p>
@@ -448,9 +392,9 @@ I am still building this thing out, so if you have any particular feature reques
 <img src="images/biaxial_umap_interface.gif"/>
 </div>
 </div>
-<div id="outline-container-org86b0c9f" class="outline-3">
-<h3 id="org86b0c9f"><a href="https://www.linkedin.com/posts/tylerjburns_in-light-of-recent-scrutiny-around-umap-activity-7169341694348324865-sCmq?utm_source=share&amp;utm_medium=member_desktop">KNN sleepwalk: Two UMAPs in light of All of Us research program controversy</a></h3>
-<div class="outline-text-3" id="text-org86b0c9f">
+<div id="outline-container-org73fe76b" class="outline-3">
+<h3 id="org73fe76b"><a href="https://www.linkedin.com/posts/tylerjburns_in-light-of-recent-scrutiny-around-umap-activity-7169341694348324865-sCmq?utm_source=share&amp;utm_medium=member_desktop">KNN sleepwalk: Two UMAPs in light of All of Us research program controversy</a></h3>
+<div class="outline-text-3" id="text-org73fe76b">
 <p>
 March 1, 2024
 </p>
@@ -481,9 +425,9 @@ If you have questions about UMAP or similar tools, or just want to vent, please 
 <img src="images/knn_sleepwalk_two_umaps.gif"/>
 </div>
 </div>
-<div id="outline-container-org2f114ad" class="outline-3">
-<h3 id="org2f114ad"><a href="https://www.linkedin.com/posts/tylerjburns_one-way-to-understand-how-much-global-information-activity-7180898836213620736-lXIX?utm_source=share&amp;utm_medium=member_desktop">KFN sleepwalk, two UMAPs</a></h3>
-<div class="outline-text-3" id="text-org2f114ad">
+<div id="outline-container-org45e0524" class="outline-3">
+<h3 id="org45e0524"><a href="https://www.linkedin.com/posts/tylerjburns_one-way-to-understand-how-much-global-information-activity-7180898836213620736-lXIX?utm_source=share&amp;utm_medium=member_desktop">KFN sleepwalk, two UMAPs</a></h3>
+<div class="outline-text-3" id="text-org45e0524">
 <p>
 April 2, 2024
 </p>
@@ -518,9 +462,9 @@ If you want to use this KFN (and the respective KNN) sleepwalk tool for your dat
 <img src="images/kfn_sleepwalk_two_umaps.gif"/>
 </div>
 </div>
-<div id="outline-container-org7567389" class="outline-3">
-<h3 id="org7567389"><a href="https://www.linkedin.com/posts/tylerjburns_as-requested-here-are-the-k-farthest-neighbors-activity-7024009354307588096-ghUg?utm_source=share&amp;utm_medium=member_desktop">KFN sleepwalk, t-SNE and UMAP</a></h3>
-<div class="outline-text-3" id="text-org7567389">
+<div id="outline-container-org5101474" class="outline-3">
+<h3 id="org5101474"><a href="https://www.linkedin.com/posts/tylerjburns_as-requested-here-are-the-k-farthest-neighbors-activity-7024009354307588096-ghUg?utm_source=share&amp;utm_medium=member_desktop">KFN sleepwalk, t-SNE and UMAP</a></h3>
+<div class="outline-text-3" id="text-org5101474">
 <p>
 January 25, 2023
 </p>
@@ -535,9 +479,9 @@ But again, don't take my word for it. Use the tool and analyze your data here: <
 <img src="images/kfn_sleepwalk_tsne_umap_umap_perspective2.gif"/>
 </div>
 </div>
-<div id="outline-container-org260bfbd" class="outline-3">
-<h3 id="org260bfbd"><a href="https://www.linkedin.com/posts/tylerjburns_the-k-farthest-neighbors-of-a-cytof-dataset-activity-7021519004338958338-Q9rl?utm_source=share&amp;utm_medium=member_desktop">KFN sleepwalk, t-SNE</a></h3>
-<div class="outline-text-3" id="text-org260bfbd">
+<div id="outline-container-orgca50222" class="outline-3">
+<h3 id="orgca50222"><a href="https://www.linkedin.com/posts/tylerjburns_the-k-farthest-neighbors-of-a-cytof-dataset-activity-7021519004338958338-Q9rl?utm_source=share&amp;utm_medium=member_desktop">KFN sleepwalk, t-SNE</a></h3>
+<div class="outline-text-3" id="text-orgca50222">
 <p>
 January 18, 2023
 </p>
@@ -548,9 +492,9 @@ The k-farthest neighbors of a CyTOF dataset, visualized on a t-SNE map, are all 
 <img src="images/kfn_sleepwalk_tsne.gif"/>
 </div>
 </div>
-<div id="outline-container-org4b3e75e" class="outline-3">
-<h3 id="org4b3e75e"><a href="https://www.linkedin.com/posts/tylerjburns_heres-an-interesting-metric-i-developed-activity-7019326037322825728-3jY-?utm_source=share&amp;utm_medium=member_desktop">KFN overlap as a metric for evaluating global preservation for embeddings</a></h3>
-<div class="outline-text-3" id="text-org4b3e75e">
+<div id="outline-container-org5dcc5a7" class="outline-3">
+<h3 id="org5dcc5a7"><a href="https://www.linkedin.com/posts/tylerjburns_heres-an-interesting-metric-i-developed-activity-7019326037322825728-3jY-?utm_source=share&amp;utm_medium=member_desktop">KFN overlap as a metric for evaluating global preservation for embeddings</a></h3>
+<div class="outline-text-3" id="text-org5dcc5a7">
 <p>
 January 12, 2023
 </p>
@@ -561,9 +505,9 @@ Here's an interesting metric I developed to get at global structure preservation
 </p>
 </div>
 </div>
-<div id="outline-container-orgb9f8698" class="outline-3">
-<h3 id="orgb9f8698"><a href="https://www.linkedin.com/posts/tylerjburns_in-my-single-cell-sequencing-work-i-sometimes-activity-7076888734289289216-oP-4?utm_source=share&amp;utm_medium=member_desktop">A KNN based solution to viewing data on a UMAP where one condition is "sitting on top of" the other</a></h3>
-<div class="outline-text-3" id="text-orgb9f8698">
+<div id="outline-container-org74b1a7d" class="outline-3">
+<h3 id="org74b1a7d"><a href="https://www.linkedin.com/posts/tylerjburns_in-my-single-cell-sequencing-work-i-sometimes-activity-7076888734289289216-oP-4?utm_source=share&amp;utm_medium=member_desktop">A KNN based solution to viewing data on a UMAP where one condition is "sitting on top of" the other</a></h3>
+<div class="outline-text-3" id="text-org74b1a7d">
 <p>
 June 20, 2023
 </p>
@@ -582,9 +526,9 @@ If you want a more in-depth look at this KNN-based solution and things you can d
 </p>
 </div>
 </div>
-<div id="outline-container-org01a6a15" class="outline-3">
-<h3 id="org01a6a15"><a href="https://www.linkedin.com/posts/tylerjburns_if-you-run-t-sne-or-umap-multiple-times-activity-7317539109864890369-xg0A?utm_source=share&amp;utm_medium=member_desktop&amp;rcm=ACoAAAbP8M8BYXs_UknoBHnmw2rZ-aRDTJF7L3Y">Following a cell's position across multiple t-SNE and UMAP runs</a></h3>
-<div class="outline-text-3" id="text-org01a6a15">
+<div id="outline-container-orgb564762" class="outline-3">
+<h3 id="orgb564762"><a href="https://www.linkedin.com/posts/tylerjburns_if-you-run-t-sne-or-umap-multiple-times-activity-7317539109864890369-xg0A?utm_source=share&amp;utm_medium=member_desktop&amp;rcm=ACoAAAbP8M8BYXs_UknoBHnmw2rZ-aRDTJF7L3Y">Following a cell's position across multiple t-SNE and UMAP runs</a></h3>
+<div class="outline-text-3" id="text-orgb564762">
 <p>
 April 14, 2025
 </p>
@@ -654,14 +598,14 @@ I hope you all have a great day.
 </p>
 
 
-<div id="org6e5f99f" class="figure">
+<div id="orgc922803" class="figure">
 <p><img src="images/tsne_umap_cell_tracking.gif" alt="tsne_umap_cell_tracking.gif" />
 </p>
 </div>
 </div>
-<div id="outline-container-org38c6ab3" class="outline-4">
-<h4 id="org38c6ab3">comment</h4>
-<div class="outline-text-4" id="text-org38c6ab3">
+<div id="outline-container-orgd7d55cf" class="outline-4">
+<h4 id="orgd7d55cf">comment</h4>
+<div class="outline-text-4" id="text-orgd7d55cf">
 <p>
 A webinar I gave on the limits of dimensionality reduction analysis: <a href="https://watershed.bio/resources/the-limits-of-dimensionality-reduction-tools-for-single-cell-analysis">https://watershed.bio/resources/the-limits-of-dimensionality-reduction-tools-for-single-cell-analysis</a>
 </p>
@@ -672,9 +616,9 @@ My KnnSleepwalk tool, which you all should use: <a href="https://github.com/tjbu
 </div>
 </div>
 </div>
-<div id="outline-container-org70f432f" class="outline-3">
-<h3 id="org70f432f"><a href="https://www.linkedin.com/posts/tylerjburns_in-reviewing-the-recent-seeing-data-as-t-sne-activity-7201194319930675201-YFrF?utm_source=share&amp;utm_medium=member_desktop">t-SNE and UMAP exist on a spectrum</a></h3>
-<div class="outline-text-3" id="text-org70f432f">
+<div id="outline-container-org017c800" class="outline-3">
+<h3 id="org017c800"><a href="https://www.linkedin.com/posts/tylerjburns_in-reviewing-the-recent-seeing-data-as-t-sne-activity-7201194319930675201-YFrF?utm_source=share&amp;utm_medium=member_desktop">t-SNE and UMAP exist on a spectrum</a></h3>
+<div class="outline-text-3" id="text-org017c800">
 <p>
 May 28, 2024
 </p>
@@ -710,9 +654,9 @@ I provide the code (in the comments) to make these images and gifs, and I encour
 <img src="images/spectrum_animation_-1.3_1.7.gif"/>
 </div>
 </div>
-<div id="outline-container-org29ce78c" class="outline-3">
-<h3 id="org29ce78c"><a href="https://www.linkedin.com/posts/tylerjburns_as-requested-here-are-100-t-sne-runs-in-activity-7029475365689380864-GZvE?utm_source=share&amp;utm_medium=member_desktop">Gif of running t-SNE over and over, ordered by image similarity</a></h3>
-<div class="outline-text-3" id="text-org29ce78c">
+<div id="outline-container-org1da84cb" class="outline-3">
+<h3 id="org1da84cb"><a href="https://www.linkedin.com/posts/tylerjburns_as-requested-here-are-100-t-sne-runs-in-activity-7029475365689380864-GZvE?utm_source=share&amp;utm_medium=member_desktop">Gif of running t-SNE over and over, ordered by image similarity</a></h3>
+<div class="outline-text-3" id="text-org1da84cb">
 <p>
 February 9, 2023
 </p>
@@ -727,9 +671,9 @@ How I did it: I took every plot image and made a pairwise image distance matrix 
 <img src="images/tsne_multiple_run_image_similarity.gif"/>
 </div>
 </div>
-<div id="outline-container-orgdaad9c7" class="outline-3">
-<h3 id="orgdaad9c7"><a href="https://www.linkedin.com/posts/tylerjburns_if-you-have-one-or-two-bad-markers-in-your-activity-7038805627606814720-ybsS?utm_source=share&amp;utm_medium=member_desktop">Gif of progressively adding noisy dimensions to t-SNE</a></h3>
-<div class="outline-text-3" id="text-orgdaad9c7">
+<div id="outline-container-org91b70a6" class="outline-3">
+<h3 id="org91b70a6"><a href="https://www.linkedin.com/posts/tylerjburns_if-you-have-one-or-two-bad-markers-in-your-activity-7038805627606814720-ybsS?utm_source=share&amp;utm_medium=member_desktop">Gif of progressively adding noisy dimensions to t-SNE</a></h3>
+<div class="outline-text-3" id="text-org91b70a6">
 <p>
 March 7, 2023
 </p>
@@ -749,9 +693,9 @@ If you have one or two bad markers in your panel (noise), does it completely rui
 <img src="images/tsne_add_noise.gif"/>
 </div>
 </div>
-<div id="outline-container-orgd7bb2fa" class="outline-3">
-<h3 id="orgd7bb2fa"><a href="https://www.linkedin.com/posts/tylerjburns_run-t-sne-and-umap-on-cytof-data-100-times-activity-7029143066804420609-UsDZ?utm_source=share&amp;utm_medium=member_desktop">Gif of running t-SNE and UMAP over and over</a></h3>
-<div class="outline-text-3" id="text-orgd7bb2fa">
+<div id="outline-container-org0d04afd" class="outline-3">
+<h3 id="org0d04afd"><a href="https://www.linkedin.com/posts/tylerjburns_run-t-sne-and-umap-on-cytof-data-100-times-activity-7029143066804420609-UsDZ?utm_source=share&amp;utm_medium=member_desktop">Gif of running t-SNE and UMAP over and over</a></h3>
+<div class="outline-text-3" id="text-org0d04afd">
 <p>
 February 8, 2023
 </p>
@@ -762,9 +706,9 @@ Run t-SNE and UMAP on CyTOF data 100 times in a row. How much does the island pl
 <img src="images/tsne_umap_multiple_runs.gif"/>
 </div>
 </div>
-<div id="outline-container-org437e8b3" class="outline-3">
-<h3 id="org437e8b3"><a href="https://www.linkedin.com/posts/tylerjburns_umap-on-noisy-non-trajectory-data-looks-like-activity-7041404193252737026-Zx-_?utm_source=share&amp;utm_medium=member_desktop">Gif of progressively adding noisy dimensions to UMAP</a></h3>
-<div class="outline-text-3" id="text-org437e8b3">
+<div id="outline-container-orgeb1cc40" class="outline-3">
+<h3 id="orgeb1cc40"><a href="https://www.linkedin.com/posts/tylerjburns_umap-on-noisy-non-trajectory-data-looks-like-activity-7041404193252737026-Zx-_?utm_source=share&amp;utm_medium=member_desktop">Gif of progressively adding noisy dimensions to UMAP</a></h3>
+<div class="outline-text-3" id="text-orgeb1cc40">
 <p>
 March 14, 2023
 </p>
@@ -792,9 +736,9 @@ A relevant interrogation of dimension reduction with lots of pictures here: <a h
 <img src="images/umap_add_noise.gif"/>
 </div>
 </div>
-<div id="outline-container-org6b629f8" class="outline-3">
-<h3 id="org6b629f8"><a href="https://www.linkedin.com/posts/tylerjburns_the-case-for-viridis-activity-7289648023238811648-Qh8o?utm_source=share&amp;utm_medium=member_desktop">Comparing Color Palettes for scRNA-seq Data Visualization: The Case for Viridis as a Default</a></h3>
-<div class="outline-text-3" id="text-org6b629f8">
+<div id="outline-container-org22d597c" class="outline-3">
+<h3 id="org22d597c"><a href="https://www.linkedin.com/posts/tylerjburns_the-case-for-viridis-activity-7289648023238811648-Qh8o?utm_source=share&amp;utm_medium=member_desktop">Comparing Color Palettes for scRNA-seq Data Visualization: The Case for Viridis as a Default</a></h3>
+<div class="outline-text-3" id="text-org22d597c">
 <p>
 January 27, 2025
 </p>
@@ -850,9 +794,9 @@ Bottom line: use viridis to improve clarity and inclusivity in your single-cell 
 </p>
 </div>
 
-<div id="outline-container-org35a9d44" class="outline-4">
-<h4 id="org35a9d44">comment</h4>
-<div class="outline-text-4" id="text-org35a9d44">
+<div id="outline-container-org23e335a" class="outline-4">
+<h4 id="org23e335a">comment</h4>
+<div class="outline-text-4" id="text-org23e335a">
 <p>
 My markdown is here: <a href="https://tjburns08.github.io/case_for_viridis.html">https://tjburns08.github.io/case_for_viridis.html</a>
 </p>
@@ -867,9 +811,9 @@ Thank you to Asier Antoranz for making me aware of this video, and therefore ins
 </div>
 </div>
 </div>
-<div id="outline-container-org3cc6154" class="outline-3">
-<h3 id="org3cc6154"><a href="https://www.linkedin.com/posts/tylerjburns_flowcytof-users-who-are-now-doing-single-cell-activity-7287826621862940672-Iv0E?utm_source=share&amp;utm_medium=member_desktop">Cytobank color palette for Seurat's FeaturePlot</a></h3>
-<div class="outline-text-3" id="text-org3cc6154">
+<div id="outline-container-orgdd20ef1" class="outline-3">
+<h3 id="orgdd20ef1"><a href="https://www.linkedin.com/posts/tylerjburns_flowcytof-users-who-are-now-doing-single-cell-activity-7287826621862940672-Iv0E?utm_source=share&amp;utm_medium=member_desktop">Cytobank color palette for Seurat's FeaturePlot</a></h3>
+<div class="outline-text-3" id="text-orgdd20ef1">
 <p>
 January 22, 2025
 </p>
@@ -891,14 +835,14 @@ Feel free to steal the code and do whatever you want with it. I hope you all hav
 </p>
 
 
-<div id="orgced04dc" class="figure">
+<div id="orgf474519" class="figure">
 <p><img src="images/featureplot_cytobank_colors.png" alt="featureplot_cytobank_colors.png" />
 </p>
 </div>
 </div>
-<div id="outline-container-org2e7bdc7" class="outline-4">
-<h4 id="org2e7bdc7">comment</h4>
-<div class="outline-text-4" id="text-org2e7bdc7">
+<div id="outline-container-orgc410c21" class="outline-4">
+<h4 id="orgc410c21">comment</h4>
+<div class="outline-text-4" id="text-orgc410c21">
 <p>
 The markdown is here: <a href="https://tjburns08.github.io/rainbow_feature_plot.html">https://tjburns08.github.io/rainbow_feature_plot.html</a>
 </p>
@@ -907,17 +851,17 @@ The markdown is here: <a href="https://tjburns08.github.io/rainbow_feature_plot.
 </div>
 </div>
 
-<div id="outline-container-org0c23244" class="outline-2">
-<h2 id="org0c23244">Clustering, Gating, And Population Assignment</h2>
-<div class="outline-text-2" id="text-org0c23244">
+<div id="outline-container-org6453dd6" class="outline-2">
+<h2 id="org6453dd6">Clustering, Gating, And Population Assignment</h2>
+<div class="outline-text-2" id="text-org6453dd6">
 <a href="#top">Back to top</a>
 <p>
 Posts about assigning cells to groups, evaluating stability, rare subset detection, automated gating, and methods that can produce convincing but misleading structure.
 </p>
 </div>
-<div id="outline-container-org609ca2d" class="outline-3">
-<h3 id="org609ca2d"><a href="https://www.linkedin.com/posts/tylerjburns_in-light-of-recent-benchmarking-work-ive-activity-7373737973080731648-ImSh?utm_source=share&amp;utm_medium=member_desktop&amp;rcm=ACoAAAbP8M8BYXs_UknoBHnmw2rZ-aRDTJF7L3Y">Pareto fronts for cluster benchmarking</a></h3>
-<div class="outline-text-3" id="text-org609ca2d">
+<div id="outline-container-org0b4cd28" class="outline-3">
+<h3 id="org0b4cd28"><a href="https://www.linkedin.com/posts/tylerjburns_in-light-of-recent-benchmarking-work-ive-activity-7373737973080731648-ImSh?utm_source=share&amp;utm_medium=member_desktop&amp;rcm=ACoAAAbP8M8BYXs_UknoBHnmw2rZ-aRDTJF7L3Y">Pareto fronts for cluster benchmarking</a></h3>
+<div class="outline-text-3" id="text-org0b4cd28">
 <p>
 September 16, 2025
 </p>
@@ -956,23 +900,23 @@ I hope you all have a great day.
 </p>
 
 
-<div id="org6309826" class="figure">
+<div id="orgc5b173c" class="figure">
 <p><img src="images/pareto_front_clustering.png" alt="pareto_front_clustering.png" />
 </p>
 </div>
 </div>
-<div id="outline-container-org706b544" class="outline-4">
-<h4 id="org706b544">comment</h4>
-<div class="outline-text-4" id="text-org706b544">
+<div id="outline-container-org95a9dc8" class="outline-4">
+<h4 id="org95a9dc8">comment</h4>
+<div class="outline-text-4" id="text-org95a9dc8">
 <p>
 Paper is <a href="https://academic.oup.com/bioinformatics/article/37/14/1972/6122691">here</a>.
 </p>
 </div>
 </div>
 </div>
-<div id="outline-container-org1d120fd" class="outline-3">
-<h3 id="org1d120fd"><a href="https://www.linkedin.com/posts/tylerjburns_you-may-have-noticed-the-emergence-of-leiden-activity-7396949129756721153--CwY?utm_source=share&amp;utm_medium=member_desktop&amp;rcm=ACoAAAbP8M8BYXs_UknoBHnmw2rZ-aRDTJF7L3Y">Louvain versus Leiden cluster stability in Seurat</a></h3>
-<div class="outline-text-3" id="text-org1d120fd">
+<div id="outline-container-org071411a" class="outline-3">
+<h3 id="org071411a"><a href="https://www.linkedin.com/posts/tylerjburns_you-may-have-noticed-the-emergence-of-leiden-activity-7396949129756721153--CwY?utm_source=share&amp;utm_medium=member_desktop&amp;rcm=ACoAAAbP8M8BYXs_UknoBHnmw2rZ-aRDTJF7L3Y">Louvain versus Leiden cluster stability in Seurat</a></h3>
+<div class="outline-text-3" id="text-org071411a">
 <p>
 November 19, 2025
 </p>
@@ -1030,15 +974,15 @@ Thank you and I hope you all have a great day.
 </p>
 
 
-<div id="orge4d4c7e" class="figure">
+<div id="org2e16a0a" class="figure">
 <p><img src="images/louvain_leiden.gif" alt="louvain_leiden.gif" />
 </p>
 </div>
 </div>
 </div>
-<div id="outline-container-orgc48cae4" class="outline-3">
-<h3 id="orgc48cae4"><a href="https://www.linkedin.com/posts/tylerjburns_ever-wonder-if-a-boundary-cell-in-a-clustering-activity-7328409514074857472-Op_5?utm_source=share&amp;utm_medium=member_desktop&amp;rcm=ACoAAAbP8M8BYXs_UknoBHnmw2rZ-aRDTJF7L3Y">Cells at the boundary of two clusters</a></h3>
-<div class="outline-text-3" id="text-orgc48cae4">
+<div id="outline-container-org3cfb8d9" class="outline-3">
+<h3 id="org3cfb8d9"><a href="https://www.linkedin.com/posts/tylerjburns_ever-wonder-if-a-boundary-cell-in-a-clustering-activity-7328409514074857472-Op_5?utm_source=share&amp;utm_medium=member_desktop&amp;rcm=ACoAAAbP8M8BYXs_UknoBHnmw2rZ-aRDTJF7L3Y">Cells at the boundary of two clusters</a></h3>
+<div class="outline-text-3" id="text-org3cfb8d9">
 <p>
 May 14, 2025
 </p>
@@ -1094,14 +1038,14 @@ If there are any similar things you do for your data (e.g. cluster silhouette sc
 </p>
 
 
-<div id="org6edbd8e" class="figure">
+<div id="orgdc1357a" class="figure">
 <p><img src="images/cluster_boundaries.png" alt="cluster_boundaries.png" />
 </p>
 </div>
 </div>
-<div id="outline-container-orgbdb718c" class="outline-4">
-<h4 id="orgbdb718c">comment</h4>
-<div class="outline-text-4" id="text-orgbdb718c">
+<div id="outline-container-orgda16151" class="outline-4">
+<h4 id="orgda16151">comment</h4>
+<div class="outline-text-4" id="text-orgda16151">
 <p>
 My longer report, containing code you can use: <a href="https://tjburns08.github.io/soft_clustering.html">https://tjburns08.github.io/soft_clustering.html</a>
 </p>
@@ -1122,9 +1066,9 @@ Soft clustering (aka fuzzy clustering). This is where cells are not assigned to 
 </div>
 </div>
 </div>
-<div id="outline-container-orgd655290" class="outline-3">
-<h3 id="orgd655290"><a href="https://www.linkedin.com/feed/update/urn:li:activity:7307398833943011328/">Cluster stability as an evaluation metric for your clustering scheme's performance on single-cell data</a></h3>
-<div class="outline-text-3" id="text-orgd655290">
+<div id="outline-container-org70ffd16" class="outline-3">
+<h3 id="org70ffd16"><a href="https://www.linkedin.com/feed/update/urn:li:activity:7307398833943011328/">Cluster stability as an evaluation metric for your clustering scheme's performance on single-cell data</a></h3>
+<div class="outline-text-3" id="text-org70ffd16">
 <p>
 March 17, 2025
 </p>
@@ -1170,24 +1114,24 @@ If you want to chat with me more about this kind of thing, feel free to send me 
 </p>
 
 
-<div id="orgf7e64e8" class="figure">
+<div id="org8843eec" class="figure">
 <p><img src="images/ppt_pbmc3k_raw_fps30.gif" alt="ppt_pbmc3k_raw_fps30.gif" />
 </p>
 </div>
 </div>
 
-<div id="outline-container-org1d6b6fb" class="outline-4">
-<h4 id="org1d6b6fb">comment</h4>
-<div class="outline-text-4" id="text-org1d6b6fb">
+<div id="outline-container-org2576b66" class="outline-4">
+<h4 id="org2576b66">comment</h4>
+<div class="outline-text-4" id="text-org2576b66">
 <p>
 Code and data can be found here: <a href="https://tjburns08.github.io/seurat_pbmc_cluster_stability.html">https://tjburns08.github.io/seurat_pbmc_cluster_stability.html</a>
 </p>
 </div>
 </div>
 </div>
-<div id="outline-container-org4394bbd" class="outline-3">
-<h3 id="org4394bbd"><a href="https://www.linkedin.com/posts/tylerjburns_when-you-cluster-your-single-cell-data-do-activity-7198660249229127682-sWlv?utm_source=share&amp;utm_medium=member_desktop">Cluster stability visualization</a></h3>
-<div class="outline-text-3" id="text-org4394bbd">
+<div id="outline-container-orgdaf9161" class="outline-3">
+<h3 id="orgdaf9161"><a href="https://www.linkedin.com/posts/tylerjburns_when-you-cluster-your-single-cell-data-do-activity-7198660249229127682-sWlv?utm_source=share&amp;utm_medium=member_desktop">Cluster stability visualization</a></h3>
+<div class="outline-text-3" id="text-orgdaf9161">
 <p>
 May 21, 2024
 </p>
@@ -1219,9 +1163,9 @@ The data and code for creating this gif is linked in the comments. I just got st
 <img src="images/cluster_stability.gif"/>
 </div>
 </div>
-<div id="outline-container-org877e775" class="outline-3">
-<h3 id="org877e775"><a href="https://www.linkedin.com/posts/tylerjburns_facing-challenges-with-analyzing-large-flow-activity-7099769574782324736-vjnv?utm_source=share&amp;utm_medium=member_desktop">GigaSOM: FlowSOM in Julia for larger datasets</a></h3>
-<div class="outline-text-3" id="text-org877e775">
+<div id="outline-container-org4402973" class="outline-3">
+<h3 id="org4402973"><a href="https://www.linkedin.com/posts/tylerjburns_facing-challenges-with-analyzing-large-flow-activity-7099769574782324736-vjnv?utm_source=share&amp;utm_medium=member_desktop">GigaSOM: FlowSOM in Julia for larger datasets</a></h3>
+<div class="outline-text-3" id="text-org4402973">
 <p>
 August 22, 2023
 </p>
@@ -1253,9 +1197,9 @@ Dive deeper into the details with the paper and package homepage: <a href="https
 </p>
 </div>
 </div>
-<div id="outline-container-org2b14d8d" class="outline-3">
-<h3 id="org2b14d8d"><a href="https://www.linkedin.com/posts/tylerjburns_i-wanted-to-highlight-a-clustering-method-activity-7087382242867470336-pUbG?utm_source=share&amp;utm_medium=member_desktop">How X-shift works</a></h3>
-<div class="outline-text-3" id="text-org2b14d8d">
+<div id="outline-container-org109093e" class="outline-3">
+<h3 id="org109093e"><a href="https://www.linkedin.com/posts/tylerjburns_i-wanted-to-highlight-a-clustering-method-activity-7087382242867470336-pUbG?utm_source=share&amp;utm_medium=member_desktop">How X-shift works</a></h3>
+<div class="outline-text-3" id="text-org109093e">
 <p>
 July 19, 2023
 </p>
@@ -1285,15 +1229,15 @@ Thank you for your attention, and I hope you all have a great day.
 </p>
 
 
-<div id="orgbd074d9" class="figure">
+<div id="orge79cf71" class="figure">
 <p><img src="images/how_xshift_works.jpeg" alt="how_xshift_works.jpeg" />
 </p>
 </div>
 </div>
 </div>
-<div id="outline-container-org87c19d5" class="outline-3">
-<h3 id="org87c19d5"><a href="https://www.linkedin.com/posts/tylerjburns_flow-cytometry-and-cytof-users-here-is-a-activity-7003308800543711232-eAEx?utm_source=share&amp;utm_medium=member_desktop">What happens when you run SPADE on random input</a></h3>
-<div class="outline-text-3" id="text-org87c19d5">
+<div id="outline-container-org1dbf48f" class="outline-3">
+<h3 id="org1dbf48f"><a href="https://www.linkedin.com/posts/tylerjburns_flow-cytometry-and-cytof-users-here-is-a-activity-7003308800543711232-eAEx?utm_source=share&amp;utm_medium=member_desktop">What happens when you run SPADE on random input</a></h3>
+<div class="outline-text-3" id="text-org1dbf48f">
 <p>
 November 29, 2022
 </p>
@@ -1303,15 +1247,15 @@ Flow cytometry and CyTOF users: here is a SPADE tree produced from 30 dimensions
 </p>
 
 
-<div id="org339cade" class="figure">
+<div id="orgd412275" class="figure">
 <p><img src="images/spade_random_input.jpeg" alt="spade_random_input.jpeg" />
 </p>
 </div>
 </div>
 </div>
-<div id="outline-container-org8b7d22b" class="outline-3">
-<h3 id="org8b7d22b"><a href="https://www.linkedin.com/posts/tylerjburns_automated-gating-autogating-has-been-a-activity-7167877080360206336-dDlD?utm_source=share&amp;utm_medium=member_desktop">Survey March 2024, most are not using but are interested in autogating</a></h3>
-<div class="outline-text-3" id="text-org8b7d22b">
+<div id="outline-container-orga52fd3b" class="outline-3">
+<h3 id="orga52fd3b"><a href="https://www.linkedin.com/posts/tylerjburns_automated-gating-autogating-has-been-a-activity-7167877080360206336-dDlD?utm_source=share&amp;utm_medium=member_desktop">Survey March 2024, most are not using but are interested in autogating</a></h3>
+<div class="outline-text-3" id="text-orga52fd3b">
 <p>
 February 26, 2024
 </p>
@@ -1324,17 +1268,17 @@ Automated gating (autogating) has been a topic of discussion for many years, but
 </div>
 </div>
 
-<div id="outline-container-org15fcd38" class="outline-2">
-<h2 id="org15fcd38">AI-Assisted Bioinformatics</h2>
-<div class="outline-text-2" id="text-org15fcd38">
+<div id="outline-container-orgb002491" class="outline-2">
+<h2 id="orgb002491">AI-Assisted Bioinformatics</h2>
+<div class="outline-text-2" id="text-orgb002491">
 <a href="#top">Back to top</a>
 <p>
 Posts about LLMs and agents as analysis tools: pipeline generation, annotation, interpretation, prompt scripting, and failure modes.
 </p>
 </div>
-<div id="outline-container-org62efa7a" class="outline-3">
-<h3 id="org62efa7a"><a href="https://www.linkedin.com/posts/tylerjburns_one-of-the-metrics-i-have-been-tracking-for-activity-7462852276383162369-Yzld?utm_source=share&amp;utm_medium=member_desktop&amp;rcm=ACoAAAbP8M8BYXs_UknoBHnmw2rZ-aRDTJF7L3Y">Claude Code experiments for manual gating, part 2</a></h3>
-<div class="outline-text-3" id="text-org62efa7a">
+<div id="outline-container-org967cce4" class="outline-3">
+<h3 id="org967cce4"><a href="https://www.linkedin.com/posts/tylerjburns_one-of-the-metrics-i-have-been-tracking-for-activity-7462852276383162369-Yzld?utm_source=share&amp;utm_medium=member_desktop&amp;rcm=ACoAAAbP8M8BYXs_UknoBHnmw2rZ-aRDTJF7L3Y">Claude Code experiments for manual gating, part 2</a></h3>
+<div class="outline-text-3" id="text-org967cce4">
 <p>
 One of the metrics I have been tracking for agentic AI is "can it gate my cells?" Here is a followup on my previous manual gating experiment, with Opus 4.7 instead of Opus 4.6.
 </p>
@@ -1404,23 +1348,23 @@ This is progress I care about, but I also care that we all are well-informed aro
 </p>
 
 
-<div id="org3d40598" class="figure">
+<div id="org658f022" class="figure">
 <p><img src="images/claude_opus_4.7_gating.png" alt="claude_opus_4.7_gating.png" />
 </p>
 </div>
 </div>
-<div id="outline-container-org4feef6d" class="outline-4">
-<h4 id="org4feef6d">comment</h4>
-<div class="outline-text-4" id="text-org4feef6d">
+<div id="outline-container-org4327a0a" class="outline-4">
+<h4 id="org4327a0a">comment</h4>
+<div class="outline-text-4" id="text-org4327a0a">
 <p>
 My CyTOF gating GitHub project is here (which has an older experiment in the README, if you're wondering why the numbers don't match): <a href="https://github.com/tjburns08/claude-cytof-gating">https://github.com/tjburns08/claude-cytof-gating</a>
 </p>
 </div>
 </div>
 </div>
-<div id="outline-container-org1788fcc" class="outline-3">
-<h3 id="org1788fcc"><a href="https://www.linkedin.com/posts/tylerjburns_hi-friends-in-light-of-recent-llm-bioinformatics-activity-7438223292014018560-1U9U?utm_source=share&amp;utm_medium=member_desktop&amp;rcm=ACoAAAbP8M8BYXs_UknoBHnmw2rZ-aRDTJF7L3Y">LLM CyTOF clustering algorithm choices</a></h3>
-<div class="outline-text-3" id="text-org1788fcc">
+<div id="outline-container-org22dba51" class="outline-3">
+<h3 id="org22dba51"><a href="https://www.linkedin.com/posts/tylerjburns_hi-friends-in-light-of-recent-llm-bioinformatics-activity-7438223292014018560-1U9U?utm_source=share&amp;utm_medium=member_desktop&amp;rcm=ACoAAAbP8M8BYXs_UknoBHnmw2rZ-aRDTJF7L3Y">LLM CyTOF clustering algorithm choices</a></h3>
+<div class="outline-text-3" id="text-org22dba51">
 <p>
 March 13, 2026
 </p>
@@ -1474,18 +1418,18 @@ Thanks and I hope you all have a great day.
 <img src="images/cytof_algo_choice.png" alt="cytof_algo_choice.png" />
 </p>
 </div>
-<div id="outline-container-org009902d" class="outline-4">
-<h4 id="org009902d">comment</h4>
-<div class="outline-text-4" id="text-org009902d">
+<div id="outline-container-org0266231" class="outline-4">
+<h4 id="org0266231">comment</h4>
+<div class="outline-text-4" id="text-org0266231">
 <p>
 The report is here: <a href="https://tjburns08.github.io/cytof_llm_selection_experiment.html">https://tjburns08.github.io/cytof_llm_selection_experiment.html</a>
 </p>
 </div>
 </div>
 </div>
-<div id="outline-container-org8683f6e" class="outline-3">
-<h3 id="org8683f6e"><a href="https://www.linkedin.com/posts/tylerjburns_hi-friends-in-light-of-recent-experiments-activity-7434239530603483137-TDRH?utm_source=share&amp;utm_medium=member_desktop&amp;rcm=ACoAAAbP8M8BYXs_UknoBHnmw2rZ-aRDTJF7L3Y">LLM-generated CyTOF data properties</a></h3>
-<div class="outline-text-3" id="text-org8683f6e">
+<div id="outline-container-orgdbe7b28" class="outline-3">
+<h3 id="orgdbe7b28"><a href="https://www.linkedin.com/posts/tylerjburns_hi-friends-in-light-of-recent-experiments-activity-7434239530603483137-TDRH?utm_source=share&amp;utm_medium=member_desktop&amp;rcm=ACoAAAbP8M8BYXs_UknoBHnmw2rZ-aRDTJF7L3Y">LLM-generated CyTOF data properties</a></h3>
+<div class="outline-text-3" id="text-orgdbe7b28">
 <p>
 March 2, 2026
 </p>
@@ -1551,18 +1495,18 @@ The report is in the comments, which includes the prompt and all output, so you 
 <img src="images/llm_cytof_data.png" alt="llm_cytof_data.png" />
 </p>
 </div>
-<div id="outline-container-orgbac57dc" class="outline-4">
-<h4 id="orgbac57dc">comment</h4>
-<div class="outline-text-4" id="text-orgbac57dc">
+<div id="outline-container-orgc99620f" class="outline-4">
+<h4 id="orgc99620f">comment</h4>
+<div class="outline-text-4" id="text-orgc99620f">
 <p>
 The report is here, so you can try this kind of thing yourself: <a href="https://tjburns08.github.io/samusik_llm_mishmash.html">https://tjburns08.github.io/samusik_llm_mishmash.html</a>
 </p>
 </div>
 </div>
 </div>
-<div id="outline-container-org2c36234" class="outline-3">
-<h3 id="org2c36234"><a href="https://www.linkedin.com/posts/tylerjburns_hi-friends-here-is-what-happens-when-i-context-activity-7424088272919965696-54Gz?utm_source=share&amp;utm_medium=member_desktop&amp;rcm=ACoAAAbP8M8BYXs_UknoBHnmw2rZ-aRDTJF7L3Y">Claude Code experiments for manual gating</a></h3>
-<div class="outline-text-3" id="text-org2c36234">
+<div id="outline-container-org4b64ad8" class="outline-3">
+<h3 id="org4b64ad8"><a href="https://www.linkedin.com/posts/tylerjburns_hi-friends-here-is-what-happens-when-i-context-activity-7424088272919965696-54Gz?utm_source=share&amp;utm_medium=member_desktop&amp;rcm=ACoAAAbP8M8BYXs_UknoBHnmw2rZ-aRDTJF7L3Y">Claude Code experiments for manual gating</a></h3>
+<div class="outline-text-3" id="text-org4b64ad8">
 <p>
 February 2, 2026
 </p>
@@ -1632,18 +1576,18 @@ The GitHub for the final experiment is in the comments. I hope you all have a gr
 <img src="images/claude_code_gating.png" alt="claude_code_gating.png" />
 </p>
 </div>
-<div id="outline-container-org981d613" class="outline-4">
-<h4 id="org981d613">comment</h4>
-<div class="outline-text-4" id="text-org981d613">
+<div id="outline-container-org4ee8429" class="outline-4">
+<h4 id="org4ee8429">comment</h4>
+<div class="outline-text-4" id="text-org4ee8429">
 <p>
 The GitHub to the most recent experiment is here: <a href="https://github.com/tjburns08/claude-cytof-gating">https://github.com/tjburns08/claude-cytof-gating</a>
 </p>
 </div>
 </div>
 </div>
-<div id="outline-container-orgbf1a4b2" class="outline-3">
-<h3 id="orgbf1a4b2"><a href="https://www.linkedin.com/posts/tylerjburns_hi-friends-following-my-previous-work-on-activity-7421554989552254978-0WpC?utm_source=share&amp;utm_medium=member_desktop&amp;rcm=ACoAAAbP8M8BYXs_UknoBHnmw2rZ-aRDTJF7L3Y">Agentic AI for analyzing CyTOF data</a></h3>
-<div class="outline-text-3" id="text-orgbf1a4b2">
+<div id="outline-container-org25387b1" class="outline-3">
+<h3 id="org25387b1"><a href="https://www.linkedin.com/posts/tylerjburns_hi-friends-following-my-previous-work-on-activity-7421554989552254978-0WpC?utm_source=share&amp;utm_medium=member_desktop&amp;rcm=ACoAAAbP8M8BYXs_UknoBHnmw2rZ-aRDTJF7L3Y">Agentic AI for analyzing CyTOF data</a></h3>
+<div class="outline-text-3" id="text-org25387b1">
 <p>
 January 26, 2026
 </p>
@@ -1711,9 +1655,9 @@ Link to the full results in comments. If you're running similar experiments, I'd
 <img src="images/agentic_ai_cytof.png" alt="agentic_ai_cytof.png" />
 </p>
 </div>
-<div id="outline-container-orge0e7ce3" class="outline-4">
-<h4 id="orge0e7ce3">comments</h4>
-<div class="outline-text-4" id="text-orge0e7ce3">
+<div id="outline-container-orgf802ba2" class="outline-4">
+<h4 id="orgf802ba2">comments</h4>
+<div class="outline-text-4" id="text-orgf802ba2">
 <p>
 One potential use case for this would be through the CyTOF SAAS products directly (not going to name them, but you know the popular ones). It might be via API access (assuming we figure out the cybersecurity), or that the SAAS products themselves embed the agents directly into the software. Either way, this is something I would watch out for, for programmers and non-programmers alike.
 </p>
@@ -1724,9 +1668,9 @@ The GitHub link to the project is here: <a href="https://github.com/tjburns08/cy
 </div>
 </div>
 </div>
-<div id="outline-container-orge1180c7" class="outline-3">
-<h3 id="orge1180c7"><a href="https://www.linkedin.com/posts/tylerjburns_can-you-use-llms-to-create-self-refactoring-activity-7392201680521560064-IIQm?utm_source=share&amp;utm_medium=member_desktop&amp;rcm=ACoAAAbP8M8BYXs_UknoBHnmw2rZ-aRDTJF7L3Y">LLM make-it-better experiment for UMAP plotting</a></h3>
-<div class="outline-text-3" id="text-orge1180c7">
+<div id="outline-container-orge6c7773" class="outline-3">
+<h3 id="orge6c7773"><a href="https://www.linkedin.com/posts/tylerjburns_can-you-use-llms-to-create-self-refactoring-activity-7392201680521560064-IIQm?utm_source=share&amp;utm_medium=member_desktop&amp;rcm=ACoAAAbP8M8BYXs_UknoBHnmw2rZ-aRDTJF7L3Y">LLM make-it-better experiment for UMAP plotting</a></h3>
+<div class="outline-text-3" id="text-orge6c7773">
 <p>
 November 6, 2025
 </p>
@@ -1764,15 +1708,15 @@ Thank you and I hope you all have a great day.
 </p>
 
 
-<div id="orgcf1902b" class="figure">
+<div id="orgb90cd2e" class="figure">
 <p><img src="images/llm_make_it_better.png" alt="llm_make_it_better.png" />
 </p>
 </div>
 </div>
 </div>
-<div id="outline-container-orgc885a62" class="outline-3">
-<h3 id="orgc885a62"><a href="https://www.linkedin.com/posts/tylerjburns_to-gauge-llm-progress-in-my-domain-i-prompted-activity-7379503790162534401-C-Zj?utm_source=share&amp;utm_medium=member_desktop&amp;rcm=ACoAAAbP8M8BYXs_UknoBHnmw2rZ-aRDTJF7L3Y">LLM-based CyTOF analysis pipeline design choices</a></h3>
-<div class="outline-text-3" id="text-orgc885a62">
+<div id="outline-container-org3ab79a6" class="outline-3">
+<h3 id="org3ab79a6"><a href="https://www.linkedin.com/posts/tylerjburns_to-gauge-llm-progress-in-my-domain-i-prompted-activity-7379503790162534401-C-Zj?utm_source=share&amp;utm_medium=member_desktop&amp;rcm=ACoAAAbP8M8BYXs_UknoBHnmw2rZ-aRDTJF7L3Y">LLM-based CyTOF analysis pipeline design choices</a></h3>
+<div class="outline-text-3" id="text-org3ab79a6">
 <p>
 October 2, 2025
 </p>
@@ -1839,15 +1783,15 @@ Please let me know if you have questions/comments. I hope you all have a great d
 </p>
 
 
-<div id="org3707f71" class="figure">
+<div id="orgef94962" class="figure">
 <p><img src="images/llm_pipeline_design_choices.png" alt="llm_pipeline_design_choices.png" />
 </p>
 </div>
 </div>
 </div>
-<div id="outline-container-org87285b5" class="outline-3">
-<h3 id="org87285b5"><a href="https://www.linkedin.com/posts/tylerjburns_in-light-of-the-recent-work-i-have-been-doing-activity-7374066902265978880-Kt6A?utm_source=share&amp;utm_medium=member_desktop&amp;rcm=ACoAAAbP8M8BYXs_UknoBHnmw2rZ-aRDTJF7L3Y">A review of CyteType: LLM-based annotator</a></h3>
-<div class="outline-text-3" id="text-org87285b5">
+<div id="outline-container-orgc950d07" class="outline-3">
+<h3 id="orgc950d07"><a href="https://www.linkedin.com/posts/tylerjburns_in-light-of-the-recent-work-i-have-been-doing-activity-7374066902265978880-Kt6A?utm_source=share&amp;utm_medium=member_desktop&amp;rcm=ACoAAAbP8M8BYXs_UknoBHnmw2rZ-aRDTJF7L3Y">A review of CyteType: LLM-based annotator</a></h3>
+<div class="outline-text-3" id="text-orgc950d07">
 <p>
 September 17, 2025
 </p>
@@ -1901,14 +1845,14 @@ Thank you Parashar for producing this tool for the community. Link to the python
 </p>
 
 
-<div id="org97c7fb3" class="figure">
+<div id="org1f94948" class="figure">
 <p><img src="images/cytetype_annotation.png" alt="cytetype_annotation.png" />
 </p>
 </div>
 </div>
-<div id="outline-container-org841a55c" class="outline-4">
-<h4 id="org841a55c">comment</h4>
-<div class="outline-text-4" id="text-org841a55c">
+<div id="outline-container-org56d1a78" class="outline-4">
+<h4 id="org56d1a78">comment</h4>
+<div class="outline-text-4" id="text-org56d1a78">
 <p>
 The python package is here: <a href="https://github.com/NygenAnalytics/CyteType">https://github.com/NygenAnalytics/CyteType</a>
 The R version (CyteTypeR) is here: <a href="https://github.com/NygenAnalytics/CyteTypeR">https://github.com/NygenAnalytics/CyteTypeR</a>
@@ -1916,9 +1860,9 @@ The R version (CyteTypeR) is here: <a href="https://github.com/NygenAnalytics/Cy
 </div>
 </div>
 </div>
-<div id="outline-container-orgcfd1b2a" class="outline-3">
-<h3 id="orgcfd1b2a"><a href="https://www.linkedin.com/posts/tylerjburns_in-light-of-recent-work-on-llm-generated-activity-7358851476070293506-zn_F?utm_source=share&amp;utm_medium=member_desktop&amp;rcm=ACoAAAbP8M8BYXs_UknoBHnmw2rZ-aRDTJF7L3Y">A map of 10,000 LLM-generated microbiome questions</a></h3>
-<div class="outline-text-3" id="text-orgcfd1b2a">
+<div id="outline-container-orgd2a4349" class="outline-3">
+<h3 id="orgd2a4349"><a href="https://www.linkedin.com/posts/tylerjburns_in-light-of-recent-work-on-llm-generated-activity-7358851476070293506-zn_F?utm_source=share&amp;utm_medium=member_desktop&amp;rcm=ACoAAAbP8M8BYXs_UknoBHnmw2rZ-aRDTJF7L3Y">A map of 10,000 LLM-generated microbiome questions</a></h3>
+<div class="outline-text-3" id="text-orgd2a4349">
 <p>
 August 6, 2025
 </p>
@@ -1980,14 +1924,14 @@ Thank you and I hope you all have a great day.
 </p>
 
 
-<div id="org6d1a1b0" class="figure">
+<div id="orgaac4488" class="figure">
 <p><img src="images/llm_microbiome_ppt_slide_2.gif" alt="llm_microbiome_ppt_slide_2.gif" />
 </p>
 </div>
 </div>
-<div id="outline-container-org08a97c2" class="outline-4">
-<h4 id="org08a97c2">comment</h4>
-<div class="outline-text-4" id="text-org08a97c2">
+<div id="outline-container-orgcaaef28" class="outline-4">
+<h4 id="orgcaaef28">comment</h4>
+<div class="outline-text-4" id="text-orgcaaef28">
 <p>
 Jupyter notebook is here: <a href="https://tjburns08.github.io/LLM_microbiome_questions.html">https://tjburns08.github.io/LLM_microbiome_questions.html</a>
 Html output for microbiome is here: <a href="https://tjburns08.github.io/umap_questions_with_mq.html">https://tjburns08.github.io/umap_questions_with_mq.html</a>
@@ -1995,9 +1939,9 @@ Html output for microbiome is here: <a href="https://tjburns08.github.io/umap_qu
 </div>
 </div>
 </div>
-<div id="outline-container-orga527626" class="outline-3">
-<h3 id="orga527626"><a href="https://www.linkedin.com/posts/tylerjburns_friends-leaders-and-scientists-how-often-activity-7354155006498955264-62BL?utm_source=share&amp;utm_medium=member_desktop&amp;rcm=ACoAAAbP8M8BYXs_UknoBHnmw2rZ-aRDTJF7L3Y">The use of LLMs to help interpret PCA loadings</a></h3>
-<div class="outline-text-3" id="text-orga527626">
+<div id="outline-container-org5561409" class="outline-3">
+<h3 id="org5561409"><a href="https://www.linkedin.com/posts/tylerjburns_friends-leaders-and-scientists-how-often-activity-7354155006498955264-62BL?utm_source=share&amp;utm_medium=member_desktop&amp;rcm=ACoAAAbP8M8BYXs_UknoBHnmw2rZ-aRDTJF7L3Y">The use of LLMs to help interpret PCA loadings</a></h3>
+<div class="outline-text-3" id="text-org5561409">
 <p>
 July 24, 2025
 </p>
@@ -2063,14 +2007,14 @@ To the rest of you, thank you and I hope you all have a great day.
 </p>
 
 
-<div id="org3bce443" class="figure">
+<div id="org13c6a36" class="figure">
 <p><img src="llm_pca_loadings_post.jpeg" alt="llm_pca_loadings_post.jpeg" />
 </p>
 </div>
 </div>
-<div id="outline-container-orgdb4fca7" class="outline-4">
-<h4 id="orgdb4fca7">comment</h4>
-<div class="outline-text-4" id="text-orgdb4fca7">
+<div id="outline-container-orgcc40a03" class="outline-4">
+<h4 id="orgcc40a03">comment</h4>
+<div class="outline-text-4" id="text-orgcc40a03">
 <p>
 The markdown that allows you to do it on your end, so long as you have an OpenAI API key, is here: <a href="https://tjburns08.github.io/BLSC_PCA_loading_LLMs_final.html">https://tjburns08.github.io/BLSC_PCA_loading_LLMs_final.html</a>
 The report of what we found is here: <a href="https://tjburns08.github.io/blsc_pc_loadings_by_llm_interpretation.pdf">https://tjburns08.github.io/blsc_pc_loadings_by_llm_interpretation.pdf</a>
@@ -2078,9 +2022,9 @@ The report of what we found is here: <a href="https://tjburns08.github.io/blsc_p
 </div>
 </div>
 </div>
-<div id="outline-container-org08f2890" class="outline-3">
-<h3 id="org08f2890"><a href="https://www.linkedin.com/feed/update/urn:li:activity:7297975993489616897/">Searchbot and prompt scripting</a></h3>
-<div class="outline-text-3" id="text-org08f2890">
+<div id="outline-container-org8c91fe5" class="outline-3">
+<h3 id="org8c91fe5"><a href="https://www.linkedin.com/feed/update/urn:li:activity:7297975993489616897/">Searchbot and prompt scripting</a></h3>
+<div class="outline-text-3" id="text-org8c91fe5">
 <p>
 February 19, 2025
 </p>
@@ -2138,23 +2082,23 @@ And to the rest of you, reach out if you need help configuring the tool or want 
 </p>
 
 
-<div id="org8306bc4" class="figure">
+<div id="orgde2b81f" class="figure">
 <p><img src="images/prompt_scripting.png" alt="prompt_scripting.png" />
 </p>
 </div>
 </div>
-<div id="outline-container-org5e4d1e4" class="outline-4">
-<h4 id="org5e4d1e4">comment</h4>
-<div class="outline-text-4" id="text-org5e4d1e4">
+<div id="outline-container-org6c2d4be" class="outline-4">
+<h4 id="org6c2d4be">comment</h4>
+<div class="outline-text-4" id="text-org6c2d4be">
 <p>
 The writeup on how to do this can be found here: <a href="https://tjburns08.github.io/command_line_writeup.html">https://tjburns08.github.io/command_line_writeup.html</a>
 </p>
 </div>
 </div>
 </div>
-<div id="outline-container-org6fa93ed" class="outline-3">
-<h3 id="org6fa93ed"><a href="https://www.linkedin.com/feed/update/urn:li:activity:7295449514847432704/">LLM based cell annotation pipeline in Seurat</a></h3>
-<div class="outline-text-3" id="text-org6fa93ed">
+<div id="outline-container-org938ade2" class="outline-3">
+<h3 id="org938ade2"><a href="https://www.linkedin.com/feed/update/urn:li:activity:7295449514847432704/">LLM based cell annotation pipeline in Seurat</a></h3>
+<div class="outline-text-3" id="text-org938ade2">
 <p>
 February 12, 2025
 </p>
@@ -2212,14 +2156,14 @@ The R markdown with the respective code is linked in the comments. Have fun with
 </p>
 
 
-<div id="orgbc4fb9f" class="figure">
+<div id="org32b2a17" class="figure">
 <p><img src="images/llm_annotation_pipeline.png" alt="llm_annotation_pipeline.png" />
 </p>
 </div>
 </div>
-<div id="outline-container-org85bfd6a" class="outline-4">
-<h4 id="org85bfd6a">comment</h4>
-<div class="outline-text-4" id="text-org85bfd6a">
+<div id="outline-container-orgbe33d17" class="outline-4">
+<h4 id="orgbe33d17">comment</h4>
+<div class="outline-text-4" id="text-orgbe33d17">
 <p>
 The markdown can be found here, which has everything you need to get started: <a href="https://tjburns08.github.io/llm_annotate_pbmc3k.html">https://tjburns08.github.io/llm_annotate_pbmc3k.html</a>
 </p>
@@ -2230,9 +2174,9 @@ The GitHub to the project can be found here: <a href="https://github.com/tjburns
 </div>
 </div>
 </div>
-<div id="outline-container-orga5f062f" class="outline-3">
-<h3 id="orga5f062f"><a href="https://www.linkedin.com/posts/tylerjburns_if-gsea-leaves-you-with-firehose-of-go-and-activity-7292914924509421570-V_HI?utm_source=share&amp;utm_medium=member_desktop&amp;rcm=ACoAAAbP8M8BYXs_UknoBHnmw2rZ-aRDTJF7L3Y">GSEA context map</a></h3>
-<div class="outline-text-3" id="text-orga5f062f">
+<div id="outline-container-org84ea90c" class="outline-3">
+<h3 id="org84ea90c"><a href="https://www.linkedin.com/posts/tylerjburns_if-gsea-leaves-you-with-firehose-of-go-and-activity-7292914924509421570-V_HI?utm_source=share&amp;utm_medium=member_desktop&amp;rcm=ACoAAAbP8M8BYXs_UknoBHnmw2rZ-aRDTJF7L3Y">GSEA context map</a></h3>
+<div class="outline-text-3" id="text-org84ea90c">
 <p>
 February 5, 2025
 </p>
@@ -2310,23 +2254,23 @@ The R markdown guide is linked in the comments below. Please let me know if you 
 </p>
 
 
-<div id="org7df87f1" class="figure">
+<div id="org36e8fe3" class="figure">
 <p><img src="images/gprofiler_bert_ppt_2_better_colors.gif" alt="gprofiler_bert_ppt_2_better_colors.gif" />
 </p>
 </div>
 </div>
-<div id="outline-container-org38df61e" class="outline-4">
-<h4 id="org38df61e">comment</h4>
-<div class="outline-text-4" id="text-org38df61e">
+<div id="outline-container-org1775803" class="outline-4">
+<h4 id="org1775803">comment</h4>
+<div class="outline-text-4" id="text-org1775803">
 <p>
 The markdown is here: <a href="https://tjburns08.github.io/run_gprofiler_and_embed.html">https://tjburns08.github.io/run_gprofiler_and_embed.html</a>
 </p>
 </div>
 </div>
 </div>
-<div id="outline-container-orge135df2" class="outline-3">
-<h3 id="orge135df2"><a href="https://www.linkedin.com/posts/tylerjburns_when-doing-exploratory-data-analysis-for-activity-7290378848502796288-TYlg?utm_source=share&amp;utm_medium=member_desktop">How I built a LLM chatbot</a></h3>
-<div class="outline-text-3" id="text-orge135df2">
+<div id="outline-container-org0072d04" class="outline-3">
+<h3 id="org0072d04"><a href="https://www.linkedin.com/posts/tylerjburns_when-doing-exploratory-data-analysis-for-activity-7290378848502796288-TYlg?utm_source=share&amp;utm_medium=member_desktop">How I built a LLM chatbot</a></h3>
+<div class="outline-text-3" id="text-org0072d04">
 <p>
 January 29, 2025
 </p>
@@ -2392,23 +2336,23 @@ Give it a shot, and message me if you need help setting it up. If you are integr
 </p>
 
 
-<div id="orgbf923f3" class="figure">
+<div id="org25f4eb0" class="figure">
 <p><img src="images/llm_chatbot.png" alt="llm_chatbot.png" />
 </p>
 </div>
 </div>
-<div id="outline-container-orgc0c2113" class="outline-4">
-<h4 id="orgc0c2113">comment</h4>
-<div class="outline-text-4" id="text-orgc0c2113">
+<div id="outline-container-org5c52f60" class="outline-4">
+<h4 id="org5c52f60">comment</h4>
+<div class="outline-text-4" id="text-org5c52f60">
 <p>
 The writeup can be found here: <a href="https://tjburns08.github.io/command_line_writeup.html">https://tjburns08.github.io/command_line_writeup.html</a>
 </p>
 </div>
 </div>
 </div>
-<div id="outline-container-org29de93e" class="outline-3">
-<h3 id="org29de93e"><a href="https://www.linkedin.com/posts/tylerjburns_as-per-my-two-polls-placed-11-months-apart-activity-7165771409686827008-k5E2?utm_source=share&amp;utm_medium=member_desktop">Two surveys side by side, 11 months apart on LLM usage (April 2023, March 2024)</a></h3>
-<div class="outline-text-3" id="text-org29de93e">
+<div id="outline-container-org36ec158" class="outline-3">
+<h3 id="org36ec158"><a href="https://www.linkedin.com/posts/tylerjburns_as-per-my-two-polls-placed-11-months-apart-activity-7165771409686827008-k5E2?utm_source=share&amp;utm_medium=member_desktop">Two surveys side by side, 11 months apart on LLM usage (April 2023, March 2024)</a></h3>
+<div class="outline-text-3" id="text-org36ec158">
 <p>
 February 20, 2024
 </p>
@@ -2422,7 +2366,7 @@ I have not come across any work using LLMs particularly with flow/CyTOF data ana
 </p>
 
 
-<div id="orga691bd6" class="figure">
+<div id="org172986b" class="figure">
 <p><img src="images/llm_surveys.jpeg" alt="llm_surveys.jpeg" />
 </p>
 </div>
@@ -2430,17 +2374,17 @@ I have not come across any work using LLMs particularly with flow/CyTOF data ana
 </div>
 </div>
 
-<div id="outline-container-orgea1c024" class="outline-2">
-<h2 id="orgea1c024">Foundation Models For Single-Cell And Spatial</h2>
-<div class="outline-text-2" id="text-orgea1c024">
+<div id="outline-container-org78dc4ea" class="outline-2">
+<h2 id="org78dc4ea">Foundation Models For Single-Cell And Spatial</h2>
+<div class="outline-text-2" id="text-org78dc4ea">
 <a href="#top">Back to top</a>
 <p>
 Posts focused on transformer and foundation models themselves, separate from general LLM-assisted analysis workflows.
 </p>
 </div>
-<div id="outline-container-org6c53708" class="outline-3">
-<h3 id="org6c53708"><a href="https://www.linkedin.com/posts/tylerjburns_as-a-followup-to-my-earlier-posts-about-single-cell-activity-7389671614948388864-v7D1?utm_source=share&amp;utm_medium=member_desktop&amp;rcm=ACoAAAbP8M8BYXs_UknoBHnmw2rZ-aRDTJF7L3Y">Cell2Sentence update: 27B parameters</a></h3>
-<div class="outline-text-3" id="text-org6c53708">
+<div id="outline-container-org40d5dd4" class="outline-3">
+<h3 id="org40d5dd4"><a href="https://www.linkedin.com/posts/tylerjburns_as-a-followup-to-my-earlier-posts-about-single-cell-activity-7389671614948388864-v7D1?utm_source=share&amp;utm_medium=member_desktop&amp;rcm=ACoAAAbP8M8BYXs_UknoBHnmw2rZ-aRDTJF7L3Y">Cell2Sentence update: 27B parameters</a></h3>
+<div class="outline-text-3" id="text-org40d5dd4">
 <p>
 October 30, 2025
 </p>
@@ -2518,15 +2462,15 @@ The pre-print is here: <a href="https://www.biorxiv.org/content/10.1101/2025.04.
 </p>
 
 
-<div id="org1028d4d" class="figure">
+<div id="org6669895" class="figure">
 <p><img src="images/cell2sentence_27b.png" alt="cell2sentence_27b.png" />
 </p>
 </div>
 </div>
 </div>
-<div id="outline-container-orgdbc86bb" class="outline-3">
-<h3 id="orgdbc86bb"><a href="https://www.linkedin.com/feed/update/urn:li:activity:7338549286822993920/">The KRONOS patch based spatial foundation model</a></h3>
-<div class="outline-text-3" id="text-orgdbc86bb">
+<div id="outline-container-orgbbef564" class="outline-3">
+<h3 id="orgbbef564"><a href="https://www.linkedin.com/feed/update/urn:li:activity:7338549286822993920/">The KRONOS patch based spatial foundation model</a></h3>
+<div class="outline-text-3" id="text-orgbbef564">
 <p>
 June 11, 2025
 </p>
@@ -2580,14 +2524,14 @@ Let me know what the most absolutely annoying aspects of spatial QC are for you.
 </p>
 
 
-<div id="org4f46d63" class="figure">
+<div id="org2707af9" class="figure">
 <p><img src="kronos_fm.png" alt="kronos_fm.png" />
 </p>
 </div>
 </div>
-<div id="outline-container-org757f611" class="outline-4">
-<h4 id="org757f611">comment</h4>
-<div class="outline-text-4" id="text-org757f611">
+<div id="outline-container-org05cb06f" class="outline-4">
+<h4 id="org05cb06f">comment</h4>
+<div class="outline-text-4" id="text-org05cb06f">
 <p>
 The KRONOS pre-print is here: <a href="https://www.arxiv.org/pdf/2506.03373">https://www.arxiv.org/pdf/2506.03373</a>
 The GitHub is here: <a href="https://github.com/mahmoodlab/KRONOS">https://github.com/mahmoodlab/KRONOS</a>
@@ -2595,9 +2539,9 @@ The GitHub is here: <a href="https://github.com/mahmoodlab/KRONOS">https://githu
 </div>
 </div>
 </div>
-<div id="outline-container-org0435e8e" class="outline-3">
-<h3 id="org0435e8e"><a href="https://www.linkedin.com/posts/tylerjburns_transformer-based-foundation-models-the-activity-7249759966423646210-5Ba2?utm_source=share&amp;utm_medium=member_desktop">Review on single cell foundation models</a></h3>
-<div class="outline-text-3" id="text-org0435e8e">
+<div id="outline-container-org311efa9" class="outline-3">
+<h3 id="org311efa9"><a href="https://www.linkedin.com/posts/tylerjburns_transformer-based-foundation-models-the-activity-7249759966423646210-5Ba2?utm_source=share&amp;utm_medium=member_desktop">Review on single cell foundation models</a></h3>
+<div class="outline-text-3" id="text-org311efa9">
 <p>
 October 9, 2024
 </p>
@@ -2661,14 +2605,14 @@ If any of you are currently tinkering at the interface between single-cell/spati
 </p>
 
 
-<div id="orge6dc521" class="figure">
+<div id="orgcdb18c3" class="figure">
 <p><img src="images/2024-10-08_19-09-14_Screenshot 2024-10-08 at 19.09.08.png" alt="2024-10-08_19-09-14_Screenshot 2024-10-08 at 19.09.08.png" />
 </p>
 </div>
 </div>
-<div id="outline-container-orgd95c4db" class="outline-4">
-<h4 id="orgd95c4db">comment</h4>
-<div class="outline-text-4" id="text-orgd95c4db">
+<div id="outline-container-org266aeb2" class="outline-4">
+<h4 id="org266aeb2">comment</h4>
+<div class="outline-text-4" id="text-org266aeb2">
 <p>
 The review by Artur Szalata and colleagues can be found here: <a href="https://pubmed.ncbi.nlm.nih.gov/39122952/">https://pubmed.ncbi.nlm.nih.gov/39122952/</a>
 </p>
@@ -2685,9 +2629,9 @@ Me interrogating the geometry of a foundation model embedding by trying to find 
 </div>
 </div>
 </div>
-<div id="outline-container-org7e74a5d" class="outline-3">
-<h3 id="org7e74a5d"><a href="https://www.linkedin.com/posts/tylerjburns_in-a-standard-scrna-seq-analysis-pipeline-activity-7254837976428388352-Ki7x?utm_source=share&amp;utm_medium=member_desktop">Don't use top n variable genes for AI foundation models</a></h3>
-<div class="outline-text-3" id="text-org7e74a5d">
+<div id="outline-container-org8f57d6e" class="outline-3">
+<h3 id="org8f57d6e"><a href="https://www.linkedin.com/posts/tylerjburns_in-a-standard-scrna-seq-analysis-pipeline-activity-7254837976428388352-Ki7x?utm_source=share&amp;utm_medium=member_desktop">Don't use top n variable genes for AI foundation models</a></h3>
+<div class="outline-text-3" id="text-org8f57d6e">
 <p>
 October 23, 2024
 </p>
@@ -2754,14 +2698,14 @@ A jupyter notebook showing my work is linked in the comments. I hope you all hav
 </p>
 
 
-<div id="org1333fc7" class="figure">
+<div id="org83e5f67" class="figure">
 <p><img src="images/variable_genes_foundation_model.png" alt="variable_genes_foundation_model.png" />
 </p>
 </div>
 </div>
-<div id="outline-container-org8e72c61" class="outline-4">
-<h4 id="org8e72c61">comment</h4>
-<div class="outline-text-4" id="text-org8e72c61">
+<div id="outline-container-org3ac2686" class="outline-4">
+<h4 id="org3ac2686">comment</h4>
+<div class="outline-text-4" id="text-org3ac2686">
 <p>
 Jupyter notebook detailing my work: <a href="https://tjburns08.github.io/compare_full_vs_filtered_uce.html">https://tjburns08.github.io/compare_full_vs_filtered_uce.html</a>
 </p>
@@ -2776,9 +2720,9 @@ Note: a pre-processing step in the UCE pipeline reduced the 1838 genes I took ou
 </div>
 </div>
 </div>
-<div id="outline-container-org0aae323" class="outline-3">
-<h3 id="org0aae323"><a href="https://www.linkedin.com/posts/tylerjburns_i-test-drove-a-single-cell-ai-foundation-activity-7252303573709938688-MCZ5?utm_source=share&amp;utm_medium=member_desktop">Test drive of single-cell AI foundation model</a></h3>
-<div class="outline-text-3" id="text-org0aae323">
+<div id="outline-container-org300b567" class="outline-3">
+<h3 id="org300b567"><a href="https://www.linkedin.com/posts/tylerjburns_i-test-drove-a-single-cell-ai-foundation-activity-7252303573709938688-MCZ5?utm_source=share&amp;utm_medium=member_desktop">Test drive of single-cell AI foundation model</a></h3>
+<div class="outline-text-3" id="text-org300b567">
 <p>
 October 16, 2024
 </p>
@@ -2847,9 +2791,9 @@ I hope you all have a great day.
 
 <img src="images/knn_sleepwalk_3k_10k_labeled_3.gif"/>
 </div>
-<div id="outline-container-org8fc0649" class="outline-4">
-<h4 id="org8fc0649">comment</h4>
-<div class="outline-text-4" id="text-org8fc0649">
+<div id="outline-container-org7e3111d" class="outline-4">
+<h4 id="org7e3111d">comment</h4>
+<div class="outline-text-4" id="text-org7e3111d">
 <p>
 My jupyter notebook: <a href="https://tjburns08.github.io/explore_uce_output_3k_10k.html">https://tjburns08.github.io/explore_uce_output_3k_10k.html</a>
 </p>
@@ -2868,9 +2812,9 @@ Universal Cell Embeddings: <a href="https://www.biorxiv.org/content/10.1101/2023
 </div>
 </div>
 </div>
-<div id="outline-container-org4930742" class="outline-3">
-<h3 id="org4930742"><a href="https://www.linkedin.com/posts/tylerjburns_keeping-ahead-of-the-single-cell-foundation-activity-7287119420181680128-oxJk?utm_source=share&amp;utm_medium=member_desktop">Keeping ahead of the single-cell foundation model literature with GitHub's "awesome" page</a></h3>
-<div class="outline-text-3" id="text-org4930742">
+<div id="outline-container-org45542e7" class="outline-3">
+<h3 id="org45542e7"><a href="https://www.linkedin.com/posts/tylerjburns_keeping-ahead-of-the-single-cell-foundation-activity-7287119420181680128-oxJk?utm_source=share&amp;utm_medium=member_desktop">Keeping ahead of the single-cell foundation model literature with GitHub's "awesome" page</a></h3>
+<div class="outline-text-3" id="text-org45542e7">
 <p>
 January 20, 2025
 </p>
@@ -2947,9 +2891,9 @@ In short, foundation models are rapidly developing in single-cell genomics. If y
 <img src="images/awesome_single_cell_foundation_model_lit.png" alt="awesome_single_cell_foundation_model_lit.png" />
 </p>
 </div>
-<div id="outline-container-org83f4d47" class="outline-4">
-<h4 id="org83f4d47">comment</h4>
-<div class="outline-text-4" id="text-org83f4d47">
+<div id="outline-container-org7b70338" class="outline-4">
+<h4 id="org7b70338">comment</h4>
+<div class="outline-text-4" id="text-org7b70338">
 <p>
 The GitHub page: <a href="https://github.com/OmicsML/awesome-foundation-model-single-cell-papers?tab=readme-ov-file">https://github.com/OmicsML/awesome-foundation-model-single-cell-papers?tab=readme-ov-file</a>
 </p>
@@ -2975,17 +2919,17 @@ There are a handful of concepts here that intersect with stuff any single-cell r
 </div>
 </div>
 
-<div id="outline-container-org5fa9f4d" class="outline-2">
-<h2 id="org5fa9f4d">Spatial, Multimodal, And Assay Design</h2>
-<div class="outline-text-2" id="text-org5fa9f4d">
+<div id="outline-container-org9086b69" class="outline-2">
+<h2 id="org9086b69">Spatial, Multimodal, And Assay Design</h2>
+<div class="outline-text-2" id="text-org9086b69">
 <a href="#top">Back to top</a>
 <p>
 Posts on spatial assays, multimodal integration, panel design, segmentation, deconvolution, and cross-platform analysis.
 </p>
 </div>
-<div id="outline-container-org51c7c8d" class="outline-3">
-<h3 id="org51c7c8d"><a href="https://www.linkedin.com/posts/tylerjburns_essb2025-spatialbiology-embl-activity-7386022173758386177-h9VB?utm_source=share&amp;utm_medium=member_desktop&amp;rcm=ACoAAAbP8M8BYXs_UknoBHnmw2rZ-aRDTJF7L3Y">Thoughts about ESSB 2025</a></h3>
-<div class="outline-text-3" id="text-org51c7c8d">
+<div id="outline-container-orga4cc512" class="outline-3">
+<h3 id="orga4cc512"><a href="https://www.linkedin.com/posts/tylerjburns_essb2025-spatialbiology-embl-activity-7386022173758386177-h9VB?utm_source=share&amp;utm_medium=member_desktop&amp;rcm=ACoAAAbP8M8BYXs_UknoBHnmw2rZ-aRDTJF7L3Y">Thoughts about ESSB 2025</a></h3>
+<div class="outline-text-3" id="text-orga4cc512">
 <p>
 October 20, 2025
 </p>
@@ -3043,15 +2987,15 @@ There is absolutely a gap between what you learn at conferences, versus what sho
 </p>
 
 
-<div id="org6280a5d" class="figure">
+<div id="org9b035c5" class="figure">
 <p><img src="images/essb_pics.png" alt="essb_pics.png" />
 </p>
 </div>
 </div>
 </div>
-<div id="outline-container-org32d49a7" class="outline-3">
-<h3 id="org32d49a7"><a href="https://www.linkedin.com/posts/tylerjburns_for-spatial-transcriptomics-data-cell-segmentation-activity-7234553712344465410-NxRX?utm_source=share&amp;utm_medium=member_desktop">Cell segmentation size matters for spatial transcriptomics</a></h3>
-<div class="outline-text-3" id="text-org32d49a7">
+<div id="outline-container-org8d39188" class="outline-3">
+<h3 id="org8d39188"><a href="https://www.linkedin.com/posts/tylerjburns_for-spatial-transcriptomics-data-cell-segmentation-activity-7234553712344465410-NxRX?utm_source=share&amp;utm_medium=member_desktop">Cell segmentation size matters for spatial transcriptomics</a></h3>
+<div class="outline-text-3" id="text-org8d39188">
 <p>
 August 28, 2024
 </p>
@@ -3097,15 +3041,15 @@ Link to <a href="https://www.biorxiv.org/content/10.1101/2024.01.11.575135v1">pa
 </p>
 
 
-<div id="org2b56b17" class="figure">
+<div id="org4cd882a" class="figure">
 <p><img src="images/segmentation_size.png" alt="segmentation_size.png" />
 </p>
 </div>
 </div>
 </div>
-<div id="outline-container-org0eb8363" class="outline-3">
-<h3 id="org0eb8363"><a href="https://www.linkedin.com/posts/tylerjburns_single-cell-protein-data-can-take-many-forms-activity-7166098906634829824-3aSF?utm_source=share&amp;utm_medium=member_desktop">Data integration using CyCombine</a></h3>
-<div class="outline-text-3" id="text-org0eb8363">
+<div id="outline-container-orgca2e51e" class="outline-3">
+<h3 id="orgca2e51e"><a href="https://www.linkedin.com/posts/tylerjburns_single-cell-protein-data-can-take-many-forms-activity-7166098906634829824-3aSF?utm_source=share&amp;utm_medium=member_desktop">Data integration using CyCombine</a></h3>
+<div class="outline-text-3" id="text-orgca2e51e">
 <p>
 February 21, 2024
 </p>
@@ -3128,9 +3072,9 @@ To sum things up, there is good work being done in this space, and we should be 
 </p>
 </div>
 </div>
-<div id="outline-container-org121a9e9" class="outline-3">
-<h3 id="org121a9e9"><a href="https://www.linkedin.com/posts/tylerjburns_leaders-using-single-cell-tech-do-you-have-activity-7164260356083716096-0S0M?utm_source=share&amp;utm_medium=member_desktop">Bridge integration</a></h3>
-<div class="outline-text-3" id="text-org121a9e9">
+<div id="outline-container-org05196b4" class="outline-3">
+<h3 id="org05196b4"><a href="https://www.linkedin.com/posts/tylerjburns_leaders-using-single-cell-tech-do-you-have-activity-7164260356083716096-0S0M?utm_source=share&amp;utm_medium=member_desktop">Bridge integration</a></h3>
+<div class="outline-text-3" id="text-org05196b4">
 <p>
 February 16, 2024
 </p>
@@ -3156,15 +3100,15 @@ Links to the paper and Seurat code in the comments below.
 </p>
 
 
-<div id="org1ca21ed" class="figure">
+<div id="orgd6004a3" class="figure">
 <p><img src="images/bridge_integration.jpeg" alt="bridge_integration.jpeg" />
 </p>
 </div>
 </div>
 </div>
-<div id="outline-container-orga9e38b8" class="outline-3">
-<h3 id="orga9e38b8"><a href="https://www.linkedin.com/posts/tylerjburns_hack-you-can-run-scrna-seq-data-inside-omiq-activity-7376963107434250240-CA6f?utm_source=share&amp;utm_medium=member_desktop&amp;rcm=ACoAAAbP8M8BYXs_UknoBHnmw2rZ-aRDTJF7L3Y">Doing single-cell sequencing analysis in OMIQ</a></h3>
-<div class="outline-text-3" id="text-orga9e38b8">
+<div id="outline-container-org43547f1" class="outline-3">
+<h3 id="org43547f1"><a href="https://www.linkedin.com/posts/tylerjburns_hack-you-can-run-scrna-seq-data-inside-omiq-activity-7376963107434250240-CA6f?utm_source=share&amp;utm_medium=member_desktop&amp;rcm=ACoAAAbP8M8BYXs_UknoBHnmw2rZ-aRDTJF7L3Y">Doing single-cell sequencing analysis in OMIQ</a></h3>
+<div class="outline-text-3" id="text-org43547f1">
 <p>
 September 25, 2025
 </p>
@@ -3228,23 +3172,23 @@ Thank you and I hope you all have a great day.
 </p>
 
 
-<div id="org7abf88b" class="figure">
+<div id="orgef723e2" class="figure">
 <p><img src="images/sc_seq_with_omiq.png" alt="sc_seq_with_omiq.png" />
 </p>
 </div>
 </div>
-<div id="outline-container-org0693287" class="outline-4">
-<h4 id="org0693287">comment</h4>
-<div class="outline-text-4" id="text-org0693287">
+<div id="outline-container-orgcc1e295" class="outline-4">
+<h4 id="orgcc1e295">comment</h4>
+<div class="outline-text-4" id="text-orgcc1e295">
 <p>
 The opposite is also possible, running flow/mass cytometry data in Seurat. If you want to see how I was able to do that, please look at my R Markdown here: <a href="https://tjburns08.github.io/run_cytof_with_seurat.html">https://tjburns08.github.io/run_cytof_with_seurat.html</a>
 </p>
 </div>
 </div>
 </div>
-<div id="outline-container-org68caff2" class="outline-3">
-<h3 id="org68caff2"><a href="https://www.linkedin.com/posts/tylerjburns_spatial-omics-analysis-is-complicated-but-activity-7310656950818496512-9D5a?utm_source=share&amp;utm_medium=member_desktop&amp;rcm=ACoAAAbP8M8BYXs_UknoBHnmw2rZ-aRDTJF7L3Y">Neighbor graphs in spatial analysis</a></h3>
-<div class="outline-text-3" id="text-org68caff2">
+<div id="outline-container-orgfa65daa" class="outline-3">
+<h3 id="orgfa65daa"><a href="https://www.linkedin.com/posts/tylerjburns_spatial-omics-analysis-is-complicated-but-activity-7310656950818496512-9D5a?utm_source=share&amp;utm_medium=member_desktop&amp;rcm=ACoAAAbP8M8BYXs_UknoBHnmw2rZ-aRDTJF7L3Y">Neighbor graphs in spatial analysis</a></h3>
+<div class="outline-text-3" id="text-orgfa65daa">
 <p>
 March 26, 2025
 </p>
@@ -3306,14 +3250,14 @@ If you want to talk to me more about any of this stuff, just send a DM. If you'v
 </p>
 
 
-<div id="orgeae651b" class="figure">
+<div id="org2fbbf74" class="figure">
 <p><img src="images/neighbor_graphs_spatial.png" alt="neighbor_graphs_spatial.png" />
 </p>
 </div>
 </div>
-<div id="outline-container-orgbe4be17" class="outline-4">
-<h4 id="orgbe4be17">comment</h4>
-<div class="outline-text-4" id="text-orgbe4be17">
+<div id="outline-container-orgd0f4dbf" class="outline-4">
+<h4 id="orgd0f4dbf">comment</h4>
+<div class="outline-text-4" id="text-orgd0f4dbf">
 <p>
 Giotto paper is here: <a href="https://genomebiology.biomedcentral.com/articles/10.1186/s13059-021-02286-2">https://genomebiology.biomedcentral.com/articles/10.1186/s13059-021-02286-2</a>
 Giotto suite paper is here: <a href="https://www.biorxiv.org/content/10.1101/2023.11.26.568752v1.full.pdf">https://www.biorxiv.org/content/10.1101/2023.11.26.568752v1.full.pdf</a>
@@ -3321,9 +3265,9 @@ Giotto suite paper is here: <a href="https://www.biorxiv.org/content/10.1101/202
 </div>
 </div>
 </div>
-<div id="outline-container-orgcff92cf" class="outline-3">
-<h3 id="orgcff92cf"><a href="https://www.linkedin.com/posts/tylerjburns_in-bioinformatics-sometimes-the-simple-solution-activity-7247585445658685440-aIzc?utm_source=share&amp;utm_medium=member_desktop">Sometimes the simple solution is good enough</a></h3>
-<div class="outline-text-3" id="text-orgcff92cf">
+<div id="outline-container-orgdfb4104" class="outline-3">
+<h3 id="orgdfb4104"><a href="https://www.linkedin.com/posts/tylerjburns_in-bioinformatics-sometimes-the-simple-solution-activity-7247585445658685440-aIzc?utm_source=share&amp;utm_medium=member_desktop">Sometimes the simple solution is good enough</a></h3>
+<div class="outline-text-3" id="text-orgdfb4104">
 <p>
 October 3, 2024
 </p>
@@ -3381,23 +3325,23 @@ I hope you all have a great day.
 </p>
 
 
-<div id="org94e08e4" class="figure">
+<div id="org8328408" class="figure">
 <p><img src="images/visium_deconvolution.jpeg" alt="visium_deconvolution.jpeg" />
 </p>
 </div>
 </div>
-<div id="outline-container-org011f8f9" class="outline-4">
-<h4 id="org011f8f9">comment</h4>
-<div class="outline-text-4" id="text-org011f8f9">
+<div id="outline-container-org00b8103" class="outline-4">
+<h4 id="org00b8103">comment</h4>
+<div class="outline-text-4" id="text-org00b8103">
 <p>
 The spatial deconvolution benchmarking paper: <a href="https://elifesciences.org/articles/88431">https://elifesciences.org/articles/88431</a>
 </p>
 </div>
 </div>
 </div>
-<div id="outline-container-org34995db" class="outline-3">
-<h3 id="org34995db"><a href="https://www.linkedin.com/posts/tylerjburns_in-flowmass-cytometry-we-spend-a-lot-of-activity-7245071757269778432-NbjL?utm_source=share&amp;utm_medium=member_desktop">Panel design for Xenium assays</a></h3>
-<div class="outline-text-3" id="text-org34995db">
+<div id="outline-container-org4614540" class="outline-3">
+<h3 id="org4614540"><a href="https://www.linkedin.com/posts/tylerjburns_in-flowmass-cytometry-we-spend-a-lot-of-activity-7245071757269778432-NbjL?utm_source=share&amp;utm_medium=member_desktop">Panel design for Xenium assays</a></h3>
+<div class="outline-text-3" id="text-org4614540">
 <p>
 September 26, 2024
 </p>
@@ -3431,7 +3375,7 @@ But until this is widespread and widely validated, I would budget some time into
 </p>
 
 
-<div id="org81a1a26" class="figure">
+<div id="org1862367" class="figure">
 <p><img src="images/2024-09-26_16-13-19_Screenshot 2024-09-26 at 16.13.14.png" alt="2024-09-26_16-13-19_Screenshot 2024-09-26 at 16.13.14.png" />
 </p>
 </div>
@@ -3439,17 +3383,17 @@ But until this is widespread and widely validated, I would budget some time into
 </div>
 </div>
 
-<div id="outline-container-org3ff04af" class="outline-2">
-<h2 id="org3ff04af">Workflow Reliability, QC, And Reproducibility</h2>
-<div class="outline-text-2" id="text-org3ff04af">
+<div id="outline-container-orga16b01d" class="outline-2">
+<h2 id="orga16b01d">Workflow Reliability, QC, And Reproducibility</h2>
+<div class="outline-text-2" id="text-orga16b01d">
 <a href="#top">Back to top</a>
 <p>
 Posts about provenance, file formats, QC, integration mistakes, reproducibility, and building workflows that make failure modes visible.
 </p>
 </div>
-<div id="outline-container-org6142aa4" class="outline-3">
-<h3 id="org6142aa4"><a href="https://www.linkedin.com/posts/tylerjburns_in-light-of-recent-work-i-am-doing-that-requires-activity-7285315114067517440-tGpT?utm_source=share&amp;utm_medium=member_desktop">Reproducibility of Jupyter notebooks from biomedical publications</a></h3>
-<div class="outline-text-3" id="text-org6142aa4">
+<div id="outline-container-org7fdbe3d" class="outline-3">
+<h3 id="org7fdbe3d"><a href="https://www.linkedin.com/posts/tylerjburns_in-light-of-recent-work-i-am-doing-that-requires-activity-7285315114067517440-tGpT?utm_source=share&amp;utm_medium=member_desktop">Reproducibility of Jupyter notebooks from biomedical publications</a></h3>
+<div class="outline-text-3" id="text-org7fdbe3d">
 <p>
 January 15, 2025
 </p>
@@ -3511,14 +3455,14 @@ That's all for now. Happy new year everyone.
 </p>
 
 
-<div id="org5b37afe" class="figure">
+<div id="orge81b17d" class="figure">
 <p><img src="images/jupyter_notebook_paper.png" alt="jupyter_notebook_paper.png" />
 </p>
 </div>
 </div>
-<div id="outline-container-orga2cfe6e" class="outline-4">
-<h4 id="orga2cfe6e">comment</h4>
-<div class="outline-text-4" id="text-orga2cfe6e">
+<div id="outline-container-orgd9c17be" class="outline-4">
+<h4 id="orgd9c17be">comment</h4>
+<div class="outline-text-4" id="text-orgd9c17be">
 <p>
 The link to the paper is here: <a href="https://academic.oup.com/gigascience/article/doi/10.1093/gigascience/giad113/7516267#493978474">https://academic.oup.com/gigascience/article/doi/10.1093/gigascience/giad113/7516267#493978474</a>
 </p>
@@ -3529,9 +3473,9 @@ And thanks to Mike Leipold for finding this paper and sending it over.
 </div>
 </div>
 </div>
-<div id="outline-container-orgbbd6558" class="outline-3">
-<h3 id="orgbbd6558"><a href="https://www.linkedin.com/posts/tylerjburns_life-science-leaders-using-flowmass-cytometry-activity-7161731050065408000-LN_D?utm_source=share&amp;utm_medium=member_desktop">Flow/CyTOF users could take a page from the best practices in single-cell sequencing</a></h3>
-<div class="outline-text-3" id="text-orgbbd6558">
+<div id="outline-container-org42f9dd5" class="outline-3">
+<h3 id="org42f9dd5"><a href="https://www.linkedin.com/posts/tylerjburns_life-science-leaders-using-flowmass-cytometry-activity-7161731050065408000-LN_D?utm_source=share&amp;utm_medium=member_desktop">Flow/CyTOF users could take a page from the best practices in single-cell sequencing</a></h3>
+<div class="outline-text-3" id="text-org42f9dd5">
 <p>
 February 9, 2024
 </p>
@@ -3572,15 +3516,15 @@ I'll acknowledge that there are differences between the fields that may impact w
 </p>
 
 
-<div id="org45e3c11" class="figure">
+<div id="org1979756" class="figure">
 <p><img src="images/single_cell_best_practices.jpeg" alt="single_cell_best_practices.jpeg" />
 </p>
 </div>
 </div>
 </div>
-<div id="outline-container-org0e46c37" class="outline-3">
-<h3 id="org0e46c37"><a href="https://www.linkedin.com/posts/tylerjburns_hi-friends-i-wrote-a-guest-post-for-lamin-activity-7445459712386514944-wU4s?utm_source=share&amp;utm_medium=member_desktop&amp;rcm=ACoAAAbP8M8BYXs_UknoBHnmw2rZ-aRDTJF7L3Y">Guest blog post: an introduction to LaminR</a></h3>
-<div class="outline-text-3" id="text-org0e46c37">
+<div id="outline-container-org5d3c6c3" class="outline-3">
+<h3 id="org5d3c6c3"><a href="https://www.linkedin.com/posts/tylerjburns_hi-friends-i-wrote-a-guest-post-for-lamin-activity-7445459712386514944-wU4s?utm_source=share&amp;utm_medium=member_desktop&amp;rcm=ACoAAAbP8M8BYXs_UknoBHnmw2rZ-aRDTJF7L3Y">Guest blog post: an introduction to LaminR</a></h3>
+<div class="outline-text-3" id="text-org5d3c6c3">
 <p>
 April 2, 2026
 </p>
@@ -3607,9 +3551,9 @@ Thanks to Luke Zappia, Robrecht Cannoodt, and Alex Wolf for collaborating on thi
 </p>
 </div>
 </div>
-<div id="outline-container-org9617fbd" class="outline-3">
-<h3 id="org9617fbd"><a href="https://www.linkedin.com/posts/tylerjburns_fcs-files-outputted-by-flow-and-mass-cytometers-activity-7404524653811056640-jaOW?utm_source=share&amp;utm_medium=member_desktop&amp;rcm=ACoAAAbP8M8BYXs_UknoBHnmw2rZ-aRDTJF7L3Y">Byte order matters when reading in fcs files</a></h3>
-<div class="outline-text-3" id="text-org9617fbd">
+<div id="outline-container-org4452389" class="outline-3">
+<h3 id="org4452389"><a href="https://www.linkedin.com/posts/tylerjburns_fcs-files-outputted-by-flow-and-mass-cytometers-activity-7404524653811056640-jaOW?utm_source=share&amp;utm_medium=member_desktop&amp;rcm=ACoAAAbP8M8BYXs_UknoBHnmw2rZ-aRDTJF7L3Y">Byte order matters when reading in fcs files</a></h3>
+<div class="outline-text-3" id="text-org4452389">
 <p>
 December 10, 2025
 </p>
@@ -3671,15 +3615,15 @@ Thank you, and I hope you all have a great day.
 </p>
 
 
-<div id="org43877de" class="figure">
+<div id="org4e8f0d6" class="figure">
 <p><img src="images/byte_order_matters.png" alt="byte_order_matters.png" />
 </p>
 </div>
 </div>
 </div>
-<div id="outline-container-org2e65c4b" class="outline-3">
-<h3 id="org2e65c4b"><a href="https://www.linkedin.com/posts/tylerjburns_case-study-an-issue-with-a-bulk-sequencing-activity-7333478597971603456-370y?utm_source=share&amp;utm_medium=member_desktop&amp;rcm=ACoAAAbP8M8BYXs_UknoBHnmw2rZ-aRDTJF7L3Y">The need for wet lab and dry lab integration</a></h3>
-<div class="outline-text-3" id="text-org2e65c4b">
+<div id="outline-container-org5cf3ab9" class="outline-3">
+<h3 id="org5cf3ab9"><a href="https://www.linkedin.com/posts/tylerjburns_case-study-an-issue-with-a-bulk-sequencing-activity-7333478597971603456-370y?utm_source=share&amp;utm_medium=member_desktop&amp;rcm=ACoAAAbP8M8BYXs_UknoBHnmw2rZ-aRDTJF7L3Y">The need for wet lab and dry lab integration</a></h3>
+<div class="outline-text-3" id="text-org5cf3ab9">
 <p>
 May 28, 2025
 </p>
@@ -3714,15 +3658,15 @@ Thank you and I hope you all have a great day.
 </p>
 
 
-<div id="org8ef9e95" class="figure">
+<div id="orgc56e1d8" class="figure">
 <p><img src=":images/wet_lab_dry_lab.png" alt="wet_lab_dry_lab.png" />
 </p>
 </div>
 </div>
 </div>
-<div id="outline-container-org852f898" class="outline-3">
-<h3 id="org852f898"><a href="https://www.linkedin.com/posts/tylerjburns_plenty-of-people-are-talking-about-automation-activity-7242885831139487746-7NxH?utm_source=share&amp;utm_medium=member_desktop">Build automation with user paranoia in mind</a></h3>
-<div class="outline-text-3" id="text-org852f898">
+<div id="outline-container-org21d6811" class="outline-3">
+<h3 id="org21d6811"><a href="https://www.linkedin.com/posts/tylerjburns_plenty-of-people-are-talking-about-automation-activity-7242885831139487746-7NxH?utm_source=share&amp;utm_medium=member_desktop">Build automation with user paranoia in mind</a></h3>
+<div class="outline-text-3" id="text-org21d6811">
 <p>
 September 20, 2024
 </p>
@@ -3744,14 +3688,14 @@ So embrace the paranoia of the users, learn about it, and speak to it as you bui
 </p>
 
 
-<div id="org45c6600" class="figure">
+<div id="orgd73fd40" class="figure">
 <p><img src="images/bioinformatics_automation_paranoia.jpeg" alt="bioinformatics_automation_paranoia.jpeg" />
 </p>
 </div>
 </div>
-<div id="outline-container-org843e97e" class="outline-4">
-<h4 id="org843e97e">comment</h4>
-<div class="outline-text-4" id="text-org843e97e">
+<div id="outline-container-org21d0140" class="outline-4">
+<h4 id="org21d0140">comment</h4>
+<div class="outline-text-4" id="text-org21d0140">
 <p>
 I think that the spotlight on paranoia in my post resonates with a broader field, that may become increasingly relevant: explainable AI (XAI).
 </p>
@@ -3778,9 +3722,9 @@ In section 2.3.1 of a 2024 review by Longo and colleagues (<a href="https://www.
 </div>
 </div>
 </div>
-<div id="outline-container-org7e7621a" class="outline-3">
-<h3 id="org7e7621a"><a href="https://www.linkedin.com/posts/tylerjburns_the-following-is-a-warning-for-biologists-activity-7085200486697443330-Zzbc?utm_source=share&amp;utm_medium=member_desktop">Single-cell sequencing analysis: don't forget to integrate your data</a></h3>
-<div class="outline-text-3" id="text-org7e7621a">
+<div id="outline-container-org846732e" class="outline-3">
+<h3 id="org846732e"><a href="https://www.linkedin.com/posts/tylerjburns_the-following-is-a-warning-for-biologists-activity-7085200486697443330-Zzbc?utm_source=share&amp;utm_medium=member_desktop">Single-cell sequencing analysis: don't forget to integrate your data</a></h3>
+<div class="outline-text-3" id="text-org846732e">
 <p>
 July 13, 2023
 </p>
@@ -3806,29 +3750,29 @@ For bioinformaticians and those interested in going deeper, the vignette is here
 </p>
 
 
-<div id="orge253b53" class="figure">
+<div id="orgbb8de94" class="figure">
 <p><img src="images/integrate_your_data.jpeg" alt="integrate_your_data.jpeg" />
 </p>
 </div>
 </div>
 </div>
-<div id="outline-container-orgea7d936" class="outline-3">
-<h3 id="orgea7d936"><a href="https://www.linkedin.com/posts/tylerjburns_activity-7045080240515076096-kXLl?utm_source=share&amp;utm_medium=member_desktop">Survey: QC gives people the most headache in a flow/CyTOF data analysis pipeline</a></h3>
-<div class="outline-text-3" id="text-orgea7d936">
+<div id="outline-container-org92b45b5" class="outline-3">
+<h3 id="org92b45b5"><a href="https://www.linkedin.com/posts/tylerjburns_activity-7045080240515076096-kXLl?utm_source=share&amp;utm_medium=member_desktop">Survey: QC gives people the most headache in a flow/CyTOF data analysis pipeline</a></h3>
+<div class="outline-text-3" id="text-org92b45b5">
 <p>
 March 24, 2023
 </p>
 
 
-<div id="orgf681c25" class="figure">
+<div id="orgffe466f" class="figure">
 <p><img src="images/analysis_headache.png" alt="analysis_headache.png" />
 </p>
 </div>
 </div>
 </div>
-<div id="outline-container-orga8a6e42" class="outline-3">
-<h3 id="orga8a6e42"><a href="https://www.linkedin.com/posts/tylerjburns_cytof-users-we-use-the-asinh-transform-activity-7009180881546321922-y5qH?utm_source=share&amp;utm_medium=member_desktop">Pictures of different data transforms for CyTOF</a></h3>
-<div class="outline-text-3" id="text-orga8a6e42">
+<div id="outline-container-orgd19929f" class="outline-3">
+<h3 id="orgd19929f"><a href="https://www.linkedin.com/posts/tylerjburns_cytof-users-we-use-the-asinh-transform-activity-7009180881546321922-y5qH?utm_source=share&amp;utm_medium=member_desktop">Pictures of different data transforms for CyTOF</a></h3>
+<div class="outline-text-3" id="text-orgd19929f">
 <p>
 December 15, 2022
 </p>
@@ -3838,7 +3782,7 @@ CyTOF users: we use the asinh transform, but is that the only one that works? Ho
 </p>
 
 
-<div id="org068c83f" class="figure">
+<div id="org7e5d20b" class="figure">
 <p><img src="images/data_transformation.jpeg" alt="data_transformation.jpeg" />
 </p>
 </div>
@@ -3846,17 +3790,17 @@ CyTOF users: we use the asinh transform, but is that the only one that works? Ho
 </div>
 </div>
 
-<div id="outline-container-orgfb24f8e" class="outline-2">
-<h2 id="orgfb24f8e">Teaching Bioinformatics And Computational Thinking</h2>
-<div class="outline-text-2" id="text-orgfb24f8e">
+<div id="outline-container-orgb184331" class="outline-2">
+<h2 id="orgb184331">Teaching Bioinformatics And Computational Thinking</h2>
+<div class="outline-text-2" id="text-orgb184331">
 <a href="#top">Back to top</a>
 <p>
 Posts about teaching bioinformatics, learning to code from a biology background, and developing the mental models needed for computational work.
 </p>
 </div>
-<div id="outline-container-orgc5679f0" class="outline-3">
-<h3 id="orgc5679f0"><a href="https://www.linkedin.com/posts/tylerjburns_turn-the-knobs-see-how-the-output-changes-activity-7367177068553461761-yPpK?utm_source=share&amp;utm_medium=member_desktop&amp;rcm=ACoAAAbP8M8BYXs_UknoBHnmw2rZ-aRDTJF7L3Y">Scanpy analysis intuition building app</a></h3>
-<div class="outline-text-3" id="text-orgc5679f0">
+<div id="outline-container-org4cf1f51" class="outline-3">
+<h3 id="org4cf1f51"><a href="https://www.linkedin.com/posts/tylerjburns_turn-the-knobs-see-how-the-output-changes-activity-7367177068553461761-yPpK?utm_source=share&amp;utm_medium=member_desktop&amp;rcm=ACoAAAbP8M8BYXs_UknoBHnmw2rZ-aRDTJF7L3Y">Scanpy analysis intuition building app</a></h3>
+<div class="outline-text-3" id="text-org4cf1f51">
 <p>
 August 29, 2025
 </p>
@@ -3906,14 +3850,14 @@ Link to the app is in the comments below. Credit to Arianna Aalami for fleshing 
 </p>
 
 
-<div id="org593b5a9" class="figure">
+<div id="orgc27fc93" class="figure">
 <p><img src="images/scanpy_app_demo.gif" alt="scanpy_app_demo.gif" />
 </p>
 </div>
 </div>
-<div id="outline-container-org251d9c4" class="outline-4">
-<h4 id="org251d9c4">comment</h4>
-<div class="outline-text-4" id="text-org251d9c4">
+<div id="outline-container-orgb725c4e" class="outline-4">
+<h4 id="orgb725c4e">comment</h4>
+<div class="outline-text-4" id="text-orgb725c4e">
 <p>
 The GitHub link to the project is here: <a href="https://github.com/ariannaaalami/interactive_scanpy_pipeline">https://github.com/ariannaaalami/interactive_scanpy_pipeline</a>
 </p>
@@ -3924,9 +3868,9 @@ I managed to host it on Plotly Cloud (I'm an early access member), though the li
 </div>
 </div>
 </div>
-<div id="outline-container-org5eea5b1" class="outline-3">
-<h3 id="org5eea5b1"><a href="https://www.linkedin.com/posts/tylerjburns_here-is-a-post-i-wrote-for-biologists-and-activity-7090282332749717504-XTkW?utm_source=share&amp;utm_medium=member_desktop">How I went from biologist to biology-leveraged bioinformatician</a></h3>
-<div class="outline-text-3" id="text-org5eea5b1">
+<div id="outline-container-org14041ab" class="outline-3">
+<h3 id="org14041ab"><a href="https://www.linkedin.com/posts/tylerjburns_here-is-a-post-i-wrote-for-biologists-and-activity-7090282332749717504-XTkW?utm_source=share&amp;utm_medium=member_desktop">How I went from biologist to biology-leveraged bioinformatician</a></h3>
+<div class="outline-text-3" id="text-org14041ab">
 <p>
 July 27, 2023
 </p>
@@ -3949,9 +3893,9 @@ Have a look here for more insights and depth: <a href="https://lnkd.in/eQ-2BvNn"
 </p>
 </div>
 </div>
-<div id="outline-container-org988f60d" class="outline-3">
-<h3 id="org988f60d"><a href="https://www.linkedin.com/posts/tylerjburns_my-survey-has-revealed-that-the-act-of-problem-activity-7193215772448505858-tK7P?utm_source=share&amp;utm_medium=member_desktop">Problem solving as a bottleneck to learning how to code</a></h3>
-<div class="outline-text-3" id="text-org988f60d">
+<div id="outline-container-org7e68280" class="outline-3">
+<h3 id="org7e68280"><a href="https://www.linkedin.com/posts/tylerjburns_my-survey-has-revealed-that-the-act-of-problem-activity-7193215772448505858-tK7P?utm_source=share&amp;utm_medium=member_desktop">Problem solving as a bottleneck to learning how to code</a></h3>
+<div class="outline-text-3" id="text-org7e68280">
 <p>
 May 6, 2024
 </p>
@@ -3990,9 +3934,9 @@ More resources in the comments below.
 </p>
 </div>
 </div>
-<div id="outline-container-orgff220f8" class="outline-3">
-<h3 id="orgff220f8"><a href="https://www.linkedin.com/posts/tylerjburns_this-image-is-romanesco-broccoli-i-came-activity-7191860234095640576-rGEH?utm_source=share&amp;utm_medium=member_desktop">Learning how to code has improved how I think</a></h3>
-<div class="outline-text-3" id="text-orgff220f8">
+<div id="outline-container-orgc54c43a" class="outline-3">
+<h3 id="orgc54c43a"><a href="https://www.linkedin.com/posts/tylerjburns_this-image-is-romanesco-broccoli-i-came-activity-7191860234095640576-rGEH?utm_source=share&amp;utm_medium=member_desktop">Learning how to code has improved how I think</a></h3>
+<div class="outline-text-3" id="text-orgc54c43a">
 <p>
 May 2, 2024
 </p>
@@ -4030,15 +3974,15 @@ The article is <a href="https://tjburns08.github.io/coding_as_philosophical_proj
 </p>
 
 
-<div id="org72dcd98" class="figure">
+<div id="orge065061" class="figure">
 <p><img src="images/romanesco_broccoli.jpeg" alt="romanesco_broccoli.jpeg" />
 </p>
 </div>
 </div>
 </div>
-<div id="outline-container-org3403b73" class="outline-3">
-<h3 id="org3403b73"><a href="https://www.linkedin.com/posts/tylerjburns_my-survey-has-already-revealed-that-a-large-activity-7189597924899643392-HXOM?utm_source=share&amp;utm_medium=member_desktop">Biologists becoming bioinformaticians are having the hardest time learning how to code</a></h3>
-<div class="outline-text-3" id="text-org3403b73">
+<div id="outline-container-org932ebef" class="outline-3">
+<h3 id="org932ebef"><a href="https://www.linkedin.com/posts/tylerjburns_my-survey-has-already-revealed-that-a-large-activity-7189597924899643392-HXOM?utm_source=share&amp;utm_medium=member_desktop">Biologists becoming bioinformaticians are having the hardest time learning how to code</a></h3>
+<div class="outline-text-3" id="text-org932ebef">
 <p>
 April 26, 2024
 </p>
@@ -4072,15 +4016,15 @@ I remember what it feels like to be a wet-lab biologist and be totally overwhelm
 </p>
 
 
-<div id="org09386b5" class="figure">
+<div id="org11b13e9" class="figure">
 <p><img src="images/bioinformatics_learning_biggest_hangups.jpeg" alt="bioinformatics_learning_biggest_hangups.jpeg" />
 </p>
 </div>
 </div>
 </div>
-<div id="outline-container-org8021af4" class="outline-3">
-<h3 id="org8021af4"><a href="https://www.linkedin.com/posts/tylerjburns_bioinformatics-bigdata-collaboration-activity-7177394725853741056-W1of?utm_source=share&amp;utm_medium=member_desktop">Recap on teaching engagement with Zamora Lab at MCW</a></h3>
-<div class="outline-text-3" id="text-org8021af4">
+<div id="outline-container-org4890d1d" class="outline-3">
+<h3 id="org4890d1d"><a href="https://www.linkedin.com/posts/tylerjburns_bioinformatics-bigdata-collaboration-activity-7177394725853741056-W1of?utm_source=share&amp;utm_medium=member_desktop">Recap on teaching engagement with Zamora Lab at MCW</a></h3>
+<div class="outline-text-3" id="text-org4890d1d">
 <p>
 March 23, 2024
 </p>
@@ -4102,15 +4046,15 @@ I saw this first hand with the lab of Anthony Zamora this past week. I spent thr
 </p>
 
 
-<div id="org9c49e0e" class="figure">
+<div id="org06e773d" class="figure">
 <p><img src="images/zamora_lab.jpeg" alt="zamora_lab.jpeg" />
 </p>
 </div>
 </div>
 </div>
-<div id="outline-container-org07c75e7" class="outline-3">
-<h3 id="org07c75e7"><a href="https://www.linkedin.com/posts/tylerjburns_i-am-tired-of-the-phrase-those-who-can-activity-7168606001758257152-5iMu?utm_source=share&amp;utm_medium=member_desktop">Those who can do, do; those who have done, teach</a></h3>
-<div class="outline-text-3" id="text-org07c75e7">
+<div id="outline-container-orgdbcc01b" class="outline-3">
+<h3 id="orgdbcc01b"><a href="https://www.linkedin.com/posts/tylerjburns_i-am-tired-of-the-phrase-those-who-can-activity-7168606001758257152-5iMu?utm_source=share&amp;utm_medium=member_desktop">Those who can do, do; those who have done, teach</a></h3>
+<div class="outline-text-3" id="text-orgdbcc01b">
 <p>
 February 28, 2024
 </p>
@@ -4140,7 +4084,7 @@ If you know anyone who could use this post or my teaching/advice, please share i
 </p>
 
 
-<div id="orgc7c9f02" class="figure">
+<div id="org6401404" class="figure">
 <p><img src="images/have_done_teach.jpeg" alt="have_done_teach.jpeg" />
 </p>
 </div>
@@ -4148,17 +4092,17 @@ If you know anyone who could use this post or my teaching/advice, please share i
 </div>
 </div>
 
-<div id="outline-container-org7c5d8e7" class="outline-2">
-<h2 id="org7c5d8e7">Literature Landscapes And Field Trends</h2>
-<div class="outline-text-2" id="text-org7c5d8e7">
+<div id="outline-container-org9c529c1" class="outline-2">
+<h2 id="org9c529c1">Literature Landscapes And Field Trends</h2>
+<div class="outline-text-2" id="text-org9c529c1">
 <a href="#top">Back to top</a>
 <p>
 Posts that analyze the literature, method provenance, publication trends, and field-level health.
 </p>
 </div>
-<div id="outline-container-org992a18d" class="outline-3">
-<h3 id="org992a18d"><a href="https://www.linkedin.com/posts/tylerjburns_hi-friends-we-have-all-seen-that-the-cytof-activity-7462487719865147392-jh3Y?utm_source=share&amp;utm_medium=member_desktop&amp;rcm=ACoAAAbP8M8BYXs_UknoBHnmw2rZ-aRDTJF7L3Y">Dimensionality reduction provenance app</a></h3>
-<div class="outline-text-3" id="text-org992a18d">
+<div id="outline-container-org627e648" class="outline-3">
+<h3 id="org627e648"><a href="https://www.linkedin.com/posts/tylerjburns_hi-friends-we-have-all-seen-that-the-cytof-activity-7462487719865147392-jh3Y?utm_source=share&amp;utm_medium=member_desktop&amp;rcm=ACoAAAbP8M8BYXs_UknoBHnmw2rZ-aRDTJF7L3Y">Dimensionality reduction provenance app</a></h3>
+<div class="outline-text-3" id="text-org627e648">
 <p>
 May 19, 2026
 </p>
@@ -4195,23 +4139,23 @@ The app is linked in the comments. Please let me know if you have any questions.
 </p>
 
 
-<div id="org3bec81d" class="figure">
+<div id="orgc887bfa" class="figure">
 <p><img src="images/graph_browse_linkedin.gif" alt="graph_browse_linkedin.gif" />
 </p>
 </div>
 </div>
-<div id="outline-container-org4e7b0e5" class="outline-4">
-<h4 id="org4e7b0e5">comment</h4>
-<div class="outline-text-4" id="text-org4e7b0e5">
+<div id="outline-container-org3adff5c" class="outline-4">
+<h4 id="org3adff5c">comment</h4>
+<div class="outline-text-4" id="text-org3adff5c">
 <p>
 Try the app yourself: <a href="https://tjburns08.github.io/dr_provenance_interactive.html">https://tjburns08.github.io/dr_provenance_interactive.html</a>
 </p>
 </div>
 </div>
 </div>
-<div id="outline-container-org15c3350" class="outline-3">
-<h3 id="org15c3350"><a href="https://www.linkedin.com/posts/tylerjburns_if-we-put-2008-as-the-first-cytof-paper-activity-7041804065097281537-nkIM?utm_source=share&amp;utm_medium=member_desktop">IMC vs CyTOF publication rates: surprised IMC is taking off so fast</a></h3>
-<div class="outline-text-3" id="text-org15c3350">
+<div id="outline-container-org653e773" class="outline-3">
+<h3 id="org653e773"><a href="https://www.linkedin.com/posts/tylerjburns_if-we-put-2008-as-the-first-cytof-paper-activity-7041804065097281537-nkIM?utm_source=share&amp;utm_medium=member_desktop">IMC vs CyTOF publication rates: surprised IMC is taking off so fast</a></h3>
+<div class="outline-text-3" id="text-org653e773">
 <p>
 March 15, 2023
 </p>
@@ -4233,15 +4177,15 @@ Some notes:
 <li>Here is the code so you can do it for your own searches: <a href="https://lnkd.in/eBwU_EE9">https://lnkd.in/eBwU_EE9</a></li>
 </ul>
 
-<div id="orga4602f8" class="figure">
+<div id="orge80caec" class="figure">
 <p><img src="images/imc_vs_cytof.jpeg" alt="imc_vs_cytof.jpeg" />
 </p>
 </div>
 </div>
 </div>
-<div id="outline-container-orga40e6cc" class="outline-3">
-<h3 id="orga40e6cc"><a href="https://www.linkedin.com/posts/tylerjburns_spectral-flow-cytometry-is-trending-in-my-activity-7034458560377847809-b2Zj?utm_source=share&amp;utm_medium=member_desktop">Surprisingly few spectral flow cytometry publications despite all the buzz around it</a></h3>
-<div class="outline-text-3" id="text-orga40e6cc">
+<div id="outline-container-org0aac3d0" class="outline-3">
+<h3 id="org0aac3d0"><a href="https://www.linkedin.com/posts/tylerjburns_spectral-flow-cytometry-is-trending-in-my-activity-7034458560377847809-b2Zj?utm_source=share&amp;utm_medium=member_desktop">Surprisingly few spectral flow cytometry publications despite all the buzz around it</a></h3>
+<div class="outline-text-3" id="text-org0aac3d0">
 <p>
 February 23, 2023
 </p>
@@ -4259,15 +4203,15 @@ If you want to know more about the project, please visit my Medium article (2018
 </p>
 
 
-<div id="orgbe6bcdb" class="figure">
+<div id="org164ae28" class="figure">
 <p><img src="images/few_spectral_pubs.jpeg" alt="few_spectral_pubs.jpeg" />
 </p>
 </div>
 </div>
 </div>
-<div id="outline-container-org1abed5c" class="outline-3">
-<h3 id="org1abed5c"><a href="https://www.linkedin.com/posts/tylerjburns_major-data-analysis-errors-invalidate-cancer-activity-7092387938352656385-Cgqv?utm_source=share&amp;utm_medium=member_desktop">My fear that single-cell is in a replication crisis</a></h3>
-<div class="outline-text-3" id="text-org1abed5c">
+<div id="outline-container-orgc2705a3" class="outline-3">
+<h3 id="orgc2705a3"><a href="https://www.linkedin.com/posts/tylerjburns_major-data-analysis-errors-invalidate-cancer-activity-7092387938352656385-Cgqv?utm_source=share&amp;utm_medium=member_desktop">My fear that single-cell is in a replication crisis</a></h3>
+<div class="outline-text-3" id="text-orgc2705a3">
 <p>
 August 2, 2023
 </p>
@@ -4295,17 +4239,17 @@ In short, this is a complicated problem space, with a lot hinging on it. But I h
 </div>
 </div>
 
-<div id="outline-container-org3d17942" class="outline-2">
-<h2 id="org3d17942">Text Embeddings, Social Media, And Information Consumption</h2>
-<div class="outline-text-2" id="text-org3d17942">
+<div id="outline-container-org61d35d7" class="outline-2">
+<h2 id="org61d35d7">Text Embeddings, Social Media, And Information Consumption</h2>
+<div class="outline-text-2" id="text-org61d35d7">
 <a href="#top">Back to top</a>
 <p>
 Posts that use text embeddings, social media scraping, or map-based interfaces to organize writing, news, and online information.
 </p>
 </div>
-<div id="outline-container-orgbfb0dbc" class="outline-3">
-<h3 id="orgbfb0dbc"><a href="https://www.linkedin.com/posts/tylerjburns_ever-wonder-what-regions-of-news-space-activity-7051174977668042752-G0lC?utm_source=share&amp;utm_medium=member_desktop">Spatial embedding of CNN vs FoxNews vs AP using BERT, viewing on UMAP</a></h3>
-<div class="outline-text-3" id="text-orgbfb0dbc">
+<div id="outline-container-orgb6a6d91" class="outline-3">
+<h3 id="orgb6a6d91"><a href="https://www.linkedin.com/posts/tylerjburns_ever-wonder-what-regions-of-news-space-activity-7051174977668042752-G0lC?utm_source=share&amp;utm_medium=member_desktop">Spatial embedding of CNN vs FoxNews vs AP using BERT, viewing on UMAP</a></h3>
+<div class="outline-text-3" id="text-orgb6a6d91">
 <p>
 April 10, 2023
 </p>
@@ -4328,9 +4272,9 @@ If you have any particular use cases, or need help getting this working on your 
 </p>
 </div>
 </div>
-<div id="outline-container-orgf908d37" class="outline-3">
-<h3 id="orgf908d37"><a href="https://www.linkedin.com/posts/tylerjburns_ive-been-trying-to-reduce-the-scrolling-activity-6966053080530350080-BXdK?utm_source=share&amp;utm_medium=member_desktop">Original post around making tweet embeddings: the scrolling problem</a></h3>
-<div class="outline-text-3" id="text-orgf908d37">
+<div id="outline-container-orgbe6fe67" class="outline-3">
+<h3 id="orgbe6fe67"><a href="https://www.linkedin.com/posts/tylerjburns_ive-been-trying-to-reduce-the-scrolling-activity-6966053080530350080-BXdK?utm_source=share&amp;utm_medium=member_desktop">Original post around making tweet embeddings: the scrolling problem</a></h3>
+<div class="outline-text-3" id="text-orgbe6fe67">
 <p>
 August 18, 2022
 </p>
@@ -4349,15 +4293,15 @@ I really hope this helps you too!
 </p>
 
 
-<div id="orgd65be2d" class="figure">
+<div id="orgf7149f1" class="figure">
 <p><img src="images/scrolling_problem.jpeg" alt="scrolling_problem.jpeg" />
 </p>
 </div>
 </div>
 </div>
-<div id="outline-container-org300f3ce" class="outline-3">
-<h3 id="org300f3ce"><a href="https://www.linkedin.com/posts/tylerjburns_i-recently-hit-a-milestone-in-my-personal-activity-7152694472559017985-6KFn?utm_source=share&amp;utm_medium=member_desktop">Recap after writing 1 million words in my journal over 15 years, parsing it with AI</a></h3>
-<div class="outline-text-3" id="text-org300f3ce">
+<div id="outline-container-org42fce0e" class="outline-3">
+<h3 id="org42fce0e"><a href="https://www.linkedin.com/posts/tylerjburns_i-recently-hit-a-milestone-in-my-personal-activity-7152694472559017985-6KFn?utm_source=share&amp;utm_medium=member_desktop">Recap after writing 1 million words in my journal over 15 years, parsing it with AI</a></h3>
+<div class="outline-text-3" id="text-org42fce0e">
 <p>
 January 15, 2024
 </p>
@@ -4379,15 +4323,15 @@ The write-up can be found here: <a href="https://lnkd.in/dFuq8wYY">https://lnkd.
 </p>
 
 
-<div id="org2975226" class="figure">
+<div id="org181ff0f" class="figure">
 <p><img src="images/one_million_words.jpeg" alt="one_million_words.jpeg" />
 </p>
 </div>
 </div>
 </div>
-<div id="outline-container-org85502f6" class="outline-3">
-<h3 id="org85502f6"><a href="https://www.linkedin.com/posts/tylerjburns_the-retweet-to-like-ratio-matters-for-getting-activity-7039541884293128192-xFuf?utm_source=share&amp;utm_medium=member_desktop">Retweet to like ratio of single-cell sequencing tweets</a></h3>
-<div class="outline-text-3" id="text-org85502f6">
+<div id="outline-container-orgc453b1a" class="outline-3">
+<h3 id="orgc453b1a"><a href="https://www.linkedin.com/posts/tylerjburns_the-retweet-to-like-ratio-matters-for-getting-activity-7039541884293128192-xFuf?utm_source=share&amp;utm_medium=member_desktop">Retweet to like ratio of single-cell sequencing tweets</a></h3>
+<div class="outline-text-3" id="text-orgc453b1a">
 <p>
 March 9, 2023
 </p>
@@ -4419,15 +4363,15 @@ If you want to see and look at the tweets in the biaxial yourself (the tweet sho
 </p>
 
 
-<div id="org332d933" class="figure">
+<div id="org33079a2" class="figure">
 <p><img src="images/retweet_to_like.jpeg" alt="retweet_to_like.jpeg" />
 </p>
 </div>
 </div>
 </div>
-<div id="outline-container-orgf5591e3" class="outline-3">
-<h3 id="orgf5591e3"><a href="https://www.linkedin.com/posts/tylerjburns_my-scrolling-problem-and-how-i-fixed-it-activity-7084166939647848451-uU5w?utm_source=share&amp;utm_medium=member_desktop">On my TEDx Basel talk</a></h3>
-<div class="outline-text-3" id="text-orgf5591e3">
+<div id="outline-container-orgfd39293" class="outline-3">
+<h3 id="orgfd39293"><a href="https://www.linkedin.com/posts/tylerjburns_my-scrolling-problem-and-how-i-fixed-it-activity-7084166939647848451-uU5w?utm_source=share&amp;utm_medium=member_desktop">On my TEDx Basel talk</a></h3>
+<div class="outline-text-3" id="text-orgfd39293">
 <p>
 July 10, 2023
 </p>
@@ -4464,17 +4408,17 @@ I'll link the projects I talk about in the comments.
 </div>
 </div>
 
-<div id="outline-container-orgbec408d" class="outline-2">
-<h2 id="orgbec408d">Career And Consulting</h2>
-<div class="outline-text-2" id="text-orgbec408d">
+<div id="outline-container-org37f1c58" class="outline-2">
+<h2 id="org37f1c58">Career And Consulting</h2>
+<div class="outline-text-2" id="text-org37f1c58">
 <a href="#top">Back to top</a>
 <p>
 Posts about self-employment and professional practice in life-science consulting.
 </p>
 </div>
-<div id="outline-container-org0b6cd05" class="outline-3">
-<h3 id="org0b6cd05"><a href="https://www.linkedin.com/posts/tylerjburns_the-following-is-for-my-friends-from-academia-activity-7160684719934779392-n26f?utm_source=share&amp;utm_medium=member_desktop">Three pointers for doing self employed consulting in the life sciences</a></h3>
-<div class="outline-text-3" id="text-org0b6cd05">
+<div id="outline-container-org6e6d672" class="outline-3">
+<h3 id="org6e6d672"><a href="https://www.linkedin.com/posts/tylerjburns_the-following-is-for-my-friends-from-academia-activity-7160684719934779392-n26f?utm_source=share&amp;utm_medium=member_desktop">Three pointers for doing self employed consulting in the life sciences</a></h3>
+<div class="outline-text-3" id="text-org6e6d672">
 <p>
 February 6, 2024
 </p>
@@ -4507,7 +4451,7 @@ I don't expect three bullet points on a LinkedIn post to lead to my friends sudd
 </p>
 
 
-<div id="org3510993" class="figure">
+<div id="org42f8d9e" class="figure">
 <p><img src="images/self_employed.jpeg" alt="self_employed.jpeg" />
 </p>
 </div>

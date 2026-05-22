@@ -8,64 +8,8 @@
 <title>Burns Life Sciences Consulting GmbH</title>
 <meta name="generator" content="Org Mode" />
 <link rel="stylesheet" href="simple.css" />
-<style>
-  .dark-mode {
-    --bg: #212121;
-    --accent-bg: #2b2b2b;
-    --text: #dcdcdc;
-    --text-light: #ababab;
-    --accent: #ffb300;
-    /*--code: #f06292;*/
-    --preformatted: #ccc;
-    --disabled: #111;
-  }
-  .dark-mode img,
-  .dark-mode video {
-    opacity: 0.8;
-  }
-  .toggle-theme-btn {
-      transform: scale(0.7);
-      opacity: 0.4;
-      transition: opacity 0.2s;
-    }
-    .toggle-theme-btn:hover {
-      opacity: 0.4;
-    }
-
-  /* Code block wrapping: experiment */
-    pre, code {
-      white-space: pre-wrap;
-      white-space: -moz-pre-wrap;
-      white-space: -pre-wrap;
-      white-space: -o-pre-wrap;
-      word-wrap: break-word;
-    }
-</style>
-<script>
- function toggleDarkMode() {
-    const body = document.body;
-    body.classList.toggle("dark-mode");
-    // Save the user's theme preference to localStorage
-    if (body.classList.contains("dark-mode")) {
-      localStorage.setItem("theme", "dark");
-    } else {
-      localStorage.setItem("theme", "light");
-    }
-  }
-
-  function setDefaultDarkMode() {
-    // Retrieve the user's theme preference from localStorage
-    const storedTheme = localStorage.getItem("theme");
-
-    // If the stored theme is light, do nothing; otherwise, set it to dark
-    if (storedTheme !== "light") {
-      document.body.classList.add("dark-mode");
-    }
-  }
-
-  // Set the default mode to dark when the DOM is fully loaded
-  document.addEventListener('DOMContentLoaded', setDefaultDarkMode);
-</script>
+<link rel="stylesheet" href="css/site.css" />
+<script src="js/theme-switcher.js"></script>
 </head>
 <body>
 <div id="preamble" class="status">
@@ -86,22 +30,22 @@ For Tyler's personal website, go <a href="./index.html">here</a>.<br />
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgc83d781">AI-Bio Research, Strategy, Product Development, and Scientific Communication</a></li>
-<li><a href="#orgde78ecd">The AI-Bio frontier</a></li>
-<li><a href="#org6986462">What we do</a></li>
-<li><a href="#orga0ce353">Who we help</a></li>
-<li><a href="#org18a1dcd">Ways to work together</a></li>
-<li><a href="#orgde88b87">Why Burns LSC</a></li>
-<li><a href="#org6bd5e96">What people are saying</a></li>
-<li><a href="#orgf14c079">Contact us</a></li>
-<li><a href="#org9633ab9">Insights</a></li>
+<li><a href="#org6353929">AI-Bio Research, Strategy, Product Development, and Scientific Communication</a></li>
+<li><a href="#org6b834e0">The AI-Bio frontier</a></li>
+<li><a href="#org98e964a">What we do</a></li>
+<li><a href="#org6ec63b2">Who we help</a></li>
+<li><a href="#org8b11043">Ways to work together</a></li>
+<li><a href="#orgeabcbec">Why Burns LSC</a></li>
+<li><a href="#org006554f">What people are saying</a></li>
+<li><a href="#orge95d4e3">Contact us</a></li>
+<li><a href="#orgf1a0c90">Insights</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-orgc83d781" class="outline-2">
-<h2 id="orgc83d781">AI-Bio Research, Strategy, Product Development, and Scientific Communication</h2>
-<div class="outline-text-2" id="text-orgc83d781">
+<div id="outline-container-org6353929" class="outline-2">
+<h2 id="org6353929">AI-Bio Research, Strategy, Product Development, and Scientific Communication</h2>
+<div class="outline-text-2" id="text-org6353929">
 <p>
 We help biotech, bioinformatics, AI, and biosecurity organizations understand, evaluate, build, and communicate work at the frontier of AI and biology.
 </p>
@@ -112,9 +56,9 @@ Burns LSC works with teams facing ambiguous AI-Bio questions: what is real, what
 </div>
 </div>
 
-<div id="outline-container-orgde78ecd" class="outline-2">
-<h2 id="orgde78ecd">The AI-Bio frontier</h2>
-<div class="outline-text-2" id="text-orgde78ecd">
+<div id="outline-container-org6b834e0" class="outline-2">
+<h2 id="org6b834e0">The AI-Bio frontier</h2>
+<div class="outline-text-2" id="text-org6b834e0">
 <p>
 AI is making routine bioinformatics easier to automate. The more valuable questions now sit upstream:
 </p>
@@ -138,9 +82,9 @@ That is where we work.
 </div>
 </div>
 
-<div id="outline-container-org6986462" class="outline-2">
-<h2 id="org6986462">What we do</h2>
-<div class="outline-text-2" id="text-org6986462">
+<div id="outline-container-org98e964a" class="outline-2">
+<h2 id="org98e964a">What we do</h2>
+<div class="outline-text-2" id="text-org98e964a">
 <p>
 We help organizations make better decisions and build useful systems at the intersection of AI and biology.
 </p>
@@ -168,13 +112,13 @@ The goal is not to “add AI.” The goal is to find where AI creates real lever
 </div>
 </div>
 
-<div id="outline-container-orga0ce353" class="outline-2">
-<h2 id="orga0ce353">Who we help</h2>
-<div class="outline-text-2" id="text-orga0ce353">
+<div id="outline-container-org6ec63b2" class="outline-2">
+<h2 id="org6ec63b2">Who we help</h2>
+<div class="outline-text-2" id="text-org6ec63b2">
 </div>
-<div id="outline-container-orgf981c9f" class="outline-3">
-<h3 id="orgf981c9f">Bioinformatics and biotech companies</h3>
-<div class="outline-text-3" id="text-orgf981c9f">
+<div id="outline-container-orgdc46aed" class="outline-3">
+<h3 id="orgdc46aed">Bioinformatics and biotech companies</h3>
+<div class="outline-text-3" id="text-orgdc46aed">
 <p>
 We help companies integrate AI into products, platforms, workflows, and strategy.
 </p>
@@ -208,9 +152,9 @@ Typical questions:
 </div>
 </div>
 
-<div id="outline-container-orgba46c30" class="outline-3">
-<h3 id="orgba46c30">AI-biosecurity organizations</h3>
-<div class="outline-text-3" id="text-orgba46c30">
+<div id="outline-container-org5ceed3e" class="outline-3">
+<h3 id="org5ceed3e">AI-biosecurity organizations</h3>
+<div class="outline-text-3" id="text-org5ceed3e">
 <p>
 We help nonprofits, funders, and research groups study the implications of frontier AI systems for biological risk.
 </p>
@@ -243,9 +187,9 @@ Typical questions:
 </div>
 </div>
 
-<div id="outline-container-org9c4ebef" class="outline-3">
-<h3 id="org9c4ebef">Leaders, investors, and funders navigating AI-Bio</h3>
-<div class="outline-text-3" id="text-org9c4ebef">
+<div id="outline-container-org8d4e4d2" class="outline-3">
+<h3 id="org8d4e4d2">Leaders, investors, and funders navigating AI-Bio</h3>
+<div class="outline-text-3" id="text-org8d4e4d2">
 <p>
 We help founders, executives, technical leads, investors, and funders understand what is happening at the AI-Bio frontier and what to do next.
 </p>
@@ -277,13 +221,13 @@ Typical questions:
 </div>
 </div>
 
-<div id="outline-container-org18a1dcd" class="outline-2">
-<h2 id="org18a1dcd">Ways to work together</h2>
-<div class="outline-text-2" id="text-org18a1dcd">
+<div id="outline-container-org8b11043" class="outline-2">
+<h2 id="org8b11043">Ways to work together</h2>
+<div class="outline-text-2" id="text-org8b11043">
 </div>
-<div id="outline-container-org877a4f2" class="outline-3">
-<h3 id="org877a4f2">AI-Bio strategy</h3>
-<div class="outline-text-3" id="text-org877a4f2">
+<div id="outline-container-orgbd887c1" class="outline-3">
+<h3 id="orgbd887c1">AI-Bio strategy</h3>
+<div class="outline-text-3" id="text-orgbd887c1">
 <p>
 A focused engagement to clarify where AI can create value, where it is likely to fail, and what your team should do next.
 </p>
@@ -303,9 +247,9 @@ Typical outputs:
 </div>
 </div>
 
-<div id="outline-container-org537f765" class="outline-3">
-<h3 id="org537f765">AI-Bio prototyping</h3>
-<div class="outline-text-3" id="text-org537f765">
+<div id="outline-container-org0c4e0c1" class="outline-3">
+<h3 id="org0c4e0c1">AI-Bio prototyping</h3>
+<div class="outline-text-3" id="text-org0c4e0c1">
 <p>
 A hands-on engagement to turn an idea into a working prototype, internal tool, evaluation, or demo.
 </p>
@@ -325,9 +269,9 @@ Typical outputs:
 </div>
 </div>
 
-<div id="outline-container-org58553d2" class="outline-3">
-<h3 id="org58553d2">AI-biosecurity research and product development</h3>
-<div class="outline-text-3" id="text-org58553d2">
+<div id="outline-container-org55c1e2c" class="outline-3">
+<h3 id="org55c1e2c">AI-biosecurity research and product development</h3>
+<div class="outline-text-3" id="text-org55c1e2c">
 <p>
 Technical research and product development for organizations studying biological risk from frontier AI systems.
 </p>
@@ -346,9 +290,9 @@ Typical outputs:
 </div>
 </div>
 
-<div id="outline-container-orgba1a86d" class="outline-3">
-<h3 id="orgba1a86d">Scientific communication and operations</h3>
-<div class="outline-text-3" id="text-orgba1a86d">
+<div id="outline-container-org189a190" class="outline-3">
+<h3 id="org189a190">Scientific communication and operations</h3>
+<div class="outline-text-3" id="text-org189a190">
 <p>
 Support for teams that need complex AI-Bio work turned into clear, organized, communication-ready outputs.
 </p>
@@ -369,9 +313,9 @@ Typical outputs:
 </div>
 </div>
 
-<div id="outline-container-org4016e70" class="outline-3">
-<h3 id="org4016e70">Fractional AI-Bio product or research support</h3>
-<div class="outline-text-3" id="text-org4016e70">
+<div id="outline-container-org021c29a" class="outline-3">
+<h3 id="org021c29a">Fractional AI-Bio product or research support</h3>
+<div class="outline-text-3" id="text-org021c29a">
 <p>
 Ongoing support for organizations that need senior judgment across AI, biology, product, communication, and execution without hiring a full-time team.
 </p>
@@ -383,9 +327,9 @@ This can include product strategy, technical review, prototype supervision, part
 </div>
 </div>
 
-<div id="outline-container-orgde88b87" class="outline-2">
-<h2 id="orgde88b87">Why Burns LSC</h2>
-<div class="outline-text-2" id="text-orgde88b87">
+<div id="outline-container-orgeabcbec" class="outline-2">
+<h2 id="orgeabcbec">Why Burns LSC</h2>
+<div class="outline-text-2" id="text-orgeabcbec">
 <p>
 Burns LSC is led by Tyler and Marie Burns.
 </p>
@@ -404,9 +348,9 @@ Together, we help organizations move from ambiguous AI-Bio questions to concrete
 </div>
 </div>
 
-<div id="outline-container-org6bd5e96" class="outline-2">
-<h2 id="org6bd5e96">What people are saying</h2>
-<div class="outline-text-2" id="text-org6bd5e96">
+<div id="outline-container-org006554f" class="outline-2">
+<h2 id="org006554f">What people are saying</h2>
+<div class="outline-text-2" id="text-org006554f">
 <a href="#top">Back to top</a>
 
 <p>
@@ -451,9 +395,9 @@ Together, we help organizations move from ambiguous AI-Bio questions to concrete
 </div>
 </div>
 
-<div id="outline-container-orgf14c079" class="outline-2">
-<h2 id="orgf14c079">Contact us</h2>
-<div class="outline-text-2" id="text-orgf14c079">
+<div id="outline-container-orge95d4e3" class="outline-2">
+<h2 id="orge95d4e3">Contact us</h2>
+<div class="outline-text-2" id="text-orge95d4e3">
 <p>
 Tyler and Marie maintain active LinkedIn presences. If you are not connected, send a connection request with a short message. If we cannot answer your question directly, we may be able to point you toward someone who can.
 </p>
@@ -461,33 +405,33 @@ Tyler and Marie maintain active LinkedIn presences. If you are not connected, se
 <a href="#top">Back to top</a>
 </div>
 
-<div id="outline-container-orgdb8ed86" class="outline-3">
-<h3 id="orgdb8ed86"><a href="https://calendly.com/burnslsc-info/30min">Book a free 30-minute consultation</a></h3>
-<div class="outline-text-3" id="text-orgdb8ed86">
+<div id="outline-container-org7d7f21a" class="outline-3">
+<h3 id="org7d7f21a"><a href="https://calendly.com/burnslsc-info/30min">Book a free 30-minute consultation</a></h3>
+<div class="outline-text-3" id="text-org7d7f21a">
 <p>
 If you would like our perspective on an AI-Bio question, or want to explore a potential engagement or partnership, you can book a call here.
 </p>
 </div>
 </div>
 
-<div id="outline-container-org7310626" class="outline-3">
-<h3 id="org7310626"><a href="https://www.linkedin.com/in/tylerjburns/">Tyler's LinkedIn</a></h3>
+<div id="outline-container-org6f799f9" class="outline-3">
+<h3 id="org6f799f9"><a href="https://www.linkedin.com/in/tylerjburns/">Tyler's LinkedIn</a></h3>
 </div>
 
-<div id="outline-container-org74bf3a8" class="outline-3">
-<h3 id="org74bf3a8"><a href="https://www.linkedin.com/in/dr-marie-burns/">Marie's LinkedIn</a></h3>
+<div id="outline-container-org85b213d" class="outline-3">
+<h3 id="org85b213d"><a href="https://www.linkedin.com/in/dr-marie-burns/">Marie's LinkedIn</a></h3>
 </div>
 </div>
 
-<div id="outline-container-org9633ab9" class="outline-2">
-<h2 id="org9633ab9">Insights</h2>
-<div class="outline-text-2" id="text-org9633ab9">
+<div id="outline-container-orgf1a0c90" class="outline-2">
+<h2 id="orgf1a0c90">Insights</h2>
+<div class="outline-text-2" id="text-orgf1a0c90">
 <a href="#top">Back to top</a>
 </div>
 
-<div id="outline-container-orgf82c41c" class="outline-3">
-<h3 id="orgf82c41c"><a href="https://tjburns08.github.io/social_media_posts.html">A compendium of Tyler's social media posts</a></h3>
-<div class="outline-text-3" id="text-orgf82c41c">
+<div id="outline-container-org3d62854" class="outline-3">
+<h3 id="org3d62854"><a href="https://tjburns08.github.io/social_media_posts.html">A compendium of Tyler's social media posts</a></h3>
+<div class="outline-text-3" id="text-org3d62854">
 <p>
 These are grouped by subject and are easier to browse here than through LinkedIn history.
 </p>

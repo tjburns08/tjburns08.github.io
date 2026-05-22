@@ -28,87 +28,33 @@
 ;; Load the publishing system
 (require 'ox-publish)
 
-;; Customize the HTML output
-;;(setq org-html-validation-link nil            ;; Don't show validation link
-;;      org-html-head-include-scripts nil       ;; Use our own scripts
-;;      org-html-head-include-default-style nil ;; Use our own styles
-;;      org-html-head "<link rel=\"stylesheet\" href=\"simple.css\" />") ;; links to local css
-      ;; org-html-head "<link rel=\"stylesheet\" href=\"https://cdn.simplecss.org/simple.min.css\" />")
+(defvar site-html-head
+  (concat
+   "<link rel=\"stylesheet\" href=\"simple.css\" />\n"
+   "<link rel=\"stylesheet\" href=\"css/site.css\" />\n"
+   "<script src=\"js/theme-switcher.js\"></script>"))
 
-;; Dev: Toggle dark mode
-(setq org-html-validation-link nil
-      org-html-head-include-scripts nil ;; dev
-      org-html-head-include-default-style nil ;; dev
-      org-html-head "<link rel=\"stylesheet\" href=\"simple.css\" />
-<style>
-  .dark-mode {
-    --bg: #212121;
-    --accent-bg: #2b2b2b;
-    --text: #dcdcdc;
-    --text-light: #ababab;
-    --accent: #ffb300;
-    /*--code: #f06292;*/
-    --preformatted: #ccc;
-    --disabled: #111;
-  }
-  .dark-mode img,
-  .dark-mode video {
-    opacity: 0.8;
-  }
-  .toggle-theme-btn {
-      transform: scale(0.7);
-      opacity: 0.4;
-      transition: opacity 0.2s;
-    }
-    .toggle-theme-btn:hover {
-      opacity: 0.4;
-    }
-
-  /* Code block wrapping: experiment */
-    pre, code {
-      white-space: pre-wrap;
-      white-space: -moz-pre-wrap;
-      white-space: -pre-wrap;
-      white-space: -o-pre-wrap;
-      word-wrap: break-word;
-    }
-</style>
-<script>
- function toggleDarkMode() {
-    const body = document.body;
-    body.classList.toggle(\"dark-mode\");
-    // Save the user's theme preference to localStorage
-    if (body.classList.contains(\"dark-mode\")) {
-      localStorage.setItem(\"theme\", \"dark\");
-    } else {
-      localStorage.setItem(\"theme\", \"light\");
-    }
-  }
-
-  function setDefaultDarkMode() {
-    // Retrieve the user's theme preference from localStorage
-    const storedTheme = localStorage.getItem(\"theme\");
-
-    // If the stored theme is light, do nothing; otherwise, set it to dark
-    if (storedTheme !== \"light\") {
-      document.body.classList.add(\"dark-mode\");
-    }
-  }
-
-  // Set the default mode to dark when the DOM is fully loaded
-  document.addEventListener('DOMContentLoaded', setDefaultDarkMode);
-</script>")
-
-;; Dev: The light/dark mode button, others
-(setq org-html-preamble
-      "<div style=\"position: fixed; top: 10px; right: 10px;\">
+(defvar site-html-preamble
+  "<div style=\"position: fixed; top: 10px; right: 10px;\">
          <button class=\"toggle-theme-btn\" onclick=\"toggleDarkMode()\">Light/Dark</button>
        </div>")
+
+(setq org-html-validation-link nil
+      org-html-head-include-scripts nil
+      org-html-head-include-default-style nil
+      org-html-head site-html-head
+      org-html-preamble site-html-preamble)
 
 ;; Define the publishing project
 (setq org-publish-project-alist
       (list
-       (list "tyler_burns_website"
+       (list "site-assets"
+             :base-directory "./assets"
+             :base-extension "css\\|js"
+             :publishing-directory "./public"
+             :recursive t
+             :publishing-function 'org-publish-attachment)
+       (list "site-pages"
              :recursive t
              :base-directory "./content"
              :publishing-directory "./public"
@@ -118,13 +64,15 @@
              :with-toc nil                ;; Include a table of contents
              :section-numbers nil       ;; Don't include section numbers
              :time-stamp-file nil       ;; Don't include time stamp in file
-             :publishing-function 'org-html-publish-to-html)))
+             :publishing-function 'org-html-publish-to-html)
+       (list "tyler_burns_website"
+             :components '("site-assets" "site-pages"))))
 
 
 ;; Get rid of "validate" on bottom of site
 (setq org-html-validation-link nil) 
 
 ;; Generate the site output
-(org-publish-all t)
+(org-publish-project "tyler_burns_website" t)
 
 (message "build complete!")
