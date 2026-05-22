@@ -20,12 +20,15 @@ If you have quesitons or comments, or you're interested in working or collaborat
 :PROPERTIES:
 :UNNUMBERED: notoc
 :END:
+May 20, 2026.
+
 A report on a series of convenings in DC that I helped [[https://helena.org/][Helena]] put on in collaboration with RAND. These convenings were around AI-Bio safety. The first one was technical-centric and the second one was policy-centric. What I can tell you is that there is a very large gap between what is being said on the internet, and what is being said in person. These convenings were under the [[https://en.wikipedia.org/wiki/Chatham_House_Rule][Chatham House Rule]], so we can only say so much. But have a look at the report.
 ** [[./dr_provenance_interactive.html][Provenance of CyTOF dimension reduction algorithms]]
 :PROPERTIES:
 :UNNUMBERED: notoc
 :END:
 Interactive html.\\
+May 18, 2026 - May 19, 2026.
 
 If you want to understand the algorithms used in analyzing data specific to a given field, you need to understand the history of their development. Knowing that Leiden clustering was built on top of Louvain matters, for example. Knowing that UMAP was built after t-SNE matters. Here, I built provenance graph of CyTOF dimensionality reduction/visualization algorithms, from SPADE to UMAP and later. I turned it into an interactive html. We can see that while the field has "collapsed" into UMAP, there are a number of other methods developed after or in parallel to UMAP that could be equally useful or if not useful to your bespoke situation. The bigger picture: this does to the intro section of a paper what SPADE did to the immune system.
 ** [[https://blog.lamin.ai/intro-to-laminr][An Introduction to LaminR]]
@@ -33,6 +36,7 @@ If you want to understand the algorithms used in analyzing data specific to a gi
 :UNNUMBERED: notoc
 :END:
 Guest blog post.\\
+April 2, 2026.
 
 One of the longer term issues I've run into in my consulting work is that of coming back to old projects, handing off my work, or receiving work others have handed off to me. There is inevitable confusion as to what was done previously. Lamin solves this problem by tracking every data artifact, in terms of what was done to it when. I think this will become increasingly important, especially when we get to a point where there are AI agents doing work alongside you. LaminR is Lamin's R interface, which I use here to analyze the PBMC 3k dataset, in order to show you what Lamin does.
 
@@ -41,6 +45,7 @@ One of the longer term issues I've run into in my consulting work is that of com
 :UNNUMBERED: notoc
 :END:
 R Markdown.\\
+March 13, 2026.
 
 If I ask a LLM to select a CyTOF clustering algorithm at random, what do I get? In this experiment, I did that in a 50-iteration loop across a number of models from Anthropic, Google, and xAI's Grok4. The models only chose FlowSOM or PhenoGraph, suggesting a "winner take all" bias in terms of how often the tools are used in the literature. I found that the Antrhopic models prefer FlowSOM, the Google models are mixed, but still lean toward FlowSOM, and Grok4 prefers PhenoGraph. This suggests that similar experiments must be done by anyone who is looking to use AI to assist them in CyTOF analysis pipeliens, to determine where the models might be biased.
 ** [[./samusik_llm_mishmash.html][Experiment with LLM-generated CyTOF data]]
@@ -48,6 +53,7 @@ If I ask a LLM to select a CyTOF clustering algorithm at random, what do I get? 
 :UNNUMBERED: notoc
 :END:
 R Markdown.\\
+February 27, 2026.
 
 What would happen if I asked a frontier-level LLM to simulate CyTOF data, one cell at a time? Would it "rip" a dataset, number by number? Would it create convincing simulated cells that fit marker distributions, and cell frequency distributions? Would it create a bunch of numbers that make no sense? Here, we tested that by getting Claude Sonnet 4.6 to simulate the Samusik dataset, cell by cell. We provided minimal instructions. We found that for the most part, the cells produced were not in line with the Saumisik dataset. This suggests that either Claude Sonnet is not yet good enough to output simulated Samusik data, or that better prompt engineering is needed to this end.
 
@@ -56,6 +62,7 @@ What would happen if I asked a frontier-level LLM to simulate CyTOF data, one ce
 :UNNUMBERED: notoc
 :END:
 GitHub repo.\\
+February 16, 2026.
 
 Data integration is something that has been well-trodden in both flow cytometry and single-cell RNA sequencing (at the time of writing [2026-02-16 Mon]) due to batch effects that can form. Here, we use Claude Code to ask two questions. 1) Can we place multiple CyTOF files into Seurat? And 2) Can we use Harmony within this Seurat object ot integrate the data? Claude Code figured out a way to do both. There are plenty of limitations in this experiment, especially that of needing to determine whether we lose biological signal in the integration. But this at least is a first step (of many) that can be built off of.
 ** [[https://github.com/tjburns08/claude-cytof-gating][Experiment with Claude Code for manual gating CyTOF data]]
@@ -63,6 +70,7 @@ Data integration is something that has been well-trodden in both flow cytometry 
 :UNNUMBERED: notoc
 :END:
 GitHub Repo.\\
+February 2, 2026.
 
 Manual gating is an important process for cell subsetting in flow and mass cytometry data. Despite over a decade of innovations in clustering, manual gating has not been replaced. Automated gating has been of interest for a few years now at the time of writing [2026-02-02 Mon]. Here, I tested whether Claude Code could do manual gating on the Samusik mouse bone marrow CyTOF dataset. I found that while lots of work needs to be done, there seems to be a path here, and plenty more things to try. Thus, I present my work in this repo for others to build off of. Hints: try building out an actual interface where individual gates can be adjusted in real time, rather than a script it executes top to bottom. And try getting it to process its own plot images.
 
@@ -71,6 +79,7 @@ Manual gating is an important process for cell subsetting in flow and mass cytom
 :UNNUMBERED: notoc
 :END:
 GitHub Repo.\\
+January 26, 2026.
 
 At the time of writing [2026-01-26 Mon], AI agents are becoming much more capable. To this end, I tested them on CyTOF analysis, a domain I know quite well. I did 5 runs for Claude Code and ChatGPT Codex (both regular and xhigh) respectively. The task was to analyze 1 file, the Samusik_01 dataset (from the X-Shift paper). The agents were able to generate code, run the code, and fix issues in real time. The code ran to completion. The output was almost always sensible. The design choices were hit or miss. Future directions include analyzing multi-file datasets (and see if they can find batch effects, and so forth). Overall, this direction looks promising, but needs work. Have a look for further details.
 
@@ -79,6 +88,7 @@ At the time of writing [2026-01-26 Mon], AI agents are becoming much more capabl
 :UNNUMBERED: notoc
 :END:
 Feature.\\
+December 5, 2025 - December 10, 2025.
 
 In the summer of 2025, I had a Krupp intern from the Stanford in Berlin program. This was special because I did this same internship when I was in the Stanford in Berlin program in 2007. Here, I got the chance to give back. On page 6 of this pdf, my intern Arianna gives her reflection of how the internship and her summer in general went. I thank the program for giving me the opportunity to mentor Arianna, and I hope for many more Krupp interns to come.
 
@@ -87,6 +97,7 @@ In the summer of 2025, I had a Krupp intern from the Stanford in Berlin program.
 :UNNUMBERED: notoc
 :END:
 Markdown.\\
+November 17, 2025 - November 19, 2025.
 
 Seurat defaults to Louvain clustering, and Scanpy defaults to the newer and improved Leiden clustering. Here, I try Leiden clustering in Seurat over 20 random seeds, assessing cluster stability by visualizing the cluster centroids on a UMAP as gifs. I find that Leiden clustering in Seurat requires additional parameter turning. In other words, if the settings work for Louvain, they won't necessarily work for Leiden.
 
@@ -95,24 +106,39 @@ Seurat defaults to Louvain clustering, and Scanpy defaults to the newer and impr
 :UNNUMBERED: notoc
 :END:
 GitHub project.\\
+August 28, 2025.
 
 One of the ways that I developed intuition around single-cell and spatial analysis over the years is by changing the settings of a given analysis pipeline and seeing how it changes the output. Here, my intern Arianna and I built an app that allows a user to do that with a simple scanpy analysis of single-cell data. The interface has a couple of "knobs" you can turn, like changing the number of highly variable genes, or the number of PCs, and seeing how that affects the shape of the UMAP downstream, and the placement of pre-annotated cells therein.
 
 
 ** 10,000 random research questions generated by a LLM
+July 30, 2025 - August 5, 2025.
+
 This project was inspired by the LLM-generated random numbers [[https://sanand0.github.io/llmrandom/][work]], which showed that LLM's have "favorite" numbers. Here, we generate research questions and determine that at least within the field of the microbiome, Gemini 2.5 Flash Lite has favorite questions.
 *** [[./LLM_microbiome_questions.html][Jupyter Notebook as html]]
+July 30, 2025 - August 5, 2025.
+
 This is the notebook that gives you all the code necessary to make these question maps.
 *** [[./umap_questions_with_mq.html][Example output: microbiome]]
+August 5, 2025.
+
 This is a html file that is a map of microbiome questions, where questions that are similar to each other in context are grouped near to each other on the map.
 
 ** LLM-augmented PCA loadings
+July 17, 2025 - July 24, 2025.
+
 This project was driven by my intern [[https://www.linkedin.com/in/arianna-aalami-328576231/][Arianna Aalami]] (think of her as the first author and me as the last author), a Stanford bioengineering graduate, with both wet-lab and dry-lab capabilities, interested in applying these to study the microbiome.
 *** [[./BLSC_PCA_loading_LLMs_final.html][R Markdown]]
+July 17, 2025.
+
 Here is the code, comments, and explanations needed to generated the reports below. In order to repeat this yourself, you need an OpenAI API key. We note that the cost to run all of these experiments in the markdown, using o4-mini, is around 30 cents.
 *** [[./blsc_pc_loadings_by_llm_interpretation.pdf][PC loading by interpretation report]]
+July 24, 2025.
+
 Here is the primary output from the aforementioned R Markdown, whereby we have the left column that shows a biaxial plot of PC1 and PCN where N is any number between 2 and 10. This already is something that is not often viewed in single-cell sequencing workflows. The right column shows the LLM-generated biological interpretation. The first few PCs are sanity checks in this regard, and the later PCs, while not yet rigorously checked, are thought provoking.
 *** [[./blsc_llm_consistency_check.pdf][LLM consistency experiment]]
+July 24, 2025.
+
 Here, we aimed to check whether the output of our LLM-based biological interpretation is consistent. We tried PC1 (which is straightforward), and PC20 (which we expect to be a bit messier). We note that with the o4-mini model the results were indeed relatively consistent between the multiple runs, with the 4o-mini model (does not do reasoning), the results for PC20 were quite inconsistent (data not shown). The results suggest a degree of consistency when using reasoning models, but we would still recommend doing these runs more than once, just in case.
 
 ** [[./descent_into_madness.html][A LLM's descent into madness]]
@@ -136,6 +162,7 @@ At any given point, there are ideas in my head or rough pieces of text and code 
 :UNNUMBERED: notoc
 :END:
 Markdown.\\
+January 21, 2025.
 
 Universal Cell Embeddings (UCE) is a foundation model that takes a single-cell dataset as input and outputs a 1280 dimensional embedding that is relevant in the context of a large number of single-cell datasets that it was trained on. This model can in turn do things like label transfer between datasets. Here, I looked at the embedding within the PBMC 3k dataset and simply asked how many k-nearest neighbors per cell are shared between the original dataset and its UCE embedding. Specifically, I used the first 50 PCs of the PBMC 3k dataset's top 2000 most variable genes (standard practice), and the first 50 PCs of the UCE model. The results suggest that nearest neighbors are preserved at the labeled cell subset level but the resolution does not go beyond this. Note: I also compared the first 50 PCs of the PBMC 3k dataset with the entire 1280 dimensions of the UCE output, and the results were slightly worse but similar.
 
@@ -182,6 +209,7 @@ This is the observation I run into with just about every line of scientific inqu
 :UNNUMBERED: notoc
 :END:
 Markdown.\\
+April 11, 2023.
 
 Seurat is an R package that runs single-cell sequencing and related data. Here, I trick Seurat into thinking my CyTOF PBMC data is single-cell sequencing data. I find out that the effective dimensionality of my CyTOF data appears to be much less than the surface markers I am using (15). This is a counter-intuitive result because our features are carefully curated before the experiment is done.
 ** [[https://github.com/tjburns08/knn_sleepwalk][Knn sleepwalk]]
@@ -189,6 +217,7 @@ Seurat is an R package that runs single-cell sequencing and related data. Here, 
 :UNNUMBERED: notoc
 :END:
 Software.\\
+November 16, 2022.
 
 A wrapper I wrote around the [[https://anders-biostat.github.io/sleepwalk/][sleepwalk]] R package. Hover the cursor over any cell in your embedding, and it will show you the cell's k-nearest neighbors computed from the original feature space (as opposed to the embedding space). This allows you to test your assumptions around how exact a low-dimensional embedding (eg. t-SNE, UMAP) is.
 ** [[https://www.youtube.com/watch?v=U35T-KzfeLk][TEDx Basel talk: my scrolling problem, and how I fixed it]]
@@ -196,6 +225,7 @@ A wrapper I wrote around the [[https://anders-biostat.github.io/sleepwalk/][slee
 :UNNUMBERED: notoc
 :END:
 YouTube video of my TED talk.\\
+July 7, 2023.
 
 In this talk, I introduce the idea of the Scrolling Problem, which is the incompatiblity of my ADD brain and modern technology built around the infinite scroll. I talk about some work I'm doing to counteract that, which can be found [[https://github.com/tjburns08/twitter_archive_and_embed][here]]. It was originally Twitter, but I switched to RSS mapping, [[https://github.com/tjburns08/rss_map][here]], after Twitter started blocking scrapers.
 ** [[./scrolling_problem.org][The Scrolling Problem]]
@@ -211,6 +241,7 @@ The article behind my [[https://www.youtube.com/watch?v=U35T-KzfeLk][TEDx Basel 
 :UNNUMBERED: notoc
 :END:
 Markdown.\\
+July 11, 2023.
 
 In flow cytometry and CyTOF analysis, we distinguish between "type" and "state" markers, so we can cluster on the former and analyze per-cluster expression changes in the latter. For single-cell RNA sequencing, we cannot make this distinguishment. Thus, we have to rely on data integration algorithms when we are analyzing pre-treatment and post-treatment datasets. I show how this is done, and I show how failure to do so can lead research teams to falsely interpret the data, and make false conclusions. Thus, understanding data integration is critical to keeping research teams on track.
 * Bioinformatics & single-cell
@@ -230,58 +261,74 @@ In this article, I summarize my journey from biologist at the beginning of grad 
 ** CyTOF / mass cytometry methods
 *** [[./how_xshift_works.html][How X-shift works]]
 Markdown.\\
+June 15, 2023.
 
 X-shift is a popular clustering algorithm for CyTOF and related high-dimensional data that is related to mean-shift clustering. It is especially good for the detection of rare cell subsets. While X-shift is computationally intensive and written in java to overcome several engineering hurdles accordingly, here I show you a simplified version of X-shift written in R that leverages the igraph package. The purpose of this markdown is to show you how X-shift works in a language that is less verbose and more familiar to the average CyTOF user than java.
 *** [[./cytof_mnn_experiment.html][CyTOF mutual nearest neighbors experiment]]
 Markdown.\\
+June 14, 2023.
 
 Phenograph is a popular CyTOF clustering algorithm, which is really Louvain community detection of a K-Nearest Neighbor (KNN) graph. Of note, this is the primary clustering tool used in Seurat for scRNA seq data. Here, I make the KNN graph myself for CyTOF data, and contrast it with the mutual nearest neighbor (MNN) graph, where Cell 1 is connected to Cell 2 if and only if they both are part of each other's respective KNN. I find that clustering the MNN graph might provide a little more resolution than the KNN graph, if properly optimized.
 
 *** [[./cytof_analysis_language_tour.html][CyTOF analysis langauge tour in R Markdown]]
 Markdown.\\
+May 10, 2023.
 
 I typically analyze CyTOF data in R. However, there are plenty of reasons why one might want to analyze CyTOF data in other languages as well. Here, I show that you can use python, julia, C++, SQL, and Rust directly in R Markdown. I do most of my work in R Markdown these days, but I like the flexibility of being able to switch from one language to the other and back, all in the same literate programming environement.
 
 *** [[./julia_cytof_pipeline_one_file.html][CyTOF UMAP with Julia: an experiment]]
 Markdown.\\
+April 17, 2023.
 
 Here, we compare the UMAP implementation from R with the UMAP implementation from Julia. The Julia programming language is a much faster programming language, so I expected that we might be able to speed UMAP up. Accordingly, it did. Here, I show you how to import your data into R, move in into Julia, run UMAP, get it back into R, and plot it. All in a single R markdown.
 *** [[./run_cytof_with_seurat.html][Run CyTOF analysis with Seurat]]
 Markdown.\\
+April 11, 2023.
 
 Seurat is an R package that runs single-cell sequencing and related data. Here, I trick Seurat into thinking my CyTOF PBMC data is single-cell sequencing data. I find out that the effective dimensionality of my CyTOF data appears to be much less than the surface markers I am using (15). This is a counter-intuitive result because our features are carefully curated before the experiment is done.
 *** [[./anatomy_of_fcs_file.html][Anatomy of a fcs file]]
 Markdown.\\
+March 23, 2023.
 
 You can parse a fcs file from scratch without flowCore. I read in a fcs file line by line, rather than using the standard read.FCS from flowCore. We can't read the data directly this way, but we can read in the header and the text. For the data, we read in the bytes, convert them into decimal, and then build the expression matrix.
 *** CyTOF analysis pipeline
 Markdowns.\\
+March 12, 2023 - March 16, 2023.
 
 CyTOF analysis has come a long way. Along with single-cell sequencing analysis, a lot of it is high-level functions that do what needs to be done. I prefer a guts-level analysis, where I can see the low-level the details of how my data are being manipulated. This is important for understanding and innovation.
 **** [[./cytof_pipeline_one_file.html][One fcs file]]
+March 12, 2023.
+
 Keeping it to one fcs file, we can focus on what happens when a fcs file is read into R, how it is transformed, and what the best practices of clustering, dimension reduction, and visualization are. These foundations can be built upon when looking at multiple fcs files to determine where there are differences in your control versus experiment group.
 **** [[./cytof_pipeline_many_files.html][Multiple fcs files]]
+March 16, 2023.
+
 This markdown uses the [[https://www.bioconductor.org/packages/release/bioc/html/diffcyt.html][diffcyt]] package to help us do statistics between groups, though I show you how to do per-cluster statistics yourself. We make box plots group-level comparisons for clusters we care about. We also color our dimension reduction maps by the p-value information. This pipeline requires a sample metadata file, as well as a marker file. I show you what these look like directly in the pipeline.
 *** [[./asinh_mean_vs_mean_asinh.html][asinh(mean(x)) vs mean(asinh(x))]]
 Markdown.\\
+December 7, 2022.
 
 If you want the means of your markers per cluster, be careful how you export the data. If you export the means of the raw values per cluster, and take the asinh(x/5) transform of that, the values will be different than if you take the means of the asinh(x/5) transformed data per cluster. The latter is the right way to do it. But don't take my word for it. Look at the markdown yourself.
 *** [[./cytof_data_transformations.html][Data transformations for CyTOF]]
 Markdown.\\
+June 29, 2022 - December 15, 2022.
 
 CyTOF data are transformed using the inverse hyperbolic sine (asinh) of the data divided by 5 (aka scale argument of 5). But does it have to be like that? What happens if we use a scale argument of 1? 500? What if we do a log transform? How does t-SNE look on untransformed CyTOF data?
 
 ** Single-cell RNA-seq methods
 *** [[./louvain_leiden_cluster_stability.html][Louvain versus Leiden cluster stability]]
 Markdown.\\
+November 17, 2025 - November 19, 2025.
 
 Seurat defaults to Louvain clustering, and Scanpy defaults to the newer and improved Leiden clustering. Here, I try Leiden clustering in Seurat over 20 random seeds, assessing cluster stability by visualizing the cluster centroids on a UMAP as gifs. I find that Leiden clustering in Seurat requires additional parameter turning. In other words, if the settings work for Louvain, they won't necessarily work for Leiden.
 *** [[https://github.com/ariannaaalami/interactive_scanpy_pipeline][Scanpy pipeline intuition building app]]
 GitHub project.\\
+August 28, 2025.
 
 One of the ways that I developed intuition around single-cell and spatial analysis over the years is by changing the settings of a given analysis pipeline and seeing how it changes the output. Here, my intern Arianna and I built an app that allows a user to do that with a simple scanpy analysis of single-cell data. The interface has a couple of "knobs" you can turn, like changing the number of highly variable genes, or the number of PCs, and seeing how that affects the shape of the UMAP downstream, and the placement of pre-annotated cells therein.
 *** [[./soft_clustering.html][Cluster membership purity score for single cells]]
 Markdown.\\
+May 13, 2025.
 
 When clustering single-cell or spatial data, there is a built-in assumption that the clusters are final. That a CD4 T cell at a CD4/CD8 boundary is nonetheless a CD4 T cell. This may not be the case every time. Here, I developed a simple way to identify and interrogate these boundary regions. I do this by taking each cell's k-nearest neighbors (KNN) and calculating the Shannon entropy of each neighborhood. Zero entropy means you're in the thicket of a cluster. Higher entropy means you are at a boundary region.
 
@@ -289,48 +336,59 @@ At the per-cell level, you can interrogate these cells or factor this score into
 
 *** [[./seurat_pbmc_cluster_stability.html][Cluster stability as an evaluation metric for single-cell workflows]]
 Markdown.\\
+March 16, 2025.
 
 Clustering is a critical piece of any single-cell analysis workflow, be it suspension or spatial, transcript or protein. But after clusters have been computed, how sure is any given user that the clusters most accurrately represent cell subset partitions? Are there any element of arbitrariness of a given clustering scheme? One way to get at that question is to run your clustering algorithm multiple times across multiple random seeds, and look at how similar any one scheme is to the others by stringing the cluster visualizations (in this case, the cluster centroids) together into an animation. Here, we do this with the PBMC 3k dataset and standard Louvain clustering. We show that some subsets are less stable than others, and stability will differ based on what resolution you choose for your clustering scheme.
 *** [[./case_for_viridis.html][Comparing Color Palettes for scRNA-seq Data Visualization: The Case for Viridis as a Default]]
 Markdown.\\
+January 25, 2025.
 
 When using "color" as a dimension (for example, coloring UMAPs by marker expression), flow cytometry users often default to the "jet" color palette, and Seurat users often default to their default light-gray to blue color palette. Here, I present the case for the use of viridis as a default color palette. I show that viridis is more balanced and colorblind friendly than jet, with more resolution than the Seurat default. Using this color scheme will be beneficial for both data interpretation and inclusivity in our field.
 *** [[./annotated_seurat_without_pca.html][Running UMAP on scRNA seq data without PCA reveals importance of cosine distnace in high dimensional data]]
 Markdown.\\
+January 21, 2025.
 
 What happens when you omit PCA from a Seurat scRNA-seq pipeline? Here, Using the flagship pre-annotated PBMC 3k dataset, I tested this by inputting the top 2000 variable genes directly into UMAP, bypassing PCA. The results showed less spatially resolved subsets, particularly among CD4 T cells. Furthermore, I found that in the no-PCA condition, performance (measured by how well cell subsets could be resolved) was substantially worse when using Euclidean distance rather than cosine distance. These differences went away when the top 10 PCs were used as input (which again is standard best practices). These results suggest that in this context, the choice of distance metric matters more in higher dimensions. Thus, I recommend defaulting to cosine distance or testing both metrics side by side when using UMAP or similar tools on high-dimensional datasets.
 *** [[./annotate_pbmc_3k.html][Annotate the PBMC 3k dataset]]
 Markdown.\\
+January 21, 2025.
 
 This markdown is for people with PBMC datasets, who want a convenient way to annoate them using the markers specified in Seurat's [[https://satijalab.org/seurat/articles/pbmc3k_tutorial.html][guided clustering tutorial]]. Here, we take the aforementioned tutorial and run the PBMC 3k dataset through it. Then, we have a block of code that loops through each of the populations identified in the tutorial and looks for the relevant markers in the clustering scheme from our run. This allows the user to quickly and conveniently figure out what cluster belongs to what population.
 *** [[./rainbow_feature_plot.html][Flow cytometry color scheme for Seurat's FeaturePlot]]
 Markdown.\\
+January 20, 2025.
 
 Seurat's FeaturePlot has a built in color scheme that goes from grey (zero expression) through violet, to a deep blue for the highest expression. People like me who started with CyTOF in Cytobank or similar tools are used to a color scheme that starts with blue, then goes through cyan, green, yellow, orange, then red. Here, I re-make that color palette for use in Seurat's FeaturePlot. Then, I further show how to make the FeaturePlot output with the altered color palette independent of Seurat.
 *** [[./charite_covid_figure_2.html][Single-cell sequencing: Schulte-Schrepping et al. Cell 2020]]
 Markdown.\\
+June 13, 2023 - June 20, 2023.
 
 In this markdown, I take a Seurat object provided by the aforementioned paper, and I use it to do perform visualizations, which include box and whisker plots. This markdown is an example of what kinds of things a single-cell sequencing bioinoformatics workflow might entail.
 *** [[./scrna_seq_piepline_pbmc_3k.html][Single-cell sequencing pipeline, PBMC 3k in depth]]
 Markdown.\\
+May 24, 2023.
 
 I use the classic Seurat PBMC 3k vignette as a foundation to explore the guts of the high-level Seurat functions within. This includes normalizing and scaling the data myself, and reverse engineering the "Seurat" clustering algorithm. Regarding the latter, I show you how to visualize the KNN graph that serves as the basis for the Louvain clustering Seurat uses.
 *** [[./scrna_seq_analyze_and_integrate.html][Single-cell sequencing: integrated vs not integrated]]
 Markdown.\\
+July 11, 2023.
 
 In flow cytometry and CyTOF analysis, we distinguish between "type" and "state" markers, so we can cluster on the former and analyze per-cluster expression changes in the latter. For single-cell RNA sequencing, we cannot make this distinguishment. Thus, we have to rely on data integration algorithms when we are analyzing pre-treatment and post-treatment datasets. I show how this is done, and I show how failure to do so can lead research teams to falsely interpret the data, and make false conclusions. Thus, understanding data integration is critical to keeping research teams on track.
 
 ** Dimension reduction interrogation
 *** [[./dr_provenance_interactive.html][Provenance of CyTOF dimension reduction algorithms]]
 Interactive html.\\
+May 18, 2026 - May 19, 2026.
 
 If you want to understand the algorithms used in analyzing data specific to a given field, you need to understand the history of their development. Knowing that Leiden clustering was built on top of Louvain matters, for example. Knowing that UMAP was built after t-SNE matters. Here, I built provenance graph of CyTOF dimensionality reduction/visualization algorithms, from SPADE to UMAP and later. I turned it into an interactive html. We can see that while the field has "collapsed" into UMAP, there are a number of other methods developed after or in parallel to UMAP that could be equally useful or if not useful to your bespoke situation. The bigger picture: this does to the intro section of a paper what SPADE did to the immune system.
 *** [[./distance_matrix_correlation.html][Distance matrix metric correlations]]
 Markdown.\\
+January 24, 2023.
 
 Which distance metrics are right for your data analysis. While I've created a poster on this [[https://tjburns08.github.io/final_distance.project.poster.pdf][here]], this is a stab at it from a different direction. I make synthetic CyTOF-like data, varying the dimensionality from 2 to 1000. I make a distance matrix for each distance metric used, and then correlate each one to that of the Euclidean distance matrix, which is often a default. The results are counter-intuitive.
 *** [[https://github.com/tjburns08/dimension_reduction_add_noise][Dimension reduction add noise]]
 Software.\\
+March 8, 2023.
 
 If you have one or two bad markers in your panel (noise), does it completely ruin your t-SNE/UMAP visualizations? According to my analysis so far, no. I take whole blood CyTOF data (22 dimensions) and add extra dimensions of random normal distributions, running t-SNE after each new column has been added (I've done UMAP too). What I have found:
 1. A few dimensions of noise do not catastrophically affect the map. Lots of noise dimensions do.
@@ -338,12 +396,14 @@ If you have one or two bad markers in your panel (noise), does it completely rui
 3. When you have many dimensions of noise, the map starts to look trajectory-like (look at the end of the gif), which could affect biological interpretation.
 *** [[https://github.com/tjburns08/dimension_reduction_island_placement][Dimension reduction island placement]]
 Software.\\
+February 20, 2023.
 
 This project asks the following question: if you run t-SNE or UMAP over and over for 100 times or more, how different does each map look from each other map? Is each map radically different? Is each map similar? Are there pockets of stability?
 
 The spoiler alert is that the island placement of UMAP appears to be more stable than that of t-SNE, but t-SNE does display pockets of stability. This can be more easily seen by ordering the t-SNE runs by similarity.
 *** KNN sleepwalk examples
 Software.\\
+January 25, 2023.
 
 Some examples of output for my [[https://github.com/tjburns08/knn_sleepwalk][KNN sleepwalk tool]]. These are interactive, and are here to give the user intuition around the nature of dimension reduction maps. From the README: "My wrapper allows for the visualization of a given cell's K-nearest (and K-farthest) neighbors. In other words, the cursor is on a given cell, and the cells on the map that change color correspond to a pre-specified number of nearest neighbors in the original high-dimensional space." See notebooks in my repo to see the data and code. What to do with the visuals below:
 - K-nearest neighbors (KNN) will give you intuition around how exact the embedding is.
@@ -351,121 +411,161 @@ Some examples of output for my [[https://github.com/tjburns08/knn_sleepwalk][KNN
 **** CyTOF PBMCs
 The dataset is internal, from the German Rheumatism Research Center in Berlin. These take a bit to load after you click on them, but its worth the wait.
 ***** [[./knn_sleepwalk_cytof.html][KNN from original marker space]]
+January 25, 2023.
+
 ***** [[./kfn_sleepwalk_cytof.html][KFN from original marker space]]
+January 25, 2023.
+
 **** single-cell RNA sequencing PBMCs
 The dataset is from [[https://satijalab.org/seurat/articles/pbmc3k_tutorial.html][this vignette]]. The dimension reduction was done on the top 10 principal components of the top 2000 most variable genes.
 ***** [[./knn_sleepwalk_scrna_seq_pca.html][KNN from PCA space]]
+January 25, 2023.
+
 ***** [[./kfn_sleepwalk_scrna_seq_pca.html][KFN from PCA space]]
+January 25, 2023.
+
 ***** [[./knn_sleepwalk_scrna_seq_var_genes.html][KNN from variable genes space]]
+January 25, 2023.
+
 ***** [[./kfn_sleepwalk_scrna_seq_var_genes.html][KFN from variable genes space]]
+January 25, 2023.
 
 ** AI agents & LLMs applied to single-cell
 *** [[./cytof_llm_selection_experiment.html][CyTOF clustering algorithms selected at random by LLMs]]
 R Markdown.\\
+March 13, 2026.
 
 If I ask a LLM to select a CyTOF clustering algorithm at random, what do I get? In this experiment, I did that in a 50-iteration loop across a number of models from Anthropic, Google, and xAI's Grok4. The models only chose FlowSOM or PhenoGraph, suggesting a "winner take all" bias in terms of how often the tools are used in the literature. I found that the Antrhopic models prefer FlowSOM, the Google models are mixed, but still lean toward FlowSOM, and Grok4 prefers PhenoGraph. This suggests that similar experiments must be done by anyone who is looking to use AI to assist them in CyTOF analysis pipeliens, to determine where the models might be biased.
 *** [[./samusik_llm_mishmash.html][Experiment with LLM-generated CyTOF data]]
 R Markdown.\\
+February 27, 2026.
 
 What would happen if I asked a frontier-level LLM to simulate CyTOF data, one cell at a time? Would it "rip" a dataset, number by number? Would it create convincing simulated cells that fit marker distributions, and cell frequency distributions? Would it create a bunch of numbers that make no sense? Here, we tested that by getting Claude Sonnet 4.6 to simulate the Samusik dataset, cell by cell. We provided minimal instructions. We found that for the most part, the cells produced were not in line with the Saumisik dataset. This suggests that either Claude Sonnet is not yet good enough to output simulated Samusik data, or that better prompt engineering is needed to this end.
 *** [[https://github.com/tjburns08/claude-cytof-seurat-harmony][Experiment with Claude Code for data integration in Seurat]]
 GitHub repo.\\
+February 16, 2026.
 
 Data integration is something that has been well-trodden in both flow cytometry and single-cell RNA sequencing (at the time of writing [2026-02-16 Mon]) due to batch effects that can form. Here, we use Claude Code to ask two questions. 1) Can we place multiple CyTOF files into Seurat? And 2) Can we use Harmony within this Seurat object ot integrate the data? Claude Code figured out a way to do both. There are plenty of limitations in this experiment, especially that of needing to determine whether we lose biological signal in the integration. But this at least is a first step (of many) that can be built off of.
 *** [[https://github.com/tjburns08/claude-cytof-gating][Experiment with Claude Code for manual gating CyTOF data]]
 GitHub Repo.\\
+February 2, 2026.
 
 Manual gating is an important process for cell subsetting in flow and mass cytometry data. Despite over a decade of innovations in clustering, manual gating has not been replaced. Automated gating has been of interest for a few years now at the time of writing [2026-02-02 Mon]. Here, I tested whether Claude Code could do manual gating on the Samusik mouse bone marrow CyTOF dataset. I found that while lots of work needs to be done, there seems to be a path here, and plenty more things to try. Thus, I present my work in this repo for others to build off of. Hints: try building out an actual interface where individual gates can be adjusted in real time, rather than a script it executes top to bottom. And try getting it to process its own plot images.
 
 *** [[https://github.com/tjburns08/cytof_agentic_prompting_experiments][Experiments with Claude Code and Codex for CyTOF analysis]]
 GitHub Repo.\\
+January 26, 2026.
 
 At the time of writing [2026-01-26 Mon], AI agents are becoming much more capable. To this end, I tested them on CyTOF analysis, a domain I know quite well. I did 5 runs for Claude Code and ChatGPT Codex (both regular and xhigh) respectively. The task was to analyze 1 file, the Samusik_01 dataset (from the X-Shift paper). The agents were able to generate code, run the code, and fix issues in real time. The code ran to completion. The output was almost always sensible. The design choices were hit or miss. Future directions include analyzing multi-file datasets (and see if they can find batch effects, and so forth). Overall, this direction looks promising, but needs work. Have a look for further details.
 *** [[./llm_annotate_pbmc3k.html][Automated LLM-based annotation of single-cell sequencing data, directly in a R workflow]]
 Markdown.\\
+February 7, 2025 - February 12, 2025.
 
 A typical single-cell sequencing pipeline involves clustering the data, and then using prior biological knowledge to annotate the clusters given unique marker expression. Here, I develop a workflow that calls a LLM directly in R, with a pre-specified prompt, to annotate the PBMC 3k data, storing the results as an R object, directly in a Seurat workflow, in R. I then run it multiple times to check for stabiity of the annotations. I find that it annotates the PBMC 3k dataset accurrately, with subtle errors (eg. not going deep enough in the naming of a subset) likely able to be overcome by prompt engineering and/or model selection.
 *** LLM-augmented PCA loadings
+July 17, 2025 - July 24, 2025.
+
 This project was driven by my intern [[https://www.linkedin.com/in/arianna-aalami-328576231/][Arianna Aalami]] (think of her as the first author and me as the last author), a Stanford bioengineering graduate, with both wet-lab and dry-lab capabilities, interested in applying these to study the microbiome.
 **** [[./BLSC_PCA_loading_LLMs_final.html][R Markdown]]
+July 17, 2025.
+
 Here is the code, comments, and explanations needed to generated the reports below. In order to repeat this yourself, you need an OpenAI API key. We note that the cost to run all of these experiments in the markdown, using o4-mini, is around 30 cents.
 **** [[./blsc_pc_loadings_by_llm_interpretation.pdf][PC loading by interpretation report]]
+July 24, 2025.
+
 Here is the primary output from the aforementioned R Markdown, whereby we have the left column that shows a biaxial plot of PC1 and PCN where N is any number between 2 and 10. This already is something that is not often viewed in single-cell sequencing workflows. The right column shows the LLM-generated biological interpretation. The first few PCs are sanity checks in this regard, and the later PCs, while not yet rigorously checked, are thought provoking.
 **** [[./blsc_llm_consistency_check.pdf][LLM consistency experiment]]
+July 24, 2025.
+
 Here, we aimed to check whether the output of our LLM-based biological interpretation is consistent. We tried PC1 (which is straightforward), and PC20 (which we expect to be a bit messier). We note that with the o4-mini model the results were indeed relatively consistent between the multiple runs, with the 4o-mini model (does not do reasoning), the results for PC20 were quite inconsistent (data not shown). The results suggest a degree of consistency when using reasoning models, but we would still recommend doing these runs more than once, just in case.
 
 ** Foundation models & embeddings
 *** [[https://blog.lamin.ai/intro-to-laminr][An Introduction to LaminR]]
 Guest blog post.\\
+April 2, 2026.
 
 One of the longer term issues I've run into in my consulting work is that of coming back to old projects, handing off my work, or receiving work others have handed off to me. There is inevitable confusion as to what was done previously. Lamin solves this problem by tracking every data artifact, in terms of what was done to it when. I think this will become increasingly important, especially when we get to a point where there are AI agents doing work alongside you. LaminR is Lamin's R interface, which I use here to analyze the PBMC 3k dataset, in order to show you what Lamin does.
 *** [[./pbmc_uce_nn_comparison.html][Nearest neighbor similarity between PBMC 3k dataset and its foundation model embedding]]
 Markdown.\\
+January 21, 2025.
 
 Universal Cell Embeddings (UCE) is a foundation model that takes a single-cell dataset as input and outputs a 1280 dimensional embedding that is relevant in the context of a large number of single-cell datasets that it was trained on. This model can in turn do things like label transfer between datasets. Here, I looked at the embedding within the PBMC 3k dataset and simply asked how many k-nearest neighbors per cell are shared between the original dataset and its UCE embedding. Specifically, I used the first 50 PCs of the PBMC 3k dataset's top 2000 most variable genes (standard practice), and the first 50 PCs of the UCE model. The results suggest that nearest neighbors are preserved at the labeled cell subset level but the resolution does not go beyond this. Note: I also compared the first 50 PCs of the PBMC 3k dataset with the entire 1280 dimensions of the UCE output, and the results were slightly worse but similar.
 *** [[./compare_full_vs_filtered_uce.html][Running only the most variable genes through UCE leads to worse cell separation than running the whole dataset]]
 Markdown.\\
+October 19, 2024 - October 23, 2024.
 
 In a standard single cell RNA sequencing analysis pipeline, one of the first things you do is find and use only the most variable genes, as measured by gene expression and dispersion. These variable genes are sufficient to be used in downstream analysis, like clustering and dimensionality reduction. Here, I test whether I can do the same thing for the Universal Cell Embeddings (UCE) foundation model, which in theory could save time and compute. I find that running only the variable genes through UCE leads to poorer cell type separation, as measured by both UMAP and PCA. This suggests that those who use UCE should use the full datasets, not filtered ones.
 *** [[./explore_uce_output_3k_10k.html][Universal Cell Embeddings with two PBMC datasets: how to test whether it grokked integration]]
 Markdown.\\
+October 12, 2024 - October 13, 2024.
 
 In this markdown, we import two PBMC datasets, the PBMC 3k and the PBMC 10k datasets. The 3k dataset is a flagship dataset used in the early days of Seurat. The 10k dataset is the default that is run through the model if you don't specify another dataset. Here, I show that if we look at a UMAP embedding, the datasets do not sit on each other. However, if we use my KnnSleepwalk package, we find that the distances on the UMAP are distorted. What we find is that, for example, the T cell island for the 3k datset sits much closer to the T cell island for the 10k dataset. This in turn suggests that we should be careful using UMAP to assess foundation models in single-cell and in any field.
 *** [[./human_universal_cell_embeddings.html][UMAP does not capture the proper center and outer edges of human CNS portion of the Univesal Cell Embeddings (UCE) transformer foundation model]]
 Markdown.\\
+September 29, 2024 - October 12, 2024.
 
 This is a jupyter notebook that looks at the Universal Cell Embeddings transformer foundation model for single-cell sequencing. It is part of an emerging sub-field of foundation model building within single-cell sequencing. The output of the model is a 1280 dimensional embedding. Here, to get a sense of the geometry of the embedding, I look at the center and the outer edges. I visualize this in the context of UMAP space, and find that UMAP does not properly capture center-ness. I further find that center-ness is positively associated with both frequency of cell subset and per-subset density. I conclude that center-ness is a worthwhile feature to look at in the context of these models, and that it is not something that UMAP can be relied upon to capture.
 
 ** Software & packages
 *** [[https://github.com/tjburns08/KnnSleepwalk][Knn sleepwalk]]
 Software.\\
+May 7, 2024 - May 14, 2024.
 
 A wrapper I wrote around the [[https://anders-biostat.github.io/sleepwalk/][sleepwalk]] R package, that I in turn made into a package, so users even with limited bioinformatics experience can utilize it. Hover the cursor over any cell in your embedding, and it will show you the cell's k-nearest neighbors computed from the original feature space (as opposed to the embedding space). This allows you to test your assumptions around how exact a low-dimensional embedding (eg. t-SNE, UMAP) is.
 *** [[https://www.bioconductor.org/packages/release/bioc/html/Sconify.html][Bioconductor package Sconify]]
 Software.\\
+May 1, 2018.
 
 Official description: This package does k-nearest neighbor based statistics and visualizations with flow and mass cytometery data. This gives tSNE maps"fold change" functionality and provides a data quality metric by assessing manifold overlap between fcs files expected to be the same. Other applications using this package include imputation, marker redundancy, and testing the relative information loss of lower dimension embeddings compared to the original manifold.
 
 ** Talks, slide decks, posters
 *** [[./tjb_dimr_talk.pdf][A visual interrogation of dimension reduction tools for single-cell analysis]]
 Slide deck.\\
+January 24, 2020.
 
 German CyTOF User Forum; Berlin, Germany; January 2020.
 In this talk, I measured the accurracy of dimension reduction tools (PCA, t-SNE, and UMAP) in terms of their nearest neighbor overlap. This is the k-nearest neighbors of a given cell in the original high dimension space, in comparison to the k-nearest neighbors of a given cell in the embedding. I show that the overlap here is much lower than my audience expected. I've given this talk many times since then, for my clients.
 *** [[./visual_capabilities_of_som.pdf][Neighborhood-based analysis of self-organizing maps]]
 Slide deck.\\
+June 2018.
 
 [[https://vib.be/labs/saeys-lab][Laboratory of Yvan Saeys]], VIB Ghent, Belgium. June 2018.
 This slide deck summarizes some work I did with Sofie Van Gassen, developer of [[https://bioconductor.org/packages/release/bioc/html/FlowSOM.html][FlowSOM]] and all-around awesome person. We were looking at what is called the U-Matrix, a way to visualize the self organizing maps that FlowSOM produces. The question was what insights could we derive from using the U-Matrix to visualize the output of very large FlowSOM clusterings (eg. a 100 x 100 grid rather than the default 10 x 10). So far as I know, this is not explored in any major CyTOF publication, so any CyTOF users who use FlowSOM (most people at the time of writing) should have a look at this. There are visualizations in here that are useful but remain unpublished.
 *** [[./mass.cytometry.analysis.history.pdf][A history of mass cytometry data analysis, and where the field is going]]
 Slide deck.\\
+March 2019.
 
 [[https://www.drfz.de/en/aktuelles/veranstaltungen/cytof-forum-2020/][German Rheumatism Research Center]]; Berlin, Germany; March 2019.
 I talk about how CyTOF data analysis developed from its inception at the beginning of 2010 to now. In doing so, I provide a template for proper CyTOF data analysis in terms of how we got there. In doing so, I test various assumptions: I show visualizations of data transformations other than asinh(x/5), and I show what a SPADE tree looks like with completely random inputs. I like to show these slides to people new to CyTOF data analysis to properly orient them.
 *** [[./drfz_tsne_interrogation_talk_final.pdf][A comprehensive interrogation of the t-SNE algorithm for mass cytometry analysis]]
 Slide deck.\\
+May 2018.
 
 German Rheumatism Research Center; Berlin, Germany; May 2018.
 This talk was a response to a member of the research institue who was simply not convinced that t-SNE was providing the accurracy that the avearge CyTOF user thought. In this talk, I show that he was right. This being said, I provide recommendations for how to properly use t-SNE for CyTOF analysis.
 *** [[./burns_cytof_user_forum_talk_for_pdf.pdf][Nearest neighborhood comparisons across biological conditions in single cell data]]
 Slide deck.\\
+February 2, 2018.
 
 Invited Speaker, German CyTOF User Forum; Berlin, Germany; February 2018.
 This is the talk version of my 2018 Sconify paper, that ended up being the final chapter of my PhD thesis. There are two aspects to this talk. The first is making visual comparisons of unstimulated and stimulated CyTOF data when looking at measurements of phosphoproteins. This was easily done on SPADE trees, but not t-SNE maps, until I started making k-nearest neighbor based comparisons. The second aspect of this talk is using the same nearest neighbor based comparisons to investigate batch effects in CyTOF data. I note that batch effects were only heavily discussed among CyTOF users starting near 2020 (in my circles), and this work goes back to 2016.
 *** [[./final_distance.project.poster.pdf][Determining which distance metrics are ideal within a mass cytometry data analysis pipeline]]
 Poster.\\
+April 28, 2018 - May 2, 2018.
 
 CYTO Conference; Prague, Czech Republic; May 2018.
 Abstract: Due to the rise of high-dimensional single cell technologies in the past few years, there has been an increasing number of both computational methods and workflows to analyze the new wealth of data. However, non-intuitive properties of high-dimensional space can give rise to analysis artifacts, collectively known of as the "curse of dimensionality." Increasing dimensions differentially affect the performance of distance metrics, and there is no clear consensus about which distance metrics to use for which analysis strategies. While the influence of many tool-specific parameters has been evaluated, we study here the impact of commonly used distance metrics on the outcome of dimensionality reduction and clustering.
 
 *** [[./0117TylerCytobankBlog.pdf][Fine-Tune viSNE to Get the Most of Your Single-Cell Data Analysis]]
 Guest blog post.\\
+January 17, 2017.
 
 This is a guest blog post I wrote for Cytobank. The formatting of the post has since been messed up (image links are broken) since Beckman acquired Cytobank and moved all the web content over. Until it gets fixed, I'm linking you to the original PDF. At the time of writing, there was still a lot of work to be done in terms of really understanding dimension reduction for CyTOF data. As such, I spent a lot of time adjusting inputs (eg. number of cells) and parameters (eg. perplexity) to understand how that affects the resulting map.
 
 ** Publications & thesis
 *** [[https://www.biorxiv.org/content/10.1101/337485v1][Continuous Visualization of Multiple Biological Conditions In Single-Cell Data]]
 First author pre-print.\\
+June 2, 2018.
 
 Abstract: In high-dimensional single cell data, comparing changes in functional markers between conditions is typically done across manual or algorithm-derived partitions based on population-defining markers. Visualizations of these partitions is commonly done on low-dimensional embeddings (eg. t-SNE), colored by per-partition changes. Here, we provide an analysis and visualization tool that performs these comparisons across overlapping k-nearest neighbor (KNN) groupings. This allows one to color low-dimensional embeddings by marker changes without hard boundaries imposed by partitioning. We devised an objective optimization of k based on minimizing functional marker KNN imputation error. Proof-of-concept work visualized the exact location of an IL-7 responsive subset in a B cell developmental trajectory on a t-SNE map independent of clustering. Per-condition cell frequency analysis revealed that KNN is sensitive to detecting artifacts due to marker shift, and therefore can also be valuable in a quality control pipeline. Overall, we found that KNN groupings lead to useful multiple condition visualizations and efficiently extract a large amount of information from mass cytometry data. Our software is publicly available through the Bioconductor package Sconify.
 
@@ -473,12 +573,14 @@ I've been asked recently why this is still a pre-print. So I published the peer 
 
 *** [[https://pubmed.ncbi.nlm.nih.gov/28094900/][High Throughput Precision Measurement of Subcellular Localization in Single Cells]]
 First author publication.\\
+January 17, 2017.
 
 Abstract: To quantify visual and spatial information in single cells with a throughput of thousands of cells per second, we developed Subcellular Localization Assay (SLA). This adaptation of Proximity Ligation Assay expands the capabilities of flow cytometry to include data relating to localization of proteins to and within organelles. We used SLA to detect the nuclear import of transcription factors across cell subsets in complex samples. We further measured intranuclear re-localization of target proteins across the cell cycle and upon DNA damage induction. SLA combines multiple single-cell methods to bring about a new dimension of inquiry and analysis in complex cell populations. (c) 2017 International Society for Advancement of Cytometry.
 
 My summer students are co-authors on this paper! Undergrads and high school students. They worked very hard and learned a lot. I am proud of each and every one of them.
 *** [[./Burns.Dissertation.Final.pdf][Expanding the Capabilities of Mass Cytometry Data Acquisition and Analysis]]
 PhD Thesis.\\
+August 2017.
 
 My PhD thesis dissertation, from the laboratory of Garry P. Nolan at Stanford University School of Medicine.
 
@@ -523,10 +625,16 @@ February 9, 2025 - February 18, 2025.
 At the time of writing (February 2025) I am frustrated by the best of the LLMs giving me results that are still in my opinion superficial. So I wrote a script that would prompt a LLM to give me an answer on something, and then with each iteration in a loop, take a piece of the answer and go deeper into it. I thought it would either converge upon something fundamental, or continually drift into different topics. I was wrong on both. The model eventually descended into emoji-laden verse, and then word salad, and then a sort of letter salad, where it started making up words, disregarding grammar, and so forth. Something like E. E. Cummings. I encourage the reader to try it on their machine.
 
 *** 10,000 random research questions generated by a LLM
+July 30, 2025 - August 5, 2025.
+
 This project was inspired by the LLM-generated random numbers [[https://sanand0.github.io/llmrandom/][work]], which showed that LLM's have "favorite" numbers. Here, we generate research questions and determine that at least within the field of the microbiome, Gemini 2.5 Flash Lite has favorite questions.
 **** [[./microbiome_questions.html][Main writeup]]
+July 30, 2025.
+
 This report shows you how to generate the questions, embed them, cluster them, reduce them to UMAP coordinates, and plot the results, saving it as a html.
 **** [[./make_metaquestions.html][R Markdown]]
+July 30, 2025.
+
 This piece is the code to take the above output and label the clusters.
 
 *** [[./gpt3_student.org][GPT-3 simulating students]]
@@ -550,11 +658,13 @@ The article behind my [[https://www.youtube.com/watch?v=U35T-KzfeLk][TEDx Basel 
 
 *** [[./run_gprofiler_and_embed.html][From gene lists to interactive contextual maps: enhancing g:Profiler interpretation]]
 Markdown.\\
+January 29, 2025.
 
 In my client projects, I often have to make sense of long lists of differentially expressed genes (DEGs). This typically leads to a long list of biologically relevant terms (eg. GO terms, pathways). This too is often overwhelming. Here, I make these terms easier to understand by producing a interactive contextual map of them, where terms that are similar to each other in context are physically near each other on the map. In this R Markdown, I show you both how its done, and how to use python's sentence-transformers package (and python in general) directly in R.
 
 *** [[./website_internal_link_graph.html][Graph visualization of my website]]
 Visualization.\\
+August 5, 2023.
 
 My website functions a bit like a personal wiki, with content linking internally to other content. Here is a graph that shows an updated version of what links to what, so the reader can get a feel for what ideas I express and how they relate to each other. It is colored by the number of links.
 
@@ -566,6 +676,7 @@ I started a typed journal back in 2009. It recently hit one million words. It is
 
 *** [[./cnn_fox_ap_map.html][CNN, FoxNews, and AP: a News Space study]]
 Markdown.\\
+April 7, 2023.
 
 In this study, we take news articles that correspond to CNN, FoxNews, and AP, from their Twitter handles, and their BERT embeddings, and produce a map of news space. We figure out what areas of news space are heavy in one news source or the other (perhaps corresponding to political bias). We find that Fox News in general reports heavily on the topic of politics in comparison to CNN and AP, and that while AP is supposed to be neutral, there are still regions of news space that are heavy in AP content. Interactive maps are included for the user to explore.
 
@@ -577,36 +688,43 @@ We should all be active content curators. We should all be actively discussing h
 
 *** [[./context_problem_bfx.html][The Context Problem in Bioinformatics]]
 Article.\\
+August 26, 2022.
 
 In the age of big data, my bioinformatics analyses often lead to output that is still too much for a human to extract insight from. My use case here, common in my work: what GWAS traits do two or more genes have in common? I produce a context map of GWAS traits using an AI language model based on BERT. I then subset the map by traits associated with the genes the user inputs, coloring the points accordingly. One can quickly know what contexts, rather than traits, the genes share.
 
 *** [[./ask_marcus_writeup.html][What would Marcus Aurelius say?]]
 Article.\\
+September 1, 2022 - September 7, 2022.
 
 I turn the Meditations by Marcus Aurelius into a semantic search based language model, where I ask a question and it returns the most relevant passages in the book as answers. This helps me with the study of stoic philosophy, but this approach can be used in any sort of book that is structured as aphorisms.
 
 *** [[https://github.com/tjburns08/rss_map][RSS map]]
 Software.\\
+January 11, 2023 - March 22, 2023.
 
 Associated with [[https://tjburns08.github.io/scrolling_problem.html][The Scrolling Problem]]. An app that converts an RSS feed into a semantic map where articles that are similar to each other in context are near each other on the map.
 
 *** (temporarily suspended) [[https://gwasmap.herokuapp.com/][Gwasmap]]
 Software.\\
+August 26, 2022.
 
 Associated with my article [[https://tjburns08.github.io/context_problem_bfx.html][The Context Problem in Bioinformatics]]. Given one of more genes, what are the GWAS associations? These are placed onto a semantic map where associations that are similar to each other are grouped near each other on the map. Thus, if gene 1 is associated with Alzheimer's disease and gene 2 is associated with age-related cognitive decline (different but related disease) the associations for each gene (colored accordingly) will show up near each other.
 
 *** [[https://huggingface.co/spaces/tjburns/ask_marcus_aurelius][Ask Marcus Aurelius]]
 Software.\\
+September 7, 2022.
 
 Associated with [[https://tjburns08.github.io/ask_marcus_writeup.html][What Would Marcus Aurelius Say]]. This project turned the Meditaitons by Marcus Aurelius into a semantic map that can be queried, such that the user can ask a question, and the software will return the most relevant passages in the Meditations.
 
 *** [[https://huggingface.co/spaces/tjburns/find_your_biases][Find your biases]]
 Software.\\
+September 9, 2022.
 
 Write your thoughts into the text box, and the app will give you a list of cognitive biases that match the thoughts. The app does this using an AI embedding model to embed both your input and Wikipedia's [[https://en.wikipedia.org/wiki/List_of_cognitive_biases][list of cognitive biases]], and then perform a nearest neighbor search.
 
 *** [[https://github.com/tjburns08/twitter_archive_and_embed][Twitter archive and embed]]
 Software.\\
+February 15, 2023.
 
 This is one of the main tools that I wrote and use to address the [[./scrolling_problem.html][scrolling problem]]. I gave a [[https://www.youtube.com/watch?v=U35T-KzfeLk][TED talk]] on this project, and in progress of preparation, Twitter decimated my ability to get data. But here is what I've got.
 
@@ -614,18 +732,23 @@ A pipeline that takes as input a list of twitter user names that you supply. Fir
 
 *** [[https://huggingface.co/spaces/tjburns/duckduckgo_2d_search][DuckDuckGo 2-D Search]]
 Software.\\
+February 1, 2023.
 
 For web searches of broad topics, where you need the first hundred results rather than the first page. Type in your search term of interest, and it will give you an interactive context map of search results and a results table with clickable links.
 
 *** [[./biorxiv_medrxiv_history.html][Preprint server archive]]
 Software.\\
+November 17, 2022.
 
 A searchable and sortable table of every biorxiv and medrxiv pre-print to date ([2022-11-17 Thu 13:43]). Specifically, every time a paper is uploaded to one of these pre-print servers, it is automatically tweeted out from the respective twitter handle. As such, the table contains the paper title along with various tweet metadata (eg. likes) to allow users to understand which papers are potentialy important.
 
 *** Likes vs retweets
 Markdown.\\
+March 9, 2023.
 
 **** [[./single cell sequencing OR single-cell sequencing.csv_likes_vs_retweets.html][Search term: single cell sequencing OR single-cell sequencing]]
+March 9, 2023.
+
 We find three regions:
 - High retweets/likes: open academic student and postdoc positions
 - Medium retweets/likes: papers, projects, data (the stuff you're probably looking for)
@@ -633,22 +756,26 @@ We find three regions:
 
 *** [[./question_graph_writeup.html][Question graph]]
 Markdown.\\
+June 30, 2022.
 
 You are only as good as the questions you ask yourself and others. My uncle told me that many years ago when I was getting started with my career and it stuck. This has been relevant to me in terms of having and maintaining good friendships, being a good husband, being a good family member, being a good businessman, and when I was in graduate school, being a good scientist, and simply being an interesting person. I have a very large list of questions now that is very overwhelming. So I turned them into an embedding using the BERT language model, turned that into a nearest neighbor graph, and then derived insight from looking at the questions in terms of "communities."
 
 ** Older NLP / literature mining
 *** [[https://medium.com/@tjburns_72591/how-to-utilize-scientific-literature-trends-to-gain-intuition-about-a-topic-b5c554e3d280][How to utilize scientific literature trends to gain intuition around a topic]]
 Medium post.\\
+August 3, 2018.
 
 The scientific literature is overwhelming, and knowing how to utilize text mining and analytic tools can help you efficiently get what you want out of a literature search. Here, I utilize the PubMed API to find publication rates for particular topics. I show that among other things, single-cell sequencing began out-pacing mass cytometry in 2016. Insight like this helps you see how crowded a field is and especially identify trends.
 
 *** [[https://medium.com/coinmonks/how-to-identify-thought-leaders-and-visualize-their-influence-c01aa218090e][How to identify thought leaders and visualize their influence]]
 Medium post.\\
+August 9, 2018.
 
 Understanding how authors of a given field are connected can help you identify key individuals to pay attention to. Here is how I utilize the PubMed API to build co-author networks, which lead me to identify thought leaders in a given domain. In this article, focusing on mass cytometry, I identify two types of thought leaders: one exclusive to a particular sub-domain, and one who spans across multiple sub-domains. It is important to know both types when approaching a new topic.
 
 *** [[https://medium.com/@tjburns_72591/using-and-mining-pre-prints-to-stay-ahead-of-your-field-with-the-help-of-twitter-50d5bdc528de][Using and mining pre-prints to stay ahead of your field, with the help of Twitter]]
 Medium post.\\
+March 27, 2019.
 
 I explain why pre-prints are important to staying ahead of the technology and general paradigms in your field, with single-cell analysis as an example. I then show how I utilize the Twitter API to harvest and rank tweets from automated pre-print linking bots from bioRxiv to determine what pre-print articles are being talked about (and therefore what you should probably pay attention to).
 
@@ -862,6 +989,7 @@ What happens under the hood when you do something simple in R, like add two numb
 :UNNUMBERED: notoc
 :END:
 Fiction.\\
+June 9, 2023.
 
 I am learning Lisp at the moment. In learning about the history of the language, I realized that the story of Lisp is analogous to the Tower of Babel. I am not the first person to realize this by any means, but I saw it in a way that I haven't seen anywhere else. So I decided to put it into words here.
 ** [[./metaprogramming_in_R.html][Metaprogramming in R]]
@@ -869,6 +997,7 @@ I am learning Lisp at the moment. In learning about the history of the language,
 :UNNUMBERED: notoc
 :END:
 Markdown.\\
+June 4, 2023.
 
 When I started learning Lisp, I learned of the concept of metaprogramming. This means using code to change the programming language itself. A practical example of this in English is using "they/them" to denote gender-neutral singular pronouns, overriding the plural default. Here, I show you how to change the syntax of R to fit your fancy. I show you how to change the "+" operator in ggplot2, and to zero-index vectors, as they're done in many other programming languages. The goal of this markdown is to get you to see through and unsee the arbitrary constraints that any language, spoken/written or programming, will give you.
 ** [[./ca_rule_space.html][Elementary cellular automata rule space]]
@@ -876,6 +1005,7 @@ When I started learning Lisp, I learned of the concept of metaprogramming. This 
 :UNNUMBERED: notoc
 :END:
 Markdown.\\
+April 8, 2023.
 
 I lay out the rule space of elementary cellular automata as an eight dimensional dataset. I perform UMAP on rule space and color by complexity measures, the most interesting being the labeled Wolfram class of each rule. Class 3, the most chaotic behavior, shows up as little pockets in rule space. Class 4, where things like Turing completeness happen, shows up at or near these pockets, surrounded by Class 2 (repetitive, orderly). This supports the idea of Class 4 being "at the edge of chaos."
 ** [[./logic_gates.html][Logic gates]]
@@ -883,6 +1013,7 @@ I lay out the rule space of elementary cellular automata as an eight dimensional
 :UNNUMBERED: notoc
 :END:
 Markdown.\\
+December 7, 2022.
 
 What are the fundamental units of a computer? Logic gates. I show what these are. I then show that they can be created with combinations of a single type of logic gate: NAND (Not AND). In other words, you can make a general-purpose computer if you had enough NAND gates and wires. In the spirit of this, I combine NAND gates to create a calculator that can add large numbers. One of the key points in this exercise is that it does not take much to get from NAND gates to complex computations.
 ** [[./1d_ca.html][1-D Cellular Automata]]
@@ -890,6 +1021,7 @@ What are the fundamental units of a computer? Logic gates. I show what these are
 :UNNUMBERED: notoc
 :END:
 Markdown.\\
+June 29, 2022.
 
 Here, I write some code to produce each of the 256 Wolfram cellular automata rules, and visualize the output.
 ** [[./explore_rule_110.html][Explore Wolfram Rule 110]]
@@ -897,6 +1029,7 @@ Here, I write some code to produce each of the 256 Wolfram cellular automata rul
 :UNNUMBERED: notoc
 :END:
 Markdown.\\
+June 29, 2022.
 
 Here, I write some code to produce Rule 110, a Class 4 1-D cellular automata. I then enhance the gliders to make them easier to see. I explore how the output changes if I make the rule probabilistic (eg. 99.99% chance the rule will be followed.
 * Statistics
@@ -907,6 +1040,7 @@ There is a lot that you can figure out on your own if you simulate coin tosses a
 :UNNUMBERED: notoc
 :END:
 Markdown.\\
+June 29, 2022 - April 2, 2024.
 
 I taught one of my high school summer students the basics of probability by simulating coin tosses in R. Here, we "discover" the law of large numbers and the central limit theorem using simulated coin tosses.
 ** [[./2_runs_of_luck.html][Coin toss series 2: Runs of luck]]
@@ -914,6 +1048,7 @@ I taught one of my high school summer students the basics of probability by simu
 :UNNUMBERED: notoc
 :END:
 Markdown.\\
+June 29, 2022.
 
 Here, we build on the initial piece in the series by looking at the properties of runs of luck. If we flip a coin a million times, how often will we get 10 heads in a row? How many times do we need to flip a coin to get 20 heads in a row on average? Related to sports. How often, statistically, would you expect Steph Curry to make 10 three pointers in a row given his 3-point shot percentage?
 ** [[./3_fair_vs_unfair_coins.html][Coin toss series 3: Fair versus unfair coins]]
@@ -921,6 +1056,7 @@ Here, we build on the initial piece in the series by looking at the properties o
 :UNNUMBERED: notoc
 :END:
 Markdown.\\
+June 29, 2022.
 
 Here, we examine the properties of unfair coins, where the odds of getting heads or tails does not equal 50%. Can we figure out whether a coin is a fair coin?
 ** [[./4_random_walk.html][Coin toss series 4: Random walks]]
@@ -928,6 +1064,7 @@ Here, we examine the properties of unfair coins, where the odds of getting heads
 :UNNUMBERED: notoc
 :END:
 Markdown.\\
+June 29, 2022.
 
 Here, we show that if we simulate flipping coins, but we keep a record of the number of heads and the number of tails, we end up doing a random walk. We visualize these walks (they look somewhat like stock market data), and ask questions like how often a random walker crosses zero.
 ** [[./5_dice_roll.html][Coin toss series 5: Dice rolls]]
@@ -935,6 +1072,7 @@ Here, we show that if we simulate flipping coins, but we keep a record of the nu
 :UNNUMBERED: notoc
 :END:
 Markdown.\\
+June 29, 2022.
 
 Here, we do an abstraction of the coin tosses we have been simulating, by coinsidering dice of three or more faces. We simulate these dice rolls and examine their properties. How often does a six sided dice land on the number 3? We can figure that out with simple math, but if you roll a dice 1000 times, and you do that again, and you do that again, what will be the standard deviation of the number of times the dice lands on 3?
 ** [[./6_is_this_sequence_random.html][Coin toss series 6: Is this sequence random?]]
@@ -942,6 +1080,7 @@ Here, we do an abstraction of the coin tosses we have been simulating, by coinsi
 :UNNUMBERED: notoc
 :END:
 Markdown.\\
+June 29, 2022.
 
 Here, we look at fair coin tosses, unfair coin tosses, and random walks, and explore the randomness of the sequences by doing convolutions on the sequences with kernel size 2.
 * Personal essays
@@ -988,6 +1127,7 @@ I take the classic game Zelda: A Link to the Past, and draw parallels between th
 :UNNUMBERED: notoc
 :END:
 Feature.\\
+December 21, 2020.
 
 An article I wrote in 2020 for the annual Krupp Internship e-newsletter. It was written just after the first wave of the COVID-19 pandemic. It serves as a time capsule for that period, in which many of our basic assumptions about the stability and the future of the modern world were upended. I enjoy looking at it again now and then, as it captures a very unique state of mind. It also captures my wedding, which took place the day before the first lockdown, and included toilet paper as a wedding present.
 
@@ -1025,7 +1165,7 @@ Over the years, I have seen people who want to get in shape develop fitness goal
 :UNNUMBERED: notoc
 :END:
 Article.\\
-February 7 - February 7.
+February 7, 2023 - February 8, 2023.
 
 There is a renewed interest in Stoic philosophy as of late. It's a great set of tools that I have used for dealing with hardship. But it's 2000 years old. Where are the modern Stoics? They exist, but under a different name: psychotherapists. If psychotherapy was the successor to Stoicism, and there is so much interest in Stoicism, then shouldn't there be an equal amount of interest in clinical psychology and how it can help us? Shouldn't it be something we learn early, and make these tools part of our daily routine, as the Stoics do?
 ** [[./just_paint.org][Just paint]]
@@ -1043,18 +1183,22 @@ Think of these as both newsletters and time capsules. They are not exhaustive, b
 :PROPERTIES:
 :UNNUMBERED: notoc
 :END:
+May 2024.
 ** [[./2023_may.html][May 2023]]
 :PROPERTIES:
 :UNNUMBERED: notoc
 :END:
+May 2023.
 ** [[./2023_april.html][April 2023]]
 :PROPERTIES:
 :UNNUMBERED: notoc
 :END:
+April 2023.
 ** [[./2023_march.html][March 2023]]
 :PROPERTIES:
 :UNNUMBERED: notoc
 :END:
+March 2023.
 * Collections
 #+HTML: <a href="#top">Back to top</a>
 These are growing lists of things that I find important.
@@ -1063,6 +1207,7 @@ These are growing lists of things that I find important.
 :UNNUMBERED: notoc
 :END:
 Collection.\\
+May 25, 2024 - July 21, 2025.
 
 I find that asking good questions is key to orienting you in the right direction. As I get older, I am focusing less on answers and more on questions. Accordingly, here is a growing collection of questions that I have found helpful over the years. It is divided into two categories: lists of questions that have been collected by others, and my independent collection. Most of these questions are attributed to others, as opposed to being unique to me.
 
@@ -1071,6 +1216,7 @@ I find that asking good questions is key to orienting you in the right direction
 :UNNUMBERED: notoc
 :END:
 Collection.\\
+May 17, 2024 - present.
 
 Social media is a way for me to get things off my chest that I think are valuable to the world. Oftentimes, I will have an idea, or a piece of software, or a gif, that will give people unique intuition around a perticular topic, for example in bioinformatics. Rather than spending countless hours turning it into a paper or what not, it is easier to just turn it into a social media post. Having done this for a few years now, I have a collection of social media posts. Rather than having to scroll through each of them yourself, I have organized the ones that matter by topic here.
 * Where I was featured
@@ -1079,12 +1225,15 @@ Social media is a way for me to get things off my chest that I think are valuabl
 :PROPERTIES:
 :UNNUMBERED: notoc
 :END:
+May 20, 2026.
+
 A report on a series of convenings in DC that I helped [[https://helena.org/][Helena]] put on in collaboration with RAND. These convenings were around AI-Bio safety. The first one was technical-centric and the second one was policy-centric. What I can tell you is that there is a very large gap between what is being said on the internet, and what is being said in person. These convenings were under the [[https://en.wikipedia.org/wiki/Chatham_House_Rule][Chatham House Rule]], so we can only say so much. But have a look at the report.
 ** [[./Krupp-Stanford_E-Newsletter_2025_9MB.pdf][Krupp Stanford Newsletter 2025, featuring my intern]]
 :PROPERTIES:
 :UNNUMBERED: notoc
 :END:
 Feature.\\
+December 5, 2025 - December 10, 2025.
 
 In the summer of 2025, I had a Krupp intern from the Stanford in Berlin program. This was special because I did this same internship when I was in the Stanford in Berlin program in 2007. Here, I got the chance to give back. On page 6 of this pdf, my intern Arianna gives her reflection of how the internship and her summer in general went. I thank the program for giving me the opportunity to mentor Arianna, and I hope for many more Krupp interns to come.
 ** [[https://www.youtube.com/watch?v=wRVOyYse5ug][Interview with Ramji Srinivasan, CEO of Teiko]]
@@ -1092,6 +1241,7 @@ In the summer of 2025, I had a Krupp intern from the Stanford in Berlin program.
 :UNNUMBERED: notoc
 :END:
 Video.\\
+April 25, 2025 - April 30, 2025.
 
 This interview took place at AACR 2025 in Chicago. The interview was spur of the moment. We discussed a variety of topics related to flow/mass cytometry and single-cell analysis.
 
@@ -1101,6 +1251,7 @@ To give credit where credit is due, I talk about the MEM paper (Diggins et al, 2
 :UNNUMBERED: notoc
 :END:
 Webinar.\\
+July 10, 2024.
 
 This webinar is the latest iteration of my "dimensionality reduction interrogation" work, which has spanned six years. In this talk, I show the limits of these tools by looking at the K-nearest neighbors (KNN) of a given cell in the 2-D embedding space, and compare it to the K-nearest neighbors of that same cell in the high-dimensional feature space. I look at the averages across a given dataset for a given method to compare t-SNE, UMAP and PCA. I then color the maps by each cell's KNN preservation to look for patterns across the dataset. While I point out some general trends, I conclude that at least some of this depends on the dataset. Thus, I demo my free [[https://github.com/tjburns08/KnnSleepwalk][KnnSleepwalk]] tool, which allows users to deterine the performance of their t-SNE's and UMAPs for their data accordingly.
 ** [[https://rseng.github.io/devstories/2023/tyler-burns-part-2/][Developer Stories Podcast: Part 2: Be the flame, not the moth]]
@@ -1108,6 +1259,7 @@ This webinar is the latest iteration of my "dimensionality reduction interrogati
 :UNNUMBERED: notoc
 :END:
 Guest on a Podcast.\\
+June 1, 2023.
 
 Here is part 2 of my appearance on the Developer Stories podcast. In part 1, I talked about my transition from biology to programming and bioinformatics in graduate school. In this podcast, I talk about my life after graduation, which started with a big move from Palo Alto, California to Berlin, Germany. I talk about life out here, projects I'm working on, being self-employed, and starting my own company.
 
@@ -1116,6 +1268,7 @@ Here is part 2 of my appearance on the Developer Stories podcast. In part 1, I t
 :UNNUMBERED: notoc
 :END:
 Guest on a podcast.\\
+May 4, 2023.
 
 I talk with software developer Vanessa Sochat about my time in graduate school. I started out as a wet-lab biologist. But after taking an intro CS class for fun, I realized that I really enjoyed the dry-lab side of things, and my career trajectory changed accordingly. Have a listen for more details. This is part 1 of 2.
 ** [[https://www.youtube.com/watch?v=U35T-KzfeLk][TEDx Basel talk: my scrolling problem, and how I fixed it]]
@@ -1123,6 +1276,7 @@ I talk with software developer Vanessa Sochat about my time in graduate school. 
 :UNNUMBERED: notoc
 :END:
 YouTube video of my TED talk.\\
+July 7, 2023.
 
 In this talk, I introduce the idea of the Scrolling Problem, which is the incompatiblity of my ADD brain and modern technology built around the infinite scroll. I talk about some work I'm doing to counteract that, which can be found [[https://github.com/tjburns08/twitter_archive_and_embed][here]]. It was originally Twitter, but I switched to RSS mapping, [[https://github.com/tjburns08/rss_map][here]], after Twitter started blocking scrapers.
 ** [[./burns_tedx_caricature.pdf][TEDx Basel: caricature of my talk]]
@@ -1130,6 +1284,7 @@ In this talk, I introduce the idea of the Scrolling Problem, which is the incomp
 :UNNUMBERED: notoc
 :END:
 Work of art.\\
+May 15, 2023.
 
 While I was giving my TED talk, unbeknownst to me an artist in the audience was drawing it out in real time, complete with pen and watercolor. He did this for each of the speakers. I was extremely impressed with what he was able to do given the very limited time. My talk is not yet on YouTube, but if you want the gist of it, have a look at this picture.
 ** [[./tyler_alumni_im_portrait.pdf][Tyler Alumni Im Portrait]]
@@ -1137,6 +1292,7 @@ While I was giving my TED talk, unbeknownst to me an artist in the audience was 
 :UNNUMBERED: notoc
 :END:
 Feature.\\
+July 5, 2023.
 
 "Im" is short for "in dem" in German. Not a typo. An article I did for the Stanford Krupp Internship Program, which had huge impact on my life and career trajectory. In a nutshell, I was pre-med prior to my medical internship at the Charite Hospital in Berlin in 2007. Through the internship, I realized that I wanted to do research rather than clinical work. I got my PhD and came back to Berlin to work on the Charite Hospital campus once again, this time as a researcher! I will be forever grateful for the Krupp Internship program and Stanford's Bing Overseas Study Program.
 * Fun stuff
@@ -1146,6 +1302,7 @@ Feature.\\
 :UNNUMBERED: notoc
 :END:
 Web page.\\
+April 21, 2023 - April 29, 2023.
 
 Take the text you want to memorize and paste it into the box. The text will be split up into individual sentences. The first sentence will be displayed. Recite as much of the subsequent sentences as you can from memory. Buttons will allow you to move to the next sentence or the previous sentence all the way to the end of the text.
 
@@ -1154,6 +1311,7 @@ Take the text you want to memorize and paste it into the box. The text will be s
 :UNNUMBERED: notoc
 :END:
 Game.\\
+April 21, 2023.
 
 A game within Conway's Game of Life. You are a blue square that you can move (with arrows), and your goal is to make contact with a "goal" square, colored green, while avoiding all the squares in the Game of Life automata that come at you. Each level up leads to a denser game board. You get five seconds of invincibility (you're colored red) in the beginning of each level, that allows you to get out of the way of any Game of Life objects near you.
 ** [[./breakout.html][Breakout]]
@@ -1161,6 +1319,7 @@ A game within Conway's Game of Life. You are a blue square that you can move (wi
 :UNNUMBERED: notoc
 :END:
 Game.\\
+March 26, 2023.
 
 A game that will always be of significance to me, because it was the assignment in my intro CS class that made me realize that I really enjoy coding. A simple implementation of breakout that runs on a single html page.
 ** [[./conways_gol.html][Conway's Game of Life]]
@@ -1168,6 +1327,7 @@ A game that will always be of significance to me, because it was the assignment 
 :UNNUMBERED: notoc
 :END:
 Web page.\\
+March 26, 2023 - April 21, 2023.
 
 I first came across Conway's Game of Life when I was 16. It completely changed the way I think about how the world works. Or, it helped me realize the way I inherently think about the world. One of those. I consider this the first major event that moved me into the world of computer science later in life. I was above to program this up for the first time in my second intro CS class (Stanford CS106B, C++).
 
@@ -1186,6 +1346,7 @@ I have also added the ability to modify the size of the grid.
 :UNNUMBERED: notoc
 :END:
 Web page.\\
+March 26, 2023.
 
 I first came across this in one of my old math books, perhaps in middle school. I just thought of it as a strange cool looking thing at the time, but what I didn't appreciate until later was how simple it was to implement. This is a single html page, under 80 lines in total. Click on any point on the screen to zoom. Note that you do lose resolution if you zoom in long enough.
 * Other contributions
