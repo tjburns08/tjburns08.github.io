@@ -867,7 +867,7 @@
 
     const COLS = 48;
     const ROWS = 32;
-    const pageBase = "../public/";
+    const pageBase = "";
 
     document.documentElement.style.setProperty("--cols", COLS);
     document.documentElement.style.setProperty("--rows", ROWS);
@@ -1917,10 +1917,10 @@
             el.type = "button";
             el.setAttribute("aria-label", meta.article.title);
             el.innerHTML = `<span class="level-box">${meta.article.token}</span>`;
-            el.addEventListener("click", () => {
-              cat = { x, y };
-              update(true);
-            });
+            // No tile-level click handler: the world-level click handler
+            // converts every tap into a one-tile step toward the tap so
+            // mobile users don't need a visible d-pad. Tap on cat's own
+            // tile opens the article. Legend buttons still warp directly.
           }
           frag.appendChild(el);
         }
@@ -2178,8 +2178,27 @@
       });
     });
 
+    /* Universal click handler: any tap/click on the map steps the cat one
+       tile toward the tap. Tap on the cat's own tile opens the article.
+       This is what mobile users use in lieu of a visible d-pad. */
     document.getElementById("world").addEventListener("click", (e) => {
-      e.currentTarget.focus();
+      const worldEl = e.currentTarget;
+      worldEl.focus();
+      const rect = worldEl.getBoundingClientRect();
+      const t = currentTileSize();
+      const tileX = Math.floor((e.clientX - rect.left) / t);
+      const tileY = Math.floor((e.clientY - rect.top) / t);
+      const dx = tileX - cat.x;
+      const dy = tileY - cat.y;
+      if (dx === 0 && dy === 0) {
+        openCurrent();
+        return;
+      }
+      if (Math.abs(dx) > Math.abs(dy)) {
+        move(dx > 0 ? 1 : -1, 0);
+      } else {
+        move(0, dy > 0 ? 1 : -1);
+      }
     });
 
     /* ---- touch: swipe-to-move ----
