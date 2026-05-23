@@ -83,16 +83,17 @@ January 26, 2026.
 
 At the time of writing [2026-01-26 Mon], AI agents are becoming much more capable. To this end, I tested them on CyTOF analysis, a domain I know quite well. I did 5 runs for Claude Code and ChatGPT Codex (both regular and xhigh) respectively. The task was to analyze 1 file, the Samusik_01 dataset (from the X-Shift paper). The agents were able to generate code, run the code, and fix issues in real time. The code ran to completion. The output was almost always sensible. The design choices were hit or miss. Future directions include analyzing multi-file datasets (and see if they can find batch effects, and so forth). Overall, this direction looks promising, but needs work. Have a look for further details.
 
-* Popular
+* Start here
 #+HTML: <a href="#top">Back to top</a>
-** [[./learn_bioinformatics.html][How I transitioned from biologist to biology-leveraged bioinformatician]]
+** [[./die_with_zero.html][Die with zero ideas]]
 :PROPERTIES:
 :UNNUMBERED: notoc
 :END:
 Article.\\
-July 23, 2023 - July 23, 2023.
+January 22, 2025 - January 22, 2025.
 
-In this article, I summarize my journey from biologist at the beginning of grad school to bioinformatician at the end. On top of that, I show you some of the key insights that empowered me to get to where I am now. I link out to a number of references in bioinformatics and computer science that I find meaningful. In short, I hope that anyone in the life sciences reading this article can use it as a resource on their journey to learn bioinformatics.
+At any given point, there are ideas in my head or rough pieces of text and code on my computer that could prove useful for someone in the world. To this end, I created this website and I began posting about the stuff I put on here. This has helped my life and career immensely. My general stance these days is I want all my useful stuff to be in the public domain by the time I die. This article details both the "why" and the "how" of this effort.
+
 ** [[./its_more_complicated_than_that.html][It's more complicated than that]]
 :PROPERTIES:
 :UNNUMBERED: notoc
@@ -102,14 +103,46 @@ December 27, 2022 - December 27, 2022.
 
 This is the observation I run into with just about every line of scientific inquiry. This is despite a revolution of new technologies that allow us to look at much more data, and new algorithms to make sense of these huge datasets. I repeat this phrase every time I start to feel like I've figured it all out.
 
-** [[./run_cytof_with_seurat.html][Run CyTOF analysis with Seurat]]
+** [[./stick_shift_mindset.html][Zen and the art of driving stick]]
 :PROPERTIES:
 :UNNUMBERED: notoc
 :END:
-Markdown.\\
-April 11, 2023.
+Article.\\
+October 9, 2022 - October 13, 2024.
 
-Seurat is an R package that runs single-cell sequencing and related data. Here, I trick Seurat into thinking my CyTOF PBMC data is single-cell sequencing data. I find out that the effective dimensionality of my CyTOF data appears to be much less than the surface markers I am using (15). This is a counter-intuitive result because our features are carefully curated before the experiment is done.
+I find that if I'm driving stick rather than automatic, I'm much more connected to what I'm doing, much more satisfied in the moment, and I'm objectively a better driver as a result.This concept generalizes. Pick an endeavor. Complete the analogy: automatic transmission is to your endeavor as manual transmission is to X. If you know how to do X, do it when you can. If you don't know how to do X, then learn it. I give several examples of this in my life, and I conclude by encouraging others to embody this way of doing things.
+
+** [[./signal_there.html][There's some signal there]]
+:PROPERTIES:
+:UNNUMBERED: notoc
+:END:
+Article.\\
+August 6, 2024 - August 6, 2024.
+
+This is an expression I use a lot in casual conversation. In essence, when I come across something that feels like its part of the path forward, but can't fully articulate why, I say "there's some signal there" and then I put it in my back pocket. This essay tells the story of how doing this from my teenage years onwards, has contributed to a lot of my good decisions thus far.
+** [[./how_to_solve_problems.html][What I learned about problem solving from my thesis lab]]
+:PROPERTIES:
+:UNNUMBERED: notoc
+:END:
+Article.\\
+March 24, 2023 - March 24, 2023.
+
+A collection of stories from my time in graduate school. The people in my thesis lab had one perplexing thing in common. They would come in as biologists and then literally invent new hardware and software, without any prior relevant background. They would just figure it out as they went. I learned the ways of the lab and learned several themes around how to solve problems, some of which fly in the face of traditional mainstream advice. So I figured I'd write them down.
+
+** [[./we_choose_to_think.html][We choose to think about stuff]]
+Article.\\
+August 1, 2025 - August 1, 2025.
+
+A letter to my future self, proclaiming that despite advances in AI and a societal push to value agency over intelligence, such discussions are devoid of the topic of wisdom. That operating in the absence of AI trains the "relevance filter" that in turn culminates in wisdom. Thus, an interdependence with AI rather than a dependence on AI is what's called for. That agency requires wisdom. And no matter how good and fast the machines get, I will still pursue wisdom, and thus I will still think about stuff.
+
+** [[./learn_bioinformatics.html][How I transitioned from biologist to biology-leveraged bioinformatician]]
+:PROPERTIES:
+:UNNUMBERED: notoc
+:END:
+Article.\\
+July 23, 2023 - July 23, 2023.
+
+In this article, I summarize my journey from biologist at the beginning of grad school to bioinformatician at the end. On top of that, I show you some of the key insights that empowered me to get to where I am now. I link out to a number of references in bioinformatics and computer science that I find meaningful. In short, I hope that anyone in the life sciences reading this article can use it as a resource on their journey to learn bioinformatics.
 ** [[https://github.com/tjburns08/knn_sleepwalk][Knn sleepwalk]]
 :PROPERTIES:
 :UNNUMBERED: notoc
@@ -126,22 +159,6 @@ YouTube video of my TED talk.\\
 July 7, 2023.
 
 In this talk, I introduce the idea of the Scrolling Problem, which is the incompatiblity of my ADD brain and modern technology built around the infinite scroll. I talk about some work I'm doing to counteract that, which can be found [[https://github.com/tjburns08/twitter_archive_and_embed][here]]. It was originally Twitter, but I switched to RSS mapping, [[https://github.com/tjburns08/rss_map][here]], after Twitter started blocking scrapers.
-** [[./scrolling_problem.org][The Scrolling Problem]]
-:PROPERTIES:
-:UNNUMBERED: notoc
-:END:
-Article.\\
-July 15, 2022 - February 7, 2023.
-
-The article behind my [[https://www.youtube.com/watch?v=U35T-KzfeLk][TEDx Basel talk]]. We spend a large fraction of our lives endlessly scrolling through our feeds, with no control over what hypernormal, outrage-inducing content will appear next. I call this the scrolling problem. I define it, and I have a crack at it by viewing my news feed as map with the help of an AI language model based on BERT.
-** [[./scrna_seq_analyze_and_integrate.html][Single-cell sequencing analysis: the importance of data integration]]
-:PROPERTIES:
-:UNNUMBERED: notoc
-:END:
-Markdown.\\
-July 11, 2023.
-
-In flow cytometry and CyTOF analysis, we distinguish between "type" and "state" markers, so we can cluster on the former and analyze per-cluster expression changes in the latter. For single-cell RNA sequencing, we cannot make this distinguishment. Thus, we have to rely on data integration algorithms when we are analyzing pre-treatment and post-treatment datasets. I show how this is done, and I show how failure to do so can lead research teams to falsely interpret the data, and make false conclusions. Thus, understanding data integration is critical to keeping research teams on track.
 * Bioinformatics & single-cell
   :PROPERTIES:
   :CUSTOM_ID: single_cell
