@@ -843,6 +843,32 @@
         font-size: 0.8rem;
         white-space: nowrap;
       }
+      .mtb-details {
+        display: none;
+      }
+      .mobile-title-bar.on-article .mtb-details {
+        display: block;
+        width: 100%;
+        padding-top: 6px;
+        border-top: 2px solid rgba(0, 0, 0, 0.15);
+        margin-top: 6px;
+      }
+      .mobile-title-bar.on-article {
+        flex-wrap: wrap;
+      }
+      .mtb-date {
+        font-size: 0.75rem;
+        opacity: 0.7;
+        margin-bottom: 4px;
+      }
+      .mtb-summary {
+        font-family: -apple-system, BlinkMacSystemFont, "Avenir Next", Avenir,
+          "Nimbus Sans L", Roboto, "Noto Sans", "Segoe UI", Arial, Helvetica, sans-serif;
+        font-size: 0.82rem;
+        font-weight: 400;
+        line-height: 1.3;
+        white-space: normal;
+      }
     }
 
     @media (max-width: 1180px) {
@@ -884,6 +910,10 @@
         <span class="mtb-region" id="mtb-region">Start Beach</span>
         <span class="mtb-title" id="mtb-title">Move the cat to explore</span>
         <span class="mtb-action" id="mtb-action"></span>
+        <span class="mtb-details" id="mtb-details">
+          <span class="mtb-date" id="mtb-date"></span>
+          <span class="mtb-summary" id="mtb-summary"></span>
+        </span>
       </button>
 
       <div class="game-area">
@@ -2317,26 +2347,36 @@
 
       // Mobile title bar — always reflects current location; tappable when
       // standing on an article.
+      const mtbDate = document.getElementById("mtb-date");
+      const mtbSummary = document.getElementById("mtb-summary");
       if (a) {
         titleBar.classList.add("on-article");
         mtbRegion.textContent = reg ? reg.name : "";
         mtbTitle.textContent = a.title;
         mtbAction.textContent = isExternalUrl(a.url) ? "Open ↗" : "Open ›";
+        mtbDate.textContent = a.date;
+        mtbSummary.textContent = a.summary;
       } else if (bridgeSet.has(`${cat.x},${cat.y}`)) {
         titleBar.classList.remove("on-article");
         mtbRegion.textContent = "Bridge";
         mtbTitle.textContent = "Crossing between regions";
         mtbAction.textContent = "";
+        mtbDate.textContent = "";
+        mtbSummary.textContent = "";
       } else if (reg) {
         titleBar.classList.remove("on-article");
         mtbRegion.textContent = reg.name;
         mtbTitle.textContent = "Walking the path";
         mtbAction.textContent = "";
+        mtbDate.textContent = "";
+        mtbSummary.textContent = "";
       } else {
         titleBar.classList.remove("on-article");
         mtbRegion.textContent = "";
         mtbTitle.textContent = "Out of bounds";
         mtbAction.textContent = "";
+        mtbDate.textContent = "";
+        mtbSummary.textContent = "";
       }
 
       if (a) {
