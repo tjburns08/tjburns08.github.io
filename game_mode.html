@@ -1679,8 +1679,13 @@
     function loadSecretsFromStorage() {
       for (const id in SECRETS) {
         let opened = false;
-        try { opened = localStorage.getItem(SECRETS[id].storageKey) === "true"; }
-        catch (e) { /* localStorage blocked — treat as not opened */ }
+        try {
+          // Clean up any leftover persistent flag from an earlier version
+          // that used localStorage — we now use sessionStorage so the secret
+          // resets per tab/session.
+          localStorage.removeItem(SECRETS[id].storageKey);
+          opened = sessionStorage.getItem(SECRETS[id].storageKey) === "true";
+        } catch (e) { /* storage blocked — treat as not opened */ }
         secretRevealed[id] = opened;
         if (!opened) {
           SECRETS[id].pathTiles.forEach((c) => hiddenTiles.add(c));
@@ -2138,7 +2143,7 @@
       const s = SECRETS[id];
       if (!s) return false;
       secretRevealed[id] = true;
-      try { localStorage.setItem(s.storageKey, "true"); } catch (e) { /* ignore */ }
+      try { sessionStorage.setItem(s.storageKey, "true"); } catch (e) { /* ignore */ }
 
       const affected = [];
       s.pathTiles.forEach((c) => {
@@ -2529,13 +2534,18 @@
       // hidden secret tiles aren't walkable until revealed, and a gremlin
       // spawned on one would have no walkable neighbors and freeze.
       const candidates = articles.filter((a) => !a.secret || secretRevealed[a.secret]);
-      let best = candidates[0], bestDist = -1;
-      for (let i = 0; i < 12; i += 1) {
+      // Uniform random over all articles at least MIN_DIST tiles from cat.
+      // (Earlier "farthest of N samples" approach biased toward corners with
+      // the most articles, which made all gremlins cluster in AI Cyberzone.)
+      const MIN_DIST = 12;
+      for (let i = 0; i < 40; i += 1) {
         const a = candidates[Math.floor(Math.random() * candidates.length)];
         const d = Math.abs(a.x - cat.x) + Math.abs(a.y - cat.y);
-        if (d > bestDist) { bestDist = d; best = a; }
+        if (d >= MIN_DIST) return { x: a.x, y: a.y };
       }
-      return { x: best.x, y: best.y };
+      // Fallback if the map is unusually small: any random article.
+      const a = candidates[Math.floor(Math.random() * candidates.length)];
+      return { x: a.x, y: a.y };
     }
 
     function makeGremlinEl() {
