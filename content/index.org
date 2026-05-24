@@ -971,7 +971,7 @@ There is a lot that you can figure out on your own if you simulate coin tosses a
 :UNNUMBERED: notoc
 :END:
 Markdown.\\
-June 29, 2022 - April 2, 2024.
+May 26, 2021.
 
 I taught one of my high school summer students the basics of probability by simulating coin tosses in R. Here, we "discover" the law of large numbers and the central limit theorem using simulated coin tosses.
 ** [[./2_runs_of_luck.html][Coin toss series 2: Runs of luck]]
@@ -979,7 +979,7 @@ I taught one of my high school summer students the basics of probability by simu
 :UNNUMBERED: notoc
 :END:
 Markdown.\\
-June 29, 2022.
+May 26, 2021.
 
 Here, we build on the initial piece in the series by looking at the properties of runs of luck. If we flip a coin a million times, how often will we get 10 heads in a row? How many times do we need to flip a coin to get 20 heads in a row on average? Related to sports. How often, statistically, would you expect Steph Curry to make 10 three pointers in a row given his 3-point shot percentage?
 ** [[./3_fair_vs_unfair_coins.html][Coin toss series 3: Fair versus unfair coins]]
@@ -987,7 +987,7 @@ Here, we build on the initial piece in the series by looking at the properties o
 :UNNUMBERED: notoc
 :END:
 Markdown.\\
-June 29, 2022.
+May 26, 2021.
 
 Here, we examine the properties of unfair coins, where the odds of getting heads or tails does not equal 50%. Can we figure out whether a coin is a fair coin?
 ** [[./4_random_walk.html][Coin toss series 4: Random walks]]
@@ -995,7 +995,7 @@ Here, we examine the properties of unfair coins, where the odds of getting heads
 :UNNUMBERED: notoc
 :END:
 Markdown.\\
-June 29, 2022.
+May 26, 2021.
 
 Here, we show that if we simulate flipping coins, but we keep a record of the number of heads and the number of tails, we end up doing a random walk. We visualize these walks (they look somewhat like stock market data), and ask questions like how often a random walker crosses zero.
 ** [[./5_dice_roll.html][Coin toss series 5: Dice rolls]]
@@ -1003,7 +1003,7 @@ Here, we show that if we simulate flipping coins, but we keep a record of the nu
 :UNNUMBERED: notoc
 :END:
 Markdown.\\
-June 29, 2022.
+May 27, 2021.
 
 Here, we do an abstraction of the coin tosses we have been simulating, by coinsidering dice of three or more faces. We simulate these dice rolls and examine their properties. How often does a six sided dice land on the number 3? We can figure that out with simple math, but if you roll a dice 1000 times, and you do that again, and you do that again, what will be the standard deviation of the number of times the dice lands on 3?
 ** [[./6_is_this_sequence_random.html][Coin toss series 6: Is this sequence random?]]
@@ -1011,7 +1011,7 @@ Here, we do an abstraction of the coin tosses we have been simulating, by coinsi
 :UNNUMBERED: notoc
 :END:
 Markdown.\\
-June 29, 2022.
+May 27, 2021.
 
 Here, we look at fair coin tosses, unfair coin tosses, and random walks, and explore the randomness of the sequences by doing convolutions on the sequences with kernel size 2.
 * Personal essays
