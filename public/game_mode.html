@@ -267,6 +267,10 @@
       outline: none;
     }
 
+    .tile.article.visited .level-box {
+      border-color: var(--red);
+    }
+
     .tile.article.castle .level-box {
       background: var(--castle-bg);
     }
@@ -906,6 +910,7 @@
       <header class="hud">
         <h1>Tyler's World</h1>
         <div class="hud-chip region" id="region-chip">Start Beach</div>
+        <div class="hud-chip" id="visited-chip">0 / 0 visited</div>
         <div class="hud-chip">Arrows: move</div>
         <div class="hud-chip">Enter: open</div>
       </header>
@@ -1690,6 +1695,43 @@
     const articleByCoord = new Map(articles.map((a) => [`${a.x},${a.y}`, a]));
 
     /* ------------------------------------------------------------------
+       VISITED TRACKING
+    ------------------------------------------------------------------ */
+
+    const VISITED_KEY = "tylersworld-visited";
+    const visitedSet = new Set();
+
+    function loadVisited() {
+      try {
+        const raw = localStorage.getItem(VISITED_KEY);
+        if (raw) JSON.parse(raw).forEach((id) => visitedSet.add(id));
+      } catch (e) { /* ignore */ }
+    }
+
+    function saveVisited() {
+      try { localStorage.setItem(VISITED_KEY, JSON.stringify([...visitedSet])); }
+      catch (e) { /* ignore */ }
+    }
+
+    function markVisited(id) {
+      if (!id || visitedSet.has(id)) return;
+      visitedSet.add(id);
+      saveVisited();
+      updateVisitedUI();
+    }
+
+    function updateVisitedUI() {
+      const total = articles.filter((a) => !a.secret || secretRevealed[a.secret]).length;
+      const count = visitedSet.size;
+      document.getElementById("visited-chip").textContent = `${count} / ${total} visited`;
+      document.querySelectorAll(".tile.article").forEach((el) => {
+        const x = Number(el.dataset.x), y = Number(el.dataset.y);
+        const art = articleByCoord.get(`${x},${y}`);
+        if (art) el.classList.toggle("visited", visitedSet.has(art.id));
+      });
+    }
+
+    /* ------------------------------------------------------------------
        SECRETS — Zelda-style hidden tiles, revealed by walking into a
        specific tile in a specific direction. Each secret defines a
        trigger (cat position + move direction) and a list of tiles that
@@ -2282,6 +2324,7 @@
     function openCurrent() {
       const a = articleAtCat();
       if (!a) return;
+      markVisited(a.id);
       const href = resolveUrl(a.url);
       if (isExternalUrl(a.url)) {
         window.open(href, "_blank", "noopener,noreferrer");
@@ -2700,6 +2743,7 @@
       const a = articles[Math.floor(Math.random() * articles.length)];
       const href = resolveUrl(a.url);
 
+      markVisited(a.id);
       document.getElementById("status").textContent =
         `Caught! Opening "${a.title}"...`;
 
@@ -2722,10 +2766,12 @@
        BOOT
     ------------------------------------------------------------------ */
 
+    loadVisited();
     loadSecretsFromStorage();
     buildWalkable();
     buildMap();
     buildLegend();
+    updateVisitedUI();
 
     const restored = readHashCat();
     if (restored) cat = restored;
