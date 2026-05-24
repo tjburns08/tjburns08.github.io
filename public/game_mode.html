@@ -2517,11 +2517,21 @@
     let gremlinTimers = [];
     let caughtInFlight = false;
 
+    // Reset transient state on every page show, including bfcache restores
+    // after the user clicks back from a caught-and-warped article. Without
+    // this, caughtInFlight stays true and silently blocks all later catches.
+    window.addEventListener("pageshow", () => {
+      caughtInFlight = false;
+    });
+
     function pickSpawnFarFromCat() {
-      // Farthest of 12 random article tiles — cheap proxy for "far".
-      let best = articles[0], bestDist = -1;
+      // Only pick from articles that are actually reachable right now —
+      // hidden secret tiles aren't walkable until revealed, and a gremlin
+      // spawned on one would have no walkable neighbors and freeze.
+      const candidates = articles.filter((a) => !a.secret || secretRevealed[a.secret]);
+      let best = candidates[0], bestDist = -1;
       for (let i = 0; i < 12; i += 1) {
-        const a = articles[Math.floor(Math.random() * articles.length)];
+        const a = candidates[Math.floor(Math.random() * candidates.length)];
         const d = Math.abs(a.x - cat.x) + Math.abs(a.y - cat.y);
         if (d > bestDist) { bestDist = d; best = a; }
       }
@@ -2591,9 +2601,17 @@
       let pick;
       if (candidates.length > 0) {
         pick = candidates[Math.floor(Math.random() * candidates.length)];
-      } else if (g.prev) {
+      } else if (g.prev && walkable.has(`${g.prev.x},${g.prev.y}`)) {
         pick = g.prev;
       } else {
+        // Stuck on an unreachable tile (e.g. spawned on a hidden secret
+        // before the secret data was filtered out). Teleport this gremlin
+        // to a known-good spawn point instead of freezing forever.
+        const pos = pickSpawnFarFromCat();
+        g.x = pos.x;
+        g.y = pos.y;
+        g.prev = null;
+        renderGremlin(g, false);
         return;
       }
       g.prev = { x: g.x, y: g.y };
