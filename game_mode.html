@@ -843,18 +843,22 @@
         font-size: 0.8rem;
         white-space: nowrap;
       }
+      .mobile-title-bar {
+        position: relative;
+      }
       .mtb-details {
         display: none;
       }
       .mobile-title-bar.on-article .mtb-details {
         display: block;
-        width: 100%;
-        padding-top: 6px;
-        border-top: 2px solid rgba(0, 0, 0, 0.15);
-        margin-top: 6px;
-      }
-      .mobile-title-bar.on-article {
-        flex-wrap: wrap;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        padding: 8px 14px;
+        background: var(--gold);
+        border-bottom: 4px solid var(--ink);
+        z-index: 50;
       }
       .mtb-date {
         font-size: 0.75rem;
