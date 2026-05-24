@@ -474,6 +474,19 @@
       box-shadow: inset -4px -4px 0 rgba(255, 68, 170, 0.4);
     }
 
+    /* ----- Secret reveal flash ----- */
+
+    @keyframes secret-reveal {
+      0%   { transform: scale(0.35); opacity: 0; filter: brightness(2.6); }
+      55%  { transform: scale(1.15); opacity: 1; filter: brightness(1.6); }
+      100% { transform: scale(1);    opacity: 1; filter: brightness(1); }
+    }
+
+    .tile.just-revealed {
+      animation: secret-reveal 700ms ease-out;
+      z-index: 5;
+    }
+
     /* ----- Avatar ----- */
 
     .avatar {
@@ -1089,6 +1102,13 @@
         date: "December 27, 2022",
         url: "its_more_complicated_than_that.html",
         summary: "A scientific reflex against premature certainty." },
+      // ---- Hidden Zelda-style level (revealed by walking up from complicated-phil) ----
+      { id: "meditations", region: "philosophy", x: 1, y: 19, kind: "castle", token: "MD",
+        title: "My Meditations Chapter 1",
+        date: "December 24, 2022",
+        url: "meditations_chapter_one.html",
+        summary: "A personal version of Marcus Aurelius's opening chapter — debts and acknowledgments.",
+        secret: "meditations" },
       { id: "fear", region: "philosophy", x: 3, y: 21, kind: "essay", token: "FU",
         title: "Fear of the un-word is the beginning of wisdom",
         date: "November 11, 2023",
@@ -1636,6 +1656,41 @@
     const articleByCoord = new Map(articles.map((a) => [`${a.x},${a.y}`, a]));
 
     /* ------------------------------------------------------------------
+       SECRETS — Zelda-style hidden tiles, revealed by walking into a
+       specific tile in a specific direction. Each secret defines a
+       trigger (cat position + move direction) and a list of tiles that
+       should appear when triggered. Discovered secrets are persisted in
+       localStorage so they stay open across sessions.
+    ------------------------------------------------------------------ */
+
+    const SECRETS = {
+      meditations: {
+        // Stand on "It's more complicated than that" and press up.
+        trigger: { x: 1, y: 21, dx: 0, dy: -1 },
+        pathTiles: ["1,20"],
+        articleId: "meditations",
+        storageKey: "tylersworld-secret-meditations"
+      }
+    };
+
+    const secretRevealed = {};
+    const hiddenTiles = new Set();
+
+    function loadSecretsFromStorage() {
+      for (const id in SECRETS) {
+        let opened = false;
+        try { opened = localStorage.getItem(SECRETS[id].storageKey) === "true"; }
+        catch (e) { /* localStorage blocked — treat as not opened */ }
+        secretRevealed[id] = opened;
+        if (!opened) {
+          SECRETS[id].pathTiles.forEach((c) => hiddenTiles.add(c));
+          const art = articleById.get(SECRETS[id].articleId);
+          if (art) hiddenTiles.add(`${art.x},${art.y}`);
+        }
+      }
+    }
+
+    /* ------------------------------------------------------------------
        CONNECTIONS — within-region paths between articles
        Each [aId, bId] paves a straight (axis-aligned) path between them.
     ------------------------------------------------------------------ */
@@ -1891,10 +1946,23 @@
     }
 
     function buildWalkable() {
-      articles.forEach((a) => addWalkable(`${a.x},${a.y}`));
+      articles.forEach((a) => {
+        if (a.secret && !secretRevealed[a.secret]) return;
+        addWalkable(`${a.x},${a.y}`);
+      });
       connections.forEach(([a, b]) => pave(a, b));
       corridors.forEach(paveCorridor);
       bridgeSet.forEach((c) => walkable.add(c));
+
+      // Any secret whose tiles are already revealed (from localStorage) gets
+      // its path tiles added now.
+      for (const id in SECRETS) {
+        if (!secretRevealed[id]) continue;
+        SECRETS[id].pathTiles.forEach((c) => {
+          walkable.add(c);
+          pathTiles.add(c);
+        });
+      }
 
       // Connect each bridge endpoint to the nearest article in the adjacent
       // region by laying a short path. We do this lightly — any walkable
@@ -1931,6 +1999,18 @@
       const coord = `${x},${y}`;
       const region = regionAt(x, y);
       const meta = { region, coord, classes: ["tile"] };
+
+      // Hidden secret tile? Render as decorative terrain so it blends in.
+      if (hiddenTiles.has(coord)) {
+        if (region) meta.classes.push(`region-${region.id}`);
+        const h = hashXY(x, y);
+        const rules = decorationRules[region ? region.id : "philosophy"] || { forest: 0, hill: 0 };
+        const r = (h % 1000) / 1000;
+        if (r < rules.forest) meta.classes.push("forest");
+        else if (r < rules.forest + rules.hill) meta.classes.push("hill");
+        else meta.classes.push("grass");
+        return meta;
+      }
 
       const article = articleByCoord.get(coord);
       if (article) {
@@ -2003,8 +2083,10 @@
 
     function buildLegend() {
       const legend = document.getElementById("legend");
+      legend.innerHTML = "";
       const byRegion = new Map();
       articles.forEach((a) => {
+        if (a.secret && !secretRevealed[a.secret]) return;
         if (!byRegion.has(a.region)) byRegion.set(a.region, []);
         byRegion.get(a.region).push(a);
       });
@@ -2032,6 +2114,60 @@
         details.appendChild(itemsDiv);
         legend.appendChild(details);
       });
+    }
+
+    function rebuildTile(x, y) {
+      const old = document.querySelector(`.tile[data-x="${x}"][data-y="${y}"]`);
+      if (!old) return;
+      const meta = tileMeta(x, y);
+      const el = document.createElement(meta.article ? "button" : "div");
+      el.className = meta.classes.join(" ");
+      el.dataset.x = x;
+      el.dataset.y = y;
+      if (meta.article) {
+        el.type = "button";
+        el.setAttribute("aria-label", meta.article.title);
+        el.innerHTML = `<span class="level-box">${meta.article.token}</span>`;
+      }
+      old.replaceWith(el);
+      return el;
+    }
+
+    function revealSecret(id) {
+      if (secretRevealed[id]) return false;
+      const s = SECRETS[id];
+      if (!s) return false;
+      secretRevealed[id] = true;
+      try { localStorage.setItem(s.storageKey, "true"); } catch (e) { /* ignore */ }
+
+      const affected = [];
+      s.pathTiles.forEach((c) => {
+        hiddenTiles.delete(c);
+        walkable.add(c);
+        pathTiles.add(c);
+        const [x, y] = c.split(",").map(Number);
+        affected.push({ x, y });
+      });
+      const art = articleById.get(s.articleId);
+      if (art) {
+        hiddenTiles.delete(`${art.x},${art.y}`);
+        walkable.add(`${art.x},${art.y}`);
+        affected.push({ x: art.x, y: art.y });
+      }
+
+      affected.forEach(({ x, y }) => {
+        const el = rebuildTile(x, y);
+        if (!el) return;
+        el.classList.add("just-revealed");
+        window.setTimeout(() => el.classList.remove("just-revealed"), 700);
+      });
+
+      buildLegend();
+
+      document.getElementById("status").textContent =
+        `★ Secret found: "${art ? art.title : id}"`;
+
+      return true;
     }
 
     /* ------------------------------------------------------------------
@@ -2067,6 +2203,17 @@
     }
 
     function move(dx, dy) {
+      // Check for a Zelda-style secret reveal at the cat's current position.
+      // If a trigger matches, the secret unlocks before the canMove check —
+      // so the just-revealed tile is now walkable and the move can proceed.
+      for (const id in SECRETS) {
+        if (secretRevealed[id]) continue;
+        const t = SECRETS[id].trigger;
+        if (t.x === cat.x && t.y === cat.y && t.dx === dx && t.dy === dy) {
+          revealSecret(id);
+        }
+      }
+
       const next = { x: cat.x + dx, y: cat.y + dy };
       if (!canMove(next.x, next.y)) {
         const s = document.getElementById("status");
@@ -2503,6 +2650,7 @@
        BOOT
     ------------------------------------------------------------------ */
 
+    loadSecretsFromStorage();
     buildWalkable();
     buildMap();
     buildLegend();
