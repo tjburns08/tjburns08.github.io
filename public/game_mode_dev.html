@@ -1,0 +1,2796 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <title>Tyler's World - Game Mode</title>
+  <style>
+    :root {
+      --tile: 48px;
+      --ink: #1d130c;
+      --cream: #fff1c7;
+      --paper: #f5d78e;
+      --panel: #f0c66d;
+      --panel-dark: #6b3f20;
+      --gold: #f4c542;
+      --red: #c94b37;
+      --blue: #2d5e9e;
+
+      /* Defaults inherited where region class hasn't set values yet. */
+      --grass: #62b14f;
+      --grass-dark: #3e8b3a;
+      --path: #d8ad61;
+      --path-dark: #9a6b34;
+      --decor: #2e7942;
+      --decor-light: #5dbf7a;
+      --token-bg: #fff1c7;
+      --castle-bg: #d8d8d8;
+      --house-bg: #ffe0a3;
+      --house-roof: #c94b37;
+    }
+
+    * { box-sizing: border-box; }
+
+    /* ---- Mobile zoom / tap-delay suppression ----
+       touch-action: manipulation kills the 300ms double-tap-to-zoom window so
+       rapid taps register as taps, never as zoom triggers. user-select +
+       -webkit-touch-callout block the long-press magnifier/text-select popup
+       that rapid tapping can otherwise summon. */
+    html, body, .world, .viewport, .tile, .dpad button, .legend button,
+    .float-open, .open-link, .hud-chip {
+      touch-action: manipulation;
+      -webkit-touch-callout: none;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .world, .viewport, .tile {
+      user-select: none;
+      -webkit-user-select: none;
+    }
+
+    body {
+      min-height: 100vh;
+      margin: 0;
+      background: linear-gradient(#7bc3e1 0 25%, #5aaed0 25% 28%, #3f9c54 28% 100%);
+      color: var(--ink);
+      font-family: "Courier New", Courier, monospace;
+      line-height: 1.35;
+    }
+
+    button, a { font: inherit; }
+
+    .page {
+      min-height: 100vh;
+      padding: 14px;
+    }
+
+    .game-shell {
+      max-width: 1280px;
+      margin: 0 auto;
+      border: 4px solid var(--ink);
+      background: var(--paper);
+      box-shadow: 0 10px 0 rgba(0, 0, 0, 0.22);
+    }
+
+    .hud {
+      display: grid;
+      grid-template-columns: minmax(220px, 1fr) auto auto auto;
+      gap: 10px;
+      align-items: center;
+      border-bottom: 4px solid var(--ink);
+      background: var(--panel);
+      padding: 10px 12px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(1.1rem, 2.2vw, 1.6rem);
+      letter-spacing: 0;
+      text-transform: uppercase;
+    }
+
+    .hud-chip {
+      border: 3px solid var(--ink);
+      background: var(--cream);
+      padding: 5px 8px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .hud-chip.region {
+      background: var(--gold);
+    }
+
+    .game-area {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 340px;
+      gap: 0;
+    }
+
+    .viewport {
+      position: relative;
+      overflow: auto;
+      max-height: 640px;
+      border-right: 4px solid var(--ink);
+      background: #1a4f7a;
+    }
+
+    .world {
+      position: relative;
+      width: calc(var(--tile) * var(--cols));
+      height: calc(var(--tile) * var(--rows));
+      image-rendering: pixelated;
+    }
+
+    .world:focus-visible {
+      outline: 5px solid var(--gold);
+      outline-offset: -5px;
+    }
+
+    .map-grid {
+      display: grid;
+      grid-template-columns: repeat(var(--cols), var(--tile));
+      grid-template-rows: repeat(var(--rows), var(--tile));
+      width: 100%;
+      height: 100%;
+    }
+
+    .tile {
+      position: relative;
+      width: var(--tile);
+      height: var(--tile);
+      border: 0;
+      padding: 0;
+      background:
+        radial-gradient(circle at 12px 12px, rgba(255, 255, 255, 0.18) 0 2px, transparent 3px),
+        radial-gradient(circle at 34px 30px, rgba(255, 255, 255, 0.12) 0 2px, transparent 3px),
+        var(--grass);
+    }
+
+    /* Ground/grass micro pattern */
+    .tile.grass::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(90deg, transparent 0 21px, rgba(0, 0, 0, 0.08) 21px 24px, transparent 24px),
+        linear-gradient(0deg, transparent 0 32px, rgba(0, 0, 0, 0.06) 32px 35px, transparent 35px);
+      opacity: 0.5;
+      pointer-events: none;
+    }
+
+    .tile.path {
+      background:
+        radial-gradient(circle at 14px 14px, rgba(0, 0, 0, 0.2) 0 2px, transparent 3px),
+        radial-gradient(circle at 32px 29px, rgba(0, 0, 0, 0.18) 0 2px, transparent 3px),
+        var(--path);
+      box-shadow: inset 0 0 0 3px var(--path-dark);
+    }
+
+    .tile.water {
+      background:
+        linear-gradient(135deg, transparent 0 35%, rgba(255, 255, 255, 0.32) 35% 44%, transparent 44%),
+        linear-gradient(315deg, transparent 0 38%, rgba(255, 255, 255, 0.22) 38% 46%, transparent 46%),
+        #3f8fc7;
+      box-shadow: inset 0 0 0 4px #2669a5;
+    }
+
+    .tile.bridge {
+      background:
+        linear-gradient(180deg, #c8956a 0 8px, #a06d3e 8px 12px, #c8956a 12px 22px, #a06d3e 22px 26px, #c8956a 26px 36px, #a06d3e 36px 40px, #c8956a 40px 48px);
+      box-shadow: inset 0 0 0 3px #5a3a1c;
+    }
+
+    .tile.bridge.vertical {
+      background:
+        linear-gradient(90deg, #c8956a 0 8px, #a06d3e 8px 12px, #c8956a 12px 22px, #a06d3e 22px 26px, #c8956a 26px 36px, #a06d3e 36px 40px, #c8956a 40px 48px);
+    }
+
+    .tile.forest {
+      background: var(--grass-dark);
+    }
+    .tile.forest::before,
+    .tile.forest::after {
+      content: "";
+      position: absolute;
+      left: 9px;
+      width: 0;
+      height: 0;
+      border-left: 15px solid transparent;
+      border-right: 15px solid transparent;
+    }
+    .tile.forest::before {
+      top: 6px;
+      border-bottom: 19px solid var(--decor);
+    }
+    .tile.forest::after {
+      top: 18px;
+      border-bottom: 22px solid var(--decor-light);
+    }
+
+    .tile.hill {
+      background: var(--grass);
+    }
+    .tile.hill::before {
+      content: "";
+      position: absolute;
+      left: 5px;
+      bottom: 5px;
+      width: 38px;
+      height: 26px;
+      border: 3px solid var(--decor);
+      border-radius: 28px 28px 6px 6px;
+      background:
+        radial-gradient(circle at 13px 11px, rgba(255, 255, 255, 0.4) 0 3px, transparent 4px),
+        var(--decor-light);
+    }
+
+    .tile.start-mark {
+      background:
+        linear-gradient(45deg, rgba(255, 255, 255, 0.28) 25%, transparent 25% 50%, rgba(255, 255, 255, 0.28) 50% 75%, transparent 75%),
+        var(--path);
+      background-size: 16px 16px;
+      box-shadow: inset 0 0 0 3px var(--path-dark);
+    }
+
+    .tile.article {
+      cursor: pointer;
+      background:
+        radial-gradient(circle at 14px 14px, rgba(0, 0, 0, 0.18) 0 2px, transparent 3px),
+        radial-gradient(circle at 32px 29px, rgba(0, 0, 0, 0.16) 0 2px, transparent 3px),
+        var(--path);
+      box-shadow: inset 0 0 0 3px var(--path-dark);
+    }
+
+    .level-box {
+      position: absolute;
+      inset: 6px;
+      display: grid;
+      place-items: center;
+      border: 4px solid var(--ink);
+      background:
+        linear-gradient(90deg, rgba(0, 0, 0, 0.08) 0 4px, transparent 4px 36px, rgba(255, 255, 255, 0.24) 36px),
+        var(--token-bg);
+      color: var(--ink);
+      font-size: 0.78rem;
+      font-weight: 900;
+      text-align: center;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      box-shadow: inset -4px -4px 0 rgba(0, 0, 0, 0.16);
+    }
+
+    .tile.article.current .level-box,
+    .tile.article:hover .level-box,
+    .tile.article:focus-visible .level-box {
+      background: var(--gold);
+      outline: none;
+    }
+
+    .tile.article.visited .level-box {
+      border-color: var(--red);
+    }
+
+    .tile.article.castle .level-box {
+      background: var(--castle-bg);
+    }
+    .tile.article.castle .level-box::before {
+      content: "";
+      position: absolute;
+      top: -10px;
+      left: 5px;
+      right: 5px;
+      height: 10px;
+      background:
+        linear-gradient(90deg, var(--ink) 0 4px, transparent 4px 8px, var(--ink) 8px 12px, transparent 12px 16px, var(--ink) 16px 20px, transparent 20px 24px, var(--ink) 24px 28px);
+    }
+
+    .tile.article.house .level-box {
+      background: var(--house-bg);
+    }
+    .tile.article.house .level-box::before {
+      content: "";
+      position: absolute;
+      top: -13px;
+      left: 2px;
+      width: 0;
+      height: 0;
+      border-left: 18px solid transparent;
+      border-right: 18px solid transparent;
+      border-bottom: 14px solid var(--house-roof);
+    }
+
+    /* ----- REGION THEMES (override CSS variables on each tile) ----- */
+
+    .region-featured {
+      --grass: #e8e2d0;
+      --grass-dark: #c4b89a;
+      --path: #efe5c5;
+      --path-dark: #b7a677;
+      --decor: #8a7e5a;
+      --decor-light: #d4c79c;
+      --token-bg: #fffbe5;
+      --castle-bg: #f4eed0;
+      --house-bg: #faf2c8;
+      --house-roof: #b07640;
+    }
+
+    .region-bio {
+      --grass: #d8ecf2;
+      --grass-dark: #b3d6df;
+      --path: #f4fafc;
+      --path-dark: #6fa1b3;
+      --decor: #2e7186;
+      --decor-light: #5fb1c4;
+      --token-bg: #ffffff;
+      --castle-bg: #d3e9ef;
+      --house-bg: #e8f8fc;
+      --house-roof: #2e7186;
+    }
+
+    .region-ai {
+      --grass: #261f4a;
+      --grass-dark: #161235;
+      --path: #4a3a8c;
+      --path-dark: #221a4a;
+      --decor: #b06acc;
+      --decor-light: #f072c6;
+      --token-bg: #2e2660;
+      --castle-bg: #1a1340;
+      --house-bg: #382b76;
+      --house-roof: #f072c6;
+    }
+    .region-ai .level-box {
+      color: #f5e8ff;
+      border-color: #f072c6;
+    }
+
+    .region-computing {
+      --grass: #102819;
+      --grass-dark: #07140c;
+      --path: #1c4a2d;
+      --path-dark: #0c2616;
+      --decor: #28a050;
+      --decor-light: #5fdf85;
+      --token-bg: #0c1e12;
+      --castle-bg: #133b22;
+      --house-bg: #19502c;
+      --house-roof: #5fdf85;
+    }
+    .region-computing .level-box {
+      color: #c4ffcd;
+      border-color: #5fdf85;
+      font-family: "Courier New", Courier, monospace;
+    }
+
+    .region-start {
+      --grass: #f4d99a;
+      --grass-dark: #d8b770;
+      --path: #fff0c2;
+      --path-dark: #c89c50;
+      --decor: #6cae74;
+      --decor-light: #a8d4a8;
+      --token-bg: #fff8d8;
+      --castle-bg: #f3e3a8;
+      --house-bg: #fff2c0;
+      --house-roof: #ce5a3a;
+    }
+
+    .region-collections {
+      --grass: #d9c3a0;
+      --grass-dark: #ad9270;
+      --path: #efd8ad;
+      --path-dark: #936c3e;
+      --decor: #5a3b1a;
+      --decor-light: #a07748;
+      --token-bg: #fff2c8;
+      --castle-bg: #ddc090;
+      --house-bg: #f0d8a8;
+      --house-roof: #5a3b1a;
+    }
+
+    .region-philosophy {
+      --grass: #62b14f;
+      --grass-dark: #3e8b3a;
+      --path: #d8ad61;
+      --path-dark: #9a6b34;
+      --decor: #145d31;
+      --decor-light: #1d7040;
+      --token-bg: #fff1c7;
+      --castle-bg: #d8d8d8;
+      --house-bg: #ffe0a3;
+      --house-roof: #c94b37;
+    }
+
+    .region-health {
+      --grass: #82d05a;
+      --grass-dark: #5aa83c;
+      --path: #f0e29e;
+      --path-dark: #b08a3a;
+      --decor: #2d7a1f;
+      --decor-light: #6fc54a;
+      --token-bg: #fdfdd8;
+      --castle-bg: #e6e8b0;
+      --house-bg: #f0f4b0;
+      --house-roof: #d04848;
+    }
+
+    .region-personal {
+      --grass: #efb878;
+      --grass-dark: #c48a4e;
+      --path: #f9d8a3;
+      --path-dark: #a86a2e;
+      --decor: #c44a6a;
+      --decor-light: #e57a92;
+      --token-bg: #fff0d8;
+      --castle-bg: #e3b88f;
+      --house-bg: #ffd9a8;
+      --house-roof: #b03d3d;
+    }
+
+    .region-stats {
+      --grass: #d4e0ea;
+      --grass-dark: #a3b6c8;
+      --path: #f0f4f8;
+      --path-dark: #4d7298;
+      --decor: #2a4a72;
+      --decor-light: #5e85b0;
+      --token-bg: #ffffff;
+      --castle-bg: #c8d8e8;
+      --house-bg: #ecf2f8;
+      --house-roof: #2a4a72;
+    }
+    .region-stats.grass::after {
+      background:
+        linear-gradient(45deg, rgba(0, 0, 0, 0.18) 25%, transparent 25% 50%, rgba(0, 0, 0, 0.18) 50% 75%, transparent 75%) !important;
+      background-size: 12px 12px !important;
+      opacity: 0.4 !important;
+    }
+
+    .region-snapshots {
+      --grass: #d4b896;
+      --grass-dark: #a88a64;
+      --path: #ecd4ad;
+      --path-dark: #8a5e34;
+      --decor: #5a3a1a;
+      --decor-light: #c4936a;
+      --token-bg: #f5e4c0;
+      --castle-bg: #ccac80;
+      --house-bg: #e8c896;
+      --house-roof: #6a3a1a;
+    }
+
+    .region-fun {
+      --grass: #1b0a2a;
+      --grass-dark: #0a031a;
+      --path: #3d1958;
+      --path-dark: #1a0a2a;
+      --decor: #ff44aa;
+      --decor-light: #44ddee;
+      --token-bg: #2c1142;
+      --castle-bg: #1a0628;
+      --house-bg: #3d1958;
+      --house-roof: #ffd848;
+    }
+    .region-fun .level-box {
+      color: #ffe2f8;
+      border-color: #ff44aa;
+      box-shadow: inset -4px -4px 0 rgba(255, 68, 170, 0.4);
+    }
+
+    /* ----- Secret reveal flash ----- */
+
+    @keyframes secret-reveal {
+      0%   { transform: scale(0.35); opacity: 0; filter: brightness(2.6); }
+      55%  { transform: scale(1.15); opacity: 1; filter: brightness(1.6); }
+      100% { transform: scale(1);    opacity: 1; filter: brightness(1); }
+    }
+
+    .tile.just-revealed {
+      animation: secret-reveal 700ms ease-out;
+      z-index: 5;
+    }
+
+    /* ----- Avatar ----- */
+
+    .avatar {
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 100;
+      width: var(--tile);
+      height: var(--tile);
+      pointer-events: none;
+      transition: transform 140ms steps(2, end);
+      will-change: transform;
+    }
+
+    .avatar.no-transition { transition: none; }
+
+    .avatar::after {
+      content: "";
+      position: absolute;
+      left: 10px;
+      bottom: 2px;
+      width: 29px;
+      height: 7px;
+      background: rgba(0, 0, 0, 0.3);
+      border-radius: 50%;
+    }
+
+    .avatar.step .cat-sprite {
+      animation: hop 140ms steps(2, end);
+    }
+
+    @keyframes hop {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-6px); }
+      100% { transform: translateY(0); }
+    }
+
+    .cat-sprite {
+      position: absolute;
+      z-index: 2;
+      left: 3px;
+      top: 1px;
+      width: 42px;
+      height: 42px;
+      image-rendering: pixelated;
+      shape-rendering: crispEdges;
+    }
+
+    .avatar.face-left .cat-sprite { transform: scaleX(-1); }
+
+    /* ----- Gremlin (the antagonist) ----- */
+
+    .gremlin {
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 99;
+      width: var(--tile);
+      height: var(--tile);
+      pointer-events: none;
+      transition: transform 320ms steps(2, end);
+      will-change: transform;
+    }
+
+    .gremlin::after {
+      content: "";
+      position: absolute;
+      left: 10px;
+      bottom: 2px;
+      width: 29px;
+      height: 7px;
+      background: rgba(0, 0, 0, 0.3);
+      border-radius: 50%;
+    }
+
+    .gremlin.step .gremlin-sprite {
+      animation: gremlin-hop 320ms steps(2, end);
+    }
+
+    @keyframes gremlin-hop {
+      0%   { transform: translateY(0); }
+      50%  { transform: translateY(-5px); }
+      100% { transform: translateY(0); }
+    }
+
+    .gremlin-sprite {
+      position: absolute;
+      z-index: 2;
+      left: 4px;
+      top: 4px;
+      width: 40px;
+      height: 40px;
+      image-rendering: pixelated;
+      shape-rendering: crispEdges;
+    }
+
+    /* ----- Catch flash overlay ----- */
+
+    .catch-flash {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 500;
+      background: rgba(220, 30, 40, 0);
+      transition: background 80ms ease-out;
+    }
+
+    .catch-flash.active {
+      background: rgba(220, 30, 40, 0.5);
+    }
+
+    /* ----- Side Panel ----- */
+
+    .panel {
+      display: grid;
+      grid-template-rows: auto auto 1fr auto;
+      min-height: 528px;
+      background: #efbd60;
+    }
+
+    .card {
+      border-bottom: 4px solid var(--ink);
+      padding: 14px;
+    }
+
+    .card h2 {
+      margin: 0 0 7px;
+      font-size: 1.1rem;
+      line-height: 1.15;
+      text-transform: uppercase;
+    }
+
+    .date, .kind {
+      font-weight: 700;
+      font-size: 0.85rem;
+    }
+
+    .kind {
+      display: inline-block;
+      margin-bottom: 8px;
+      border: 3px solid var(--ink);
+      background: var(--cream);
+      padding: 2px 6px;
+      font-size: 0.8rem;
+    }
+
+    .summary {
+      margin: 10px 0 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Avenir Next", Avenir,
+        "Nimbus Sans L", Roboto, "Noto Sans", "Segoe UI", Arial, Helvetica, sans-serif;
+      font-size: 0.92rem;
+    }
+
+    .controls {
+      padding: 12px 14px;
+      border-bottom: 4px solid var(--ink);
+      background: #e6ae50;
+    }
+
+    .controls p {
+      margin: 0 0 6px;
+      font-weight: 700;
+      font-size: 0.85rem;
+    }
+
+    .dpad {
+      display: grid;
+      grid-template-columns: repeat(3, 38px);
+      grid-template-rows: repeat(3, 30px);
+      gap: 4px;
+      margin-top: 8px;
+    }
+
+    .dpad button {
+      border: 3px solid var(--ink);
+      background: var(--cream);
+      color: var(--ink);
+      cursor: pointer;
+      font-size: 0.95rem;
+      font-weight: 900;
+      line-height: 1;
+      box-shadow: inset -3px -3px 0 rgba(0, 0, 0, 0.18);
+    }
+
+    .dpad button:hover, .dpad button:focus-visible {
+      background: var(--gold);
+      outline: none;
+    }
+
+    .dpad .up { grid-column: 2; grid-row: 1; }
+    .dpad .left { grid-column: 1; grid-row: 2; }
+    .dpad .right { grid-column: 3; grid-row: 2; }
+    .dpad .down { grid-column: 2; grid-row: 3; }
+
+    .legend {
+      max-height: 240px;
+      overflow: auto;
+      padding: 12px 14px;
+    }
+
+    .legend h3 {
+      margin: 0 0 6px;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+    }
+
+    .legend-section {
+      margin-bottom: 8px;
+    }
+
+    .legend-section summary {
+      cursor: pointer;
+      font-size: 0.82rem;
+      font-weight: 900;
+      padding: 4px 6px;
+      border: 2px solid var(--ink);
+      background: var(--cream);
+      text-transform: uppercase;
+      list-style: none;
+    }
+    .legend-section summary::-webkit-details-marker { display: none; }
+    .legend-section summary::before {
+      content: "▸ ";
+    }
+    .legend-section[open] summary::before {
+      content: "▾ ";
+    }
+
+    .legend-section .items {
+      display: grid;
+      gap: 3px;
+      padding: 6px 0 0;
+    }
+
+    .legend-section button {
+      min-height: 26px;
+      border: 2px solid var(--ink);
+      background: var(--cream);
+      color: var(--ink);
+      cursor: pointer;
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-align: left;
+      padding: 2px 6px;
+    }
+
+    .legend-section button:hover, .legend-section button:focus-visible {
+      background: var(--gold);
+      outline: none;
+    }
+
+    .actions {
+      display: grid;
+      gap: 8px;
+      padding: 12px 14px;
+      border-top: 4px solid var(--ink);
+      background: var(--panel);
+    }
+
+    .open-link {
+      display: grid;
+      place-items: center;
+      min-height: 40px;
+      border: 4px solid var(--ink);
+      background: var(--blue);
+      color: white;
+      font-weight: 900;
+      text-decoration: none;
+      text-transform: uppercase;
+      box-shadow: inset -4px -4px 0 rgba(0, 0, 0, 0.22);
+    }
+
+    .open-link.disabled {
+      background: #8b7e69;
+      color: #e5dac3;
+      pointer-events: none;
+    }
+
+    .status {
+      margin: 0;
+      font-size: 0.8rem;
+      font-weight: 700;
+    }
+
+    /* ---- floating Open FAB for touch / mobile ---- */
+    .float-open {
+      position: fixed;
+      right: 16px;
+      bottom: 16px;
+      z-index: 200;
+      padding: 14px 22px;
+      border: 4px solid var(--ink);
+      background: var(--blue);
+      color: white;
+      font-family: "Courier New", Courier, monospace;
+      font-weight: 900;
+      text-transform: uppercase;
+      text-decoration: none;
+      box-shadow: 0 4px 0 rgba(0, 0, 0, 0.3),
+                  inset -4px -4px 0 rgba(0, 0, 0, 0.22);
+      display: none;
+    }
+
+    @media (pointer: coarse), (max-width: 1180px) {
+      .float-open.visible { display: block; }
+    }
+
+    /* ---- Mobile title bar (slim "Region · Article" strip above the map) ---- */
+    .mobile-title-bar {
+      display: none;
+    }
+
+    @media (pointer: coarse), (max-width: 1180px) {
+      .mobile-title-bar {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        width: 100%;
+        padding: 10px 14px;
+        background: var(--cream);
+        color: var(--ink);
+        border: 0;
+        border-top: 4px solid var(--ink);
+        border-bottom: 4px solid var(--ink);
+        font-family: "Courier New", Courier, monospace;
+        font-size: 0.92rem;
+        font-weight: 700;
+        text-align: left;
+        cursor: default;
+      }
+      .mobile-title-bar.on-article {
+        background: var(--gold);
+        cursor: pointer;
+      }
+      .mtb-region {
+        font-size: 0.72rem;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        opacity: 0.7;
+        padding: 2px 6px;
+        border: 2px solid var(--ink);
+        background: rgba(255, 255, 255, 0.4);
+        white-space: nowrap;
+      }
+      .mtb-title {
+        flex: 1;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+      .mtb-action {
+        font-weight: 900;
+        text-transform: uppercase;
+        font-size: 0.8rem;
+        white-space: nowrap;
+      }
+      .mobile-title-bar {
+        position: relative;
+      }
+      .mtb-details {
+        display: none;
+      }
+      .mobile-title-bar.on-article .mtb-details {
+        display: block;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        padding: 8px 14px;
+        background: var(--gold);
+        border-bottom: 4px solid var(--ink);
+        z-index: 50;
+      }
+      .mtb-date {
+        font-size: 0.75rem;
+        opacity: 0.7;
+        margin-bottom: 4px;
+      }
+      .mtb-summary {
+        font-family: -apple-system, BlinkMacSystemFont, "Avenir Next", Avenir,
+          "Nimbus Sans L", Roboto, "Noto Sans", "Segoe UI", Arial, Helvetica, sans-serif;
+        font-size: 0.82rem;
+        font-weight: 400;
+        line-height: 1.3;
+        white-space: normal;
+      }
+    }
+
+    @media (max-width: 1180px) {
+      .game-area { grid-template-columns: 1fr; }
+      .viewport { border-right: 0; border-bottom: 4px solid var(--ink); }
+      .panel { min-height: auto; }
+    }
+
+    /* ---- touch: enlarge d-pad to comfortable hit-target size ---- */
+    @media (pointer: coarse) {
+      .dpad {
+        grid-template-columns: repeat(3, 56px);
+        grid-template-rows: repeat(3, 48px);
+        gap: 8px;
+      }
+      .dpad button { font-size: 1.25rem; }
+      .legend-section button { min-height: 36px; font-size: 0.82rem; }
+    }
+
+    @media (max-width: 760px) {
+      :root { --tile: 40px; }
+      .page { padding: 6px; }
+      .hud { grid-template-columns: 1fr; }
+      .hud-chip { white-space: normal; }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <section class="game-shell" aria-label="Tyler's world overworld">
+      <header class="hud">
+        <h1>Tyler's World</h1>
+        <div class="hud-chip region" id="region-chip">Start Beach</div>
+        <div class="hud-chip" id="visited-chip">0 / 0 visited</div>
+        <div class="hud-chip">Arrows: move</div>
+        <div class="hud-chip">Enter: open</div>
+      </header>
+
+      <button class="mobile-title-bar" id="mobile-title-bar" type="button" aria-live="polite">
+        <span class="mtb-region" id="mtb-region">Start Beach</span>
+        <span class="mtb-title" id="mtb-title">Move the cat to explore</span>
+        <span class="mtb-action" id="mtb-action"></span>
+        <span class="mtb-details" id="mtb-details">
+          <span class="mtb-date" id="mtb-date"></span>
+          <span class="mtb-summary" id="mtb-summary"></span>
+        </span>
+      </button>
+
+      <div class="game-area">
+        <section class="viewport" id="viewport" aria-label="Overworld map">
+          <div class="world" id="world" tabindex="0">
+            <div class="map-grid" id="map-grid"></div>
+            <div class="avatar" id="avatar" aria-hidden="true">
+              <svg class="cat-sprite" viewBox="0 0 16 16" aria-hidden="true">
+                <rect x="4" y="1" width="2" height="2" fill="#241812"></rect>
+                <rect x="10" y="1" width="2" height="2" fill="#241812"></rect>
+                <rect x="3" y="2" width="4" height="2" fill="#241812"></rect>
+                <rect x="9" y="2" width="4" height="2" fill="#241812"></rect>
+                <rect x="4" y="2" width="2" height="2" fill="#f3a944"></rect>
+                <rect x="10" y="2" width="2" height="2" fill="#f3a944"></rect>
+                <rect x="3" y="4" width="10" height="7" fill="#241812"></rect>
+                <rect x="4" y="5" width="8" height="5" fill="#f3a944"></rect>
+                <rect x="5" y="6" width="1" height="2" fill="#241812"></rect>
+                <rect x="10" y="6" width="1" height="2" fill="#241812"></rect>
+                <rect x="7" y="8" width="2" height="1" fill="#241812"></rect>
+                <rect x="5" y="10" width="6" height="1" fill="#ffe3a2"></rect>
+                <rect x="4" y="11" width="8" height="3" fill="#241812"></rect>
+                <rect x="5" y="11" width="6" height="2" fill="#e99433"></rect>
+                <rect x="2" y="10" width="3" height="2" fill="#241812"></rect>
+                <rect x="2" y="9" width="2" height="2" fill="#e99433"></rect>
+                <rect x="12" y="10" width="3" height="2" fill="#241812"></rect>
+                <rect x="12" y="9" width="2" height="2" fill="#e99433"></rect>
+                <rect x="4" y="14" width="3" height="1" fill="#241812"></rect>
+                <rect x="9" y="14" width="3" height="1" fill="#241812"></rect>
+              </svg>
+            </div>
+          </div>
+        </section>
+
+        <aside class="panel" aria-live="polite">
+          <section class="card">
+            <span class="kind" id="kind">Beach</span>
+            <h2 id="title">Welcome to Tyler's World</h2>
+            <div class="date" id="date">Start Beach</div>
+            <p class="summary" id="summary">Use the arrow keys to move the cat. Each region of the island is a section of the website. Step onto a tile to inspect it. Press Enter to open the article.</p>
+          </section>
+
+          <section class="controls">
+            <p id="location">Cat: Start Beach (22, 13)</p>
+            <div class="dpad" aria-label="On-screen movement controls">
+              <button class="up" type="button" data-move="0,-1" aria-label="Move up">^</button>
+              <button class="left" type="button" data-move="-1,0" aria-label="Move left">&lt;</button>
+              <button class="right" type="button" data-move="1,0" aria-label="Move right">&gt;</button>
+              <button class="down" type="button" data-move="0,1" aria-label="Move down">v</button>
+            </div>
+          </section>
+
+          <section class="legend" id="legend" aria-label="Region jump menu"></section>
+
+          <section class="actions">
+            <a class="open-link disabled" href="#" id="open-link">Open article</a>
+            <p class="status" id="status">Original pixel art. No borrowed sprites.</p>
+          </section>
+        </aside>
+      </div>
+    </section>
+    <a class="float-open" id="float-open" href="#" aria-label="Open current article">Open ↗</a>
+    <div class="catch-flash" id="catch-flash" aria-hidden="true"></div>
+  </main>
+
+  <script>
+    "use strict";
+
+    const COLS = 48;
+    const ROWS = 32;
+    const pageBase = "";
+
+    document.documentElement.style.setProperty("--cols", COLS);
+    document.documentElement.style.setProperty("--rows", ROWS);
+
+    /* ------------------------------------------------------------------
+       REGIONS — themed rectangles on the giant map
+    ------------------------------------------------------------------ */
+
+    const regions = [
+      { id: "featured",    name: "Hall of Fame",       x0: 0,  y0: 0,  x1: 12, y1: 7 },
+      { id: "bio",         name: "Bioinformatics Lab", x0: 15, y0: 0,  x1: 30, y1: 8 },
+      { id: "ai",          name: "AI Cyberzone",       x0: 33, y0: 0,  x1: 47, y1: 8 },
+      { id: "computing",   name: "Computing Grid",     x0: 0,  y0: 10, x1: 12, y1: 15 },
+      { id: "start",       name: "Start Beach",        x0: 15, y0: 10, x1: 30, y1: 15 },
+      { id: "collections", name: "Collections Loft",   x0: 33, y0: 10, x1: 47, y1: 15 },
+      { id: "philosophy",  name: "Philosophy Forest",  x0: 0,  y0: 17, x1: 13, y1: 23 },
+      { id: "health",      name: "Health Meadow",      x0: 15, y0: 17, x1: 30, y1: 22 },
+      { id: "personal",    name: "Personal Hills",     x0: 33, y0: 17, x1: 47, y1: 22 },
+      { id: "stats",       name: "Statistics Strand",  x0: 0,  y0: 25, x1: 13, y1: 31 },
+      { id: "snapshots",   name: "Snapshot Gallery",   x0: 15, y0: 24, x1: 30, y1: 31 },
+      { id: "fun",         name: "Fun Arcade",         x0: 33, y0: 24, x1: 47, y1: 31 }
+    ];
+
+    function regionAt(x, y) {
+      for (const r of regions) {
+        if (x >= r.x0 && x <= r.x1 && y >= r.y0 && y <= r.y1) return r;
+      }
+      return null;
+    }
+
+    /* ------------------------------------------------------------------
+       ARTICLES — every walkable level on the map
+    ------------------------------------------------------------------ */
+
+    const articles = [
+      /* ---------- START BEACH (entry hub) ---------- */
+      { id: "die-zero", region: "start", x: 16, y: 13, kind: "house", token: "DZ",
+        title: "Die with zero ideas",
+        date: "January 22, 2025",
+        url: "die_with_zero.html",
+        summary: "The rule of the website: get useful ideas into public before they disappear." },
+      { id: "complicated-start", region: "start", x: 18, y: 13, kind: "essay", token: "MC",
+        title: "It's more complicated than that",
+        date: "December 27, 2022",
+        url: "its_more_complicated_than_that.html",
+        summary: "A scientific reflex against premature certainty." },
+      { id: "stick-shift", region: "start", x: 20, y: 13, kind: "essay", token: "ZN",
+        title: "Zen and the art of driving stick",
+        date: "October 9, 2022 - October 13, 2024",
+        url: "stick_shift_mindset.html",
+        summary: "Manual transmission as a way of being more present and skillful in any endeavor." },
+      { id: "signal-start", region: "start", x: 22, y: 13, kind: "castle", token: "SG",
+        title: "There's some signal there",
+        date: "August 6, 2024",
+        url: "signal_there.html",
+        summary: "The phrase for noticing path-shaped information before you can fully explain why it matters." },
+      { id: "problem-start", region: "start", x: 24, y: 13, kind: "essay", token: "HP",
+        title: "What I learned about problem solving from my thesis lab",
+        date: "March 24, 2023",
+        url: "how_to_solve_problems.html",
+        summary: "Stories from a lab where biologists invented hardware and software, and the heuristics they used." },
+      { id: "we-think", region: "start", x: 26, y: 13, kind: "essay", token: "WC",
+        title: "We choose to think about stuff",
+        date: "August 1, 2025",
+        url: "we_choose_to_think.html",
+        summary: "Wisdom requires thinking — even when AI could do it for you. A letter to future-me." },
+      { id: "learn-bfx", region: "start", x: 28, y: 13, kind: "house", token: "LB",
+        title: "How I transitioned from biologist to bioinformatician",
+        date: "July 23, 2023",
+        url: "learn_bioinformatics.html",
+        summary: "Journey notes and recommended references for crossing from wet lab to dry lab." },
+      { id: "knn-sleepwalk-start", region: "start", x: 22, y: 11, kind: "essay", token: "KS",
+        title: "Knn sleepwalk",
+        date: "November 16, 2022",
+        url: "https://github.com/tjburns08/knn_sleepwalk",
+        summary: "An R package that lets you test how exact a 2D embedding really is." },
+      { id: "tedx", region: "start", x: 22, y: 15, kind: "castle", token: "TX",
+        title: "TEDx Basel: my scrolling problem, and how I fixed it",
+        date: "July 7, 2023",
+        url: "https://www.youtube.com/watch?v=U35T-KzfeLk",
+        summary: "How an ADD brain meets infinite scroll, and what to build instead." },
+
+      /* ---------- PHILOSOPHY FOREST (22 articles) ---------- */
+      { id: "boring", region: "philosophy", x: 3, y: 17, kind: "essay", token: "BM",
+        title: "The most boring man in the world",
+        date: "January 3, 2025 - January 8, 2025",
+        url: "boring.html",
+        summary: "A defense of boring stability as a surprisingly high-leverage way to live and work." },
+      { id: "praise", region: "philosophy", x: 5, y: 17, kind: "essay", token: "PI",
+        title: "Buddhism is to mindfulness, as Christianity is to...",
+        date: "January 8, 2025",
+        url: "praise_the_ideal.html",
+        summary: "A reflection on ideals, religion, and what gets stripped away when practices flatten into techniques." },
+      { id: "signal-phil", region: "philosophy", x: 7, y: 17, kind: "essay", token: "SG",
+        title: "There's some signal there",
+        date: "August 6, 2024",
+        url: "signal_there.html",
+        summary: "Noticing path-shaped information before you can fully explain why it matters." },
+      { id: "occam", region: "philosophy", x: 9, y: 17, kind: "essay", token: "OR",
+        title: "But what is Occam's razor really?",
+        date: "March 24, 2023",
+        url: "occams_razor.html",
+        summary: "A closer look at a familiar heuristic that people invoke more often than they understand." },
+      { id: "dialectic", region: "philosophy", x: 11, y: 17, kind: "essay", token: "DL",
+        title: "Making sense of the messy real world",
+        date: "December 10, 2022",
+        url: "dialectic.html",
+        summary: "A dialectical approach to navigating reality when clean abstractions break down." },
+      { id: "beauty-truth", region: "philosophy", x: 13, y: 17, kind: "essay", token: "BT",
+        title: "The beauty is truth delusion",
+        date: "November 29, 2022",
+        url: "the_beauty_is_truth_delusion.html",
+        summary: "A warning against confusing elegance, beauty, or coherence with truth." },
+      { id: "doomer", region: "philosophy", x: 3, y: 19, kind: "castle", token: "DG",
+        title: "If the doomers are right, then be a giver",
+        date: "August 23, 2025 - May 23, 2026",
+        url: "doomer_good_life.html",
+        summary: "A lived attempt to connect eudaimonia, existential risk, and giving more than you take." },
+      { id: "die-zero-phil", region: "philosophy", x: 5, y: 19, kind: "house", token: "DZ",
+        title: "Die with zero ideas",
+        date: "January 22, 2025",
+        url: "die_with_zero.html",
+        summary: "Get useful ideas into public before they disappear." },
+      { id: "getting", region: "philosophy", x: 7, y: 19, kind: "essay", token: "GL",
+        title: "Getting life done",
+        date: "September 14, 2023 - January 20, 2024",
+        url: "getting_life_done.html",
+        summary: "Getting through the parts of life that do not care about your abstractions." },
+      { id: "complexity", region: "philosophy", x: 9, y: 19, kind: "essay", token: "FC",
+        title: "Fight complexity with complexity",
+        date: "May 16, 2023",
+        url: "fight_complexity_with_complexity.html",
+        summary: "Sometimes a complex world requires complex tools." },
+      { id: "depth", region: "philosophy", x: 11, y: 19, kind: "essay", token: "VD",
+        title: "The virtue of depth",
+        date: "April 7, 2023",
+        url: "virtue_of_depth.html",
+        summary: "Staying with something long enough for its real structure to reveal itself." },
+      { id: "tao-problem", region: "philosophy", x: 13, y: 19, kind: "essay", token: "TP",
+        title: "The Tao of problem solving",
+        date: "December 4, 2022",
+        url: "tao_of_problem_solving.html",
+        summary: "Problem solving as moving with the grain of reality instead of forcing procedures onto it." },
+      { id: "complicated-phil", region: "philosophy", x: 1, y: 21, kind: "essay", token: "MC",
+        title: "It's more complicated than that",
+        date: "December 27, 2022",
+        url: "its_more_complicated_than_that.html",
+        summary: "A scientific reflex against premature certainty." },
+      // ---- Hidden Zelda-style level (revealed by walking up from complicated-phil) ----
+      { id: "meditations", region: "philosophy", x: 1, y: 19, kind: "castle", token: "MD",
+        title: "My Meditations Chapter 1",
+        date: "December 24, 2022",
+        url: "meditations_chapter_one.html",
+        summary: "A personal version of Marcus Aurelius's opening chapter — debts and acknowledgments.",
+        secret: "meditations" },
+      { id: "fear", region: "philosophy", x: 3, y: 21, kind: "essay", token: "FU",
+        title: "Fear of the un-word is the beginning of wisdom",
+        date: "November 11, 2023",
+        url: "fear_the_unword.html",
+        summary: "Unnamed things, taboo concepts, and the wisdom that starts when language gets uncomfortable." },
+      { id: "problem-phil", region: "philosophy", x: 5, y: 21, kind: "essay", token: "PS",
+        title: "What I learned about problem solving from my thesis lab",
+        date: "March 24, 2023",
+        url: "how_to_solve_problems.html",
+        summary: "Lab stories about people who reinvented what they needed." },
+      { id: "enjoyment", region: "philosophy", x: 7, y: 21, kind: "essay", token: "EA",
+        title: "Enjoyment arbitrage",
+        date: "May 23, 2023",
+        url: "enjoyment_arbitrage.html",
+        summary: "You can sometimes do what you love if everyone else hates the surrounding work enough." },
+      { id: "finite", region: "philosophy", x: 9, y: 21, kind: "essay", token: "FI",
+        title: "Finite and infinite-life games",
+        date: "April 20, 2023",
+        url: "finite_infinite_life_games.html",
+        summary: "A personal adaptation of finite and infinite games into life choices." },
+      { id: "coding", region: "philosophy", x: 11, y: 21, kind: "essay", token: "CP",
+        title: "Learning how to code improved how I think",
+        date: "January 15, 2023",
+        url: "coding_as_philosophical_project.html",
+        summary: "Coding as a practice that changes how problems are perceived." },
+      { id: "way", region: "philosophy", x: 13, y: 21, kind: "essay", token: "WY",
+        title: "The way is the way",
+        date: "December 18, 2022",
+        url: "purpose_driven_vs_purposeless.html",
+        summary: "Acting when purpose is less useful than recognizing the path." },
+      { id: "beauty", region: "philosophy", x: 7, y: 23, kind: "house", token: "AB",
+        title: "Replace value with beauty",
+        date: "April 23, 2023",
+        url: "add_beauty.html",
+        summary: "A proposed swap: beauty-add thinking instead of value-add thinking." },
+      { id: "hacking", region: "philosophy", x: 11, y: 23, kind: "essay", token: "HK",
+        title: "Hacking: seeing through and unseeing in my life",
+        date: "March 15, 2023",
+        url: "on_hacking.html",
+        summary: "Hacking as noticing hidden degrees of freedom in everyday systems." },
+      { id: "minimize", region: "philosophy", x: 13, y: 23, kind: "essay", token: "MS",
+        title: "Applying sustainability to everyday life",
+        date: "October 13, 2022",
+        url: "minimize_and_sustain.html",
+        summary: "A sustainability mindset for ordinary personal choices." },
+
+      /* ---------- BIOINFORMATICS LAB ---------- */
+      { id: "xshift", region: "bio", x: 15, y: 1, kind: "essay", token: "XS",
+        title: "How X-shift works",
+        date: "June 15, 2023",
+        url: "how_xshift_works.html",
+        summary: "X-shift, a CyTOF clustering algorithm, simplified in R with igraph." },
+      { id: "mnn", region: "bio", x: 17, y: 1, kind: "essay", token: "MN",
+        title: "CyTOF mutual nearest neighbors experiment",
+        date: "June 14, 2023",
+        url: "cytof_mnn_experiment.html",
+        summary: "MNN vs KNN graphs for clustering CyTOF data." },
+      { id: "lang-tour", region: "bio", x: 19, y: 1, kind: "essay", token: "LT",
+        title: "CyTOF analysis language tour",
+        date: "May 10, 2023",
+        url: "cytof_analysis_language_tour.html",
+        summary: "Same CyTOF analysis in R, Python, Julia, C++, SQL, and Rust." },
+      { id: "julia-umap", region: "bio", x: 21, y: 1, kind: "essay", token: "JU",
+        title: "CyTOF UMAP with Julia",
+        date: "April 17, 2023",
+        url: "julia_cytof_pipeline_one_file.html",
+        summary: "Trading R's UMAP for Julia's faster implementation, end to end." },
+      { id: "cytof-seurat", region: "bio", x: 23, y: 1, kind: "essay", token: "CS",
+        title: "Run CyTOF analysis with Seurat",
+        date: "April 11, 2023",
+        url: "run_cytof_with_seurat.html",
+        summary: "Tricking Seurat into thinking CyTOF data is scRNA-seq data." },
+      { id: "fcs-anatomy", region: "bio", x: 25, y: 1, kind: "essay", token: "FA",
+        title: "Anatomy of a FCS file",
+        date: "March 23, 2023",
+        url: "anatomy_of_fcs_file.html",
+        summary: "Parsing an FCS file by hand, byte by byte, without flowCore." },
+      { id: "cytof-pipe1", region: "bio", x: 27, y: 1, kind: "house", token: "P1",
+        title: "CyTOF pipeline: one FCS file",
+        date: "March 12, 2023",
+        url: "cytof_pipeline_one_file.html",
+        summary: "A guts-level walkthrough of single-file CyTOF analysis in R." },
+      { id: "cytof-pipe-many", region: "bio", x: 29, y: 1, kind: "house", token: "PM",
+        title: "CyTOF pipeline: many FCS files",
+        date: "March 16, 2023",
+        url: "cytof_pipeline_many_files.html",
+        summary: "Multi-file CyTOF with per-cluster stats and diffcyt." },
+
+      { id: "asinh", region: "bio", x: 15, y: 3, kind: "essay", token: "AS",
+        title: "asinh(mean) vs mean(asinh)",
+        date: "December 7, 2022",
+        url: "asinh_mean_vs_mean_asinh.html",
+        summary: "Order of operations matters when summarizing per-cluster CyTOF expression." },
+      { id: "cytof-trans", region: "bio", x: 17, y: 3, kind: "essay", token: "DT",
+        title: "Data transformations for CyTOF",
+        date: "2022",
+        url: "cytof_data_transformations.html",
+        summary: "Asinh, logicle, linear: comparing what each transformation does to mass cytometry data." },
+      { id: "louvain-leiden", region: "bio", x: 19, y: 3, kind: "essay", token: "LL",
+        title: "Louvain versus Leiden cluster stability",
+        date: "2024",
+        url: "louvain_leiden_cluster_stability.html",
+        summary: "Replicates and stability scores across two community-detection algorithms." },
+      { id: "soft-clust", region: "bio", x: 21, y: 3, kind: "essay", token: "SC",
+        title: "Cluster membership purity score",
+        date: "2024",
+        url: "soft_clustering.html",
+        summary: "How firmly does a single cell belong to its assigned cluster?" },
+      { id: "seurat-stab", region: "bio", x: 23, y: 3, kind: "essay", token: "SS",
+        title: "Cluster stability as an evaluation metric",
+        date: "2024",
+        url: "seurat_pbmc_cluster_stability.html",
+        summary: "Stability as a working evaluation metric for single-cell workflows." },
+      { id: "viridis", region: "bio", x: 25, y: 3, kind: "essay", token: "VR",
+        title: "Case for viridis in scRNA-seq",
+        date: "2024",
+        url: "case_for_viridis.html",
+        summary: "A defense of viridis as the default scRNA-seq color scale." },
+      { id: "seurat-nopca", region: "bio", x: 27, y: 3, kind: "essay", token: "NP",
+        title: "UMAP without PCA reveals cosine distance",
+        date: "2024",
+        url: "annotated_seurat_without_pca.html",
+        summary: "What gets lost — and what holds up — when you skip PCA in a scRNA-seq UMAP." },
+      { id: "annotate-3k", region: "bio", x: 29, y: 3, kind: "essay", token: "A3",
+        title: "Annotate the PBMC 3k dataset",
+        date: "2024",
+        url: "annotate_pbmc_3k.html",
+        summary: "Walkthrough of marker-based annotation for a small reference dataset." },
+
+      { id: "rainbow", region: "bio", x: 15, y: 5, kind: "essay", token: "RB",
+        title: "Flow-style color scheme for FeaturePlot",
+        date: "2024",
+        url: "rainbow_feature_plot.html",
+        summary: "Bringing flow cytometry's color sensibilities to Seurat plots." },
+      { id: "charite", region: "bio", x: 17, y: 5, kind: "essay", token: "CC",
+        title: "scRNA-seq: Schulte-Schrepping et al. Cell 2020",
+        date: "2023",
+        url: "charite_covid_figure_2.html",
+        summary: "A figure-by-figure walk through a single-cell COVID-19 paper." },
+      { id: "scrna-pipe", region: "bio", x: 19, y: 5, kind: "house", token: "SR",
+        title: "scRNA-seq pipeline: PBMC 3k in depth",
+        date: "2024",
+        url: "scrna_seq_piepline_pbmc_3k.html",
+        summary: "Pipeline walkthrough from raw to clusters on the canonical PBMC dataset." },
+      { id: "scrna-integrate", region: "bio", x: 21, y: 5, kind: "essay", token: "IN",
+        title: "scRNA-seq: integrated vs not",
+        date: "2024",
+        url: "scrna_seq_analyze_and_integrate.html",
+        summary: "What integration changes — and what it costs." },
+      { id: "dr-prov", region: "bio", x: 23, y: 5, kind: "castle", token: "DR",
+        title: "Provenance of CyTOF dimension reduction",
+        date: "May 18, 2026",
+        url: "dr_provenance_interactive.html",
+        summary: "Interactive provenance graph: SPADE → UMAP and the methods around them." },
+      { id: "dist-mat", region: "bio", x: 25, y: 5, kind: "essay", token: "DM",
+        title: "Distance matrix metric correlations",
+        date: "2023",
+        url: "distance_matrix_correlation.html",
+        summary: "Which distance metrics agree, and which give you different cell neighborhoods." },
+      { id: "cytof-llm-sel", region: "bio", x: 27, y: 5, kind: "essay", token: "LS",
+        title: "CyTOF clustering picked at random by LLMs",
+        date: "March 13, 2026",
+        url: "cytof_llm_selection_experiment.html",
+        summary: "LLMs prefer FlowSOM or PhenoGraph. Vendor-specific biases matter." },
+      { id: "samusik-llm", region: "bio", x: 29, y: 5, kind: "essay", token: "SL",
+        title: "LLM-generated CyTOF data",
+        date: "February 27, 2026",
+        url: "samusik_llm_mishmash.html",
+        summary: "Asking Claude Sonnet to simulate Samusik cells, one at a time." },
+
+      { id: "llm-annotate", region: "bio", x: 15, y: 7, kind: "essay", token: "LA",
+        title: "LLM-based cell annotation in R",
+        date: "2024",
+        url: "llm_annotate_pbmc3k.html",
+        summary: "Automated marker-based annotation routed through an LLM." },
+      { id: "blsc-pca", region: "bio", x: 17, y: 7, kind: "essay", token: "BP",
+        title: "LLM-augmented PCA loadings",
+        date: "2024",
+        url: "BLSC_PCA_loading_LLMs_final.html",
+        summary: "Using LLMs to interpret PC loadings in PBMC analysis." },
+      { id: "uce-nn", region: "bio", x: 19, y: 7, kind: "essay", token: "UN",
+        title: "PBMC 3k nearest neighbors in UCE",
+        date: "2024",
+        url: "pbmc_uce_nn_comparison.html",
+        summary: "Do foundation embeddings preserve local neighborhood structure?" },
+      { id: "uce-filt", region: "bio", x: 21, y: 7, kind: "essay", token: "UF",
+        title: "UCE: variable genes vs full",
+        date: "2024",
+        url: "compare_full_vs_filtered_uce.html",
+        summary: "Pre-filtering to variable genes hurts cell separation in UCE." },
+      { id: "uce-3k10k", region: "bio", x: 23, y: 7, kind: "essay", token: "UE",
+        title: "UCE on PBMC 3k + 10k",
+        date: "2024",
+        url: "explore_uce_output_3k_10k.html",
+        summary: "Testing whether the embedding really grokked dataset integration." },
+      { id: "uce-cns", region: "bio", x: 25, y: 7, kind: "essay", token: "UC",
+        title: "UMAP and UCE on CNS data",
+        date: "2024",
+        url: "human_universal_cell_embeddings.html",
+        summary: "UMAP misses the proper center and edges of the human CNS portion of UCE." },
+      { id: "learn-bfx-bio", region: "bio", x: 27, y: 7, kind: "castle", token: "LB",
+        title: "How I transitioned from biologist to bioinformatician",
+        date: "July 23, 2023",
+        url: "learn_bioinformatics.html",
+        summary: "Notes and references from the journey across the bench/keyboard divide." },
+      { id: "claude-cytof", region: "bio", x: 29, y: 7, kind: "essay", token: "CL",
+        title: "Claude Code + Codex CyTOF experiments",
+        date: "January 26, 2026",
+        url: "https://github.com/tjburns08/cytof_agentic_prompting_experiments",
+        summary: "Agentic prompting on a known dataset; outputs often sensible, choices hit-or-miss." },
+
+      /* ---------- AI CYBERZONE ---------- */
+      { id: "we-think-ai", region: "ai", x: 33, y: 1, kind: "essay", token: "WC",
+        title: "We choose to think about stuff",
+        date: "August 1, 2025",
+        url: "we_choose_to_think.html",
+        summary: "Wisdom requires thinking — even when AI could do it for you." },
+      { id: "be-diff", region: "ai", x: 35, y: 1, kind: "essay", token: "BD",
+        title: "Be different, now more important than ever",
+        date: "2024",
+        url: "be_different.html",
+        summary: "Why distinctiveness matters more in an age of LLM averages." },
+      { id: "episodic", region: "ai", x: 37, y: 1, kind: "essay", token: "EM",
+        title: "Episodic memory is the new semantic memory",
+        date: "2024",
+        url: "episodic_memory.html",
+        summary: "When LLMs ate semantic memory, the high-leverage skill became remembering events." },
+      { id: "xai-us", region: "ai", x: 39, y: 1, kind: "essay", token: "XA",
+        title: "Explainable AI and understanding ourselves",
+        date: "2024",
+        url: "xai_and_us.html",
+        summary: "Interpretability work, and how it loops back into self-knowledge." },
+
+      { id: "descent", region: "ai", x: 33, y: 3, kind: "castle", token: "MD",
+        title: "An LLM's descent into madness",
+        date: "2024",
+        url: "descent_into_madness.html",
+        summary: "What happens when you feed a language model its own output, again and again." },
+      { id: "microbiome-q", region: "ai", x: 35, y: 3, kind: "essay", token: "MQ",
+        title: "10k microbiome questions, generated",
+        date: "2023",
+        url: "microbiome_questions.html",
+        summary: "Letting a LLM imagine the space of researchable questions in a field." },
+      { id: "make-meta", region: "ai", x: 37, y: 3, kind: "essay", token: "MM",
+        title: "Generating metaquestions (R Markdown)",
+        date: "2023",
+        url: "make_metaquestions.html",
+        summary: "The pipeline behind the 10k question set." },
+      { id: "gpt3-student", region: "ai", x: 39, y: 3, kind: "essay", token: "G3",
+        title: "GPT-3 simulating students",
+        date: "2022",
+        url: "gpt3_student.html",
+        summary: "Old-school but instructive: simulating student answers to gauge pedagogy." },
+      { id: "cmd-chatbot", region: "ai", x: 41, y: 3, kind: "essay", token: "CB",
+        title: "Command-line chatbot",
+        date: "2023",
+        url: "command_line_writeup.html",
+        summary: "A pocket chatbot you can build, hack, and run from your terminal." },
+
+      { id: "scrolling-problem", region: "ai", x: 33, y: 5, kind: "essay", token: "SP",
+        title: "The Scrolling Problem",
+        date: "2023",
+        url: "scrolling_problem.html",
+        summary: "Where the TEDx talk started: an ADD-friendly answer to infinite scroll." },
+      { id: "gprofiler", region: "ai", x: 35, y: 5, kind: "essay", token: "GP",
+        title: "Gene lists → interactive contextual maps",
+        date: "2024",
+        url: "run_gprofiler_and_embed.html",
+        summary: "Embeddings on top of g:Profiler results for richer biological interpretation." },
+      { id: "site-graph", region: "ai", x: 37, y: 5, kind: "essay", token: "SG",
+        title: "Graph visualization of my website",
+        date: "2024",
+        url: "website_internal_link_graph.html",
+        summary: "The internal link structure of this website, rendered as a graph." },
+      { id: "journaling", region: "ai", x: 39, y: 5, kind: "house", token: "JM",
+        title: "One million words: 15 years of journaling",
+        date: "2024",
+        url: "tech_enabled_journaling.html",
+        summary: "Embedding and exploring 15 years of personal journals." },
+      { id: "news-space", region: "ai", x: 41, y: 5, kind: "essay", token: "NS",
+        title: "CNN, Fox, AP: a news space study",
+        date: "2024",
+        url: "cnn_fox_ap_map.html",
+        summary: "Mapping the semantic space of three news outlets." },
+
+      { id: "curate", region: "ai", x: 33, y: 7, kind: "essay", token: "CC",
+        title: "How I curate content",
+        date: "2024",
+        url: "how_i_curate_content.html",
+        summary: "A workflow for filtering and saving signal in a noisy info diet." },
+      { id: "context-bfx", region: "ai", x: 35, y: 7, kind: "essay", token: "CX",
+        title: "The Context Problem in bioinformatics",
+        date: "2024",
+        url: "context_problem_bfx.html",
+        summary: "Why generic LLMs struggle to be useful in a specialist's pipeline." },
+      { id: "ask-marcus", region: "ai", x: 37, y: 7, kind: "essay", token: "AM",
+        title: "What would Marcus Aurelius say?",
+        date: "2024",
+        url: "ask_marcus_writeup.html",
+        summary: "The build log behind the Hugging Face 'Ask Marcus Aurelius' space." },
+      { id: "biorxiv", region: "ai", x: 39, y: 7, kind: "essay", token: "BX",
+        title: "Preprint server archive",
+        date: "2024",
+        url: "biorxiv_medrxiv_history.html",
+        summary: "Snapshot history of bioRxiv and medRxiv." },
+      { id: "qgraph", region: "ai", x: 41, y: 7, kind: "essay", token: "QG",
+        title: "Question graph",
+        date: "2024",
+        url: "question_graph_writeup.html",
+        summary: "Treating curiosity itself as a graph you can walk and prune." },
+
+      /* ---------- COMPUTING GRID ---------- */
+      { id: "levels", region: "computing", x: 2, y: 11, kind: "castle", token: "LV",
+        title: "Levels of analysis in bits and atoms",
+        date: "2023",
+        url: "levels_of_analysis.html",
+        summary: "Choosing the right altitude when reasoning about computers — and everything else." },
+      { id: "r-rabbit", region: "computing", x: 4, y: 11, kind: "essay", token: "RR",
+        title: "The R rabbit hole",
+        date: "2023",
+        url: "r_rabbit_hole.html",
+        summary: "Going deep on R — what's down there, and why it changed how I think." },
+      { id: "lisp", region: "computing", x: 6, y: 11, kind: "essay", token: "LI",
+        title: "The Lisp machine of Babel",
+        date: "2023",
+        url: "lisp_machine_of_babel.html",
+        summary: "Lisp as a lens for understanding code, language, and abstraction." },
+      { id: "metaprog", region: "computing", x: 8, y: 11, kind: "essay", token: "MP",
+        title: "Metaprogramming in R",
+        date: "2023",
+        url: "metaprogramming_in_R.html",
+        summary: "Hands-on with R's unusual capacity to operate on its own code." },
+      { id: "ca-rules", region: "computing", x: 10, y: 11, kind: "essay", token: "CA",
+        title: "Elementary cellular automata rule space",
+        date: "2023",
+        url: "ca_rule_space.html",
+        summary: "Mapping the rule space of 1D cellular automata." },
+      { id: "logic-gates", region: "computing", x: 2, y: 13, kind: "essay", token: "LG",
+        title: "Logic gates",
+        date: "2023",
+        url: "logic_gates.html",
+        summary: "The atomic building blocks of computing, from scratch." },
+      { id: "1d-ca", region: "computing", x: 4, y: 13, kind: "essay", token: "1C",
+        title: "1-D cellular automata",
+        date: "2023",
+        url: "1d_ca.html",
+        summary: "Running the simplest interesting automata you can." },
+      { id: "rule-110", region: "computing", x: 6, y: 13, kind: "house", token: "R0",
+        title: "Explore Wolfram Rule 110",
+        date: "2023",
+        url: "explore_rule_110.html",
+        summary: "The Turing-complete rule from the elementary CA family." },
+
+      /* ---------- COLLECTIONS LOFT ---------- */
+      { id: "qbank", region: "collections", x: 35, y: 13, kind: "house", token: "QB",
+        title: "Question Bank",
+        date: "ongoing",
+        url: "question_bank.html",
+        summary: "An ever-growing library of questions worth sitting with." },
+      { id: "social", region: "collections", x: 40, y: 13, kind: "castle", token: "SM",
+        title: "Social media posts",
+        date: "ongoing",
+        url: "social_media_posts.html",
+        summary: "Selected posts from across the years, archived here." },
+
+      /* ---------- STATISTICS STRAND (coin toss series) ---------- */
+      { id: "stats-1", region: "stats", x: 1, y: 27, kind: "house", token: "C1",
+        title: "Coin toss 1: large numbers + CLT",
+        date: "May 26, 2021",
+        url: "1_law_large_numbers_central_limit_theorem.html",
+        summary: "The two foundational results, illustrated by simulation." },
+      { id: "stats-2", region: "stats", x: 3, y: 27, kind: "essay", token: "C2",
+        title: "Coin toss 2: runs of luck",
+        date: "May 26, 2021",
+        url: "2_runs_of_luck.html",
+        summary: "How often a fair coin throws up streaks that look unfair." },
+      { id: "stats-3", region: "stats", x: 5, y: 27, kind: "essay", token: "C3",
+        title: "Coin toss 3: fair vs unfair coins",
+        date: "May 26, 2021",
+        url: "3_fair_vs_unfair_coins.html",
+        summary: "Discriminating bias from noise." },
+      { id: "stats-4", region: "stats", x: 7, y: 27, kind: "essay", token: "C4",
+        title: "Coin toss 4: random walks",
+        date: "May 26, 2021",
+        url: "4_random_walk.html",
+        summary: "Random walks built up coin-flip by coin-flip." },
+      { id: "stats-5", region: "stats", x: 9, y: 27, kind: "essay", token: "C5",
+        title: "Coin toss 5: dice rolls",
+        date: "May 27, 2021",
+        url: "5_dice_roll.html",
+        summary: "Extending the same reasoning past binary outcomes." },
+      { id: "stats-6", region: "stats", x: 11, y: 27, kind: "castle", token: "C6",
+        title: "Coin toss 6: is this sequence random?",
+        date: "May 27, 2021",
+        url: "6_is_this_sequence_random.html",
+        summary: "Tests for randomness, and where intuition fails." },
+
+      /* ---------- HEALTH MEADOW ---------- */
+      { id: "boring-diet", region: "health", x: 17, y: 19, kind: "house", token: "BD",
+        title: "The boring diet",
+        date: "2023",
+        url: "boring_diet.html",
+        summary: "How I prevent food addiction by removing decisions, not adding rules." },
+      { id: "tao-health", region: "health", x: 20, y: 19, kind: "castle", token: "TH",
+        title: "The Tao of good health",
+        date: "2023",
+        url: "pursuit_of_health.html",
+        summary: "Long-game health as a way of being, not a checklist." },
+      { id: "fit-20", region: "health", x: 23, y: 19, kind: "essay", token: "F2",
+        title: "How to get fit in 20 years",
+        date: "2023",
+        url: "how_to_get_fit_long_term.html",
+        summary: "The slow-cooker school of fitness." },
+      { id: "therapy", region: "health", x: 26, y: 19, kind: "essay", token: "PT",
+        title: "Psychotherapy should be as normal as the gym",
+        date: "2023",
+        url: "psychotherapy_and_fitness.html",
+        summary: "Mental fitness deserves the same standing as physical fitness." },
+      { id: "just-paint", region: "health", x: 28, y: 19, kind: "essay", token: "JP",
+        title: "Just paint",
+        date: "2023",
+        url: "just_paint.html",
+        summary: "On letting art be art." },
+
+      /* ---------- PERSONAL HILLS ---------- */
+      { id: "northern", region: "personal", x: 35, y: 19, kind: "house", token: "NL",
+        title: "I saw the northern lights",
+        date: "2023",
+        url: "i_saw_the_northern_lights.html",
+        summary: "On finally seeing them, and what showing up actually means." },
+      { id: "limbic", region: "personal", x: 37, y: 19, kind: "essay", token: "LL",
+        title: "Limbic language learning",
+        date: "2023",
+        url: "limbic_language_learning.html",
+        summary: "Learning a language through emotion, not flashcards." },
+      { id: "stick-personal", region: "personal", x: 39, y: 19, kind: "essay", token: "ZN",
+        title: "Zen and the art of driving stick",
+        date: "2024",
+        url: "stick_shift_mindset.html",
+        summary: "Manual transmission as a personal philosophy." },
+      { id: "zelda", region: "personal", x: 41, y: 19, kind: "essay", token: "ZE",
+        title: "Zelda, the hero instinct, and narratives",
+        date: "2024",
+        url: "zelda.html",
+        summary: "What playing Zelda taught me about narrative and motive." },
+      { id: "coronazeit", region: "personal", x: 43, y: 19, kind: "castle", token: "CZ",
+        title: "Life and love in Berlin during the Coronazeit",
+        date: "2021",
+        url: "life_and_love_during_coronazeit.pdf",
+        summary: "A long essay on Berlin during the pandemic." },
+
+      /* ---------- SNAPSHOT GALLERY ---------- */
+      { id: "snap-2024-05", region: "snapshots", x: 17, y: 27, kind: "house", token: "M4",
+        title: "May 2024",
+        date: "2024",
+        url: "2024_may.html",
+        summary: "A snapshot of what I was working on and thinking about." },
+      { id: "snap-2023-05", region: "snapshots", x: 20, y: 27, kind: "essay", token: "M3",
+        title: "May 2023",
+        date: "2023",
+        url: "2023_may.html",
+        summary: "Snapshot, May 2023." },
+      { id: "snap-2023-04", region: "snapshots", x: 23, y: 27, kind: "essay", token: "A3",
+        title: "April 2023",
+        date: "2023",
+        url: "2023_april.html",
+        summary: "Snapshot, April 2023." },
+      { id: "snap-2023-03", region: "snapshots", x: 26, y: 27, kind: "essay", token: "R3",
+        title: "March 2023",
+        date: "2023",
+        url: "2023_march.html",
+        summary: "Snapshot, March 2023." },
+
+      /* ---------- FUN ARCADE ---------- */
+      { id: "speech", region: "fun", x: 35, y: 27, kind: "house", token: "SP",
+        title: "Speech memorization helper",
+        date: "2024",
+        url: "speech_memorization_helper.html",
+        summary: "A small tool for memorizing speeches by scaffolded reveal." },
+      { id: "gol-nav", region: "fun", x: 37, y: 27, kind: "essay", token: "GL",
+        title: "Conway's Game of Life Cellvivor",
+        date: "2024",
+        url: "gol_navigate.html",
+        summary: "Navigate around inside a Game of Life simulation." },
+      { id: "breakout", region: "fun", x: 39, y: 27, kind: "essay", token: "BO",
+        title: "Breakout",
+        date: "2024",
+        url: "breakout.html",
+        summary: "A small Breakout clone." },
+      { id: "conways", region: "fun", x: 41, y: 27, kind: "essay", token: "GO",
+        title: "Conway's Game of Life",
+        date: "2024",
+        url: "conways_gol.html",
+        summary: "The canonical cellular automaton, playable." },
+      { id: "mandel", region: "fun", x: 43, y: 27, kind: "castle", token: "MB",
+        title: "Mandelbrot Set",
+        date: "2024",
+        url: "mandelbrot_set.html",
+        summary: "Pan and zoom through the most famous fractal." },
+
+      /* ---------- HALL OF FAME (FEATURED) ---------- */
+      { id: "rand", region: "featured", x: 2, y: 2, kind: "castle", token: "RH",
+        title: "RAND-Helena report on AI-enabled bio threats",
+        date: "May 20, 2026",
+        url: "https://www.rand.org/pubs/conf_proceedings/CFA4954-1.html",
+        summary: "Report on the DC convenings I helped organize." },
+      { id: "krupp", region: "featured", x: 4, y: 2, kind: "essay", token: "KS",
+        title: "Krupp Stanford Newsletter 2025",
+        date: "2025",
+        url: "Krupp-Stanford_E-Newsletter_2025_9MB.pdf",
+        summary: "Featuring my intern." },
+      { id: "ramji", region: "featured", x: 6, y: 2, kind: "essay", token: "RJ",
+        title: "Interview with Ramji Srinivasan (Teiko)",
+        date: "2024",
+        url: "https://www.youtube.com/watch?v=wRVOyYse5ug",
+        summary: "Conversation with the CEO of Teiko." },
+      { id: "watershed", region: "featured", x: 8, y: 2, kind: "essay", token: "WB",
+        title: "Limits of dimensionality reduction",
+        date: "2024",
+        url: "https://watershed.bio/resources/the-limits-of-dimensionality-reduction-tools-for-single-cell-analysis",
+        summary: "Guest piece on Watershed's blog." },
+      { id: "dev-pod-2", region: "featured", x: 2, y: 4, kind: "essay", token: "D2",
+        title: "Developer Stories Pt. 2: Be the flame",
+        date: "2023",
+        url: "https://rseng.github.io/devstories/2023/tyler-burns-part-2/",
+        summary: "Podcast episode." },
+      { id: "dev-pod-1", region: "featured", x: 4, y: 4, kind: "essay", token: "D1",
+        title: "Developer Stories Pt. 1: Line 37",
+        date: "2023",
+        url: "https://rseng.github.io/devstories/2023/tyler-burns-part-1/",
+        summary: "Podcast episode." },
+      { id: "tedx-feat", region: "featured", x: 6, y: 4, kind: "castle", token: "TX",
+        title: "TEDx Basel: scrolling problem",
+        date: "2023",
+        url: "https://www.youtube.com/watch?v=U35T-KzfeLk",
+        summary: "The TED talk." },
+      { id: "caricature", region: "featured", x: 8, y: 4, kind: "essay", token: "CA",
+        title: "TEDx Basel caricature",
+        date: "2023",
+        url: "burns_tedx_caricature.pdf",
+        summary: "The caricature artist's take on the talk." }
+    ];
+
+    const articleById = new Map(articles.map((a) => [a.id, a]));
+    const articleByCoord = new Map(articles.map((a) => [`${a.x},${a.y}`, a]));
+
+    /* ------------------------------------------------------------------
+       VISITED TRACKING
+    ------------------------------------------------------------------ */
+
+    const VISITED_KEY = "tylersworld-visited";
+    const visitedSet = new Set();
+
+    function loadVisited() {
+      try {
+        const raw = localStorage.getItem(VISITED_KEY);
+        if (raw) JSON.parse(raw).forEach((id) => visitedSet.add(id));
+      } catch (e) { /* ignore */ }
+    }
+
+    function saveVisited() {
+      try { localStorage.setItem(VISITED_KEY, JSON.stringify([...visitedSet])); }
+      catch (e) { /* ignore */ }
+    }
+
+    function markVisited(id) {
+      if (!id || visitedSet.has(id)) return;
+      visitedSet.add(id);
+      saveVisited();
+      updateVisitedUI();
+    }
+
+    function updateVisitedUI() {
+      const total = articles.filter((a) => !a.secret || secretRevealed[a.secret]).length;
+      const count = visitedSet.size;
+      document.getElementById("visited-chip").textContent = `${count} / ${total} visited`;
+      document.querySelectorAll(".tile.article").forEach((el) => {
+        const x = Number(el.dataset.x), y = Number(el.dataset.y);
+        const art = articleByCoord.get(`${x},${y}`);
+        if (art) el.classList.toggle("visited", visitedSet.has(art.id));
+      });
+    }
+
+    /* ------------------------------------------------------------------
+       SECRETS — Zelda-style hidden tiles, revealed by walking into a
+       specific tile in a specific direction. Each secret defines a
+       trigger (cat position + move direction) and a list of tiles that
+       should appear when triggered. Discovered secrets are persisted in
+       localStorage so they stay open across sessions.
+    ------------------------------------------------------------------ */
+
+    const SECRETS = {
+      meditations: {
+        // Stand on "It's more complicated than that" and press up.
+        trigger: { x: 1, y: 21, dx: 0, dy: -1 },
+        pathTiles: ["1,20"],
+        articleId: "meditations",
+        storageKey: "tylersworld-secret-meditations"
+      }
+    };
+
+    const secretRevealed = {};
+    const hiddenTiles = new Set();
+
+    function loadSecretsFromStorage() {
+      for (const id in SECRETS) {
+        let opened = false;
+        try {
+          // Clean up any leftover persistent flag from an earlier version
+          // that used localStorage — we now use sessionStorage so the secret
+          // resets per tab/session.
+          localStorage.removeItem(SECRETS[id].storageKey);
+          opened = sessionStorage.getItem(SECRETS[id].storageKey) === "true";
+        } catch (e) { /* storage blocked — treat as not opened */ }
+        secretRevealed[id] = opened;
+        if (!opened) {
+          SECRETS[id].pathTiles.forEach((c) => hiddenTiles.add(c));
+          const art = articleById.get(SECRETS[id].articleId);
+          if (art) hiddenTiles.add(`${art.x},${art.y}`);
+        }
+      }
+    }
+
+    /* ------------------------------------------------------------------
+       CONNECTIONS — within-region paths between articles
+       Each [aId, bId] paves a straight (axis-aligned) path between them.
+    ------------------------------------------------------------------ */
+
+    const connections = [
+      /* Start Beach — horizontal trunk + vertical branches */
+      ["die-zero", "complicated-start"], ["complicated-start", "stick-shift"],
+      ["stick-shift", "signal-start"], ["signal-start", "problem-start"],
+      ["problem-start", "we-think"], ["we-think", "learn-bfx"],
+      ["signal-start", "knn-sleepwalk-start"], ["signal-start", "tedx"],
+
+      /* Philosophy Forest — the original 4-track layout */
+      ["boring", "praise"], ["praise", "signal-phil"], ["signal-phil", "occam"],
+      ["occam", "dialectic"], ["dialectic", "beauty-truth"],
+      ["doomer", "die-zero-phil"], ["die-zero-phil", "getting"],
+      ["getting", "complexity"], ["complexity", "depth"], ["depth", "tao-problem"],
+      ["complicated-phil", "fear"], ["fear", "problem-phil"], ["problem-phil", "enjoyment"],
+      ["enjoyment", "finite"], ["finite", "coding"], ["coding", "way"],
+      ["problem-phil", "beauty"], ["beauty", "hacking"], ["hacking", "minimize"],
+      ["way", "minimize"],
+      ["doomer", "boring"], ["doomer", "fear"],
+
+      /* Bio — 4 horizontal tracks, connected vertically */
+      ["xshift", "mnn"], ["mnn", "lang-tour"], ["lang-tour", "julia-umap"],
+      ["julia-umap", "cytof-seurat"], ["cytof-seurat", "fcs-anatomy"],
+      ["fcs-anatomy", "cytof-pipe1"], ["cytof-pipe1", "cytof-pipe-many"],
+      ["asinh", "cytof-trans"], ["cytof-trans", "louvain-leiden"],
+      ["louvain-leiden", "soft-clust"], ["soft-clust", "seurat-stab"],
+      ["seurat-stab", "viridis"], ["viridis", "seurat-nopca"], ["seurat-nopca", "annotate-3k"],
+      ["rainbow", "charite"], ["charite", "scrna-pipe"], ["scrna-pipe", "scrna-integrate"],
+      ["scrna-integrate", "dr-prov"], ["dr-prov", "dist-mat"],
+      ["dist-mat", "cytof-llm-sel"], ["cytof-llm-sel", "samusik-llm"],
+      ["llm-annotate", "blsc-pca"], ["blsc-pca", "uce-nn"], ["uce-nn", "uce-filt"],
+      ["uce-filt", "uce-3k10k"], ["uce-3k10k", "uce-cns"],
+      ["uce-cns", "learn-bfx-bio"], ["learn-bfx-bio", "claude-cytof"],
+      ["xshift", "asinh"], ["asinh", "rainbow"], ["rainbow", "llm-annotate"],
+
+      /* AI — 4 horizontal tracks + verticals */
+      ["we-think-ai", "be-diff"], ["be-diff", "episodic"], ["episodic", "xai-us"],
+      ["descent", "microbiome-q"], ["microbiome-q", "make-meta"], ["make-meta", "gpt3-student"],
+      ["gpt3-student", "cmd-chatbot"],
+      ["scrolling-problem", "gprofiler"], ["gprofiler", "site-graph"],
+      ["site-graph", "journaling"], ["journaling", "news-space"],
+      ["curate", "context-bfx"], ["context-bfx", "ask-marcus"],
+      ["ask-marcus", "biorxiv"], ["biorxiv", "qgraph"],
+      ["we-think-ai", "descent"], ["descent", "scrolling-problem"], ["scrolling-problem", "curate"],
+
+      /* Computing — two short rows */
+      ["levels", "r-rabbit"], ["r-rabbit", "lisp"], ["lisp", "metaprog"], ["metaprog", "ca-rules"],
+      ["logic-gates", "1d-ca"], ["1d-ca", "rule-110"],
+      ["levels", "logic-gates"], ["ca-rules", "rule-110"],
+
+      /* Collections */
+      ["qbank", "social"],
+
+      /* Statistics — single horizontal row */
+      ["stats-1", "stats-2"], ["stats-2", "stats-3"], ["stats-3", "stats-4"],
+      ["stats-4", "stats-5"], ["stats-5", "stats-6"],
+
+      /* Health */
+      ["boring-diet", "tao-health"], ["tao-health", "fit-20"],
+      ["fit-20", "therapy"], ["therapy", "just-paint"],
+
+      /* Personal */
+      ["northern", "limbic"], ["limbic", "stick-personal"],
+      ["stick-personal", "zelda"], ["zelda", "coronazeit"],
+
+      /* Snapshots */
+      ["snap-2024-05", "snap-2023-05"], ["snap-2023-05", "snap-2023-04"],
+      ["snap-2023-04", "snap-2023-03"],
+
+      /* Fun */
+      ["speech", "gol-nav"], ["gol-nav", "breakout"],
+      ["breakout", "conways"], ["conways", "mandel"],
+
+      /* Featured */
+      ["rand", "krupp"], ["krupp", "ramji"], ["ramji", "watershed"],
+      ["dev-pod-2", "dev-pod-1"], ["dev-pod-1", "tedx-feat"], ["tedx-feat", "caricature"],
+      ["rand", "dev-pod-2"], ["watershed", "caricature"]
+    ];
+
+    /* ------------------------------------------------------------------
+       BRIDGES — explicit walkable tiles spanning the water gaps
+       Each bridge is a list of "x,y" strings.
+    ------------------------------------------------------------------ */
+
+    const bridges = [
+      /* Vertical bridges (cross the y-gap rows) */
+      // Featured (bottom y=7) -> Computing (top y=10) via x=5
+      ["5,8", "5,9"],
+      // Bio (bottom y=8) -> Start (top y=10) via x=22 — the cat's main lifeline north
+      ["22,9"],
+      // AI (bottom y=8) -> Collections (top y=10) via x=40
+      ["40,9"],
+      // Computing (bottom y=15) -> Philosophy (top y=17) via x=5
+      ["5,16"],
+      // Start (bottom y=15) -> Health (top y=17) via x=22 — main lifeline south
+      ["22,16"],
+      // Collections (bottom y=15) -> Personal (top y=17) via x=40
+      ["40,16"],
+      // Philosophy (bottom y=23) -> Stats (top y=25) via x=5
+      ["5,24"],
+      // Health (bottom y=22) -> Snapshots (top y=24) via x=22
+      ["22,23"],
+      // Personal (bottom y=22) -> Fun (top y=24) via x=40
+      ["40,23"],
+
+      /* Horizontal bridges (cross the x-gap columns) */
+      // Featured (right x=12) -> Bio (left x=15) via y=4
+      ["13,4", "14,4"],
+      // Bio (right x=30) -> AI (left x=33) via y=4
+      ["31,4", "32,4"],
+      // Computing (right x=12) -> Start (left x=15) via y=13
+      ["13,13", "14,13"],
+      // Start (right x=30) -> Collections (left x=33) via y=13
+      ["31,13", "32,13"],
+      // Philosophy (right x=13) -> Health (left x=15) via y=19
+      ["14,19"],
+      // Health (right x=30) -> Personal (left x=33) via y=19
+      ["31,19", "32,19"],
+      // Stats (right x=13) -> Snapshots (left x=15) via y=27
+      ["14,27"],
+      // Snapshots (right x=30) -> Fun (left x=33) via y=27
+      ["31,27", "32,27"]
+    ].flat();
+
+    const bridgeSet = new Set(bridges);
+
+    /* ------------------------------------------------------------------
+       CORRIDORS — explicit axis-aligned path segments that don't fit the
+       article-to-article pave model. Mostly: paths from bridge extensions
+       back into each region's article network.
+       Each entry is [x0, y0, x1, y1] (inclusive).
+    ------------------------------------------------------------------ */
+
+    const corridors = [
+      // Featured: drop col 4 from dev-pod-1 down to bridge (5,8) approach
+      [4, 4, 4, 7], [4, 7, 5, 7],
+      // Featured east row y=4 out to bridge column 13
+      [8, 4, 12, 4],
+
+      // Bio east row y=3 out to bridge column 31
+      [29, 3, 30, 3], [30, 3, 30, 4],
+
+      // Collections: vertical lane on col 40 connecting AI bridge → social → Personal bridge
+      [40, 10, 40, 15],
+      // Collections west row y=13 out to bridge column 31
+      [33, 13, 35, 13],
+
+      // Computing east row y=13 out to bridge column 13
+      [6, 13, 12, 13],
+      // Computing south col 5 down to bridge row 16
+      [5, 13, 5, 15],
+
+      // Start west row y=13 in to die-zero
+      [15, 13, 16, 13],
+      // Start east row y=13 out to bridge column 31
+      [28, 13, 30, 13],
+
+      // Philosophy south col 5 down to Stats bridge
+      [5, 21, 5, 23],
+
+      // Health west row y=19 out to Philosophy bridge column 14
+      [15, 19, 17, 19],
+      // Health east row y=19 out to Personal bridge column 31
+      [28, 19, 30, 19],
+      // Health col 22 connecting Start bridge down to Snapshots bridge
+      [22, 17, 22, 22],
+
+      // Personal west row y=19 in from Health bridge
+      [33, 19, 35, 19],
+      // Personal col 40 from Collections bridge down through articles to Fun bridge
+      [40, 17, 40, 22],
+
+      // Stats east row y=27 out to Snapshots bridge column 14
+      [11, 27, 13, 27],
+      // Stats col 5 up to Philosophy bridge
+      [5, 25, 5, 27],
+
+      // Snapshots west row y=27 in to snap-2024-05
+      [15, 27, 17, 27],
+      // Snapshots east row y=27 out to Fun bridge column 31
+      [26, 27, 30, 27],
+      // Snapshots col 22 up to Health bridge
+      [22, 24, 22, 27],
+
+      // Fun west row y=27 in to speech
+      [33, 27, 35, 27],
+      // Fun col 40 up to Personal bridge
+      [40, 24, 40, 27]
+    ];
+
+    /* ------------------------------------------------------------------
+       PROCEDURAL TERRAIN — scatter forest/hill within each region
+       (deterministic so the map looks the same on every load)
+    ------------------------------------------------------------------ */
+
+    function hashXY(x, y) {
+      // small deterministic hash for procedural decoration
+      let h = (x * 73856093) ^ (y * 19349663);
+      h = (h ^ (h >>> 13)) * 1274126177;
+      return (h ^ (h >>> 16)) >>> 0;
+    }
+
+    const decorationRules = {
+      featured:    { forest: 0,    hill: 0.08 },
+      bio:         { forest: 0,    hill: 0    },
+      ai:          { forest: 0.06, hill: 0    },
+      computing:   { forest: 0,    hill: 0    },
+      start:       { forest: 0,    hill: 0.1  },
+      collections: { forest: 0.08, hill: 0    },
+      philosophy:  { forest: 0.18, hill: 0.12 },
+      health:      { forest: 0.05, hill: 0.18 },
+      personal:    { forest: 0.06, hill: 0.14 },
+      stats:       { forest: 0,    hill: 0    },
+      snapshots:   { forest: 0.04, hill: 0.04 },
+      fun:         { forest: 0.05, hill: 0    }
+    };
+
+    /* ------------------------------------------------------------------
+       WALKABILITY — paths + articles + bridges
+    ------------------------------------------------------------------ */
+
+    const walkable = new Set();
+    const pathTiles = new Set();
+
+    function addWalkable(coord) {
+      walkable.add(coord);
+      pathTiles.add(coord);
+    }
+
+    function pave(aId, bId) {
+      const a = articleById.get(aId);
+      const b = articleById.get(bId);
+      if (!a || !b) return;
+      if (a.x === b.x) {
+        const lo = Math.min(a.y, b.y), hi = Math.max(a.y, b.y);
+        for (let y = lo; y <= hi; y += 1) addWalkable(`${a.x},${y}`);
+      } else if (a.y === b.y) {
+        const lo = Math.min(a.x, b.x), hi = Math.max(a.x, b.x);
+        for (let x = lo; x <= hi; x += 1) addWalkable(`${x},${a.y}`);
+      }
+    }
+
+    function paveCorridor([x0, y0, x1, y1]) {
+      if (x0 === x1) {
+        const lo = Math.min(y0, y1), hi = Math.max(y0, y1);
+        for (let y = lo; y <= hi; y += 1) addWalkable(`${x0},${y}`);
+      } else if (y0 === y1) {
+        const lo = Math.min(x0, x1), hi = Math.max(x0, x1);
+        for (let x = lo; x <= hi; x += 1) addWalkable(`${x},${y0}`);
+      }
+    }
+
+    function buildWalkable() {
+      articles.forEach((a) => {
+        if (a.secret && !secretRevealed[a.secret]) return;
+        addWalkable(`${a.x},${a.y}`);
+      });
+      connections.forEach(([a, b]) => pave(a, b));
+      corridors.forEach(paveCorridor);
+      bridgeSet.forEach((c) => walkable.add(c));
+
+      // Any secret whose tiles are already revealed (from localStorage) gets
+      // its path tiles added now.
+      for (const id in SECRETS) {
+        if (!secretRevealed[id]) continue;
+        SECRETS[id].pathTiles.forEach((c) => {
+          walkable.add(c);
+          pathTiles.add(c);
+        });
+      }
+
+      // Connect each bridge endpoint to the nearest article in the adjacent
+      // region by laying a short path. We do this lightly — any walkable
+      // tile already paved (above) is left alone. We extend bridges by 1
+      // tile into each adjacent region so the cat can leave them.
+      const adjacencyExtensions = [
+        // bridge tile, extension tile to make walkable
+        ["5,8", "5,7"],   ["5,9", "5,10"],
+        ["22,9", "22,8"], ["22,9", "22,10"],
+        ["40,9", "40,8"], ["40,9", "40,10"],
+        ["5,16", "5,15"], ["5,16", "5,17"],
+        ["22,16", "22,15"], ["22,16", "22,17"],
+        ["40,16", "40,15"], ["40,16", "40,17"],
+        ["5,24", "5,23"], ["5,24", "5,25"],
+        ["22,23", "22,22"], ["22,23", "22,24"],
+        ["40,23", "40,22"], ["40,23", "40,24"],
+        ["13,4", "12,4"], ["14,4", "15,4"],
+        ["31,4", "30,4"], ["32,4", "33,4"],
+        ["13,13", "12,13"], ["14,13", "15,13"],
+        ["31,13", "30,13"], ["32,13", "33,13"],
+        ["14,19", "13,19"], ["14,19", "15,19"],
+        ["31,19", "30,19"], ["32,19", "33,19"],
+        ["14,27", "13,27"], ["14,27", "15,27"],
+        ["31,27", "30,27"], ["32,27", "33,27"]
+      ];
+      adjacencyExtensions.forEach(([_, ext]) => addWalkable(ext));
+    }
+
+    /* ------------------------------------------------------------------
+       RENDERING
+    ------------------------------------------------------------------ */
+
+    function tileMeta(x, y) {
+      const coord = `${x},${y}`;
+      const region = regionAt(x, y);
+      const meta = { region, coord, classes: ["tile"] };
+
+      // Hidden secret tile? Render as decorative terrain so it blends in.
+      if (hiddenTiles.has(coord)) {
+        if (region) meta.classes.push(`region-${region.id}`);
+        const h = hashXY(x, y);
+        const rules = decorationRules[region ? region.id : "philosophy"] || { forest: 0, hill: 0 };
+        const r = (h % 1000) / 1000;
+        if (r < rules.forest) meta.classes.push("forest");
+        else if (r < rules.forest + rules.hill) meta.classes.push("hill");
+        else meta.classes.push("grass");
+        return meta;
+      }
+
+      const article = articleByCoord.get(coord);
+      if (article) {
+        meta.classes.push("article", article.kind);
+        meta.article = article;
+        if (region) meta.classes.push(`region-${region.id}`);
+        return meta;
+      }
+
+      if (bridgeSet.has(coord)) {
+        meta.classes.push("bridge");
+        // vertical bridges run through gap rows where there's no region.
+        // horizontal bridges run through gap columns. Use a simple heuristic:
+        // if x is in a region gap, paint a vertical-stripe bridge; otherwise default.
+        const inXGap = (x === 13 || x === 14 || x === 31 || x === 32);
+        if (inXGap) meta.classes.push("vertical");
+        return meta;
+      }
+
+      if (!region) {
+        meta.classes.push("water");
+        return meta;
+      }
+
+      // Inside a region: decide if this is a decoration or plain ground.
+      meta.classes.push(`region-${region.id}`);
+
+      if (pathTiles.has(coord)) {
+        meta.classes.push("path");
+        return meta;
+      }
+
+      const h = hashXY(x, y);
+      const rules = decorationRules[region.id] || { forest: 0, hill: 0 };
+      const r = (h % 1000) / 1000;
+      if (r < rules.forest) {
+        meta.classes.push("forest");
+      } else if (r < rules.forest + rules.hill) {
+        meta.classes.push("hill");
+      } else {
+        meta.classes.push("grass");
+      }
+      return meta;
+    }
+
+    function buildMap() {
+      const grid = document.getElementById("map-grid");
+      const frag = document.createDocumentFragment();
+      for (let y = 0; y < ROWS; y += 1) {
+        for (let x = 0; x < COLS; x += 1) {
+          const meta = tileMeta(x, y);
+          const el = document.createElement(meta.article ? "button" : "div");
+          el.className = meta.classes.join(" ");
+          el.dataset.x = x;
+          el.dataset.y = y;
+          if (meta.article) {
+            el.type = "button";
+            el.setAttribute("aria-label", meta.article.title);
+            el.innerHTML = `<span class="level-box">${meta.article.token}</span>`;
+            // No tile-level click handler: the world-level click handler
+            // converts every tap into a one-tile step toward the tap so
+            // mobile users don't need a visible d-pad. Tap on cat's own
+            // tile opens the article. Legend buttons still warp directly.
+          }
+          frag.appendChild(el);
+        }
+      }
+      grid.appendChild(frag);
+    }
+
+    function buildLegend() {
+      const legend = document.getElementById("legend");
+      legend.innerHTML = "";
+      const byRegion = new Map();
+      articles.forEach((a) => {
+        if (a.secret && !secretRevealed[a.secret]) return;
+        if (!byRegion.has(a.region)) byRegion.set(a.region, []);
+        byRegion.get(a.region).push(a);
+      });
+      regions.forEach((r) => {
+        const items = byRegion.get(r.id);
+        if (!items || items.length === 0) return;
+        const details = document.createElement("details");
+        details.className = "legend-section";
+        details.open = (r.id === "start");
+        const summary = document.createElement("summary");
+        summary.textContent = `${r.name} (${items.length})`;
+        details.appendChild(summary);
+        const itemsDiv = document.createElement("div");
+        itemsDiv.className = "items";
+        items.forEach((a) => {
+          const btn = document.createElement("button");
+          btn.type = "button";
+          btn.textContent = `${a.token} ${a.title}`;
+          btn.addEventListener("click", () => {
+            cat = { x: a.x, y: a.y };
+            update(true);
+          });
+          itemsDiv.appendChild(btn);
+        });
+        details.appendChild(itemsDiv);
+        legend.appendChild(details);
+      });
+    }
+
+    function rebuildTile(x, y) {
+      const old = document.querySelector(`.tile[data-x="${x}"][data-y="${y}"]`);
+      if (!old) return;
+      const meta = tileMeta(x, y);
+      const el = document.createElement(meta.article ? "button" : "div");
+      el.className = meta.classes.join(" ");
+      el.dataset.x = x;
+      el.dataset.y = y;
+      if (meta.article) {
+        el.type = "button";
+        el.setAttribute("aria-label", meta.article.title);
+        el.innerHTML = `<span class="level-box">${meta.article.token}</span>`;
+      }
+      old.replaceWith(el);
+      return el;
+    }
+
+    function revealSecret(id) {
+      if (secretRevealed[id]) return false;
+      const s = SECRETS[id];
+      if (!s) return false;
+      secretRevealed[id] = true;
+      try { sessionStorage.setItem(s.storageKey, "true"); } catch (e) { /* ignore */ }
+
+      const affected = [];
+      s.pathTiles.forEach((c) => {
+        hiddenTiles.delete(c);
+        walkable.add(c);
+        pathTiles.add(c);
+        const [x, y] = c.split(",").map(Number);
+        affected.push({ x, y });
+      });
+      const art = articleById.get(s.articleId);
+      if (art) {
+        hiddenTiles.delete(`${art.x},${art.y}`);
+        walkable.add(`${art.x},${art.y}`);
+        affected.push({ x: art.x, y: art.y });
+      }
+
+      affected.forEach(({ x, y }) => {
+        const el = rebuildTile(x, y);
+        if (!el) return;
+        el.classList.add("just-revealed");
+        window.setTimeout(() => el.classList.remove("just-revealed"), 700);
+      });
+
+      buildLegend();
+
+      document.getElementById("status").textContent =
+        `★ Secret found: "${art ? art.title : id}"`;
+
+      return true;
+    }
+
+    /* ------------------------------------------------------------------
+       INTERACTION
+    ------------------------------------------------------------------ */
+
+    let cat = { x: 22, y: 13 };
+    let facing = "right";
+
+    function readHashCat() {
+      const m = (window.location.hash || "").match(/cat=(\d+),(\d+)/);
+      if (!m) return null;
+      const x = parseInt(m[1], 10);
+      const y = parseInt(m[2], 10);
+      if (!Number.isFinite(x) || !Number.isFinite(y)) return null;
+      if (!walkable.has(`${x},${y}`)) return null;
+      return { x, y };
+    }
+
+    function writeHashCat() {
+      const next = `#cat=${cat.x},${cat.y}`;
+      if (window.location.hash !== next) {
+        history.replaceState(null, "", next);
+      }
+    }
+
+    function articleAtCat() {
+      return articleByCoord.get(`${cat.x},${cat.y}`) || null;
+    }
+
+    function canMove(x, y) {
+      return x >= 0 && x < COLS && y >= 0 && y < ROWS && walkable.has(`${x},${y}`);
+    }
+
+    function move(dx, dy) {
+      // Check for a Zelda-style secret reveal at the cat's current position.
+      // If a trigger matches, the secret unlocks before the canMove check —
+      // so the just-revealed tile is now walkable and the move can proceed.
+      for (const id in SECRETS) {
+        if (secretRevealed[id]) continue;
+        const t = SECRETS[id].trigger;
+        if (t.x === cat.x && t.y === cat.y && t.dx === dx && t.dy === dy) {
+          revealSecret(id);
+        }
+      }
+
+      const next = { x: cat.x + dx, y: cat.y + dy };
+      if (!canMove(next.x, next.y)) {
+        const s = document.getElementById("status");
+        const reg = regionAt(next.x, next.y);
+        if (reg) {
+          s.textContent = "No path that way. Try another direction.";
+        } else {
+          s.textContent = "That way is water. Find a bridge.";
+        }
+        return;
+      }
+      if (dx < 0) facing = "left";
+      if (dx > 0) facing = "right";
+      cat = next;
+      update(true);
+      checkCatch();
+    }
+
+    function isExternalUrl(url) {
+      return /^https?:\/\//i.test(url) || /\.pdf$/i.test(url);
+    }
+
+    function resolveUrl(url) {
+      return /^https?:\/\//i.test(url) ? url : pageBase + url;
+    }
+
+    function openCurrent() {
+      const a = articleAtCat();
+      if (!a) return;
+      markVisited(a.id);
+      const href = resolveUrl(a.url);
+      if (isExternalUrl(a.url)) {
+        window.open(href, "_blank", "noopener,noreferrer");
+      } else {
+        window.location.href = href;
+      }
+    }
+
+    function currentTileSize() {
+      return Number.parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--tile")) || 48;
+    }
+
+    let cameraInitialized = false;
+
+    function centerCamera(instant = false) {
+      const viewport = document.getElementById("viewport");
+      const t = currentTileSize();
+      const targetX = Math.max(0, cat.x * t + t / 2 - viewport.clientWidth / 2);
+      const targetY = Math.max(0, cat.y * t + t / 2 - viewport.clientHeight / 2);
+      if (instant) {
+        // Direct property assignment is guaranteed instant and bypasses
+        // any CSS scroll-behavior in effect.
+        viewport.scrollLeft = targetX;
+        viewport.scrollTop = targetY;
+      } else {
+        viewport.scrollTo({ left: targetX, top: targetY, behavior: "smooth" });
+      }
+    }
+
+    function update(stepped = false) {
+      const avatar = document.getElementById("avatar");
+      const t = currentTileSize();
+      avatar.style.transform = `translate(${cat.x * t}px, ${cat.y * t}px)`;
+      avatar.classList.toggle("face-left", facing === "left");
+      if (stepped) {
+        avatar.classList.remove("step");
+        window.requestAnimationFrame(() => {
+          avatar.classList.add("step");
+          window.setTimeout(() => avatar.classList.remove("step"), 160);
+        });
+      }
+
+      document.querySelectorAll(".tile.article").forEach((el) => {
+        el.classList.toggle("current",
+          Number(el.dataset.x) === cat.x && Number(el.dataset.y) === cat.y);
+      });
+
+      const a = articleAtCat();
+      const reg = regionAt(cat.x, cat.y);
+      const openLink = document.getElementById("open-link");
+      const floatOpen = document.getElementById("float-open");
+      const regionChip = document.getElementById("region-chip");
+      const loc = document.getElementById("location");
+      const titleBar = document.getElementById("mobile-title-bar");
+      const mtbRegion = document.getElementById("mtb-region");
+      const mtbTitle = document.getElementById("mtb-title");
+      const mtbAction = document.getElementById("mtb-action");
+
+      if (reg) {
+        regionChip.textContent = reg.name;
+      } else if (bridgeSet.has(`${cat.x},${cat.y}`)) {
+        regionChip.textContent = "Bridge";
+      } else {
+        regionChip.textContent = "—";
+      }
+      loc.textContent = `Cat: ${reg ? reg.name : "Bridge"} (${cat.x}, ${cat.y})`;
+
+      // Mobile title bar — always reflects current location; tappable when
+      // standing on an article.
+      const mtbDate = document.getElementById("mtb-date");
+      const mtbSummary = document.getElementById("mtb-summary");
+      if (a) {
+        titleBar.classList.add("on-article");
+        mtbRegion.textContent = reg ? reg.name : "";
+        mtbTitle.textContent = a.title;
+        mtbAction.textContent = isExternalUrl(a.url) ? "Open ↗" : "Open ›";
+        mtbDate.textContent = a.date;
+        mtbSummary.textContent = a.summary;
+      } else if (bridgeSet.has(`${cat.x},${cat.y}`)) {
+        titleBar.classList.remove("on-article");
+        mtbRegion.textContent = "Bridge";
+        mtbTitle.textContent = "Crossing between regions";
+        mtbAction.textContent = "";
+        mtbDate.textContent = "";
+        mtbSummary.textContent = "";
+      } else if (reg) {
+        titleBar.classList.remove("on-article");
+        mtbRegion.textContent = reg.name;
+        mtbTitle.textContent = "Walking the path";
+        mtbAction.textContent = "";
+        mtbDate.textContent = "";
+        mtbSummary.textContent = "";
+      } else {
+        titleBar.classList.remove("on-article");
+        mtbRegion.textContent = "";
+        mtbTitle.textContent = "Out of bounds";
+        mtbAction.textContent = "";
+        mtbDate.textContent = "";
+        mtbSummary.textContent = "";
+      }
+
+      if (a) {
+        document.getElementById("kind").textContent =
+          a.kind === "castle" ? "Castle essay"
+          : a.kind === "house" ? "House essay"
+          : "Article tile";
+        document.getElementById("title").textContent = a.title;
+        document.getElementById("date").textContent = a.date;
+        document.getElementById("summary").textContent = a.summary;
+        const external = isExternalUrl(a.url);
+        const resolved = resolveUrl(a.url);
+        openLink.href = resolved;
+        floatOpen.href = resolved;
+        floatOpen.classList.add("visible");
+        if (external) {
+          openLink.target = "_blank";
+          openLink.rel = "noopener noreferrer";
+          openLink.textContent = "Open in new tab ↗";
+          floatOpen.target = "_blank";
+          floatOpen.rel = "noopener noreferrer";
+          floatOpen.textContent = "Open ↗";
+          document.getElementById("status").textContent = "External link — opens in a new tab.";
+        } else {
+          openLink.removeAttribute("target");
+          openLink.removeAttribute("rel");
+          openLink.textContent = "Open article";
+          floatOpen.removeAttribute("target");
+          floatOpen.removeAttribute("rel");
+          floatOpen.textContent = "Open";
+          document.getElementById("status").textContent = "Press Enter to open. Back button returns here.";
+        }
+        openLink.classList.remove("disabled");
+      } else if (bridgeSet.has(`${cat.x},${cat.y}`)) {
+        document.getElementById("kind").textContent = "Bridge";
+        document.getElementById("title").textContent = "Crossing between regions";
+        document.getElementById("date").textContent = "Keep walking";
+        document.getElementById("summary").textContent =
+          "Bridges connect themed regions. Keep going to enter the next section of the site.";
+        document.getElementById("status").textContent = "Halfway there.";
+        openLink.href = "#";
+        openLink.classList.add("disabled");
+        floatOpen.classList.remove("visible");
+      } else if (reg) {
+        document.getElementById("kind").textContent = reg.name;
+        document.getElementById("title").textContent = reg.name;
+        document.getElementById("date").textContent = "Region path";
+        document.getElementById("summary").textContent =
+          "Connective tissue between tiles in this region. Step onto a numbered box to inspect an article.";
+        document.getElementById("status").textContent = "Find an article tile.";
+        openLink.href = "#";
+        openLink.classList.add("disabled");
+        floatOpen.classList.remove("visible");
+      } else {
+        document.getElementById("kind").textContent = "Open water";
+        document.getElementById("title").textContent = "Out of bounds";
+        document.getElementById("date").textContent = "";
+        document.getElementById("summary").textContent =
+          "Backtrack to a bridge to keep exploring.";
+        document.getElementById("status").textContent = "No tile here.";
+        openLink.href = "#";
+        openLink.classList.add("disabled");
+        floatOpen.classList.remove("visible");
+      }
+
+      centerCamera(!cameraInitialized);
+      cameraInitialized = true;
+      writeHashCat();
+    }
+
+    /* ------------------------------------------------------------------
+       INPUT
+    ------------------------------------------------------------------ */
+
+    window.addEventListener("keydown", (event) => {
+      if (event.target && event.target.tagName === "BUTTON" && event.key === "Enter") {
+        // let the button take Enter normally
+        return;
+      }
+      if (event.key === "ArrowUp")    { event.preventDefault(); move(0, -1); }
+      else if (event.key === "ArrowDown")  { event.preventDefault(); move(0, 1); }
+      else if (event.key === "ArrowLeft")  { event.preventDefault(); move(-1, 0); }
+      else if (event.key === "ArrowRight") { event.preventDefault(); move(1, 0); }
+      else if (event.key === "Enter") { event.preventDefault(); openCurrent(); }
+    });
+
+    document.querySelectorAll("[data-move]").forEach((button) => {
+      button.addEventListener("click", () => {
+        const [dx, dy] = button.dataset.move.split(",").map(Number);
+        move(dx, dy);
+        document.getElementById("world").focus();
+      });
+    });
+
+    /* Universal click handler: any tap/click on the map steps the cat one
+       tile toward the tap. Tap on the cat's own tile opens the article.
+       This is what mobile users use in lieu of a visible d-pad. */
+    document.getElementById("world").addEventListener("click", (e) => {
+      const worldEl = e.currentTarget;
+      worldEl.focus();
+      const rect = worldEl.getBoundingClientRect();
+      const t = currentTileSize();
+      const tileX = Math.floor((e.clientX - rect.left) / t);
+      const tileY = Math.floor((e.clientY - rect.top) / t);
+      const dx = tileX - cat.x;
+      const dy = tileY - cat.y;
+      if (dx === 0 && dy === 0) {
+        openCurrent();
+        return;
+      }
+      if (Math.abs(dx) > Math.abs(dy)) {
+        move(dx > 0 ? 1 : -1, 0);
+      } else {
+        move(0, dy > 0 ? 1 : -1);
+      }
+    });
+
+    /* Tapping the mobile title bar opens the article (when standing on one). */
+    document.getElementById("mobile-title-bar").addEventListener("click", () => {
+      if (articleAtCat()) openCurrent();
+    });
+
+    /* ---- touch: swipe-to-move ----
+       Short swipe (>= 30px in <= 600ms) steps the cat one tile in that
+       cardinal direction. Longer drags fall through to native pan-to-scroll
+       on the viewport. Tap (small movement) still warps via the tile's
+       click handler. */
+    (() => {
+      const SWIPE_MIN = 30;
+      const SWIPE_MAX_TIME = 600;
+      let touchStart = null;
+      const worldEl = document.getElementById("world");
+      worldEl.addEventListener("touchstart", (e) => {
+        if (e.touches.length !== 1) { touchStart = null; return; }
+        const t = e.touches[0];
+        touchStart = { x: t.clientX, y: t.clientY, time: Date.now() };
+      }, { passive: true });
+      worldEl.addEventListener("touchcancel", () => { touchStart = null; });
+      worldEl.addEventListener("touchend", (e) => {
+        if (!touchStart) return;
+        const t = e.changedTouches[0];
+        const dx = t.clientX - touchStart.x;
+        const dy = t.clientY - touchStart.y;
+        const dt = Date.now() - touchStart.time;
+        touchStart = null;
+        if (Math.hypot(dx, dy) < SWIPE_MIN || dt > SWIPE_MAX_TIME) return;
+        if (Math.abs(dx) > Math.abs(dy)) move(dx > 0 ? 1 : -1, 0);
+        else move(0, dy > 0 ? 1 : -1);
+        // Suppress the click that would otherwise warp the cat to wherever
+        // the swipe ended.
+        e.preventDefault();
+      });
+    })();
+
+    /* ------------------------------------------------------------------
+       GREMLINS — three random-walking antagonists
+    ------------------------------------------------------------------ */
+
+    const NUM_GREMLINS = 3;
+    const GREMLIN_INTERVAL_MS = 3000;
+    const GREMLIN_STAGGER_MS = 1000;
+    const GREMLIN_SVG = `
+      <svg class="gremlin-sprite" viewBox="0 0 16 16" aria-hidden="true">
+        <rect x="3" y="0" width="1" height="2" fill="#52297a"></rect>
+        <rect x="12" y="0" width="1" height="2" fill="#52297a"></rect>
+        <rect x="2" y="2" width="12" height="11" fill="#241812"></rect>
+        <rect x="3" y="3" width="10" height="9" fill="#6cc55e"></rect>
+        <rect x="3" y="9" width="10" height="3" fill="#4a8c3e"></rect>
+        <rect x="4" y="5" width="3" height="2" fill="#c03050"></rect>
+        <rect x="9" y="5" width="3" height="2" fill="#c03050"></rect>
+        <rect x="5" y="5" width="1" height="1" fill="#ffffff"></rect>
+        <rect x="10" y="5" width="1" height="1" fill="#ffffff"></rect>
+        <rect x="6" y="10" width="4" height="2" fill="#241812"></rect>
+        <rect x="6" y="10" width="1" height="1" fill="#ffe2a2"></rect>
+        <rect x="9" y="10" width="1" height="1" fill="#ffe2a2"></rect>
+        <rect x="4" y="13" width="2" height="2" fill="#241812"></rect>
+        <rect x="10" y="13" width="2" height="2" fill="#241812"></rect>
+        <rect x="4" y="13" width="2" height="1" fill="#4a8c3e"></rect>
+        <rect x="10" y="13" width="2" height="1" fill="#4a8c3e"></rect>
+      </svg>`;
+
+    let gremlins = [];
+    let gremlinTimers = [];
+    let caughtInFlight = false;
+
+    // Reset transient state on every page show, including bfcache restores
+    // after the user clicks back from a caught-and-warped article. Without
+    // this, caughtInFlight stays true and silently blocks all later catches.
+    window.addEventListener("pageshow", () => {
+      caughtInFlight = false;
+    });
+
+    function pickSpawnFarFromCat() {
+      // Only pick from articles that are actually reachable right now —
+      // hidden secret tiles aren't walkable until revealed, and a gremlin
+      // spawned on one would have no walkable neighbors and freeze.
+      const candidates = articles.filter((a) => !a.secret || secretRevealed[a.secret]);
+      // Uniform random over all articles at least MIN_DIST tiles from cat.
+      // (Earlier "farthest of N samples" approach biased toward corners with
+      // the most articles, which made all gremlins cluster in AI Cyberzone.)
+      const MIN_DIST = 12;
+      for (let i = 0; i < 40; i += 1) {
+        const a = candidates[Math.floor(Math.random() * candidates.length)];
+        const d = Math.abs(a.x - cat.x) + Math.abs(a.y - cat.y);
+        if (d >= MIN_DIST) return { x: a.x, y: a.y };
+      }
+      // Fallback if the map is unusually small: any random article.
+      const a = candidates[Math.floor(Math.random() * candidates.length)];
+      return { x: a.x, y: a.y };
+    }
+
+    function makeGremlinEl() {
+      const div = document.createElement("div");
+      div.className = "gremlin";
+      div.setAttribute("aria-hidden", "true");
+      div.innerHTML = GREMLIN_SVG;
+      return div;
+    }
+
+    function renderGremlin(g, stepped) {
+      const t = currentTileSize();
+      g.el.style.transform = `translate(${g.x * t}px, ${g.y * t}px)`;
+      if (stepped) {
+        g.el.classList.remove("step");
+        window.requestAnimationFrame(() => {
+          g.el.classList.add("step");
+          window.setTimeout(() => g.el.classList.remove("step"), 340);
+        });
+      }
+    }
+
+    function clearGremlins() {
+      gremlinTimers.forEach((t) => {
+        window.clearTimeout(t);
+        window.clearInterval(t);
+      });
+      gremlinTimers = [];
+      gremlins.forEach((g) => g.el.remove());
+      gremlins = [];
+    }
+
+    function spawnGremlins() {
+      clearGremlins();
+      const worldEl = document.getElementById("world");
+      for (let i = 0; i < NUM_GREMLINS; i += 1) {
+        const el = makeGremlinEl();
+        worldEl.appendChild(el);
+        const pos = pickSpawnFarFromCat();
+        const g = { x: pos.x, y: pos.y, prev: null, el };
+        gremlins.push(g);
+        renderGremlin(g, false);
+      }
+      // Stagger ticks so the three don't move in lockstep.
+      gremlins.forEach((g, i) => {
+        const initial = window.setTimeout(() => {
+          gremlinTick(g);
+          const interval = window.setInterval(() => gremlinTick(g), GREMLIN_INTERVAL_MS);
+          gremlinTimers.push(interval);
+        }, GREMLIN_INTERVAL_MS + i * GREMLIN_STAGGER_MS);
+        gremlinTimers.push(initial);
+      });
+    }
+
+    function gremlinTick(g) {
+      const candidates = [];
+      for (const [dx, dy] of [[1,0],[-1,0],[0,1],[0,-1]]) {
+        const nx = g.x + dx, ny = g.y + dy;
+        if (!walkable.has(`${nx},${ny}`)) continue;
+        if (g.prev && nx === g.prev.x && ny === g.prev.y) continue;
+        candidates.push({ x: nx, y: ny });
+      }
+      let pick;
+      if (candidates.length > 0) {
+        pick = candidates[Math.floor(Math.random() * candidates.length)];
+      } else if (g.prev && walkable.has(`${g.prev.x},${g.prev.y}`)) {
+        pick = g.prev;
+      } else {
+        // Stuck on an unreachable tile (e.g. spawned on a hidden secret
+        // before the secret data was filtered out). Teleport this gremlin
+        // to a known-good spawn point instead of freezing forever.
+        const pos = pickSpawnFarFromCat();
+        g.x = pos.x;
+        g.y = pos.y;
+        g.prev = null;
+        renderGremlin(g, false);
+        return;
+      }
+      g.prev = { x: g.x, y: g.y };
+      g.x = pick.x;
+      g.y = pick.y;
+      renderGremlin(g, true);
+      if (g.x === cat.x && g.y === cat.y) caught();
+    }
+
+    function checkCatch() {
+      for (const g of gremlins) {
+        if (g.x === cat.x && g.y === cat.y) { caught(); return; }
+      }
+    }
+
+    function caught() {
+      // Guard against double-firing if the cat lands on a gremlin during
+      // a frame where another gremlin is also ticking onto it.
+      if (caughtInFlight) return;
+      caughtInFlight = true;
+
+      const flash = document.getElementById("catch-flash");
+      flash.classList.add("active");
+      window.setTimeout(() => flash.classList.remove("active"), 280);
+
+      // Persist the catch position to the URL so back-button returns the
+      // cat exactly here. (update() already wrote this on the cat's last
+      // move; doing it again is harmless and explicit.)
+      writeHashCat();
+
+      // Pick a random article and "click" it — the cat stays put.
+      const a = articles[Math.floor(Math.random() * articles.length)];
+      const href = resolveUrl(a.url);
+
+      markVisited(a.id);
+      document.getElementById("status").textContent =
+        `Caught! Opening "${a.title}"...`;
+
+      // Respawn all gremlins far from the cat for when the user returns.
+      spawnGremlins();
+
+      if (isExternalUrl(a.url)) {
+        // New tab — cat is still here, the game keeps running.
+        window.open(href, "_blank", "noopener,noreferrer");
+        // Clear the in-flight guard after the flash so subsequent catches
+        // can still fire.
+        window.setTimeout(() => { caughtInFlight = false; }, 400);
+      } else {
+        // Same tab — give the flash time to register, then navigate.
+        window.setTimeout(() => { window.location.href = href; }, 320);
+      }
+    }
+
+    /* ------------------------------------------------------------------
+       BOOT
+    ------------------------------------------------------------------ */
+
+    loadVisited();
+    loadSecretsFromStorage();
+    buildWalkable();
+    buildMap();
+    buildLegend();
+    updateVisitedUI();
+
+    const restored = readHashCat();
+    if (restored) cat = restored;
+
+    const avatarEl = document.getElementById("avatar");
+    avatarEl.classList.add("no-transition");
+    update();
+    spawnGremlins();
+    window.requestAnimationFrame(() => {
+      // Re-center now that layout has settled — viewport dimensions are
+      // unreliable during the synchronous boot.
+      cameraInitialized = false;
+      centerCamera(true);
+      cameraInitialized = true;
+      avatarEl.getBoundingClientRect();
+      avatarEl.classList.remove("no-transition");
+      gremlins.forEach((g) => renderGremlin(g, false));
+    });
+    document.getElementById("world").focus();
+  </script>
+</body>
+</html>
