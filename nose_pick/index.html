@@ -1,0 +1,1205 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pick the Nose</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      background: #f6f1e8;
+      color: #24221f;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    main {
+      width: min(96vw, 1120px);
+    }
+
+    h1 {
+      margin: 0 0 10px;
+      font-size: clamp(28px, 5vw, 48px);
+      text-align: center;
+    }
+
+    .hud {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 10px;
+      font-size: 18px;
+      font-weight: 700;
+      flex-wrap: wrap;
+    }
+
+    canvas {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      display: block;
+      border: 4px solid #24221f;
+      background: #92c7df;
+    }
+
+    .game-wrap {
+      position: relative;
+    }
+
+    .play-again {
+      position: absolute;
+      left: 50%;
+      bottom: 32px;
+      transform: translateX(-50%);
+      z-index: 2;
+      border: 4px solid #24221f;
+      background: #ffd166;
+      color: #24221f;
+      font: 700 22px Arial, Helvetica, sans-serif;
+      padding: 14px 24px;
+      cursor: pointer;
+    }
+
+    .play-again:hover,
+    .play-again:focus-visible {
+      background: #ffe08a;
+      outline: 4px solid #145a27;
+      outline-offset: 3px;
+    }
+
+    .play-again[hidden] {
+      display: none;
+    }
+
+    .debug-controls {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      margin: 0 0 10px;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .debug-controls[hidden] {
+      display: none;
+    }
+
+    .debug-controls span {
+      border: 3px solid #24221f;
+      background: #24221f;
+      color: #ffffff;
+      padding: 8px 10px;
+    }
+
+    .debug-controls button {
+      border: 3px solid #24221f;
+      background: #bde0fe;
+      color: #24221f;
+      font: 700 14px Arial, Helvetica, sans-serif;
+      padding: 8px 12px;
+      cursor: pointer;
+    }
+
+    .debug-controls button:hover,
+    .debug-controls button:focus-visible {
+      background: #d7ecff;
+      outline: 3px solid #145a27;
+      outline-offset: 2px;
+    }
+
+    .title-screen {
+      position: absolute;
+      inset: 4px;
+      z-index: 3;
+      overflow: hidden;
+      background: #061a3d;
+    }
+
+    .title-screen[hidden] {
+      display: none;
+    }
+
+    .title-art {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: contain;
+    }
+
+    .title-actions {
+      position: absolute;
+      left: 50%;
+      bottom: clamp(16px, 4vw, 34px);
+      transform: translateX(-50%);
+      z-index: 1;
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+      justify-content: center;
+      width: min(92%, 440px);
+    }
+
+    .mode-button {
+      min-width: 180px;
+      border: 4px solid #24221f;
+      background: #ffd166;
+      color: #24221f;
+      font: 700 24px Arial, Helvetica, sans-serif;
+      padding: 16px 22px;
+      cursor: pointer;
+    }
+
+    .mode-button:hover,
+    .mode-button:focus-visible {
+      background: #ffe08a;
+      outline: 4px solid #145a27;
+      outline-offset: 3px;
+    }
+
+    .hint {
+      margin: 10px 0 0;
+      text-align: center;
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Pick the Nose</h1>
+    <div class="hud">
+      <span>Level: <span id="level">1</span></span>
+      <span>Lives: <span id="lives">3</span></span>
+      <span>Mode: <span id="mode">--</span></span>
+      <span>Speed: <span id="speed">1.0x</span></span>
+      <span id="message">Catch the moving nose</span>
+    </div>
+    <div id="debug-controls" class="debug-controls" hidden>
+      <span>Debug Mode</span>
+      <button id="next-level" type="button">Next Level</button>
+    </div>
+    <div class="game-wrap">
+      <canvas id="game" width="1200" height="675" aria-label="Pick the Nose game"></canvas>
+      <div id="title-screen" class="title-screen" aria-label="Pick the Nose">
+        <img class="title-art" src="chatgpt_title_screen.png" alt="">
+        <div class="title-actions">
+          <button class="mode-button" type="button" data-mode="easy">Easy Mode</button>
+          <button class="mode-button" type="button" data-mode="hard">Hard Mode</button>
+        </div>
+      </div>
+      <button id="play-again" class="play-again" type="button" hidden>Play Again</button>
+    </div>
+    <p class="hint">Touch the fingertip to the bottom of the moving nose.</p>
+  </main>
+
+  <script>
+    const canvas = document.getElementById('game');
+    const ctx = canvas.getContext('2d');
+    const levelEl = document.getElementById('level');
+    const livesEl = document.getElementById('lives');
+    const modeEl = document.getElementById('mode');
+    const speedEl = document.getElementById('speed');
+    const messageEl = document.getElementById('message');
+    const debugControls = document.getElementById('debug-controls');
+    const nextLevelButton = document.getElementById('next-level');
+    const titleScreen = document.getElementById('title-screen');
+    const modeButtons = document.querySelectorAll('[data-mode]');
+    const playAgainButton = document.getElementById('play-again');
+
+    const keys = new Set();
+    const debugParam = new URLSearchParams(window.location.search).get('debug');
+    const debugMode = debugParam !== null && debugParam !== '0' && debugParam !== 'false';
+    const difficulties = {
+      easy: {
+        label: 'Easy',
+        motionMultiplier: 1,
+        spinMultiplier: 1,
+        lives: 10
+      },
+      hard: {
+        label: 'Hard',
+        motionMultiplier: 2,
+        spinMultiplier: 2,
+        lives: 3
+      }
+    };
+    let gameStarted = false;
+    let difficulty = difficulties.easy;
+    let level = 1;
+    let lives = startingLives();
+    let winTimer = 0;
+    let missed = false;
+    let slimed = false;
+    let gameOver = false;
+    let gameWon = false;
+    let bossIntro = false;
+    let bossIntroTimer = 0;
+    let bossHitTimer = 0;
+    let bossHits = 0;
+    const bossMaxHits = 4;
+    const bossIntroDuration = 2.5;
+    const firstSneezeDelay = 0.5;
+    const sneezeInterval = 2.5;
+    let sneezeTimer = sneezeInterval;
+    let achooTimer = 0;
+    const slimeBalls = [];
+
+    const baseNoseSpeed = 200;
+    const baseNoseAcceleration = 16;
+    const defaultNoseMaxSpeed = 620;
+    const levelSpeedTuning = {
+      enabled: false,
+      perLevel: 45
+    };
+    const levels = [
+      null,
+      {
+        message: 'Level 1: catch the moving nose',
+        shootsSlime: false,
+        spins: false
+      },
+      {
+        message: 'Level 2: catch the fast moving nose',
+        shootsSlime: false,
+        spins: false,
+        startSpeedMultiplier: 2
+      },
+      {
+        message: 'Level 3: dodge the green balls',
+        shootsSlime: true,
+        spins: false
+      },
+      {
+        message: 'Level 4: dodge fast green balls',
+        shootsSlime: true,
+        spins: false,
+        startSpeedMultiplier: 2
+      },
+      {
+        message: 'Level 5: catch the spinning nose',
+        shootsSlime: false,
+        spins: true
+      },
+      {
+        message: 'Level 6: catch the fast spinning nose',
+        shootsSlime: false,
+        spins: true,
+        startSpeedMultiplier: 2
+      },
+      {
+        message: 'Level 7: catch the sneezing spinning nose',
+        shootsSlime: true,
+        spins: true
+      },
+      {
+        message: 'Level 8: catch the fast sneezing spinning nose',
+        shootsSlime: true,
+        spins: true,
+        startSpeedMultiplier: 2
+      },
+      {
+        message: 'Boss Fight: Patrick Ewing',
+        shootsSlime: true,
+        spins: false,
+        boss: true,
+        startSpeedMultiplier: 2,
+        finalHitSpeedMultiplier: 2,
+        firstSneezeDelay: 0.5,
+        sneezeInterval: 1,
+        slimeBalls: 3,
+        enragedSlimeBalls: 5
+      }
+    ];
+    const maxLevel = levels.length - 1;
+
+    const noseSprite = loadSprite('nose-clean.png');
+    const ewingNoseSprite = loadSprite('ewing-nose-clean.png');
+    const fingerSprite = loadSprite('finger-clean.png');
+    const ewingSprite = loadSprite('chatgpt_ewing.png');
+    const winScreenSprite = loadSprite('chatgpt_game_win_screen.png');
+    const normalNoseSize = {
+      width: 150,
+      height: 177
+    };
+    const bossNoseSize = {
+      width: 240,
+      height: 246
+    };
+
+    debugControls.hidden = !debugMode;
+
+    const finger = {
+      x: 70,
+      y: canvas.height - 240 - 20,
+      width: 155,
+      height: 240,
+      speed: 440
+    };
+
+    const nose = {
+      x: 890,
+      y: 35,
+      width: normalNoseSize.width,
+      height: normalNoseSize.height,
+      directionX: -1,
+      speed: 200,
+      acceleration: 16,
+      maxSpeed: defaultNoseMaxSpeed,
+      angle: 0,
+      spinSpeed: 1.8
+    };
+
+    function loadSprite(fileName) {
+      const image = new Image();
+      const sprite = {
+        image,
+        mask: null,
+        ready: false
+      };
+
+      image.onload = () => {
+        sprite.mask = createSpriteMask(image);
+        sprite.ready = true;
+      };
+      image.src = fileName;
+      return sprite;
+    }
+
+    function createSpriteMask(image) {
+      const mask = document.createElement('canvas');
+      const maskCtx = mask.getContext('2d');
+      mask.width = image.naturalWidth;
+      mask.height = image.naturalHeight;
+      maskCtx.drawImage(image, 0, 0);
+      maskCtx.globalCompositeOperation = 'source-in';
+      maskCtx.fillStyle = '#24221f';
+      maskCtx.fillRect(0, 0, mask.width, mask.height);
+      maskCtx.globalCompositeOperation = 'source-over';
+      return mask;
+    }
+
+    function clamp(value, min, max) {
+      return Math.max(min, Math.min(max, value));
+    }
+
+    function fingerTouchesNose() {
+      const bottom = noseBottom();
+
+      return fingerPickCircles().some((circle) => (
+        circleTouchesRotatedEllipse(circle, nose, bottom)
+      ));
+    }
+
+    function fingerHitsNose() {
+      const noseZones = [
+        noseEllipse(0.5, 0.47, 0.39, 0.42),
+        noseEllipse(0.5, 0.68, 0.28, 0.10)
+      ];
+
+      return fingerCollisionCircles().some((circle) => (
+        noseZones.some((ellipse) => circleTouchesRotatedEllipse(circle, nose, ellipse))
+      ));
+    }
+
+    function fingerHitBySlime() {
+      return slimeBalls.some((ball) => (
+        fingerCollisionCircles().some((circle) => circlesTouch(ball, circle))
+      ));
+    }
+
+    function fingerCollisionCircles() {
+      return [
+        fingerTip(),
+        fingerCircle(0.5, 0.18, 18),
+        fingerCircle(0.5, 0.34, 20),
+        fingerCircle(0.5, 0.53, 24),
+        fingerCircle(0.5, 0.73, 34)
+      ];
+    }
+
+    function fingerPickCircles() {
+      return [
+        fingerTip(),
+        fingerCircle(0.5, 0.10, 16)
+      ];
+    }
+
+    function circlesTouch(a, b) {
+      return Math.hypot(a.x - b.x, a.y - b.y) <= a.radius + b.radius;
+    }
+
+    function fingerTip() {
+      return {
+        x: finger.x + finger.width * 0.5,
+        y: finger.y + finger.height * 0.05,
+        radius: 13
+      };
+    }
+
+    function fingerCircle(x, y, radius) {
+      return {
+        x: finger.x + finger.width * x,
+        y: finger.y + finger.height * y,
+        radius
+      };
+    }
+
+    function noseBottom() {
+      return noseEllipse(0.5, 0.84, 0.39, 0.19);
+    }
+
+    function noseEllipse(x, y, radiusX, radiusY) {
+      return {
+        x,
+        y,
+        radiusX,
+        radiusY
+      };
+    }
+
+    function circleTouchesRotatedEllipse(circle, entity, ellipse) {
+      const centerX = entity.x + entity.width / 2;
+      const centerY = entity.y + entity.height / 2;
+      const local = rotatePoint(
+        circle.x - centerX,
+        circle.y - centerY,
+        -(entity.angle || 0)
+      );
+      const localX = local.x + entity.width / 2;
+      const localY = local.y + entity.height / 2;
+      const ellipseX = entity.width * ellipse.x;
+      const ellipseY = entity.height * ellipse.y;
+      const radiusX = entity.width * ellipse.radiusX;
+      const radiusY = entity.height * ellipse.radiusY;
+      const dx = (localX - ellipseX) / (radiusX + circle.radius);
+      const dy = (localY - ellipseY) / (radiusY + circle.radius);
+
+      return dx * dx + dy * dy <= 1;
+    }
+
+    function rotatePoint(x, y, angle) {
+      const cos = Math.cos(angle);
+      const sin = Math.sin(angle);
+      return {
+        x: x * cos - y * sin,
+        y: x * sin + y * cos
+      };
+    }
+
+    function localPointToWorld(entity, x, y) {
+      const centerX = entity.x + entity.width / 2;
+      const centerY = entity.y + entity.height / 2;
+      const local = rotatePoint(
+        entity.width * x - entity.width / 2,
+        entity.height * y - entity.height / 2,
+        entity.angle || 0
+      );
+
+      return {
+        x: centerX + local.x,
+        y: centerY + local.y
+      };
+    }
+
+    function currentLevel() {
+      return levels[level];
+    }
+
+    function noseMotionMultiplier() {
+      return difficulty.motionMultiplier;
+    }
+
+    function noseSpinMultiplier() {
+      return difficulty.spinMultiplier;
+    }
+
+    function isBossFinalHitPhase(config) {
+      return config.boss && bossHits >= bossMaxHits - 1;
+    }
+
+    function speedMultiplierForLevel(config) {
+      const multiplier = config.startSpeedMultiplier || 1;
+      if (isBossFinalHitPhase(config)) {
+        return multiplier * (config.finalHitSpeedMultiplier || 2);
+      }
+
+      return multiplier;
+    }
+
+    function maxSpeedForLevel(config) {
+      const multiplierSpeed = baseNoseSpeed * speedMultiplierForLevel(config) * noseMotionMultiplier();
+      const levelMaxSpeed = (config.maxSpeed || defaultNoseMaxSpeed) * noseMotionMultiplier();
+      return Math.max(levelMaxSpeed, multiplierSpeed);
+    }
+
+    function startingSpeedForLevel(levelNumber) {
+      const config = levels[levelNumber];
+      if (config.startSpeedMultiplier || isBossFinalHitPhase(config)) {
+        return Math.min(
+          baseNoseSpeed * speedMultiplierForLevel(config) * noseMotionMultiplier(),
+          maxSpeedForLevel(config)
+        );
+      }
+
+      const levelBonus = levelSpeedTuning.enabled
+        ? (levelNumber - 1) * levelSpeedTuning.perLevel
+        : 0;
+
+      return Math.min((baseNoseSpeed + levelBonus) * noseMotionMultiplier(), maxSpeedForLevel(config));
+    }
+
+    function shouldNoseSpin(config) {
+      return config.spins || (config.boss && bossHits >= 2);
+    }
+
+    function randomSpinSpeed(config) {
+      const speed = config.boss ? 3.4 : 1.8 + level * 0.25;
+      const scaledSpeed = speed * noseSpinMultiplier();
+      return (Math.random() < 0.5 ? -1 : 1) * scaledSpeed;
+    }
+
+    function currentFirstSneezeDelay() {
+      const config = currentLevel();
+      return config.firstSneezeDelay || firstSneezeDelay;
+    }
+
+    function currentSneezeInterval() {
+      const config = currentLevel();
+      return config.sneezeInterval || sneezeInterval;
+    }
+
+    function currentSlimeBallCount() {
+      const config = currentLevel();
+      if (config.boss && bossHits >= 2) {
+        return config.enragedSlimeBalls;
+      }
+
+      return config.slimeBalls || 3;
+    }
+
+    function bossPicksLeft() {
+      return Math.max(0, bossMaxHits - bossHits);
+    }
+
+    function bossHudMessage() {
+      const picks = bossPicksLeft();
+      return `Boss: ${picks} ${picks === 1 ? 'pick' : 'picks'} left`;
+    }
+
+    function resetFingerPosition() {
+      finger.x = 70;
+      finger.y = canvas.height - finger.height - 20;
+    }
+
+    function resetNosePosition(config) {
+      const size = config.boss ? bossNoseSize : normalNoseSize;
+      nose.width = size.width;
+      nose.height = size.height;
+      nose.x = canvas.width - nose.width - 110;
+      nose.y = config.boss ? 28 : 35;
+      nose.directionX = Math.random() < 0.5 ? -1 : 1;
+      nose.maxSpeed = maxSpeedForLevel(config);
+      nose.acceleration = baseNoseAcceleration * noseMotionMultiplier();
+      nose.speed = startingSpeedForLevel(level);
+
+      if (shouldNoseSpin(config)) {
+        nose.angle = Math.random() * Math.PI * 2;
+        nose.spinSpeed = randomSpinSpeed(config);
+      } else {
+        nose.angle = 0;
+        nose.spinSpeed = 0;
+      }
+    }
+
+    function updateSpeedHud() {
+      speedEl.textContent = `${(nose.speed / baseNoseSpeed).toFixed(1)}x`;
+    }
+
+    function updateModeHud() {
+      modeEl.textContent = gameStarted ? difficulty.label : '--';
+    }
+
+    function startingLives() {
+      return debugMode ? Number.POSITIVE_INFINITY : difficulty.lives;
+    }
+
+    function updateLivesHud() {
+      livesEl.textContent = debugMode ? 'Infinite' : lives;
+    }
+
+    function isPaused() {
+      return missed || slimed || gameOver || gameWon || bossIntro;
+    }
+
+    function resetLevel() {
+      const config = currentLevel();
+
+      winTimer = 0;
+      bossIntroTimer = 0;
+      bossHitTimer = 0;
+      missed = false;
+      slimed = false;
+      gameOver = false;
+      gameWon = false;
+      bossIntro = false;
+      if (config.boss) {
+        bossHits = 0;
+      }
+      keys.clear();
+      playAgainButton.hidden = true;
+      resetFingerPosition();
+      resetNosePosition(config);
+      sneezeTimer = config.shootsSlime ? currentFirstSneezeDelay() : sneezeInterval;
+      achooTimer = 0;
+      slimeBalls.length = 0;
+
+      messageEl.textContent = config.boss ? bossHudMessage() : config.message;
+      levelEl.textContent = config.boss ? 'Boss' : level;
+      updateLivesHud();
+      updateModeHud();
+      updateSpeedHud();
+    }
+
+    function resetGame() {
+      level = 1;
+      lives = startingLives();
+      bossHits = 0;
+      resetLevel();
+    }
+
+    function loseLife(kind) {
+      if (!debugMode) {
+        lives = Math.max(0, lives - 1);
+      }
+
+      missed = kind === 'missed';
+      slimed = kind === 'slimed';
+      gameOver = !debugMode && lives === 0;
+      keys.clear();
+      messageEl.textContent = gameOver ? 'GAME OVER' : 'Play again from this level';
+      playAgainButton.hidden = false;
+      playAgainButton.focus();
+      updateLivesHud();
+    }
+
+    function showBossIntro() {
+      bossIntro = true;
+      bossIntroTimer = bossIntroDuration;
+      winTimer = 0;
+      slimeBalls.length = 0;
+      achooTimer = 0;
+      playAgainButton.hidden = true;
+      messageEl.textContent = 'Boss Fight! Patrick Ewing';
+      levelEl.textContent = 'Boss';
+      speedEl.textContent = '--';
+    }
+
+    function finishGame() {
+      gameWon = true;
+      winTimer = 0;
+      bossHitTimer = 0;
+      keys.clear();
+      slimeBalls.length = 0;
+      achooTimer = 0;
+      messageEl.textContent = 'EWING DEFEATED!';
+      levelEl.textContent = 'Done';
+      speedEl.textContent = '--';
+      playAgainButton.hidden = false;
+      playAgainButton.focus();
+    }
+
+    function showTitleScreen() {
+      gameStarted = false;
+      titleScreen.hidden = false;
+      playAgainButton.hidden = true;
+      keys.clear();
+      slimeBalls.length = 0;
+      achooTimer = 0;
+      winTimer = 0;
+      bossHitTimer = 0;
+      bossIntroTimer = 0;
+      bossIntro = false;
+      levelEl.textContent = '--';
+      livesEl.textContent = debugMode ? 'Infinite' : difficulties.easy.lives;
+      updateModeHud();
+      speedEl.textContent = '--';
+      messageEl.textContent = 'Choose a mode';
+    }
+
+    function startGame(modeName) {
+      difficulty = difficulties[modeName] || difficulties.easy;
+      gameStarted = true;
+      titleScreen.hidden = true;
+      resetGame();
+    }
+
+    function startNextLevel() {
+      level += 1;
+      resetLevel();
+    }
+
+    function advanceLevel() {
+      if (!gameStarted) {
+        return;
+      }
+
+      if (bossIntro) {
+        startNextLevel();
+        return;
+      }
+
+      if (level >= maxLevel) {
+        finishGame();
+        return;
+      }
+
+      if (levels[level + 1].boss) {
+        showBossIntro();
+        return;
+      }
+
+      startNextLevel();
+    }
+
+    function update(dt) {
+      if (!gameStarted) {
+        return;
+      }
+
+      const config = currentLevel();
+
+      if (bossIntro) {
+        bossIntroTimer -= dt;
+        if (bossIntroTimer <= 0) {
+          advanceLevel();
+        }
+        return;
+      }
+
+      if (bossHitTimer > 0) {
+        bossHitTimer -= dt;
+
+        if (bossHitTimer <= 0) {
+          resetBossAfterHit();
+        }
+        return;
+      }
+
+      if (isPaused()) {
+        return;
+      }
+
+      if (winTimer > 0) {
+        winTimer -= dt;
+        if (winTimer <= 0) {
+          advanceLevel();
+        }
+        return;
+      }
+
+      const moveX = (keys.has('ArrowRight') ? 1 : 0) - (keys.has('ArrowLeft') ? 1 : 0);
+      const moveY = (keys.has('ArrowDown') ? 1 : 0) - (keys.has('ArrowUp') ? 1 : 0);
+      const length = Math.hypot(moveX, moveY) || 1;
+
+      finger.x += (moveX / length) * finger.speed * dt;
+      finger.y += (moveY / length) * finger.speed * dt;
+      finger.x = clamp(finger.x, 10, canvas.width - finger.width - 10);
+      finger.y = clamp(finger.y, 10, canvas.height - finger.height - 10);
+
+      nose.speed = Math.min(nose.speed + nose.acceleration * dt, nose.maxSpeed);
+      nose.x += nose.directionX * nose.speed * dt;
+      if (shouldNoseSpin(config)) {
+        nose.angle += nose.spinSpeed * dt;
+      }
+      updateSpeedHud();
+
+      if (nose.x < 10 || nose.x + nose.width > canvas.width - 10) {
+        nose.directionX *= -1;
+        nose.x = clamp(nose.x, 10, canvas.width - nose.width - 10);
+      }
+
+      if (config.shootsSlime) {
+        updateSlime(dt);
+
+        if (fingerHitBySlime()) {
+          loseLife('slimed');
+          return;
+        }
+      }
+
+      if (fingerTouchesNose()) {
+        pickNose();
+      } else if (fingerHitsNose()) {
+        loseLife('missed');
+      }
+    }
+
+    function pickNose() {
+      const config = currentLevel();
+      if (!config.boss) {
+        winTimer = 0.85;
+        messageEl.textContent = 'You picked!';
+        return;
+      }
+
+      bossHits += 1;
+      keys.clear();
+      slimeBalls.length = 0;
+      achooTimer = 0;
+
+      if (bossHits >= bossMaxHits) {
+        winTimer = 0.85;
+        messageEl.textContent = 'EWING DEFEATED!';
+        return;
+      }
+
+      bossHitTimer = 0.75;
+      messageEl.textContent = bossHudMessage();
+      updateSpeedHud();
+    }
+
+    function resetBossAfterHit() {
+      const config = currentLevel();
+      bossHitTimer = 0;
+      resetFingerPosition();
+      resetNosePosition(config);
+      sneezeTimer = currentFirstSneezeDelay();
+      achooTimer = 0;
+      slimeBalls.length = 0;
+      messageEl.textContent = bossHudMessage();
+      updateSpeedHud();
+    }
+
+    function updateSlime(dt) {
+      sneezeTimer -= dt;
+      if (sneezeTimer <= 0) {
+        sneezeTimer += currentSneezeInterval();
+        sneeze();
+      }
+
+      achooTimer = Math.max(0, achooTimer - dt);
+
+      for (const ball of slimeBalls) {
+        ball.x += ball.vx * dt;
+        ball.y += ball.vy * dt;
+        ball.vy += 90 * dt;
+      }
+
+      for (let i = slimeBalls.length - 1; i >= 0; i -= 1) {
+        const ball = slimeBalls[i];
+        if (
+          ball.x < -60 ||
+          ball.x > canvas.width + 60 ||
+          ball.y < -60 ||
+          ball.y > canvas.height + 80
+        ) {
+          slimeBalls.splice(i, 1);
+        }
+      }
+    }
+
+    function sneeze() {
+      const origin = localPointToWorld(nose, 0.5, 0.83);
+      const ballCount = currentSlimeBallCount();
+      const spacing = ballCount > 3 ? 95 : 115;
+      const center = (ballCount - 1) / 2;
+      achooTimer = 0.85;
+
+      for (let index = 0; index < ballCount; index += 1) {
+        const offset = (index - center) * spacing;
+        slimeBalls.push({
+          x: origin.x,
+          y: origin.y,
+          vx: offset + nose.directionX * 55,
+          vy: 285 + Math.abs(offset) * 0.15,
+          radius: 17
+        });
+      }
+    }
+
+    function drawBackground() {
+      ctx.fillStyle = '#92c7df';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+    }
+
+    function drawNose() {
+      const config = currentLevel();
+      const sprite = config.boss ? ewingNoseSprite : noseSprite;
+      const fallbackColor = config.boss ? '#a95720' : '#f08a8a';
+      drawSprite(sprite, nose, fallbackColor);
+    }
+
+    function drawFinger() {
+      drawSprite(fingerSprite, finger, '#f2bf8f');
+    }
+
+    function drawSlime() {
+      for (const ball of slimeBalls) {
+        ctx.fillStyle = '#37b24d';
+        ctx.strokeStyle = '#145a27';
+        ctx.lineWidth = 4;
+        ctx.beginPath();
+        ctx.arc(ball.x, ball.y, ball.radius, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.stroke();
+
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.45)';
+        ctx.beginPath();
+        ctx.arc(ball.x - ball.radius * 0.35, ball.y - ball.radius * 0.35, ball.radius * 0.25, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    }
+
+    function drawAchoo() {
+      if (achooTimer <= 0 || missed || slimed || winTimer > 0) {
+        return;
+      }
+
+      ctx.fillStyle = '#145a27';
+      ctx.font = 'bold 42px Arial, Helvetica, sans-serif';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText('ACHOO!', nose.x + nose.width / 2, nose.y + nose.height + 38);
+    }
+
+    function drawImageContained(sprite, x, y, width, height) {
+      if (!sprite.ready) {
+        ctx.fillStyle = '#f08a8a';
+        ctx.strokeStyle = '#24221f';
+        ctx.lineWidth = 5;
+        ctx.fillRect(x, y, width, height);
+        ctx.strokeRect(x, y, width, height);
+        return;
+      }
+
+      const imageWidth = sprite.image.naturalWidth;
+      const imageHeight = sprite.image.naturalHeight;
+      const scale = Math.min(width / imageWidth, height / imageHeight);
+      const drawWidth = imageWidth * scale;
+      const drawHeight = imageHeight * scale;
+      const drawX = x + (width - drawWidth) / 2;
+      const drawY = y + (height - drawHeight) / 2;
+
+      ctx.drawImage(sprite.image, drawX, drawY, drawWidth, drawHeight);
+    }
+
+    function drawBossIntro() {
+      ctx.fillStyle = '#f6f1e8';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      ctx.fillStyle = '#24221f';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.font = 'bold 78px Arial, Helvetica, sans-serif';
+      ctx.fillText('Boss Fight!', canvas.width / 2, 82);
+      ctx.font = 'bold 58px Arial, Helvetica, sans-serif';
+      ctx.fillText('Patrick Ewing', canvas.width / 2, 152);
+
+      const imageX = 312;
+      const imageY = 205;
+      const imageWidth = 576;
+      const imageHeight = 432;
+      ctx.fillStyle = '#24221f';
+      ctx.fillRect(imageX - 8, imageY - 8, imageWidth + 16, imageHeight + 16);
+      ctx.fillStyle = '#ffffff';
+      ctx.fillRect(imageX, imageY, imageWidth, imageHeight);
+      drawImageContained(ewingSprite, imageX, imageY, imageWidth, imageHeight);
+    }
+
+    function drawWinScreen() {
+      ctx.fillStyle = '#061a3d';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      drawImageContained(winScreenSprite, 0, 0, canvas.width, canvas.height);
+    }
+
+    function livesLeftText() {
+      if (debugMode) {
+        return 'INFINITE LIVES';
+      }
+
+      return lives === 1 ? '1 LIFE LEFT' : `${lives} LIVES LEFT`;
+    }
+
+    function drawDeathOverlay(title, backdrop, color, detail) {
+      ctx.fillStyle = backdrop;
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = color;
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.font = 'bold 86px Arial, Helvetica, sans-serif';
+      ctx.fillText(title, canvas.width / 2, canvas.height / 2 - 42);
+      ctx.font = 'bold 38px Arial, Helvetica, sans-serif';
+      ctx.fillText(detail, canvas.width / 2, canvas.height / 2 + 42);
+    }
+
+    function drawSprite(sprite, entity, fallbackColor) {
+      const centerX = entity.x + entity.width / 2;
+      const centerY = entity.y + entity.height / 2;
+      const angle = entity.angle || 0;
+
+      ctx.save();
+      ctx.translate(centerX, centerY);
+      ctx.rotate(angle);
+
+      if (sprite.ready) {
+        ctx.imageSmoothingEnabled = true;
+        ctx.imageSmoothingQuality = 'high';
+        if (sprite.mask) {
+          drawSpriteOutline(sprite, entity);
+        }
+        ctx.drawImage(
+          sprite.image,
+          -entity.width / 2,
+          -entity.height / 2,
+          entity.width,
+          entity.height
+        );
+        ctx.restore();
+        return;
+      }
+
+      ctx.fillStyle = fallbackColor;
+      ctx.strokeStyle = '#24221f';
+      ctx.lineWidth = 5;
+      ctx.fillRect(-entity.width / 2, -entity.height / 2, entity.width, entity.height);
+      ctx.strokeRect(-entity.width / 2, -entity.height / 2, entity.width, entity.height);
+      ctx.restore();
+    }
+
+    function drawSpriteOutline(sprite, entity) {
+      const border = 3;
+      const offsets = [
+        [-border, 0],
+        [border, 0],
+        [0, -border],
+        [0, border],
+        [-border, -border],
+        [border, -border],
+        [-border, border],
+        [border, border]
+      ];
+
+      for (const [offsetX, offsetY] of offsets) {
+        ctx.drawImage(
+          sprite.mask,
+          -entity.width / 2 + offsetX,
+          -entity.height / 2 + offsetY,
+          entity.width,
+          entity.height
+        );
+      }
+    }
+
+    function draw() {
+      if (!gameStarted) {
+        drawBackground();
+        return;
+      }
+
+      if (bossIntro) {
+        drawBossIntro();
+        return;
+      }
+
+      drawBackground();
+      drawNose();
+      drawSlime();
+      drawAchoo();
+      drawFinger();
+
+      if (bossHitTimer > 0) {
+        drawDeathOverlay(
+          'HIT!',
+          'rgba(255, 255, 255, 0.72)',
+          '#145a27',
+          bossHudMessage().toUpperCase()
+        );
+      } else if (winTimer > 0) {
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = '#24221f';
+        ctx.font = 'bold 86px Arial, Helvetica, sans-serif';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText(messageEl.textContent, canvas.width / 2, canvas.height / 2);
+      } else if (gameWon) {
+        drawWinScreen();
+      } else if (gameOver) {
+        drawDeathOverlay(
+          'GAME OVER',
+          'rgba(255, 255, 255, 0.9)',
+          '#24221f',
+          'NO LIVES LEFT'
+        );
+      } else if (missed) {
+        drawDeathOverlay(
+          'YOU MISSED',
+          'rgba(255, 255, 255, 0.85)',
+          '#24221f',
+          livesLeftText()
+        );
+      } else if (slimed) {
+        drawDeathOverlay(
+          'YOU GOT SLIMED',
+          'rgba(210, 255, 218, 0.88)',
+          '#145a27',
+          livesLeftText()
+        );
+      }
+    }
+
+    let lastTime = performance.now();
+    function loop(now) {
+      const dt = Math.min((now - lastTime) / 1000, 0.033);
+      lastTime = now;
+      update(dt);
+      draw();
+      requestAnimationFrame(loop);
+    }
+
+    window.addEventListener('keydown', (event) => {
+      if (debugMode && gameStarted && event.key.toLowerCase() === 'n') {
+        event.preventDefault();
+        advanceLevel();
+        return;
+      }
+
+      if (event.key.startsWith('Arrow')) {
+        event.preventDefault();
+        keys.add(event.key);
+      }
+    });
+
+    window.addEventListener('keyup', (event) => {
+      keys.delete(event.key);
+    });
+
+    playAgainButton.addEventListener('click', () => {
+      if (gameOver || gameWon) {
+        resetGame();
+        return;
+      }
+
+      resetLevel();
+    });
+
+    modeButtons.forEach((button) => {
+      button.addEventListener('click', () => {
+        startGame(button.dataset.mode);
+      });
+    });
+
+    nextLevelButton.addEventListener('click', () => {
+      advanceLevel();
+    });
+
+    showTitleScreen();
+    requestAnimationFrame(loop);
+  </script>
+</body>
+</html>

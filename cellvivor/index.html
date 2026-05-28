@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Cellvivor</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <main class="shell">
+      <section class="game" aria-label="Cellvivor game">
+        <header class="topbar">
+          <div class="brand">CELLVIVOR</div>
+          <div class="readouts" aria-live="polite">
+            <div id="lifePips" class="pips" aria-label="Lives"></div>
+            <div class="meter"><span id="level">L1</span></div>
+            <div class="meter"><span id="timer">00.0</span></div>
+            <div class="meter"><span id="generation">000</span></div>
+          </div>
+          <div class="actions">
+            <button id="pauseButton" type="button">Pause</button>
+            <button id="restartButton" type="button">Restart</button>
+          </div>
+        </header>
+
+        <div class="stage">
+          <canvas id="gameCanvas" aria-label="Cellvivor play field"></canvas>
+          <div id="overlay" class="overlay">
+            <h1 id="overlayTitle">CELLVIVOR</h1>
+            <p id="overlayCopy">Cross the living chasm.</p>
+            <button id="overlayButton" type="button">Launch</button>
+          </div>
+        </div>
+
+        <div class="touch-controls" aria-label="Touch controls">
+          <button type="button" data-touch="up" aria-label="Up">^</button>
+          <button type="button" data-touch="left" aria-label="Left">&lt;</button>
+          <button type="button" data-touch="down" aria-label="Down">v</button>
+          <button type="button" data-touch="right" aria-label="Right">&gt;</button>
+        </div>
+      </section>
+    </main>
+    <script src="game.js"></script>
+  </body>
+</html>
