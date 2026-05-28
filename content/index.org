@@ -1274,7 +1274,7 @@ A game that will always be of significance to me, because it was the assignment 
 :UNNUMBERED: notoc
 :END:
 Web page.\\
-March 26, 2023 - April 21, 2023.
+March 26, 2023 - May 28, 2026.
 
 I first came across Conway's Game of Life when I was 16. It completely changed the way I think about how the world works. Or, it helped me realize the way I inherently think about the world. One of those. I consider this the first major event that moved me into the world of computer science later in life. I was above to program this up for the first time in my second intro CS class (Stanford CS106B, C++).
 
@@ -1284,10 +1284,7 @@ Rules for the grid:\\
 3. If one cell is alive, and it has greater than 3 live neighbors, it dies as if by overpopulation.
 4. If one cell is dead, then it becomes alive if it has exactly 3 live neighbors, as if by reproduction.
 
-I added a "rule probability" box, that sets the probability that a given rule will proceed for a given cell in the grid at a given iteration. I don't see this in standard game of life implementations, but biological life has a bit of randomness involved, so why not do the same for this?
-Aside from that, I have added the ability to modify the rules for the grid. This includes the ability to determine how may layers out you look for nearest neighbors. Note that when you tinker with these settings, most of the automata you get will either be too orderly or too chaotic. The Game of Life rules are a delicate balance between the two.
-
-I have also added the ability to modify the size of the grid.
+I added additional rules other than GOL to the interface, and the ability to build your own. I realized a few years ago when I was messing with convolutions that you can change the patterns in an interesting way if you toggled what regions of the Moore neighborhood the CA rules actually pay attention to. So you'll see that in the interface too.
 ** [[./mandelbrot_set.html][Mandelbrot Set]]
 :PROPERTIES:
 :UNNUMBERED: notoc
