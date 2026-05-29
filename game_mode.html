@@ -566,6 +566,13 @@
       border-radius: 50%;
     }
 
+    /* The speedster: a rarer, faster gremlin. Red and glowing so it reads as
+       distinct from the green ones. */
+    .gremlin.fast {
+      z-index: 100;
+      filter: drop-shadow(0 0 5px #ff5a2c) drop-shadow(0 0 2px #ff8a2c);
+    }
+
     .gremlin.step .gremlin-sprite {
       animation: gremlin-hop 320ms steps(2, end);
     }
@@ -799,26 +806,28 @@
     }
 
     /* ---- Exit to the regular (scrolling) site ---- */
+    /* Sized to match the HUD chips (e.g. "Start Crossing") and aligned flush
+       with their top/bottom: top = .page padding (14) + .game-shell border (4)
+       + .hud padding-top (10) = 28px. */
     .exit-mode {
-      position: fixed;
-      top: 16px;
+      position: absolute;
+      top: 28px;
       left: 50%;
       transform: translateX(-50%);
       z-index: 200;
-      padding: 10px 16px;
-      border: 4px solid var(--ink);
+      padding: 5px 8px;
+      border: 3px solid var(--ink);
       background: var(--gold);
       color: var(--ink);
       font-family: "Courier New", Courier, monospace;
-      font-weight: 900;
+      font-size: 0.85rem;
+      font-weight: 700;
       text-transform: uppercase;
       text-decoration: none;
-      box-shadow: 0 4px 0 rgba(0, 0, 0, 0.3),
-                  inset -4px -4px 0 rgba(0, 0, 0, 0.22);
     }
 
     .exit-mode:hover { background: var(--cream); }
-    .exit-mode:active { transform: translateX(-50%) translateY(2px); box-shadow: 0 2px 0 rgba(0, 0, 0, 0.3); }
+    .exit-mode:active { transform: translateX(-50%) translateY(1px); }
 
     /* ---- Mobile title bar (slim "Region · Article" strip above the map) ---- */
     .mobile-title-bar {
@@ -923,6 +932,7 @@
       .page { padding: 6px; }
       .hud { grid-template-columns: 1fr; }
       .hud-chip { white-space: normal; }
+      .exit-mode { top: 20px; }
     }
   </style>
 </head>
@@ -2633,6 +2643,37 @@
         <rect x="10" y="13" width="2" height="1" fill="#4a8c3e"></rect>
       </svg>`;
 
+    // The speedster — a rare, faster gremlin. It ticks twice as often as the
+    // others and, when it catches the cat, warps straight to one specific
+    // article ("It's more complicated than that") instead of a random one.
+    const FAST_GREMLIN_INTERVAL_MS = GREMLIN_INTERVAL_MS / 2;
+    const FAST_TARGET_URL = "its_more_complicated_than_that.html";
+    const FAST_GREMLIN_SVG = `
+      <svg class="gremlin-sprite" viewBox="0 0 16 16" aria-hidden="true">
+        <rect x="3" y="0" width="1" height="2" fill="#7a1f1f"></rect>
+        <rect x="12" y="0" width="1" height="2" fill="#7a1f1f"></rect>
+        <rect x="2" y="2" width="12" height="11" fill="#2a0a0a"></rect>
+        <rect x="3" y="3" width="10" height="9" fill="#e0563a"></rect>
+        <rect x="3" y="9" width="10" height="3" fill="#b23a22"></rect>
+        <rect x="4" y="5" width="3" height="2" fill="#5a1414"></rect>
+        <rect x="9" y="5" width="3" height="2" fill="#5a1414"></rect>
+        <rect x="5" y="5" width="1" height="1" fill="#ffe14d"></rect>
+        <rect x="10" y="5" width="1" height="1" fill="#ffe14d"></rect>
+        <rect x="6" y="10" width="4" height="2" fill="#2a0a0a"></rect>
+        <rect x="6" y="10" width="1" height="1" fill="#fff4d6"></rect>
+        <rect x="9" y="10" width="1" height="1" fill="#fff4d6"></rect>
+        <rect x="4" y="13" width="2" height="2" fill="#2a0a0a"></rect>
+        <rect x="10" y="13" width="2" height="2" fill="#2a0a0a"></rect>
+        <rect x="4" y="13" width="2" height="1" fill="#b23a22"></rect>
+        <rect x="10" y="13" width="2" height="1" fill="#b23a22"></rect>
+      </svg>`;
+
+    // Once the speedster has caught the cat, it never spawns again (persisted).
+    const FAST_CAUGHT_KEY = "tylersworld-speedster-caught";
+    let speedsterCaught = false;
+    try { speedsterCaught = localStorage.getItem(FAST_CAUGHT_KEY) === "true"; }
+    catch (e) { /* ignore */ }
+
     let gremlins = [];
     let gremlinTimers = [];
     let caughtInFlight = false;
@@ -2663,11 +2704,11 @@
       return { x: a.x, y: a.y };
     }
 
-    function makeGremlinEl() {
+    function makeGremlinEl(svg, extraClass) {
       const div = document.createElement("div");
-      div.className = "gremlin";
+      div.className = extraClass ? `gremlin ${extraClass}` : "gremlin";
       div.setAttribute("aria-hidden", "true");
-      div.innerHTML = GREMLIN_SVG;
+      div.innerHTML = svg || GREMLIN_SVG;
       return div;
     }
 
@@ -2700,17 +2741,34 @@
         const el = makeGremlinEl();
         worldEl.appendChild(el);
         const pos = pickSpawnFarFromCat();
-        const g = { x: pos.x, y: pos.y, prev: null, el };
+        const g = { x: pos.x, y: pos.y, prev: null, el, interval: GREMLIN_INTERVAL_MS };
         gremlins.push(g);
         renderGremlin(g, false);
       }
-      // Stagger ticks so the three don't move in lockstep.
+      // The speedster: ticks twice as fast and warps to one specific article.
+      // Once it has caught the cat, it's retired for good and an ordinary green
+      // gremlin takes its place, so the total count is unchanged.
+      {
+        const fast = !speedsterCaught;
+        const el = fast ? makeGremlinEl(FAST_GREMLIN_SVG, "fast") : makeGremlinEl();
+        worldEl.appendChild(el);
+        const pos = pickSpawnFarFromCat();
+        const g = {
+          x: pos.x, y: pos.y, prev: null, el,
+          interval: fast ? FAST_GREMLIN_INTERVAL_MS : GREMLIN_INTERVAL_MS,
+          fast
+        };
+        gremlins.push(g);
+        renderGremlin(g, false);
+      }
+      // Stagger initial ticks so they don't move in lockstep, then run each on
+      // its own interval (the speedster's is shorter than the rest).
       gremlins.forEach((g, i) => {
         const initial = window.setTimeout(() => {
           gremlinTick(g);
-          const interval = window.setInterval(() => gremlinTick(g), GREMLIN_INTERVAL_MS);
+          const interval = window.setInterval(() => gremlinTick(g), g.interval);
           gremlinTimers.push(interval);
-        }, GREMLIN_INTERVAL_MS + i * GREMLIN_STAGGER_MS);
+        }, g.interval + i * GREMLIN_STAGGER_MS);
         gremlinTimers.push(initial);
       });
     }
@@ -2743,16 +2801,16 @@
       g.x = pick.x;
       g.y = pick.y;
       renderGremlin(g, true);
-      if (g.x === cat.x && g.y === cat.y) caught();
+      if (g.x === cat.x && g.y === cat.y) caught(g);
     }
 
     function checkCatch() {
       for (const g of gremlins) {
-        if (g.x === cat.x && g.y === cat.y) { caught(); return; }
+        if (g.x === cat.x && g.y === cat.y) { caught(g); return; }
       }
     }
 
-    function caught() {
+    function caught(by) {
       // Guard against double-firing if the cat lands on a gremlin during
       // a frame where another gremlin is also ticking onto it.
       if (caughtInFlight) return;
@@ -2767,13 +2825,25 @@
       // move; doing it again is harmless and explicit.)
       writeHashCat();
 
-      // Pick a random article and "click" it — the cat stays put.
-      const a = articles[Math.floor(Math.random() * articles.length)];
+      // The speedster warps to one fixed article; a normal gremlin warps to a
+      // random one. The cat stays put either way.
+      const a = (by && by.fast)
+        ? (articles.find((x) => x.url === FAST_TARGET_URL)
+           || articles[Math.floor(Math.random() * articles.length)])
+        : articles[Math.floor(Math.random() * articles.length)];
       const href = resolveUrl(a.url);
 
       markVisited(a.id);
-      document.getElementById("status").textContent =
-        `Caught! Opening "${a.title}"...`;
+      document.getElementById("status").textContent = (by && by.fast)
+        ? `The fast one got you! "${a.title}"...`
+        : `Caught! Opening "${a.title}"...`;
+
+      // The speedster is a one-time encounter: retire it before respawning so
+      // it never appears again (a green gremlin takes its slot).
+      if (by && by.fast) {
+        speedsterCaught = true;
+        try { localStorage.setItem(FAST_CAUGHT_KEY, "true"); } catch (e) { /* ignore */ }
+      }
 
       // Respawn all gremlins far from the cat for when the user returns.
       spawnGremlins();
