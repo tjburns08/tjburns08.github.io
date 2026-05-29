@@ -8,6 +8,11 @@
     { name: "dark", label: "Dark" }
   ];
 
+  // View-mode preference: the regular scrolling site vs. the game-mode overworld.
+  // Set only by the explicit Game Mode / Regular Mode toggle buttons.
+  const MODE_KEY = "viewMode";
+  const GAME_MODE_URL = "game_mode.html";
+
   const themeByName = new Map(THEMES.map((theme) => [theme.name, theme]));
 
   function readStorage(key) {
@@ -18,13 +23,31 @@
     }
   }
 
-  function writeStorage(name) {
+  function writeStorage(key, value) {
     try {
-      window.localStorage.setItem(STORAGE_KEY, name);
+      window.localStorage.setItem(key, value);
     } catch (_error) {
-      // Theme selection should still work when storage is unavailable.
+      // Selections should still work when storage is unavailable.
     }
   }
+
+  // True only on the site's home page, so deep links to individual
+  // articles are never auto-redirected into game mode.
+  function isHomePage() {
+    const path = window.location.pathname;
+    return path.endsWith("/index.html") || path.endsWith("/");
+  }
+
+  // Returning visitors who last chose game mode land back in it from home.
+  // Runs synchronously in <head> before the body renders, so there is no flash.
+  if (readStorage(MODE_KEY) === "game" && isHomePage()) {
+    window.location.replace(GAME_MODE_URL);
+  }
+
+  window.enterGameMode = function enterGameMode() {
+    writeStorage(MODE_KEY, "game");
+    window.location.href = GAME_MODE_URL;
+  };
 
   function normalizeTheme(name) {
     return themeByName.has(name) ? name : DEFAULT_THEME;
@@ -37,7 +60,7 @@
     document.body.classList.toggle("dark-mode", normalizedName === "dark");
 
     if (shouldPersist) {
-      writeStorage(normalizedName);
+      writeStorage(STORAGE_KEY, normalizedName);
     }
   }
 
