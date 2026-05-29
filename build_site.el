@@ -36,8 +36,9 @@
    "<script src=\"js/theme-switcher.js\"></script>"))
 
 (defvar site-html-preamble
-  "<div style=\"position: fixed; top: 10px; right: 10px;\">
+  "<div style=\"position: fixed; top: 10px; right: 10px; display: flex; flex-direction: column; align-items: flex-end;\">
          <button class=\"toggle-theme-btn\" onclick=\"toggleDarkMode()\">Light/Dark</button>
+         <button class=\"toggle-theme-btn\" style=\"margin-top: -10px;\" onclick=\"enterGameMode()\">Game Mode</button>
        </div>")
 
 (defun site-html-escape (text)

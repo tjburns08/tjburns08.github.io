@@ -798,6 +798,28 @@
       .float-open.visible { display: block; }
     }
 
+    /* ---- Exit to the regular (scrolling) site ---- */
+    .exit-mode {
+      position: fixed;
+      top: 16px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 200;
+      padding: 10px 16px;
+      border: 4px solid var(--ink);
+      background: var(--gold);
+      color: var(--ink);
+      font-family: "Courier New", Courier, monospace;
+      font-weight: 900;
+      text-transform: uppercase;
+      text-decoration: none;
+      box-shadow: 0 4px 0 rgba(0, 0, 0, 0.3),
+                  inset -4px -4px 0 rgba(0, 0, 0, 0.22);
+    }
+
+    .exit-mode:hover { background: var(--cream); }
+    .exit-mode:active { transform: translateX(-50%) translateY(2px); box-shadow: 0 2px 0 rgba(0, 0, 0, 0.3); }
+
     /* ---- Mobile title bar (slim "Region · Article" strip above the map) ---- */
     .mobile-title-bar {
       display: none;
@@ -905,18 +927,19 @@
   </style>
 </head>
 <body>
+  <a class="exit-mode" href="index.html" aria-label="Return to the regular website" onclick="try{localStorage.setItem('viewMode','regular')}catch(e){}">&larr; Regular Mode</a>
   <main class="page">
     <section class="game-shell" aria-label="Tyler's world overworld">
       <header class="hud">
         <h1>Tyler's World</h1>
-        <div class="hud-chip region" id="region-chip">Start Beach</div>
+        <div class="hud-chip region" id="region-chip">Start Crossing</div>
         <div class="hud-chip" id="visited-chip">0 / 0 visited</div>
         <div class="hud-chip">Arrows: move</div>
         <div class="hud-chip">Enter: open</div>
       </header>
 
       <button class="mobile-title-bar" id="mobile-title-bar" type="button" aria-live="polite">
-        <span class="mtb-region" id="mtb-region">Start Beach</span>
+        <span class="mtb-region" id="mtb-region">Start Crossing</span>
         <span class="mtb-title" id="mtb-title">Move the cat to explore</span>
         <span class="mtb-action" id="mtb-action"></span>
         <span class="mtb-details" id="mtb-details">
@@ -960,12 +983,12 @@
           <section class="card">
             <span class="kind" id="kind">Beach</span>
             <h2 id="title">Welcome to Tyler's World</h2>
-            <div class="date" id="date">Start Beach</div>
+            <div class="date" id="date">Start Crossing</div>
             <p class="summary" id="summary">Use the arrow keys to move the cat. Each region of the island is a section of the website. Step onto a tile to inspect it. Press Enter to open the article.</p>
           </section>
 
           <section class="controls">
-            <p id="location">Cat: Start Beach (22, 13)</p>
+            <p id="location">Cat: Start Crossing (22, 13)</p>
             <div class="dpad" aria-label="On-screen movement controls">
               <button class="up" type="button" data-move="0,-1" aria-label="Move up">^</button>
               <button class="left" type="button" data-move="-1,0" aria-label="Move left">&lt;</button>
@@ -1006,7 +1029,7 @@
       { id: "bio",         name: "Bioinformatics Lab", x0: 15, y0: 0,  x1: 30, y1: 8 },
       { id: "ai",          name: "AI Cyberzone",       x0: 33, y0: 0,  x1: 47, y1: 8 },
       { id: "computing",   name: "Computing Grid",     x0: 0,  y0: 10, x1: 12, y1: 15 },
-      { id: "start",       name: "Start Beach",        x0: 15, y0: 10, x1: 30, y1: 15 },
+      { id: "start",       name: "Start Crossing",        x0: 15, y0: 10, x1: 30, y1: 15 },
       { id: "collections", name: "Collections Loft",   x0: 33, y0: 10, x1: 47, y1: 15 },
       { id: "philosophy",  name: "Philosophy Forest",  x0: 0,  y0: 17, x1: 13, y1: 23 },
       { id: "health",      name: "Health Meadow",      x0: 15, y0: 17, x1: 30, y1: 22 },
@@ -1782,7 +1805,7 @@
     ------------------------------------------------------------------ */
 
     const connections = [
-      /* Start Beach — horizontal trunk + vertical branches */
+      /* Start Crossing — horizontal trunk + vertical branches */
       ["die-zero", "complicated-start"], ["complicated-start", "stick-shift"],
       ["stick-shift", "signal-start"], ["signal-start", "problem-start"],
       ["problem-start", "we-think"], ["we-think", "learn-bfx"],
