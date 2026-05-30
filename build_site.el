@@ -109,9 +109,23 @@
 
 
 ;; Get rid of "validate" on bottom of site
-(setq org-html-validation-link nil) 
+(setq org-html-validation-link nil)
 
-;; Generate the site output
-(org-publish-project "tyler_burns_website" t)
+;; Keep the publish timestamp cache inside the repo (gitignored) so that
+;; incremental builds work reliably across runs on this machine.
+(setq org-publish-timestamp-directory "./.org-timestamps/")
+
+;; Generate the site output.
+;;
+;; Incremental by default: only re-export the .org files whose source changed
+;; since the last build. This stops every commit from restaging hundreds of
+;; regenerated HTML files (Org assigns fresh random anchor ids on each export,
+;; so a forced full rebuild rewrites every page even when nothing changed).
+;;
+;; Force a full rebuild with:  FORCE_BUILD=1 ./build.sh "message"
+;; You need that whenever you change this file (the shared head/preamble/CSS
+;; link), since org-publish only tracks changes to the .org sources, not the
+;; build template.
+(org-publish-project "tyler_burns_website" (and (getenv "FORCE_BUILD") t))
 
 (message "build complete!")
