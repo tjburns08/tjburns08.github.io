@@ -1,0 +1,807 @@
+/* Tyler's World — shared overworld styling (structural).
+   Per-world colour palettes (the .region-* / .zone-* themes) live
+   inline in each world's HTML so each world owns its own look. */
+
+:root {
+  --tile: 48px;
+  --ink: #1d130c;
+  --cream: #fff1c7;
+  --paper: #f5d78e;
+  --panel: #f0c66d;
+  --panel-dark: #6b3f20;
+  --gold: #f4c542;
+  --red: #c94b37;
+  --blue: #2d5e9e;
+
+  /* Defaults inherited where region class hasn't set values yet. */
+  --grass: #62b14f;
+  --grass-dark: #3e8b3a;
+  --path: #d8ad61;
+  --path-dark: #9a6b34;
+  --decor: #2e7942;
+  --decor-light: #5dbf7a;
+  --token-bg: #fff1c7;
+  --castle-bg: #d8d8d8;
+  --house-bg: #ffe0a3;
+  --house-roof: #c94b37;
+}
+
+* { box-sizing: border-box; }
+
+/* ---- Mobile zoom / tap-delay suppression ----
+   touch-action: manipulation kills the 300ms double-tap-to-zoom window so
+   rapid taps register as taps, never as zoom triggers. user-select +
+   -webkit-touch-callout block the long-press magnifier/text-select popup
+   that rapid tapping can otherwise summon. */
+html, body, .world, .viewport, .tile, .dpad button, .legend button,
+.float-open, .open-link, .hud-chip {
+  touch-action: manipulation;
+  -webkit-touch-callout: none;
+  -webkit-tap-highlight-color: transparent;
+}
+.world, .viewport, .tile {
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  background: linear-gradient(#7bc3e1 0 25%, #5aaed0 25% 28%, #3f9c54 28% 100%);
+  color: var(--ink);
+  font-family: "Courier New", Courier, monospace;
+  line-height: 1.35;
+}
+
+button, a { font: inherit; }
+
+.page {
+  min-height: 100vh;
+  padding: 14px;
+}
+
+.game-shell {
+  max-width: 1280px;
+  margin: 0 auto;
+  border: 4px solid var(--ink);
+  background: var(--paper);
+  box-shadow: 0 10px 0 rgba(0, 0, 0, 0.22);
+}
+
+.hud {
+  display: grid;
+  grid-template-columns: minmax(220px, 1fr) auto auto auto;
+  gap: 10px;
+  align-items: center;
+  border-bottom: 4px solid var(--ink);
+  background: var(--panel);
+  padding: 10px 12px;
+}
+
+h1 {
+  margin: 0;
+  font-size: clamp(1.1rem, 2.2vw, 1.6rem);
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.hud-chip {
+  border: 3px solid var(--ink);
+  background: var(--cream);
+  padding: 5px 8px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.hud-chip.region {
+  background: var(--gold);
+}
+
+.game-area {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 340px;
+  gap: 0;
+}
+
+.viewport {
+  position: relative;
+  overflow: auto;
+  max-height: 640px;
+  border-right: 4px solid var(--ink);
+  background: #1a4f7a;
+}
+
+.world {
+  position: relative;
+  width: calc(var(--tile) * var(--cols));
+  height: calc(var(--tile) * var(--rows));
+  image-rendering: pixelated;
+}
+
+.world:focus-visible {
+  outline: 5px solid var(--gold);
+  outline-offset: -5px;
+}
+
+.map-grid {
+  display: grid;
+  grid-template-columns: repeat(var(--cols), var(--tile));
+  grid-template-rows: repeat(var(--rows), var(--tile));
+  width: 100%;
+  height: 100%;
+}
+
+.tile {
+  position: relative;
+  width: var(--tile);
+  height: var(--tile);
+  border: 0;
+  padding: 0;
+  background:
+    radial-gradient(circle at 12px 12px, rgba(255, 255, 255, 0.18) 0 2px, transparent 3px),
+    radial-gradient(circle at 34px 30px, rgba(255, 255, 255, 0.12) 0 2px, transparent 3px),
+    var(--grass);
+}
+
+/* Ground/grass micro pattern */
+.tile.grass::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, transparent 0 21px, rgba(0, 0, 0, 0.08) 21px 24px, transparent 24px),
+    linear-gradient(0deg, transparent 0 32px, rgba(0, 0, 0, 0.06) 32px 35px, transparent 35px);
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.tile.path {
+  background:
+    radial-gradient(circle at 14px 14px, rgba(0, 0, 0, 0.2) 0 2px, transparent 3px),
+    radial-gradient(circle at 32px 29px, rgba(0, 0, 0, 0.18) 0 2px, transparent 3px),
+    var(--path);
+  box-shadow: inset 0 0 0 3px var(--path-dark);
+}
+
+.tile.water {
+  background:
+    linear-gradient(135deg, transparent 0 35%, rgba(255, 255, 255, 0.32) 35% 44%, transparent 44%),
+    linear-gradient(315deg, transparent 0 38%, rgba(255, 255, 255, 0.22) 38% 46%, transparent 46%),
+    #3f8fc7;
+  box-shadow: inset 0 0 0 4px #2669a5;
+}
+
+.tile.bridge {
+  background:
+    linear-gradient(180deg, #c8956a 0 8px, #a06d3e 8px 12px, #c8956a 12px 22px, #a06d3e 22px 26px, #c8956a 26px 36px, #a06d3e 36px 40px, #c8956a 40px 48px);
+  box-shadow: inset 0 0 0 3px #5a3a1c;
+}
+
+.tile.bridge.vertical {
+  background:
+    linear-gradient(90deg, #c8956a 0 8px, #a06d3e 8px 12px, #c8956a 12px 22px, #a06d3e 22px 26px, #c8956a 26px 36px, #a06d3e 36px 40px, #c8956a 40px 48px);
+}
+
+.tile.forest {
+  background: var(--grass-dark);
+}
+.tile.forest::before,
+.tile.forest::after {
+  content: "";
+  position: absolute;
+  left: 9px;
+  width: 0;
+  height: 0;
+  border-left: 15px solid transparent;
+  border-right: 15px solid transparent;
+}
+.tile.forest::before {
+  top: 6px;
+  border-bottom: 19px solid var(--decor);
+}
+.tile.forest::after {
+  top: 18px;
+  border-bottom: 22px solid var(--decor-light);
+}
+
+.tile.hill {
+  background: var(--grass);
+}
+.tile.hill::before {
+  content: "";
+  position: absolute;
+  left: 5px;
+  bottom: 5px;
+  width: 38px;
+  height: 26px;
+  border: 3px solid var(--decor);
+  border-radius: 28px 28px 6px 6px;
+  background:
+    radial-gradient(circle at 13px 11px, rgba(255, 255, 255, 0.4) 0 3px, transparent 4px),
+    var(--decor-light);
+}
+
+.tile.start-mark {
+  background:
+    linear-gradient(45deg, rgba(255, 255, 255, 0.28) 25%, transparent 25% 50%, rgba(255, 255, 255, 0.28) 50% 75%, transparent 75%),
+    var(--path);
+  background-size: 16px 16px;
+  box-shadow: inset 0 0 0 3px var(--path-dark);
+}
+
+.tile.article {
+  cursor: pointer;
+  background:
+    radial-gradient(circle at 14px 14px, rgba(0, 0, 0, 0.18) 0 2px, transparent 3px),
+    radial-gradient(circle at 32px 29px, rgba(0, 0, 0, 0.16) 0 2px, transparent 3px),
+    var(--path);
+  box-shadow: inset 0 0 0 3px var(--path-dark);
+}
+
+.level-box {
+  position: absolute;
+  inset: 6px;
+  display: grid;
+  place-items: center;
+  border: 4px solid var(--ink);
+  background:
+    linear-gradient(90deg, rgba(0, 0, 0, 0.08) 0 4px, transparent 4px 36px, rgba(255, 255, 255, 0.24) 36px),
+    var(--token-bg);
+  color: var(--ink);
+  font-size: 0.78rem;
+  font-weight: 900;
+  text-align: center;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  box-shadow: inset -4px -4px 0 rgba(0, 0, 0, 0.16);
+}
+
+.tile.article.current .level-box,
+.tile.article:hover .level-box,
+.tile.article:focus-visible .level-box {
+  background: var(--gold);
+  outline: none;
+}
+
+.tile.article.visited .level-box {
+  border-color: var(--red);
+}
+
+.tile.article.castle .level-box {
+  background: var(--castle-bg);
+}
+.tile.article.castle .level-box::before {
+  content: "";
+  position: absolute;
+  top: -10px;
+  left: 5px;
+  right: 5px;
+  height: 10px;
+  background:
+    linear-gradient(90deg, var(--ink) 0 4px, transparent 4px 8px, var(--ink) 8px 12px, transparent 12px 16px, var(--ink) 16px 20px, transparent 20px 24px, var(--ink) 24px 28px);
+}
+
+.tile.article.house .level-box {
+  background: var(--house-bg);
+}
+.tile.article.house .level-box::before {
+  content: "";
+  position: absolute;
+  top: -13px;
+  left: 2px;
+  width: 0;
+  height: 0;
+  border-left: 18px solid transparent;
+  border-right: 18px solid transparent;
+  border-bottom: 14px solid var(--house-roof);
+}
+
+/* ----- Secret reveal flash ----- */
+
+@keyframes secret-reveal {
+  0%   { transform: scale(0.35); opacity: 0; filter: brightness(2.6); }
+  55%  { transform: scale(1.15); opacity: 1; filter: brightness(1.6); }
+  100% { transform: scale(1);    opacity: 1; filter: brightness(1); }
+}
+
+.tile.just-revealed {
+  animation: secret-reveal 700ms ease-out;
+  z-index: 5;
+}
+
+/* ----- Avatar ----- */
+
+.avatar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  width: var(--tile);
+  height: var(--tile);
+  pointer-events: none;
+  transition: transform 140ms steps(2, end);
+  will-change: transform;
+}
+
+.avatar.no-transition { transition: none; }
+
+.avatar::after {
+  content: "";
+  position: absolute;
+  left: 10px;
+  bottom: 2px;
+  width: 29px;
+  height: 7px;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 50%;
+}
+
+.avatar.step .cat-sprite {
+  animation: hop 140ms steps(2, end);
+}
+
+@keyframes hop {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+  100% { transform: translateY(0); }
+}
+
+.cat-sprite {
+  position: absolute;
+  z-index: 2;
+  left: 3px;
+  top: 1px;
+  width: 42px;
+  height: 42px;
+  image-rendering: pixelated;
+  shape-rendering: crispEdges;
+}
+
+.avatar.face-left .cat-sprite { transform: scaleX(-1); }
+
+/* ----- Gremlin (the antagonist) ----- */
+
+.gremlin {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 99;
+  width: var(--tile);
+  height: var(--tile);
+  pointer-events: none;
+  transition: transform 320ms steps(2, end);
+  will-change: transform;
+}
+
+.gremlin::after {
+  content: "";
+  position: absolute;
+  left: 10px;
+  bottom: 2px;
+  width: 29px;
+  height: 7px;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 50%;
+}
+
+/* The speedster: a rarer, faster gremlin. Red and glowing so it reads as
+   distinct from the green ones. */
+.gremlin.fast {
+  z-index: 100;
+  filter: drop-shadow(0 0 5px #ff5a2c) drop-shadow(0 0 2px #ff8a2c);
+}
+
+.gremlin.step .gremlin-sprite {
+  animation: gremlin-hop 320ms steps(2, end);
+}
+
+@keyframes gremlin-hop {
+  0%   { transform: translateY(0); }
+  50%  { transform: translateY(-5px); }
+  100% { transform: translateY(0); }
+}
+
+.gremlin-sprite {
+  position: absolute;
+  z-index: 2;
+  left: 4px;
+  top: 4px;
+  width: 40px;
+  height: 40px;
+  image-rendering: pixelated;
+  shape-rendering: crispEdges;
+}
+
+/* ----- Catch flash overlay ----- */
+
+.catch-flash {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 500;
+  background: rgba(220, 30, 40, 0);
+  transition: background 80ms ease-out;
+}
+
+.catch-flash.active {
+  background: rgba(220, 30, 40, 0.5);
+}
+
+/* ----- Side Panel ----- */
+
+.panel {
+  display: grid;
+  grid-template-rows: auto auto 1fr auto;
+  min-height: 528px;
+  background: #efbd60;
+}
+
+.card {
+  border-bottom: 4px solid var(--ink);
+  padding: 14px;
+}
+
+.card h2 {
+  margin: 0 0 7px;
+  font-size: 1.1rem;
+  line-height: 1.15;
+  text-transform: uppercase;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.date, .kind {
+  font-weight: 700;
+  font-size: 0.85rem;
+}
+
+.kind {
+  display: inline-block;
+  margin-bottom: 8px;
+  border: 3px solid var(--ink);
+  background: var(--cream);
+  padding: 2px 6px;
+  font-size: 0.8rem;
+}
+
+.summary {
+  margin: 10px 0 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Avenir Next", Avenir,
+    "Nimbus Sans L", Roboto, "Noto Sans", "Segoe UI", Arial, Helvetica, sans-serif;
+  font-size: 0.92rem;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.controls {
+  padding: 12px 14px;
+  border-bottom: 4px solid var(--ink);
+  background: #e6ae50;
+}
+
+.controls p {
+  margin: 0 0 6px;
+  font-weight: 700;
+  font-size: 0.85rem;
+}
+
+.dpad {
+  display: grid;
+  grid-template-columns: repeat(3, 38px);
+  grid-template-rows: repeat(3, 30px);
+  gap: 4px;
+  margin-top: 8px;
+}
+
+.dpad button {
+  border: 3px solid var(--ink);
+  background: var(--cream);
+  color: var(--ink);
+  cursor: pointer;
+  font-size: 0.95rem;
+  font-weight: 900;
+  line-height: 1;
+  box-shadow: inset -3px -3px 0 rgba(0, 0, 0, 0.18);
+}
+
+.dpad button:hover, .dpad button:focus-visible {
+  background: var(--gold);
+  outline: none;
+}
+
+.dpad .up { grid-column: 2; grid-row: 1; }
+.dpad .left { grid-column: 1; grid-row: 2; }
+.dpad .right { grid-column: 3; grid-row: 2; }
+.dpad .down { grid-column: 2; grid-row: 3; }
+
+.legend {
+  max-height: 240px;
+  overflow: auto;
+  padding: 12px 14px;
+}
+
+.legend h3 {
+  margin: 0 0 6px;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+}
+
+.legend-section {
+  margin-bottom: 8px;
+}
+
+.legend-section summary {
+  cursor: pointer;
+  font-size: 0.82rem;
+  font-weight: 900;
+  padding: 4px 6px;
+  border: 2px solid var(--ink);
+  background: var(--cream);
+  text-transform: uppercase;
+  list-style: none;
+}
+.legend-section summary::-webkit-details-marker { display: none; }
+.legend-section summary::before {
+  content: "▸ ";
+}
+.legend-section[open] summary::before {
+  content: "▾ ";
+}
+
+.legend-section .items {
+  display: grid;
+  gap: 3px;
+  padding: 6px 0 0;
+}
+
+.legend-section button {
+  min-height: 26px;
+  border: 2px solid var(--ink);
+  background: var(--cream);
+  color: var(--ink);
+  cursor: pointer;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-align: left;
+  padding: 2px 6px;
+}
+
+.legend-section button:hover, .legend-section button:focus-visible {
+  background: var(--gold);
+  outline: none;
+}
+
+.actions {
+  display: grid;
+  gap: 8px;
+  padding: 12px 14px;
+  border-top: 4px solid var(--ink);
+  background: var(--panel);
+}
+
+.open-link {
+  display: grid;
+  place-items: center;
+  min-height: 40px;
+  border: 4px solid var(--ink);
+  background: var(--blue);
+  color: white;
+  font-weight: 900;
+  text-decoration: none;
+  text-transform: uppercase;
+  box-shadow: inset -4px -4px 0 rgba(0, 0, 0, 0.22);
+}
+
+.open-link.disabled {
+  background: #8b7e69;
+  color: #e5dac3;
+  pointer-events: none;
+}
+
+.status {
+  margin: 0;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+/* ---- floating Open FAB for touch / mobile ---- */
+.float-open {
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+  z-index: 200;
+  padding: 14px 22px;
+  border: 4px solid var(--ink);
+  background: var(--blue);
+  color: white;
+  font-family: "Courier New", Courier, monospace;
+  font-weight: 900;
+  text-transform: uppercase;
+  text-decoration: none;
+  box-shadow: 0 4px 0 rgba(0, 0, 0, 0.3),
+              inset -4px -4px 0 rgba(0, 0, 0, 0.22);
+  display: none;
+}
+
+@media (pointer: coarse), (max-width: 1180px) {
+  .float-open.visible { display: block; }
+}
+
+/* ---- Exit to the regular (scrolling) site ---- */
+/* Sized to match the HUD chips (e.g. "Start Crossing") and aligned flush
+   with their top/bottom: top = .page padding (14) + .game-shell border (4)
+   + .hud padding-top (10) = 28px. */
+.exit-mode {
+  position: absolute;
+  top: 28px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 200;
+  padding: 5px 8px;
+  border: 3px solid var(--ink);
+  background: var(--gold);
+  color: var(--ink);
+  font-family: "Courier New", Courier, monospace;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+
+.exit-mode:hover { background: var(--cream); }
+.exit-mode:active { transform: translateX(-50%) translateY(1px); }
+
+/* ---- Mobile title bar (slim "Region · Article" strip above the map) ---- */
+.mobile-title-bar {
+  display: none;
+}
+
+@media (pointer: coarse), (max-width: 1180px) {
+  .mobile-title-bar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    padding: 10px 14px;
+    background: var(--cream);
+    color: var(--ink);
+    border: 0;
+    border-top: 4px solid var(--ink);
+    border-bottom: 4px solid var(--ink);
+    font-family: "Courier New", Courier, monospace;
+    font-size: 0.92rem;
+    font-weight: 700;
+    text-align: left;
+    cursor: default;
+  }
+  .mobile-title-bar.on-article {
+    background: var(--gold);
+    cursor: pointer;
+  }
+  .mtb-region {
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    opacity: 0.7;
+    padding: 2px 6px;
+    border: 2px solid var(--ink);
+    background: rgba(255, 255, 255, 0.4);
+    white-space: nowrap;
+  }
+  .mtb-title {
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .mtb-action {
+    font-weight: 900;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    white-space: nowrap;
+  }
+  .mobile-title-bar {
+    position: relative;
+  }
+  .mtb-details {
+    display: none;
+  }
+  .mobile-title-bar.on-article .mtb-details {
+    display: block;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    padding: 8px 14px;
+    background: var(--gold);
+    border-bottom: 4px solid var(--ink);
+    z-index: 50;
+  }
+  .mtb-date {
+    font-size: 0.75rem;
+    opacity: 0.7;
+    margin-bottom: 4px;
+  }
+  .mtb-summary {
+    font-family: -apple-system, BlinkMacSystemFont, "Avenir Next", Avenir,
+      "Nimbus Sans L", Roboto, "Noto Sans", "Segoe UI", Arial, Helvetica, sans-serif;
+    font-size: 0.82rem;
+    font-weight: 400;
+    line-height: 1.3;
+    white-space: normal;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+}
+
+@media (max-width: 1180px) {
+  .game-area { grid-template-columns: 1fr; }
+  .viewport { border-right: 0; border-bottom: 4px solid var(--ink); }
+  .panel { min-height: auto; }
+}
+
+/* ---- touch: enlarge d-pad to comfortable hit-target size ---- */
+@media (pointer: coarse) {
+  .dpad {
+    grid-template-columns: repeat(3, 56px);
+    grid-template-rows: repeat(3, 48px);
+    gap: 8px;
+  }
+  .dpad button { font-size: 1.25rem; }
+  .legend-section button { min-height: 36px; font-size: 0.82rem; }
+}
+
+@media (max-width: 760px) {
+  :root { --tile: 40px; }
+  .page { padding: 6px; }
+  .hud { grid-template-columns: 1fr; }
+  .hud-chip { white-space: normal; }
+  .exit-mode { top: 20px; }
+}
+
+
+/* ----- Portal tile — same box shape and black outline as every other
+   level, just a distinct colour so it reads as a special "gateway". ----- */
+.tile.article.portal .level-box {
+  background: #b8329a;
+  color: #fff;
+}
+.tile.article.portal.current .level-box,
+.tile.article.portal:hover .level-box,
+.tile.article.portal:focus-visible .level-box {
+  background: #ff52c4;
+}
+
+/* ----- World-warp animation (cat launches up / drops down) ----- */
+@keyframes warp-launch {
+  0%   { transform: translateY(0)      scale(1);    opacity: 1; }
+  18%  { transform: translateY(7px)    scale(1.12); opacity: 1; }
+  100% { transform: translateY(-130vh) scale(0.55); opacity: 0.2; }
+}
+@keyframes warp-drop {
+  0%   { transform: translateY(-130vh) scale(0.55); opacity: 0.2; }
+  82%  { transform: translateY(0)      scale(1.08); opacity: 1; }
+  100% { transform: translateY(0)      scale(1);    opacity: 1; }
+}
+.cat-sprite.warp-launch { animation: warp-launch 0.55s ease-in  forwards; }
+.cat-sprite.warp-drop   { animation: warp-drop   0.62s ease-out forwards; }
+
+/* sparkle burst that trails the warp */
+@keyframes sparkle-fly {
+  0%   { transform: translate(0, 0) scale(0.2) rotate(0deg);   opacity: 0; }
+  25%  { opacity: 1; }
+  100% { transform: translate(var(--sx, 0), var(--sy, -30px)) scale(1.1) rotate(140deg); opacity: 0; }
+}
+.sparkle {
+  position: absolute;
+  left: 50%;
+  top: 42%;
+  z-index: 120;
+  pointer-events: none;
+  font-size: 14px;
+  line-height: 1;
+  color: #ffe14d;
+  text-shadow: 0 0 5px #ff8adf, 0 0 9px #62e7ff;
+  animation: sparkle-fly 0.8s ease-out forwards;
+}
