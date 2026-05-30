@@ -769,13 +769,20 @@
         date: "ongoing",
         url: "question_bank.html",
         summary: "An ever-growing library of questions worth sitting with." },
-      { id: "social", region: "collections", x: 40, y: 13, kind: "portal", token: "SP",
+      { id: "social", region: "collections", x: 40, y: 13, kind: "castle", token: "SP",
+        title: "Social media posts",
+        date: "ongoing",
+        url: "social_media_posts.html",
+        summary: "The text version of my LinkedIn posts collection. (Psst — press right from here to find a hidden path.)" },
+      // ---- Hidden portal to the Social Media World (revealed by walking right from the SP box) ----
+      { id: "social-portal", region: "collections", x: 42, y: 13, kind: "portal", token: "SW",
         title: "Social Media World",
         date: "Portal",
         url: "social_world.html",
         kindLabel: "Portal",
         excludeFromWarp: true,
-        summary: "A hidden overworld built from my LinkedIn posts. Step onto this gateway and press Enter to warp in." },
+        summary: "A hidden overworld built from my LinkedIn posts. Press Enter to warp in.",
+        secret: "socialworld" },
 
       /* ---------- STATISTICS STRAND (coin toss series) ---------- */
       { id: "stats-1", region: "stats", x: 1, y: 27, kind: "house", token: "C1",
@@ -1156,6 +1163,13 @@
         pathTiles: ["1,20"],
         articleId: "meditations",
         storageKey: "tylersworld-secret-meditations"
+      },
+      socialworld: {
+        // Stand on the "Social media posts" (SP) box and press right.
+        trigger: { x: 40, y: 13, dx: 1, dy: 0 },
+        pathTiles: ["41,13"],
+        articleId: "social-portal",
+        storageKey: "tylersworld-secret-socialworld"
       }
     };
 
