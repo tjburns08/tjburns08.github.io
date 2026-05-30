@@ -110,6 +110,13 @@ h1 {
   max-height: 640px;
   border-right: 4px solid var(--ink);
   background: #1a4f7a;
+  /* Opt out of the site-wide `html { scroll-behavior: smooth }`. The engine
+     drives the camera with its own cancelable animation; letting CSS also
+     animate scrollLeft/scrollTop makes the two fight, which Safari renders as
+     the camera "skipping around". */
+  scroll-behavior: auto;
+  /* Smooth momentum panning on iOS without hijacking the engine's scrolls. */
+  -webkit-overflow-scrolling: touch;
 }
 
 .world {

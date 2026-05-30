@@ -577,20 +577,57 @@ function createWorld(config) {
     }
 
     let cameraInitialized = false;
+    let camAnim = null;
+    const prefersReducedMotion = !!(window.matchMedia &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches);
 
     function centerCamera(instant = false) {
       const viewport = document.getElementById("viewport");
       const t = currentTileSize();
       const targetX = Math.max(0, cat.x * t + t / 2 - viewport.clientWidth / 2);
       const targetY = Math.max(0, cat.y * t + t / 2 - viewport.clientHeight / 2);
-      if (instant) {
-        // Direct property assignment is guaranteed instant and bypasses
-        // any CSS scroll-behavior in effect.
+
+      // Cancel any camera tween already running. Without this, a second move
+      // before the first scroll finished would start a competing animation;
+      // the two fighting over scrollLeft/scrollTop is exactly the "skipping
+      // around" Safari shows. We drive the scroll ourselves (rAF) rather than
+      // scrollTo({behavior:"smooth"}) so it's deterministic on every browser,
+      // and the .viewport opts out of the site-wide `scroll-behavior: smooth`.
+      if (camAnim !== null) {
+        window.cancelAnimationFrame(camAnim);
+        camAnim = null;
+      }
+
+      if (instant || prefersReducedMotion) {
         viewport.scrollLeft = targetX;
         viewport.scrollTop = targetY;
-      } else {
-        viewport.scrollTo({ left: targetX, top: targetY, behavior: "smooth" });
+        return;
       }
+
+      const startX = viewport.scrollLeft;
+      const startY = viewport.scrollTop;
+      const dx = targetX - startX;
+      const dy = targetY - startY;
+      if (Math.abs(dx) < 1 && Math.abs(dy) < 1) {
+        viewport.scrollLeft = targetX;
+        viewport.scrollTop = targetY;
+        return;
+      }
+
+      const duration = 160;
+      const startTime = performance.now();
+      function stepFrame(now) {
+        const p = Math.min(1, (now - startTime) / duration);
+        const ease = p * (2 - p); // easeOutQuad
+        viewport.scrollLeft = startX + dx * ease;
+        viewport.scrollTop = startY + dy * ease;
+        if (p < 1) {
+          camAnim = window.requestAnimationFrame(stepFrame);
+        } else {
+          camAnim = null;
+        }
+      }
+      camAnim = window.requestAnimationFrame(stepFrame);
     }
 
     function update(stepped = false) {

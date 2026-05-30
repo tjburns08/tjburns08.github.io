@@ -4,19 +4,20 @@
 #+Purpose: tasks and lab notebook
 
 * Tasks
-** IN-PROGRESS add game mode as a state button
+** DONE add game mode as a state button
+CLOSED: [2026-05-30 Sat 09:15]
 ** DONE figure out what to do about "short" LI posts
 CLOSED: [2026-05-30]
 Resolved by the Social Media World: every post is one level regardless of
 length. The level box shows the title/date/summary; short posts just have a
 short summary. No separate treatment needed.
-** IN-PROGRESS make LI post of game mode
-SCHEDULED: <2026-05-26 Tue>
+** DONE make LI post of game mode
+CLOSED: [2026-05-30 Sat 09:15] SCHEDULED: <2026-05-26 Tue>
 ** TODO consider little mini-game challenges
 Platformers, "insert" and so forth.
 ** TODO find the little path bugs and patch them
 ** TODO add the talisman system to the regular game mode
-** IN-PROGRESS Social Media World (game-mode portal)
+** WAITING Social Media World (game-mode portal)
 A second overworld, reachable ONLY from inside game mode, where each level is a
 LinkedIn post. Same engine and feel as the main map, but its own zones, palette,
 gremlins, and sprites. Content source: [[file:content/social_media_posts.org][social_media_posts.org]] (H1
@@ -117,13 +118,27 @@ works in both directions.
 CLOSED: [2026-05-30]
 Confirmed: social_world.html is linked only from game_mode.html (the portal);
 nothing in content/*.org or the published regular site links to it.
-**** TODO Cross-browser + mobile pass (watch the Safari "skips around" issue)
-SCHEDULED: <2026-05-30 Sat>
-Booted both worlds headlessly in jsdom (clean render, no JS errors, all tiles
-reachable). Still needs a real-browser + Safari/mobile pass on device.
+**** DONE Cross-browser + mobile pass (watch the Safari "skips around" issue)
+CLOSED: [2026-05-30]
+Confirmed working on-device (desktop Safari + iOS) after the fix below.
+Root cause of the Safari "skips around" found and fixed: simple.css sets
+`html { scroll-behavior: smooth }` globally, so even the engine's direct
+scrollLeft/scrollTop assignments animated, and each per-move recenter
+interrupted the previous one — the fighting animations are the "skipping".
+Fixes:
+- public/css/game.css: `.viewport { scroll-behavior: auto }` (opt the map out of
+  the site-wide smooth scroll) + `-webkit-overflow-scrolling: touch`.
+- public/js/engine.js: centerCamera now drives the scroll with its own
+  cancelable requestAnimationFrame tween (easeOutQuad, 160ms) and cancels any
+  in-flight tween before starting a new one, so rapid moves can't stack.
+Verified headlessly (no JS errors, centering math correct). STILL NEEDS a human
+on-device confirmation in desktop Safari + iOS Safari (camera follow on the new
+bridges + the warp transition).
 **** DONE Path/walkability bugs on the new map
 CLOSED: [2026-05-30]
 Flood-fill from spawn reaches all 86 tiles; no orphaned levels.
+** TODO add little virus gremlin in social media mode that takes you to viral posts
+SCHEDULED: <2026-05-31 Sun>
 ** TODO make the nose pick game mobile friendly
 SCHEDULED: <2026-05-30 Sat>
 ** TODO add memory persistence with game mode toggling (which right now we only have with the back button)
@@ -207,3 +222,15 @@ Reworked per feedback:
   main-world-specific hardcode, so bridges look right in both worlds.
 All verified headlessly: both worlds render with no JS errors, every tile is
 reachable, and the warp animation fires in both directions.
+***** Social Media World — hidden-path entry (Zelda-style)
+Reworked the entry to mirror the Marcus Aurelius secret:
+- The "SP" box is now an ordinary tile linking to the text collection
+  (social_media_posts.html), not the portal itself.
+- The teleport is a HIDDEN portal one tile further right: standing on the SP box
+  and pressing right reveals a path tile (41,13) and the portal tile (42,13),
+  which warps to the Social Media World. New SECRETS entry "socialworld".
+- The social world's exit portal now returns to 42,13 (the hidden teleport
+  square); sessionStorage keeps the secret open within the session so the return
+  square is walkable. Also thinned the social-world paths (horizontal tracks +
+  scattered vertical spines, not a full grid) and gave the portal box a black
+  outline like the other tiles.
