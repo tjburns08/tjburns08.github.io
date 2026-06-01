@@ -13,7 +13,8 @@
      spawn                 {x, y} starting tile for the cat
      regions               [{id, name, x0, y0, x1, y1}]
      articles              [{id, region, x, y, kind, token, title, date,
-                             url, summary, secret?, kindLabel?}]
+                             url, summary, secret?, kindLabel?,
+                             collectible?, dialogue?, requiresGremlinClear?}]
      connections           [[aId, bId], ...] straight paths to pave
      bridges               ["x,y", ...] walkable tiles spanning gaps
      corridors             [[x0,y0,x1,y1], ...] extra axis-aligned paths
@@ -22,6 +23,8 @@
      secrets               {id: {trigger, pathTiles, articleId, storageKey}}
      visitedKey            localStorage key for visited tracking
      gremlins              {count, intervalMs, staggerMs, svg,
+                            caughtUrl?, spawnAnywhere?, minSpawnDistance?,
+                            killItem?, clearedKey?,
                             speedster?: {svg, targetUrl, caughtKey, intervalMs?}}
 ------------------------------------------------------------------ */
 
@@ -45,6 +48,25 @@ function createWorld(config) {
       <rect x="4" y="13" width="2" height="1" fill="#4a8c3e"></rect>
       <rect x="10" y="13" width="2" height="1" fill="#4a8c3e"></rect>
     </svg>`;
+  const CAT_BACK_SVG = `
+                <rect x="4" y="1" width="2" height="2" fill="#241812"></rect>
+                <rect x="10" y="1" width="2" height="2" fill="#241812"></rect>
+                <rect x="3" y="2" width="4" height="2" fill="#241812"></rect>
+                <rect x="9" y="2" width="4" height="2" fill="#241812"></rect>
+                <rect x="4" y="2" width="2" height="2" fill="#f3a944"></rect>
+                <rect x="10" y="2" width="2" height="2" fill="#f3a944"></rect>
+                <rect x="3" y="4" width="10" height="7" fill="#241812"></rect>
+                <rect x="4" y="4" width="8" height="6" fill="#d9842d"></rect>
+                <rect x="5" y="5" width="6" height="3" fill="#f3a944"></rect>
+                <rect x="4" y="8" width="8" height="2" fill="#c06f2a"></rect>
+                <rect x="4" y="11" width="8" height="3" fill="#241812"></rect>
+                <rect x="5" y="11" width="6" height="2" fill="#e99433"></rect>
+                <rect x="2" y="10" width="3" height="2" fill="#241812"></rect>
+                <rect x="2" y="9" width="2" height="2" fill="#e99433"></rect>
+                <rect x="12" y="10" width="3" height="2" fill="#241812"></rect>
+                <rect x="12" y="9" width="2" height="2" fill="#e99433"></rect>
+                <rect x="4" y="14" width="3" height="1" fill="#241812"></rect>
+                <rect x="9" y="14" width="3" height="1" fill="#241812"></rect>`;
     "use strict";
 
     const COLS = config.cols;
@@ -106,6 +128,57 @@ function createWorld(config) {
       visitedSet.add(id);
       saveVisited();
       updateVisitedUI();
+    }
+
+    /* ------------------------------------------------------------------
+       ITEMS — small global inventory shared by worlds. The first item is the
+       sword, but this is intentionally generic so future special rooms can use
+       the same mechanism.
+    ------------------------------------------------------------------ */
+
+    const ITEM_KEY_PREFIX = config.itemKeyPrefix || "tylersworld-item-";
+    const ITEM_LABELS = { sword: "Sword" };
+    const itemMemory = new Set();
+
+    function itemKey(item) {
+      return `${ITEM_KEY_PREFIX}${item}`;
+    }
+
+    function itemLabel(item) {
+      return ITEM_LABELS[item] || item;
+    }
+
+    function hasItem(item) {
+      if (!item) return false;
+      if (itemMemory.has(item)) return true;
+      try {
+        if (localStorage.getItem(itemKey(item)) === "true") {
+          itemMemory.add(item);
+          return true;
+        }
+      } catch (e) { /* ignore */ }
+      return false;
+    }
+
+    function grantItem(item) {
+      if (!item) return false;
+      const alreadyHad = hasItem(item);
+      itemMemory.add(item);
+      try { localStorage.setItem(itemKey(item), "true"); } catch (e) { /* ignore */ }
+      updateItemUI();
+      return !alreadyHad;
+    }
+
+    function updateItemUI() {
+      const avatar = document.getElementById("avatar");
+      if (avatar) avatar.classList.remove("armed");
+
+      const chip = document.getElementById("item-chip");
+      if (chip) chip.textContent = hasItem("sword") ? "Sword: found" : "Sword: hidden";
+    }
+
+    function isCollectibleCollected(a) {
+      return !!(a && a.collectible && hasItem(a.collectible));
     }
 
     function updateVisitedUI() {
@@ -276,6 +349,8 @@ function createWorld(config) {
       const article = articleByCoord.get(coord);
       if (article) {
         meta.classes.push("article", article.kind);
+        if (isArticleLocked(article)) meta.classes.push("locked");
+        if (isCollectibleCollected(article)) meta.classes.push("collected");
         meta.article = article;
         if (region) meta.classes.push(`region-${region.id}`);
         return meta;
@@ -438,6 +513,29 @@ function createWorld(config) {
 
     let cat = { x: config.spawn.x, y: config.spawn.y };
     let facing = "right";
+    let facingVector = { dx: 1, dy: 0 };
+    let catFrontSprite = "";
+    let swordSwingTimer = null;
+    let swordSwingUntil = 0;
+
+    function spriteEl() {
+      return document.querySelector("#avatar .cat-sprite");
+    }
+
+    function rememberFrontSprite() {
+      const sprite = spriteEl();
+      if (sprite && !catFrontSprite) catFrontSprite = sprite.innerHTML;
+    }
+
+    function updateCatSprite() {
+      const sprite = spriteEl();
+      if (!sprite) return;
+      rememberFrontSprite();
+      const mode = facing === "up" ? "back" : "front";
+      if (sprite.dataset.mode === mode) return;
+      sprite.innerHTML = mode === "back" ? CAT_BACK_SVG : catFrontSprite;
+      sprite.dataset.mode = mode;
+    }
 
     function readHashCat() {
       const m = (window.location.hash || "").match(/cat=(\d+),(\d+)/);
@@ -445,7 +543,15 @@ function createWorld(config) {
       const x = parseInt(m[1], 10);
       const y = parseInt(m[2], 10);
       if (!Number.isFinite(x) || !Number.isFinite(y)) return null;
-      if (!walkable.has(`${x},${y}`)) return null;
+      const coord = `${x},${y}`;
+      // Arriving on a hidden secret tile — e.g. warping back from the Social
+      // World onto its portal tile, which is still a secret until discovered.
+      // Reveal it so the cat lands on the portal instead of the center spawn.
+      if (!walkable.has(coord)) {
+        const art = articleByCoord.get(coord);
+        if (art && art.secret) revealSecret(art.secret);
+      }
+      if (!walkable.has(coord)) return null;
       return { x, y };
     }
 
@@ -458,6 +564,10 @@ function createWorld(config) {
 
     function articleAtCat() {
       return articleByCoord.get(`${cat.x},${cat.y}`) || null;
+    }
+
+    function isArticleLocked(a) {
+      return !!(a && a.requiresGremlinClear && !gremlinsCleared);
     }
 
     function canMove(x, y) {
@@ -488,7 +598,10 @@ function createWorld(config) {
         return;
       }
       if (dx < 0) facing = "left";
-      if (dx > 0) facing = "right";
+      else if (dx > 0) facing = "right";
+      else if (dy < 0) facing = "up";
+      else if (dy > 0) facing = "down";
+      facingVector = { dx, dy };
       cat = next;
       update(true);
       checkCatch();
@@ -498,6 +611,12 @@ function createWorld(config) {
       return /^https?:\/\//i.test(url) || /\.pdf$/i.test(url);
     }
 
+    // Caves behave exactly like portals (step in, warp to another world) but
+    // carry their own "cave" CSS class so they can look like a dark opening.
+    function isPortalKind(a) {
+      return !!a && (a.kind === "portal" || a.kind === "cave");
+    }
+
     function resolveUrl(url) {
       return /^https?:\/\//i.test(url) ? url : pageBase + url;
     }
@@ -505,9 +624,37 @@ function createWorld(config) {
     function openCurrent() {
       const a = articleAtCat();
       if (!a) return;
+
+      if (isArticleLocked(a)) {
+        const message = a.lockedStatus ||
+          "You have to clear the enemies here before this article opens.";
+        document.getElementById("status").textContent = message;
+        document.getElementById("summary").textContent = a.lockedSummary || message;
+        return;
+      }
+
       markVisited(a.id);
+
+      if (a.collectible) {
+        const newlyCollected = grantItem(a.collectible);
+        const label = itemLabel(a.collectible);
+        document.getElementById("status").textContent = newlyCollected
+          ? `${label} found. Press Space to slash.`
+          : `You already have the ${label.toLowerCase()}.`;
+        update(true);
+        return;
+      }
+
+      if (a.dialogue && !a.url) {
+        document.getElementById("status").textContent = a.dialogue;
+        document.getElementById("summary").textContent = a.dialogue;
+        return;
+      }
+
+      if (!a.url) return;
+
       const href = resolveUrl(a.url);
-      if (a.kind === "portal") {
+      if (isPortalKind(a)) {
         warpOutTo(href);
       } else if (isExternalUrl(a.url)) {
         window.open(href, "_blank", "noopener,noreferrer");
@@ -547,7 +694,8 @@ function createWorld(config) {
       warpInFlight = true;
       const avatar = document.getElementById("avatar");
       const sprite = avatar.querySelector(".cat-sprite");
-      avatar.classList.remove("face-left", "step");
+      avatar.classList.remove("face-left", "face-up", "face-down", "step");
+      avatar.classList.add("warping");
       sprite.classList.remove("warp-drop");
       // force reflow so re-adding the launch class restarts the animation
       void sprite.offsetWidth;
@@ -567,13 +715,74 @@ function createWorld(config) {
       if (!warping) return;
       const avatar = document.getElementById("avatar");
       const sprite = avatar.querySelector(".cat-sprite");
+      avatar.classList.add("warping");
       sprite.classList.add("warp-drop");
       window.setTimeout(() => emitSparkles(avatar, 18), 360);
-      window.setTimeout(() => sprite.classList.remove("warp-drop"), 720);
+      window.setTimeout(() => {
+        sprite.classList.remove("warp-drop");
+        avatar.classList.remove("warping");
+      }, 720);
     }
 
     function currentTileSize() {
       return Number.parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--tile")) || 48;
+    }
+
+    function swordTarget() {
+      return {
+        x: cat.x + facingVector.dx,
+        y: cat.y + facingVector.dy
+      };
+    }
+
+    function swordHitsGremlin(g) {
+      if (!g || Date.now() > swordSwingUntil) return false;
+      const target = swordTarget();
+      return g.x === target.x && g.y === target.y;
+    }
+
+    function clearSwordSwingClasses(avatar) {
+      avatar.classList.remove(
+        "sword-swing",
+        "sword-left",
+        "sword-right",
+        "sword-up",
+        "sword-down"
+      );
+    }
+
+    function hitSwordTargets() {
+      let hits = 0;
+      for (const g of [...gremlins]) {
+        if (swordHitsGremlin(g) && defeatGremlin(g)) hits += 1;
+      }
+      return hits;
+    }
+
+    function swingSword() {
+      if (!hasItem("sword")) {
+        document.getElementById("status").textContent = "Find the sword first.";
+        return;
+      }
+      if (warpInFlight) return;
+
+      const avatar = document.getElementById("avatar");
+      if (!avatar) return;
+      if (swordSwingTimer) window.clearTimeout(swordSwingTimer);
+
+      clearSwordSwingClasses(avatar);
+      void avatar.offsetWidth;
+      swordSwingUntil = Date.now() + 190;
+      avatar.classList.add("sword-swing", `sword-${facing}`);
+
+      const hits = hitSwordTargets();
+      if (hits === 0) document.getElementById("status").textContent = "Sword slash.";
+
+      swordSwingTimer = window.setTimeout(() => {
+        swordSwingUntil = 0;
+        clearSwordSwingClasses(avatar);
+        swordSwingTimer = null;
+      }, 210);
     }
 
     let cameraInitialized = false;
@@ -635,6 +844,10 @@ function createWorld(config) {
       const t = currentTileSize();
       avatar.style.transform = `translate(${cat.x * t}px, ${cat.y * t}px)`;
       avatar.classList.toggle("face-left", facing === "left");
+      avatar.classList.toggle("face-up", facing === "up");
+      avatar.classList.toggle("face-down", facing === "down");
+      updateCatSprite();
+      updateItemUI();
       if (stepped) {
         avatar.classList.remove("step");
         window.requestAnimationFrame(() => {
@@ -644,8 +857,11 @@ function createWorld(config) {
       }
 
       document.querySelectorAll(".tile.article").forEach((el) => {
+        const art = articleByCoord.get(`${el.dataset.x},${el.dataset.y}`);
         el.classList.toggle("current",
           Number(el.dataset.x) === cat.x && Number(el.dataset.y) === cat.y);
+        el.classList.toggle("locked", isArticleLocked(art));
+        el.classList.toggle("collected", isCollectibleCollected(art));
       });
 
       const a = articleAtCat();
@@ -673,12 +889,17 @@ function createWorld(config) {
       const mtbDate = document.getElementById("mtb-date");
       const mtbSummary = document.getElementById("mtb-summary");
       if (a) {
+        const locked = isArticleLocked(a);
+        const collected = isCollectibleCollected(a);
         titleBar.classList.add("on-article");
         mtbRegion.textContent = reg ? reg.name : "";
         mtbTitle.textContent = a.title;
-        mtbAction.textContent = isExternalUrl(a.url) ? "Open ↗" : "Open ›";
+        mtbAction.textContent = locked ? "Locked"
+          : a.collectible ? (collected ? "Taken" : "Take")
+          : a.dialogue && !a.url ? "Talk"
+          : isExternalUrl(a.url) ? "Open ↗" : "Open ›";
         mtbDate.textContent = a.date;
-        mtbSummary.textContent = a.summary;
+        mtbSummary.textContent = locked ? (a.lockedSummary || a.summary) : a.summary;
       } else if (bridgeSet.has(`${cat.x},${cat.y}`)) {
         titleBar.classList.remove("on-article");
         mtbRegion.textContent = "Bridge";
@@ -703,20 +924,56 @@ function createWorld(config) {
       }
 
       if (a) {
+        const locked = isArticleLocked(a);
+        const collected = isCollectibleCollected(a);
         document.getElementById("kind").textContent =
           a.kindLabel ? a.kindLabel
           : a.kind === "castle" ? "Castle essay"
           : a.kind === "house" ? "House essay"
+          : a.kind === "sword" ? "Item"
+          : a.kind === "npc" ? "Cave elder"
           : "Article tile";
         document.getElementById("title").textContent = a.title;
         document.getElementById("date").textContent = a.date;
-        document.getElementById("summary").textContent = a.summary;
-        const external = isExternalUrl(a.url);
-        const resolved = resolveUrl(a.url);
+        document.getElementById("summary").textContent =
+          locked ? (a.lockedSummary || a.summary) : a.summary;
+        const external = a.url ? isExternalUrl(a.url) : false;
+        const resolved = a.url ? resolveUrl(a.url) : "#";
         openLink.href = resolved;
         floatOpen.href = resolved;
-        floatOpen.classList.add("visible");
-        if (external) {
+
+        if (locked) {
+          openLink.removeAttribute("target");
+          openLink.removeAttribute("rel");
+          openLink.textContent = "Locked";
+          openLink.classList.add("disabled");
+          floatOpen.classList.remove("visible");
+          document.getElementById("status").textContent =
+            a.lockedStatus || "You have to clear the enemies here before this article opens.";
+        } else if (a.collectible) {
+          openLink.removeAttribute("target");
+          openLink.removeAttribute("rel");
+          openLink.textContent = collected ? "Sword found" : "Take sword";
+          openLink.classList.toggle("disabled", collected);
+          floatOpen.classList.toggle("visible", !collected);
+          floatOpen.removeAttribute("target");
+          floatOpen.removeAttribute("rel");
+          floatOpen.textContent = "Take";
+          document.getElementById("status").textContent = collected
+            ? "The sword is yours. Press Space to slash."
+            : "Press Enter to take the sword.";
+        } else if (a.dialogue && !a.url) {
+          openLink.removeAttribute("target");
+          openLink.removeAttribute("rel");
+          openLink.textContent = "Talk";
+          openLink.classList.remove("disabled");
+          floatOpen.removeAttribute("target");
+          floatOpen.removeAttribute("rel");
+          floatOpen.textContent = "Talk";
+          floatOpen.classList.add("visible");
+          document.getElementById("status").textContent = a.dialogue;
+        } else if (external) {
+          floatOpen.classList.add("visible");
           openLink.target = "_blank";
           openLink.rel = "noopener noreferrer";
           openLink.textContent = "Open in new tab ↗";
@@ -725,6 +982,7 @@ function createWorld(config) {
           floatOpen.textContent = "Open ↗";
           document.getElementById("status").textContent = "External link — opens in a new tab.";
         } else {
+          floatOpen.classList.add("visible");
           openLink.removeAttribute("target");
           openLink.removeAttribute("rel");
           openLink.textContent = "Open article";
@@ -733,7 +991,7 @@ function createWorld(config) {
           floatOpen.textContent = "Open";
           document.getElementById("status").textContent = "Press Enter to open. Back button returns here.";
         }
-        openLink.classList.remove("disabled");
+        if (!locked && !(a.collectible && collected)) openLink.classList.remove("disabled");
       } else if (bridgeSet.has(`${cat.x},${cat.y}`)) {
         document.getElementById("kind").textContent = "Bridge";
         document.getElementById("title").textContent = "Crossing between regions";
@@ -784,6 +1042,7 @@ function createWorld(config) {
       else if (event.key === "ArrowDown")  { event.preventDefault(); move(0, 1); }
       else if (event.key === "ArrowLeft")  { event.preventDefault(); move(-1, 0); }
       else if (event.key === "ArrowRight") { event.preventDefault(); move(1, 0); }
+      else if (event.key === " " || event.code === "Space") { event.preventDefault(); swingSword(); }
       else if (event.key === "Enter") { event.preventDefault(); openCurrent(); }
     });
 
@@ -801,7 +1060,8 @@ function createWorld(config) {
     ["open-link", "float-open"].forEach((id) => {
       document.getElementById(id).addEventListener("click", (e) => {
         const a = articleAtCat();
-        if (a && a.kind === "portal") {
+        if (a && (isPortalKind(a) || isArticleLocked(a) ||
+            a.collectible || (a.dialogue && !a.url) || !a.url)) {
           e.preventDefault();
           openCurrent();
         }
@@ -877,6 +1137,26 @@ function createWorld(config) {
     const GREMLIN_INTERVAL_MS = (_g.intervalMs != null) ? _g.intervalMs : 3000;
     const GREMLIN_STAGGER_MS = (_g.staggerMs != null) ? _g.staggerMs : 1000;
     const GREMLIN_SVG = _g.svg || DEFAULT_GREMLIN_SVG;
+    // Optional: in dungeon-style worlds, a gremlin catch sends the cat to one
+    // fixed url (e.g. booted back out to the overworld) instead of warping it
+    // to a random article from this world. Left null in normal worlds.
+    const CAUGHT_URL = _g.caughtUrl || null;
+    // Optional: spawn gremlins on any open floor tile rather than on article
+    // tiles. Useful for sparse "open room" worlds (a dungeon with few tiles)
+    // where article-only spawns would cluster them. Off by default.
+    const SPAWN_ANYWHERE = !!_g.spawnAnywhere;
+    const GREMLIN_MIN_SPAWN_DIST =
+      (_g.minSpawnDistance != null) ? _g.minSpawnDistance : 12;
+    const GREMLIN_KILL_ITEM = _g.killItem === false ? null : (_g.killItem || "sword");
+    const GREMLIN_CLEARED_KEY = _g.clearedKey || null;
+    const GREMLIN_CLEARED_STATUS = _g.clearedStatus ||
+      (GREMLIN_CLEARED_KEY ? "The purple gremlins are gone. The shrine is open."
+        : "The gremlins are gone.");
+    let gremlinsCleared = false;
+    try {
+      gremlinsCleared = !!(GREMLIN_CLEARED_KEY &&
+        localStorage.getItem(GREMLIN_CLEARED_KEY) === "true");
+    } catch (e) { /* ignore */ }
 
     // The speedster is opt-in per world: supply config.gremlins.speedster to
     // enable a rare, faster gremlin that warps to one fixed target.
@@ -894,6 +1174,45 @@ function createWorld(config) {
     let gremlinTimers = [];
     let caughtInFlight = false;
 
+    function clearGremlinTimers(g) {
+      if (!g) return;
+      if (g.startTimer) window.clearTimeout(g.startTimer);
+      if (g.timer) window.clearInterval(g.timer);
+      g.startTimer = null;
+      g.timer = null;
+    }
+
+    function markGremlinsCleared() {
+      if (gremlinsCleared) return;
+      gremlinsCleared = true;
+      try {
+        if (GREMLIN_CLEARED_KEY) localStorage.setItem(GREMLIN_CLEARED_KEY, "true");
+      } catch (e) { /* ignore */ }
+      update(false);
+      document.getElementById("status").textContent = GREMLIN_CLEARED_STATUS;
+    }
+
+    function defeatGremlin(g) {
+      if (!g || !GREMLIN_KILL_ITEM || !hasItem(GREMLIN_KILL_ITEM)) return false;
+      clearGremlinTimers(g);
+      gremlins = gremlins.filter((x) => x !== g);
+      if (g.fast) {
+        speedsterCaught = true;
+        try { localStorage.setItem(FAST_CAUGHT_KEY, "true"); } catch (e) { /* ignore */ }
+      }
+      g.el.classList.add("defeated");
+      emitSparkles(g.el, 8);
+      window.setTimeout(() => g.el.remove(), 220);
+
+      if (gremlins.length === 0) {
+        markGremlinsCleared();
+      } else {
+        document.getElementById("status").textContent =
+          `Sword hit. ${gremlins.length} gremlins left.`;
+      }
+      return true;
+    }
+
     // Reset transient state on every page show, including bfcache restores
     // after the user clicks back from a caught-and-warped article. Without
     // this, caughtInFlight stays true and silently blocks all later catches.
@@ -901,23 +1220,51 @@ function createWorld(config) {
       caughtInFlight = false;
     });
 
-    function pickSpawnFarFromCat() {
-      // Only pick from articles that are actually reachable right now —
+    function randomFrom(list) {
+      return list[Math.floor(Math.random() * list.length)];
+    }
+
+    function spawnCandidates() {
+      if (SPAWN_ANYWHERE) {
+        const floor = [...walkable]
+          .filter((coord) => !hiddenTiles.has(coord))
+          .filter((coord) => !articleByCoord.has(coord))
+          .map((coord) => {
+            const [x, y] = coord.split(",").map(Number);
+            return { x, y };
+          });
+        if (floor.length > 0) return floor;
+
+        return [...walkable].map((coord) => {
+          const [x, y] = coord.split(",").map(Number);
+          return { x, y };
+        });
+      }
+
+      // Only pick from articles that are actually reachable right now -
       // hidden secret tiles aren't walkable until revealed, and a gremlin
       // spawned on one would have no walkable neighbors and freeze.
-      const candidates = articles.filter((a) => !a.secret || secretRevealed[a.secret]);
-      // Uniform random over all articles at least MIN_DIST tiles from cat.
-      // (Earlier "farthest of N samples" approach biased toward corners with
-      // the most articles, which made all gremlins cluster in AI Cyberzone.)
-      const MIN_DIST = 12;
-      for (let i = 0; i < 40; i += 1) {
-        const a = candidates[Math.floor(Math.random() * candidates.length)];
-        const d = Math.abs(a.x - cat.x) + Math.abs(a.y - cat.y);
-        if (d >= MIN_DIST) return { x: a.x, y: a.y };
-      }
-      // Fallback if the map is unusually small: any random article.
-      const a = candidates[Math.floor(Math.random() * candidates.length)];
-      return { x: a.x, y: a.y };
+      return articles
+        .filter((a) => !a.secret || secretRevealed[a.secret])
+        .map((a) => ({ x: a.x, y: a.y }));
+    }
+
+    function pickSpawnFarFromCat(occupied = new Set()) {
+      // Uniform random over all eligible spawn points far enough from the cat.
+      // Earlier "farthest of N samples" logic biased toward corners with the
+      // most articles, which made gremlins cluster in AI Cyberzone. Dungeons
+      // can opt into floor spawns so they don't stack on the exit/shrine tiles.
+      const candidates = spawnCandidates()
+        .filter((p) => !occupied.has(`${p.x},${p.y}`))
+        .filter((p) => !(p.x === cat.x && p.y === cat.y));
+
+      const far = candidates.filter((p) =>
+        Math.abs(p.x - cat.x) + Math.abs(p.y - cat.y) >= GREMLIN_MIN_SPAWN_DIST);
+
+      const pool = far.length ? far : candidates;
+      if (pool.length > 0) return randomFrom(pool);
+
+      return { x: config.spawn.x, y: config.spawn.y };
     }
 
     function makeGremlinEl(svg, extraClass) {
@@ -946,17 +1293,21 @@ function createWorld(config) {
         window.clearInterval(t);
       });
       gremlinTimers = [];
+      gremlins.forEach(clearGremlinTimers);
       gremlins.forEach((g) => g.el.remove());
       gremlins = [];
     }
 
     function spawnGremlins() {
       clearGremlins();
+      if (gremlinsCleared) return;
       const worldEl = document.getElementById("world");
+      const occupied = new Set();
       for (let i = 0; i < NUM_GREMLINS; i += 1) {
         const el = makeGremlinEl();
         worldEl.appendChild(el);
-        const pos = pickSpawnFarFromCat();
+        const pos = pickSpawnFarFromCat(occupied);
+        occupied.add(`${pos.x},${pos.y}`);
         const g = { x: pos.x, y: pos.y, prev: null, el, interval: GREMLIN_INTERVAL_MS };
         gremlins.push(g);
         renderGremlin(g, false);
@@ -968,7 +1319,8 @@ function createWorld(config) {
         const fast = !speedsterCaught;
         const el = fast ? makeGremlinEl(FAST_GREMLIN_SVG, "fast") : makeGremlinEl();
         worldEl.appendChild(el);
-        const pos = pickSpawnFarFromCat();
+        const pos = pickSpawnFarFromCat(occupied);
+        occupied.add(`${pos.x},${pos.y}`);
         const g = {
           x: pos.x, y: pos.y, prev: null, el,
           interval: fast ? FAST_GREMLIN_INTERVAL_MS : GREMLIN_INTERVAL_MS,
@@ -981,15 +1333,22 @@ function createWorld(config) {
       // its own interval (the speedster's is shorter than the rest).
       gremlins.forEach((g, i) => {
         const initial = window.setTimeout(() => {
+          if (!gremlins.includes(g)) return;
           gremlinTick(g);
-          const interval = window.setInterval(() => gremlinTick(g), g.interval);
+          const interval = window.setInterval(() => {
+            if (!gremlins.includes(g)) return;
+            gremlinTick(g);
+          }, g.interval);
+          g.timer = interval;
           gremlinTimers.push(interval);
         }, g.interval + i * GREMLIN_STAGGER_MS);
+        g.startTimer = initial;
         gremlinTimers.push(initial);
       });
     }
 
     function gremlinTick(g) {
+      if (!gremlins.includes(g) || gremlinsCleared) return;
       const candidates = [];
       for (const [dx, dy] of [[1,0],[-1,0],[0,1],[0,-1]]) {
         const nx = g.x + dx, ny = g.y + dy;
@@ -1017,6 +1376,7 @@ function createWorld(config) {
       g.x = pick.x;
       g.y = pick.y;
       renderGremlin(g, true);
+      if (swordHitsGremlin(g) && defeatGremlin(g)) return;
       if (g.x === cat.x && g.y === cat.y) caught(g);
     }
 
@@ -1040,6 +1400,17 @@ function createWorld(config) {
       // cat exactly here. (update() already wrote this on the cat's last
       // move; doing it again is harmless and explicit.)
       writeHashCat();
+
+      // Dungeon-style worlds: a normal gremlin catch boots the cat to one fixed
+      // url instead of warping to a random article. (The speedster, if any,
+      // still uses its own target below.)
+      if (CAUGHT_URL && !(by && by.fast)) {
+        document.getElementById("status").textContent =
+          "A gremlin got you! Back out you go…";
+        spawnGremlins();
+        window.setTimeout(() => { window.location.href = resolveUrl(CAUGHT_URL); }, 320);
+        return;
+      }
 
       // The speedster warps to one fixed article; a normal gremlin warps to a
       // random one. The cat stays put either way.

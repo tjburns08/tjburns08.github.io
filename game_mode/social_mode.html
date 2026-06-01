@@ -1,0 +1,1790 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <title>Social Media World - Tyler Burns</title>
+  <link rel="stylesheet" href="css/game.css">
+  <style>
+/* Social-media-world zone palettes (this world owns its own look). */
+    .region-gateway {
+      --grass: #384b3c; --grass-dark: #1f3028; --path: #d9be75; --path-dark: #7a5b2d;
+      --decor: #1d5c38; --decor-light: #55a060; --token-bg: #f7e8a0;
+      --castle-bg: #b5b8ae; --house-bg: #e8d698; --house-roof: #774c3a;
+    }
+    .region-dimred { --grass: #3d8c4a; --grass-dark: #20572e; --path: #d9b66c; --path-dark: #79512a; --decor: #195f4d; --decor-light: #71c77a; --token-bg: #f8e58a; --castle-bg: #b7c0b0; --house-bg: #e8d28c; --house-roof: #953f4e; }
+    .region-cluster { --grass: #a8793b; --grass-dark: #654018; --path: #d8b765; --path-dark: #78502a; --decor: #3c5f78; --decor-light: #7ab2cc; --token-bg: #f5df8e; --castle-bg: #c7a064; --house-bg: #e2c078; --house-roof: #2f5d8a; }
+    .region-aibfx { --grass: #27346e; --grass-dark: #151d42; --path: #8a75be; --path-dark: #3b2d70; --decor: #34a6b8; --decor-light: #8bf0d9; --token-bg: #d9cff9; --castle-bg: #4b4386; --house-bg: #5d4da3; --house-roof: #d85ab6; }
+    .region-foundation { --grass: #6c9840; --grass-dark: #365c24; --path: #d9c168; --path-dark: #74612a; --decor: #82446c; --decor-light: #d58bb5; --token-bg: #fbeba2; --castle-bg: #bec27a; --house-bg: #e5d889; --house-roof: #864c84; }
+    .region-spatial { --grass: #3b927f; --grass-dark: #1e564d; --path: #c9bd7c; --path-dark: #6a6337; --decor: #9a475f; --decor-light: #e08091; --token-bg: #e0f2bc; --castle-bg: #95b89d; --house-bg: #bddca8; --house-roof: #a2445d; }
+    .region-workflow { --grass: #507c8d; --grass-dark: #253f4b; --path: #d6c186; --path-dark: #71643c; --decor: #8a4838; --decor-light: #d98d68; --token-bg: #e9efc2; --castle-bg: #95a9a8; --house-bg: #c4d2b4; --house-roof: #8f4535; }
+    .region-teaching { --grass: #4d82a5; --grass-dark: #25435e; --path: #dbc77c; --path-dark: #716238; --decor: #77672d; --decor-light: #cfb85a; --token-bg: #e4ecaa; --castle-bg: #96add0; --house-bg: #bed4d8; --house-roof: #8d6b2f; }
+    .region-literature { --grass: #745aa0; --grass-dark: #392859; --path: #ccb27d; --path-dark: #6c5533; --decor: #6f7d37; --decor-light: #b6cc68; --token-bg: #e8dca1; --castle-bg: #aaa0bd; --house-bg: #d0c5ad; --house-roof: #6c7930; }
+    .region-text { --grass: #5d456c; --grass-dark: #2c2037; --path: #a98674; --path-dark: #584034; --decor: #35724b; --decor-light: #75bd72; --token-bg: #d9c7a0; --castle-bg: #7d6c88; --house-bg: #b49b92; --house-roof: #3b713e; }
+    .region-career { --grass: #9a5a67; --grass-dark: #58303d; --path: #d0b073; --path-dark: #735232; --decor: #2f735c; --decor-light: #71c28e; --token-bg: #f2d49a; --castle-bg: #ba9a92; --house-bg: #d8bc90; --house-roof: #347455; }
+    .region-lost { --grass: #29523d; --grass-dark: #152c23; --path: #b7975b; --path-dark: #5e4428; --decor: #1a6b45; --decor-light: #7bd080; --token-bg: #e8d899; --castle-bg: #789070; --house-bg: #c5b87b; --house-roof: #5a3b2a; }
+    .region-reef { --grass: #4e8c78; --grass-dark: #28564f; --path: #d4bc76; --path-dark: #6b5d36; --decor: #2f6f8f; --decor-light: #8be4d4; --token-bg: #d9efb0; --castle-bg: #89b39d; --house-bg: #b7d8a2; --house-roof: #32718c; }
+    .region-observatory { --grass: #394f80; --grass-dark: #1d2847; --path: #c2a56e; --path-dark: #665036; --decor: #8c7a48; --decor-light: #d9c66f; --token-bg: #e6dda0; --castle-bg: #7480aa; --house-bg: #aeb8c7; --house-roof: #6d5f37; }
+    .region-garden { --grass: #5e8745; --grass-dark: #304f2a; --path: #d8bf77; --path-dark: #735a33; --decor: #9a4f70; --decor-light: #e89bbe; --token-bg: #f2df99; --castle-bg: #a5b876; --house-bg: #d8ca8a; --house-roof: #8c4c62; }
+
+    /* ---- Zelda-mode terrain on top of game.css ---- */
+    body.zelda-mode {
+      background:
+        linear-gradient(180deg, #182040 0 18%, #2b5f8b 18% 19%, #203a2e 19% 100%);
+    }
+    body.zelda-mode .game-shell {
+      border-color:#18110b;
+      background:#d6b15f;
+      box-shadow:0 12px 0 rgba(0,0,0,.38), 0 0 0 6px #6b3c1e inset;
+    }
+    body.zelda-mode .hud {
+      grid-template-columns:minmax(220px,1fr) auto auto auto auto auto auto auto;
+      background:#b46a35;
+      color:#fff1c7;
+    }
+    body.zelda-mode .hud-chip {
+      background:#f3d37c;
+      color:#21150d;
+      box-shadow: inset -3px -3px 0 rgba(0,0,0,.24);
+    }
+    body.zelda-mode .hud-chip.region { background:#7fcf67; }
+    body.zelda-mode .panel {
+      grid-template-rows:auto auto auto minmax(0,1fr) auto;
+      background:#d49348;
+    }
+    body.zelda-mode .viewport::after {
+      content:"";
+      position:absolute;
+      inset:0;
+      pointer-events:none;
+      background:linear-gradient(rgba(255,255,255,.06) 0 1px, transparent 1px 4px);
+      opacity:.22;
+      z-index:160;
+      mix-blend-mode:soft-light;
+    }
+    .tile.mountain { background:#6b5a3e; box-shadow: inset 0 0 0 4px #46381f; }
+    .tile.mountain::after { content:""; position:absolute; left:4px; right:4px; bottom:3px; height:34px;
+      background:linear-gradient(135deg,#8a7550 0 46%,#5c4a30 50% 100%);
+      clip-path: polygon(50% 0, 100% 100%, 0 100%); }
+    .tile.shore:not(.article):not(.mountain):not(.water):not(.raft) {
+      box-shadow: inset 0 0 0 4px rgba(228, 193, 103, .86);
+    }
+    .tile.grass.flowers::before,
+    .tile.grass.ruin::before,
+    .tile.grass.crystal-field::before {
+      content:"";
+      position:absolute;
+      inset:9px;
+      pointer-events:none;
+    }
+    .tile.grass.flowers::before {
+      background:
+        radial-gradient(circle at 6px 7px,#ffdde8 0 2px,transparent 3px),
+        radial-gradient(circle at 22px 18px,#ffe36a 0 2px,transparent 3px),
+        radial-gradient(circle at 17px 5px,#f27dae 0 2px,transparent 3px);
+    }
+    .tile.grass.ruin::before {
+      left:8px; right:8px; top:12px; bottom:10px;
+      background:
+        linear-gradient(90deg,#6f6657 0 7px,transparent 7px 19px,#6f6657 19px 26px),
+        linear-gradient(#94866d 0 7px,transparent 7px);
+      box-shadow:0 4px 0 #51483c;
+    }
+    .tile.grass.crystal-field::before {
+      background:
+        linear-gradient(135deg,transparent 0 38%,#a7fff1 38% 55%,#2aa9c0 55% 72%,transparent 72%),
+        linear-gradient(45deg,transparent 0 42%,#f0d4ff 42% 58%,#7c58c9 58% 74%,transparent 74%);
+      filter:drop-shadow(0 0 3px #82fff0);
+    }
+    .tile.raft { background:
+      linear-gradient(135deg, transparent 0 35%, rgba(255,255,255,.30) 35% 44%, transparent 44%),
+      #3f8fc7; box-shadow: inset 0 0 0 4px #2669a5; }
+    .tile.raft::after { content:""; position:absolute; left:7px; right:7px; top:11px; height:24px;
+      background:linear-gradient(#a96b3c,#7c4a24); border:2px solid #5a3418; border-radius:5px 5px 10px 10px;
+      box-shadow: inset 0 3px 0 rgba(255,255,255,.18); }
+    .tile.dungeon-floor { background:#2a2433; box-shadow: inset 0 0 0 2px #211b29; }
+    .tile.dungeon-floor::after { content:""; position:absolute; inset:0;
+      background:linear-gradient(90deg, transparent 0 22px, rgba(255,255,255,.04) 22px 24px, transparent 24px),
+                 linear-gradient(0deg, transparent 0 22px, rgba(0,0,0,.20) 22px 24px, transparent 24px);
+      pointer-events:none; }
+    .tile.dungeon-wall  { background:#15121d; box-shadow: inset 0 0 0 4px #0b0913; }
+    .tile.cave, .tile.stairs { background:#1a1626; }
+    .tile.cave::after { content:""; position:absolute; left:11px; right:11px; top:9px; bottom:0;
+      background:#000; border-radius:18px 18px 0 0; box-shadow: inset 0 0 0 3px #d8b85e; }
+    /* shimmer played on the dungeon mouth the moment the last relic is found */
+    .tile.just-revealed { animation: tile-reveal 1.1s ease-out; z-index:3; }
+    @keyframes tile-reveal {
+      0%   { transform: scale(0.2); opacity: 0; filter: brightness(2.4); box-shadow: 0 0 0 0 rgba(216,184,94,.9); }
+      45%  { transform: scale(1.18); opacity: 1; filter: brightness(1.8); box-shadow: 0 0 26px 10px rgba(216,184,94,.85); }
+      100% { transform: scale(1); opacity: 1; filter: brightness(1); box-shadow: 0 0 0 0 rgba(216,184,94,0); }
+    }
+    .tile.stairs::after { content:""; position:absolute; inset:7px;
+      background:repeating-linear-gradient(180deg,#d8c8a0 0 6px,#9a8a64 6px 12px); box-shadow: inset 0 0 0 3px #5a4a30; }
+    body.in-dungeon { background:#0a0710; }
+    body.in-dungeon .viewport { background:#0a0710; }
+    /* the cat rides a little boat while on a raft tile */
+    .avatar.on-boat::before { content:""; position:absolute; left:4px; right:4px; bottom:1px; height:14px;
+      background:linear-gradient(#a96b3c,#7c4a24); border:2px solid #5a3418; border-radius:5px 5px 11px 11px; z-index:1; }
+
+    .gremlin.shooter { filter: hue-rotate(200deg) saturate(1.5) drop-shadow(0 0 5px #ff7a1a) drop-shadow(0 0 2px #ffb347); }
+    .gremlin.swimmer { filter: drop-shadow(0 0 5px #2bd0ff) drop-shadow(0 0 2px #2bffea); }
+    .tile.sign, .tile.chest, .tile.shrine, .tile.obelisk, .tile.gate, .tile.sword, .tile.old-man, .tile.bow {
+      background:
+        radial-gradient(circle at 14px 14px, rgba(0,0,0,.18) 0 2px, transparent 3px),
+        var(--path);
+      box-shadow: inset 0 0 0 3px var(--path-dark);
+    }
+    .tile.sign::after { content:""; position:absolute; left:16px; top:9px; width:18px; height:16px;
+      background:#c08a45; border:3px solid #4d2f18; box-shadow:0 15px 0 -5px #4d2f18; }
+    .tile.chest::after { content:""; position:absolute; left:9px; right:9px; top:16px; height:20px;
+      background:linear-gradient(#d9a44e 0 45%,#8c5426 45% 100%); border:3px solid #3d2412;
+      box-shadow: inset 0 4px 0 rgba(255,255,255,.25); }
+    .tile.chest::before { content:""; position:absolute; left:21px; top:24px; width:7px; height:7px; background:#ffe16a; z-index:1; }
+    .tile.chest.opened::after { background:linear-gradient(#4c2f1a 0 45%,#8c5426 45% 100%); }
+    .tile.shrine::after, .tile.obelisk::after, .tile.gate::after { content:""; position:absolute; left:12px; right:12px; top:7px; bottom:6px; }
+    .tile.shrine::after { background:linear-gradient(#f2d783,#a07035); border:3px solid #503316; clip-path:polygon(50% 0,100% 34%,80% 100%,20% 100%,0 34%); }
+    .tile.obelisk::after { background:linear-gradient(135deg,#bfb7d9,#5b537d); border:3px solid #21182d; clip-path:polygon(50% 0,82% 18%,72% 100%,28% 100%,18% 18%); box-shadow:0 0 8px #a7fff1; }
+    .tile.gate::after { background:radial-gradient(ellipse at 50% 70%,#07040b 0 42%,#7a5ac6 43% 56%,#d2c3ff 57% 66%,transparent 67%); }
+    .tile.sword::after { content:""; position:absolute; left:18px; top:4px; width:10px; height:34px;
+      background:linear-gradient(#fff 0 12%,#dfe8ff 12% 68%,#425172 68% 78%,#b67b35 78% 100%);
+      border:2px solid #241812; box-shadow:0 0 8px rgba(255,238,160,.75);
+      clip-path:polygon(50% 0,100% 18%,78% 70%,100% 70%,100% 82%,66% 82%,66% 100%,34% 100%,34% 82%,0 82%,0 70%,22% 70%,0 18%); }
+    .tile.sword.opened::after { opacity:.35; box-shadow:none; }
+    .tile.old-man {
+      background:
+        radial-gradient(circle at 14px 37px, rgba(255,196,76,.45) 0 3px, transparent 4px),
+        radial-gradient(circle at 34px 37px, rgba(255,196,76,.38) 0 3px, transparent 4px),
+        #2a2433;
+      box-shadow: inset 0 0 0 3px #211b29;
+    }
+    .tile.old-man::before { content:""; position:absolute; left:6px; right:6px; bottom:4px; height:8px;
+      background:rgba(0,0,0,.28); border-radius:50%; }
+    .old-man-sprite {
+      position:absolute;
+      left:7px;
+      top:2px;
+      width:34px;
+      height:43px;
+      image-rendering:pixelated;
+      filter:drop-shadow(0 3px 0 rgba(0,0,0,.42));
+      z-index:1;
+    }
+    .tile.bow::after { content:""; position:absolute; left:7px; right:7px; top:8px; bottom:8px;
+      background:
+        radial-gradient(ellipse at 22px 16px, transparent 0 11px, #5b3118 12px 15px, transparent 16px),
+        linear-gradient(90deg, transparent 0 12px, #ffe6a3 12px 17px, transparent 17px),
+        linear-gradient(45deg, transparent 0 40%, #d08b38 40% 48%, transparent 48%);
+      border-left:4px solid #5b3118;
+      border-radius:24px;
+      box-shadow:0 0 8px rgba(255,224,120,.70); }
+    .tile.bow::before { content:""; position:absolute; left:21px; top:9px; width:5px; height:30px;
+      background:linear-gradient(#fff4c2,#d8993c); box-shadow:5px 7px 0 -1px #3d2412; z-index:1; }
+    .tile.bow.opened::before, .tile.bow.opened::after { opacity:.35; box-shadow:none; }
+    .quest-log {
+      padding:12px 14px;
+      border-bottom:4px solid var(--ink);
+      background:#c7833a;
+    }
+    .quest-row {
+      display:grid;
+      grid-template-columns:auto 1fr;
+      gap:8px;
+      align-items:center;
+      font-size:.78rem;
+      font-weight:900;
+      text-transform:uppercase;
+    }
+    .quest-row span {
+      border:2px solid var(--ink);
+      background:#f3d37c;
+      padding:2px 5px;
+    }
+    .relic-list {
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:5px;
+      margin:10px 0;
+    }
+    .relic {
+      min-height:24px;
+      border:2px solid var(--ink);
+      background:#6b5f53;
+      color:#eadfc2;
+      padding:3px 5px;
+      font-size:.68rem;
+      font-weight:900;
+      text-transform:uppercase;
+      overflow:hidden;
+      text-overflow:ellipsis;
+      white-space:nowrap;
+    }
+    .relic.collected {
+      background:#f3d37c;
+      color:#21150d;
+      box-shadow:inset -3px -3px 0 rgba(0,0,0,.2);
+    }
+    .minimap {
+      display:grid;
+      width:max-content;
+      max-width:100%;
+      border:3px solid var(--ink);
+      background:#111;
+      overflow:hidden;
+    }
+    .mini-cell { width:4px; height:4px; background:#16243b; }
+    .mini-cell.land { background:#557b43; }
+    .mini-cell.water { background:#23699b; }
+    .mini-cell.wall { background:#07060a; }
+    .mini-cell.floor { background:#4b4258; }
+    .mini-cell.article { background:#f2d45d; }
+    .mini-cell.special { background:#f07a48; }
+    .mini-cell.current { background:#fff; box-shadow:0 0 0 1px #111 inset; }
+    .shot { position:absolute; top:0; left:0; z-index:101; width:var(--tile); height:var(--tile);
+      pointer-events:none; transition: transform 140ms linear; will-change:transform; }
+    .shot::after { content:""; position:absolute; left:50%; top:50%; width:15px; height:15px;
+      transform:translate(-50%,-50%);
+      background:radial-gradient(circle at 38% 32%, #fff 0 2px, #ff5a2c 3px 6px, #b51d0f 7px);
+      border-radius:50%; box-shadow:0 0 7px #ff6a3c; }
+    .arrow { position:absolute; top:0; left:0; z-index:102; width:var(--tile); height:var(--tile);
+      pointer-events:none; transition: transform 115ms linear; will-change:transform; }
+    .arrow::after { content:""; position:absolute; left:50%; top:50%; width:28px; height:10px;
+      transform:translate(-50%,-50%);
+      background:linear-gradient(90deg,#7a4a22 0 7px,#f6d37c 7px 22px,#fff4c2 22px 100%);
+      clip-path:polygon(0 36%,70% 36%,70% 0,100% 50%,70% 100%,70% 64%,0 64%);
+      filter:drop-shadow(0 0 3px rgba(255,236,150,.75)); }
+    .arrow-left::after { transform:translate(-50%,-50%) rotate(180deg); }
+    .arrow-up::after { transform:translate(-50%,-50%) rotate(-90deg); }
+    .arrow-down::after { transform:translate(-50%,-50%) rotate(90deg); }
+    @media (max-width: 760px) {
+      body.zelda-mode .hud { grid-template-columns:1fr; }
+      .relic-list { grid-template-columns:1fr; }
+    }
+  </style>
+</head>
+<body class="zelda-mode">
+  <main class="page">
+    <section class="game-shell" aria-label="Social media world adventure mode">
+      <header class="hud">
+        <h1>Social Media World</h1>
+        <div class="hud-chip region" id="region-chip">Overworld</div>
+        <div class="hud-chip" id="visited-chip">0 / 0 read</div>
+        <div class="hud-chip" id="relic-chip">0 / 4 relics</div>
+        <div class="hud-chip" id="item-chip">Bow: hidden</div>
+        <div class="hud-chip">Arrows: move</div>
+        <div class="hud-chip">Enter: open/take</div>
+        <div class="hud-chip">Space / double-tap: fire</div>
+      </header>
+
+      <button class="mobile-title-bar" id="mobile-title-bar" type="button" aria-live="polite">
+        <span class="mtb-region" id="mtb-region">Overworld</span>
+        <span class="mtb-title" id="mtb-title">Walk onto a post to read it</span>
+        <span class="mtb-action" id="mtb-action"></span>
+        <span class="mtb-details" id="mtb-details">
+          <span class="mtb-date" id="mtb-date"></span>
+          <span class="mtb-summary" id="mtb-summary"></span>
+        </span>
+      </button>
+
+      <div class="game-area">
+        <section class="viewport" id="viewport" aria-label="Overworld map">
+          <div class="world" id="world" tabindex="0">
+            <div class="map-grid" id="map-grid"></div>
+            <div class="avatar" id="avatar" aria-hidden="true">
+              <svg class="cat-sprite" viewBox="0 0 16 16" aria-hidden="true">
+                <rect x="4" y="1" width="2" height="2" fill="#241812"></rect>
+                <rect x="10" y="1" width="2" height="2" fill="#241812"></rect>
+                <rect x="3" y="2" width="4" height="2" fill="#241812"></rect>
+                <rect x="9" y="2" width="4" height="2" fill="#241812"></rect>
+                <rect x="4" y="2" width="2" height="2" fill="#f3a944"></rect>
+                <rect x="10" y="2" width="2" height="2" fill="#f3a944"></rect>
+                <rect x="3" y="4" width="10" height="7" fill="#241812"></rect>
+                <rect x="4" y="5" width="8" height="5" fill="#f3a944"></rect>
+                <rect x="5" y="6" width="1" height="2" fill="#241812"></rect>
+                <rect x="10" y="6" width="1" height="2" fill="#241812"></rect>
+                <rect x="7" y="8" width="2" height="1" fill="#241812"></rect>
+                <rect x="5" y="10" width="6" height="1" fill="#ffe3a2"></rect>
+                <rect x="4" y="11" width="8" height="3" fill="#241812"></rect>
+                <rect x="5" y="11" width="6" height="2" fill="#e99433"></rect>
+                <rect x="2" y="10" width="3" height="2" fill="#241812"></rect>
+                <rect x="2" y="9" width="2" height="2" fill="#e99433"></rect>
+                <rect x="12" y="10" width="3" height="2" fill="#241812"></rect>
+                <rect x="12" y="9" width="2" height="2" fill="#e99433"></rect>
+                <rect x="4" y="14" width="3" height="1" fill="#241812"></rect>
+                <rect x="9" y="14" width="3" height="1" fill="#241812"></rect>
+              </svg>
+            </div>
+          </div>
+        </section>
+
+        <aside class="panel" aria-live="polite">
+          <section class="card">
+            <span class="kind" id="kind">Overworld</span>
+            <h2 id="title">The Social Media World</h2>
+            <div class="date" id="date">An experiment</div>
+            <p class="summary" id="summary">A broken archipelago of posts, shrines, ruins, cave stairs, eastern wilds, and southern margins. Visit the old man's starter cave for the bow, then wander the longer loops and go all the way south and around to find the Text &amp; Social Media dungeon.</p>
+          </section>
+
+          <section class="controls">
+            <p id="location">Overworld</p>
+            <div class="dpad" aria-label="On-screen movement controls">
+              <button class="up" type="button" data-move="0,-1" aria-label="Move up">^</button>
+              <button class="left" type="button" data-move="-1,0" aria-label="Move left">&lt;</button>
+              <button class="right" type="button" data-move="1,0" aria-label="Move right">&gt;</button>
+              <button class="down" type="button" data-move="0,1" aria-label="Move down">v</button>
+            </div>
+          </section>
+
+          <section class="quest-log" aria-label="Quest log">
+            <div class="quest-row">
+              <span>Quest</span>
+              <strong id="quest-title">Wake the archive shrines</strong>
+            </div>
+            <div class="relic-list" id="relic-list"></div>
+            <div class="minimap" id="minimap" aria-hidden="true"></div>
+          </section>
+
+          <section class="legend" id="legend" aria-label="Jump to a post"></section>
+
+          <section class="actions">
+            <a class="open-link disabled" href="#" id="open-link">Open post</a>
+            <p class="status" id="status">Explore the archive. Posts open on LinkedIn.</p>
+          </section>
+        </aside>
+      </div>
+    </section>
+    <a class="float-open" id="float-open" href="#" aria-label="Open current post">Open &#8599;</a>
+    <div class="catch-flash" id="catch-flash" aria-hidden="true"></div>
+  </main>
+
+  <script>
+
+(function () {
+  "use strict";
+
+  const PAGE_BASE = "";
+  const REGIONS = [
+      {"id": "gateway", "name": "Gateway", "x0": 2, "y0": 2, "x1": 4, "y1": 4},
+      {"id": "dimred", "name": "Dimensionality Reduction", "x0": 13, "y0": 2, "x1": 23, "y1": 10},
+      {"id": "cluster", "name": "Clustering & Gating", "x0": 26, "y0": 2, "x1": 32, "y1": 8},
+      {"id": "aibfx", "name": "AI-Assisted Bioinformatics", "x0": 2, "y0": 13, "x1": 10, "y1": 21},
+      {"id": "foundation", "name": "Foundation Models", "x0": 13, "y0": 13, "x1": 19, "y1": 17},
+      {"id": "spatial", "name": "Spatial & Multimodal", "x0": 26, "y0": 13, "x1": 32, "y1": 19},
+      {"id": "workflow", "name": "Workflow & QC", "x0": 2, "y0": 24, "x1": 8, "y1": 30},
+      {"id": "teaching", "name": "Teaching", "x0": 13, "y0": 24, "x1": 19, "y1": 30},
+      {"id": "literature", "name": "Literature & Trends", "x0": 26, "y0": 24, "x1": 30, "y1": 28},
+      {"id": "text", "name": "Text & Social Media", "x0": 2, "y0": 33, "x1": 8, "y1": 37},
+      {"id": "career", "name": "Career & Consulting", "x0": 13, "y0": 33, "x1": 15, "y1": 35},
+      {"id": "lost", "name": "Lost Methods Woods", "x0": 36, "y0": 3, "x1": 50, "y1": 16},
+      {"id": "reef", "name": "Question Reef", "x0": 37, "y0": 18, "x1": 53, "y1": 31},
+      {"id": "observatory", "name": "Citation Observatory", "x0": 17, "y0": 40, "x1": 34, "y1": 53},
+      {"id": "garden", "name": "Margin Gardens", "x0": 2, "y0": 41, "x1": 14, "y1": 53},
+    ];
+  const POSTS = [
+      {"id": "exit-portal", "region": "gateway", "x": 3, "y": 3, "kind": "portal", "kindLabel": "Portal", "token": "<<", "title": "Back to Tyler's World", "date": "Portal", "url": "game_mode.html#cat=42,13", "excludeFromWarp": true, "summary": "Leave the Social Media World and warp back to the Social Media Posts gateway in the main overworld."},
+      {"id": "dimred-0", "region": "dimred", "x": 14, "y": 3, "kind": "castle", "token": "KS", "title": "KNN Sleepwalk Dash app", "date": "September 4, 2025", "url": "https://www.linkedin.com/posts/tylerjburns_hi-friends-i-finally-after-several-years-activity-7369363128763002882-VdIM?utm_source=share&utm_medium=member_desktop&rcm=ACoAAAbP8M8BYXs_UknoBHnmw2rZ-aRDTJF7L3Y", "summary": "Hi friends, I finally (after several years) turned my KnnSleepwalk package into a web app that anyone can use with a single click."},
+      {"id": "dimred-1", "region": "dimred", "x": 16, "y": 3, "kind": "essay", "token": "KSS", "title": "KNN Sleepwalk for spatial: Xenium", "date": "June 18, 2025", "url": "https://www.linkedin.com/posts/tylerjburns_below-is-a-quick-way-to-get-hover-linked-activity-7341093015492485120-j-lq?utm_source=share&utm_medium=member_desktop&rcm=ACoAAAbP8M8BYXs_UknoBHnmw2rZ-aRDTJF7L3Y", "summary": "Below is a quick way to get hover-linked interaction between UMAP coordinates (or similar) and XY coordinates for your spatial data to see…"},
+      {"id": "dimred-2", "region": "dimred", "x": 18, "y": 3, "kind": "essay", "token": "KS2", "title": "KNN Sleepwalk for spatial: IMC", "date": "June 4, 2025", "url": "https://www.linkedin.com/posts/tylerjburns_spatialtranscriptomics-spatialbiology-activity-7336012823308689409-3h3c?utm_source=share&utm_medium=member_desktop&rcm=ACoAAAbP8M8BYXs_UknoBHnmw2rZ-aRDTJF7L3Y", "summary": "You can now use my KnnSleepwalk package to interrogate your spatial data."},
+      {"id": "dimred-3", "region": "dimred", "x": 20, "y": 3, "kind": "essay", "token": "KSC", "title": "KNN Sleepwalk colored by ranks", "date": "May 21, 2025", "url": "https://www.linkedin.com/posts/tylerjburns_umap-shuffles-nearest-neighbor-rank-check-activity-7330937919156760578-VTee?utm_source=share&utm_medium=member_desktop&rcm=ACoAAAbP8M8BYXs_UknoBHnmw2rZ-aRDTJF7L3Y", "summary": "UMAP shuffles nearest neighbor rank. Check out David Novak's update to my KNN Sleepwalk package, which shows this."},
+      {"id": "dimred-4", "region": "dimred", "x": 22, "y": 3, "kind": "essay", "token": "OK", "title": "Original KNN sleepwalk reveal", "date": "November 16, 2022", "url": "https://www.linkedin.com/posts/tylerjburns_do-you-need-quick-and-easy-intuition-around-activity-6998611378068430848-BSrt?utm_source=share&utm_medium=member_desktop", "summary": "Do you need quick and easy intuition around how exact your single-cell embeddings are?"},
+      {"id": "dimred-5", "region": "dimred", "x": 14, "y": 5, "kind": "essay", "token": "KSB", "title": "KNN sleepwalk: Biaxial-UMAP interface", "date": "April 8, 2024", "url": "https://www.linkedin.com/posts/tylerjburns_flowcytof-users-and-leaders-have-you-ever-activity-7183087620942356480-hAHz?utm_source=share&utm_medium=member_desktop", "summary": "Flow/CyTOF users and leaders: have you ever wanted to know exactly where a cell on a biaxial plot is on a corresponding UMAP and vice…"},
+      {"id": "dimred-6", "region": "dimred", "x": 16, "y": 5, "kind": "house", "token": "KST", "title": "KNN sleepwalk: Two UMAPs in light of All of Us research program controversy", "date": "March 1, 2024", "url": "https://www.linkedin.com/posts/tylerjburns_in-light-of-recent-scrutiny-around-umap-activity-7169341694348324865-sCmq?utm_source=share&utm_medium=member_desktop", "summary": "In light of recent scrutiny around UMAP, coming from its controversial use in the All of Us Research Program, I refactored my KNN Sleepwalk…"},
+      {"id": "dimred-7", "region": "dimred", "x": 18, "y": 5, "kind": "essay", "token": "KS7", "title": "KFN sleepwalk, two UMAPs", "date": "April 2, 2024", "url": "https://www.linkedin.com/posts/tylerjburns_one-way-to-understand-how-much-global-information-activity-7180898836213620736-lXIX?utm_source=share&utm_medium=member_desktop", "summary": "One way to understand how much global information UMAP can (and cannot) preserve: look at the K-farthest neighbors (KFN) of cells in UMAP…"},
+      {"id": "dimred-8", "region": "dimred", "x": 20, "y": 5, "kind": "essay", "token": "KS8", "title": "KFN sleepwalk, t-SNE and UMAP", "date": "January 25, 2023", "url": "https://www.linkedin.com/posts/tylerjburns_as-requested-here-are-the-k-farthest-neighbors-activity-7024009354307588096-ghUg?utm_source=share&utm_medium=member_desktop", "summary": "As requested, here are the k-farthest neighbors of a CyTOF dataset side-by-side between t-SNE and UMAP."},
+      {"id": "dimred-9", "region": "dimred", "x": 22, "y": 5, "kind": "essay", "token": "KS9", "title": "KFN sleepwalk, t-SNE", "date": "January 18, 2023", "url": "https://www.linkedin.com/posts/tylerjburns_the-k-farthest-neighbors-of-a-cytof-dataset-activity-7021519004338958338-Q9rl?utm_source=share&utm_medium=member_desktop", "summary": "The k-farthest neighbors of a CyTOF dataset, visualized on a t-SNE map, are all over the place."},
+      {"id": "dimred-10", "region": "dimred", "x": 14, "y": 7, "kind": "essay", "token": "KO", "title": "KFN overlap as a metric for evaluating global preservation for embeddings", "date": "January 12, 2023", "url": "https://www.linkedin.com/posts/tylerjburns_heres-an-interesting-metric-i-developed-activity-7019326037322825728-3jY-?utm_source=share&utm_medium=member_desktop", "summary": "Here's an interesting metric I developed to get at global structure preservation of high-dimensional data in a low-dimensional embedding:…"},
+      {"id": "dimred-11", "region": "dimred", "x": 16, "y": 7, "kind": "essay", "token": "KB", "title": "A KNN based solution to viewing data on a UMAP where one condition is \"sitting on top of\" the other", "date": "June 20, 2023", "url": "https://www.linkedin.com/posts/tylerjburns_in-my-single-cell-sequencing-work-i-sometimes-activity-7076888734289289216-oP-4?utm_source=share&utm_medium=member_desktop", "summary": "In my single-cell sequencing work, I sometimes come across visualizations where there are two conditions stacked onto a UMAP in two…"},
+      {"id": "dimred-12", "region": "dimred", "x": 18, "y": 7, "kind": "essay", "token": "FC", "title": "Following a cell's position across multiple t-SNE and UMAP runs", "date": "April 14, 2025", "url": "https://www.linkedin.com/posts/tylerjburns_if-you-run-t-sne-or-umap-multiple-times-activity-7317539109864890369-xg0A?utm_source=share&utm_medium=member_desktop&rcm=ACoAAAbP8M8BYXs_UknoBHnmw2rZ-aRDTJF7L3Y", "summary": "If you run t-SNE or UMAP multiple times, you can see the maps change. To properly use these tools, you need to run them more than once."},
+      {"id": "dimred-13", "region": "dimred", "x": 20, "y": 7, "kind": "house", "token": "TS", "title": "t-SNE and UMAP exist on a spectrum", "date": "May 28, 2024", "url": "https://www.linkedin.com/posts/tylerjburns_in-reviewing-the-recent-seeing-data-as-t-sne-activity-7201194319930675201-YFrF?utm_source=share&utm_medium=member_desktop", "summary": "In reviewing the recent \"Seeing data as t-SNE and UMAP do\" paper, I found out that t-SNE and UMAP are on a spectrum. Let me explain:"},
+      {"id": "dimred-14", "region": "dimred", "x": 22, "y": 7, "kind": "essay", "token": "GR", "title": "Gif of running t-SNE over and over, ordered by image similarity", "date": "February 9, 2023", "url": "https://www.linkedin.com/posts/tylerjburns_as-requested-here-are-100-t-sne-runs-in-activity-7029475365689380864-GZvE?utm_source=share&utm_medium=member_desktop", "summary": "As requested, here are 100 t-SNE runs in a row for CyTOF data ordered by image similarity."},
+      {"id": "dimred-15", "region": "dimred", "x": 14, "y": 9, "kind": "essay", "token": "GP", "title": "Gif of progressively adding noisy dimensions to t-SNE", "date": "March 7, 2023", "url": "https://www.linkedin.com/posts/tylerjburns_if-you-have-one-or-two-bad-markers-in-your-activity-7038805627606814720-ybsS?utm_source=share&utm_medium=member_desktop", "summary": "If you have one or two bad markers in your panel (noise), does it completely ruin your t-SNE/UMAP visualizations?"},
+      {"id": "dimred-16", "region": "dimred", "x": 16, "y": 9, "kind": "essay", "token": "GRT", "title": "Gif of running t-SNE and UMAP over and over", "date": "February 8, 2023", "url": "https://www.linkedin.com/posts/tylerjburns_run-t-sne-and-umap-on-cytof-data-100-times-activity-7029143066804420609-UsDZ?utm_source=share&utm_medium=member_desktop", "summary": "Run t-SNE and UMAP on CyTOF data 100 times in a row. How much does the island placement for each map vary from the previous one?"},
+      {"id": "dimred-17", "region": "dimred", "x": 18, "y": 9, "kind": "essay", "token": "GPA", "title": "Gif of progressively adding noisy dimensions to UMAP", "date": "March 14, 2023", "url": "https://www.linkedin.com/posts/tylerjburns_umap-on-noisy-non-trajectory-data-looks-like-activity-7041404193252737026-Zx-_?utm_source=share&utm_medium=member_desktop", "summary": "UMAP on noisy non-trajectory data looks like a trajectory. I add one noisy dimension to whole blood CyTOF data, run UMAP, add another noise…"},
+      {"id": "dimred-18", "region": "dimred", "x": 20, "y": 9, "kind": "essay", "token": "CC", "title": "Comparing Color Palettes for scRNA-seq Data Visualization: The Case for Viridis as a Default", "date": "January 27, 2025", "url": "https://www.linkedin.com/posts/tylerjburns_the-case-for-viridis-activity-7289648023238811648-Qh8o?utm_source=share&utm_medium=member_desktop", "summary": "TL;DR: use the viridis color palette for your single-cell data to improve interpretability and colorblind accessibility."},
+      {"id": "dimred-19", "region": "dimred", "x": 22, "y": 9, "kind": "essay", "token": "CCP", "title": "Cytobank color palette for Seurat's FeaturePlot", "date": "January 22, 2025", "url": "https://www.linkedin.com/posts/tylerjburns_flowcytof-users-who-are-now-doing-single-cell-activity-7287826621862940672-Iv0E?utm_source=share&utm_medium=member_desktop", "summary": "Flow/CyTOF users who are now doing single-cell sequencing analysis: I created the blue-to-red color palette (eg."},
+      {"id": "cluster-0", "region": "cluster", "x": 27, "y": 3, "kind": "castle", "token": "PF", "title": "Pareto fronts for cluster benchmarking", "date": "September 16, 2025", "url": "https://www.linkedin.com/posts/tylerjburns_in-light-of-recent-benchmarking-work-ive-activity-7373737973080731648-ImSh?utm_source=share&utm_medium=member_desktop&rcm=ACoAAAbP8M8BYXs_UknoBHnmw2rZ-aRDTJF7L3Y", "summary": "In light of recent benchmarking work I've been doing, I was introduced to a paper that uses Pareto fronts to look at multiple metrics,…"},
+      {"id": "cluster-1", "region": "cluster", "x": 29, "y": 3, "kind": "essay", "token": "LV", "title": "Louvain versus Leiden cluster stability in Seurat", "date": "November 19, 2025", "url": "https://www.linkedin.com/posts/tylerjburns_you-may-have-noticed-the-emergence-of-leiden-activity-7396949129756721153--CwY?utm_source=share&utm_medium=member_desktop&rcm=ACoAAAbP8M8BYXs_UknoBHnmw2rZ-aRDTJF7L3Y", "summary": "You may have noticed the emergence of Leiden clustering (as opposed to Louvain clustering) a few years ago in single-cell analysis."},
+      {"id": "cluster-2", "region": "cluster", "x": 31, "y": 3, "kind": "essay", "token": "CA", "title": "Cells at the boundary of two clusters", "date": "May 14, 2025", "url": "https://www.linkedin.com/posts/tylerjburns_ever-wonder-if-a-boundary-cell-in-a-clustering-activity-7328409514074857472-Op_5?utm_source=share&utm_medium=member_desktop&rcm=ACoAAAbP8M8BYXs_UknoBHnmw2rZ-aRDTJF7L3Y", "summary": "Ever wonder if a \"boundary\" cell in a clustering scheme really fits its assigned cluster, versus the adjacent cluster?"},
+      {"id": "cluster-3", "region": "cluster", "x": 27, "y": 5, "kind": "essay", "token": "CS", "title": "Cluster stability as an evaluation metric for your clustering scheme's performance on single-cell data", "date": "March 17, 2025", "url": "https://www.linkedin.com/feed/update/urn:li:activity:7307398833943011328/", "summary": "Cluster stability as an evaluation metric for your clustering scheme's performance on single-cell data:"},
+      {"id": "cluster-4", "region": "cluster", "x": 29, "y": 5, "kind": "essay", "token": "CSV", "title": "Cluster stability visualization", "date": "May 21, 2024", "url": "https://www.linkedin.com/posts/tylerjburns_when-you-cluster-your-single-cell-data-do-activity-7198660249229127682-sWlv?utm_source=share&utm_medium=member_desktop", "summary": "When you cluster your single-cell data, do you run it multiple times to check for consistency? You should."},
+      {"id": "cluster-5", "region": "cluster", "x": 31, "y": 5, "kind": "essay", "token": "GF", "title": "GigaSOM: FlowSOM in Julia for larger datasets", "date": "August 22, 2023", "url": "https://www.linkedin.com/posts/tylerjburns_facing-challenges-with-analyzing-large-flow-activity-7099769574782324736-vjnv?utm_source=share&utm_medium=member_desktop", "summary": "Facing challenges with analyzing large flow and mass cytometry datasets?"},
+      {"id": "cluster-6", "region": "cluster", "x": 27, "y": 7, "kind": "house", "token": "HX", "title": "How X-shift works", "date": "July 19, 2023", "url": "https://www.linkedin.com/posts/tylerjburns_i-wanted-to-highlight-a-clustering-method-activity-7087382242867470336-pUbG?utm_source=share&utm_medium=member_desktop", "summary": "I wanted to highlight a clustering method specialized in rare subset detection that in my opinion is under-explored with respect to newer,…"},
+      {"id": "cluster-7", "region": "cluster", "x": 29, "y": 7, "kind": "essay", "token": "WH", "title": "What happens when you run SPADE on random input", "date": "November 29, 2022", "url": "https://www.linkedin.com/posts/tylerjburns_flow-cytometry-and-cytof-users-here-is-a-activity-7003308800543711232-eAEx?utm_source=share&utm_medium=member_desktop", "summary": "Flow cytometry and CyTOF users: here is a SPADE tree produced from 30 dimensions of random noise."},
+      {"id": "cluster-8", "region": "cluster", "x": 31, "y": 7, "kind": "essay", "token": "SM", "title": "Survey March 2024, most are not using but are interested in autogating", "date": "February 26, 2024", "url": "https://www.linkedin.com/posts/tylerjburns_automated-gating-autogating-has-been-a-activity-7167877080360206336-dDlD?utm_source=share&utm_medium=member_desktop", "summary": "Automated gating (autogating) has been a topic of discussion for many years, but more recently I'm seeing it in the major flow/cytof…"},
+      {"id": "aibfx-0", "region": "aibfx", "x": 3, "y": 14, "kind": "castle", "token": "CCE", "title": "Claude Code experiments for manual gating, part 2", "date": "One of the metrics I have been tracking for agentic AI is \"can it gate my cells?\" Here is a followup on my previous manual gating experiment, with Opus 4.7 instead of Opus 4.6.", "url": "https://www.linkedin.com/posts/tylerjburns_one-of-the-metrics-i-have-been-tracking-for-activity-7462852276383162369-Yzld?utm_source=share&utm_medium=member_desktop&rcm=ACoAAAbP8M8BYXs_UknoBHnmw2rZ-aRDTJF7L3Y", "summary": "The task: give an AI agent an 86,864-event CyTOF bone marrow dataset, a manual gating strategy, QA requirements, and ask it to write and…"},
+      {"id": "aibfx-1", "region": "aibfx", "x": 5, "y": 14, "kind": "essay", "token": "LC", "title": "LLM CyTOF clustering algorithm choices", "date": "March 13, 2026", "url": "https://www.linkedin.com/posts/tylerjburns_hi-friends-in-light-of-recent-llm-bioinformatics-activity-7438223292014018560-1U9U?utm_source=share&utm_medium=member_desktop&rcm=ACoAAAbP8M8BYXs_UknoBHnmw2rZ-aRDTJF7L3Y", "summary": "Hi friends, in light of recent LLM bioinformatics \"design choice\" experiments I've been doing, I asked a simpler question: if I prompt a…"},
+      {"id": "aibfx-2", "region": "aibfx", "x": 7, "y": 14, "kind": "essay", "token": "LG", "title": "LLM-generated CyTOF data properties", "date": "March 2, 2026", "url": "https://www.linkedin.com/posts/tylerjburns_hi-friends-in-light-of-recent-experiments-activity-7434239530603483137-TDRH?utm_source=share&utm_medium=member_desktop&rcm=ACoAAAbP8M8BYXs_UknoBHnmw2rZ-aRDTJF7L3Y", "summary": "Hi friends, in light of recent experiments showing people \"pulling data\" from LLMs, I decided to see if I could pull the Samusik CyTOF…"},
+      {"id": "aibfx-3", "region": "aibfx", "x": 9, "y": 14, "kind": "essay", "token": "CC2", "title": "Claude Code experiments for manual gating", "date": "February 2, 2026", "url": "https://www.linkedin.com/posts/tylerjburns_hi-friends-here-is-what-happens-when-i-context-activity-7424088272919965696-54Gz?utm_source=share&utm_medium=member_desktop&rcm=ACoAAAbP8M8BYXs_UknoBHnmw2rZ-aRDTJF7L3Y", "summary": "Hi friends, here is what happens when I context engineer Claude Code to do manual gating for CyTOF data."},
+      {"id": "aibfx-4", "region": "aibfx", "x": 3, "y": 16, "kind": "essay", "token": "AA", "title": "Agentic AI for analyzing CyTOF data", "date": "January 26, 2026", "url": "https://www.linkedin.com/posts/tylerjburns_hi-friends-following-my-previous-work-on-activity-7421554989552254978-0WpC?utm_source=share&utm_medium=member_desktop&rcm=ACoAAAbP8M8BYXs_UknoBHnmw2rZ-aRDTJF7L3Y", "summary": "Hi friends, following my previous work on LLM design choices in CyTOF analysis, I re-ran the experiments with agentic coding tools: Claude…"},
+      {"id": "aibfx-5", "region": "aibfx", "x": 5, "y": 16, "kind": "essay", "token": "LM", "title": "LLM make-it-better experiment for UMAP plotting", "date": "November 6, 2025", "url": "https://www.linkedin.com/posts/tylerjburns_can-you-use-llms-to-create-self-refactoring-activity-7392201680521560064-IIQm?utm_source=share&utm_medium=member_desktop&rcm=ACoAAAbP8M8BYXs_UknoBHnmw2rZ-aRDTJF7L3Y", "summary": "Can you use LLM's to create self-refactoring code? Here, I broadly asked a LLM to take six lines of R code plotting a UMAP and iteratively…"},
+      {"id": "aibfx-6", "region": "aibfx", "x": 7, "y": 16, "kind": "house", "token": "LB", "title": "LLM-based CyTOF analysis pipeline design choices", "date": "October 2, 2025", "url": "https://www.linkedin.com/posts/tylerjburns_to-gauge-llm-progress-in-my-domain-i-prompted-activity-7379503790162534401-C-Zj?utm_source=share&utm_medium=member_desktop&rcm=ACoAAAbP8M8BYXs_UknoBHnmw2rZ-aRDTJF7L3Y", "summary": "To gauge LLM progress in my domain, I prompted 4 models 10 times each to generate CyTOF analysis pipelines, keeping prompts vague to assess…"},
+      {"id": "aibfx-7", "region": "aibfx", "x": 9, "y": 16, "kind": "essay", "token": "RC", "title": "A review of CyteType: LLM-based annotator", "date": "September 17, 2025", "url": "https://www.linkedin.com/posts/tylerjburns_in-light-of-the-recent-work-i-have-been-doing-activity-7374066902265978880-Kt6A?utm_source=share&utm_medium=member_desktop&rcm=ACoAAAbP8M8BYXs_UknoBHnmw2rZ-aRDTJF7L3Y", "summary": "In light of the recent work I have been doing on LLM-based annotation, I wanted to highlight a package I tried that does this quite well:…"},
+      {"id": "aibfx-8", "region": "aibfx", "x": 3, "y": 18, "kind": "essay", "token": "M1", "title": "A map of 10,000 LLM-generated microbiome questions", "date": "August 6, 2025", "url": "https://www.linkedin.com/posts/tylerjburns_in-light-of-recent-work-on-llm-generated-activity-7358851476070293506-zn_F?utm_source=share&utm_medium=member_desktop&rcm=ACoAAAbP8M8BYXs_UknoBHnmw2rZ-aRDTJF7L3Y", "summary": "In light of recent work on LLM-generated random numbers, I decided to get LLMs to randomly generate biology research questions, to…"},
+      {"id": "aibfx-9", "region": "aibfx", "x": 5, "y": 18, "kind": "essay", "token": "UL", "title": "The use of LLMs to help interpret PCA loadings", "date": "July 24, 2025", "url": "https://www.linkedin.com/posts/tylerjburns_friends-leaders-and-scientists-how-often-activity-7354155006498955264-62BL?utm_source=share&utm_medium=member_desktop&rcm=ACoAAAbP8M8BYXs_UknoBHnmw2rZ-aRDTJF7L3Y", "summary": "Friends, leaders, and scientists: how often do you actually use the PCA loadings that come for free in your single-cell and spatial…"},
+      {"id": "aibfx-10", "region": "aibfx", "x": 7, "y": 18, "kind": "essay", "token": "SP", "title": "Searchbot and prompt scripting", "date": "February 19, 2025", "url": "https://www.linkedin.com/feed/update/urn:li:activity:7297975993489616897/", "summary": "In light of OpenAI's Deep Research, I updated my command line chatbot to include internet search."},
+      {"id": "aibfx-11", "region": "aibfx", "x": 9, "y": 18, "kind": "essay", "token": "LBC", "title": "LLM based cell annotation pipeline in Seurat", "date": "February 12, 2025", "url": "https://www.linkedin.com/feed/update/urn:li:activity:7295449514847432704/", "summary": "In light of recent work on LLM-based single-cell annotation, I created a R function for you that allows you to integrate this into your…"},
+      {"id": "aibfx-12", "region": "aibfx", "x": 3, "y": 20, "kind": "essay", "token": "GC", "title": "GSEA context map", "date": "February 5, 2025", "url": "https://www.linkedin.com/posts/tylerjburns_if-gsea-leaves-you-with-firehose-of-go-and-activity-7292914924509421570-V_HI?utm_source=share&utm_medium=member_desktop&rcm=ACoAAAbP8M8BYXs_UknoBHnmw2rZ-aRDTJF7L3Y", "summary": "If GSEA leaves you with firehose of GO and pathway terms that are hard to navigate, I've developed a free solution you can use that…"},
+      {"id": "aibfx-13", "region": "aibfx", "x": 5, "y": 20, "kind": "house", "token": "HB", "title": "How I built a LLM chatbot", "date": "January 29, 2025", "url": "https://www.linkedin.com/posts/tylerjburns_when-doing-exploratory-data-analysis-for-activity-7290378848502796288-TYlg?utm_source=share&utm_medium=member_desktop", "summary": "When doing exploratory data analysis for clients, I have to take very rigorous notes at every step, typically done with literate…"},
+      {"id": "aibfx-14", "region": "aibfx", "x": 7, "y": 20, "kind": "essay", "token": "TSS", "title": "Two surveys side by side, 11 months apart on LLM usage (April 2023, March 2024)", "date": "February 20, 2024", "url": "https://www.linkedin.com/posts/tylerjburns_as-per-my-two-polls-placed-11-months-apart-activity-7165771409686827008-k5E2?utm_source=share&utm_medium=member_desktop", "summary": "As per my two polls placed 11 months apart, most people in the flow/CyTOF community are interested in but not using or experimenting with…"},
+      {"id": "foundation-0", "region": "foundation", "x": 14, "y": 14, "kind": "castle", "token": "CU", "title": "Cell2Sentence update: 27B parameters", "date": "October 30, 2025", "url": "https://www.linkedin.com/posts/tylerjburns_as-a-followup-to-my-earlier-posts-about-single-cell-activity-7389671614948388864-v7D1?utm_source=share&utm_medium=member_desktop&rcm=ACoAAAbP8M8BYXs_UknoBHnmw2rZ-aRDTJF7L3Y", "summary": "As a followup to my earlier posts about single-cell foundation models, I wanted to do a post-length journal club on a recently updated…"},
+      {"id": "foundation-1", "region": "foundation", "x": 16, "y": 14, "kind": "essay", "token": "KP", "title": "The KRONOS patch based spatial foundation model", "date": "June 11, 2025", "url": "https://www.linkedin.com/feed/update/urn:li:activity:7338549286822993920/", "summary": "If you do spatial, you know QC is a headache. There's a new spatial foundation model called KRONOS out this week that can help with that."},
+      {"id": "foundation-2", "region": "foundation", "x": 18, "y": 14, "kind": "essay", "token": "RS", "title": "Review on single cell foundation models", "date": "October 9, 2024", "url": "https://www.linkedin.com/posts/tylerjburns_transformer-based-foundation-models-the-activity-7249759966423646210-5Ba2?utm_source=share&utm_medium=member_desktop", "summary": "Transformer-based foundation models (the stuff of LLMs) are slowly working their way into the single-cell literature."},
+      {"id": "foundation-3", "region": "foundation", "x": 14, "y": 16, "kind": "essay", "token": "DT", "title": "Don't use top n variable genes for AI foundation models", "date": "October 23, 2024", "url": "https://www.linkedin.com/posts/tylerjburns_in-a-standard-scrna-seq-analysis-pipeline-activity-7254837976428388352-Ki7x?utm_source=share&utm_medium=member_desktop", "summary": "In a standard scRNA-seq analysis pipeline, you select the top ~2000 variable genes for downstream analysis (eg. clustering)."},
+      {"id": "foundation-4", "region": "foundation", "x": 16, "y": 16, "kind": "essay", "token": "TD", "title": "Test drive of single-cell AI foundation model", "date": "October 16, 2024", "url": "https://www.linkedin.com/posts/tylerjburns_i-test-drove-a-single-cell-ai-foundation-activity-7252303573709938688-MCZ5?utm_source=share&utm_medium=member_desktop", "summary": "I test drove a single-cell AI foundation model with scRNA-seq data, so you don't have to."},
+      {"id": "foundation-5", "region": "foundation", "x": 18, "y": 16, "kind": "essay", "token": "KA", "title": "Keeping ahead of the single-cell foundation model literature with GitHub's \"awesome\" page", "date": "January 20, 2025", "url": "https://www.linkedin.com/posts/tylerjburns_keeping-ahead-of-the-single-cell-foundation-activity-7287119420181680128-oxJk?utm_source=share&utm_medium=member_desktop", "summary": "Keeping ahead of the single-cell foundation model literature, using GitHub's \"awesome\" pages:"},
+      {"id": "spatial-0", "region": "spatial", "x": 27, "y": 14, "kind": "castle", "token": "TA", "title": "Thoughts about ESSB 2025", "date": "October 20, 2025", "url": "https://www.linkedin.com/posts/tylerjburns_essb2025-spatialbiology-embl-activity-7386022173758386177-h9VB?utm_source=share&utm_medium=member_desktop&rcm=ACoAAAbP8M8BYXs_UknoBHnmw2rZ-aRDTJF7L3Y", "summary": "I had a great time at ESSB2025 in Heidelberg, where I caught up with and met great spatial bio researchers, and got up to speed on the…"},
+      {"id": "spatial-1", "region": "spatial", "x": 29, "y": 14, "kind": "essay", "token": "CSS", "title": "Cell segmentation size matters for spatial transcriptomics", "date": "August 28, 2024", "url": "https://www.linkedin.com/posts/tylerjburns_for-spatial-transcriptomics-data-cell-segmentation-activity-7234553712344465410-NxRX?utm_source=share&utm_medium=member_desktop", "summary": "For spatial transcriptomics data, cell segmentation size is critical."},
+      {"id": "spatial-2", "region": "spatial", "x": 31, "y": 14, "kind": "essay", "token": "DI", "title": "Data integration using CyCombine", "date": "February 21, 2024", "url": "https://www.linkedin.com/posts/tylerjburns_single-cell-protein-data-can-take-many-forms-activity-7166098906634829824-3aSF?utm_source=share&utm_medium=member_desktop", "summary": "Single-cell protein data can take many forms: flow cytometry (spectral or otherwise), mass cytometry, CITE-seq, or protein-based imaging…"},
+      {"id": "spatial-3", "region": "spatial", "x": 27, "y": 16, "kind": "essay", "token": "BI", "title": "Bridge integration", "date": "February 16, 2024", "url": "https://www.linkedin.com/posts/tylerjburns_leaders-using-single-cell-tech-do-you-have-activity-7164260356083716096-0S0M?utm_source=share&utm_medium=member_desktop", "summary": "Leaders using single-cell tech: do you have data across multiple modalities (eg."},
+      {"id": "spatial-4", "region": "spatial", "x": 29, "y": 16, "kind": "essay", "token": "DS", "title": "Doing single-cell sequencing analysis in OMIQ", "date": "September 25, 2025", "url": "https://www.linkedin.com/posts/tylerjburns_hack-you-can-run-scrna-seq-data-inside-omiq-activity-7376963107434250240-CA6f?utm_source=share&utm_medium=member_desktop&rcm=ACoAAAbP8M8BYXs_UknoBHnmw2rZ-aRDTJF7L3Y", "summary": "Hack: you can run scRNA-seq data inside OMIQ. This gives you cytometry-grade visualization capabilities and analysis tools (e.g."},
+      {"id": "spatial-5", "region": "spatial", "x": 31, "y": 16, "kind": "essay", "token": "NG", "title": "Neighbor graphs in spatial analysis", "date": "March 26, 2025", "url": "https://www.linkedin.com/posts/tylerjburns_spatial-omics-analysis-is-complicated-but-activity-7310656950818496512-9D5a?utm_source=share&utm_medium=member_desktop&rcm=ACoAAAbP8M8BYXs_UknoBHnmw2rZ-aRDTJF7L3Y", "summary": "Spatial -omics analysis is complicated. But there is a powerful concept that unifies many seemingly unrelated methods: neighbor graphs."},
+      {"id": "spatial-6", "region": "spatial", "x": 27, "y": 18, "kind": "house", "token": "SS", "title": "Sometimes the simple solution is good enough", "date": "October 3, 2024", "url": "https://www.linkedin.com/posts/tylerjburns_in-bioinformatics-sometimes-the-simple-solution-activity-7247585445658685440-aIzc?utm_source=share&utm_medium=member_desktop", "summary": "In bioinformatics, sometimes the simple solution is good enough."},
+      {"id": "spatial-7", "region": "spatial", "x": 29, "y": 18, "kind": "essay", "token": "PD", "title": "Panel design for Xenium assays", "date": "September 26, 2024", "url": "https://www.linkedin.com/posts/tylerjburns_in-flowmass-cytometry-we-spend-a-lot-of-activity-7245071757269778432-NbjL?utm_source=share&utm_medium=member_desktop", "summary": "In flow/mass cytometry, we spend a lot of time on panel design. It turns out if you're going to run a spatial transcriptomic assay (e.g."},
+      {"id": "workflow-0", "region": "workflow", "x": 3, "y": 25, "kind": "castle", "token": "RJ", "title": "Reproducibility of Jupyter notebooks from biomedical publications", "date": "January 15, 2025", "url": "https://www.linkedin.com/posts/tylerjburns_in-light-of-recent-work-i-am-doing-that-requires-activity-7285315114067517440-tGpT?utm_source=share&utm_medium=member_desktop", "summary": "In light of recent work I am doing that requires me to reproduce results from GitHub repos associated with papers (eg."},
+      {"id": "workflow-1", "region": "workflow", "x": 5, "y": 25, "kind": "essay", "token": "FCU", "title": "Flow/CyTOF users could take a page from the best practices in single-cell sequencing", "date": "February 9, 2024", "url": "https://www.linkedin.com/posts/tylerjburns_life-science-leaders-using-flowmass-cytometry-activity-7161731050065408000-LN_D?utm_source=share&utm_medium=member_desktop", "summary": "Life science leaders using flow/mass cytometry: do you want to know where the best practices in data analysis will be in 3-5 years (if done…"},
+      {"id": "workflow-2", "region": "workflow", "x": 7, "y": 25, "kind": "essay", "token": "GB", "title": "Guest blog post: an introduction to LaminR", "date": "April 2, 2026", "url": "https://www.linkedin.com/posts/tylerjburns_hi-friends-i-wrote-a-guest-post-for-lamin-activity-7445459712386514944-wU4s?utm_source=share&utm_medium=member_desktop&rcm=ACoAAAbP8M8BYXs_UknoBHnmw2rZ-aRDTJF7L3Y", "summary": "Hi friends, I wrote a guest post for Lamin on using the open-source LaminR package in an R workflow with the PBMC 3k dataset."},
+      {"id": "workflow-3", "region": "workflow", "x": 3, "y": 27, "kind": "essay", "token": "BO", "title": "Byte order matters when reading in fcs files", "date": "December 10, 2025", "url": "https://www.linkedin.com/posts/tylerjburns_fcs-files-outputted-by-flow-and-mass-cytometers-activity-7404524653811056640-jaOW?utm_source=share&utm_medium=member_desktop&rcm=ACoAAAbP8M8BYXs_UknoBHnmw2rZ-aRDTJF7L3Y", "summary": "Fcs files, outputted by flow and mass cytometers, are typically read into R or Python for analysis."},
+      {"id": "workflow-4", "region": "workflow", "x": 5, "y": 27, "kind": "essay", "token": "NW", "title": "The need for wet lab and dry lab integration", "date": "May 28, 2025", "url": "https://www.linkedin.com/posts/tylerjburns_case-study-an-issue-with-a-bulk-sequencing-activity-7333478597971603456-370y?utm_source=share&utm_medium=member_desktop&rcm=ACoAAAbP8M8BYXs_UknoBHnmw2rZ-aRDTJF7L3Y", "summary": "Case study: an issue with a bulk sequencing analysis project was quickly found and fixed because of the understanding that \"the cell type…"},
+      {"id": "workflow-5", "region": "workflow", "x": 7, "y": 27, "kind": "essay", "token": "BA", "title": "Build automation with user paranoia in mind", "date": "September 20, 2024", "url": "https://www.linkedin.com/posts/tylerjburns_plenty-of-people-are-talking-about-automation-activity-7242885831139487746-7NxH?utm_source=share&utm_medium=member_desktop", "summary": "Plenty of people are talking about automation as the future of bioinformatics."},
+      {"id": "workflow-6", "region": "workflow", "x": 3, "y": 29, "kind": "house", "token": "SC", "title": "Single-cell sequencing analysis: don't forget to integrate your data", "date": "July 13, 2023", "url": "https://www.linkedin.com/posts/tylerjburns_the-following-is-a-warning-for-biologists-activity-7085200486697443330-Zzbc?utm_source=share&utm_medium=member_desktop", "summary": "The following is a warning for biologists, bioinformaticians, and leaders of research teams, especially those moving from a flow/CyTOF…"},
+      {"id": "workflow-7", "region": "workflow", "x": 5, "y": 29, "kind": "essay", "token": "SQ", "title": "Survey: QC gives people the most headache in a flow/CyTOF data analysis pipeline", "date": "March 24, 2023", "url": "https://www.linkedin.com/posts/tylerjburns_activity-7045080240515076096-kXLl?utm_source=share&utm_medium=member_desktop", "summary": "A LinkedIn post — open to read on LinkedIn."},
+      {"id": "workflow-8", "region": "workflow", "x": 7, "y": 29, "kind": "essay", "token": "PDD", "title": "Pictures of different data transforms for CyTOF", "date": "December 15, 2022", "url": "https://www.linkedin.com/posts/tylerjburns_cytof-users-we-use-the-asinh-transform-activity-7009180881546321922-y5qH?utm_source=share&utm_medium=member_desktop", "summary": "CyTOF users: we use the asinh transform, but is that the only one that works?"},
+      {"id": "teaching-0", "region": "teaching", "x": 14, "y": 25, "kind": "castle", "token": "SA", "title": "Scanpy analysis intuition building app", "date": "August 29, 2025", "url": "https://www.linkedin.com/posts/tylerjburns_turn-the-knobs-see-how-the-output-changes-activity-7367177068553461761-yPpK?utm_source=share&utm_medium=member_desktop&rcm=ACoAAAbP8M8BYXs_UknoBHnmw2rZ-aRDTJF7L3Y", "summary": "Turn the knobs, see how the output changes."},
+      {"id": "teaching-1", "region": "teaching", "x": 16, "y": 25, "kind": "essay", "token": "HW", "title": "How I went from biologist to biology-leveraged bioinformatician", "date": "July 27, 2023", "url": "https://www.linkedin.com/posts/tylerjburns_here-is-a-post-i-wrote-for-biologists-and-activity-7090282332749717504-XTkW?utm_source=share&utm_medium=member_desktop", "summary": "Here is a post I wrote for biologists and team leaders about my journey from wet-lab biologist to biology-leveraged bioinformatician."},
+      {"id": "teaching-2", "region": "teaching", "x": 18, "y": 25, "kind": "essay", "token": "PS", "title": "Problem solving as a bottleneck to learning how to code", "date": "May 6, 2024", "url": "https://www.linkedin.com/posts/tylerjburns_my-survey-has-revealed-that-the-act-of-problem-activity-7193215772448505858-tK7P?utm_source=share&utm_medium=member_desktop", "summary": "My survey has revealed that the act of problem solving is a bottleneck for biologists learning how to code."},
+      {"id": "teaching-3", "region": "teaching", "x": 14, "y": 27, "kind": "essay", "token": "LH", "title": "Learning how to code has improved how I think", "date": "May 2, 2024", "url": "https://www.linkedin.com/posts/tylerjburns_this-image-is-romanesco-broccoli-i-came-activity-7191860234095640576-rGEH?utm_source=share&utm_medium=member_desktop", "summary": "This image is romanesco broccoli. I came across it sophomore year in my dorm cafeteria."},
+      {"id": "teaching-4", "region": "teaching", "x": 16, "y": 27, "kind": "essay", "token": "BB", "title": "Biologists becoming bioinformaticians are having the hardest time learning how to code", "date": "April 26, 2024", "url": "https://www.linkedin.com/posts/tylerjburns_my-survey-has-already-revealed-that-a-large-activity-7189597924899643392-HXOM?utm_source=share&utm_medium=member_desktop", "summary": "My survey has already revealed that a large bottleneck for biologists learning bioinformatics is the act of learning how to code, even with…"},
+      {"id": "teaching-5", "region": "teaching", "x": 18, "y": 27, "kind": "essay", "token": "RT", "title": "Recap on teaching engagement with Zamora Lab at MCW", "date": "March 23, 2024", "url": "https://www.linkedin.com/posts/tylerjburns_bioinformatics-bigdata-collaboration-activity-7177394725853741056-W1of?utm_source=share&utm_medium=member_desktop", "summary": "After speaking with many labs last year, I determined (as many others have) that there is a lack of bioinformatics support in academia."},
+      {"id": "teaching-6", "region": "teaching", "x": 14, "y": 29, "kind": "house", "token": "TW", "title": "Those who can do, do; those who have done, teach", "date": "February 28, 2024", "url": "https://www.linkedin.com/posts/tylerjburns_i-am-tired-of-the-phrase-those-who-can-activity-7168606001758257152-5iMu?utm_source=share&utm_medium=member_desktop", "summary": "I am tired of the phrase \"those who can, do; those who can't, teach.\" So let me fix it for you."},
+      {"id": "literature-0", "region": "literature", "x": 27, "y": 25, "kind": "castle", "token": "DR", "title": "Dimensionality reduction provenance app", "date": "May 19, 2026", "url": "https://www.linkedin.com/posts/tylerjburns_hi-friends-we-have-all-seen-that-the-cytof-activity-7462487719865147392-jh3Y?utm_source=share&utm_medium=member_desktop&rcm=ACoAAAbP8M8BYXs_UknoBHnmw2rZ-aRDTJF7L3Y", "summary": "Hi friends, we have all seen that the CyTOF field has converged on a narrow set of tools (e.g. FlowSOM, UMAP)."},
+      {"id": "literature-1", "region": "literature", "x": 29, "y": 25, "kind": "essay", "token": "IV", "title": "IMC vs CyTOF publication rates: surprised IMC is taking off so fast", "date": "March 15, 2023", "url": "https://www.linkedin.com/posts/tylerjburns_if-we-put-2008-as-the-first-cytof-paper-activity-7041804065097281537-nkIM?utm_source=share&utm_medium=member_desktop", "summary": "If we put 2008 as the first CyTOF paper (from Scott Tanner, before Garry Nolan), CyTOF hit 100 publications in 2017, or 9 years."},
+      {"id": "literature-2", "region": "literature", "x": 27, "y": 27, "kind": "essay", "token": "SF", "title": "Surprisingly few spectral flow cytometry publications despite all the buzz around it", "date": "February 23, 2023", "url": "https://www.linkedin.com/posts/tylerjburns_spectral-flow-cytometry-is-trending-in-my-activity-7034458560377847809-b2Zj?utm_source=share&utm_medium=member_desktop", "summary": "Spectral flow cytometry is trending in my circles, but this isn't reflected in the publication trends (yet)."},
+      {"id": "literature-3", "region": "literature", "x": 29, "y": 27, "kind": "essay", "token": "FT", "title": "My fear that single-cell is in a replication crisis", "date": "August 2, 2023", "url": "https://www.linkedin.com/posts/tylerjburns_major-data-analysis-errors-invalidate-cancer-activity-7092387938352656385-Cgqv?utm_source=share&utm_medium=member_desktop", "summary": "Interesting article shared by Ming \"Tommy\" Tang, showing that a re-analysis of a cancer microbiome paper leads to different results."},
+      {"id": "text-0", "region": "text", "x": 3, "y": 34, "kind": "castle", "token": "VG", "title": "Video game overworld as alternative to scrolling", "date": "May 26, 2026", "url": "https://www.linkedin.com/posts/tylerjburns_who-says-scrolling-is-best-here-i-built-activity-7465021517349896193-nefg?utm_source=share&utm_medium=member_desktop&rcm=ACoAAAbP8M8BYXs_UknoBHnmw2rZ-aRDTJF7L3Y", "summary": "Who says scrolling is best? Here, I built a \"game mode\" for browsing my website."},
+      {"id": "text-1", "region": "text", "x": 5, "y": 34, "kind": "essay", "token": "SE", "title": "Spatial embedding of CNN vs FoxNews vs AP using BERT, viewing on UMAP", "date": "April 10, 2023", "url": "https://www.linkedin.com/posts/tylerjburns_ever-wonder-what-regions-of-news-space-activity-7051174977668042752-G0lC?utm_source=share&utm_medium=member_desktop", "summary": "Ever wonder what regions of \"news space\" are more CNN-heavy or more FoxNews-heavy?"},
+      {"id": "text-2", "region": "text", "x": 7, "y": 34, "kind": "essay", "token": "OP", "title": "Original post around making tweet embeddings: the scrolling problem", "date": "August 18, 2022", "url": "https://www.linkedin.com/posts/tylerjburns_ive-been-trying-to-reduce-the-scrolling-activity-6966053080530350080-BXdK?utm_source=share&utm_medium=member_desktop", "summary": "I've been trying to reduce the scrolling I do in my life. For example, I check the news every day with a \"map view\" (below) I created using…"},
+      {"id": "text-3", "region": "text", "x": 3, "y": 36, "kind": "essay", "token": "RA", "title": "Recap after writing 1 million words in my journal over 15 years, parsing it with AI", "date": "January 15, 2024", "url": "https://www.linkedin.com/posts/tylerjburns_i-recently-hit-a-milestone-in-my-personal-activity-7152694472559017985-6KFn?utm_source=share&utm_medium=member_desktop", "summary": "I recently hit a milestone in my personal journal: one million words over 15 years."},
+      {"id": "text-4", "region": "text", "x": 5, "y": 36, "kind": "essay", "token": "RL", "title": "Retweet to like ratio of single-cell sequencing tweets", "date": "March 9, 2023", "url": "https://www.linkedin.com/posts/tylerjburns_the-retweet-to-like-ratio-matters-for-getting-activity-7039541884293128192-xFuf?utm_source=share&utm_medium=member_desktop", "summary": "The retweet-to-like ratio matters for getting value out of twitter for your niche, to the point where you might be able to draw manual…"},
+      {"id": "text-5", "region": "text", "x": 7, "y": 36, "kind": "essay", "token": "TB", "title": "On my TEDx Basel talk", "date": "July 10, 2023", "url": "https://www.linkedin.com/posts/tylerjburns_my-scrolling-problem-and-how-i-fixed-it-activity-7084166939647848451-uU5w?utm_source=share&utm_medium=member_desktop", "summary": "My TEDx Basel talk is now out! Here are a few key takeaways:"},
+      {"id": "career-0", "region": "career", "x": 14, "y": 34, "kind": "castle", "token": "TP", "title": "Three pointers for doing self employed consulting in the life sciences", "date": "February 6, 2024", "url": "https://www.linkedin.com/posts/tylerjburns_the-following-is-for-my-friends-from-academia-activity-7160684719934779392-n26f?utm_source=share&utm_medium=member_desktop", "summary": "The following is for my friends from academia who are in a tough work and/or financial situation."},
+    ];
+  const POST_RELOCATIONS = {
+    "cluster-5": { region: "lost", x: 39, y: 6 },
+    "cluster-6": { region: "lost", x: 43, y: 6 },
+    "cluster-7": { region: "lost", x: 47, y: 6 },
+    "cluster-8": { region: "lost", x: 39, y: 12 },
+    "dimred-15": { region: "lost", x: 43, y: 12 },
+    "dimred-16": { region: "lost", x: 45, y: 14 },
+    "dimred-17": { region: "lost", x: 49, y: 14 },
+    "aibfx-2": { region: "reef", x: 41, y: 20 },
+    "aibfx-5": { region: "reef", x: 43, y: 22 },
+    "aibfx-8": { region: "reef", x: 47, y: 22 },
+    "aibfx-10": { region: "reef", x: 45, y: 24 },
+    "aibfx-13": { region: "reef", x: 49, y: 27 },
+    "aibfx-14": { region: "reef", x: 47, y: 30 },
+    "literature-1": { region: "observatory", x: 20, y: 44 },
+    "literature-2": { region: "observatory", x: 24, y: 44 },
+    "literature-3": { region: "observatory", x: 32, y: 47 },
+    "foundation-2": { region: "observatory", x: 22, y: 47 },
+    "foundation-5": { region: "observatory", x: 28, y: 50 },
+    "workflow-0": { region: "observatory", x: 30, y: 52 },
+    "teaching-1": { region: "garden", x: 5, y: 43 },
+    "teaching-2": { region: "garden", x: 6, y: 47 },
+    "teaching-3": { region: "garden", x: 12, y: 47 },
+    "teaching-4": { region: "garden", x: 5, y: 52 },
+    "teaching-5": { region: "garden", x: 9, y: 52 },
+    "workflow-2": { region: "garden", x: 12, y: 49 },
+    "career-0": { region: "garden", x: 13, y: 50 }
+  };
+  POSTS.forEach(function (post) {
+    const relocation = POST_RELOCATIONS[post.id];
+    if (relocation) Object.assign(post, relocation);
+  });
+  const OW = {"cols": 35, "rows": 40, "terrain": ["WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW", "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW", "WW...WWWWWWWW...........WW.......WW", "WW......................WW.......WW", "WW...WWWWWWWW...........~~.......WW", "WWW.WWWWWWWWW...........WW.......WW", "WWW.WWWWWWWWW...........WW.......WW", "WWW.WWWWWWWWW...........WW.......WW", "WWW.WWWWWWWWW...........WW.......WW", "WWW.WWWWWWWWW...........WWWWWWWWWWW", "WWW.WWWWWWWWW...........WWWWWWWWWWW", "WWW.WWWWWWWWWWWW.WWWWWWWWWWWWWWWWWW", "WWW.WWWWWWWWWWWW.WWWWWWWWWWWWWWWWWW", "WW.........WW.......WWWWWW.......WW", "WW.........WW.......WWWWWW.......WW", "WW..................WWWWWW.......WW", "WW.........WW.......WWWWWW.......WW", "WW.........WW.......WWWWWW.......WW", "WW.........WWWWW.WWWWWWWWW.......WW", "WW.........WWWWW.WWWWWWWWW.......WW", "WW.........WWWWW.WWWWWWWWWWW.WWWWWW", "WW.........WWWWW.WWWWWWWWWWW.WWWWWW", "WWWWW.WWWWWWWWWW.WWWWWWWWWWW.WWWWWW", "WWWWW.WWWWWWWWWW.WWWWWWWWWWW.WWWWWW", "WW.......WWWW.......WWWWWW.....WWWW", "WW.......WWWW.......WWWWWW.....WWWW", "WW.......WWWW..................WWWW", "WW..................WWWWWW.....WWWW", "WW.......WWWW.......WWWWWW.....WWWW", "WW.......WWWW.......WWWWWWWWWWWWWWW", "WW.......WWWW.S.....WWWWWWWWWWWWWWW", "WWWWW.WWWWWWWMMMWWWWWWWWWWWWWWWWWWW", "WWWWW.WWWWWWWMMMWWWWWWWWWWWWWWWWWWW", "WWMMMCMMMWWWW.S.WWWWWWWWWWWWWWWWWWW", "WWMMMMMMMWWWW...WWWWWWWWWWWWWWWWWWW", "WWMMMMMMMWWWW...WWWWWWWWWWWWWWWWWWW", "WWMMMMMMMWWWWWWWWWWWWWWWWWWWWWWWWWW", "WWMMMMMMMWWWWWWWWWWWWWWWWWWWWWWWWWW", "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW", "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW"], "spawn": {"x": 2, "y": 3}, "door": {"x": 34, "y": 52}, "stairs": [{"ax": 14, "ay": 30, "bx": 14, "by": 33}]};
+  const DUNGEON_REGION = "text";
+  const GREMLIN_SVG = `<svg class="gremlin-sprite" viewBox="0 0 16 16" aria-hidden="true">
+        <rect x="3" y="0" width="1" height="2" fill="#1b4f6b"></rect>
+        <rect x="12" y="0" width="1" height="2" fill="#1b4f6b"></rect>
+        <rect x="2" y="2" width="12" height="11" fill="#0b1f2a"></rect>
+        <rect x="3" y="3" width="10" height="9" fill="#3fc6e0"></rect>
+        <rect x="3" y="9" width="10" height="3" fill="#2a93ad"></rect>
+        <rect x="4" y="5" width="3" height="2" fill="#13526b"></rect>
+        <rect x="9" y="5" width="3" height="2" fill="#13526b"></rect>
+        <rect x="5" y="5" width="1" height="1" fill="#ffffff"></rect>
+        <rect x="10" y="5" width="1" height="1" fill="#ffffff"></rect>
+        <rect x="6" y="10" width="4" height="2" fill="#0b1f2a"></rect>
+        <rect x="6" y="10" width="1" height="1" fill="#d6f4ff"></rect>
+        <rect x="9" y="10" width="1" height="1" fill="#d6f4ff"></rect>
+        <rect x="4" y="13" width="2" height="2" fill="#0b1f2a"></rect>
+        <rect x="10" y="13" width="2" height="2" fill="#0b1f2a"></rect>
+        <rect x="4" y="13" width="2" height="1" fill="#2a93ad"></rect>
+        <rect x="10" y="13" width="2" height="1" fill="#2a93ad"></rect>
+      </svg>`;
+
+  const OW_LAND_GREMLINS = 8, OW_SWIMMERS = 5, DG_GREMLINS = 3;
+  const OW_SHOOTERS = 2, DG_SHOOTERS = 1;
+  // Shooting gremlins only patrol the southeastern square just before the
+  // dungeon mouth (at 34,52). Everywhere else in the overworld is shooter-free;
+  // the dungeon itself uses the whole level as the shooters' range.
+  const OW_SHOOTER_ZONE = { x0: 28, y0: 46, x1: 34, y1: 53 };
+  const RELICS = [
+    { id: "compass", label: "Compass", title: "Sleepwalk Compass" },
+    { id: "sigil", label: "Sigil", title: "Gating Sigil" },
+    { id: "lantern", label: "Lantern", title: "Prompt Lantern" },
+    { id: "archive", label: "Archive", title: "Archive Key" }
+  ];
+  const RELIC_KEY = "socialmode-relics";
+  const collectedRelics = new Set();
+  try { const raw = sessionStorage.getItem(RELIC_KEY); if (raw) JSON.parse(raw).forEach(function (id) { collectedRelics.add(id); }); } catch (e) {}
+  const ITEM_KEY_PREFIX = "tylersworld-item-";
+  const ITEM_LABELS = { sword: "Sword", bow: "Bow" };
+  const BOW_CAVE_ENTRY = { x: 4, y: 4 };
+  const OLD_MAN_DIALOGUE =
+    "Take the bow. These archive gremlins do not fear blades. Fire from a distance, then keep moving.";
+  const OLD_MAN_SVG = `<svg class="old-man-sprite" viewBox="0 0 16 18" shape-rendering="crispEdges" aria-hidden="true">
+      <rect x="5" y="0" width="6" height="1" fill="#34140c"></rect>
+      <rect x="4" y="1" width="8" height="1" fill="#a8321f"></rect>
+      <rect x="3" y="2" width="10" height="1" fill="#b93a22"></rect>
+      <rect x="2" y="3" width="12" height="2" fill="#c24725"></rect>
+      <rect x="1" y="5" width="14" height="2" fill="#b83a22"></rect>
+      <rect x="0" y="7" width="3" height="3" fill="#621f13"></rect>
+      <rect x="13" y="7" width="3" height="3" fill="#621f13"></rect>
+      <rect x="3" y="6" width="10" height="2" fill="#34140c"></rect>
+      <rect x="5" y="3" width="6" height="2" fill="#f2b83e"></rect>
+      <rect x="4" y="5" width="3" height="2" fill="#ffffff"></rect>
+      <rect x="9" y="5" width="3" height="2" fill="#ffffff"></rect>
+      <rect x="6" y="5" width="1" height="2" fill="#241812"></rect>
+      <rect x="9" y="5" width="1" height="2" fill="#241812"></rect>
+      <rect x="4" y="7" width="8" height="4" fill="#fff8ec"></rect>
+      <rect x="5" y="8" width="6" height="4" fill="#ffffff"></rect>
+      <rect x="6" y="12" width="4" height="1" fill="#f0e4d0"></rect>
+      <rect x="2" y="10" width="12" height="6" fill="#b93a22"></rect>
+      <rect x="3" y="9" width="3" height="6" fill="#c74725"></rect>
+      <rect x="10" y="9" width="3" height="6" fill="#c74725"></rect>
+      <rect x="7" y="11" width="2" height="5" fill="#b87924"></rect>
+      <rect x="1" y="11" width="3" height="4" fill="#932b1b"></rect>
+      <rect x="12" y="11" width="3" height="4" fill="#932b1b"></rect>
+      <rect x="1" y="14" width="2" height="2" fill="#f2b83e"></rect>
+      <rect x="13" y="14" width="2" height="2" fill="#f2b83e"></rect>
+      <rect x="4" y="13" width="3" height="3" fill="#b8793b"></rect>
+      <rect x="3" y="13" width="1" height="3" fill="#34140c"></rect>
+      <rect x="11" y="13" width="3" height="3" fill="#34140c"></rect>
+      <rect x="12" y="14" width="1" height="1" fill="#ffd45a"></rect>
+      <rect x="13" y="14" width="1" height="1" fill="#f0a91c"></rect>
+      <rect x="4" y="16" width="3" height="1" fill="#34140c"></rect>
+      <rect x="10" y="16" width="3" height="1" fill="#34140c"></rect>
+    </svg>`;
+  const CAT_BACK_SVG = `
+                <rect x="4" y="1" width="2" height="2" fill="#241812"></rect>
+                <rect x="10" y="1" width="2" height="2" fill="#241812"></rect>
+                <rect x="3" y="2" width="4" height="2" fill="#241812"></rect>
+                <rect x="9" y="2" width="4" height="2" fill="#241812"></rect>
+                <rect x="4" y="2" width="2" height="2" fill="#f3a944"></rect>
+                <rect x="10" y="2" width="2" height="2" fill="#f3a944"></rect>
+                <rect x="3" y="4" width="10" height="7" fill="#241812"></rect>
+                <rect x="4" y="4" width="8" height="6" fill="#d9842d"></rect>
+                <rect x="5" y="5" width="6" height="3" fill="#f3a944"></rect>
+                <rect x="4" y="8" width="8" height="2" fill="#c06f2a"></rect>
+                <rect x="4" y="11" width="8" height="3" fill="#241812"></rect>
+                <rect x="5" y="11" width="6" height="2" fill="#e99433"></rect>
+                <rect x="2" y="10" width="3" height="2" fill="#241812"></rect>
+                <rect x="2" y="9" width="2" height="2" fill="#e99433"></rect>
+                <rect x="12" y="10" width="3" height="2" fill="#241812"></rect>
+                <rect x="12" y="9" width="2" height="2" fill="#e99433"></rect>
+                <rect x="4" y="14" width="3" height="1" fill="#241812"></rect>
+                <rect x="9" y="14" width="3" height="1" fill="#241812"></rect>`;
+  const OVERWORLD_SPECIALS = [
+    { x: 3, y: 4, type: "sign", kindLabel: "Map Stone", title: "The first map stone", date: "Gateway", summary: "The old road has broken into islands. Follow bridges, rafts, caves, and stairs; the best essays are no longer lined up for scrolling." },
+    { x: BOW_CAVE_ENTRY.x, y: BOW_CAVE_ENTRY.y, type: "cave", target: "bow-cave", kindLabel: "Cave", title: "Old Man's Cave", date: "Gateway cave", summary: "A firelit cave near the start. The old man inside knows why the archive gremlins ignore swords." },
+    { x: 13, y: 2, type: "obelisk", kindLabel: "Monolith", title: "Projection Monolith", date: "Dimensionality Reduction", summary: "This stone hums with t-SNE and UMAP runs. The realm bends when high-dimensional structure is pressed onto a plane." },
+    { x: 23, y: 9, type: "chest", relic: "compass", kindLabel: "Relic", title: "Sleepwalk Compass", date: "Relic", summary: "A compass for checking whether the map preserves the neighborhood you thought it did." },
+    { x: 26, y: 8, type: "shrine", relic: "sigil", kindLabel: "Relic", title: "Gating Sigil", date: "Relic", summary: "A sigil cut from gates, clusters, and manual judgment. It unlocks no article; it changes how the island feels." },
+    { x: 10, y: 21, type: "chest", relic: "lantern", kindLabel: "Relic", title: "Prompt Lantern", date: "Relic", summary: "The lantern throws a little light onto LLM-assisted analysis choices." },
+    { x: 5, y: 47, type: "chest", relic: "archive", kindLabel: "Relic", title: "Archive Key", date: "Relic", summary: "A key cut from text maps, old posts, and the refusal to browse by endless feed. With all four relics awake, the southern dungeon mouth opens." },
+    { x: 13, y: 13, type: "sign", kindLabel: "Sign", title: "Foundation Grove", date: "Foundation Models", summary: "The grove is quiet because every model claims it can become the whole forest." },
+    { x: 32, y: 19, type: "sign", kindLabel: "Sign", title: "The spatial marsh", date: "Spatial & Multimodal", summary: "Every coordinate here has two lives: what it means in feature space, and where it sits on tissue." },
+    { x: 8, y: 30, type: "sign", kindLabel: "Workshop Sign", title: "Workflow Town", date: "Workflow & QC", summary: "The local craft is not glamour. It is reproducibility, byte order, notebooks that run, and QC that catches the problem early." },
+    { x: 19, y: 30, type: "sign", kindLabel: "Village Sign", title: "Teaching Village", date: "Teaching", summary: "Those who have done, teach. The village is built around hard-won intuition rather than pure instruction." },
+    { x: 30, y: 28, type: "obelisk", kindLabel: "Library Ruin", title: "Publication Ruin", date: "Literature & Trends", summary: "Old citations are stacked like stone. The ruin tracks what the field actually did, not what the buzz said it would do." },
+    { x: 15, y: 35, type: "gate", kindLabel: "Gate", title: "Consultant Gate", date: "Career & Consulting", summary: "A late-game gate for the self-employed road: smaller quests, fuller context, fewer tiny boxes." },
+    { x: 41, y: 6, type: "sign", kindLabel: "Trail Sign", title: "Lost Methods Woods", date: "Eastern wilds", summary: "Old analysis paths split here. Some become robust methods; others vanish into the brush." },
+    { x: 49, y: 12, type: "obelisk", kindLabel: "Obelisk", title: "Bias Splitter", date: "Eastern wilds", summary: "A forked stone marking the place where every method starts carrying the assumptions that made it possible." },
+    { x: 45, y: 22, type: "sign", kindLabel: "Reef Sign", title: "Question Reef", date: "Outer water", summary: "Questions accumulate like coral here. Walk the shoals slowly; every prompt leaves structure behind." },
+    { x: 51, y: 29, type: "shrine", kindLabel: "Shrine", title: "Randomness Shrine", date: "Outer water", summary: "A shrine to the uneasy boundary between generated randomness and generated patterns." },
+    { x: 26, y: 44, type: "obelisk", kindLabel: "Observatory", title: "Citation Observatory", date: "Southern sky", summary: "The telescope points at publication trends, replication worries, and the constellations formed by fields over time." },
+    { x: 32, y: 50, type: "sign", kindLabel: "Telescope Note", title: "The slow field", date: "Southern sky", summary: "From this hill the archive looks less like a feed and more like geology." },
+    { x: 8, y: 47, type: "sign", kindLabel: "Garden Sign", title: "Margin Gardens", date: "Southern margins", summary: "The margins are where stray thoughts, half-formed essays, and future maps grow roots." },
+    { x: 13, y: 52, type: "gate", kindLabel: "Gate", title: "Unwritten Gate", date: "Southern margins", summary: "A quiet gate for work that has not turned into a post yet." }
+  ];
+
+  const regionById = new Map(REGIONS.map(function (r) { return [r.id, r]; }));
+  function regionAt(x, y) { for (const r of REGIONS) if (x >= r.x0 && x <= r.x1 && y >= r.y0 && y <= r.y1) return r; return null; }
+  function isExternalUrl(u) { return /^https?:\/\//i.test(u) || /\.pdf$/i.test(u); }
+  function resolveUrl(u) { return /^https?:\/\//i.test(u) ? u : PAGE_BASE + u; }
+  function hashStr(str) { let h = 0; for (let i = 0; i < str.length; i++) h = (h * 31 + str.charCodeAt(i)) >>> 0; return h; }
+
+  const READ_KEY = "socialmode-read";
+  const visited = new Set();
+  try { const raw = sessionStorage.getItem(READ_KEY); if (raw) JSON.parse(raw).forEach(function (id) { visited.add(id); }); } catch (e) {}
+  function markVisited(id) { if (!id || visited.has(id)) return; visited.add(id); try { sessionStorage.setItem(READ_KEY, JSON.stringify(Array.from(visited))); } catch (e) {} }
+
+  const warpPool = POSTS.filter(function (p) { return !p.excludeFromWarp && p.kind !== "portal"; });
+  const owPosts = POSTS.filter(function (p) { return p.region !== DUNGEON_REGION; });
+  const dgPosts = POSTS.filter(function (p) { return p.region === DUNGEON_REGION; });
+
+  function buildExpandedTerrain(base) {
+    const cols = 55, rows = 55;
+    const grid = Array.from({ length: rows }, function () {
+      return Array(cols).fill("W");
+    });
+
+    function set(x, y, c) {
+      if (x < 0 || y < 0 || x >= cols || y >= rows) return;
+      grid[y][x] = c;
+    }
+    function rect(x0, y0, x1, y1, c) {
+      for (let y = y0; y <= y1; y++) for (let x = x0; x <= x1; x++) set(x, y, c);
+    }
+    function line(x0, y0, x1, y1, c) {
+      if (x0 === x1) {
+        const lo = Math.min(y0, y1), hi = Math.max(y0, y1);
+        for (let y = lo; y <= hi; y++) set(x0, y, c);
+      } else if (y0 === y1) {
+        const lo = Math.min(x0, x1), hi = Math.max(x0, x1);
+        for (let x = lo; x <= hi; x++) set(x, y0, c);
+      }
+    }
+    function copyBase() {
+      for (let y = 0; y < base.rows; y++) {
+        const row = base.terrain[y] || "";
+        for (let x = 0; x < Math.min(base.cols, row.length); x++) set(x, y, row[x]);
+      }
+    }
+
+    copyBase();
+
+    // Eastern expansion: a larger forest island reached from Clustering.
+    rect(38, 4, 49, 15, ".");
+    line(36, 3, 50, 3, "M"); line(50, 3, 50, 16, "M");
+    line(36, 16, 50, 16, "M"); line(36, 3, 36, 16, "M");
+    line(32, 6, 42, 6, ".");
+    line(41, 6, 49, 6, ".");
+    line(41, 6, 41, 14, ".");
+    line(39, 12, 49, 12, ".");
+    line(45, 5, 45, 15, ".");
+    rect(43, 8, 44, 9, "W");
+    rect(47, 10, 48, 11, "M");
+
+    // Outer reef: shallow water paths and two linked islands.
+    rect(39, 18, 47, 25, ".");
+    rect(45, 23, 53, 31, ".");
+    line(32, 18, 33, 18, ".");
+    line(34, 18, 37, 18, "~");
+    line(37, 18, 43, 18, ".");
+    line(45, 16, 45, 22, "~");
+    line(45, 22, 45, 30, ".");
+    line(42, 22, 51, 22, ".");
+    line(39, 27, 53, 27, ".");
+    rect(48, 19, 50, 21, "W");
+    rect(40, 29, 42, 30, "W");
+
+    // Southern expansion: garden margins, observatory hills, and long trails.
+    rect(3, 42, 14, 53, ".");
+    rect(18, 41, 34, 53, ".");
+    line(8, 37, 8, 47, ".");
+    line(5, 30, 5, 44, ".");
+    line(15, 35, 15, 41, ".");
+    line(15, 41, 26, 41, ".");
+    line(26, 41, 26, 50, ".");
+    line(14, 47, 18, 47, "~");
+    line(18, 47, 33, 47, ".");
+    line(24, 44, 32, 44, ".");
+    line(11, 52, 32, 52, ".");
+    rect(20, 42, 23, 43, "M");
+    rect(29, 42, 31, 43, "M");
+    rect(6, 49, 7, 50, "W");
+    rect(10, 43, 12, 44, "M");
+
+    // Small connective cuts that make the old world feel less boxed in.
+    line(30, 28, 37, 28, ".");
+    line(37, 28, 45, 28, "~");
+    line(45, 28, 51, 28, ".");
+    line(19, 30, 23, 30, ".");
+    line(23, 30, 23, 41, ".");
+    set(5, 33, ".");
+    set(34, 52, "C");
+
+    return {
+      cols: cols,
+      rows: rows,
+      terrain: grid.map(function (row) { return row.join(""); })
+    };
+  }
+
+  // ----- overworld from painted terrain -----
+  function buildOverworld() {
+    const terrain = buildExpandedTerrain(OW);
+    const cols = terrain.cols, rows = terrain.rows, T = terrain.terrain;
+    function code(x, y) { const r = T[y]; return (r && x >= 0 && x < r.length) ? r[x] : "W"; }
+    const land = new Set();   // where the cat can walk
+    const water = new Set();  // where swimmers can go
+    for (let y = 0; y < rows; y++) for (let x = 0; x < cols; x++) {
+      const c = code(x, y);
+      if (c === "." || c === "~" || c === "C" || c === "S") land.add(x + "," + y);
+      if (c === "W" || c === "~") water.add(x + "," + y);
+    }
+    const features = new Map(), coordOf = new Map();
+    owPosts.forEach(function (p) { const k = p.x + "," + p.y; features.set(k, p); coordOf.set(p.id, { x: p.x, y: p.y }); land.add(k); });
+    const special = new Map();
+    special.set(OW.door.x + "," + OW.door.y, {
+      x: OW.door.x, y: OW.door.y, type: "cave", target: "dungeon", hiddenUntilRelics: true,
+      kindLabel: "Cave", title: "Southern Dungeon Mouth", date: "Dungeon entrance",
+      summary: "The Text & Social Media dungeon is reached only after the long southern loop."
+    });
+    OW.stairs.forEach(function (st) {
+      special.set(st.ax + "," + st.ay, { type: "stairs", to: { x: st.bx, y: st.by } });
+      special.set(st.bx + "," + st.by, { type: "stairs", to: { x: st.ax, y: st.ay } });
+    });
+    OVERWORLD_SPECIALS.forEach(function (sp) {
+      special.set(sp.x + "," + sp.y, sp);
+      land.add(sp.x + "," + sp.y);
+    });
+    return {
+      id: "overworld", cols: cols, rows: rows, codeAt: code,
+      walkable: land, water: water, features: features, coordOf: coordOf, special: special,
+      door: OW.door, spawn: OW.spawn, gremlinLand: OW_LAND_GREMLINS, gremlinWater: OW_SWIMMERS
+    };
+  }
+
+  function buildDungeon() {
+    const N = Math.max(1, dgPosts.length);
+    const perRow = 3, roomW = 5, roomH = 5, gap = 3, pad = 1;
+    const numRows = Math.ceil(N / perRow);
+    const cols = pad * 2 + perRow * roomW + (perRow - 1) * gap;
+    const rows = pad * 2 + numRows * roomH + (numRows - 1) * gap + 4;
+    const walkable = new Set();
+    const features = new Map(), coordOf = new Map();
+    function addFloor(x, y) {
+      if (x > 0 && x < cols - 1 && y > 0 && y < rows - 1) walkable.add(x + "," + y);
+    }
+    function carveRect(x0, y0, w, h) {
+      for (let yy = y0; yy < y0 + h; yy++) for (let xx = x0; xx < x0 + w; xx++) addFloor(xx, yy);
+    }
+    function carveLine(x0, y0, x1, y1) {
+      if (x0 === x1) {
+        const lo = Math.min(y0, y1), hi = Math.max(y0, y1);
+        for (let yy = lo; yy <= hi; yy++) addFloor(x0, yy);
+      } else {
+        const lo = Math.min(x0, x1), hi = Math.max(x0, x1);
+        for (let xx = lo; xx <= hi; xx++) addFloor(xx, y0);
+      }
+    }
+    function room(col, row) {
+      const x = pad + col * (roomW + gap);
+      const y = pad + row * (roomH + gap);
+      return { x: x, y: y, cx: x + Math.floor(roomW / 2), cy: y + Math.floor(roomH / 2) };
+    }
+    for (let row = 0; row < numRows; row++) {
+      for (let col = 0; col < perRow; col++) {
+        if (row * perRow + col >= N) continue;
+        const r = room(col, row);
+        carveRect(r.x, r.y, roomW, roomH);
+        if (col > 0 && row * perRow + col - 1 < N) {
+          const left = room(col - 1, row);
+          carveLine(left.cx, left.cy, r.cx, r.cy);
+        }
+        if (row > 0 && (row - 1) * perRow + col < N) {
+          const up = room(col, row - 1);
+          carveLine(up.cx, up.cy, r.cx, r.cy);
+        }
+      }
+    }
+    dgPosts.forEach(function (p, i) {
+      const r = room(i % perRow, Math.floor(i / perRow));
+      features.set(r.cx + "," + r.cy, p);
+      coordOf.set(p.id, { x: r.cx, y: r.cy });
+    });
+    const stx = Math.floor(cols / 2), sty = rows - 2;
+    const hubY = rows - 5;
+    carveLine(stx, hubY, stx, sty);
+    carveLine(stx - 2, hubY, stx + 2, hubY);
+    const bottom = room(1, Math.max(0, numRows - 1));
+    carveLine(bottom.cx, bottom.cy, stx, hubY);
+    const special = new Map();
+    special.set(stx + "," + sty, { type: "exit" });
+    special.set(stx + "," + hubY, {
+      x: stx, y: hubY, type: "obelisk", kindLabel: "Monument",
+      title: "Archive Monument", date: "Landmark",
+      summary: "A monument at the heart of the text archive. Its key now rests somewhere out in the world."
+    });
+    return { id: "dungeon", cols: cols, rows: rows, codeAt: null, walkable: walkable, water: new Set(), features: features, coordOf: coordOf, special: special, spawn: { x: stx, y: sty }, gremlinLand: DG_GREMLINS, gremlinWater: 0 };
+  }
+
+  function buildBowCave() {
+    const cols = 9, rows = 7;
+    const walkable = new Set();
+    for (let y = 1; y <= 5; y++) for (let x = 1; x <= 7; x++) walkable.add(x + "," + y);
+    const special = new Map();
+    special.set("4,2", {
+      x: 4, y: 2, type: "old-man", kindLabel: "Old Man",
+      title: "Old Man", date: "Secret advice",
+      summary: OLD_MAN_DIALOGUE
+    });
+    special.set("4,3", {
+      x: 4, y: 3, type: "bow", item: "bow", kindLabel: "Item",
+      title: "Bow and Arrow", date: "Item",
+      summary: "A bow for the harder archive gremlins. Press Space to fire in the direction the cat is facing."
+    });
+    special.set("4,5", {
+      x: 4, y: 5, type: "exit", target: "overworld", kindLabel: "Cave mouth",
+      title: "Leave the old man's cave", date: "Exit",
+      summary: "Climb back to the gateway and test the bow in the archive realm."
+    });
+    return {
+      id: "bow-cave", cols: cols, rows: rows, codeAt: null,
+      walkable: walkable, water: new Set(), features: new Map(), coordOf: new Map(), special: special,
+      spawn: { x: 4, y: 4 }, gremlinLand: 0, gremlinWater: 0
+    };
+  }
+
+  const overworld = buildOverworld();
+  const dungeon = buildDungeon();
+  const bowCave = buildBowCave();
+
+  let L = overworld;
+  let cat = { x: overworld.spawn.x, y: overworld.spawn.y };
+  let facing = "right";
+  let facingVector = { dx: 1, dy: 0 };
+  let catFrontSprite = "";
+  let swordSwingTimer = null;
+  let swordSwingUntil = 0;
+
+  const grid = document.getElementById("map-grid");
+  const avatarEl = document.getElementById("avatar");
+  const viewport = document.getElementById("viewport");
+  const worldEl = document.getElementById("world");
+  function elid(id) { return document.getElementById(id); }
+  function setStatus(t) { const s = elid("status"); if (s) s.textContent = t; }
+  function tileSize() { return parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--tile")) || 48; }
+  function onRaft() { return L.id === "overworld" && L.codeAt(cat.x, cat.y) === "~"; }
+  function spriteEl() { return avatarEl.querySelector(".cat-sprite"); }
+  function rememberFrontSprite() {
+    const sprite = spriteEl();
+    if (sprite && !catFrontSprite) catFrontSprite = sprite.innerHTML;
+  }
+  function updateCatSprite() {
+    const sprite = spriteEl();
+    if (!sprite) return;
+    rememberFrontSprite();
+    const mode = facing === "up" ? "back" : "front";
+    if (sprite.dataset.mode === mode) return;
+    sprite.innerHTML = mode === "back" ? CAT_BACK_SVG : catFrontSprite;
+    sprite.dataset.mode = mode;
+  }
+  function nearWater(x, y) {
+    if (L.id !== "overworld") return false;
+    const dirs = [[1, 0], [-1, 0], [0, 1], [0, -1]];
+    for (const d of dirs) {
+      const code = L.codeAt(x + d[0], y + d[1]);
+      if (code === "W" || code === "~") return true;
+    }
+    return false;
+  }
+
+  function relicsComplete() { return collectedRelics.size === RELICS.length; }
+
+  // A special is only "visible" (rendered, walkable as a landmark, enterable)
+  // once any relic-gating on it is satisfied. The dungeon mouth stays hidden
+  // and blends into the terrain until all four relics are collected.
+  function visibleSpecialAt(c) {
+    const sp = L.special.get(c);
+    if (!sp) return null;
+    if (sp.hiddenUntilRelics && !relicsComplete()) return null;
+    return sp;
+  }
+
+  function tileMeta(x, y) {
+    const c = x + "," + y;
+    const classes = ["tile"];
+    const sp = visibleSpecialAt(c);
+    if (sp) {
+      const reg = regionAt(x, y); if (reg) classes.push("region-" + reg.id);
+      classes.push(sp.type === "exit" ? "stairs" : sp.type);
+      if ((sp.relic && collectedRelics.has(sp.relic)) || (sp.item && hasItem(sp.item))) classes.push("opened");
+      return { classes: classes, special: sp };
+    }
+    const post = L.features.get(c);
+    if (post) {
+      classes.push("article", post.kind);
+      const reg = regionById.get(post.region); if (reg) classes.push("region-" + reg.id);
+      if (visited.has(post.id)) classes.push("visited");
+      return { classes: classes, post: post };
+    }
+    if (L.id !== "overworld") { classes.push(L.walkable.has(c) ? "dungeon-floor" : "dungeon-wall"); return { classes: classes }; }
+    const code = L.codeAt(x, y);
+    if (code === "W") { classes.push("water"); return { classes: classes }; }
+    if (code === "M") { classes.push("mountain"); return { classes: classes }; }
+    if (code === "~") { classes.push("raft"); return { classes: classes }; }
+    const reg = regionAt(x, y); if (reg) classes.push("region-" + reg.id);
+    if (nearWater(x, y)) classes.push("shore");
+    const h = hashStr(x + ":" + y); const r = (h % 1000) / 1000;
+    if (r < 0.05) classes.push("forest");
+    else if (r < 0.10) classes.push("hill");
+    else {
+      classes.push("grass");
+      const rr = (hashStr("detail:" + x + ":" + y) % 1000) / 1000;
+      if (rr < 0.045) classes.push("flowers");
+      else if (rr > 0.965) classes.push("ruin");
+      else if (reg && reg.id === "aibfx" && rr > 0.88) classes.push("crystal-field");
+    }
+    return { classes: classes };
+  }
+
+  function makeTileEl(x, y) {
+    const meta = tileMeta(x, y);
+    const isBtn = L.features.has(x + "," + y) || !!visibleSpecialAt(x + "," + y);
+    const node = document.createElement(isBtn ? "button" : "div");
+    node.className = meta.classes.join(" ");
+    node.dataset.x = x; node.dataset.y = y;
+    if (isBtn) node.type = "button";
+    if (meta.post) { node.setAttribute("aria-label", meta.post.title); node.innerHTML = '<span class="level-box">' + meta.post.token + '</span>'; }
+    else if (meta.special) {
+      node.setAttribute("aria-label", meta.special.title || (meta.special.type === "cave" ? "Cave entrance" : "Stairs"));
+      if (meta.special.type === "old-man") node.innerHTML = OLD_MAN_SVG;
+    }
+    return node;
+  }
+
+  function buildMap() {
+    grid.innerHTML = "";
+    const frag = document.createDocumentFragment();
+    for (let y = 0; y < L.rows; y++) for (let x = 0; x < L.cols; x++) frag.appendChild(makeTileEl(x, y));
+    grid.appendChild(frag);
+  }
+
+  // ----- camera -----
+  let cameraReady = false, camAnim = null, levelWarpInFlight = false;
+  const reducedMotion = !!(window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+  function centerCamera(instant) {
+    const t = tileSize();
+    const tx = Math.max(0, cat.x * t + t / 2 - viewport.clientWidth / 2);
+    const ty = Math.max(0, cat.y * t + t / 2 - viewport.clientHeight / 2);
+    if (camAnim !== null) { cancelAnimationFrame(camAnim); camAnim = null; }
+    if (instant || reducedMotion) { viewport.scrollLeft = tx; viewport.scrollTop = ty; return; }
+    const sx = viewport.scrollLeft, sy = viewport.scrollTop, dx = tx - sx, dy = ty - sy;
+    if (Math.abs(dx) < 1 && Math.abs(dy) < 1) { viewport.scrollLeft = tx; viewport.scrollTop = ty; return; }
+    const start = performance.now(), dur = 160;
+    function step(now) {
+      const p = Math.min(1, (now - start) / dur), e = p * (2 - p);
+      viewport.scrollLeft = sx + dx * e; viewport.scrollTop = sy + dy * e;
+      if (p < 1) camAnim = requestAnimationFrame(step); else camAnim = null;
+    }
+    camAnim = requestAnimationFrame(step);
+  }
+
+  // Smoothly pan the camera to an arbitrary tile (not just the cat) over `dur`
+  // ms, then run `done`. Used by the dungeon-reveal cinematic.
+  function panToTile(cx, cy, dur, done) {
+    const t = tileSize();
+    const tx = Math.max(0, cx * t + t / 2 - viewport.clientWidth / 2);
+    const ty = Math.max(0, cy * t + t / 2 - viewport.clientHeight / 2);
+    if (camAnim !== null) { cancelAnimationFrame(camAnim); camAnim = null; }
+    const sx = viewport.scrollLeft, sy = viewport.scrollTop, dx = tx - sx, dy = ty - sy;
+    if (Math.abs(dx) < 1 && Math.abs(dy) < 1) { if (done) done(); return; }
+    const start = performance.now();
+    function step(now) {
+      const p = Math.min(1, (now - start) / dur), e = p * (2 - p);
+      viewport.scrollLeft = sx + dx * e; viewport.scrollTop = sy + dy * e;
+      if (p < 1) camAnim = requestAnimationFrame(step); else { camAnim = null; if (done) done(); }
+    }
+    camAnim = requestAnimationFrame(step);
+  }
+
+  function zoneLabel() {
+    if (L.id === "dungeon") return "Dungeon: Text & Social Media";
+    if (L.id === "bow-cave") return "Old Man's Cave";
+    if (onRaft()) return "On the raft";
+    const reg = regionAt(cat.x, cat.y);
+    if (reg) return reg.id === "cluster" ? (reg.name + " (island)") : reg.name;
+    return "Overworld";
+  }
+
+  function updateCard() {
+    const c = cat.x + "," + cat.y;
+    const sp = visibleSpecialAt(c);
+    const post = L.features.get(c);
+    const openLink = elid("open-link"), floatOpen = elid("float-open");
+    const titleBar = elid("mobile-title-bar");
+    elid("region-chip").textContent = zoneLabel();
+    elid("visited-chip").textContent = visited.size + " / " + POSTS.length + " read";
+    elid("location").textContent = zoneLabel();
+    function setFab(on) { if (on) floatOpen.classList.add("visible"); else floatOpen.classList.remove("visible"); }
+
+    if (post) {
+      elid("kind").textContent = (post.kindLabel || post.kind);
+      elid("title").textContent = post.title;
+      elid("date").textContent = post.date;
+      elid("summary").textContent = post.summary;
+      const href = resolveUrl(post.url);
+      openLink.href = href; floatOpen.href = href; openLink.classList.remove("disabled"); setFab(true);
+      if (isExternalUrl(post.url)) { openLink.target = "_blank"; openLink.rel = "noopener noreferrer"; floatOpen.target = "_blank"; floatOpen.rel = "noopener noreferrer"; openLink.textContent = "Open post ↗"; floatOpen.textContent = "Open ↗"; }
+      else { openLink.removeAttribute("target"); openLink.removeAttribute("rel"); openLink.textContent = "Open post"; floatOpen.textContent = "Open"; }
+      setStatus("Press Enter to open this post.");
+      titleBar.classList.add("on-article");
+      elid("mtb-region").textContent = zoneLabel(); elid("mtb-title").textContent = post.title;
+      elid("mtb-action").textContent = "Open ↗"; elid("mtb-date").textContent = post.date; elid("mtb-summary").textContent = post.summary;
+    } else {
+      openLink.href = "#"; openLink.classList.add("disabled"); setFab(false);
+      titleBar.classList.remove("on-article");
+      elid("mtb-region").textContent = zoneLabel(); elid("mtb-action").textContent = ""; elid("mtb-date").textContent = ""; elid("mtb-summary").textContent = "";
+      if (sp && sp.type !== "cave" && sp.type !== "exit" && sp.type !== "stairs") { showSpecial(sp); }
+      else if (sp && sp.type === "cave") { elid("kind").textContent = sp.kindLabel || "Cave"; elid("title").textContent = sp.title || "A dark cave"; elid("date").textContent = sp.date || "Dungeon entrance"; elid("summary").textContent = sp.summary || "Step in to descend into the dungeon where the Text & Social Media posts are sealed."; setStatus(sp.target === "bow-cave" ? "Walk in to visit the old man." : "Walk in to enter the dungeon."); elid("mtb-title").textContent = sp.title || "Cave entrance"; }
+      else if (sp && sp.type === "exit") { elid("kind").textContent = sp.kindLabel || "Stairs"; elid("title").textContent = sp.title || "Stairs out"; elid("date").textContent = sp.date || (L.id === "bow-cave" ? "Cave exit" : "Dungeon exit"); elid("summary").textContent = sp.summary || "Step here to climb back to the overworld."; setStatus("Walk onto the exit to leave."); elid("mtb-title").textContent = sp.title || "Stairs out"; }
+      else if (sp && sp.type === "stairs") { elid("kind").textContent = "Stairs"; elid("title").textContent = "Mountain stairs"; elid("date").textContent = "Passage"; elid("summary").textContent = "These stairs tunnel through the mountains to the other side."; setStatus("Walk on to take the stairs."); elid("mtb-title").textContent = "Stairs"; }
+      else if (onRaft()) { elid("kind").textContent = "Raft"; elid("title").textContent = "Crossing the lake"; elid("date").textContent = "Boat"; elid("summary").textContent = "Keep going to reach the far shore. Watch for swimmers!"; setStatus("Crossing by boat..."); elid("mtb-title").textContent = "On the raft"; }
+      else { elid("kind").textContent = zoneLabel(); elid("title").textContent = zoneLabel(); elid("date").textContent = L.id === "overworld" ? "Overworld" : (L.id === "dungeon" ? "Dungeon" : "Cave"); elid("summary").textContent = L.id === "dungeon" ? "Grab the posts sealed here, then take the stairs out." : (L.id === "bow-cave" ? "Talk to the old man, take the bow, then head back out." : "Walk the corridors. Labeled boxes are posts. Rafts cross lakes; caves and stairs lead elsewhere."); setStatus("Explore."); elid("mtb-title").textContent = "Exploring"; }
+    }
+  }
+
+  function buildLegend() {
+    const legend = elid("legend");
+    legend.innerHTML = "";
+    const byRegion = new Map();
+    POSTS.forEach(function (p) { if (!byRegion.has(p.region)) byRegion.set(p.region, []); byRegion.get(p.region).push(p); });
+    REGIONS.forEach(function (r) {
+      const items = byRegion.get(r.id); if (!items || !items.length) return;
+      const details = document.createElement("details"); details.className = "legend-section"; details.open = (r.id === REGIONS[0].id);
+      const sum = document.createElement("summary"); sum.textContent = r.name + " (" + items.length + ")"; details.appendChild(sum);
+      const div = document.createElement("div"); div.className = "items";
+      items.forEach(function (p) { const b = document.createElement("button"); b.type = "button"; b.textContent = p.token + " " + p.title; b.addEventListener("click", function () { gotoPost(p); }); div.appendChild(b); });
+      details.appendChild(div); legend.appendChild(details);
+    });
+  }
+
+  function saveRelics() {
+    try { sessionStorage.setItem(RELIC_KEY, JSON.stringify(Array.from(collectedRelics))); } catch (e) {}
+  }
+
+  function itemKey(item) {
+    return ITEM_KEY_PREFIX + item;
+  }
+
+  function itemLabel(item) {
+    return ITEM_LABELS[item] || item;
+  }
+
+  function hasItem(item) {
+    if (!item) return false;
+    try { return localStorage.getItem(itemKey(item)) === "true"; }
+    catch (e) { return false; }
+  }
+
+  function grantItem(item) {
+    if (!item) return false;
+    const alreadyHad = hasItem(item);
+    try { localStorage.setItem(itemKey(item), "true"); } catch (e) {}
+    updateItemUI();
+    return !alreadyHad;
+  }
+
+  function updateItemUI() {
+    const chip = elid("item-chip");
+    if (chip) chip.textContent = hasItem("bow") ? "Bow: found" : "Bow: hidden";
+  }
+
+  function updateRelicUI() {
+    const chip = elid("relic-chip");
+    if (chip) chip.textContent = collectedRelics.size + " / " + RELICS.length + " relics";
+    const list = elid("relic-list");
+    if (list) {
+      list.innerHTML = "";
+      RELICS.forEach(function (r) {
+        const item = document.createElement("div");
+        item.className = "relic" + (collectedRelics.has(r.id) ? " collected" : "");
+        item.textContent = collectedRelics.has(r.id) ? r.title : r.label + " ?";
+        list.appendChild(item);
+      });
+    }
+    const q = elid("quest-title");
+    if (q) q.textContent = collectedRelics.size === RELICS.length ? "The archive realm is awake" : "Wake the archive shrines";
+  }
+
+  function refreshSpecialTile(sp) {
+    if (!sp || typeof sp.x !== "number" || typeof sp.y !== "number") return;
+    const tile = grid.querySelector('.tile[data-x="' + sp.x + '"][data-y="' + sp.y + '"]');
+    if (!tile) return;
+    tile.classList.toggle("opened", !!((sp.relic && collectedRelics.has(sp.relic)) || (sp.item && hasItem(sp.item))));
+    tile.classList.add("just-revealed");
+    setTimeout(function () { tile.classList.remove("just-revealed"); }, 700);
+  }
+
+  function collectRelic(sp) {
+    if (!sp || !sp.relic) return false;
+    if (collectedRelics.has(sp.relic)) {
+      setStatus(sp.title + " is already awake.");
+      return true;
+    }
+    collectedRelics.add(sp.relic);
+    saveRelics();
+    updateRelicUI();
+    refreshSpecialTile(sp);
+    setStatus("Relic found: " + sp.title + ".");
+    buildMiniMap();
+    updateMiniMap();
+    // The 4th relic (in any order) wakes the realm and opens the dungeon mouth.
+    if (relicsComplete() && L.id === "overworld") revealDungeonMouth();
+    return true;
+  }
+
+  // Replace a single tile element in place with a freshly built one (used to
+  // pop the dungeon mouth into existence the instant the last relic is found).
+  function rebuildTileAt(x, y) {
+    const old = grid.querySelector('.tile[data-x="' + x + '"][data-y="' + y + '"]');
+    if (!old) return null;
+    const fresh = makeTileEl(x, y);
+    if (x === cat.x && y === cat.y) fresh.classList.add("current");
+    old.replaceWith(fresh);
+    return fresh;
+  }
+
+  // Cinematic for completing the relic quest: lock input, rebuild the now-open
+  // dungeon mouth, pan the camera to it as it shimmers in, then return to the cat.
+  function revealDungeonMouth() {
+    const mouth = overworld.door;
+    levelWarpInFlight = true;                 // freeze movement/weapons during the cinematic
+    rebuildTileAt(mouth.x, mouth.y);          // relicsComplete() is now true, so it renders as a cave
+    buildMiniMap(); updateMiniMap();
+    setStatus("All four relics wake — the southern dungeon mouth opens!");
+    if (reducedMotion) { levelWarpInFlight = false; return; }
+    panToTile(mouth.x, mouth.y, 650, function () {
+      const tile = grid.querySelector('.tile[data-x="' + mouth.x + '"][data-y="' + mouth.y + '"]');
+      if (tile) tile.classList.add("just-revealed");
+      setTimeout(function () {
+        panToTile(cat.x, cat.y, 480, function () {
+          if (tile) tile.classList.remove("just-revealed");
+          centerCamera(true);
+          levelWarpInFlight = false;
+        });
+      }, 1100);
+    });
+  }
+
+  function collectItem(sp) {
+    if (!sp || !sp.item) return false;
+    const newlyCollected = grantItem(sp.item);
+    const label = itemLabel(sp.item);
+    const useText = sp.item === "bow" ? "Press Space to fire." : "Press Space to slash.";
+    refreshSpecialTile(sp);
+    setStatus(newlyCollected
+      ? label + " found. " + useText
+      : "You already have the " + label.toLowerCase() + ".");
+    buildMiniMap();
+    updateMiniMap();
+    return true;
+  }
+
+  function specialKind(sp) {
+    if (!sp) return "Landmark";
+    if (sp.kindLabel) return sp.kindLabel;
+    return sp.type.charAt(0).toUpperCase() + sp.type.slice(1);
+  }
+
+  function showSpecial(sp) {
+    const claimed = !!((sp.relic && collectedRelics.has(sp.relic)) || (sp.item && hasItem(sp.item)));
+    const openLink = elid("open-link"), floatOpen = elid("float-open");
+    const itemName = sp.item ? itemLabel(sp.item) : "";
+    const itemLower = itemName.toLowerCase();
+    const itemUse = sp.item === "bow" ? "Press Space to fire." : "Press Space to slash.";
+    elid("kind").textContent = specialKind(sp);
+    elid("title").textContent = claimed ? sp.title + (sp.item ? " taken" : " awakened") : sp.title;
+    elid("date").textContent = sp.date || "Landmark";
+    elid("summary").textContent = sp.summary || "An old landmark in the archive realm.";
+    setStatus(sp.item ? (claimed ? "The " + itemLower + " is yours. " + itemUse : "Press Enter to take the " + itemLower + ".")
+      : sp.relic ? (claimed ? "Relic already claimed." : "Press Enter to claim the relic.")
+      : "Press Enter to inspect.");
+    elid("mobile-title-bar").classList.add("on-article");
+    elid("mtb-title").textContent = sp.title;
+    elid("mtb-action").textContent = sp.item ? (claimed ? "Taken" : "Take")
+      : sp.relic ? (claimed ? "Claimed" : "Claim")
+      : "Read";
+    elid("mtb-date").textContent = sp.date || "Landmark";
+    elid("mtb-summary").textContent = sp.summary || "";
+    openLink.href = "#";
+    openLink.removeAttribute("target");
+    openLink.removeAttribute("rel");
+    openLink.textContent = sp.item ? (claimed ? itemName + " found" : "Take " + itemLower)
+      : sp.relic ? (claimed ? "Relic claimed" : "Claim relic")
+      : "Inspect";
+    openLink.classList.toggle("disabled", !!(sp.item && claimed));
+    floatOpen.href = "#";
+    floatOpen.removeAttribute("target");
+    floatOpen.removeAttribute("rel");
+    floatOpen.textContent = sp.item ? "Take" : sp.relic ? "Claim" : "Inspect";
+    floatOpen.classList.toggle("visible", !claimed || (!sp.item && !sp.relic));
+  }
+
+  function activateSpecial(sp) {
+    if (!sp) return false;
+    if (sp.type === "cave" || sp.type === "exit" || sp.type === "stairs") return false;
+    if (sp.item) return collectItem(sp);
+    if (sp.relic) return collectRelic(sp);
+    if (sp.summary) {
+      setStatus(sp.summary);
+      return true;
+    }
+    return false;
+  }
+
+  function buildMiniMap() {
+    const mini = elid("minimap");
+    if (!mini) return;
+    mini.innerHTML = "";
+    mini.style.gridTemplateColumns = "repeat(" + L.cols + ", 4px)";
+    for (let y = 0; y < L.rows; y++) {
+      for (let x = 0; x < L.cols; x++) {
+        const c = x + "," + y;
+        const cell = document.createElement("span");
+        const cls = ["mini-cell"];
+        if (L.id !== "overworld") {
+          cls.push(L.walkable.has(c) ? "floor" : "wall");
+        } else {
+          const code = L.codeAt(x, y);
+          cls.push((code === "W" || code === "~") ? "water" : "land");
+        }
+        if (L.features.has(c)) cls.push("article");
+        if (visibleSpecialAt(c)) cls.push("special");
+        cell.className = cls.join(" ");
+        cell.dataset.x = x;
+        cell.dataset.y = y;
+        mini.appendChild(cell);
+      }
+    }
+  }
+
+  function updateMiniMap() {
+    const mini = elid("minimap");
+    if (!mini) return;
+    const old = mini.querySelector(".mini-cell.current");
+    if (old) old.classList.remove("current");
+    const cur = mini.querySelector('.mini-cell[data-x="' + cat.x + '"][data-y="' + cat.y + '"]');
+    if (cur) cur.classList.add("current");
+  }
+
+  function render(stepped) {
+    const t = tileSize();
+    avatarEl.style.transform = "translate(" + (cat.x * t) + "px," + (cat.y * t) + "px)";
+    avatarEl.classList.toggle("face-left", facing === "left");
+    avatarEl.classList.toggle("face-up", facing === "up");
+    avatarEl.classList.toggle("face-down", facing === "down");
+    avatarEl.classList.toggle("on-boat", onRaft());
+    updateCatSprite();
+    if (stepped) { avatarEl.classList.remove("step"); requestAnimationFrame(function () { avatarEl.classList.add("step"); setTimeout(function () { avatarEl.classList.remove("step"); }, 160); }); }
+    const old = grid.querySelector(".tile.current"); if (old) old.classList.remove("current");
+    const cur = grid.querySelector('.tile[data-x="' + cat.x + '"][data-y="' + cat.y + '"]'); if (cur) cur.classList.add("current");
+    updateCard();
+    updateRelicUI();
+    updateItemUI();
+    updateMiniMap();
+    centerCamera(!cameraReady); cameraReady = true;
+  }
+
+  // Leaving for another world (game_mode.html) — launch the cat UP off the top
+  // of the screen and set the shared flag so the destination drops it back DOWN.
+  function warpOutToWorld(href) {
+    if (levelWarpInFlight) return;
+    levelWarpInFlight = true;
+    const sprite = spriteEl();
+    avatarEl.classList.remove("face-left", "face-up", "face-down", "step");
+    avatarEl.classList.add("warping");
+    sprite.classList.remove("warp-drop", "warp-launch");
+    void sprite.offsetWidth;
+    sprite.classList.add("warp-launch");
+    emitSparkles(avatarEl, 16);
+    setStatus("Warping...");
+    try { sessionStorage.setItem("worldWarp", "1"); } catch (e) { /* ignore */ }
+    setTimeout(function () { window.location.href = href; }, 560);
+  }
+
+  function openPost(post) {
+    markVisited(post.id);
+    const node = L.coordOf.get(post.id);
+    if (node) { const tile = grid.querySelector('.tile[data-x="' + node.x + '"][data-y="' + node.y + '"]'); if (tile) tile.classList.add("visited"); }
+    const href = resolveUrl(post.url);
+    if (isExternalUrl(post.url)) window.open(href, "_blank", "noopener,noreferrer");
+    else if (post.kind === "portal") warpOutToWorld(href);
+    else window.location.href = href;
+  }
+
+  function gotoPost(post) {
+    const lvl = (post.region === DUNGEON_REGION) ? dungeon : overworld;
+    const co = lvl.coordOf.get(post.id); if (!co) return;
+    if (L !== lvl) loadLevel(lvl, co); else { cat = { x: co.x, y: co.y }; render(true); }
+    worldEl.focus();
+  }
+
+  function emitSparkles(host, count) {
+    for (let i = 0; i < count; i++) {
+      const s = document.createElement("span");
+      s.className = "sparkle";
+      const ang = Math.random() * Math.PI * 2;
+      const dist = 16 + Math.random() * 46;
+      s.style.setProperty("--sx", Math.cos(ang) * dist + "px");
+      s.style.setProperty("--sy", Math.sin(ang) * dist - 26 + "px");
+      s.style.animationDelay = Math.random() * 0.18 + "s";
+      s.textContent = Math.random() < 0.5 ? "✦" : "✧";
+      host.appendChild(s);
+      setTimeout(function () { s.remove(); }, 950);
+    }
+  }
+
+  function playLevelWarpIn() {
+    const sprite = spriteEl();
+    avatarEl.classList.add("warping");
+    avatarEl.classList.remove("face-left", "face-up", "face-down", "step");
+    sprite.classList.remove("warp-launch", "warp-drop");
+    void sprite.offsetWidth;
+    sprite.classList.add("warp-drop");
+    setTimeout(function () { emitSparkles(avatarEl, 18); }, 360);
+    setTimeout(function () {
+      sprite.classList.remove("warp-drop");
+      avatarEl.classList.remove("warping");
+      levelWarpInFlight = false;
+    }, 720);
+  }
+
+  function loadLevel(level, pos, opts) {
+    L = level;
+    document.documentElement.style.setProperty("--cols", L.cols);
+    document.documentElement.style.setProperty("--rows", L.rows);
+    document.body.classList.toggle("in-dungeon", L.id !== "overworld");
+    buildMap();
+    buildMiniMap();
+    cat = { x: pos.x, y: pos.y }; facing = "right"; facingVector = { dx: 1, dy: 0 };
+    cameraReady = false;
+    spawnGremlins();
+    render(false);
+    requestAnimationFrame(function () { cameraReady = false; centerCamera(true); cameraReady = true; gremlins.forEach(function (g) { renderGremlin(g, false); }); });
+    if (opts && opts.warpIn) requestAnimationFrame(playLevelWarpIn);
+  }
+
+  function warpToLevel(level, pos, statusText) {
+    if (levelWarpInFlight) return;
+    levelWarpInFlight = true;
+    const sprite = spriteEl();
+    avatarEl.classList.remove("face-left", "face-up", "face-down", "step");
+    avatarEl.classList.add("warping");
+    sprite.classList.remove("warp-drop", "warp-launch");
+    void sprite.offsetWidth;
+    sprite.classList.add("warp-launch");
+    emitSparkles(avatarEl, 16);
+    setStatus(statusText || "Warping...");
+    setTimeout(function () {
+      sprite.classList.remove("warp-launch");
+      loadLevel(level, pos, { warpIn: true });
+    }, 560);
+  }
+
+  function enterDungeon() { warpToLevel(dungeon, dungeon.spawn, "You descend into the dungeon..."); }
+  function exitDungeon() { warpToLevel(overworld, { x: overworld.door.x, y: overworld.door.y - 1 }, "Back to the overworld."); }
+  function enterBowCave() { warpToLevel(bowCave, bowCave.spawn, "You duck into the old man's cave..."); }
+  function exitBowCave() { warpToLevel(overworld, { x: BOW_CAVE_ENTRY.x, y: BOW_CAVE_ENTRY.y - 1 }, "Back to the gateway."); }
+  function enterCave(sp) {
+    if (sp && sp.target === "bow-cave") enterBowCave();
+    else enterDungeon();
+  }
+  function exitLevel() {
+    if (L.id === "bow-cave") exitBowCave();
+    else exitDungeon();
+  }
+
+  function canMove(x, y) { return x >= 0 && x < L.cols && y >= 0 && y < L.rows && L.walkable.has(x + "," + y); }
+
+  function setFacing(dx, dy) {
+    if (dx < 0) facing = "left";
+    else if (dx > 0) facing = "right";
+    else if (dy < 0) facing = "up";
+    else if (dy > 0) facing = "down";
+    if (dx !== 0 || dy !== 0) facingVector = { dx: dx, dy: dy };
+  }
+
+  function move(dx, dy) {
+    if (levelWarpInFlight) return;
+    setFacing(dx, dy);
+    const nx = cat.x + dx, ny = cat.y + dy;
+    if (!canMove(nx, ny)) {
+      const blockedWater = (L.id === "overworld" && L.codeAt(nx, ny) === "W");
+      render(false);
+      setStatus(blockedWater ? "Deep water. Find a raft." : (L.id !== "overworld" ? "A cave wall blocks the way." : "Mountains block the way."));
+      return;
+    }
+    cat = { x: nx, y: ny };
+    render(true);
+    // entering special tiles (a hidden, relic-gated mouth reads as plain ground)
+    const sp = visibleSpecialAt(cat.x + "," + cat.y);
+    // Caves require a deliberate action (Enter / tap) to enter, so stepping
+    // onto the mouth just prompts the player rather than warping immediately.
+    if (sp && sp.type === "cave") { setStatus("Press Enter to go inside."); checkCatch(); return; }
+    if (sp && sp.type === "exit") { exitLevel(); return; }
+    // Mountain stairs also wait for a deliberate Enter / tap rather than
+    // carrying the player through the moment they step on.
+    if (sp && sp.type === "stairs") { setStatus("Press Enter to take the stairs."); checkCatch(); return; }
+    if (sp && (sp.relic || sp.item)) activateSpecial(sp);
+    checkCatch();
+  }
+
+  function interact() {
+    if (levelWarpInFlight) return;
+    const c = cat.x + "," + cat.y;
+    const sp = visibleSpecialAt(c);
+    if (sp && sp.type === "cave") { enterCave(sp); return; }
+    if (sp && sp.type === "exit") { exitLevel(); return; }
+    if (sp && sp.type === "stairs") { cat = { x: sp.to.x, y: sp.to.y }; render(true); return; }
+    if (activateSpecial(sp)) return;
+    const post = L.features.get(c);
+    if (post) openPost(post);
+  }
+
+  function swordTarget() {
+    return { x: cat.x + facingVector.dx, y: cat.y + facingVector.dy };
+  }
+
+  function clearSwordSwingClasses() {
+    avatarEl.classList.remove("sword-swing", "sword-left", "sword-right", "sword-up", "sword-down");
+  }
+
+  function defeatGremlin(g) {
+    if (!g || !hasItem("bow")) return false;
+    gremlins = gremlins.filter(function (x) { return x !== g; });
+    g.el.classList.add("defeated");
+    setTimeout(function () { g.el.remove(); }, 220);
+    setStatus(gremlins.length ? "Arrow hit. " + gremlins.length + " gremlins remain." : "The gremlins are gone.");
+    return true;
+  }
+
+  function deflectSwordTargets() {
+    let hits = 0;
+    const target = swordTarget();
+    for (let i = shots.length - 1; i >= 0; i--) {
+      const p = shots[i];
+      if (p.x === target.x && p.y === target.y) {
+        p.el.remove();
+        shots.splice(i, 1);
+        hits += 1;
+      }
+    }
+    return hits;
+  }
+
+  function swingSword() {
+    if (!hasItem("sword")) {
+      setStatus("The old man's cave has the weapon you need.");
+      return;
+    }
+    if (swordSwingTimer) clearTimeout(swordSwingTimer);
+    clearSwordSwingClasses();
+    void avatarEl.offsetWidth;
+    swordSwingUntil = Date.now() + 190;
+    avatarEl.classList.add("sword-swing", "sword-" + facing);
+    const hits = deflectSwordTargets();
+    setStatus(hits ? "The sword knocks sparks from a fireball. Gremlins still need arrows." : "The sword glances off archive gremlins. Find the bow.");
+    swordSwingTimer = setTimeout(function () {
+      swordSwingUntil = 0;
+      clearSwordSwingClasses();
+      swordSwingTimer = null;
+    }, 210);
+  }
+
+  let arrowCooldownUntil = 0;
+  function arrowClass(dx, dy) {
+    if (dx < 0) return "arrow-left";
+    if (dy < 0) return "arrow-up";
+    if (dy > 0) return "arrow-down";
+    return "arrow-right";
+  }
+
+  function fireArrow() {
+    if (levelWarpInFlight) return;
+    if (!hasItem("bow")) {
+      if (hasItem("sword")) swingSword();
+      else setStatus("Find the old man's bow first.");
+      return;
+    }
+    const now = Date.now();
+    if (now < arrowCooldownUntil) return;
+    arrowCooldownUntil = now + 260;
+    const t = tileSize();
+    const d = facingVector;
+    const el = document.createElement("div");
+    el.className = "arrow " + arrowClass(d.dx, d.dy);
+    el.setAttribute("aria-hidden", "true");
+    worldEl.appendChild(el);
+    const p = { x: cat.x, y: cat.y, prevX: cat.x, prevY: cat.y, dx: d.dx, dy: d.dy, el: el, life: 0 };
+    arrows.push(p);
+    p.el.style.transform = "translate(" + (p.x * t) + "px," + (p.y * t) + "px)";
+    setStatus("Arrow fired.");
+    advanceArrows();
+  }
+
+  // ----- gremlins + projectiles -----
+  let gremlins = [], shots = [], arrows = [];
+  let moveTimer = null, shootTimer = null, shotTimer = null, caughtInFlight = false;
+  window.addEventListener("pageshow", function () { caughtInFlight = false; });
+
+  function randomFar(domain) {
+    const cells = Array.from(domain);
+    if (!cells.length) return null;
+    for (let i = 0; i < 60; i++) {
+      const c = cells[Math.floor(Math.random() * cells.length)].split(",");
+      const x = +c[0], y = +c[1];
+      if (Math.abs(x - cat.x) + Math.abs(y - cat.y) >= 6) return { x: x, y: y };
+    }
+    const c = cells[Math.floor(Math.random() * cells.length)].split(",");
+    return { x: +c[0], y: +c[1] };
+  }
+
+  function makeGremlinEl(cls) { const d = document.createElement("div"); d.className = "gremlin" + (cls ? " " + cls : ""); d.setAttribute("aria-hidden", "true"); d.innerHTML = GREMLIN_SVG; return d; }
+  function renderGremlin(g, stepped) {
+    const t = tileSize();
+    g.el.style.transform = "translate(" + (g.x * t) + "px," + (g.y * t) + "px)";
+    if (stepped) { g.el.classList.remove("step"); requestAnimationFrame(function () { g.el.classList.add("step"); setTimeout(function () { g.el.classList.remove("step"); }, 340); }); }
+  }
+  function clearShots() { shots.forEach(function (p) { p.el.remove(); }); shots = []; }
+  function clearArrows() { arrows.forEach(function (p) { p.el.remove(); }); arrows = []; }
+  function clearGremlins() {
+    if (moveTimer) { clearInterval(moveTimer); moveTimer = null; }
+    if (shootTimer) { clearInterval(shootTimer); shootTimer = null; }
+    if (shotTimer) { clearInterval(shotTimer); shotTimer = null; }
+    gremlins.forEach(function (g) { g.el.remove(); }); gremlins = [];
+    clearShots();
+    clearArrows();
+  }
+
+  // The patrol range for shooting gremlins: the whole dungeon, or just the
+  // southeastern square before the dungeon mouth in the overworld. Anywhere
+  // else has no shooters, so this returns an empty set and none are spawned.
+  function shooterDomain(level) {
+    if (level.id === "dungeon") return level.walkable;
+    if (level.id !== "overworld") return new Set();
+    const z = OW_SHOOTER_ZONE, cells = new Set();
+    level.walkable.forEach(function (k) {
+      const c = k.split(","), x = +c[0], y = +c[1];
+      if (x >= z.x0 && x <= z.x1 && y >= z.y0 && y <= z.y1) cells.add(k);
+    });
+    return cells;
+  }
+
+  function spawnGremlins() {
+    clearGremlins();
+    const nLand = L.gremlinLand || 0, nWater = L.gremlinWater || 0;
+    const shooterLimit = L.id === "dungeon" ? DG_SHOOTERS : (L.id === "overworld" ? OW_SHOOTERS : 0);
+    const shootZone = shooterLimit ? shooterDomain(L) : new Set();
+    const shooterCount = shootZone.size ? shooterLimit : 0;
+    for (let i = 0; i < nLand; i++) {
+      const shooter = i < shooterCount;
+      const el = makeGremlinEl(shooter ? "shooter" : null); worldEl.appendChild(el);
+      const domain = shooter ? shootZone : L.walkable;
+      const p = randomFar(domain) || { x: cat.x, y: cat.y };
+      const g = { x: p.x, y: p.y, prev: null, el: el, shooter: shooter, domain: domain };
+      gremlins.push(g); renderGremlin(g, false);
+    }
+    for (let i = 0; i < nWater; i++) {
+      if (!L.water || !L.water.size) break;
+      const el = makeGremlinEl("swimmer"); worldEl.appendChild(el);
+      const p = randomFar(L.water) || { x: cat.x, y: cat.y };
+      const g = { x: p.x, y: p.y, prev: null, el: el, shooter: false, domain: L.water };
+      gremlins.push(g); renderGremlin(g, false);
+    }
+    moveTimer = setInterval(tickGremlins, 620);
+    shootTimer = setInterval(fireShots, 1500);
+    shotTimer = setInterval(advanceProjectiles, 150);
+  }
+
+  function tickGremlins() {
+    const dirs = [[1, 0], [-1, 0], [0, 1], [0, -1]];
+    for (const g of gremlins) {
+      const opts = [];
+      for (const d of dirs) { const nx = g.x + d[0], ny = g.y + d[1]; if (!g.domain.has(nx + "," + ny)) continue; if (g.prev && nx === g.prev.x && ny === g.prev.y) continue; opts.push({ x: nx, y: ny }); }
+      let pick;
+      if (opts.length) pick = opts[Math.floor(Math.random() * opts.length)];
+      else if (g.prev && g.domain.has(g.prev.x + "," + g.prev.y)) pick = g.prev;
+      else { const p = randomFar(g.domain); if (!p) continue; g.x = p.x; g.y = p.y; g.prev = null; renderGremlin(g, false); continue; }
+      g.prev = { x: g.x, y: g.y }; g.x = pick.x; g.y = pick.y; renderGremlin(g, true);
+      if (g.x === cat.x && g.y === cat.y) { caught(g); return; }
+    }
+  }
+
+  function aimDir(g) {
+    const dx = cat.x - g.x, dy = cat.y - g.y;
+    if (Math.abs(dx) >= Math.abs(dy)) return { dx: dx > 0 ? 1 : -1, dy: 0 };
+    return { dx: 0, dy: dy > 0 ? 1 : -1 };
+  }
+  function fireShots() {
+    const t = tileSize();
+    for (const g of gremlins) {
+      if (!g.shooter) continue;
+      const d = aimDir(g);
+      const el = document.createElement("div"); el.className = "shot"; el.setAttribute("aria-hidden", "true"); worldEl.appendChild(el);
+      const p = { x: g.x, y: g.y, prevX: g.x, prevY: g.y, dx: d.dx, dy: d.dy, el: el, life: 0, g: g };
+      shots.push(p); p.el.style.transform = "translate(" + (p.x * t) + "px," + (p.y * t) + "px)";
+    }
+  }
+  function projectilesCollide(a, b) {
+    const sameTile = a.x === b.x && a.y === b.y;
+    const crossed = a.prevX === b.x && a.prevY === b.y && b.prevX === a.x && b.prevY === a.y;
+    return sameTile || crossed;
+  }
+  function advanceShots() {
+    const t = tileSize();
+    for (let i = shots.length - 1; i >= 0; i--) {
+      const p = shots[i];
+      const nx = p.x + p.dx, ny = p.y + p.dy, k = nx + "," + ny;
+      const passable = L.walkable.has(k) || (L.water && L.water.has(k));   // shots fly over land and water
+      if (p.life++ > 16 || !passable) { p.el.remove(); shots.splice(i, 1); continue; }
+      p.prevX = p.x; p.prevY = p.y;
+      p.x = nx; p.y = ny; p.el.style.transform = "translate(" + (p.x * t) + "px," + (p.y * t) + "px)";
+      const target = swordTarget();
+      if (Date.now() <= swordSwingUntil && p.x === target.x && p.y === target.y) { p.el.remove(); shots.splice(i, 1); continue; }
+      if (p.x === cat.x && p.y === cat.y) { p.el.remove(); shots.splice(i, 1); caught(p.g); return; }
+    }
+  }
+  function advanceArrows() {
+    const t = tileSize();
+    for (let i = arrows.length - 1; i >= 0; i--) {
+      const p = arrows[i];
+      const nx = p.x + p.dx, ny = p.y + p.dy, k = nx + "," + ny;
+      const passable = L.walkable.has(k) || (L.water && L.water.has(k));
+      if (p.life++ > 11 || !passable) { p.el.remove(); arrows.splice(i, 1); continue; }
+      p.prevX = p.x; p.prevY = p.y;
+      p.x = nx; p.y = ny; p.el.style.transform = "translate(" + (p.x * t) + "px," + (p.y * t) + "px)";
+      let consumed = false;
+      for (let j = shots.length - 1; j >= 0; j--) {
+        const s = shots[j];
+        if (projectilesCollide(p, s)) {
+          s.el.remove();
+          shots.splice(j, 1);
+          p.el.remove();
+          arrows.splice(i, 1);
+          consumed = true;
+          setStatus("Arrow broke a fireball.");
+          break;
+        }
+      }
+      if (consumed) continue;
+      const hit = gremlins.find(function (g) { return g.x === p.x && g.y === p.y; });
+      if (hit) {
+        p.el.remove();
+        arrows.splice(i, 1);
+        defeatGremlin(hit);
+      }
+    }
+  }
+  function advanceProjectiles() {
+    advanceShots();
+    if (!caughtInFlight) advanceArrows();
+  }
+  function checkCatch() {
+    for (const g of gremlins) if (g.x === cat.x && g.y === cat.y) { caught(g); return; }
+    for (const p of shots) if (p.x === cat.x && p.y === cat.y) { caught(p.g); return; }
+  }
+
+  // Send a single gremlin back to a random spot within its own range, leaving
+  // every other gremlin exactly where it was.
+  function relocateGremlin(g) {
+    if (!g || gremlins.indexOf(g) === -1) return;
+    const p = randomFar(g.domain);
+    if (!p) return;
+    g.x = p.x; g.y = p.y; g.prev = null;
+    renderGremlin(g, false);
+  }
+
+  function caught(culprit) {
+    if (caughtInFlight || levelWarpInFlight) return; caughtInFlight = true;
+    const flash = elid("catch-flash"); flash.classList.add("active"); setTimeout(function () { flash.classList.remove("active"); }, 280);
+    const post = warpPool[Math.floor(Math.random() * warpPool.length)];
+    markVisited(post.id);
+    setStatus("A gremlin got you! Opening \"" + post.title + "\" in a new tab.");
+    window.open(resolveUrl(post.url), "_blank", "noopener,noreferrer");
+    relocateGremlin(culprit);
+    setTimeout(function () { caughtInFlight = false; }, 400);
+  }
+
+  // ----- input -----
+  window.addEventListener("keydown", function (e) {
+    if (e.target && e.target.tagName === "BUTTON" && e.key === "Enter") return;
+    if (e.key === "ArrowUp") { e.preventDefault(); move(0, -1); }
+    else if (e.key === "ArrowDown") { e.preventDefault(); move(0, 1); }
+    else if (e.key === "ArrowLeft") { e.preventDefault(); move(-1, 0); }
+    else if (e.key === "ArrowRight") { e.preventDefault(); move(1, 0); }
+    else if (e.key === "Enter") { e.preventDefault(); interact(); }
+    else if (e.key === " " || e.code === "Space") { e.preventDefault(); fireArrow(); }
+  });
+  document.querySelectorAll("[data-move]").forEach(function (b) { b.addEventListener("click", function () { const p = b.dataset.move.split(",").map(Number); move(p[0], p[1]); worldEl.focus(); }); });
+  ["open-link", "float-open"].forEach(function (id) {
+    elid(id).addEventListener("click", function (e) {
+      const c = cat.x + "," + cat.y;
+      if (L.features.get(c)) return;
+      const sp = L.special.get(c);
+      if (sp && sp.type !== "cave" && sp.type !== "exit" && sp.type !== "stairs") {
+        e.preventDefault();
+        interact();
+        return;
+      }
+      e.preventDefault();
+    });
+  });
+  // Tap = move one tile toward the tap (or interact when tapping the cat).
+  // Double tap = use your weapon, the touch equivalent of pressing Space.
+  let lastTapAt = 0;
+  const DOUBLE_TAP_MS = 300;
+  worldEl.addEventListener("click", function (e) {
+    worldEl.focus();
+    const now = Date.now();
+    if (now - lastTapAt < DOUBLE_TAP_MS) {
+      lastTapAt = 0;            // consume so a third tap starts a fresh pair
+      fireArrow();             // fires the bow, or swings the sword as fallback
+      return;
+    }
+    lastTapAt = now;
+    const rect = worldEl.getBoundingClientRect(); const t = tileSize();
+    const tx = Math.floor((e.clientX - rect.left) / t), ty = Math.floor((e.clientY - rect.top) / t);
+    const dx = tx - cat.x, dy = ty - cat.y;
+    if (dx === 0 && dy === 0) { interact(); return; }
+    if (Math.abs(dx) > Math.abs(dy)) move(dx > 0 ? 1 : -1, 0); else move(0, dy > 0 ? 1 : -1);
+  });
+  elid("mobile-title-bar").addEventListener("click", function () { interact(); });
+  (function () {
+    const MIN = 30, MAXT = 600; let ts = null;
+    worldEl.addEventListener("touchstart", function (e) { if (e.touches.length !== 1) { ts = null; return; } const t = e.touches[0]; ts = { x: t.clientX, y: t.clientY, time: Date.now() }; }, { passive: true });
+    worldEl.addEventListener("touchcancel", function () { ts = null; });
+    worldEl.addEventListener("touchend", function (e) { if (!ts) return; const t = e.changedTouches[0]; const dx = t.clientX - ts.x, dy = t.clientY - ts.y, dt = Date.now() - ts.time; ts = null; if (Math.hypot(dx, dy) < MIN || dt > MAXT) return; if (Math.abs(dx) > Math.abs(dy)) move(dx > 0 ? 1 : -1, 0); else move(0, dy > 0 ? 1 : -1); e.preventDefault(); });
+  })();
+
+  // ----- boot -----
+  // When arriving from the main overworld (game_mode.html), the cat launched
+  // UP off the top of that screen and set this flag. Read it here so we can
+  // drop the cat back DOWN onto the ground instead of just appearing on it.
+  let arrivedByWarp = false;
+  try {
+    arrivedByWarp = sessionStorage.getItem("worldWarp") === "1";
+    if (arrivedByWarp) sessionStorage.removeItem("worldWarp");
+  } catch (e) { /* ignore */ }
+
+  document.documentElement.style.setProperty("--cols", overworld.cols);
+  document.documentElement.style.setProperty("--rows", overworld.rows);
+  buildMap();
+  buildMiniMap();
+  buildLegend();
+  avatarEl.classList.add("no-transition");
+  render(false);
+  spawnGremlins();
+  requestAnimationFrame(function () {
+    cameraReady = false; centerCamera(true); cameraReady = true;
+    avatarEl.getBoundingClientRect(); avatarEl.classList.remove("no-transition");
+    gremlins.forEach(function (g) { renderGremlin(g, false); });
+    if (arrivedByWarp) playLevelWarpIn();
+  });
+  worldEl.focus();
+})();
+
+  </script>
+</body>
+</html>
