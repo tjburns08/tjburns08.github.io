@@ -11,7 +11,7 @@
   // View-mode preference: the regular scrolling site vs. the game-mode overworld.
   // Set only by the explicit Game Mode / Regular Mode toggle buttons.
   const MODE_KEY = "viewMode";
-  const GAME_MODE_URL = "game_mode.html";
+  const GAME_MODE_URL = "game_mode/game_mode.html";
 
   const themeByName = new Map(THEMES.map((theme) => [theme.name, theme]));
 

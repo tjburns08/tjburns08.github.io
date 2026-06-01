@@ -4,149 +4,30 @@
 #+Purpose: tasks and lab notebook
 
 * Tasks
-** DONE add game mode as a state button
-CLOSED: [2026-05-30 Sat 09:15]
-** DONE figure out what to do about "short" LI posts
-CLOSED: [2026-05-30]
-Resolved by the Social Media World: every post is one level regardless of
-length. The level box shows the title/date/summary; short posts just have a
-short summary. No separate treatment needed.
-** DONE make LI post of game mode
-CLOSED: [2026-05-30 Sat 09:15] SCHEDULED: <2026-05-26 Tue>
-** TODO refactor the mobile version of game mode
-SCHEDULED: <2026-05-31 Sun>
+** DONE refactor the mobile version of game mode
+CLOSED: [2026-06-01 Mon 07:44] SCHEDULED: <2026-05-31 Sun>
 Esp the social media mode.
-** TODO consider little mini-game challenges
+** DONE consider little mini-game challenges
+CLOSED: [2026-06-01 Mon 07:44]
 Platformers, "insert" and so forth.
 ** TODO find the little path bugs and patch them
 ** TODO add the talisman system to the regular game mode
-** WAITING Social Media World (game-mode portal)
-A second overworld, reachable ONLY from inside game mode, where each level is a
-LinkedIn post. Same engine and feel as the main map, but its own zones, palette,
-gremlins, and sprites. Content source: [[file:content/social_media_posts.org][social_media_posts.org]] (H1
-categories -> zones, H2 posts -> levels, each linking out to LinkedIn).
-
-*** Decisions made (2026-05-29)
-**** DONE Architecture: shared engine + 2 world configs
-CLOSED: [2026-05-29]
-Extract the engine into a shared JS file (js/engine.js). game_mode.html and
-social_world.html each supply their own world config (regions, levels, palette,
-sprites, HUD copy). One engine to maintain; fixes apply to both worlds.
-**** DONE Entry behavior: press Enter to enter the portal
-CLOSED: [2026-05-29]
-The "Social Media Posts" tile behaves like a level; opening it (Enter / Open)
-warps to the social world. Not auto-teleport on land.
-**** DONE Gremlin-to-social: no
-CLOSED: [2026-05-29]
-Gremlins only ever warp to random destinations within their own world. The
-social world is reachable solely via the portal tile.
-**** DONE How to handle "short" LI posts as levels (ties to the existing Tasks item)
-CLOSED: [2026-05-30]
-Every post is a level; short ones just carry a short summary.
-
-*** Engine / mechanics
-**** DONE Extract the shared engine into js/engine.js (createWorld(config))
-CLOSED: [2026-05-30]
-Engine pulled out of game_mode.html into public/js/engine.js as
-createWorld(config). game_mode.html and social_world.html now each pass their
-own config (cols/rows, regions, articles, connections, corridors, bridges,
-decorationRules, secrets, gremlins, spawn). Structural CSS also extracted to
-public/css/game.css; each world inlines only its own region/zone palettes.
-**** DONE Add a "Social Media Posts" portal tile/zone in the main world (game_mode.html)
-CLOSED: [2026-05-30]
-The existing Collections "Social media posts" tile is now a kind:"portal" tile
-(token SM) that opens social_world.html.
-**** DONE Portal IN: opening the portal warps the cat into the social world
-CLOSED: [2026-05-30]
-Per the 2026-05-29 decision this is Enter/Open (not auto-teleport on land).
-**** DONE Portal OUT: an exit in the social world returns the cat to game mode
-CLOSED: [2026-05-30]
-A "Gateway" zone at the top of the social world holds a portal tile
-("Back to Tyler's World", token <<) that opens game_mode.html.
-**** DONE Gremlin random destination: keep the social world OUT of warp targets
-CLOSED: [2026-05-30]
-Resolved per the 2026-05-29 "Gremlin-to-social: no" decision. The engine now
-excludes portals (excludeFromWarp) from the caught-warp pool, so a gremlin
-never drags the cat between worlds.
-**** DONE Carry over existing systems: visited tracking, hash/back-button state, mobile title bar, d-pad, external-link new-tab handling
-CLOSED: [2026-05-30]
-All inherited automatically from the shared engine. Social world uses its own
-visited key (socialworld-visited).
-**** DONE During extraction, parameterize the speedster gremlin (its target URL + sprite) per world
-CLOSED: [2026-05-30]
-The speedster is now opt-in via config.gremlins.speedster {svg, targetUrl,
-caughtKey}. game_mode keeps the red "It's more complicated than that" speedster;
-the social world ships green/cyan gremlins only (no speedster).
-
-*** Content / data model
-**** DONE Derive social-world zones from the H1 categories in social_media_posts.org
-CLOSED: [2026-05-30]
-10 zones from the 10 H1 categories (+ a Gateway zone for the exit portal).
-**** DONE Derive social-world levels from the H2 posts (title, date, summary, LinkedIn url)
-CLOSED: [2026-05-30]
-All 85 posts parsed into levels (token, title, date, first-paragraph summary,
-LinkedIn url). The parser handles the one post whose link title wraps lines.
-**** DONE External urls open LinkedIn in a new tab (reuse isExternalUrl path)
-CLOSED: [2026-05-30]
-Inherited from the engine: https:// urls open in a new tab, cat stays put.
-**** DONE Lay out zone/level coordinates on the new grid
-CLOSED: [2026-05-30]
-24x47 grid. Zones stack vertically; posts laid out in a serpentine within each
-zone; a left-edge trunk road (x=1) connects every zone. Flood-fill confirms all
-86 tiles reachable from spawn.
-
-*** Visual identity (sculpt later)
-**** DONE New color palette / CSS variables for the social world
-CLOSED: [2026-05-30]
-Per-zone palettes generated around the hue wheel (region-<zone> classes),
-inlined in social_world.html; Gateway is a neutral slate.
-**** DONE New gremlin sprite + region decor/tiles
-CLOSED: [2026-05-30]
-Cyan "scroll gremlin" sprite for the social world; forest/hill decor scatter
-per zone via decorationRules.
-**** DONE HUD copy + world title for the social world
-CLOSED: [2026-05-30]
-Title "Social Media World", themed intro card, status line, and "← Tyler's
-World" exit button.
-**** DONE Transition animation when warping between worlds
-CLOSED: [2026-05-30]
-Stepping into a portal launches the cat up and off the top of the screen with a
-sparkle burst, sets a sessionStorage flag, then navigates; the destination world
-reads the flag on boot and drops the cat back in from above with another sparkle
-burst. Lives in the shared engine (warpOutTo / playWarpIn / emitSparkles) so it
-works in both directions.
-
-*** QA
-**** DONE Verify the social world is reachable ONLY from inside game mode (no regular-site link)
-CLOSED: [2026-05-30]
-Confirmed: social_world.html is linked only from game_mode.html (the portal);
-nothing in content/*.org or the published regular site links to it.
-**** DONE Cross-browser + mobile pass (watch the Safari "skips around" issue)
-CLOSED: [2026-05-30]
-Confirmed working on-device (desktop Safari + iOS) after the fix below.
-Root cause of the Safari "skips around" found and fixed: simple.css sets
-`html { scroll-behavior: smooth }` globally, so even the engine's direct
-scrollLeft/scrollTop assignments animated, and each per-move recenter
-interrupted the previous one — the fighting animations are the "skipping".
-Fixes:
-- public/css/game.css: `.viewport { scroll-behavior: auto }` (opt the map out of
-  the site-wide smooth scroll) + `-webkit-overflow-scrolling: touch`.
-- public/js/engine.js: centerCamera now drives the scroll with its own
-  cancelable requestAnimationFrame tween (easeOutQuad, 160ms) and cancels any
-  in-flight tween before starting a new one, so rapid moves can't stack.
-Verified headlessly (no JS errors, centering math correct). STILL NEEDS a human
-on-device confirmation in desktop Safari + iOS Safari (camera follow on the new
-bridges + the warp transition).
-**** DONE Path/walkability bugs on the new map
-CLOSED: [2026-05-30]
-Flood-fill from spawn reaches all 86 tiles; no orphaned levels.
 ** TODO add little virus gremlin in social media mode that takes you to viral posts
 SCHEDULED: <2026-05-31 Sun>
 ** TODO make the nose pick game mobile friendly
 SCHEDULED: <2026-05-31 Sun>
 ** TODO add memory persistence with game mode toggling (which right now we only have with the back button)
 SCHEDULED: <2026-06-01 Mon>
-** TODO refactor build.sh
+** DONE finish integrating Zelda mode in with game mode
+CLOSED: [2026-06-01 Mon 07:44] SCHEDULED: <2026-06-01 Mon>
+Ran out of tokens.
+** DONE fix the teleporation bug in Zelda mode (integrate the two a bit better)
+CLOSED: [2026-06-01 Mon 07:44] SCHEDULED: <2026-06-01 Mon>
+Ran out of tokens.
+** TODO integrate the old man sprite in
+Just ask the agents what they want with it.
+** TODO make a LI post of Social Mode
+SCHEDULED: <2026-06-01 Mon>
 * Log
 ** 2026
 *** May
@@ -238,3 +119,11 @@ Reworked the entry to mirror the Marcus Aurelius secret:
   square is walkable. Also thinned the social-world paths (horizontal tracks +
   scattered vertical spines, not a full grid) and gave the portal box a black
   outline like the other tiles.
+**** May 31
+***** Zelda-style secrets experiment — rolled back
+/(Written by Claude.)/ Prototyped a generalized secret system (auto-derived
+path tiles, a kind:"treasure" easter-egg tile, the Zelda essay as a hidden room,
+and a treasure in the Fun Arcade). Tyler didn't like it, so we rolled it all
+back: engine.js, game.css, and game_mode.html are restored to their prior state.
+(Note: public/zelda_mode.html was made by a separate Claude Code instance and is
+kept — it was not part of this change.)

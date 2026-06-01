@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <title>The Meditations Cave - Tyler Burns</title>
+  <link rel="stylesheet" href="css/game.css">
+  <style>
+    /* The dungeon owns its own dark look. The floor is paved ("path") so the
+       whole room is walkable and open; walls are the out-of-region "water". */
+    body { background: #0a0710; }
+    .viewport { background: #0a0710; border-right-color: #2a2238; }
+    .game-shell { background: #141021; box-shadow: 0 10px 0 rgba(0, 0, 0, 0.5); }
+    .hud { background: #1c1730; }
+    .hud h1 { color: #f3e7c6; }
+    .hud-chip { background: #efe7d2; }
+
+    .region-dungeon {
+      --grass: #1a1626; --grass-dark: #15111f;
+      --path: #2a2433; --path-dark: #211b29;
+      --decor: #3a3147; --decor-light: #4a3f5e;
+      --token-bg: #ece6ff; --castle-bg: #e7dcff;
+      --house-bg: #cfc6e8; --house-roof: #6a5a8f;
+    }
+    /* Dungeon floor + walls (override the overworld grass/water look). */
+    .tile.path  { background: #2a2433; box-shadow: inset 0 0 0 2px #211b29; }
+    .tile.water { background: #15121d; box-shadow: inset 0 0 0 4px #0b0913; }
+    /* A torch-glow ring around the shrine at the far end. */
+    .tile.article.castle .level-box {
+      box-shadow: inset -4px -4px 0 rgba(0, 0, 0, 0.18), 0 0 16px rgba(243, 200, 110, 0.55);
+    }
+  </style>
+</head>
+<body>
+  <a class="exit-mode" href="game_mode.html#cat=1,20" aria-label="Return to the main overworld">&larr; Tyler's World</a>
+  <main class="page">
+    <section class="game-shell" aria-label="The Meditations cave dungeon">
+      <header class="hud">
+        <h1>The Cave</h1>
+        <div class="hud-chip region" id="region-chip">Cave</div>
+        <div class="hud-chip" id="visited-chip">0 / 0 visited</div>
+        <div class="hud-chip" id="item-chip">Sword: hidden</div>
+        <div class="hud-chip">Arrows: move</div>
+        <div class="hud-chip">Enter: open</div>
+      </header>
+
+      <button class="mobile-title-bar" id="mobile-title-bar" type="button" aria-live="polite">
+        <span class="mtb-region" id="mtb-region">Cave</span>
+        <span class="mtb-title" id="mtb-title">Cross the cave to the shrine</span>
+        <span class="mtb-action" id="mtb-action"></span>
+        <span class="mtb-details" id="mtb-details">
+          <span class="mtb-date" id="mtb-date"></span>
+          <span class="mtb-summary" id="mtb-summary"></span>
+        </span>
+      </button>
+
+      <div class="game-area">
+        <section class="viewport" id="viewport" aria-label="Cave map">
+          <div class="world" id="world" tabindex="0">
+            <div class="map-grid" id="map-grid"></div>
+            <div class="avatar" id="avatar" aria-hidden="true">
+              <svg class="cat-sprite" viewBox="0 0 16 16" aria-hidden="true">
+                <rect x="4" y="1" width="2" height="2" fill="#241812"></rect>
+                <rect x="10" y="1" width="2" height="2" fill="#241812"></rect>
+                <rect x="3" y="2" width="4" height="2" fill="#241812"></rect>
+                <rect x="9" y="2" width="4" height="2" fill="#241812"></rect>
+                <rect x="4" y="2" width="2" height="2" fill="#f3a944"></rect>
+                <rect x="10" y="2" width="2" height="2" fill="#f3a944"></rect>
+                <rect x="3" y="4" width="10" height="7" fill="#241812"></rect>
+                <rect x="4" y="5" width="8" height="5" fill="#f3a944"></rect>
+                <rect x="5" y="6" width="1" height="2" fill="#241812"></rect>
+                <rect x="10" y="6" width="1" height="2" fill="#241812"></rect>
+                <rect x="7" y="8" width="2" height="1" fill="#241812"></rect>
+                <rect x="5" y="10" width="6" height="1" fill="#ffe3a2"></rect>
+                <rect x="4" y="11" width="8" height="3" fill="#241812"></rect>
+                <rect x="5" y="11" width="6" height="2" fill="#e99433"></rect>
+                <rect x="2" y="10" width="3" height="2" fill="#241812"></rect>
+                <rect x="2" y="9" width="2" height="2" fill="#e99433"></rect>
+                <rect x="12" y="10" width="3" height="2" fill="#241812"></rect>
+                <rect x="12" y="9" width="2" height="2" fill="#e99433"></rect>
+                <rect x="4" y="14" width="3" height="1" fill="#241812"></rect>
+                <rect x="9" y="14" width="3" height="1" fill="#241812"></rect>
+              </svg>
+            </div>
+          </div>
+        </section>
+
+        <aside class="panel" aria-live="polite">
+          <section class="card">
+            <span class="kind" id="kind">Cave</span>
+            <h2 id="title">A cave beneath the Philosophy Forest</h2>
+            <div class="date" id="date">Hidden room</div>
+            <p class="summary" id="summary">You stepped through the cave mouth into an open dungeon. The shrine is visible, but purple gremlins block it. Find the sword, clear the cave, then read my Meditations, Chapter 1.</p>
+          </section>
+
+          <section class="controls">
+            <p id="location">Cat: Cave</p>
+            <div class="dpad" aria-label="On-screen movement controls">
+              <button class="up" type="button" data-move="0,-1" aria-label="Move up">^</button>
+              <button class="left" type="button" data-move="-1,0" aria-label="Move left">&lt;</button>
+              <button class="right" type="button" data-move="1,0" aria-label="Move right">&gt;</button>
+              <button class="down" type="button" data-move="0,1" aria-label="Move down">v</button>
+            </div>
+          </section>
+
+          <section class="legend" id="legend" aria-label="Jump menu"></section>
+
+          <section class="actions">
+            <a class="open-link disabled" href="#" id="open-link">Open</a>
+            <p class="status" id="status">Original pixel art. Watch out for the gremlins.</p>
+          </section>
+        </aside>
+      </div>
+    </section>
+    <a class="float-open" id="float-open" href="#" aria-label="Open current tile">Open ›</a>
+    <div class="catch-flash" id="catch-flash" aria-hidden="true"></div>
+  </main>
+
+  <script src="js/engine.js"></script>
+  <script>
+    "use strict";
+
+    // One open room. The cat enters at the bottom, the Meditations shrine sits
+    // at the top, and gremlins wander the floor between.
+    const regions = [
+      { id: "dungeon", name: "The Cave", x0: 1, y0: 1, x1: 13, y1: 13 }
+    ];
+
+    const articles = [
+      // The goal: the Meditations article, a glowing shrine at the far end.
+      { id: "meditations", region: "dungeon", x: 7, y: 2, kind: "castle", token: "MD",
+        title: "My Meditations, Chapter 1",
+        date: "December 24, 2022",
+        url: "meditations_chapter_one.html",
+        requiresGremlinClear: true,
+        lockedSummary: "The article is here, but it is not accessible yet. You have to kill the gremlins to proceed. Find and use your sword.",
+        lockedStatus: "You have to kill the gremlins to proceed. Find and use your sword.",
+        summary: "A personal version of Marcus Aurelius's opening chapter — debts and acknowledgments. You cleared the cave." },
+      // The way back out — a cave mouth returning to the Philosophy Forest.
+      { id: "cave-exit", region: "dungeon", x: 7, y: 13, kind: "cave", kindLabel: "Cave mouth",
+        token: "<<", title: "Leave the cave", date: "Exit",
+        url: "game_mode/game_mode.html#cat=1,20", excludeFromWarp: true,
+        summary: "Climb back out into the Philosophy Forest." }
+    ];
+
+    // Pave every interior row so the whole room is open, walkable floor.
+    const corridors = [];
+    for (let y = 1; y <= 13; y += 1) corridors.push([1, y, 13, y]);
+
+    const decorationRules = { dungeon: { forest: 0, hill: 0 } };
+
+    // A shadow gremlin for the cave (violet instead of green).
+    const CAVE_GREMLIN_SVG = `
+      <svg class="gremlin-sprite" viewBox="0 0 16 16" aria-hidden="true">
+        <rect x="3" y="0" width="1" height="2" fill="#3a1f5a"></rect>
+        <rect x="12" y="0" width="1" height="2" fill="#3a1f5a"></rect>
+        <rect x="2" y="2" width="12" height="11" fill="#140a22"></rect>
+        <rect x="3" y="3" width="10" height="9" fill="#7d5ec0"></rect>
+        <rect x="3" y="9" width="10" height="3" fill="#553f8c"></rect>
+        <rect x="4" y="5" width="3" height="2" fill="#c03050"></rect>
+        <rect x="9" y="5" width="3" height="2" fill="#c03050"></rect>
+        <rect x="5" y="5" width="1" height="1" fill="#ffffff"></rect>
+        <rect x="10" y="5" width="1" height="1" fill="#ffffff"></rect>
+        <rect x="6" y="10" width="4" height="2" fill="#140a22"></rect>
+        <rect x="6" y="10" width="1" height="1" fill="#e6d2ff"></rect>
+        <rect x="9" y="10" width="1" height="1" fill="#e6d2ff"></rect>
+        <rect x="4" y="13" width="2" height="2" fill="#140a22"></rect>
+        <rect x="10" y="13" width="2" height="2" fill="#140a22"></rect>
+        <rect x="4" y="13" width="2" height="1" fill="#553f8c"></rect>
+        <rect x="10" y="13" width="2" height="1" fill="#553f8c"></rect>
+      </svg>`;
+
+    createWorld({
+      cols: 15,
+      rows: 15,
+      // Lives in public/game_mode/; the Meditations article sits at the site root.
+      pageBase: "../",
+      spawn: { x: 7, y: 12 },
+      visitedKey: "meditations-dungeon-visited",
+      regions,
+      articles,
+      connections: [],
+      corridors,
+      bridges: [],
+      decorationRules,
+      gremlins: {
+        count: 8,
+        intervalMs: 2400,
+        staggerMs: 450,
+        svg: CAVE_GREMLIN_SVG,
+        spawnAnywhere: true,
+        minSpawnDistance: 4,
+        killItem: "sword",
+        clearedKey: "meditations-dungeon-gremlins-cleared",
+        // Caught in the cave = thrown back out to the forest cave mouth.
+        caughtUrl: "game_mode.html#cat=1,20"
+      }
+    });
+  </script>
+</body>
+</html>

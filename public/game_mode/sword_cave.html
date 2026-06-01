@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <title>The Sword Cave - Tyler Burns</title>
+  <link rel="stylesheet" href="css/game.css">
+  <style>
+    body { background: #07050a; }
+    .viewport { background: #07050a; border-right-color: #261b30; }
+    .game-shell { background: #120d18; box-shadow: 0 10px 0 rgba(0, 0, 0, 0.55); }
+    .hud { background: #1a1224; }
+    .hud h1 { color: #ffe7b0; }
+    .hud-chip { background: #f2e5c8; }
+
+    .region-cave {
+      --grass: #15101c; --grass-dark: #0e0a14;
+      --path: #241a2c; --path-dark: #17101f;
+      --decor: #4d3a5f; --decor-light: #6d5684;
+      --token-bg: #efe2bd; --castle-bg: #e9d8aa;
+      --house-bg: #d8bd86; --house-roof: #75532a;
+    }
+
+    .tile.path { background: #241a2c; box-shadow: inset 0 0 0 2px #17101f; }
+    .tile.water { background: #0e0a14; box-shadow: inset 0 0 0 4px #07050a; }
+
+    .tile.article.npc .level-box {
+      font-size: 0;
+      background: #211625;
+      border-color: #0b0710;
+    }
+    .tile.article.npc .level-box::before {
+      content: "";
+      position: absolute;
+      left: 3px;
+      top: 0;
+      width: 30px;
+      height: 36px;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 18' shape-rendering='crispEdges'><rect x='5' y='0' width='6' height='1' fill='%2334140c'/><rect x='4' y='1' width='8' height='1' fill='%23a8321f'/><rect x='3' y='2' width='10' height='1' fill='%23b93a22'/><rect x='2' y='3' width='12' height='2' fill='%23c24725'/><rect x='1' y='5' width='14' height='2' fill='%23b83a22'/><rect x='0' y='7' width='3' height='3' fill='%23621f13'/><rect x='13' y='7' width='3' height='3' fill='%23621f13'/><rect x='3' y='6' width='10' height='2' fill='%2334140c'/><rect x='5' y='3' width='6' height='2' fill='%23f2b83e'/><rect x='4' y='5' width='3' height='2' fill='%23ffffff'/><rect x='9' y='5' width='3' height='2' fill='%23ffffff'/><rect x='6' y='5' width='1' height='2' fill='%23241812'/><rect x='9' y='5' width='1' height='2' fill='%23241812'/><rect x='4' y='7' width='8' height='4' fill='%23fff8ec'/><rect x='5' y='8' width='6' height='4' fill='%23ffffff'/><rect x='6' y='12' width='4' height='1' fill='%23f0e4d0'/><rect x='2' y='10' width='12' height='6' fill='%23b93a22'/><rect x='3' y='9' width='3' height='6' fill='%23c74725'/><rect x='10' y='9' width='3' height='6' fill='%23c74725'/><rect x='7' y='11' width='2' height='5' fill='%23b87924'/><rect x='1' y='11' width='3' height='4' fill='%23932b1b'/><rect x='12' y='11' width='3' height='4' fill='%23932b1b'/><rect x='1' y='14' width='2' height='2' fill='%23f2b83e'/><rect x='13' y='14' width='2' height='2' fill='%23f2b83e'/><rect x='4' y='13' width='3' height='3' fill='%23b8793b'/><rect x='3' y='13' width='1' height='3' fill='%2334140c'/><rect x='11' y='13' width='3' height='3' fill='%2334140c'/><rect x='12' y='14' width='1' height='1' fill='%23ffd45a'/><rect x='13' y='14' width='1' height='1' fill='%23f0a91c'/><rect x='4' y='16' width='3' height='1' fill='%2334140c'/><rect x='10' y='16' width='3' height='1' fill='%2334140c'/></svg>");
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: contain;
+      image-rendering: pixelated;
+    }
+
+    .tile.article.sword .level-box {
+      font-size: 0;
+      background: #22172c;
+      border-color: #0b0710;
+    }
+    .tile.article.sword .level-box::before {
+      content: "";
+      position: absolute;
+      left: 18px;
+      top: 3px;
+      width: 10px;
+      height: 34px;
+      background:
+        linear-gradient(#ffffff 0 12%, #dfe8ff 12% 68%, #425172 68% 78%, #b67b35 78% 100%);
+      border: 2px solid #241812;
+      box-shadow: 0 0 8px rgba(255, 238, 160, 0.7);
+      clip-path: polygon(50% 0, 100% 18%, 78% 70%, 100% 70%, 100% 82%, 66% 82%, 66% 100%, 34% 100%, 34% 82%, 0 82%, 0 70%, 22% 70%, 0 18%);
+    }
+    .tile.article.sword.collected .level-box::before {
+      opacity: 0.35;
+      box-shadow: none;
+    }
+  </style>
+</head>
+<body>
+  <a class="exit-mode" href="game_mode.html#cat=42,17" aria-label="Return to the main overworld">&larr; Tyler's World</a>
+  <main class="page">
+    <section class="game-shell" aria-label="The hidden sword cave">
+      <header class="hud">
+        <h1>Sword Cave</h1>
+        <div class="hud-chip region" id="region-chip">Hidden Cave</div>
+        <div class="hud-chip" id="visited-chip">0 / 0 visited</div>
+        <div class="hud-chip" id="item-chip">Sword: hidden</div>
+        <div class="hud-chip">Enter: take/talk</div>
+      </header>
+
+      <button class="mobile-title-bar" id="mobile-title-bar" type="button" aria-live="polite">
+        <span class="mtb-region" id="mtb-region">Hidden Cave</span>
+        <span class="mtb-title" id="mtb-title">Take the sword</span>
+        <span class="mtb-action" id="mtb-action"></span>
+        <span class="mtb-details" id="mtb-details">
+          <span class="mtb-date" id="mtb-date"></span>
+          <span class="mtb-summary" id="mtb-summary"></span>
+        </span>
+      </button>
+
+      <div class="game-area">
+        <section class="viewport" id="viewport" aria-label="Sword cave map">
+          <div class="world" id="world" tabindex="0">
+            <div class="map-grid" id="map-grid"></div>
+            <div class="avatar" id="avatar" aria-hidden="true">
+              <svg class="cat-sprite" viewBox="0 0 16 16" aria-hidden="true">
+                <rect x="4" y="1" width="2" height="2" fill="#241812"></rect>
+                <rect x="10" y="1" width="2" height="2" fill="#241812"></rect>
+                <rect x="3" y="2" width="4" height="2" fill="#241812"></rect>
+                <rect x="9" y="2" width="4" height="2" fill="#241812"></rect>
+                <rect x="4" y="2" width="2" height="2" fill="#f3a944"></rect>
+                <rect x="10" y="2" width="2" height="2" fill="#f3a944"></rect>
+                <rect x="3" y="4" width="10" height="7" fill="#241812"></rect>
+                <rect x="4" y="5" width="8" height="5" fill="#f3a944"></rect>
+                <rect x="5" y="6" width="1" height="2" fill="#241812"></rect>
+                <rect x="10" y="6" width="1" height="2" fill="#241812"></rect>
+                <rect x="7" y="8" width="2" height="1" fill="#241812"></rect>
+                <rect x="5" y="10" width="6" height="1" fill="#ffe3a2"></rect>
+                <rect x="4" y="11" width="8" height="3" fill="#241812"></rect>
+                <rect x="5" y="11" width="6" height="2" fill="#e99433"></rect>
+                <rect x="2" y="10" width="3" height="2" fill="#241812"></rect>
+                <rect x="2" y="9" width="2" height="2" fill="#e99433"></rect>
+                <rect x="12" y="10" width="3" height="2" fill="#241812"></rect>
+                <rect x="12" y="9" width="2" height="2" fill="#e99433"></rect>
+                <rect x="4" y="14" width="3" height="1" fill="#241812"></rect>
+                <rect x="9" y="14" width="3" height="1" fill="#241812"></rect>
+              </svg>
+            </div>
+          </div>
+        </section>
+
+        <aside class="panel" aria-live="polite">
+          <section class="card">
+            <span class="kind" id="kind">Hidden Cave</span>
+            <h2 id="title">An old man waits beside a sword</h2>
+            <div class="date" id="date">Secret room</div>
+            <p class="summary" id="summary">The old man points at the sword. It looks useful for anything hostile.</p>
+          </section>
+
+          <section class="controls">
+            <p id="location">Cat: Hidden Cave</p>
+            <div class="dpad" aria-label="On-screen movement controls">
+              <button class="up" type="button" data-move="0,-1" aria-label="Move up">^</button>
+              <button class="left" type="button" data-move="-1,0" aria-label="Move left">&lt;</button>
+              <button class="right" type="button" data-move="1,0" aria-label="Move right">&gt;</button>
+              <button class="down" type="button" data-move="0,1" aria-label="Move down">v</button>
+            </div>
+          </section>
+
+          <section class="legend" id="legend" aria-label="Jump menu"></section>
+
+          <section class="actions">
+            <a class="open-link disabled" href="#" id="open-link">Open</a>
+            <p class="status" id="status">Find the sword before entering caves with gremlins.</p>
+          </section>
+        </aside>
+      </div>
+    </section>
+    <a class="float-open" id="float-open" href="#" aria-label="Open current tile">Open</a>
+    <div class="catch-flash" id="catch-flash" aria-hidden="true"></div>
+  </main>
+
+  <script src="js/engine.js"></script>
+  <script>
+    "use strict";
+
+    const regions = [
+      { id: "cave", name: "Hidden Cave", x0: 1, y0: 1, x1: 7, y1: 5 }
+    ];
+
+    const OLD_MAN_DIALOGUE =
+      "Take the sword. Press Space to slash in the direction you are facing. Use it to defeat gremlins that block any special articles you find.";
+
+    const articles = [
+      { id: "old-man", region: "cave", x: 4, y: 2, kind: "npc", kindLabel: "Old man",
+        token: "OM", title: "Old man", date: "Secret advice",
+        dialogue: OLD_MAN_DIALOGUE,
+        summary: OLD_MAN_DIALOGUE },
+      { id: "sword", region: "cave", x: 4, y: 3, kind: "sword", kindLabel: "Sword",
+        token: "SW", title: "Wooden sword", date: "Item",
+        collectible: "sword",
+        summary: "A sword for clearing gremlins from hidden article caves." },
+      { id: "cave-exit", region: "cave", x: 4, y: 5, kind: "cave", kindLabel: "Cave mouth",
+        token: "<<", title: "Leave the sword cave", date: "Exit",
+        url: "game_mode.html#cat=42,17", excludeFromWarp: true,
+        summary: "Climb back out above the Zelda article." }
+    ];
+
+    const corridors = [];
+    for (let y = 1; y <= 5; y += 1) corridors.push([1, y, 7, y]);
+
+    createWorld({
+      cols: 9,
+      rows: 7,
+      pageBase: "",
+      spawn: { x: 4, y: 4 },
+      visitedKey: "sword-cave-visited",
+      regions,
+      articles,
+      connections: [],
+      corridors,
+      bridges: [],
+      decorationRules: { cave: { forest: 0, hill: 0 } },
+      gremlins: { count: 0 }
+    });
+  </script>
+</body>
+</html>

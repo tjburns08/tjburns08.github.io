@@ -1,0 +1,1287 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <title>Tyler's World - Game Mode</title>
+  <link rel="stylesheet" href="css/game.css">
+  <style>
+    /* Main-world region palettes (this world owns its own look). */
+    /* ----- REGION THEMES (override CSS variables on each tile) ----- */
+
+    .region-featured {
+      --grass: #e8e2d0;
+      --grass-dark: #c4b89a;
+      --path: #efe5c5;
+      --path-dark: #b7a677;
+      --decor: #8a7e5a;
+      --decor-light: #d4c79c;
+      --token-bg: #fffbe5;
+      --castle-bg: #f4eed0;
+      --house-bg: #faf2c8;
+      --house-roof: #b07640;
+    }
+
+    .region-bio {
+      --grass: #d8ecf2;
+      --grass-dark: #b3d6df;
+      --path: #f4fafc;
+      --path-dark: #6fa1b3;
+      --decor: #2e7186;
+      --decor-light: #5fb1c4;
+      --token-bg: #ffffff;
+      --castle-bg: #d3e9ef;
+      --house-bg: #e8f8fc;
+      --house-roof: #2e7186;
+    }
+
+    .region-ai {
+      --grass: #261f4a;
+      --grass-dark: #161235;
+      --path: #4a3a8c;
+      --path-dark: #221a4a;
+      --decor: #b06acc;
+      --decor-light: #f072c6;
+      --token-bg: #2e2660;
+      --castle-bg: #1a1340;
+      --house-bg: #382b76;
+      --house-roof: #f072c6;
+    }
+    .region-ai .level-box {
+      color: #f5e8ff;
+      border-color: #f072c6;
+    }
+
+    .region-computing {
+      --grass: #102819;
+      --grass-dark: #07140c;
+      --path: #1c4a2d;
+      --path-dark: #0c2616;
+      --decor: #28a050;
+      --decor-light: #5fdf85;
+      --token-bg: #0c1e12;
+      --castle-bg: #133b22;
+      --house-bg: #19502c;
+      --house-roof: #5fdf85;
+    }
+    .region-computing .level-box {
+      color: #c4ffcd;
+      border-color: #5fdf85;
+      font-family: "Courier New", Courier, monospace;
+    }
+
+    .region-start {
+      --grass: #f4d99a;
+      --grass-dark: #d8b770;
+      --path: #fff0c2;
+      --path-dark: #c89c50;
+      --decor: #6cae74;
+      --decor-light: #a8d4a8;
+      --token-bg: #fff8d8;
+      --castle-bg: #f3e3a8;
+      --house-bg: #fff2c0;
+      --house-roof: #ce5a3a;
+    }
+
+    .region-collections {
+      --grass: #d9c3a0;
+      --grass-dark: #ad9270;
+      --path: #efd8ad;
+      --path-dark: #936c3e;
+      --decor: #5a3b1a;
+      --decor-light: #a07748;
+      --token-bg: #fff2c8;
+      --castle-bg: #ddc090;
+      --house-bg: #f0d8a8;
+      --house-roof: #5a3b1a;
+    }
+
+    .region-philosophy {
+      --grass: #62b14f;
+      --grass-dark: #3e8b3a;
+      --path: #d8ad61;
+      --path-dark: #9a6b34;
+      --decor: #145d31;
+      --decor-light: #1d7040;
+      --token-bg: #fff1c7;
+      --castle-bg: #d8d8d8;
+      --house-bg: #ffe0a3;
+      --house-roof: #c94b37;
+    }
+
+    .region-health {
+      --grass: #82d05a;
+      --grass-dark: #5aa83c;
+      --path: #f0e29e;
+      --path-dark: #b08a3a;
+      --decor: #2d7a1f;
+      --decor-light: #6fc54a;
+      --token-bg: #fdfdd8;
+      --castle-bg: #e6e8b0;
+      --house-bg: #f0f4b0;
+      --house-roof: #d04848;
+    }
+
+    .region-personal {
+      --grass: #efb878;
+      --grass-dark: #c48a4e;
+      --path: #f9d8a3;
+      --path-dark: #a86a2e;
+      --decor: #c44a6a;
+      --decor-light: #e57a92;
+      --token-bg: #fff0d8;
+      --castle-bg: #e3b88f;
+      --house-bg: #ffd9a8;
+      --house-roof: #b03d3d;
+    }
+
+    .region-stats {
+      --grass: #d4e0ea;
+      --grass-dark: #a3b6c8;
+      --path: #f0f4f8;
+      --path-dark: #4d7298;
+      --decor: #2a4a72;
+      --decor-light: #5e85b0;
+      --token-bg: #ffffff;
+      --castle-bg: #c8d8e8;
+      --house-bg: #ecf2f8;
+      --house-roof: #2a4a72;
+    }
+    .region-stats.grass::after {
+      background:
+        linear-gradient(45deg, rgba(0, 0, 0, 0.18) 25%, transparent 25% 50%, rgba(0, 0, 0, 0.18) 50% 75%, transparent 75%) !important;
+      background-size: 12px 12px !important;
+      opacity: 0.4 !important;
+    }
+
+    .region-snapshots {
+      --grass: #d4b896;
+      --grass-dark: #a88a64;
+      --path: #ecd4ad;
+      --path-dark: #8a5e34;
+      --decor: #5a3a1a;
+      --decor-light: #c4936a;
+      --token-bg: #f5e4c0;
+      --castle-bg: #ccac80;
+      --house-bg: #e8c896;
+      --house-roof: #6a3a1a;
+    }
+
+    .region-fun {
+      --grass: #1b0a2a;
+      --grass-dark: #0a031a;
+      --path: #3d1958;
+      --path-dark: #1a0a2a;
+      --decor: #ff44aa;
+      --decor-light: #44ddee;
+      --token-bg: #2c1142;
+      --castle-bg: #1a0628;
+      --house-bg: #3d1958;
+      --house-roof: #ffd848;
+    }
+    .region-fun .level-box {
+      color: #ffe2f8;
+      border-color: #ff44aa;
+      box-shadow: inset -4px -4px 0 rgba(255, 68, 170, 0.4);
+    }
+  </style>
+</head>
+<body>
+  <a class="exit-mode" href="../index.html" aria-label="Return to the regular website" onclick="try{localStorage.setItem('viewMode','regular')}catch(e){}">&larr; Regular Mode</a>
+  <main class="page">
+    <section class="game-shell" aria-label="Tyler's world overworld">
+      <header class="hud">
+        <h1>Tyler's World</h1>
+        <div class="hud-chip region" id="region-chip">Start Crossing</div>
+        <div class="hud-chip" id="visited-chip">0 / 0 visited</div>
+        <div class="hud-chip">Arrows: move</div>
+        <div class="hud-chip">Enter: open</div>
+      </header>
+
+      <button class="mobile-title-bar" id="mobile-title-bar" type="button" aria-live="polite">
+        <span class="mtb-region" id="mtb-region">Start Crossing</span>
+        <span class="mtb-title" id="mtb-title">Move the cat to explore</span>
+        <span class="mtb-action" id="mtb-action"></span>
+        <span class="mtb-details" id="mtb-details">
+          <span class="mtb-date" id="mtb-date"></span>
+          <span class="mtb-summary" id="mtb-summary"></span>
+        </span>
+      </button>
+
+      <div class="game-area">
+        <section class="viewport" id="viewport" aria-label="Overworld map">
+          <div class="world" id="world" tabindex="0">
+            <div class="map-grid" id="map-grid"></div>
+            <div class="avatar" id="avatar" aria-hidden="true">
+              <svg class="cat-sprite" viewBox="0 0 16 16" aria-hidden="true">
+                <rect x="4" y="1" width="2" height="2" fill="#241812"></rect>
+                <rect x="10" y="1" width="2" height="2" fill="#241812"></rect>
+                <rect x="3" y="2" width="4" height="2" fill="#241812"></rect>
+                <rect x="9" y="2" width="4" height="2" fill="#241812"></rect>
+                <rect x="4" y="2" width="2" height="2" fill="#f3a944"></rect>
+                <rect x="10" y="2" width="2" height="2" fill="#f3a944"></rect>
+                <rect x="3" y="4" width="10" height="7" fill="#241812"></rect>
+                <rect x="4" y="5" width="8" height="5" fill="#f3a944"></rect>
+                <rect x="5" y="6" width="1" height="2" fill="#241812"></rect>
+                <rect x="10" y="6" width="1" height="2" fill="#241812"></rect>
+                <rect x="7" y="8" width="2" height="1" fill="#241812"></rect>
+                <rect x="5" y="10" width="6" height="1" fill="#ffe3a2"></rect>
+                <rect x="4" y="11" width="8" height="3" fill="#241812"></rect>
+                <rect x="5" y="11" width="6" height="2" fill="#e99433"></rect>
+                <rect x="2" y="10" width="3" height="2" fill="#241812"></rect>
+                <rect x="2" y="9" width="2" height="2" fill="#e99433"></rect>
+                <rect x="12" y="10" width="3" height="2" fill="#241812"></rect>
+                <rect x="12" y="9" width="2" height="2" fill="#e99433"></rect>
+                <rect x="4" y="14" width="3" height="1" fill="#241812"></rect>
+                <rect x="9" y="14" width="3" height="1" fill="#241812"></rect>
+              </svg>
+            </div>
+          </div>
+        </section>
+
+        <aside class="panel" aria-live="polite">
+          <section class="card">
+            <span class="kind" id="kind">Beach</span>
+            <h2 id="title">Welcome to Tyler's World</h2>
+            <div class="date" id="date">Start Crossing</div>
+            <p class="summary" id="summary">Use the arrow keys to move the cat. Each region of the island is a section of the website. Step onto a tile to inspect it. Press Enter to open the article.</p>
+          </section>
+
+          <section class="controls">
+            <p id="location">Cat: Start Crossing (22, 13)</p>
+            <div class="dpad" aria-label="On-screen movement controls">
+              <button class="up" type="button" data-move="0,-1" aria-label="Move up">^</button>
+              <button class="left" type="button" data-move="-1,0" aria-label="Move left">&lt;</button>
+              <button class="right" type="button" data-move="1,0" aria-label="Move right">&gt;</button>
+              <button class="down" type="button" data-move="0,1" aria-label="Move down">v</button>
+            </div>
+          </section>
+
+          <section class="legend" id="legend" aria-label="Region jump menu"></section>
+
+          <section class="actions">
+            <a class="open-link disabled" href="#" id="open-link">Open article</a>
+            <p class="status" id="status">Original pixel art. No borrowed sprites.</p>
+          </section>
+        </aside>
+      </div>
+    </section>
+    <a class="float-open" id="float-open" href="#" aria-label="Open current article">Open ↗</a>
+    <div class="catch-flash" id="catch-flash" aria-hidden="true"></div>
+  </main>
+
+  <script src="js/engine.js"></script>
+  <script>
+    "use strict";
+
+    const regions = [
+      { id: "featured",    name: "Hall of Fame",       x0: 0,  y0: 0,  x1: 12, y1: 7 },
+      { id: "bio",         name: "Bioinformatics Lab", x0: 15, y0: 0,  x1: 30, y1: 8 },
+      { id: "ai",          name: "AI Cyberzone",       x0: 33, y0: 0,  x1: 47, y1: 8 },
+      { id: "computing",   name: "Computing Grid",     x0: 0,  y0: 10, x1: 12, y1: 15 },
+      { id: "start",       name: "Start Crossing",        x0: 15, y0: 10, x1: 30, y1: 15 },
+      { id: "collections", name: "Collections Loft",   x0: 33, y0: 10, x1: 47, y1: 15 },
+      { id: "philosophy",  name: "Philosophy Forest",  x0: 0,  y0: 17, x1: 13, y1: 23 },
+      { id: "health",      name: "Health Meadow",      x0: 15, y0: 17, x1: 30, y1: 22 },
+      { id: "personal",    name: "Personal Hills",     x0: 33, y0: 17, x1: 47, y1: 22 },
+      { id: "stats",       name: "Statistics Strand",  x0: 0,  y0: 25, x1: 13, y1: 31 },
+      { id: "snapshots",   name: "Snapshot Gallery",   x0: 15, y0: 24, x1: 30, y1: 31 },
+      { id: "fun",         name: "Fun Arcade",         x0: 33, y0: 24, x1: 47, y1: 31 }
+    ];
+
+    const articles = [
+      /* ---------- START BEACH (entry hub) ---------- */
+      { id: "die-zero", region: "start", x: 16, y: 13, kind: "house", token: "DZ",
+        title: "Die with zero ideas",
+        date: "January 22, 2025",
+        url: "die_with_zero.html",
+        summary: "The rule of the website: get useful ideas into public before they disappear." },
+      { id: "complicated-start", region: "start", x: 18, y: 13, kind: "essay", token: "MC",
+        title: "It's more complicated than that",
+        date: "December 27, 2022",
+        url: "its_more_complicated_than_that.html",
+        summary: "A scientific reflex against premature certainty." },
+      { id: "stick-shift", region: "start", x: 20, y: 13, kind: "essay", token: "ZN",
+        title: "Zen and the art of driving stick",
+        date: "October 9, 2022 - October 13, 2024",
+        url: "stick_shift_mindset.html",
+        summary: "Manual transmission as a way of being more present and skillful in any endeavor." },
+      { id: "signal-start", region: "start", x: 22, y: 13, kind: "castle", token: "SG",
+        title: "There's some signal there",
+        date: "August 6, 2024",
+        url: "signal_there.html",
+        summary: "The phrase for noticing path-shaped information before you can fully explain why it matters." },
+      { id: "problem-start", region: "start", x: 24, y: 13, kind: "essay", token: "HP",
+        title: "What I learned about problem solving from my thesis lab",
+        date: "March 24, 2023",
+        url: "how_to_solve_problems.html",
+        summary: "Stories from a lab where biologists invented hardware and software, and the heuristics they used." },
+      { id: "we-think", region: "start", x: 26, y: 13, kind: "essay", token: "WC",
+        title: "We choose to think about stuff",
+        date: "August 1, 2025",
+        url: "we_choose_to_think.html",
+        summary: "Wisdom requires thinking — even when AI could do it for you. A letter to future-me." },
+      { id: "learn-bfx", region: "start", x: 28, y: 13, kind: "house", token: "LB",
+        title: "How I transitioned from biologist to bioinformatician",
+        date: "July 23, 2023",
+        url: "learn_bioinformatics.html",
+        summary: "Journey notes and recommended references for crossing from wet lab to dry lab." },
+      { id: "knn-sleepwalk-start", region: "start", x: 22, y: 11, kind: "essay", token: "KS",
+        title: "Knn sleepwalk",
+        date: "November 16, 2022",
+        url: "https://github.com/tjburns08/knn_sleepwalk",
+        summary: "An R package that lets you test how exact a 2D embedding really is." },
+      { id: "tedx", region: "start", x: 22, y: 15, kind: "castle", token: "TX",
+        title: "TEDx Basel: my scrolling problem, and how I fixed it",
+        date: "July 7, 2023",
+        url: "https://www.youtube.com/watch?v=U35T-KzfeLk",
+        summary: "How an ADD brain meets infinite scroll, and what to build instead." },
+
+      /* ---------- PHILOSOPHY FOREST (22 articles) ---------- */
+      { id: "boring", region: "philosophy", x: 3, y: 17, kind: "essay", token: "BM",
+        title: "The most boring man in the world",
+        date: "January 3, 2025 - January 8, 2025",
+        url: "boring.html",
+        summary: "A defense of boring stability as a surprisingly high-leverage way to live and work." },
+      { id: "praise", region: "philosophy", x: 5, y: 17, kind: "essay", token: "PI",
+        title: "Buddhism is to mindfulness, as Christianity is to...",
+        date: "January 8, 2025",
+        url: "praise_the_ideal.html",
+        summary: "A reflection on ideals, religion, and what gets stripped away when practices flatten into techniques." },
+      { id: "signal-phil", region: "philosophy", x: 7, y: 17, kind: "essay", token: "SG",
+        title: "There's some signal there",
+        date: "August 6, 2024",
+        url: "signal_there.html",
+        summary: "Noticing path-shaped information before you can fully explain why it matters." },
+      { id: "occam", region: "philosophy", x: 9, y: 17, kind: "essay", token: "OR",
+        title: "But what is Occam's razor really?",
+        date: "March 24, 2023",
+        url: "occams_razor.html",
+        summary: "A closer look at a familiar heuristic that people invoke more often than they understand." },
+      { id: "dialectic", region: "philosophy", x: 11, y: 17, kind: "essay", token: "DL",
+        title: "Making sense of the messy real world",
+        date: "December 10, 2022",
+        url: "dialectic.html",
+        summary: "A dialectical approach to navigating reality when clean abstractions break down." },
+      { id: "beauty-truth", region: "philosophy", x: 13, y: 17, kind: "essay", token: "BT",
+        title: "The beauty is truth delusion",
+        date: "November 29, 2022",
+        url: "the_beauty_is_truth_delusion.html",
+        summary: "A warning against confusing elegance, beauty, or coherence with truth." },
+      { id: "doomer", region: "philosophy", x: 3, y: 19, kind: "castle", token: "DG",
+        title: "If the doomers are right, then be a giver",
+        date: "August 23, 2025 - May 23, 2026",
+        url: "doomer_good_life.html",
+        summary: "A lived attempt to connect eudaimonia, existential risk, and giving more than you take." },
+      { id: "die-zero-phil", region: "philosophy", x: 5, y: 19, kind: "house", token: "DZ",
+        title: "Die with zero ideas",
+        date: "January 22, 2025",
+        url: "die_with_zero.html",
+        summary: "Get useful ideas into public before they disappear." },
+      { id: "getting", region: "philosophy", x: 7, y: 19, kind: "essay", token: "GL",
+        title: "Getting life done",
+        date: "September 14, 2023 - January 20, 2024",
+        url: "getting_life_done.html",
+        summary: "Getting through the parts of life that do not care about your abstractions." },
+      { id: "complexity", region: "philosophy", x: 9, y: 19, kind: "essay", token: "FC",
+        title: "Fight complexity with complexity",
+        date: "May 16, 2023",
+        url: "fight_complexity_with_complexity.html",
+        summary: "Sometimes a complex world requires complex tools." },
+      { id: "depth", region: "philosophy", x: 11, y: 19, kind: "essay", token: "VD",
+        title: "The virtue of depth",
+        date: "April 7, 2023",
+        url: "virtue_of_depth.html",
+        summary: "Staying with something long enough for its real structure to reveal itself." },
+      { id: "tao-problem", region: "philosophy", x: 13, y: 19, kind: "essay", token: "TP",
+        title: "The Tao of problem solving",
+        date: "December 4, 2022",
+        url: "tao_of_problem_solving.html",
+        summary: "Problem solving as moving with the grain of reality instead of forcing procedures onto it." },
+      { id: "complicated-phil", region: "philosophy", x: 1, y: 21, kind: "essay", token: "MC",
+        title: "It's more complicated than that",
+        date: "December 27, 2022",
+        url: "its_more_complicated_than_that.html",
+        summary: "A scientific reflex against premature certainty." },
+      // ---- Hidden cave (revealed by walking up from complicated-phil). It's a
+      //      portal into the Meditations dungeon; the article waits at the end. ----
+      { id: "meditations", region: "philosophy", x: 1, y: 19, kind: "cave", kindLabel: "Cave",
+        token: "CV",
+        title: "A cave in the forest",
+        date: "Hidden room",
+        url: "game_mode/meditations_dungeon.html",
+        summary: "A dark opening in the Philosophy Forest. An open dungeon lies within, with my Meditations, Chapter 1 sealed at the end. Press Enter to go in.",
+        excludeFromWarp: true,
+        secret: "meditations" },
+      { id: "fear", region: "philosophy", x: 3, y: 21, kind: "essay", token: "FU",
+        title: "Fear of the un-word is the beginning of wisdom",
+        date: "November 11, 2023",
+        url: "fear_the_unword.html",
+        summary: "Unnamed things, taboo concepts, and the wisdom that starts when language gets uncomfortable." },
+      { id: "problem-phil", region: "philosophy", x: 5, y: 21, kind: "essay", token: "PS",
+        title: "What I learned about problem solving from my thesis lab",
+        date: "March 24, 2023",
+        url: "how_to_solve_problems.html",
+        summary: "Lab stories about people who reinvented what they needed." },
+      { id: "enjoyment", region: "philosophy", x: 7, y: 21, kind: "essay", token: "EA",
+        title: "Enjoyment arbitrage",
+        date: "May 23, 2023",
+        url: "enjoyment_arbitrage.html",
+        summary: "You can sometimes do what you love if everyone else hates the surrounding work enough." },
+      { id: "finite", region: "philosophy", x: 9, y: 21, kind: "essay", token: "FI",
+        title: "Finite and infinite-life games",
+        date: "April 20, 2023",
+        url: "finite_infinite_life_games.html",
+        summary: "A personal adaptation of finite and infinite games into life choices." },
+      { id: "coding", region: "philosophy", x: 11, y: 21, kind: "essay", token: "CP",
+        title: "Learning how to code improved how I think",
+        date: "January 15, 2023",
+        url: "coding_as_philosophical_project.html",
+        summary: "Coding as a practice that changes how problems are perceived." },
+      { id: "way", region: "philosophy", x: 13, y: 21, kind: "essay", token: "WY",
+        title: "The way is the way",
+        date: "December 18, 2022",
+        url: "purpose_driven_vs_purposeless.html",
+        summary: "Acting when purpose is less useful than recognizing the path." },
+      { id: "beauty", region: "philosophy", x: 7, y: 23, kind: "house", token: "AB",
+        title: "Replace value with beauty",
+        date: "April 23, 2023",
+        url: "add_beauty.html",
+        summary: "A proposed swap: beauty-add thinking instead of value-add thinking." },
+      { id: "hacking", region: "philosophy", x: 11, y: 23, kind: "essay", token: "HK",
+        title: "Hacking: seeing through and unseeing in my life",
+        date: "March 15, 2023",
+        url: "on_hacking.html",
+        summary: "Hacking as noticing hidden degrees of freedom in everyday systems." },
+      { id: "minimize", region: "philosophy", x: 13, y: 23, kind: "essay", token: "MS",
+        title: "Applying sustainability to everyday life",
+        date: "October 13, 2022",
+        url: "minimize_and_sustain.html",
+        summary: "A sustainability mindset for ordinary personal choices." },
+
+      /* ---------- BIOINFORMATICS LAB ---------- */
+      { id: "xshift", region: "bio", x: 15, y: 1, kind: "essay", token: "XS",
+        title: "How X-shift works",
+        date: "June 15, 2023",
+        url: "how_xshift_works.html",
+        summary: "X-shift, a CyTOF clustering algorithm, simplified in R with igraph." },
+      { id: "mnn", region: "bio", x: 17, y: 1, kind: "essay", token: "MN",
+        title: "CyTOF mutual nearest neighbors experiment",
+        date: "June 14, 2023",
+        url: "cytof_mnn_experiment.html",
+        summary: "MNN vs KNN graphs for clustering CyTOF data." },
+      { id: "lang-tour", region: "bio", x: 19, y: 1, kind: "essay", token: "LT",
+        title: "CyTOF analysis language tour",
+        date: "May 10, 2023",
+        url: "cytof_analysis_language_tour.html",
+        summary: "Same CyTOF analysis in R, Python, Julia, C++, SQL, and Rust." },
+      { id: "julia-umap", region: "bio", x: 21, y: 1, kind: "essay", token: "JU",
+        title: "CyTOF UMAP with Julia",
+        date: "April 17, 2023",
+        url: "julia_cytof_pipeline_one_file.html",
+        summary: "Trading R's UMAP for Julia's faster implementation, end to end." },
+      { id: "cytof-seurat", region: "bio", x: 23, y: 1, kind: "essay", token: "CS",
+        title: "Run CyTOF analysis with Seurat",
+        date: "April 11, 2023",
+        url: "run_cytof_with_seurat.html",
+        summary: "Tricking Seurat into thinking CyTOF data is scRNA-seq data." },
+      { id: "fcs-anatomy", region: "bio", x: 25, y: 1, kind: "essay", token: "FA",
+        title: "Anatomy of a FCS file",
+        date: "March 23, 2023",
+        url: "anatomy_of_fcs_file.html",
+        summary: "Parsing an FCS file by hand, byte by byte, without flowCore." },
+      { id: "cytof-pipe1", region: "bio", x: 27, y: 1, kind: "house", token: "P1",
+        title: "CyTOF pipeline: one FCS file",
+        date: "March 12, 2023",
+        url: "cytof_pipeline_one_file.html",
+        summary: "A guts-level walkthrough of single-file CyTOF analysis in R." },
+      { id: "cytof-pipe-many", region: "bio", x: 29, y: 1, kind: "house", token: "PM",
+        title: "CyTOF pipeline: many FCS files",
+        date: "March 16, 2023",
+        url: "cytof_pipeline_many_files.html",
+        summary: "Multi-file CyTOF with per-cluster stats and diffcyt." },
+
+      { id: "asinh", region: "bio", x: 15, y: 3, kind: "essay", token: "AS",
+        title: "asinh(mean) vs mean(asinh)",
+        date: "December 7, 2022",
+        url: "asinh_mean_vs_mean_asinh.html",
+        summary: "Order of operations matters when summarizing per-cluster CyTOF expression." },
+      { id: "cytof-trans", region: "bio", x: 17, y: 3, kind: "essay", token: "DT",
+        title: "Data transformations for CyTOF",
+        date: "2022",
+        url: "cytof_data_transformations.html",
+        summary: "Asinh, logicle, linear: comparing what each transformation does to mass cytometry data." },
+      { id: "louvain-leiden", region: "bio", x: 19, y: 3, kind: "essay", token: "LL",
+        title: "Louvain versus Leiden cluster stability",
+        date: "2024",
+        url: "louvain_leiden_cluster_stability.html",
+        summary: "Replicates and stability scores across two community-detection algorithms." },
+      { id: "soft-clust", region: "bio", x: 21, y: 3, kind: "essay", token: "SC",
+        title: "Cluster membership purity score",
+        date: "2024",
+        url: "soft_clustering.html",
+        summary: "How firmly does a single cell belong to its assigned cluster?" },
+      { id: "seurat-stab", region: "bio", x: 23, y: 3, kind: "essay", token: "SS",
+        title: "Cluster stability as an evaluation metric",
+        date: "2024",
+        url: "seurat_pbmc_cluster_stability.html",
+        summary: "Stability as a working evaluation metric for single-cell workflows." },
+      { id: "viridis", region: "bio", x: 25, y: 3, kind: "essay", token: "VR",
+        title: "Case for viridis in scRNA-seq",
+        date: "2024",
+        url: "case_for_viridis.html",
+        summary: "A defense of viridis as the default scRNA-seq color scale." },
+      { id: "seurat-nopca", region: "bio", x: 27, y: 3, kind: "essay", token: "NP",
+        title: "UMAP without PCA reveals cosine distance",
+        date: "2024",
+        url: "annotated_seurat_without_pca.html",
+        summary: "What gets lost — and what holds up — when you skip PCA in a scRNA-seq UMAP." },
+      { id: "annotate-3k", region: "bio", x: 29, y: 3, kind: "essay", token: "A3",
+        title: "Annotate the PBMC 3k dataset",
+        date: "2024",
+        url: "annotate_pbmc_3k.html",
+        summary: "Walkthrough of marker-based annotation for a small reference dataset." },
+
+      { id: "rainbow", region: "bio", x: 15, y: 5, kind: "essay", token: "RB",
+        title: "Flow-style color scheme for FeaturePlot",
+        date: "2024",
+        url: "rainbow_feature_plot.html",
+        summary: "Bringing flow cytometry's color sensibilities to Seurat plots." },
+      { id: "charite", region: "bio", x: 17, y: 5, kind: "essay", token: "CC",
+        title: "scRNA-seq: Schulte-Schrepping et al. Cell 2020",
+        date: "2023",
+        url: "charite_covid_figure_2.html",
+        summary: "A figure-by-figure walk through a single-cell COVID-19 paper." },
+      { id: "scrna-pipe", region: "bio", x: 19, y: 5, kind: "house", token: "SR",
+        title: "scRNA-seq pipeline: PBMC 3k in depth",
+        date: "2024",
+        url: "scrna_seq_piepline_pbmc_3k.html",
+        summary: "Pipeline walkthrough from raw to clusters on the canonical PBMC dataset." },
+      { id: "scrna-integrate", region: "bio", x: 21, y: 5, kind: "essay", token: "IN",
+        title: "scRNA-seq: integrated vs not",
+        date: "2024",
+        url: "scrna_seq_analyze_and_integrate.html",
+        summary: "What integration changes — and what it costs." },
+      { id: "dr-prov", region: "bio", x: 23, y: 5, kind: "castle", token: "DR",
+        title: "Provenance of CyTOF dimension reduction",
+        date: "May 18, 2026",
+        url: "dr_provenance_interactive.html",
+        summary: "Interactive provenance graph: SPADE → UMAP and the methods around them." },
+      { id: "dist-mat", region: "bio", x: 25, y: 5, kind: "essay", token: "DM",
+        title: "Distance matrix metric correlations",
+        date: "2023",
+        url: "distance_matrix_correlation.html",
+        summary: "Which distance metrics agree, and which give you different cell neighborhoods." },
+      { id: "cytof-llm-sel", region: "bio", x: 27, y: 5, kind: "essay", token: "LS",
+        title: "CyTOF clustering picked at random by LLMs",
+        date: "March 13, 2026",
+        url: "cytof_llm_selection_experiment.html",
+        summary: "LLMs prefer FlowSOM or PhenoGraph. Vendor-specific biases matter." },
+      { id: "samusik-llm", region: "bio", x: 29, y: 5, kind: "essay", token: "SL",
+        title: "LLM-generated CyTOF data",
+        date: "February 27, 2026",
+        url: "samusik_llm_mishmash.html",
+        summary: "Asking Claude Sonnet to simulate Samusik cells, one at a time." },
+
+      { id: "llm-annotate", region: "bio", x: 15, y: 7, kind: "essay", token: "LA",
+        title: "LLM-based cell annotation in R",
+        date: "2024",
+        url: "llm_annotate_pbmc3k.html",
+        summary: "Automated marker-based annotation routed through an LLM." },
+      { id: "blsc-pca", region: "bio", x: 17, y: 7, kind: "essay", token: "BP",
+        title: "LLM-augmented PCA loadings",
+        date: "2024",
+        url: "BLSC_PCA_loading_LLMs_final.html",
+        summary: "Using LLMs to interpret PC loadings in PBMC analysis." },
+      { id: "uce-nn", region: "bio", x: 19, y: 7, kind: "essay", token: "UN",
+        title: "PBMC 3k nearest neighbors in UCE",
+        date: "2024",
+        url: "pbmc_uce_nn_comparison.html",
+        summary: "Do foundation embeddings preserve local neighborhood structure?" },
+      { id: "uce-filt", region: "bio", x: 21, y: 7, kind: "essay", token: "UF",
+        title: "UCE: variable genes vs full",
+        date: "2024",
+        url: "compare_full_vs_filtered_uce.html",
+        summary: "Pre-filtering to variable genes hurts cell separation in UCE." },
+      { id: "uce-3k10k", region: "bio", x: 23, y: 7, kind: "essay", token: "UE",
+        title: "UCE on PBMC 3k + 10k",
+        date: "2024",
+        url: "explore_uce_output_3k_10k.html",
+        summary: "Testing whether the embedding really grokked dataset integration." },
+      { id: "uce-cns", region: "bio", x: 25, y: 7, kind: "essay", token: "UC",
+        title: "UMAP and UCE on CNS data",
+        date: "2024",
+        url: "human_universal_cell_embeddings.html",
+        summary: "UMAP misses the proper center and edges of the human CNS portion of UCE." },
+      { id: "learn-bfx-bio", region: "bio", x: 27, y: 7, kind: "castle", token: "LB",
+        title: "How I transitioned from biologist to bioinformatician",
+        date: "July 23, 2023",
+        url: "learn_bioinformatics.html",
+        summary: "Notes and references from the journey across the bench/keyboard divide." },
+      { id: "claude-cytof", region: "bio", x: 29, y: 7, kind: "essay", token: "CL",
+        title: "Claude Code + Codex CyTOF experiments",
+        date: "January 26, 2026",
+        url: "https://github.com/tjburns08/cytof_agentic_prompting_experiments",
+        summary: "Agentic prompting on a known dataset; outputs often sensible, choices hit-or-miss." },
+
+      /* ---------- AI CYBERZONE ---------- */
+      { id: "we-think-ai", region: "ai", x: 33, y: 1, kind: "essay", token: "WC",
+        title: "We choose to think about stuff",
+        date: "August 1, 2025",
+        url: "we_choose_to_think.html",
+        summary: "Wisdom requires thinking — even when AI could do it for you." },
+      { id: "be-diff", region: "ai", x: 35, y: 1, kind: "essay", token: "BD",
+        title: "Be different, now more important than ever",
+        date: "2024",
+        url: "be_different.html",
+        summary: "Why distinctiveness matters more in an age of LLM averages." },
+      { id: "episodic", region: "ai", x: 37, y: 1, kind: "essay", token: "EM",
+        title: "Episodic memory is the new semantic memory",
+        date: "2024",
+        url: "episodic_memory.html",
+        summary: "When LLMs ate semantic memory, the high-leverage skill became remembering events." },
+      { id: "xai-us", region: "ai", x: 39, y: 1, kind: "essay", token: "XA",
+        title: "Explainable AI and understanding ourselves",
+        date: "2024",
+        url: "xai_and_us.html",
+        summary: "Interpretability work, and how it loops back into self-knowledge." },
+
+      { id: "descent", region: "ai", x: 33, y: 3, kind: "castle", token: "MD",
+        title: "An LLM's descent into madness",
+        date: "2024",
+        url: "descent_into_madness.html",
+        summary: "What happens when you feed a language model its own output, again and again." },
+      { id: "microbiome-q", region: "ai", x: 35, y: 3, kind: "essay", token: "MQ",
+        title: "10k microbiome questions, generated",
+        date: "2023",
+        url: "microbiome_questions.html",
+        summary: "Letting a LLM imagine the space of researchable questions in a field." },
+      { id: "make-meta", region: "ai", x: 37, y: 3, kind: "essay", token: "MM",
+        title: "Generating metaquestions (R Markdown)",
+        date: "2023",
+        url: "make_metaquestions.html",
+        summary: "The pipeline behind the 10k question set." },
+      { id: "gpt3-student", region: "ai", x: 39, y: 3, kind: "essay", token: "G3",
+        title: "GPT-3 simulating students",
+        date: "2022",
+        url: "gpt3_student.html",
+        summary: "Old-school but instructive: simulating student answers to gauge pedagogy." },
+      { id: "cmd-chatbot", region: "ai", x: 41, y: 3, kind: "essay", token: "CB",
+        title: "Command-line chatbot",
+        date: "2023",
+        url: "command_line_writeup.html",
+        summary: "A pocket chatbot you can build, hack, and run from your terminal." },
+
+      { id: "scrolling-problem", region: "ai", x: 33, y: 5, kind: "essay", token: "SP",
+        title: "The Scrolling Problem",
+        date: "2023",
+        url: "scrolling_problem.html",
+        summary: "Where the TEDx talk started: an ADD-friendly answer to infinite scroll." },
+      { id: "gprofiler", region: "ai", x: 35, y: 5, kind: "essay", token: "GP",
+        title: "Gene lists → interactive contextual maps",
+        date: "2024",
+        url: "run_gprofiler_and_embed.html",
+        summary: "Embeddings on top of g:Profiler results for richer biological interpretation." },
+      { id: "site-graph", region: "ai", x: 37, y: 5, kind: "essay", token: "SG",
+        title: "Graph visualization of my website",
+        date: "2024",
+        url: "website_internal_link_graph.html",
+        summary: "The internal link structure of this website, rendered as a graph." },
+      { id: "journaling", region: "ai", x: 39, y: 5, kind: "house", token: "JM",
+        title: "One million words: 15 years of journaling",
+        date: "2024",
+        url: "tech_enabled_journaling.html",
+        summary: "Embedding and exploring 15 years of personal journals." },
+      { id: "news-space", region: "ai", x: 41, y: 5, kind: "essay", token: "NS",
+        title: "CNN, Fox, AP: a news space study",
+        date: "2024",
+        url: "cnn_fox_ap_map.html",
+        summary: "Mapping the semantic space of three news outlets." },
+
+      { id: "curate", region: "ai", x: 33, y: 7, kind: "essay", token: "CC",
+        title: "How I curate content",
+        date: "2024",
+        url: "how_i_curate_content.html",
+        summary: "A workflow for filtering and saving signal in a noisy info diet." },
+      { id: "context-bfx", region: "ai", x: 35, y: 7, kind: "essay", token: "CX",
+        title: "The Context Problem in bioinformatics",
+        date: "2024",
+        url: "context_problem_bfx.html",
+        summary: "Why generic LLMs struggle to be useful in a specialist's pipeline." },
+      { id: "ask-marcus", region: "ai", x: 37, y: 7, kind: "essay", token: "AM",
+        title: "What would Marcus Aurelius say?",
+        date: "2024",
+        url: "ask_marcus_writeup.html",
+        summary: "The build log behind the Hugging Face 'Ask Marcus Aurelius' space." },
+      { id: "biorxiv", region: "ai", x: 39, y: 7, kind: "essay", token: "BX",
+        title: "Preprint server archive",
+        date: "2024",
+        url: "biorxiv_medrxiv_history.html",
+        summary: "Snapshot history of bioRxiv and medRxiv." },
+      { id: "qgraph", region: "ai", x: 41, y: 7, kind: "essay", token: "QG",
+        title: "Question graph",
+        date: "2024",
+        url: "question_graph_writeup.html",
+        summary: "Treating curiosity itself as a graph you can walk and prune." },
+
+      /* ---------- COMPUTING GRID ---------- */
+      { id: "levels", region: "computing", x: 2, y: 11, kind: "castle", token: "LV",
+        title: "Levels of analysis in bits and atoms",
+        date: "2023",
+        url: "levels_of_analysis.html",
+        summary: "Choosing the right altitude when reasoning about computers — and everything else." },
+      { id: "r-rabbit", region: "computing", x: 4, y: 11, kind: "essay", token: "RR",
+        title: "The R rabbit hole",
+        date: "2023",
+        url: "r_rabbit_hole.html",
+        summary: "Going deep on R — what's down there, and why it changed how I think." },
+      { id: "lisp", region: "computing", x: 6, y: 11, kind: "essay", token: "LI",
+        title: "The Lisp machine of Babel",
+        date: "2023",
+        url: "lisp_machine_of_babel.html",
+        summary: "Lisp as a lens for understanding code, language, and abstraction." },
+      { id: "metaprog", region: "computing", x: 8, y: 11, kind: "essay", token: "MP",
+        title: "Metaprogramming in R",
+        date: "2023",
+        url: "metaprogramming_in_R.html",
+        summary: "Hands-on with R's unusual capacity to operate on its own code." },
+      { id: "ca-rules", region: "computing", x: 10, y: 11, kind: "essay", token: "CA",
+        title: "Elementary cellular automata rule space",
+        date: "2023",
+        url: "ca_rule_space.html",
+        summary: "Mapping the rule space of 1D cellular automata." },
+      { id: "logic-gates", region: "computing", x: 2, y: 13, kind: "essay", token: "LG",
+        title: "Logic gates",
+        date: "2023",
+        url: "logic_gates.html",
+        summary: "The atomic building blocks of computing, from scratch." },
+      { id: "1d-ca", region: "computing", x: 4, y: 13, kind: "essay", token: "1C",
+        title: "1-D cellular automata",
+        date: "2023",
+        url: "1d_ca.html",
+        summary: "Running the simplest interesting automata you can." },
+      { id: "rule-110", region: "computing", x: 6, y: 13, kind: "house", token: "R0",
+        title: "Explore Wolfram Rule 110",
+        date: "2023",
+        url: "explore_rule_110.html",
+        summary: "The Turing-complete rule from the elementary CA family." },
+
+      /* ---------- COLLECTIONS LOFT ---------- */
+      { id: "qbank", region: "collections", x: 35, y: 13, kind: "house", token: "QB",
+        title: "Question Bank",
+        date: "ongoing",
+        url: "question_bank.html",
+        summary: "An ever-growing library of questions worth sitting with." },
+      { id: "social", region: "collections", x: 40, y: 13, kind: "castle", token: "SP",
+        title: "Social media posts",
+        date: "ongoing",
+        url: "social_media_posts.html",
+        summary: "The text version of my LinkedIn posts collection. (Psst — press right from here to find a hidden path.)" },
+      // ---- Hidden portal to the Social Media World (revealed by walking right from the SP box) ----
+      { id: "social-portal", region: "collections", x: 42, y: 13, kind: "portal", token: "SW",
+        title: "Social Media World",
+        date: "Portal",
+        url: "game_mode/social_mode.html",
+        kindLabel: "Portal",
+        excludeFromWarp: true,
+        summary: "A hidden overworld built from my LinkedIn posts. Press Enter to warp in.",
+        secret: "socialworld" },
+
+      /* ---------- STATISTICS STRAND (coin toss series) ---------- */
+      { id: "stats-1", region: "stats", x: 1, y: 27, kind: "house", token: "C1",
+        title: "Coin toss 1: large numbers + CLT",
+        date: "May 26, 2021",
+        url: "1_law_large_numbers_central_limit_theorem.html",
+        summary: "The two foundational results, illustrated by simulation." },
+      { id: "stats-2", region: "stats", x: 3, y: 27, kind: "essay", token: "C2",
+        title: "Coin toss 2: runs of luck",
+        date: "May 26, 2021",
+        url: "2_runs_of_luck.html",
+        summary: "How often a fair coin throws up streaks that look unfair." },
+      { id: "stats-3", region: "stats", x: 5, y: 27, kind: "essay", token: "C3",
+        title: "Coin toss 3: fair vs unfair coins",
+        date: "May 26, 2021",
+        url: "3_fair_vs_unfair_coins.html",
+        summary: "Discriminating bias from noise." },
+      { id: "stats-4", region: "stats", x: 7, y: 27, kind: "essay", token: "C4",
+        title: "Coin toss 4: random walks",
+        date: "May 26, 2021",
+        url: "4_random_walk.html",
+        summary: "Random walks built up coin-flip by coin-flip." },
+      { id: "stats-5", region: "stats", x: 9, y: 27, kind: "essay", token: "C5",
+        title: "Coin toss 5: dice rolls",
+        date: "May 27, 2021",
+        url: "5_dice_roll.html",
+        summary: "Extending the same reasoning past binary outcomes." },
+      { id: "stats-6", region: "stats", x: 11, y: 27, kind: "castle", token: "C6",
+        title: "Coin toss 6: is this sequence random?",
+        date: "May 27, 2021",
+        url: "6_is_this_sequence_random.html",
+        summary: "Tests for randomness, and where intuition fails." },
+
+      /* ---------- HEALTH MEADOW ---------- */
+      { id: "boring-diet", region: "health", x: 17, y: 19, kind: "house", token: "BD",
+        title: "The boring diet",
+        date: "2023",
+        url: "boring_diet.html",
+        summary: "How I prevent food addiction by removing decisions, not adding rules." },
+      { id: "tao-health", region: "health", x: 20, y: 19, kind: "castle", token: "TH",
+        title: "The Tao of good health",
+        date: "2023",
+        url: "pursuit_of_health.html",
+        summary: "Long-game health as a way of being, not a checklist." },
+      { id: "fit-20", region: "health", x: 23, y: 19, kind: "essay", token: "F2",
+        title: "How to get fit in 20 years",
+        date: "2023",
+        url: "how_to_get_fit_long_term.html",
+        summary: "The slow-cooker school of fitness." },
+      { id: "therapy", region: "health", x: 26, y: 19, kind: "essay", token: "PT",
+        title: "Psychotherapy should be as normal as the gym",
+        date: "2023",
+        url: "psychotherapy_and_fitness.html",
+        summary: "Mental fitness deserves the same standing as physical fitness." },
+      { id: "just-paint", region: "health", x: 28, y: 19, kind: "essay", token: "JP",
+        title: "Just paint",
+        date: "2023",
+        url: "just_paint.html",
+        summary: "On letting art be art." },
+
+      /* ---------- PERSONAL HILLS ---------- */
+      { id: "northern", region: "personal", x: 35, y: 19, kind: "house", token: "NL",
+        title: "I saw the northern lights",
+        date: "2023",
+        url: "i_saw_the_northern_lights.html",
+        summary: "On finally seeing them, and what showing up actually means." },
+      { id: "limbic", region: "personal", x: 37, y: 19, kind: "essay", token: "LL",
+        title: "Limbic language learning",
+        date: "2023",
+        url: "limbic_language_learning.html",
+        summary: "Learning a language through emotion, not flashcards." },
+      { id: "stick-personal", region: "personal", x: 39, y: 19, kind: "essay", token: "ZN",
+        title: "Zen and the art of driving stick",
+        date: "2024",
+        url: "stick_shift_mindset.html",
+        summary: "Manual transmission as a personal philosophy." },
+      { id: "zelda", region: "personal", x: 42, y: 19, kind: "essay", token: "ZE",
+        title: "Zelda, the hero instinct, and narratives",
+        date: "2024",
+        url: "zelda.html",
+        summary: "What playing Zelda taught me about narrative and motive." },
+      // ---- Hidden sword cave (revealed by walking up from Zelda). ----
+      { id: "sword-cave", region: "personal", x: 42, y: 17, kind: "cave", kindLabel: "Cave",
+        token: "SC",
+        title: "A hidden sword cave",
+        date: "Hidden room",
+        url: "game_mode/sword_cave.html",
+        summary: "A secret cave tucked above the Zelda essay. There is an old man inside, and he has something useful for dark places.",
+        excludeFromWarp: true,
+        secret: "swordcave" },
+      { id: "coronazeit", region: "personal", x: 44, y: 19, kind: "castle", token: "CZ",
+        title: "Life and love in Berlin during the Coronazeit",
+        date: "2021",
+        url: "life_and_love_during_coronazeit.pdf",
+        summary: "A long essay on Berlin during the pandemic." },
+
+      /* ---------- SNAPSHOT GALLERY ---------- */
+      { id: "snap-2024-05", region: "snapshots", x: 17, y: 27, kind: "house", token: "M4",
+        title: "May 2024",
+        date: "2024",
+        url: "2024_may.html",
+        summary: "A snapshot of what I was working on and thinking about." },
+      { id: "snap-2023-05", region: "snapshots", x: 20, y: 27, kind: "essay", token: "M3",
+        title: "May 2023",
+        date: "2023",
+        url: "2023_may.html",
+        summary: "Snapshot, May 2023." },
+      { id: "snap-2023-04", region: "snapshots", x: 23, y: 27, kind: "essay", token: "A3",
+        title: "April 2023",
+        date: "2023",
+        url: "2023_april.html",
+        summary: "Snapshot, April 2023." },
+      { id: "snap-2023-03", region: "snapshots", x: 26, y: 27, kind: "essay", token: "R3",
+        title: "March 2023",
+        date: "2023",
+        url: "2023_march.html",
+        summary: "Snapshot, March 2023." },
+
+      /* ---------- FUN ARCADE ---------- */
+      { id: "speech", region: "fun", x: 35, y: 27, kind: "house", token: "SP",
+        title: "Speech memorization helper",
+        date: "2024",
+        url: "speech_memorization_helper.html",
+        summary: "A small tool for memorizing speeches by scaffolded reveal." },
+      { id: "cellvivor", region: "fun", x: 37, y: 27, kind: "essay", token: "CV",
+        title: "Cellvivor",
+        date: "2026",
+        url: "cellvivor/",
+        summary: "Cross a chasm filled with Conway's Game of Life hazards." },
+      { id: "nose-pick", region: "fun", x: 39, y: 27, kind: "essay", token: "NP",
+        title: "Nose Pick",
+        date: "2026",
+        url: "nose_pick/",
+        summary: "Catch the moving nose with the fingertip." },
+      { id: "breakout", region: "fun", x: 41, y: 27, kind: "essay", token: "BO",
+        title: "Breakout",
+        date: "2024",
+        url: "breakout.html",
+        summary: "A small Breakout clone." },
+      { id: "conways", region: "fun", x: 43, y: 27, kind: "essay", token: "GO",
+        title: "Conway's Game of Life",
+        date: "2024",
+        url: "conways_gol.html",
+        summary: "The canonical cellular automaton, playable." },
+      { id: "mandel", region: "fun", x: 45, y: 27, kind: "castle", token: "MB",
+        title: "Mandelbrot Set",
+        date: "2024",
+        url: "mandelbrot_set.html",
+        summary: "Pan and zoom through the most famous fractal." },
+
+      /* ---------- HALL OF FAME (FEATURED) ---------- */
+      { id: "rand", region: "featured", x: 2, y: 2, kind: "castle", token: "RH",
+        title: "RAND-Helena report on AI-enabled bio threats",
+        date: "May 20, 2026",
+        url: "https://www.rand.org/pubs/conf_proceedings/CFA4954-1.html",
+        summary: "Report on the DC convenings I helped organize." },
+      { id: "krupp", region: "featured", x: 4, y: 2, kind: "essay", token: "KS",
+        title: "Krupp Stanford Newsletter 2025",
+        date: "2025",
+        url: "Krupp-Stanford_E-Newsletter_2025_9MB.pdf",
+        summary: "Featuring my intern." },
+      { id: "ramji", region: "featured", x: 6, y: 2, kind: "essay", token: "RJ",
+        title: "Interview with Ramji Srinivasan (Teiko)",
+        date: "2024",
+        url: "https://www.youtube.com/watch?v=wRVOyYse5ug",
+        summary: "Conversation with the CEO of Teiko." },
+      { id: "watershed", region: "featured", x: 8, y: 2, kind: "essay", token: "WB",
+        title: "Limits of dimensionality reduction",
+        date: "2024",
+        url: "https://watershed.bio/resources/the-limits-of-dimensionality-reduction-tools-for-single-cell-analysis",
+        summary: "Guest piece on Watershed's blog." },
+      { id: "dev-pod-2", region: "featured", x: 2, y: 4, kind: "essay", token: "D2",
+        title: "Developer Stories Pt. 2: Be the flame",
+        date: "2023",
+        url: "https://rseng.github.io/devstories/2023/tyler-burns-part-2/",
+        summary: "Podcast episode." },
+      { id: "dev-pod-1", region: "featured", x: 4, y: 4, kind: "essay", token: "D1",
+        title: "Developer Stories Pt. 1: Line 37",
+        date: "2023",
+        url: "https://rseng.github.io/devstories/2023/tyler-burns-part-1/",
+        summary: "Podcast episode." },
+      { id: "tedx-feat", region: "featured", x: 6, y: 4, kind: "castle", token: "TX",
+        title: "TEDx Basel: scrolling problem",
+        date: "2023",
+        url: "https://www.youtube.com/watch?v=U35T-KzfeLk",
+        summary: "The TED talk." },
+      { id: "caricature", region: "featured", x: 8, y: 4, kind: "essay", token: "CA",
+        title: "TEDx Basel caricature",
+        date: "2023",
+        url: "burns_tedx_caricature.pdf",
+        summary: "The caricature artist's take on the talk." }
+    ];
+
+    const connections = [
+      /* Start Crossing — horizontal trunk + vertical branches */
+      ["die-zero", "complicated-start"], ["complicated-start", "stick-shift"],
+      ["stick-shift", "signal-start"], ["signal-start", "problem-start"],
+      ["problem-start", "we-think"], ["we-think", "learn-bfx"],
+      ["signal-start", "knn-sleepwalk-start"], ["signal-start", "tedx"],
+
+      /* Philosophy Forest — the original 4-track layout */
+      ["boring", "praise"], ["praise", "signal-phil"], ["signal-phil", "occam"],
+      ["occam", "dialectic"], ["dialectic", "beauty-truth"],
+      ["doomer", "die-zero-phil"], ["die-zero-phil", "getting"],
+      ["getting", "complexity"], ["complexity", "depth"], ["depth", "tao-problem"],
+      ["complicated-phil", "fear"], ["fear", "problem-phil"], ["problem-phil", "enjoyment"],
+      ["enjoyment", "finite"], ["finite", "coding"], ["coding", "way"],
+      ["problem-phil", "beauty"], ["beauty", "hacking"], ["hacking", "minimize"],
+      ["way", "minimize"],
+      ["doomer", "boring"], ["doomer", "fear"],
+
+      /* Bio — 4 horizontal tracks, connected vertically */
+      ["xshift", "mnn"], ["mnn", "lang-tour"], ["lang-tour", "julia-umap"],
+      ["julia-umap", "cytof-seurat"], ["cytof-seurat", "fcs-anatomy"],
+      ["fcs-anatomy", "cytof-pipe1"], ["cytof-pipe1", "cytof-pipe-many"],
+      ["asinh", "cytof-trans"], ["cytof-trans", "louvain-leiden"],
+      ["louvain-leiden", "soft-clust"], ["soft-clust", "seurat-stab"],
+      ["seurat-stab", "viridis"], ["viridis", "seurat-nopca"], ["seurat-nopca", "annotate-3k"],
+      ["rainbow", "charite"], ["charite", "scrna-pipe"], ["scrna-pipe", "scrna-integrate"],
+      ["scrna-integrate", "dr-prov"], ["dr-prov", "dist-mat"],
+      ["dist-mat", "cytof-llm-sel"], ["cytof-llm-sel", "samusik-llm"],
+      ["llm-annotate", "blsc-pca"], ["blsc-pca", "uce-nn"], ["uce-nn", "uce-filt"],
+      ["uce-filt", "uce-3k10k"], ["uce-3k10k", "uce-cns"],
+      ["uce-cns", "learn-bfx-bio"], ["learn-bfx-bio", "claude-cytof"],
+      ["xshift", "asinh"], ["asinh", "rainbow"], ["rainbow", "llm-annotate"],
+
+      /* AI — 4 horizontal tracks + verticals */
+      ["we-think-ai", "be-diff"], ["be-diff", "episodic"], ["episodic", "xai-us"],
+      ["descent", "microbiome-q"], ["microbiome-q", "make-meta"], ["make-meta", "gpt3-student"],
+      ["gpt3-student", "cmd-chatbot"],
+      ["scrolling-problem", "gprofiler"], ["gprofiler", "site-graph"],
+      ["site-graph", "journaling"], ["journaling", "news-space"],
+      ["curate", "context-bfx"], ["context-bfx", "ask-marcus"],
+      ["ask-marcus", "biorxiv"], ["biorxiv", "qgraph"],
+      ["we-think-ai", "descent"], ["descent", "scrolling-problem"], ["scrolling-problem", "curate"],
+
+      /* Computing — two short rows */
+      ["levels", "r-rabbit"], ["r-rabbit", "lisp"], ["lisp", "metaprog"], ["metaprog", "ca-rules"],
+      ["logic-gates", "1d-ca"], ["1d-ca", "rule-110"],
+      ["levels", "logic-gates"], ["ca-rules", "rule-110"],
+
+      /* Collections */
+      ["qbank", "social"],
+
+      /* Statistics — single horizontal row */
+      ["stats-1", "stats-2"], ["stats-2", "stats-3"], ["stats-3", "stats-4"],
+      ["stats-4", "stats-5"], ["stats-5", "stats-6"],
+
+      /* Health */
+      ["boring-diet", "tao-health"], ["tao-health", "fit-20"],
+      ["fit-20", "therapy"], ["therapy", "just-paint"],
+
+      /* Personal */
+      ["northern", "limbic"], ["limbic", "stick-personal"],
+      ["stick-personal", "zelda"], ["zelda", "coronazeit"],
+
+      /* Snapshots */
+      ["snap-2024-05", "snap-2023-05"], ["snap-2023-05", "snap-2023-04"],
+      ["snap-2023-04", "snap-2023-03"],
+
+      /* Fun */
+      ["speech", "cellvivor"], ["cellvivor", "nose-pick"], ["nose-pick", "breakout"],
+      ["breakout", "conways"], ["conways", "mandel"],
+
+      /* Featured */
+      ["rand", "krupp"], ["krupp", "ramji"], ["ramji", "watershed"],
+      ["dev-pod-2", "dev-pod-1"], ["dev-pod-1", "tedx-feat"], ["tedx-feat", "caricature"],
+      ["rand", "dev-pod-2"], ["watershed", "caricature"]
+    ];
+
+    const bridges = [
+      /* Vertical bridges (cross the y-gap rows) */
+      // Featured (bottom y=7) -> Computing (top y=10) via x=5
+      ["5,8", "5,9"],
+      // Bio (bottom y=8) -> Start (top y=10) via x=22 — the cat's main lifeline north
+      ["22,9"],
+      // AI (bottom y=8) -> Collections (top y=10) via x=40
+      ["40,9"],
+      // Computing (bottom y=15) -> Philosophy (top y=17) via x=5
+      ["5,16"],
+      // Start (bottom y=15) -> Health (top y=17) via x=22 — main lifeline south
+      ["22,16"],
+      // Collections (bottom y=15) -> Personal (top y=17) via x=40
+      ["40,16"],
+      // Philosophy (bottom y=23) -> Stats (top y=25) via x=5
+      ["5,24"],
+      // Health (bottom y=22) -> Snapshots (top y=24) via x=22
+      ["22,23"],
+      // Personal (bottom y=22) -> Fun (top y=24) via x=40
+      ["40,23"],
+
+      /* Horizontal bridges (cross the x-gap columns) */
+      // Featured (right x=12) -> Bio (left x=15) via y=4
+      ["13,4", "14,4"],
+      // Bio (right x=30) -> AI (left x=33) via y=4
+      ["31,4", "32,4"],
+      // Computing (right x=12) -> Start (left x=15) via y=13
+      ["13,13", "14,13"],
+      // Start (right x=30) -> Collections (left x=33) via y=13
+      ["31,13", "32,13"],
+      // Philosophy (right x=13) -> Health (left x=15) via y=19
+      ["14,19"],
+      // Health (right x=30) -> Personal (left x=33) via y=19
+      ["31,19", "32,19"],
+      // Stats (right x=13) -> Snapshots (left x=15) via y=27
+      ["14,27"],
+      // Snapshots (right x=30) -> Fun (left x=33) via y=27
+      ["31,27", "32,27"]
+    ].flat();
+
+    const corridors = [
+      // Featured: drop col 4 from dev-pod-1 down to bridge (5,8) approach
+      [4, 4, 4, 7], [4, 7, 5, 7],
+      // Featured east row y=4 out to bridge column 13
+      [8, 4, 12, 4],
+
+      // Bio east row y=3 out to bridge column 31
+      [29, 3, 30, 3], [30, 3, 30, 4],
+
+      // Collections: vertical lane on col 40 connecting AI bridge → social → Personal bridge
+      [40, 10, 40, 15],
+      // Collections west row y=13 out to bridge column 31
+      [33, 13, 35, 13],
+
+      // Computing east row y=13 out to bridge column 13
+      [6, 13, 12, 13],
+      // Computing south col 5 down to bridge row 16
+      [5, 13, 5, 15],
+
+      // Start west row y=13 in to die-zero
+      [15, 13, 16, 13],
+      // Start east row y=13 out to bridge column 31
+      [28, 13, 30, 13],
+
+      // Philosophy south col 5 down to Stats bridge
+      [5, 21, 5, 23],
+
+      // Health west row y=19 out to Philosophy bridge column 14
+      [15, 19, 17, 19],
+      // Health east row y=19 out to Personal bridge column 31
+      [28, 19, 30, 19],
+      // Health col 22 connecting Start bridge down to Snapshots bridge
+      [22, 17, 22, 22],
+
+      // Personal west row y=19 in from Health bridge
+      [33, 19, 35, 19],
+      // Personal col 40 from Collections bridge down through articles to Fun bridge
+      [40, 17, 40, 22],
+
+      // Stats east row y=27 out to Snapshots bridge column 14
+      [11, 27, 13, 27],
+      // Stats col 5 up to Philosophy bridge
+      [5, 25, 5, 27],
+
+      // Snapshots west row y=27 in to snap-2024-05
+      [15, 27, 17, 27],
+      // Snapshots east row y=27 out to Fun bridge column 31
+      [26, 27, 30, 27],
+      // Snapshots col 22 up to Health bridge
+      [22, 24, 22, 27],
+
+      // Fun west row y=27 in to speech
+      [33, 27, 35, 27],
+      // Fun col 40 up to Personal bridge
+      [40, 24, 40, 27]
+    ];
+
+    const decorationRules = {
+      featured:    { forest: 0,    hill: 0.08 },
+      bio:         { forest: 0,    hill: 0    },
+      ai:          { forest: 0.06, hill: 0    },
+      computing:   { forest: 0,    hill: 0    },
+      start:       { forest: 0,    hill: 0.1  },
+      collections: { forest: 0.08, hill: 0    },
+      philosophy:  { forest: 0.18, hill: 0.12 },
+      health:      { forest: 0.05, hill: 0.18 },
+      personal:    { forest: 0.06, hill: 0.14 },
+      stats:       { forest: 0,    hill: 0    },
+      snapshots:   { forest: 0.04, hill: 0.04 },
+      fun:         { forest: 0.05, hill: 0    }
+    };
+
+    const SECRETS = {
+      meditations: {
+        // Stand on "It's more complicated than that" and press up.
+        trigger: { x: 1, y: 21, dx: 0, dy: -1 },
+        pathTiles: ["1,20"],
+        articleId: "meditations",
+        storageKey: "tylersworld-secret-meditations"
+      },
+      socialworld: {
+        // Stand on the "Social media posts" (SP) box and press right.
+        trigger: { x: 40, y: 13, dx: 1, dy: 0 },
+        pathTiles: ["41,13"],
+        articleId: "social-portal",
+        storageKey: "tylersworld-secret-socialworld"
+      },
+      swordcave: {
+        // Stand on "Zelda" and press up.
+        trigger: { x: 42, y: 19, dx: 0, dy: -1 },
+        pathTiles: ["42,18"],
+        articleId: "sword-cave",
+        storageKey: "tylersworld-secret-swordcave"
+      }
+    };
+
+    const adjacencyExtensions = [
+      // bridge tile, extension tile to make walkable
+      ["5,8", "5,7"],   ["5,9", "5,10"],
+      ["22,9", "22,8"], ["22,9", "22,10"],
+      ["40,9", "40,8"], ["40,9", "40,10"],
+      ["5,16", "5,15"], ["5,16", "5,17"],
+      ["22,16", "22,15"], ["22,16", "22,17"],
+      ["40,16", "40,15"], ["40,16", "40,17"],
+      ["5,24", "5,23"], ["5,24", "5,25"],
+      ["22,23", "22,22"], ["22,23", "22,24"],
+      ["40,23", "40,22"], ["40,23", "40,24"],
+      ["13,4", "12,4"], ["14,4", "15,4"],
+      ["31,4", "30,4"], ["32,4", "33,4"],
+      ["13,13", "12,13"], ["14,13", "15,13"],
+      ["31,13", "30,13"], ["32,13", "33,13"],
+      ["14,19", "13,19"], ["14,19", "15,19"],
+      ["31,19", "30,19"], ["32,19", "33,19"],
+      ["14,27", "13,27"], ["14,27", "15,27"],
+      ["31,27", "30,27"], ["32,27", "33,27"]
+    ];
+
+    const GREMLIN_SVG = `
+      <svg class="gremlin-sprite" viewBox="0 0 16 16" aria-hidden="true">
+        <rect x="3" y="0" width="1" height="2" fill="#52297a"></rect>
+        <rect x="12" y="0" width="1" height="2" fill="#52297a"></rect>
+        <rect x="2" y="2" width="12" height="11" fill="#241812"></rect>
+        <rect x="3" y="3" width="10" height="9" fill="#6cc55e"></rect>
+        <rect x="3" y="9" width="10" height="3" fill="#4a8c3e"></rect>
+        <rect x="4" y="5" width="3" height="2" fill="#c03050"></rect>
+        <rect x="9" y="5" width="3" height="2" fill="#c03050"></rect>
+        <rect x="5" y="5" width="1" height="1" fill="#ffffff"></rect>
+        <rect x="10" y="5" width="1" height="1" fill="#ffffff"></rect>
+        <rect x="6" y="10" width="4" height="2" fill="#241812"></rect>
+        <rect x="6" y="10" width="1" height="1" fill="#ffe2a2"></rect>
+        <rect x="9" y="10" width="1" height="1" fill="#ffe2a2"></rect>
+        <rect x="4" y="13" width="2" height="2" fill="#241812"></rect>
+        <rect x="10" y="13" width="2" height="2" fill="#241812"></rect>
+        <rect x="4" y="13" width="2" height="1" fill="#4a8c3e"></rect>
+        <rect x="10" y="13" width="2" height="1" fill="#4a8c3e"></rect>
+      </svg>`;
+
+    const FAST_GREMLIN_SVG = `
+      <svg class="gremlin-sprite" viewBox="0 0 16 16" aria-hidden="true">
+        <rect x="3" y="0" width="1" height="2" fill="#7a1f1f"></rect>
+        <rect x="12" y="0" width="1" height="2" fill="#7a1f1f"></rect>
+        <rect x="2" y="2" width="12" height="11" fill="#2a0a0a"></rect>
+        <rect x="3" y="3" width="10" height="9" fill="#e0563a"></rect>
+        <rect x="3" y="9" width="10" height="3" fill="#b23a22"></rect>
+        <rect x="4" y="5" width="3" height="2" fill="#5a1414"></rect>
+        <rect x="9" y="5" width="3" height="2" fill="#5a1414"></rect>
+        <rect x="5" y="5" width="1" height="1" fill="#ffe14d"></rect>
+        <rect x="10" y="5" width="1" height="1" fill="#ffe14d"></rect>
+        <rect x="6" y="10" width="4" height="2" fill="#2a0a0a"></rect>
+        <rect x="6" y="10" width="1" height="1" fill="#fff4d6"></rect>
+        <rect x="9" y="10" width="1" height="1" fill="#fff4d6"></rect>
+        <rect x="4" y="13" width="2" height="2" fill="#2a0a0a"></rect>
+        <rect x="10" y="13" width="2" height="2" fill="#2a0a0a"></rect>
+        <rect x="4" y="13" width="2" height="1" fill="#b23a22"></rect>
+        <rect x="10" y="13" width="2" height="1" fill="#b23a22"></rect>
+      </svg>`;
+    const FAST_TARGET_URL = "its_more_complicated_than_that.html";
+
+    createWorld({
+      cols: 48,
+      rows: 32,
+      // This page now lives in public/game_mode/, so internal article links
+      // (which point at the site root) are resolved one level up.
+      pageBase: "../",
+      spawn: { x: 22, y: 13 },
+      visitedKey: "tylersworld-visited",
+      regions,
+      articles,
+      connections,
+      bridges,
+      corridors,
+      decorationRules,
+      secrets: SECRETS,
+      adjacencyExtensions,
+      gremlins: {
+        count: 3,
+        intervalMs: 3000,
+        staggerMs: 1000,
+        svg: GREMLIN_SVG,
+        speedster: {
+          svg: FAST_GREMLIN_SVG,
+          targetUrl: FAST_TARGET_URL,
+          caughtKey: "tylersworld-speedster-caught"
+        }
+      }
+    });
+  </script>
+</body>
+</html>

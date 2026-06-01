@@ -367,6 +367,63 @@ h1 {
 
 .avatar.face-left .cat-sprite { transform: scaleX(-1); }
 
+.avatar.sword-swing::before {
+  content: "";
+  position: absolute;
+  z-index: 3;
+  left: 20px;
+  top: -23px;
+  width: 8px;
+  height: 30px;
+  background:
+    linear-gradient(#ffffff 0 12%, #dfe8ff 12% 68%, #6f7d96 68% 78%, #b67b35 78% 100%);
+  border: 2px solid #241812;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.35) inset;
+  clip-path: polygon(50% 0, 100% 18%, 78% 72%, 100% 72%, 100% 84%, 66% 84%, 66% 100%, 34% 100%, 34% 84%, 0 84%, 0 72%, 22% 72%, 0 18%);
+  transform: rotate(0deg);
+  transform-origin: 50% 85%;
+  animation: sword-slice 190ms steps(2, end);
+}
+
+.avatar.sword-right::before {
+  left: 32px;
+  top: -2px;
+  transform: rotate(90deg);
+}
+
+.avatar.sword-left::before {
+  left: 8px;
+  top: -2px;
+  transform: rotate(-90deg);
+}
+
+.avatar.sword-down::before {
+  left: 20px;
+  top: 12px;
+  transform: rotate(180deg);
+}
+
+.avatar.sword-up::before {
+  left: 20px;
+  top: -23px;
+  transform: rotate(0deg);
+}
+
+.avatar.warping::before {
+  display: none;
+}
+
+@keyframes sword-slice {
+  0%   { opacity: 0; transform: translate(0, 4px) rotate(var(--sword-rot, 0deg)) scale(0.85); }
+  35%  { opacity: 1; }
+  100% { opacity: 0; transform: translate(0, -2px) rotate(var(--sword-rot, 0deg)) scale(1.05); }
+}
+
+.avatar.sword-right { --sword-rot: 90deg; }
+.avatar.sword-left  { --sword-rot: -90deg; }
+.avatar.sword-down  { --sword-rot: 180deg; }
+.avatar.sword-up    { --sword-rot: 0deg; }
+
 /* ----- Gremlin (the antagonist) ----- */
 
 .gremlin {
@@ -401,6 +458,21 @@ h1 {
 
 .gremlin.step .gremlin-sprite {
   animation: gremlin-hop 320ms steps(2, end);
+}
+
+.gremlin.defeated {
+  pointer-events: none;
+}
+
+.gremlin.defeated .gremlin-sprite {
+  opacity: 0;
+  transform: scale(0.6);
+  transition: opacity 180ms steps(2, end), transform 180ms steps(2, end);
+}
+
+.gremlin.defeated::after {
+  opacity: 0;
+  transition: opacity 180ms steps(2, end);
 }
 
 @keyframes gremlin-hop {
@@ -778,6 +850,50 @@ h1 {
 .tile.article.portal:hover .level-box,
 .tile.article.portal:focus-visible .level-box {
   background: #ff52c4;
+}
+
+/* ----- Cave tile — behaves like a portal (warps to another world) but reads
+   as a dark opening in the ground: a black mouth with a faint rocky rim. ----- */
+.tile.article.cave .level-box {
+  background: radial-gradient(ellipse at 50% 118%, #4a3a2a 0 42%, #140d07 74%);
+  color: #e8c98a;
+  border-color: #0d0905;
+}
+.tile.article.cave.current .level-box,
+.tile.article.cave:hover .level-box,
+.tile.article.cave:focus-visible .level-box {
+  background: radial-gradient(ellipse at 50% 118%, #6a5238 0 42%, #241710 74%);
+  color: #ffe9b8;
+}
+
+.tile.article.locked .level-box {
+  filter: grayscale(0.8) brightness(0.72);
+  opacity: 0.72;
+  box-shadow: inset -4px -4px 0 rgba(0, 0, 0, 0.35);
+}
+
+.tile.article.locked.current .level-box,
+.tile.article.locked:hover .level-box,
+.tile.article.locked:focus-visible .level-box {
+  filter: grayscale(0.45) brightness(0.9);
+  opacity: 0.92;
+}
+
+.tile.article.sword .level-box {
+  background: #f4f6ff;
+  color: #26314a;
+  border-color: #26314a;
+}
+
+.tile.article.sword.collected .level-box {
+  background: #d8deef;
+  color: #66728c;
+}
+
+.tile.article.npc .level-box {
+  background: #d8c090;
+  color: #241812;
+  border-color: #5a3b1a;
 }
 
 /* ----- World-warp animation (cat launches up / drops down) ----- */
