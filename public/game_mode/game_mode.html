@@ -1262,6 +1262,23 @@
       pageBase: "../",
       spawn: { x: 22, y: 13 },
       visitedKey: "tylersworld-visited",
+      intro: {
+        storageKey: "tylersworld-intro-seen",
+        title: "Tyler's World",
+        tagline: "Every numbered box is something I wrote or built. Walk the cat around the island to discover it — each region is a different part of the site.",
+        controls: [
+          { keys: "Arrow keys", action: "Move the cat (swipe or tap on a phone)" },
+          { keys: "Enter", action: "Open the article you're standing on" },
+          { keys: "Space", action: "Slash your sword — once you've found it" }
+        ],
+        tips: [
+          "Bridges connect the themed regions across the water.",
+          "Some boxes hide caves and portals to other worlds.",
+          "Use the region menu on the right to jump anywhere on the map.",
+          "Reopen this anytime with “? Help” in the top bar."
+        ],
+        button: "Start exploring"
+      },
       regions,
       articles,
       connections,
