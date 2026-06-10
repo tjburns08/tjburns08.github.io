@@ -77,6 +77,47 @@ function createWorld(config) {
     document.documentElement.style.setProperty("--rows", ROWS);
 
     /* ------------------------------------------------------------------
+       DOM CACHE — every element the engine touches, looked up once.
+       update() runs on every step, so this avoids re-querying the DOM on
+       each frame and keeps the rest of the code free of getElementById
+       noise. setStatus()/setSummary() centralise the two most-written
+       text fields so callers read clearly.
+    ------------------------------------------------------------------ */
+
+    const dom = {
+      world: document.getElementById("world"),
+      viewport: document.getElementById("viewport"),
+      avatar: document.getElementById("avatar"),
+      mapGrid: document.getElementById("map-grid"),
+      hud: document.querySelector(".hud"),
+      regionChip: document.getElementById("region-chip"),
+      visitedChip: document.getElementById("visited-chip"),
+      legend: document.getElementById("legend"),
+      status: document.getElementById("status"),
+      kind: document.getElementById("kind"),
+      title: document.getElementById("title"),
+      date: document.getElementById("date"),
+      summary: document.getElementById("summary"),
+      location: document.getElementById("location"),
+      openLink: document.getElementById("open-link"),
+      floatOpen: document.getElementById("float-open"),
+      titleBar: document.getElementById("mobile-title-bar"),
+      mtbRegion: document.getElementById("mtb-region"),
+      mtbTitle: document.getElementById("mtb-title"),
+      mtbAction: document.getElementById("mtb-action"),
+      mtbDate: document.getElementById("mtb-date"),
+      mtbSummary: document.getElementById("mtb-summary"),
+      catchFlash: document.getElementById("catch-flash")
+    };
+
+    function setStatus(msg) {
+      if (dom.status) dom.status.textContent = msg;
+    }
+    function setSummary(msg) {
+      if (dom.summary) dom.summary.textContent = msg;
+    }
+
+    /* ------------------------------------------------------------------
        REGIONS — themed rectangles on the giant map
     ------------------------------------------------------------------ */
 
@@ -588,12 +629,17 @@ function createWorld(config) {
 
       const next = { x: cat.x + dx, y: cat.y + dy };
       if (!canMove(next.x, next.y)) {
-        const s = document.getElementById("status");
         const reg = regionAt(next.x, next.y);
-        if (reg) {
-          s.textContent = "No path that way. Try another direction.";
-        } else {
-          s.textContent = "That way is water. Find a bridge.";
+        setStatus(reg
+          ? "No path that way. Try another direction."
+          : "That way is water. Find a bridge.");
+        // A short shake gives the bumped move tactile feedback.
+        const avatar = dom.avatar;
+        if (avatar) {
+          avatar.classList.remove("bump");
+          void avatar.offsetWidth;
+          avatar.classList.add("bump");
+          window.setTimeout(() => avatar.classList.remove("bump"), 220);
         }
         return;
       }
@@ -840,7 +886,7 @@ function createWorld(config) {
     }
 
     function update(stepped = false) {
-      const avatar = document.getElementById("avatar");
+      const avatar = dom.avatar;
       const t = currentTileSize();
       avatar.style.transform = `translate(${cat.x * t}px, ${cat.y * t}px)`;
       avatar.classList.toggle("face-left", facing === "left");
@@ -866,77 +912,56 @@ function createWorld(config) {
 
       const a = articleAtCat();
       const reg = regionAt(cat.x, cat.y);
-      const openLink = document.getElementById("open-link");
-      const floatOpen = document.getElementById("float-open");
-      const regionChip = document.getElementById("region-chip");
-      const loc = document.getElementById("location");
-      const titleBar = document.getElementById("mobile-title-bar");
-      const mtbRegion = document.getElementById("mtb-region");
-      const mtbTitle = document.getElementById("mtb-title");
-      const mtbAction = document.getElementById("mtb-action");
+      const onBridge = bridgeSet.has(`${cat.x},${cat.y}`);
+      const openLink = dom.openLink;
+      const floatOpen = dom.floatOpen;
 
       if (reg) {
-        regionChip.textContent = reg.name;
-      } else if (bridgeSet.has(`${cat.x},${cat.y}`)) {
-        regionChip.textContent = "Bridge";
+        dom.regionChip.textContent = reg.name;
+      } else if (onBridge) {
+        dom.regionChip.textContent = "Bridge";
       } else {
-        regionChip.textContent = "—";
+        dom.regionChip.textContent = "—";
       }
-      loc.textContent = `Cat: ${reg ? reg.name : "Bridge"} (${cat.x}, ${cat.y})`;
+      dom.location.textContent = `Cat: ${reg ? reg.name : "Bridge"} (${cat.x}, ${cat.y})`;
 
       // Mobile title bar — always reflects current location; tappable when
       // standing on an article.
-      const mtbDate = document.getElementById("mtb-date");
-      const mtbSummary = document.getElementById("mtb-summary");
       if (a) {
         const locked = isArticleLocked(a);
         const collected = isCollectibleCollected(a);
-        titleBar.classList.add("on-article");
-        mtbRegion.textContent = reg ? reg.name : "";
-        mtbTitle.textContent = a.title;
-        mtbAction.textContent = locked ? "Locked"
+        dom.titleBar.classList.add("on-article");
+        dom.mtbRegion.textContent = reg ? reg.name : "";
+        dom.mtbTitle.textContent = a.title;
+        dom.mtbAction.textContent = locked ? "Locked"
           : a.collectible ? (collected ? "Taken" : "Take")
           : a.dialogue && !a.url ? "Talk"
           : isExternalUrl(a.url) ? "Open ↗" : "Open ›";
-        mtbDate.textContent = a.date;
-        mtbSummary.textContent = locked ? (a.lockedSummary || a.summary) : a.summary;
-      } else if (bridgeSet.has(`${cat.x},${cat.y}`)) {
-        titleBar.classList.remove("on-article");
-        mtbRegion.textContent = "Bridge";
-        mtbTitle.textContent = "Crossing between regions";
-        mtbAction.textContent = "";
-        mtbDate.textContent = "";
-        mtbSummary.textContent = "";
-      } else if (reg) {
-        titleBar.classList.remove("on-article");
-        mtbRegion.textContent = reg.name;
-        mtbTitle.textContent = "Walking the path";
-        mtbAction.textContent = "";
-        mtbDate.textContent = "";
-        mtbSummary.textContent = "";
+        dom.mtbDate.textContent = a.date;
+        dom.mtbSummary.textContent = locked ? (a.lockedSummary || a.summary) : a.summary;
       } else {
-        titleBar.classList.remove("on-article");
-        mtbRegion.textContent = "";
-        mtbTitle.textContent = "Out of bounds";
-        mtbAction.textContent = "";
-        mtbDate.textContent = "";
-        mtbSummary.textContent = "";
+        dom.titleBar.classList.remove("on-article");
+        dom.mtbRegion.textContent = onBridge ? "Bridge" : reg ? reg.name : "";
+        dom.mtbTitle.textContent = onBridge ? "Crossing between regions"
+          : reg ? "Walking the path" : "Out of bounds";
+        dom.mtbAction.textContent = "";
+        dom.mtbDate.textContent = "";
+        dom.mtbSummary.textContent = "";
       }
 
       if (a) {
         const locked = isArticleLocked(a);
         const collected = isCollectibleCollected(a);
-        document.getElementById("kind").textContent =
+        dom.kind.textContent =
           a.kindLabel ? a.kindLabel
           : a.kind === "castle" ? "Castle essay"
           : a.kind === "house" ? "House essay"
           : a.kind === "sword" ? "Item"
           : a.kind === "npc" ? "Cave elder"
           : "Article tile";
-        document.getElementById("title").textContent = a.title;
-        document.getElementById("date").textContent = a.date;
-        document.getElementById("summary").textContent =
-          locked ? (a.lockedSummary || a.summary) : a.summary;
+        dom.title.textContent = a.title;
+        dom.date.textContent = a.date;
+        setSummary(locked ? (a.lockedSummary || a.summary) : a.summary);
         const external = a.url ? isExternalUrl(a.url) : false;
         const resolved = a.url ? resolveUrl(a.url) : "#";
         openLink.href = resolved;
@@ -948,8 +973,8 @@ function createWorld(config) {
           openLink.textContent = "Locked";
           openLink.classList.add("disabled");
           floatOpen.classList.remove("visible");
-          document.getElementById("status").textContent =
-            a.lockedStatus || "You have to clear the enemies here before this article opens.";
+          setStatus(a.lockedStatus ||
+            "You have to clear the enemies here before this article opens.");
         } else if (a.collectible) {
           openLink.removeAttribute("target");
           openLink.removeAttribute("rel");
@@ -959,9 +984,9 @@ function createWorld(config) {
           floatOpen.removeAttribute("target");
           floatOpen.removeAttribute("rel");
           floatOpen.textContent = "Take";
-          document.getElementById("status").textContent = collected
+          setStatus(collected
             ? "The sword is yours. Press Space to slash."
-            : "Press Enter to take the sword.";
+            : "Press Enter to take the sword.");
         } else if (a.dialogue && !a.url) {
           openLink.removeAttribute("target");
           openLink.removeAttribute("rel");
@@ -971,7 +996,7 @@ function createWorld(config) {
           floatOpen.removeAttribute("rel");
           floatOpen.textContent = "Talk";
           floatOpen.classList.add("visible");
-          document.getElementById("status").textContent = a.dialogue;
+          setStatus(a.dialogue);
         } else if (external) {
           floatOpen.classList.add("visible");
           openLink.target = "_blank";
@@ -980,7 +1005,7 @@ function createWorld(config) {
           floatOpen.target = "_blank";
           floatOpen.rel = "noopener noreferrer";
           floatOpen.textContent = "Open ↗";
-          document.getElementById("status").textContent = "External link — opens in a new tab.";
+          setStatus("External link — opens in a new tab.");
         } else {
           floatOpen.classList.add("visible");
           openLink.removeAttribute("target");
@@ -989,36 +1014,33 @@ function createWorld(config) {
           floatOpen.removeAttribute("target");
           floatOpen.removeAttribute("rel");
           floatOpen.textContent = "Open";
-          document.getElementById("status").textContent = "Press Enter to open. Back button returns here.";
+          setStatus("Press Enter to open. Back button returns here.");
         }
         if (!locked && !(a.collectible && collected)) openLink.classList.remove("disabled");
-      } else if (bridgeSet.has(`${cat.x},${cat.y}`)) {
-        document.getElementById("kind").textContent = "Bridge";
-        document.getElementById("title").textContent = "Crossing between regions";
-        document.getElementById("date").textContent = "Keep walking";
-        document.getElementById("summary").textContent =
-          "Bridges connect themed regions. Keep going to enter the next section of the site.";
-        document.getElementById("status").textContent = "Halfway there.";
+      } else if (onBridge) {
+        dom.kind.textContent = "Bridge";
+        dom.title.textContent = "Crossing between regions";
+        dom.date.textContent = "Keep walking";
+        setSummary("Bridges connect themed regions. Keep going to enter the next section of the site.");
+        setStatus("Halfway there.");
         openLink.href = "#";
         openLink.classList.add("disabled");
         floatOpen.classList.remove("visible");
       } else if (reg) {
-        document.getElementById("kind").textContent = reg.name;
-        document.getElementById("title").textContent = reg.name;
-        document.getElementById("date").textContent = "Region path";
-        document.getElementById("summary").textContent =
-          "Connective tissue between tiles in this region. Step onto a numbered box to inspect an article.";
-        document.getElementById("status").textContent = "Find an article tile.";
+        dom.kind.textContent = reg.name;
+        dom.title.textContent = reg.name;
+        dom.date.textContent = "Region path";
+        setSummary("Connective tissue between tiles in this region. Step onto a numbered box to inspect an article.");
+        setStatus("Find an article tile.");
         openLink.href = "#";
         openLink.classList.add("disabled");
         floatOpen.classList.remove("visible");
       } else {
-        document.getElementById("kind").textContent = "Open water";
-        document.getElementById("title").textContent = "Out of bounds";
-        document.getElementById("date").textContent = "";
-        document.getElementById("summary").textContent =
-          "Backtrack to a bridge to keep exploring.";
-        document.getElementById("status").textContent = "No tile here.";
+        dom.kind.textContent = "Open water";
+        dom.title.textContent = "Out of bounds";
+        dom.date.textContent = "";
+        setSummary("Backtrack to a bridge to keep exploring.");
+        setStatus("No tile here.");
         openLink.href = "#";
         openLink.classList.add("disabled");
         floatOpen.classList.remove("visible");
@@ -1034,6 +1056,16 @@ function createWorld(config) {
     ------------------------------------------------------------------ */
 
     window.addEventListener("keydown", (event) => {
+      // While the how-to-play overlay is open, swallow game keys and let
+      // Enter/Space/Escape dismiss it rather than moving the hidden cat.
+      if (introEl && !introEl.hidden) {
+        if (event.key === "Escape" || event.key === "Enter" ||
+            event.key === " " || event.code === "Space") {
+          event.preventDefault();
+          hideIntro();
+        }
+        return;
+      }
       if (event.target && event.target.tagName === "BUTTON" && event.key === "Enter") {
         // let the button take Enter normally
         return;
@@ -1349,6 +1381,9 @@ function createWorld(config) {
 
     function gremlinTick(g) {
       if (!gremlins.includes(g) || gremlinsCleared) return;
+      // Hold gremlins still while the how-to-play overlay is up, so a first
+      // time visitor reading it never gets caught and warped away.
+      if (introEl && !introEl.hidden) return;
       const candidates = [];
       for (const [dx, dy] of [[1,0],[-1,0],[0,1],[0,-1]]) {
         const nx = g.x + dx, ny = g.y + dy;
@@ -1448,6 +1483,79 @@ function createWorld(config) {
     }
 
     /* ------------------------------------------------------------------
+       ONBOARDING OVERLAY — a first-visit "how to play" dialog, driven by
+       config.intro. A "? Help" chip in the HUD reopens it any time; the
+       dismissal is remembered in localStorage so returning visitors aren't
+       interrupted. Worlds that don't pass config.intro get neither.
+    ------------------------------------------------------------------ */
+
+    const INTRO = config.intro || null;
+    let introEl = null;
+
+    function introSeen() {
+      if (!INTRO || !INTRO.storageKey) return false;
+      try { return localStorage.getItem(INTRO.storageKey) === "true"; }
+      catch (e) { return false; }
+    }
+
+    function buildHelpButton() {
+      if (!INTRO || !dom.hud) return;
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "hud-chip help-chip";
+      btn.id = "help-chip";
+      btn.setAttribute("aria-label", "How to play");
+      btn.textContent = "? Help";
+      btn.addEventListener("click", () => showIntro(true));
+      dom.hud.appendChild(btn);
+    }
+
+    function buildIntro() {
+      if (!INTRO) return;
+      const controlsHtml = (INTRO.controls || []).map((c) =>
+        `<li><span class="intro-keys">${c.keys}</span><span class="intro-act">${c.action}</span></li>`
+      ).join("");
+      const tipsHtml = (INTRO.tips || []).map((tip) => `<li>${tip}</li>`).join("");
+
+      const overlay = document.createElement("div");
+      overlay.className = "intro-overlay";
+      overlay.setAttribute("role", "dialog");
+      overlay.setAttribute("aria-modal", "true");
+      overlay.setAttribute("aria-label", INTRO.title || "How to play");
+      overlay.hidden = true;
+      overlay.innerHTML = `
+        <div class="intro-card">
+          <h2 class="intro-title">${INTRO.title || "How to play"}</h2>
+          ${INTRO.tagline ? `<p class="intro-tagline">${INTRO.tagline}</p>` : ""}
+          ${controlsHtml ? `<ul class="intro-controls">${controlsHtml}</ul>` : ""}
+          ${tipsHtml ? `<p class="intro-subhead">Good to know</p><ul class="intro-tips">${tipsHtml}</ul>` : ""}
+          <button type="button" class="intro-start">${INTRO.button || "Start exploring"}</button>
+        </div>`;
+      document.body.appendChild(overlay);
+      introEl = overlay;
+
+      overlay.querySelector(".intro-start").addEventListener("click", hideIntro);
+      overlay.addEventListener("click", (e) => { if (e.target === overlay) hideIntro(); });
+    }
+
+    function showIntro(force) {
+      if (!introEl) return;
+      if (!force && introSeen()) return;
+      introEl.hidden = false;
+      const start = introEl.querySelector(".intro-start");
+      if (start) start.focus();
+    }
+
+    function hideIntro() {
+      if (!introEl || introEl.hidden) return;
+      introEl.hidden = true;
+      if (INTRO && INTRO.storageKey) {
+        try { localStorage.setItem(INTRO.storageKey, "true"); } catch (e) { /* ignore */ }
+      }
+      if (dom.world) dom.world.focus();
+    }
+
+    /* ------------------------------------------------------------------
        BOOT
     ------------------------------------------------------------------ */
 
@@ -1456,6 +1564,8 @@ function createWorld(config) {
     buildWalkable();
     buildMap();
     buildLegend();
+    buildHelpButton();
+    buildIntro();
     updateVisitedUI();
 
     const restored = readHashCat();
@@ -1478,4 +1588,8 @@ function createWorld(config) {
       playWarpIn();
     });
     document.getElementById("world").focus();
+
+    // First-time visitors see the how-to-play overlay; returning visitors
+    // (and anyone who has dismissed it once) go straight to the map.
+    showIntro(false);
 }

@@ -910,6 +910,177 @@ h1 {
 .cat-sprite.warp-launch { animation: warp-launch 0.55s ease-in  forwards; }
 .cat-sprite.warp-drop   { animation: warp-drop   0.62s ease-out forwards; }
 
+/* ----- Onboarding / how-to-play overlay ----- */
+.intro-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 600;
+  display: grid;
+  place-items: center;
+  padding: 16px;
+  background: rgba(20, 12, 6, 0.74);
+}
+
+.intro-overlay[hidden] { display: none; }
+
+.intro-card {
+  width: min(460px, 100%);
+  max-height: calc(100vh - 32px);
+  overflow: auto;
+  border: 4px solid var(--ink);
+  background: var(--paper);
+  box-shadow: 0 10px 0 rgba(0, 0, 0, 0.32);
+  padding: 22px;
+  animation: intro-pop 220ms ease-out;
+}
+
+@keyframes intro-pop {
+  0%   { transform: translateY(10px) scale(0.96); opacity: 0; }
+  100% { transform: translateY(0) scale(1); opacity: 1; }
+}
+
+.intro-title {
+  margin: 0 0 6px;
+  font-size: clamp(1.2rem, 3vw, 1.6rem);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.intro-tagline {
+  margin: 0 0 16px;
+  font-family: -apple-system, BlinkMacSystemFont, "Avenir Next", Avenir,
+    "Nimbus Sans L", Roboto, "Noto Sans", "Segoe UI", Arial, Helvetica, sans-serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.intro-controls {
+  list-style: none;
+  margin: 0 0 16px;
+  padding: 0;
+  display: grid;
+  gap: 6px;
+}
+
+.intro-controls li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border: 3px solid var(--ink);
+  background: var(--cream);
+  padding: 7px 9px;
+  box-shadow: inset -3px -3px 0 rgba(0, 0, 0, 0.12);
+}
+
+.intro-keys {
+  flex: 0 0 auto;
+  min-width: 132px;
+  font-weight: 900;
+  text-transform: uppercase;
+  font-size: 0.74rem;
+  letter-spacing: 0.3px;
+}
+
+.intro-act {
+  font-family: -apple-system, BlinkMacSystemFont, "Avenir Next", Avenir,
+    "Nimbus Sans L", Roboto, "Noto Sans", "Segoe UI", Arial, Helvetica, sans-serif;
+  font-size: 0.88rem;
+  line-height: 1.25;
+}
+
+.intro-subhead {
+  margin: 0 0 6px;
+  font-weight: 900;
+  text-transform: uppercase;
+  font-size: 0.78rem;
+  letter-spacing: 0.4px;
+}
+
+.intro-tips {
+  margin: 0 0 18px;
+  padding-left: 20px;
+  display: grid;
+  gap: 4px;
+  font-family: -apple-system, BlinkMacSystemFont, "Avenir Next", Avenir,
+    "Nimbus Sans L", Roboto, "Noto Sans", "Segoe UI", Arial, Helvetica, sans-serif;
+  font-size: 0.85rem;
+  line-height: 1.3;
+}
+
+.intro-start {
+  width: 100%;
+  min-height: 48px;
+  border: 4px solid var(--ink);
+  background: var(--blue);
+  color: #fff;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 1rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  cursor: pointer;
+  box-shadow: inset -4px -4px 0 rgba(0, 0, 0, 0.22);
+}
+
+.intro-start:hover,
+.intro-start:focus-visible {
+  background: #3a72bd;
+  outline: none;
+}
+
+.intro-start:active { transform: translateY(2px); }
+
+/* "? Help" chip injected into the HUD to reopen the overlay. */
+.help-chip {
+  cursor: pointer;
+  background: var(--cream);
+}
+
+.help-chip:hover,
+.help-chip:focus-visible {
+  background: var(--gold);
+  outline: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tile.article.current .level-box { animation: none; }
+  .intro-card { animation: none; }
+  .avatar.bump .cat-sprite,
+  .avatar.bump.face-left .cat-sprite { animation: none; }
+}
+
+/* ----- Current-tile pulse: a gentle attention cue on the box you're on ----- */
+@keyframes current-pulse {
+  0%, 100% { box-shadow: inset -4px -4px 0 rgba(0, 0, 0, 0.16); }
+  50%      { box-shadow: inset -4px -4px 0 rgba(0, 0, 0, 0.16),
+                         0 0 0 3px rgba(244, 197, 66, 0.85); }
+}
+
+.tile.article.current .level-box {
+  animation: current-pulse 1.6s ease-in-out infinite;
+}
+
+/* ----- Blocked-move bump: small shake when a move hits a wall/water ----- */
+.avatar.bump .cat-sprite {
+  animation: bump-shake 200ms steps(4, end);
+}
+
+@keyframes bump-shake {
+  0%, 100% { transform: translateX(0); }
+  25%      { transform: translateX(-3px); }
+  75%      { transform: translateX(3px); }
+}
+
+.avatar.bump.face-left .cat-sprite {
+  animation: bump-shake-flipped 200ms steps(4, end);
+}
+
+@keyframes bump-shake-flipped {
+  0%, 100% { transform: scaleX(-1) translateX(0); }
+  25%      { transform: scaleX(-1) translateX(-3px); }
+  75%      { transform: scaleX(-1) translateX(3px); }
+}
+
 /* sparkle burst that trails the warp */
 @keyframes sparkle-fly {
   0%   { transform: translate(0, 0) scale(0.2) rotate(0deg);   opacity: 0; }
