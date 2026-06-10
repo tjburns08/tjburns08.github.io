@@ -3,21 +3,22 @@
 # Instructions: run: ./build.sh "your commit message here"
 
 # Save the original directory for later
-# original_dir=$(pwd)
+original_dir=$(pwd)
 
 # Buld the site
 emacs -Q --script build_site.el
 
-# Run the site graph builder
-# cd /Users/tylerburns/workspace/06_personal/website/website_graph_view
-# source .wg_venv/bin/activate
-# cd src || exit
-# python3 make_website_graph.py
-# deactivate
-# echo "website graph build complete!"
+# Run the site graph builder (writes public/website_internal_link_graph.html).
+# Must run AFTER build_site.el so it scans the freshly-published HTML pages.
+cd "$original_dir/../website_graph_view" || exit
+source .wg_venv/bin/activate
+cd src || exit
+python3 make_website_graph.py
+deactivate
+echo "website graph build complete!"
 
 # Return to the original directory
-# cd "$original_dir" || exit
+cd "$original_dir" || exit
 
 # GitHub operations
 if [ "$#" -ne 1 ]; then
