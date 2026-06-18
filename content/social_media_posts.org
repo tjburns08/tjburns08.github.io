@@ -1073,6 +1073,26 @@ I have not come across any work using LLMs particularly with flow/CyTOF data ana
 * Foundation Models For Single-Cell And Spatial
 #+HTML: <a href="#top">Back to top</a>
 Posts focused on transformer and foundation models themselves, separate from general LLM-assisted analysis workflows.
+** [[https://www.linkedin.com/posts/tylerjburns_one-of-my-first-phospho-flow-falls-from-share-7473366191965859841-ygtc/?utm_source=share&utm_medium=member_desktop&rcm=ACoAAAbP8M8BYXs_UknoBHnmw2rZ-aRDTJF7L3Y][pSTAT1: it's more complicated than that]]
+June 18, 2026
+
+One of my first phospho-flow "falls from innocence" took place 14 years ago when I visited PhosphoSite for the first time. An example in the image below is STAT1. In the lab, we had antibodies for phospho-STAT1, among other phospho-proteins, to track cell signaling states. But for STAT1 (among others), PhosphoSite revealed that there was not one or two phospho-sites, but rather 23 of them across the protein, and a total of 84 PTMs. 39 of them are ubiquitination, by the way.
+
+And on top of that, from the image you can see on the y-axis that Y701 has 339 references, S727 has 256, for a combined 595 between them, while most of the other PTMs have 2-3 references each, with a few of the ubiquitin sites having upwards of 20.
+
+Further distinction here is whether the references are "low throughput" (a focused study) or "high throughput" (showed up in a screen). Y701 is mainly low throughput. This is the PTM that leads to dimerization and nuclear entry (something ChatGPT worded as the "login token" which I found to be adorable). The "tail" of less studied sites are mainly high throughput. Meaning we probably don't know too much about them yet.
+
+Are each of these PTMs encoded into pathway databases like Reactome? The ones that have been characterized (and in Reactome, they are rightly modeled as distinct entities). The database gets what has been characterized in the lab. Which is nowhere near exhaustive, as can be seen here.
+
+And now that we've uncovered a bit of uncertainty, we have to get all of this into AI-Bio foundation models and trust them?
+
+This is not an anti-AI rage bait post (plenty of these an easy scroll away for anyone on here). I want these models to help cure cancer some day. But rather I'm pointing to something that the seasoned biologists reading this already know: that at every major decision point, we find out over and over again that "it's more complicated than that."
+
+Maybe we don't need anything more than Y701 for whatever the AI model is going after. Maybe we do. But what we need are experts who understand the data going into the model's training. Which of those 84 PTMs matter for input into the model, and which don't. I think this is going to be a bottleneck with the AI-Bio models for a while.
+
+Thanks, and I hope you all have a great day.
+
+file:images/phospho_site_stat1.png
 ** [[https://www.linkedin.com/posts/tylerjburns_as-a-followup-to-my-earlier-posts-about-single-cell-activity-7389671614948388864-v7D1?utm_source=share&utm_medium=member_desktop&rcm=ACoAAAbP8M8BYXs_UknoBHnmw2rZ-aRDTJF7L3Y][Cell2Sentence update: 27B parameters]]
 October 30, 2025
 
@@ -1987,7 +2007,6 @@ Thank you to my fellow speakers who provided feedback and support through the pr
 
 The video is here: https://lnkd.in/eFPgrJ2V
 I'll link the projects I talk about in the comments.
-
 * Career And Consulting
 #+HTML: <a href="#top">Back to top</a>
 Posts about self-employment and professional practice in life-science consulting.
