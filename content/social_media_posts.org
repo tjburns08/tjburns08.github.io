@@ -376,6 +376,24 @@ The markdown is here: https://tjburns08.github.io/rainbow_feature_plot.html
 * Clustering, Gating, And Population Assignment
 #+HTML: <a href="#top">Back to top</a>
 Posts about assigning cells to groups, evaluating stability, rare subset detection, automated gating, and methods that can produce convincing but misleading structure.
+** [[https://www.linkedin.com/posts/tylerjburns_hi-friends-in-light-of-the-release-of-claude-activity-7478072786385526784-iAmk?utm_source=share&utm_medium=member_desktop&rcm=ACoAAAbP8M8BYXs_UknoBHnmw2rZ-aRDTJF7L3Y][Claude Science and updated cluster stability]]
+Hi friends, in light of the release of Claude Science, and any upcoming increase in bioinformatic analysis volume that it enables, I wanted to speak to the increasingly important idea of "workflow due diligence."
+
+Here is a result that should bother you. When you cluster cells with Seurat under the default settings, and you run the clustering over and over again with different random seeds, the number of clusters found stays the same, but the cell assignment changes in some boundaries. Here, I zoom in on the CD4/CD8 boundary in the PBMC 3k dataset so you can see this more clearly. This is something you'd otherwise not see unless you ran the experiment yourself on your data.
+
+The risk we face now, moreso with AI, is that workflows with hidden fragilities and/or fundamental flaws are propagated, and these mistakes are discovered long after the fact. I did a replication crisis project for a client a while back, and I can say that this is part of it.
+
+One solution for post-AI bioinformaticians is to use the tools to interrogate the workflows themselves. You've seen examples from me, especially in the "how good is t-SNE/UMAP" theme." I've done previous posts on cluster stability as well, but I was looking at the centroids of each cluster, and showing that they "jiggle" with each clustering scheme. But here, using Claude Science (though it could have been done with any agentic workflow) I was able to sync the colors of the clusterings up to illustrate what cell assignments change.
+
+If you're a leader of a research program (PI, VP, CSO, etc), it is no longer acceptable to get a workflow as a deliverable. Now, what is needed is due diligence on each little piece of the workflow, with clear visual explanations. Make time to go over these with your team. Make sure your team has the proper "taste and judgement" training to do this.
+
+Here, you can check the stability of your clustering tool, and determine what cells specifically are unstable, and then make the call as to what to do about that (e.g. whether the problematic regions matter for your project). But then you have to do this with batch correction methods, dimensionality reduction, and so forth, not to mention hyperparameter tuning for each method bespoke to your dataset. Not to mention provenance (I'll save that for another post).
+
+Two analogies from my experience come to mind. The first is panel design for flow cytometry, where you're running 5-point titrations across multiple antibody clones (among many other things) and seeing for yourself what is working. The second is Opt-SNE (Belkina et al, Nature Comms 2019), where there was a level above t-SNE, in which the hyperparameters were optimized in an automated manner.
+
+If you're already doing this kind of work or are interested in learning more (given that this is a lot of my head space these days), please let me know. Thank you and I hope you all have a great day.
+
+file::images/cluster_stability_claude_science.gif
 ** [[https://www.linkedin.com/posts/tylerjburns_in-light-of-recent-benchmarking-work-ive-activity-7373737973080731648-ImSh?utm_source=share&utm_medium=member_desktop&rcm=ACoAAAbP8M8BYXs_UknoBHnmw2rZ-aRDTJF7L3Y][Pareto fronts for cluster benchmarking]]
 September 16, 2025
 
