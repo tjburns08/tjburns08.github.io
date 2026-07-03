@@ -23,6 +23,7 @@
     }
 
     .region-bio {
+      --sand: #b3d6df;
       --grass: #d8ecf2;
       --grass-dark: #b3d6df;
       --path: #f4fafc;
@@ -36,6 +37,7 @@
     }
 
     .region-ai {
+      --sand: #4a3a8c;
       --grass: #261f4a;
       --grass-dark: #161235;
       --path: #4a3a8c;
@@ -53,6 +55,7 @@
     }
 
     .region-computing {
+      --sand: #1c4a2d;
       --grass: #102819;
       --grass-dark: #07140c;
       --path: #1c4a2d;
@@ -168,6 +171,7 @@
     }
 
     .region-fun {
+      --sand: #3d1958;
       --grass: #1b0a2a;
       --grass-dark: #0a031a;
       --path: #3d1958;
@@ -937,6 +941,27 @@
         summary: "Pan and zoom through the most famous fractal." },
 
       /* ---------- HALL OF FAME (FEATURED) ---------- */
+      // The castle door beneath the landmark. Sealed until BOTH quests are
+      // done: the Meditations Dungeon cleared (this world's sword quest) and
+      // the archive shrines woken (the Social World's relic quest). Opening
+      // it crowns the cat — permanently, in every world.
+      { id: "castle-vault", region: "featured", x: 10, y: 2, kind: "vault", token: "♛",
+        excludeFromWarp: true,
+        kindLabel: "Castle door",
+        title: "The Throne Room",
+        date: "The end of both roads",
+        collectible: "crown",
+        celebrate: true,
+        collectStatus: "👑 The castle recognizes you. The cat is crowned!",
+        takeStatus: "Press Enter to claim the crown.",
+        haveStatus: "Long live the reader-monarch of Tyler's World.",
+        requiresFlags: [
+          "meditations-dungeon-gremlins-cleared",
+          "socialworld-archive-sealed"
+        ],
+        lockedStatus: "The castle door is sealed by two trials.",
+        lockedSummary: "Two trials seal this door: clear the gremlins from the meditation cave beneath the Philosophy Forest, and wake all four archive shrines in the Social Media World.",
+        summary: "The door stands open. Whoever finished both quests may take the crown." },
       { id: "rand", region: "featured", x: 2, y: 2, kind: "castle", token: "RH",
         title: "RAND-Helena report on AI-enabled bio threats",
         date: "May 20, 2026",
@@ -1101,6 +1126,8 @@
       [4, 4, 4, 7], [4, 7, 5, 7],
       // Featured east row y=4 out to bridge column 13
       [8, 4, 12, 4],
+      // Featured: path from the article row to the castle door (vault)
+      [8, 2, 10, 2],
 
       // Bio east row y=3 out to bridge column 31
       [29, 3, 30, 3], [30, 3, 30, 4],
@@ -1153,19 +1180,25 @@
       [40, 24, 40, 27]
     ];
 
+    /* Every region scatters its own signature props (weighted, deterministic)
+       so each one is recognizable at a glance without reading a label. */
     const decorationRules = {
-      featured:    { forest: 0,    hill: 0.08 },
-      bio:         { forest: 0,    hill: 0    },
-      ai:          { forest: 0.06, hill: 0    },
-      computing:   { forest: 0,    hill: 0    },
-      start:       { forest: 0,    hill: 0.1  },
-      collections: { forest: 0.08, hill: 0    },
-      philosophy:  { forest: 0.18, hill: 0.12 },
-      health:      { forest: 0.05, hill: 0.18 },
-      personal:    { forest: 0.06, hill: 0.14 },
-      stats:       { forest: 0,    hill: 0    },
-      snapshots:   { forest: 0.04, hill: 0.04 },
-      fun:         { forest: 0.05, hill: 0    }
+      featured:    { kinds: [ { kind: "banner", p: 0.05 }, { kind: "trophy", p: 0.04 } ] },
+      bio:         { kinds: [ { kind: "flask", p: 0.05 }, { kind: "microscope", p: 0.04 } ] },
+      ai:          { kinds: [ { kind: "server", p: 0.06 }, { kind: "antenna", p: 0.04 } ] },
+      computing:   { kinds: [ { kind: "chip", p: 0.08 } ] },
+      start:       { kinds: [ { kind: "palm", p: 0.1 }, { kind: "rock", p: 0.04 },
+                              { kind: "signpost", p: 0.025 } ] },
+      collections: { kinds: [ { kind: "book", p: 0.06 }, { kind: "crate", p: 0.06 } ] },
+      philosophy:  { kinds: [ { kind: "pine", p: 0.17 }, { kind: "oak", p: 0.08 },
+                              { kind: "rock", p: 0.04 } ] },
+      health:      { kinds: [ { kind: "flower", p: 0.14 }, { kind: "oak", p: 0.06 },
+                              { kind: "pine", p: 0.05 } ] },
+      personal:    { kinds: [ { kind: "cactus", p: 0.08 }, { kind: "rock", p: 0.07 },
+                              { kind: "oak", p: 0.04 } ] },
+      stats:       { kinds: [ { kind: "dice", p: 0.05 }, { kind: "chart", p: 0.04 } ] },
+      snapshots:   { kinds: [ { kind: "frame", p: 0.06 }, { kind: "camera", p: 0.05 } ] },
+      fun:         { kinds: [ { kind: "arcade", p: 0.07 }, { kind: "star", p: 0.05 } ] }
     };
 
     const SECRETS = {
@@ -1211,6 +1244,100 @@
       ["31,19", "30,19"], ["32,19", "33,19"],
       ["14,27", "13,27"], ["14,27", "15,27"],
       ["31,27", "30,27"], ["32,27", "33,27"]
+    ];
+
+    /* ---------- LANDMARKS — big set-piece sprites, one per key region ---------- */
+
+    // Hall of Fame castle (3×2 tiles).
+    const CASTLE_SVG = `
+      <svg viewBox="0 0 48 32" aria-hidden="true">
+        <rect x="6" y="2" width="1" height="6" fill="#241812"></rect>
+        <rect x="41" y="2" width="1" height="6" fill="#241812"></rect>
+        <rect x="7" y="2" width="5" height="3" fill="#c94b37"></rect>
+        <rect x="36" y="2" width="5" height="3" fill="#c94b37"></rect>
+        <rect x="2" y="6" width="2" height="2" fill="#cfcbd8"></rect>
+        <rect x="6" y="6" width="2" height="2" fill="#cfcbd8"></rect>
+        <rect x="10" y="6" width="2" height="2" fill="#cfcbd8"></rect>
+        <rect x="36" y="6" width="2" height="2" fill="#cfcbd8"></rect>
+        <rect x="40" y="6" width="2" height="2" fill="#cfcbd8"></rect>
+        <rect x="44" y="6" width="2" height="2" fill="#cfcbd8"></rect>
+        <rect x="2" y="8" width="10" height="22" fill="#cfcbd8"></rect>
+        <rect x="10" y="8" width="2" height="22" fill="#8f8a9e"></rect>
+        <rect x="36" y="8" width="10" height="22" fill="#cfcbd8"></rect>
+        <rect x="44" y="8" width="2" height="22" fill="#8f8a9e"></rect>
+        <rect x="12" y="12" width="3" height="2" fill="#bfbacc"></rect>
+        <rect x="18" y="12" width="3" height="2" fill="#bfbacc"></rect>
+        <rect x="24" y="12" width="3" height="2" fill="#bfbacc"></rect>
+        <rect x="30" y="12" width="3" height="2" fill="#bfbacc"></rect>
+        <rect x="12" y="14" width="24" height="16" fill="#bfbacc"></rect>
+        <rect x="5" y="12" width="2" height="4" fill="#241812"></rect>
+        <rect x="40" y="12" width="2" height="4" fill="#241812"></rect>
+        <rect x="15" y="17" width="2" height="3" fill="#241812"></rect>
+        <rect x="31" y="17" width="2" height="3" fill="#241812"></rect>
+        <rect x="20" y="20" width="8" height="10" fill="#241812"></rect>
+        <rect x="21" y="22" width="6" height="8" fill="#5a3b1a"></rect>
+        <rect x="23" y="22" width="1" height="8" fill="#3d2812"></rect>
+        <rect x="2" y="30" width="44" height="2" fill="#6e6a7a"></rect>
+      </svg>`;
+
+    // Health Meadow great tree (2×2 tiles).
+    const GREAT_TREE_SVG = `
+      <svg viewBox="0 0 32 32" aria-hidden="true">
+        <rect x="6" y="1" width="20" height="5" fill="#2e7942"></rect>
+        <rect x="2" y="5" width="28" height="8" fill="#2e7942"></rect>
+        <rect x="6" y="3" width="10" height="6" fill="#5dbf7a"></rect>
+        <rect x="4" y="12" width="24" height="3" fill="#1d5c2f"></rect>
+        <rect x="8" y="14" width="16" height="2" fill="#1d5c2f"></rect>
+        <rect x="13" y="15" width="6" height="13" fill="#6b4a24"></rect>
+        <rect x="17" y="15" width="2" height="13" fill="#503618"></rect>
+        <rect x="14" y="22" width="3" height="5" fill="#241812"></rect>
+        <rect x="14" y="21" width="3" height="1" fill="#d8a03c"></rect>
+        <rect x="9" y="26" width="4" height="2" fill="#503618"></rect>
+        <rect x="19" y="26" width="4" height="2" fill="#503618"></rect>
+        <rect x="6" y="28" width="20" height="2" fill="#4d8a3d"></rect>
+      </svg>`;
+
+    // AI Cyberzone comms tower (2×2 tiles).
+    const AI_TOWER_SVG = `
+      <svg viewBox="0 0 32 32" aria-hidden="true">
+        <rect x="14" y="6" width="4" height="20" fill="#4a3a8c"></rect>
+        <rect x="14" y="6" width="1" height="20" fill="#b06acc"></rect>
+        <rect x="8" y="12" width="16" height="2" fill="#4a3a8c"></rect>
+        <rect x="10" y="18" width="12" height="2" fill="#4a3a8c"></rect>
+        <rect x="18" y="2" width="10" height="2" fill="#dfe3f5"></rect>
+        <rect x="19" y="4" width="8" height="2" fill="#c8cce8"></rect>
+        <rect x="21" y="6" width="6" height="2" fill="#8f96c4"></rect>
+        <rect x="17" y="5" width="2" height="2" fill="#8f96c4"></rect>
+        <rect x="14" y="2" width="3" height="3" fill="#f072c6"></rect>
+        <rect x="29" y="0" width="1" height="1" fill="#f072c6"></rect>
+        <rect x="27" y="2" width="1" height="1" fill="#44ddee"></rect>
+        <rect x="30" y="3" width="1" height="1" fill="#f072c6"></rect>
+        <rect x="10" y="26" width="12" height="4" fill="#221a4a"></rect>
+        <rect x="8" y="29" width="16" height="1" fill="#b06acc"></rect>
+      </svg>`;
+
+    // Start Crossing lighthouse (1×2 tiles).
+    const LIGHTHOUSE_SVG = `
+      <svg viewBox="0 0 16 32" aria-hidden="true">
+        <rect x="7" y="0" width="2" height="2" fill="#c94b37"></rect>
+        <rect x="5" y="2" width="6" height="2" fill="#c94b37"></rect>
+        <rect x="4" y="4" width="8" height="4" fill="#241812"></rect>
+        <rect x="5" y="5" width="6" height="2" fill="#ffe14d"></rect>
+        <rect x="4" y="8" width="8" height="1" fill="#241812"></rect>
+        <rect x="5" y="9" width="6" height="19" fill="#f5f0e0"></rect>
+        <rect x="10" y="9" width="1" height="19" fill="#cfc4a8"></rect>
+        <rect x="5" y="12" width="6" height="3" fill="#c94b37"></rect>
+        <rect x="5" y="19" width="6" height="3" fill="#c94b37"></rect>
+        <rect x="7" y="24" width="3" height="4" fill="#241812"></rect>
+        <rect x="3" y="28" width="10" height="3" fill="#8f8a80"></rect>
+        <rect x="3" y="30" width="10" height="1" fill="#5f5b52"></rect>
+      </svg>`;
+
+    const landmarks = [
+      { x: 9,  y: 0,  w: 3, h: 2, svg: CASTLE_SVG },      // Hall of Fame
+      { x: 25, y: 17, w: 2, h: 2, svg: GREAT_TREE_SVG },  // Health Meadow
+      { x: 43, y: 0,  w: 2, h: 2, svg: AI_TOWER_SVG },    // AI Cyberzone
+      { x: 28, y: 10, w: 1, h: 2, svg: LIGHTHOUSE_SVG }   // Start Crossing shore
     ];
 
     const GREMLIN_SVG = `
@@ -1261,6 +1388,7 @@
       // (which point at the site root) are resolved one level up.
       pageBase: "../",
       spawn: { x: 22, y: 13 },
+      coast: true,
       visitedKey: "tylersworld-visited",
       intro: {
         storageKey: "tylersworld-intro-seen",
@@ -1285,6 +1413,7 @@
       bridges,
       corridors,
       decorationRules,
+      landmarks,
       secrets: SECRETS,
       adjacencyExtensions,
       gremlins: {
