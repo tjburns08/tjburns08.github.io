@@ -3,9 +3,10 @@
 
    createWorld(config) builds one playable overworld inside the page's
    existing DOM skeleton (#world, #map-grid, #avatar, #legend, the HUD
-   chips, the mobile title bar, etc.). Both game_mode.html (the main
-   site map) and social_world.html (the LinkedIn-posts portal world)
-   call this with their own config so a single engine drives both.
+   chips, the mobile title bar, etc.). game_mode.html (the main site
+   map), sword_cave.html and meditations_dungeon.html call this with
+   their own config so a single engine drives all three worlds.
+   (social_mode.html is a separate, self-contained implementation.)
 
    config fields:
      cols, rows            grid size
@@ -14,12 +15,24 @@
      regions               [{id, name, x0, y0, x1, y1}]
      articles              [{id, region, x, y, kind, token, title, date,
                              url, summary, secret?, kindLabel?,
-                             collectible?, dialogue?, requiresGremlinClear?}]
+                             collectible?, collectStatus?, takeStatus?,
+                             haveStatus?, celebrate?, dialogue?,
+                             requiresGremlinClear?, requiresFlags?}]
      connections           [[aId, bId], ...] straight paths to pave
      bridges               ["x,y", ...] walkable tiles spanning gaps
      corridors             [[x0,y0,x1,y1], ...] extra axis-aligned paths
      adjacencyExtensions   [[bridgeTile, extTile], ...]
-     decorationRules       {regionId: {forest, hill}}
+     decorationRules       {regionId: {forest, hill}} (legacy pseudo-art)
+                           or {regionId: {kinds: [{kind, p}, ...]}} for
+                           weighted SVG props from the DECOR_SVGS library
+     decorSvgs             optional {kind: "<rect .../>"} additions or
+                           overrides for the decoration sprite library
+     landmarks             [{x, y, w, h, svg}] multi-tile decorative
+                           sprites rendered above tiles, below the avatar
+     coast                 true to carve irregular coastlines out of the
+                           region rectangles (visual only — walkable tiles
+                           are never eroded). Adds sandy shore edges on
+                           land and a lighter "shallow" band in the water.
      secrets               {id: {trigger, pathTiles, articleId, storageKey}}
      visitedKey            localStorage key for visited tracking
      gremlins              {count, intervalMs, staggerMs, svg,
@@ -67,6 +80,21 @@ function createWorld(config) {
                 <rect x="12" y="9" width="2" height="2" fill="#e99433"></rect>
                 <rect x="4" y="14" width="3" height="1" fill="#241812"></rect>
                 <rect x="9" y="14" width="3" height="1" fill="#241812"></rect>`;
+  // Worn by the cat in every world once the Throne Room grants it.
+  const CROWN_SVG = `
+    <svg class="crown-sprite" viewBox="0 0 12 8" aria-hidden="true">
+      <rect x="1" y="1" width="2" height="4" fill="#f4c542"></rect>
+      <rect x="5" y="0" width="2" height="5" fill="#f4c542"></rect>
+      <rect x="9" y="1" width="2" height="4" fill="#f4c542"></rect>
+      <rect x="1" y="0" width="1" height="1" fill="#ffe14d"></rect>
+      <rect x="5" y="0" width="1" height="1" fill="#ffe14d"></rect>
+      <rect x="9" y="0" width="1" height="1" fill="#ffe14d"></rect>
+      <rect x="1" y="4" width="10" height="3" fill="#f4c542"></rect>
+      <rect x="1" y="6" width="10" height="1" fill="#d8a63c"></rect>
+      <rect x="3" y="5" width="1" height="1" fill="#c94b37"></rect>
+      <rect x="6" y="5" width="1" height="1" fill="#2d5e9e"></rect>
+      <rect x="8" y="5" width="1" height="1" fill="#2d8a3e"></rect>
+    </svg>`;
     "use strict";
 
     const COLS = config.cols;
@@ -178,7 +206,7 @@ function createWorld(config) {
     ------------------------------------------------------------------ */
 
     const ITEM_KEY_PREFIX = config.itemKeyPrefix || "tylersworld-item-";
-    const ITEM_LABELS = { sword: "Sword" };
+    const ITEM_LABELS = { sword: "Sword", crown: "Crown" };
     const itemMemory = new Set();
 
     function itemKey(item) {
@@ -212,7 +240,10 @@ function createWorld(config) {
 
     function updateItemUI() {
       const avatar = document.getElementById("avatar");
-      if (avatar) avatar.classList.remove("armed");
+      if (avatar) {
+        avatar.classList.remove("armed");
+        avatar.classList.toggle("crowned", hasItem("crown"));
+      }
 
       const chip = document.getElementById("item-chip");
       if (chip) chip.textContent = hasItem("sword") ? "Sword: found" : "Sword: hidden";
@@ -304,6 +335,249 @@ function createWorld(config) {
 
     const decorationRules = config.decorationRules || {};
 
+    /* Pixel-art decoration sprites, keyed by kind. Regions opt in through
+       decorationRules[region].kinds = [{kind, p}, ...] — weighted, drawn
+       with the same deterministic hash as the legacy forest/hill scatter,
+       so the map still looks identical on every load. Worlds can add or
+       override sprites via config.decorSvgs. */
+    const DECOR_SVGS = Object.assign({
+      pine: `
+        <rect x="6" y="2" width="4" height="2" fill="#1d7040"></rect>
+        <rect x="5" y="4" width="6" height="2" fill="#145d31"></rect>
+        <rect x="4" y="6" width="8" height="2" fill="#1d7040"></rect>
+        <rect x="3" y="8" width="10" height="2" fill="#145d31"></rect>
+        <rect x="2" y="10" width="12" height="2" fill="#1d7040"></rect>
+        <rect x="7" y="12" width="2" height="3" fill="#6b4a24"></rect>`,
+      oak: `
+        <rect x="4" y="3" width="8" height="2" fill="#2e7942"></rect>
+        <rect x="3" y="5" width="10" height="4" fill="#2e7942"></rect>
+        <rect x="4" y="4" width="5" height="3" fill="#5dbf7a"></rect>
+        <rect x="4" y="9" width="8" height="1" fill="#1d5c2f"></rect>
+        <rect x="7" y="10" width="2" height="4" fill="#6b4a24"></rect>
+        <rect x="6" y="13" width="4" height="1" fill="#503618"></rect>`,
+      palm: `
+        <rect x="6" y="2" width="4" height="2" fill="#37b45e"></rect>
+        <rect x="2" y="3" width="4" height="2" fill="#2e9e4f"></rect>
+        <rect x="10" y="3" width="4" height="2" fill="#2e9e4f"></rect>
+        <rect x="1" y="5" width="3" height="2" fill="#27874a"></rect>
+        <rect x="12" y="5" width="3" height="2" fill="#27874a"></rect>
+        <rect x="7" y="5" width="2" height="9" fill="#b58a52"></rect>
+        <rect x="7" y="7" width="2" height="1" fill="#8a6234"></rect>
+        <rect x="7" y="10" width="2" height="1" fill="#8a6234"></rect>
+        <rect x="6" y="14" width="4" height="1" fill="#8a6234"></rect>`,
+      rock: `
+        <rect x="5" y="6" width="5" height="2" fill="#a5a096"></rect>
+        <rect x="4" y="8" width="8" height="5" fill="#8f8a80"></rect>
+        <rect x="5" y="7" width="3" height="2" fill="#c2bdb2"></rect>
+        <rect x="4" y="12" width="8" height="1" fill="#5f5b52"></rect>`,
+      flower: `
+        <rect x="3" y="6" width="3" height="3" fill="#e34d4d"></rect>
+        <rect x="4" y="7" width="1" height="1" fill="#ffd84d"></rect>
+        <rect x="9" y="4" width="3" height="3" fill="#e77aa0"></rect>
+        <rect x="10" y="5" width="1" height="1" fill="#fff6d8"></rect>
+        <rect x="10" y="9" width="3" height="3" fill="#f5f0e0"></rect>
+        <rect x="11" y="10" width="1" height="1" fill="#ffd84d"></rect>
+        <rect x="4" y="9" width="1" height="4" fill="#2d7a1f"></rect>
+        <rect x="10" y="7" width="1" height="2" fill="#2d7a1f"></rect>
+        <rect x="11" y="12" width="1" height="2" fill="#2d7a1f"></rect>
+        <rect x="3" y="12" width="3" height="1" fill="#2d7a1f"></rect>`,
+      server: `
+        <rect x="3" y="2" width="10" height="13" fill="#0d0a26"></rect>
+        <rect x="4" y="3" width="8" height="3" fill="#2e2660"></rect>
+        <rect x="4" y="7" width="8" height="3" fill="#2e2660"></rect>
+        <rect x="4" y="11" width="8" height="3" fill="#2e2660"></rect>
+        <rect x="5" y="4" width="4" height="1" fill="#4a3a8c"></rect>
+        <rect x="5" y="8" width="4" height="1" fill="#4a3a8c"></rect>
+        <rect x="5" y="12" width="4" height="1" fill="#4a3a8c"></rect>
+        <rect x="10" y="4" width="1" height="1" fill="#5fdf85"></rect>
+        <rect x="10" y="8" width="1" height="1" fill="#f072c6"></rect>
+        <rect x="10" y="12" width="1" height="1" fill="#ffd848"></rect>`,
+      antenna: `
+        <rect x="7" y="4" width="2" height="10" fill="#8a8fb0"></rect>
+        <rect x="5" y="6" width="6" height="1" fill="#8a8fb0"></rect>
+        <rect x="6" y="9" width="4" height="1" fill="#8a8fb0"></rect>
+        <rect x="7" y="2" width="2" height="2" fill="#f072c6"></rect>
+        <rect x="11" y="2" width="1" height="1" fill="#f072c6"></rect>
+        <rect x="13" y="1" width="1" height="1" fill="#b06acc"></rect>
+        <rect x="5" y="14" width="6" height="1" fill="#4a3a8c"></rect>`,
+      chip: `
+        <rect x="3" y="3" width="10" height="10" fill="#5fdf85"></rect>
+        <rect x="4" y="4" width="8" height="8" fill="#0c1e12"></rect>
+        <rect x="6" y="6" width="4" height="4" fill="#28a050"></rect>
+        <rect x="5" y="1" width="1" height="2" fill="#c4ffcd"></rect>
+        <rect x="7" y="1" width="1" height="2" fill="#c4ffcd"></rect>
+        <rect x="9" y="1" width="1" height="2" fill="#c4ffcd"></rect>
+        <rect x="5" y="13" width="1" height="2" fill="#c4ffcd"></rect>
+        <rect x="7" y="13" width="1" height="2" fill="#c4ffcd"></rect>
+        <rect x="9" y="13" width="1" height="2" fill="#c4ffcd"></rect>
+        <rect x="1" y="5" width="2" height="1" fill="#c4ffcd"></rect>
+        <rect x="1" y="7" width="2" height="1" fill="#c4ffcd"></rect>
+        <rect x="1" y="9" width="2" height="1" fill="#c4ffcd"></rect>
+        <rect x="13" y="5" width="2" height="1" fill="#c4ffcd"></rect>
+        <rect x="13" y="7" width="2" height="1" fill="#c4ffcd"></rect>
+        <rect x="13" y="9" width="2" height="1" fill="#c4ffcd"></rect>`,
+      microscope: `
+        <rect x="8" y="2" width="3" height="3" fill="#6fa1b3"></rect>
+        <rect x="9" y="4" width="2" height="9" fill="#2e7186"></rect>
+        <rect x="7" y="8" width="3" height="2" fill="#2e7186"></rect>
+        <rect x="5" y="10" width="6" height="1" fill="#6fa1b3"></rect>
+        <rect x="4" y="13" width="8" height="1" fill="#2e7186"></rect>
+        <rect x="6" y="11" width="1" height="1" fill="#c94b37"></rect>`,
+      flask: `
+        <rect x="6" y="1" width="4" height="1" fill="#6fa1b3"></rect>
+        <rect x="7" y="2" width="2" height="4" fill="#d3e9ef"></rect>
+        <rect x="6" y="6" width="4" height="1" fill="#d3e9ef"></rect>
+        <rect x="5" y="7" width="6" height="1" fill="#d3e9ef"></rect>
+        <rect x="4" y="8" width="8" height="2" fill="#d3e9ef"></rect>
+        <rect x="4" y="10" width="8" height="3" fill="#37b45e"></rect>
+        <rect x="6" y="11" width="1" height="1" fill="#c4ffcd"></rect>
+        <rect x="9" y="10" width="1" height="1" fill="#c4ffcd"></rect>
+        <rect x="4" y="13" width="8" height="1" fill="#2e7186"></rect>`,
+      book: `
+        <rect x="3" y="10" width="10" height="3" fill="#a84632"></rect>
+        <rect x="12" y="10" width="1" height="3" fill="#f5e8c8"></rect>
+        <rect x="4" y="7" width="9" height="3" fill="#2d5e9e"></rect>
+        <rect x="4" y="7" width="1" height="3" fill="#f5e8c8"></rect>
+        <rect x="5" y="4" width="8" height="3" fill="#d8a03c"></rect>
+        <rect x="12" y="4" width="1" height="3" fill="#f5e8c8"></rect>
+        <rect x="6" y="5" width="4" height="1" fill="#8a6220"></rect>`,
+      crate: `
+        <rect x="3" y="4" width="10" height="10" fill="#a07748"></rect>
+        <rect x="3" y="4" width="10" height="1" fill="#5a3b1a"></rect>
+        <rect x="3" y="13" width="10" height="1" fill="#5a3b1a"></rect>
+        <rect x="3" y="4" width="1" height="10" fill="#5a3b1a"></rect>
+        <rect x="12" y="4" width="1" height="10" fill="#5a3b1a"></rect>
+        <rect x="4" y="8" width="8" height="1" fill="#5a3b1a"></rect>
+        <rect x="5" y="5" width="2" height="1" fill="#c49a6a"></rect>`,
+      signpost: `
+        <rect x="7" y="6" width="2" height="8" fill="#8a6234"></rect>
+        <rect x="3" y="3" width="10" height="4" fill="#c89c50"></rect>
+        <rect x="13" y="4" width="1" height="2" fill="#c89c50"></rect>
+        <rect x="3" y="3" width="10" height="1" fill="#5a3b1a"></rect>
+        <rect x="3" y="6" width="10" height="1" fill="#5a3b1a"></rect>
+        <rect x="4" y="4" width="4" height="1" fill="#5a3b1a"></rect>
+        <rect x="6" y="5" width="5" height="1" fill="#5a3b1a"></rect>
+        <rect x="6" y="14" width="4" height="1" fill="#5a3b1a"></rect>`,
+      cactus: `
+        <rect x="6" y="3" width="3" height="10" fill="#2d8a3e"></rect>
+        <rect x="6" y="3" width="1" height="10" fill="#4db35b"></rect>
+        <rect x="3" y="5" width="2" height="4" fill="#2d8a3e"></rect>
+        <rect x="3" y="8" width="3" height="2" fill="#2d8a3e"></rect>
+        <rect x="11" y="4" width="2" height="3" fill="#2d8a3e"></rect>
+        <rect x="9" y="6" width="3" height="2" fill="#2d8a3e"></rect>
+        <rect x="7" y="2" width="1" height="1" fill="#e77aa0"></rect>
+        <rect x="5" y="13" width="5" height="1" fill="#8a6234"></rect>`,
+      dice: `
+        <rect x="4" y="4" width="9" height="9" fill="#f4f6ff"></rect>
+        <rect x="4" y="4" width="9" height="1" fill="#26314a"></rect>
+        <rect x="4" y="12" width="9" height="1" fill="#26314a"></rect>
+        <rect x="4" y="4" width="1" height="9" fill="#26314a"></rect>
+        <rect x="12" y="4" width="1" height="9" fill="#26314a"></rect>
+        <rect x="6" y="6" width="1" height="1" fill="#26314a"></rect>
+        <rect x="10" y="6" width="1" height="1" fill="#26314a"></rect>
+        <rect x="8" y="8" width="1" height="1" fill="#26314a"></rect>
+        <rect x="6" y="10" width="1" height="1" fill="#26314a"></rect>
+        <rect x="10" y="10" width="1" height="1" fill="#26314a"></rect>`,
+      chart: `
+        <rect x="3" y="3" width="10" height="9" fill="#fff8e0"></rect>
+        <rect x="3" y="3" width="10" height="1" fill="#2a4a72"></rect>
+        <rect x="3" y="11" width="10" height="1" fill="#2a4a72"></rect>
+        <rect x="3" y="3" width="1" height="9" fill="#2a4a72"></rect>
+        <rect x="12" y="3" width="1" height="9" fill="#2a4a72"></rect>
+        <rect x="4" y="8" width="2" height="3" fill="#5e85b0"></rect>
+        <rect x="7" y="6" width="2" height="5" fill="#2a4a72"></rect>
+        <rect x="10" y="4" width="2" height="7" fill="#c94b37"></rect>
+        <rect x="4" y="12" width="1" height="2" fill="#2a4a72"></rect>
+        <rect x="11" y="12" width="1" height="2" fill="#2a4a72"></rect>`,
+      frame: `
+        <rect x="3" y="3" width="10" height="10" fill="#8a5e34"></rect>
+        <rect x="4" y="4" width="8" height="8" fill="#f5e4c0"></rect>
+        <rect x="5" y="5" width="6" height="3" fill="#9fc4e8"></rect>
+        <rect x="5" y="8" width="6" height="3" fill="#7aa85a"></rect>
+        <rect x="9" y="5" width="1" height="1" fill="#ffd84d"></rect>
+        <rect x="7" y="13" width="2" height="1" fill="#5a3a1a"></rect>`,
+      camera: `
+        <rect x="3" y="5" width="10" height="7" fill="#5a3a1a"></rect>
+        <rect x="4" y="3" width="3" height="2" fill="#5a3a1a"></rect>
+        <rect x="6" y="6" width="4" height="4" fill="#241812"></rect>
+        <rect x="7" y="7" width="1" height="1" fill="#9fc4e8"></rect>
+        <rect x="11" y="4" width="2" height="1" fill="#c94b37"></rect>
+        <rect x="4" y="6" width="1" height="1" fill="#c49a6a"></rect>`,
+      arcade: `
+        <rect x="3" y="1" width="10" height="14" fill="#1a0628"></rect>
+        <rect x="4" y="1" width="8" height="2" fill="#ffd848"></rect>
+        <rect x="5" y="4" width="6" height="4" fill="#44ddee"></rect>
+        <rect x="7" y="5" width="2" height="1" fill="#ff44aa"></rect>
+        <rect x="6" y="6" width="1" height="1" fill="#ff44aa"></rect>
+        <rect x="9" y="6" width="1" height="1" fill="#ff44aa"></rect>
+        <rect x="5" y="9" width="6" height="2" fill="#3d1958"></rect>
+        <rect x="6" y="9" width="1" height="1" fill="#ffd848"></rect>
+        <rect x="9" y="9" width="1" height="1" fill="#ff44aa"></rect>
+        <rect x="4" y="12" width="8" height="2" fill="#3d1958"></rect>`,
+      star: `
+        <rect x="7" y="2" width="2" height="2" fill="#ffd848"></rect>
+        <rect x="6" y="4" width="4" height="2" fill="#ffd848"></rect>
+        <rect x="3" y="6" width="10" height="2" fill="#ffd848"></rect>
+        <rect x="5" y="8" width="6" height="2" fill="#ffd848"></rect>
+        <rect x="4" y="10" width="3" height="2" fill="#ffd848"></rect>
+        <rect x="9" y="10" width="3" height="2" fill="#ffd848"></rect>
+        <rect x="4" y="12" width="2" height="1" fill="#ff44aa"></rect>
+        <rect x="10" y="12" width="2" height="1" fill="#ff44aa"></rect>`,
+      banner: `
+        <rect x="4" y="2" width="8" height="1" fill="#b7a677"></rect>
+        <rect x="5" y="3" width="6" height="9" fill="#c94b37"></rect>
+        <rect x="5" y="12" width="2" height="2" fill="#c94b37"></rect>
+        <rect x="9" y="12" width="2" height="2" fill="#c94b37"></rect>
+        <rect x="7" y="6" width="2" height="2" fill="#f4c542"></rect>
+        <rect x="5" y="3" width="1" height="9" fill="#a83a2a"></rect>`,
+      trophy: `
+        <rect x="4" y="2" width="8" height="1" fill="#f4c542"></rect>
+        <rect x="5" y="3" width="6" height="4" fill="#f4c542"></rect>
+        <rect x="3" y="3" width="2" height="3" fill="#d8a63c"></rect>
+        <rect x="11" y="3" width="2" height="3" fill="#d8a63c"></rect>
+        <rect x="6" y="4" width="1" height="2" fill="#fff2c0"></rect>
+        <rect x="7" y="7" width="2" height="3" fill="#d8a63c"></rect>
+        <rect x="5" y="10" width="6" height="2" fill="#8a7e5a"></rect>
+        <rect x="4" y="12" width="8" height="2" fill="#e8e2d0"></rect>`
+    }, config.decorSvgs || {});
+
+    function decorSvg(kind) {
+      const body = DECOR_SVGS[kind];
+      if (!body) return "";
+      return `<svg class="decor-sprite" viewBox="0 0 16 16" aria-hidden="true">${body}</svg>`;
+    }
+
+    // Weighted decoration pick for one tile. Mutates meta. New-style rules
+    // ({kinds: [{kind, p}]}) get SVG sprites; legacy {forest, hill} rules
+    // keep the original pseudo-element art.
+    function pickDecoration(meta, region, x, y) {
+      // Keep the ground under landmark sprites clear of scattered props.
+      if (landmarkTiles.has(`${x},${y}`)) {
+        meta.classes.push("grass");
+        return;
+      }
+      const rules = decorationRules[region ? region.id : "philosophy"] || {};
+      const r = (hashXY(x, y) % 1000) / 1000;
+      if (Array.isArray(rules.kinds)) {
+        let acc = 0;
+        for (const k of rules.kinds) {
+          acc += k.p;
+          if (r < acc) {
+            meta.classes.push("grass", "decor", `decor-${k.kind}`);
+            meta.decorKind = k.kind;
+            return;
+          }
+        }
+        meta.classes.push("grass");
+        return;
+      }
+      const forest = rules.forest || 0;
+      const hill = rules.hill || 0;
+      if (r < forest) meta.classes.push("forest");
+      else if (r < forest + hill) meta.classes.push("hill");
+      else meta.classes.push("grass");
+    }
+
     /* ------------------------------------------------------------------
        WALKABILITY — paths + articles + bridges
     ------------------------------------------------------------------ */
@@ -367,6 +641,150 @@ function createWorld(config) {
     }
 
     /* ------------------------------------------------------------------
+       COASTLINE (opt-in via config.coast) — bite deterministic chunks out
+       of the region rectangles so the island reads as landmass, not
+       spreadsheet. Purely visual: a tile is only ever eroded if nothing
+       gameplay-relevant lives on it (no path, article, bridge or hidden
+       secret). Land that faces water gets per-side "coast-*" classes so
+       CSS can draw a sandy edge; water that touches land gets "shallow".
+    ------------------------------------------------------------------ */
+
+    const COAST = !!config.coast;
+    const erodedSet = new Set();
+    const coastSides = new Map(); // coord -> ["n","e","s","w"] facing water
+    const shallowSet = new Set();
+
+    function hash01(x, y, salt) {
+      return (hashXY(x * 3 + salt * 7919 + 1, y * 5 + salt * 104729 + 2) % 1000) / 1000;
+    }
+
+    function coastProtected(coord) {
+      return walkable.has(coord) || articleByCoord.has(coord) ||
+        bridgeSet.has(coord) || hiddenTiles.has(coord) ||
+        landmarkTiles.has(coord);
+    }
+
+    function computeCoast() {
+      if (!COAST) return;
+
+      // Water so far: outside every region rect, or already eroded.
+      // The grid edge counts as land so the map border doesn't grow foam.
+      const isWater = (x, y) => {
+        if (x < 0 || y < 0 || x >= COLS || y >= ROWS) return false;
+        return !regionAt(x, y) || erodedSet.has(`${x},${y}`);
+      };
+
+      // Two erosion passes: a strong first bite on the rectangle edges,
+      // then a gentler second pass on the newly exposed shoreline so the
+      // coast meanders instead of just dithering one row.
+      [0.38, 0.18].forEach((p, pass) => {
+        const toErode = [];
+        for (let y = 0; y < ROWS; y += 1) {
+          for (let x = 0; x < COLS; x += 1) {
+            const coord = `${x},${y}`;
+            if (isWater(x, y) || !regionAt(x, y)) continue;
+            if (coastProtected(coord)) continue;
+            const sides = isWater(x, y - 1) + isWater(x, y + 1) +
+              isWater(x + 1, y) + isWater(x - 1, y);
+            if (!sides) continue;
+            // Tiles cornered by water on 2+ sides erode more eagerly, which
+            // rounds off the rectangle corners.
+            const prob = sides >= 2 ? Math.min(0.85, p * 1.9) : p;
+            if (hash01(x, y, pass) < prob) toErode.push(coord);
+          }
+        }
+        toErode.forEach((c) => erodedSet.add(c));
+      });
+
+      // Cellular smoothing: raw erosion leaves single-tile staircase spikes
+      // and notches that read as jagged squares, not coastline. Fill any
+      // water bite hugged by land on 3+ sides; drown any land tile with
+      // water on 3+ sides (never a protected tile). Two rounds settle it.
+      for (let round = 0; round < 2; round += 1) {
+        const fill = [], drown = [];
+        for (let y = 0; y < ROWS; y += 1) {
+          for (let x = 0; x < COLS; x += 1) {
+            const coord = `${x},${y}`;
+            if (!regionAt(x, y)) continue;
+            const waterSides = isWater(x, y - 1) + isWater(x, y + 1) +
+              isWater(x + 1, y) + isWater(x - 1, y);
+            if (erodedSet.has(coord)) {
+              if (waterSides <= 1) fill.push(coord);
+            } else if (waterSides >= 3 && !coastProtected(coord)) {
+              drown.push(coord);
+            }
+          }
+        }
+        if (!fill.length && !drown.length) break;
+        fill.forEach((c) => erodedSet.delete(c));
+        drown.forEach((c) => erodedSet.add(c));
+      }
+
+      // Classify the final shoreline.
+      for (let y = 0; y < ROWS; y += 1) {
+        for (let x = 0; x < COLS; x += 1) {
+          const coord = `${x},${y}`;
+          if (isWater(x, y)) {
+            if (!isWater(x, y - 1) || !isWater(x, y + 1) ||
+                !isWater(x + 1, y) || !isWater(x - 1, y)) {
+              shallowSet.add(coord);
+            }
+            continue;
+          }
+          if (!regionAt(x, y)) continue; // grid-edge overflow guard
+          const sides = [];
+          if (isWater(x, y - 1)) sides.push("n");
+          if (isWater(x + 1, y)) sides.push("e");
+          if (isWater(x, y + 1)) sides.push("s");
+          if (isWater(x - 1, y)) sides.push("w");
+          if (sides.length) coastSides.set(coord, sides);
+        }
+      }
+    }
+
+    /* ------------------------------------------------------------------
+       LANDMARKS — big multi-tile decorative sprites (a castle, a great
+       tree...) that float above the tile grid but under the avatar.
+       config.landmarks: [{x, y, w, h, svg}] in tile units. Their
+       footprints are protected from coast erosion and kept clear of
+       scattered decorations so they always stand on solid ground.
+    ------------------------------------------------------------------ */
+
+    const LANDMARKS = config.landmarks || [];
+    const landmarkTiles = new Set();
+    LANDMARKS.forEach((lm) => {
+      for (let dy = 0; dy < lm.h; dy += 1) {
+        for (let dx = 0; dx < lm.w; dx += 1) {
+          landmarkTiles.add(`${lm.x + dx},${lm.y + dy}`);
+        }
+      }
+    });
+
+    function buildLandmarks() {
+      LANDMARKS.forEach((lm) => {
+        const div = document.createElement("div");
+        div.className = "landmark";
+        div.style.left = `calc(var(--tile) * ${lm.x})`;
+        div.style.top = `calc(var(--tile) * ${lm.y})`;
+        div.style.width = `calc(var(--tile) * ${lm.w})`;
+        div.style.height = `calc(var(--tile) * ${lm.h})`;
+        div.setAttribute("aria-hidden", "true");
+        div.innerHTML = lm.svg;
+        dom.world.appendChild(div);
+      });
+    }
+
+    // True where the map visually shows water (used for move() messaging).
+    function isWaterVisual(x, y) {
+      return !regionAt(x, y) || erodedSet.has(`${x},${y}`);
+    }
+
+    function pushCoastClasses(meta) {
+      const sides = coastSides.get(meta.coord);
+      if (sides) sides.forEach((s) => meta.classes.push(`coast-${s}`));
+    }
+
+    /* ------------------------------------------------------------------
        RENDERING
     ------------------------------------------------------------------ */
 
@@ -378,12 +796,8 @@ function createWorld(config) {
       // Hidden secret tile? Render as decorative terrain so it blends in.
       if (hiddenTiles.has(coord)) {
         if (region) meta.classes.push(`region-${region.id}`);
-        const h = hashXY(x, y);
-        const rules = decorationRules[region ? region.id : "philosophy"] || { forest: 0, hill: 0 };
-        const r = (h % 1000) / 1000;
-        if (r < rules.forest) meta.classes.push("forest");
-        else if (r < rules.forest + rules.hill) meta.classes.push("hill");
-        else meta.classes.push("grass");
+        pickDecoration(meta, region, x, y);
+        pushCoastClasses(meta);
         return meta;
       }
 
@@ -394,6 +808,7 @@ function createWorld(config) {
         if (isCollectibleCollected(article)) meta.classes.push("collected");
         meta.article = article;
         if (region) meta.classes.push(`region-${region.id}`);
+        pushCoastClasses(meta);
         return meta;
       }
 
@@ -408,8 +823,9 @@ function createWorld(config) {
         return meta;
       }
 
-      if (!region) {
+      if (!region || erodedSet.has(coord)) {
         meta.classes.push("water");
+        if (COAST && shallowSet.has(coord)) meta.classes.push("shallow");
         return meta;
       }
 
@@ -418,20 +834,33 @@ function createWorld(config) {
 
       if (pathTiles.has(coord)) {
         meta.classes.push("path");
+        pushCoastClasses(meta);
         return meta;
       }
 
-      const h = hashXY(x, y);
-      const rules = decorationRules[region.id] || { forest: 0, hill: 0 };
-      const r = (h % 1000) / 1000;
-      if (r < rules.forest) {
-        meta.classes.push("forest");
-      } else if (r < rules.forest + rules.hill) {
-        meta.classes.push("hill");
-      } else {
-        meta.classes.push("grass");
-      }
+      pickDecoration(meta, region, x, y);
+      pushCoastClasses(meta);
       return meta;
+    }
+
+    // One tile element from its meta — shared by buildMap and rebuildTile.
+    function makeTileEl(meta, x, y) {
+      const el = document.createElement(meta.article ? "button" : "div");
+      el.className = meta.classes.join(" ");
+      el.dataset.x = x;
+      el.dataset.y = y;
+      if (meta.article) {
+        el.type = "button";
+        el.setAttribute("aria-label", meta.article.title);
+        el.innerHTML = `<span class="level-box">${meta.article.token}</span>`;
+        // No tile-level click handler: the world-level click handler
+        // converts every tap into a one-tile step toward the tap so
+        // mobile users don't need a visible d-pad. Tap on cat's own
+        // tile opens the article. Legend buttons still warp directly.
+      } else if (meta.decorKind) {
+        el.innerHTML = decorSvg(meta.decorKind);
+      }
+      return el;
     }
 
     function buildMap() {
@@ -439,21 +868,7 @@ function createWorld(config) {
       const frag = document.createDocumentFragment();
       for (let y = 0; y < ROWS; y += 1) {
         for (let x = 0; x < COLS; x += 1) {
-          const meta = tileMeta(x, y);
-          const el = document.createElement(meta.article ? "button" : "div");
-          el.className = meta.classes.join(" ");
-          el.dataset.x = x;
-          el.dataset.y = y;
-          if (meta.article) {
-            el.type = "button";
-            el.setAttribute("aria-label", meta.article.title);
-            el.innerHTML = `<span class="level-box">${meta.article.token}</span>`;
-            // No tile-level click handler: the world-level click handler
-            // converts every tap into a one-tile step toward the tap so
-            // mobile users don't need a visible d-pad. Tap on cat's own
-            // tile opens the article. Legend buttons still warp directly.
-          }
-          frag.appendChild(el);
+          frag.appendChild(makeTileEl(tileMeta(x, y), x, y));
         }
       }
       grid.appendChild(frag);
@@ -497,16 +912,7 @@ function createWorld(config) {
     function rebuildTile(x, y) {
       const old = document.querySelector(`.tile[data-x="${x}"][data-y="${y}"]`);
       if (!old) return;
-      const meta = tileMeta(x, y);
-      const el = document.createElement(meta.article ? "button" : "div");
-      el.className = meta.classes.join(" ");
-      el.dataset.x = x;
-      el.dataset.y = y;
-      if (meta.article) {
-        el.type = "button";
-        el.setAttribute("aria-label", meta.article.title);
-        el.innerHTML = `<span class="level-box">${meta.article.token}</span>`;
-      }
+      const el = makeTileEl(tileMeta(x, y), x, y);
       old.replaceWith(el);
       return el;
     }
@@ -607,8 +1013,22 @@ function createWorld(config) {
       return articleByCoord.get(`${cat.x},${cat.y}`) || null;
     }
 
+    // requiresFlags: ["some-localStorage-key", ...] — every named flag must
+    // read "true" before the article unlocks. Flags are written by other
+    // worlds (dungeon clears, the Social World quest), which is what lets
+    // one locked door span the whole multi-world adventure.
+    function flagsSatisfied(a) {
+      if (!a || !a.requiresFlags) return true;
+      return a.requiresFlags.every((key) => {
+        try { return localStorage.getItem(key) === "true"; }
+        catch (e) { return false; }
+      });
+    }
+
     function isArticleLocked(a) {
-      return !!(a && a.requiresGremlinClear && !gremlinsCleared);
+      if (!a) return false;
+      if (a.requiresGremlinClear && !gremlinsCleared) return true;
+      return !flagsSatisfied(a);
     }
 
     function canMove(x, y) {
@@ -629,10 +1049,9 @@ function createWorld(config) {
 
       const next = { x: cat.x + dx, y: cat.y + dy };
       if (!canMove(next.x, next.y)) {
-        const reg = regionAt(next.x, next.y);
-        setStatus(reg
-          ? "No path that way. Try another direction."
-          : "That way is water. Find a bridge.");
+        setStatus(isWaterVisual(next.x, next.y)
+          ? "That way is water. Find a bridge."
+          : "No path that way. Try another direction.");
         // A short shake gives the bumped move tactile feedback.
         const avatar = dom.avatar;
         if (avatar) {
@@ -684,10 +1103,15 @@ function createWorld(config) {
       if (a.collectible) {
         const newlyCollected = grantItem(a.collectible);
         const label = itemLabel(a.collectible);
-        document.getElementById("status").textContent = newlyCollected
-          ? `${label} found. Press Space to slash.`
-          : `You already have the ${label.toLowerCase()}.`;
+        // update() first — its collectible branch writes the ambient status,
+        // and the take/coronation message must land on top of it, not under.
         update(true);
+        setStatus(newlyCollected
+          ? (a.collectStatus || `${label} found.`)
+          : `You already have the ${label.toLowerCase()}.`);
+        if (newlyCollected && a.celebrate) {
+          emitSparkles(document.getElementById("avatar"), 26);
+        }
         return;
       }
 
@@ -976,17 +1400,18 @@ function createWorld(config) {
           setStatus(a.lockedStatus ||
             "You have to clear the enemies here before this article opens.");
         } else if (a.collectible) {
+          const label = itemLabel(a.collectible);
           openLink.removeAttribute("target");
           openLink.removeAttribute("rel");
-          openLink.textContent = collected ? "Sword found" : "Take sword";
+          openLink.textContent = collected ? `${label} taken` : `Take ${label.toLowerCase()}`;
           openLink.classList.toggle("disabled", collected);
           floatOpen.classList.toggle("visible", !collected);
           floatOpen.removeAttribute("target");
           floatOpen.removeAttribute("rel");
           floatOpen.textContent = "Take";
           setStatus(collected
-            ? "The sword is yours. Press Space to slash."
-            : "Press Enter to take the sword.");
+            ? (a.haveStatus || `The ${label.toLowerCase()} is yours.`)
+            : (a.takeStatus || `Press Enter to take the ${label.toLowerCase()}.`));
         } else if (a.dialogue && !a.url) {
           openLink.removeAttribute("target");
           openLink.removeAttribute("rel");
@@ -1562,7 +1987,10 @@ function createWorld(config) {
     loadVisited();
     loadSecretsFromStorage();
     buildWalkable();
+    computeCoast();
+    if (COAST && dom.world) dom.world.classList.add("has-coast");
     buildMap();
+    buildLandmarks();
     buildLegend();
     buildHelpButton();
     buildIntro();
@@ -1572,6 +2000,7 @@ function createWorld(config) {
     if (restored) cat = restored;
 
     const avatarEl = document.getElementById("avatar");
+    avatarEl.insertAdjacentHTML("beforeend", CROWN_SVG);
     avatarEl.classList.add("no-transition");
     update();
     spawnGremlins();
