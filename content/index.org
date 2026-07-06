@@ -19,6 +19,11 @@ Who are my intended readers? The first one is future-me. It's interesting now to
 If you have quesitons or comments, or you're interested in working or collaborating with me, just send me a message (see contact info below). I'm always happy to help.
 * New
 #+HTML: <a href="#top">Back to top</a>
+** [[./knn_kfn_sweep_10k.html][UMAP KNN to KFN sweep]]
+Web app.\\
+July 5, 2026 - July 6, 2026
+
+Neighborhood preservation is a great benchmarking metric to compare dimensionality reduction tools. Visually, it is a great intuition builder around how well these tools preserve local information. I have shown this with KNN Sleepwalk. Here, I extend the idea by creating a tool that does a "sweep" from the k nearest neighbors (KNN) to the k farthest neighbors (KFN), to show that although UMAP claims to be good at global preservation, the reality is more complicated than that. The intent of this tool is not to knock on UMAP. But rather to dispel as many assumptions about preservation as possible, as quickly as possible.
 ** [[./website_internal_link_graph.html][Graph visualization of my website]]
 Visualization.\\
 August 5, 2023 - June 10, 2026.
@@ -313,6 +318,11 @@ July 11, 2023.
 In flow cytometry and CyTOF analysis, we distinguish between "type" and "state" markers, so we can cluster on the former and analyze per-cluster expression changes in the latter. For single-cell RNA sequencing, we cannot make this distinguishment. Thus, we have to rely on data integration algorithms when we are analyzing pre-treatment and post-treatment datasets. I show how this is done, and I show how failure to do so can lead research teams to falsely interpret the data, and make false conclusions. Thus, understanding data integration is critical to keeping research teams on track.
 
 ** Dimension reduction interrogation
+*** [[./knn_kfn_sweep_10k.html][UMAP KNN to KFN sweep]]
+Web app.\\
+July 5, 2026 - July 6, 2026
+
+Neighborhood preservation is a great benchmarking metric to compare dimensionality reduction tools. Visually, it is a great intuition builder around how well these tools preserve local information. I have shown this with KNN Sleepwalk. Here, I extend the idea by creating a tool that does a "sweep" from the k nearest neighbors (KNN) to the k farthest neighbors (KFN), to show that although UMAP claims to be good at global preservation, the reality is more complicated than that. The intent of this tool is not to knock on UMAP. But rather to dispel as many assumptions about preservation as possible, as quickly as possible.
 *** [[./dr_provenance_interactive.html][Provenance of CyTOF dimension reduction algorithms]]
 Interactive html.\\
 May 18, 2026 - May 19, 2026.
