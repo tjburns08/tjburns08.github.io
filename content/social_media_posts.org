@@ -16,6 +16,36 @@ Dr. Seuss, [[https://en.wikipedia.org/wiki/Horton_Hatches_the_Egg][/Horton Hatch
 * Dimensionality Reduction And Embedding Interpretation
 #+HTML: <a href="#top">Back to top</a>
 Posts on UMAP, t-SNE, KNN/KFN Sleepwalk, map stability, global/local preservation, and visual defaults that affect interpretation.
+** [[https://www.linkedin.com/posts/tylerjburns_hi-friends-your-umap-preserves-far-fewer-activity-7479884243993812992-HUqM?utm_source=share&utm_medium=member_desktop&rcm=ACoAAAbP8M8BYXs_UknoBHnmw2rZ-aRDTJF7L3Y][KNN to KFN sweep]]
+July 6, 2026
+
+Hi friends! Your UMAP preserves far fewer nearest neighbors than you think. And once you look past the nearest few hundred, preservation basically falls apart. I built a tool to watch it happen, frame by frame.
+
+Context: in light of some messages sent to me about how UMAP was being used at CYTO this year, I added to my KNN Sleepwalk concept, which I've been posting about here for three years now, to include every "slice" of nearest neighbors from nearest to farthest.
+
+The purpose of this current iteration is to remove as many assumptions around what UMAP preserves as possible in as short of a period of time as possible. On the nearest neighbor side, we have already seen that preservation is less than one would "wishfully think." I've shown this over and over again since the spring of 2018. Nearest neighbor preservation is now a widely accepted benchmark. Good.
+
+But here, I show that as soon as you start moving out away from the nearest neighbors and toward the farthest neighbors, the results are, for lack of a better term, weird. You can compute the percentage preservation and show it in a line chart, but that does not provide the intuition that the visualization below does.
+
+While the neighbor "front" proceeds out like a ring in UMAP space, in marker space we have no such "front," and we see unexpected things like the neighbors lingering on a single island for much longer than expected. Or islands that are far away in UMAP space suddenly appearing near in terms of neighbor ID in marker space.
+
+This doesn't mean that UMAP is useless. Rather, it puts bounds on what you can assume that it's doing (e.g. do you want to gate on a UMAP after seeing this animation?).
+
+This brings me to a much bigger point. It is no longer acceptable to say "UMAP is amazing" or "UMAP is bad, never use it." You need to show your opinion. With data. Visually. A good mental model for this is the picture of the WW2 survivor's aircraft riddled with bullets everywhere except the engine (to show survivorship bias).
+
+Since code implementation has gotten much easier due to obvious "digital trends," taste and judgement matter much more than they used to. Accordingly, we need to be building and using apps like this that serve as taste and judgement "enablers."
+
+This is what I've been doing for clients for a while now. How can you provide the fastest possible intuition that allows someone in a high stakes situation to make the right call? That's what you build. Spoiler alert: it's not a slide deck.
+
+Since so much of the life sciences sector now involves black box tools, building apps like this are increasingly important for leaders and decision makers as we learn the failure modes of what is otherwise beautiful output.
+
+Leaders: apps like this should be baseline, not extra credit. If you want to talk more about this increasingly important topic, feel free to reach out. Link to the app is in the comments. Thank you and I hope you all have a great day.
+
+[[file::images/knn_to_kfn_raw10k_umap_8876_6994_6557.gif]]
+*** comment
+Link to the app, with Samusik dataset, so you can try it yourself: https://tjburns08.github.io/knn_kfn_sweep_10k.html
+
+
 ** [[https://www.linkedin.com/posts/tylerjburns_hi-friends-i-finally-after-several-years-activity-7369363128763002882-VdIM?utm_source=share&utm_medium=member_desktop&rcm=ACoAAAbP8M8BYXs_UknoBHnmw2rZ-aRDTJF7L3Y][KNN Sleepwalk Dash app]]
 September 4, 2025
 
@@ -376,7 +406,9 @@ The markdown is here: https://tjburns08.github.io/rainbow_feature_plot.html
 * Clustering, Gating, And Population Assignment
 #+HTML: <a href="#top">Back to top</a>
 Posts about assigning cells to groups, evaluating stability, rare subset detection, automated gating, and methods that can produce convincing but misleading structure.
-** [[https://www.linkedin.com/posts/tylerjburns_hi-friends-in-light-of-the-release-of-claude-activity-7478072786385526784-iAmk?utm_source=share&utm_medium=member_desktop&rcm=ACoAAAbP8M8BYXs_UknoBHnmw2rZ-aRDTJF7L3Y][Claude Science and updated cluster stability]]
+** [[https://www.linkedin.com/posts/tylerjburns_hi-friends-in-light-of-the-release-of-claude-activity-7478072786385526784-iAmk?utm_source=share&utm_medium=member_desktop&rcm=ACoAAAbP8M8BYXs_UknoBHnmw2rZ-aRDTJF7L3Y][Claude Science and updated cluster stability
+]]July 2, 2026
+
 Hi friends, in light of the release of Claude Science, and any upcoming increase in bioinformatic analysis volume that it enables, I wanted to speak to the increasingly important idea of "workflow due diligence."
 
 Here is a result that should bother you. When you cluster cells with Seurat under the default settings, and you run the clustering over and over again with different random seeds, the number of clusters found stays the same, but the cell assignment changes in some boundaries. Here, I zoom in on the CD4/CD8 boundary in the PBMC 3k dataset so you can see this more clearly. This is something you'd otherwise not see unless you ran the experiment yourself on your data.
