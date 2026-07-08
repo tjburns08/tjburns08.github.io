@@ -20,11 +20,17 @@ If you have quesitons or comments, or you're interested in working or collaborat
 * New
 #+HTML: <a href="#top">Back to top</a>
 ** [[./knn_kfn_sweep_10k.html][UMAP KNN to KFN sweep]]
+:PROPERTIES:
+:UNNUMBERED: notoc
+:END:
 Web app.\\
 July 5, 2026 - July 6, 2026
 
 Neighborhood preservation is a great benchmarking metric to compare dimensionality reduction tools. Visually, it is a great intuition builder around how well these tools preserve local information. I have shown this with KNN Sleepwalk. Here, I extend the idea by creating a tool that does a "sweep" from the k nearest neighbors (KNN) to the k farthest neighbors (KFN), to show that although UMAP claims to be good at global preservation, the reality is more complicated than that. The intent of this tool is not to knock on UMAP. But rather to dispel as many assumptions about preservation as possible, as quickly as possible.
 ** [[./website_internal_link_graph.html][Graph visualization of my website]]
+:PROPERTIES:
+:UNNUMBERED: notoc
+:END:
 Visualization.\\
 August 5, 2023 - June 10, 2026.
 
