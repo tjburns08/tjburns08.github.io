@@ -1,0 +1,338 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>The Old Pond, Crossing the Water</title>
+<style>
+:root{
+  --ground:#E2E4DE;
+  --ground-2:#D6D9D2;
+  --ink:#1E2320;
+  --ink-soft:#5E655F;
+  --ink-faint:#8B918A;
+  --rule:#BEC3BA;
+  --patina:#2B6B70;
+  --patina-dim:rgba(43,107,112,.22);
+  --grain:.035;
+}
+:root:not([data-theme="light"]){
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --ground:#12151A;
+    --ground-2:#191D23;
+    --ink:#D7D9D2;
+    --ink-soft:#8B938F;
+    --ink-faint:#5E6669;
+    --rule:#2A2F36;
+    --patina:#7BC3C6;
+    --patina-dim:rgba(123,195,198,.24);
+    --grain:.05;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --ground:#12151A;
+  --ground-2:#191D23;
+  --ink:#D7D9D2;
+  --ink-soft:#8B938F;
+  --ink-faint:#5E6669;
+  --rule:#2A2F36;
+  --patina:#7BC3C6;
+  --patina-dim:rgba(123,195,198,.24);
+  --grain:.05;
+  color-scheme:dark;
+}
+
+*{box-sizing:border-box}
+body{
+  background:var(--ground);
+  color:var(--ink);
+  font-family:"Cardo",Georgia,"Times New Roman",serif;
+  margin:0;
+  padding-block:clamp(2.2rem,6vw,4.5rem) clamp(2.5rem,7vw,5rem);
+  padding-inline:20px;
+  -webkit-font-smoothing:antialiased;
+}
+#grain{
+  position:fixed;inset:0;pointer-events:none;z-index:99;
+  opacity:var(--grain);mix-blend-mode:multiply;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) #grain{mix-blend-mode:screen}}
+:root[data-theme="dark"] #grain{mix-blend-mode:screen}
+
+.wrap{max-width:40rem;margin-inline:auto}
+
+/* ---- masthead ---- */
+.eyebrow{
+  font-family:"IBM Plex Mono",ui-monospace,monospace;
+  font-size:.66rem;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--ink-faint);margin:0 0 1.1rem;
+}
+h1{
+  font-family:"Marcellus",Palatino,Georgia,serif;
+  font-weight:400;
+  font-size:clamp(2rem,1.3rem+3.2vw,3.1rem);
+  letter-spacing:.02em;
+  line-height:1.05;
+  margin:0 0 .55rem;
+  text-wrap:balance;
+}
+.standfirst{
+  font-size:.98rem;line-height:1.6;color:var(--ink-soft);
+  margin:0;max-width:32rem;font-style:italic;
+}
+.rule{height:1px;background:var(--rule);border:0;margin:clamp(2rem,5vw,3rem) 0}
+
+/* ---- poem ---- */
+.poem{
+  font-size:clamp(1.12rem,1rem+.75vw,1.5rem);
+  line-height:1.95;
+  letter-spacing:.004em;
+}
+.ln{padding-left:1.3em;text-indent:-1.3em}
+.ln.gap{margin-top:.75em}
+.w{
+  display:inline-block;
+  text-indent:0;
+  transition:opacity .34s ease,filter .34s ease,transform .34s ease,color .9s ease;
+}
+.w.gone{opacity:0;filter:blur(5px);transform:translateY(-.3em)}
+.w.arriving{opacity:0;filter:blur(5px);transform:translateY(.3em)}
+.w.nofx{transition:none}
+.w.lit{color:var(--patina)}
+body.plain .w{transition:none;filter:none!important;transform:none!important}
+body.nohl .w.lit{color:inherit}
+
+/* ---- index strip ---- */
+.strip{
+  display:flex;gap:2px;align-items:flex-end;height:22px;margin:clamp(2rem,5vw,2.8rem) 0 .85rem;
+  cursor:crosshair;
+}
+.tick{flex:1 1 0;min-width:0;height:6px;background:var(--rule);border:0;padding:0;transition:height .25s ease,background .25s ease}
+.tick.past{background:var(--patina-dim)}
+.tick.now{height:20px;background:var(--patina)}
+
+.meter{
+  display:flex;justify-content:space-between;align-items:baseline;gap:1rem;
+  font-family:"IBM Plex Mono",ui-monospace,monospace;
+  font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-faint);
+  font-variant-numeric:tabular-nums;
+}
+.meter b{color:var(--ink-soft);font-weight:500}
+.meter .swap{color:var(--patina)}
+
+/* ---- controls ---- */
+.controls{
+  display:flex;flex-wrap:wrap;gap:.5rem .4rem;align-items:center;
+  margin-top:1.6rem;
+}
+button{
+  font-family:"IBM Plex Mono",ui-monospace,monospace;
+  font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--ink-soft);background:transparent;
+  border:1px solid var(--rule);border-radius:1px;
+  padding:.5rem .7rem;cursor:pointer;
+  transition:color .2s,border-color .2s,background .2s;
+}
+button:hover{color:var(--ink);border-color:var(--ink-faint)}
+button[aria-pressed="true"],button.on{color:var(--patina);border-color:var(--patina)}
+button:focus-visible{outline:2px solid var(--patina);outline-offset:2px}
+.spacer{flex:1 1 1.5rem;min-width:0}
+.grp{display:flex}
+.grp button+button{margin-left:-1px}
+
+/* ---- archive ---- */
+.archive{margin-top:clamp(2.5rem,6vw,4rem)}
+.archive[hidden]{display:none!important}
+.arch-head{
+  font-family:"IBM Plex Mono",ui-monospace,monospace;
+  font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-faint);
+  padding-bottom:.7rem;border-bottom:1px solid var(--rule);margin-bottom:1.6rem;
+}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(15rem,1fr));gap:2rem 1.75rem}
+.card{font-size:.72rem;line-height:1.62}
+.card .no{
+  font-family:"IBM Plex Mono",ui-monospace,monospace;
+  font-size:.62rem;letter-spacing:.12em;color:var(--ink-faint);
+  display:block;margin-bottom:.5rem;font-variant-numeric:tabular-nums;
+}
+.card em{font-style:normal;color:var(--patina)}
+.card p{margin:0;white-space:pre-line;color:var(--ink-soft)}
+
+footer{
+  margin-top:clamp(2.5rem,6vw,4rem);padding-top:1.2rem;border-top:1px solid var(--rule);
+  font-family:"IBM Plex Mono",ui-monospace,monospace;
+  font-size:.66rem;line-height:1.9;letter-spacing:.06em;color:var(--ink-faint);
+}
+@media (prefers-reduced-motion:reduce){
+  .w,.tick{transition:none}
+}
+
+.wrap{max-width:42rem}.poem{font-size:clamp(1.15rem,4.5vw,2rem);line-height:2.05;padding-block:1rem}.ln{padding:0;text-indent:0}.meter{flex-wrap:wrap}.swap{min-height:1.5em}.w.lit{color:inherit}.changed{color:var(--patina);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:.2em}body.nohl .changed{color:inherit;text-decoration:none}.w.flash{animation:arrival .55s ease}@keyframes arrival{from{background:var(--patina-dim)}to{background:transparent}}@media(prefers-reduced-motion:reduce){.w.flash{animation:none}}nav{display:flex;flex-wrap:wrap;gap:1rem;margin-bottom:.8rem}footer a{color:var(--ink-soft)}input[type=range]{width:100%;accent-color:var(--patina);margin:1.5rem 0 1rem}.note{font-size:.85rem;color:var(--ink-soft);line-height:1.6}button:disabled{opacity:.4;cursor:default}.card p{white-space:pre-line}
+
+</style></head><body><main class="wrap">
+<header><p class="eyebrow">Dynamic poetry · two-letter drift</p><h1>The Old Pond, Crossing the Water</h1><p class="standfirst">A pond, a shore, a tree in the wind. Two letters let the scene travel further. Read again from the top.</p><p class="note">After Matsuo Bashō · English translation by Harry Behn<br>Dynamic adaptation by Tyler Burns</p></header>
+<hr class="rule"><div class="poem" id="poem" aria-live="off"><div class="ln">An old silent pond</div><div class="ln">A frog jumps into the pond—</div><div class="ln">Splash! Silence again.</div></div>
+
+<input id="position" type="range" min="0" max="40" value="0" aria-label="Poem version">
+<div class="meter"><span>Version <b id="vnum">001</b> / 41 <span id="direction"></span></span><span class="swap" id="swap">Original text</span></div>
+<div class="controls"><div class="grp"><button id="prev" aria-label="Previous version">←</button><button id="play">Play</button><button id="next" aria-label="Next version">→</button></div><div class="spacer"></div><div class="grp"><button class="speed" data-ms="6000" aria-pressed="false">Slow</button><button class="speed" data-ms="3200" aria-pressed="true">Reading</button><button class="speed" data-ms="1200" aria-pressed="false">Quick</button></div><button id="reset">Original</button><button id="highlight" aria-pressed="true">Mark change</button><button id="all" aria-expanded="false" aria-controls="archive">All 41</button></div>
+<p class="note">One or two letters are replaced in one word at each step. Every resulting word is an English word. The route follows three scenes, with stranger passages between them. The poem travels outward, then retraces its steps home.</p>
+<section class="archive" id="archive" hidden><p class="arch-head">Every version, in order</p><div class="grid"><article class="card"><span class="no">001</span><p>An old silent pond
+A frog jumps into the pond—
+Splash! Silence again.</p></article><article class="card"><span class="no">002</span><p>An odd silent pond
+A frog jumps into the pond—
+Splash! Silence again.</p></article><article class="card"><span class="no">003</span><p>An odd silent pool
+A frog jumps into the pond—
+Splash! Silence again.</p></article><article class="card"><span class="no">004</span><p>An odd silent pool
+A frog jumps into the pool—
+Splash! Silence again.</p></article><article class="card"><span class="no">005</span><p>An odd silent pool
+A crow jumps into the pool—
+Splash! Silence again.</p></article><article class="card"><span class="no">006</span><p>An odd silent pool
+A crow jumps into the pool—
+Squash! Silence again.</p></article><article class="card"><span class="no">007</span><p>An odd silent pool
+A crow jumps into the pool—
+Squawk! Silence again.</p></article><article class="card"><span class="no">008</span><p>An odd silent pool
+A crow limps into the pool—
+Squawk! Silence again.</p></article><article class="card"><span class="no">009</span><p>An odd silent pool
+A crow limps onto the pool—
+Squawk! Silence again.</p></article><article class="card"><span class="no">010</span><p>An odd silent pool
+A crow limps onto the pond—
+Squawk! Silence again.</p></article><article class="card"><span class="no">011</span><p>An odd silent pool
+A crow limps onto the sand—
+Squawk! Silence again.</p></article><article class="card"><span class="no">012</span><p>An odd silent pond
+A crow limps onto the sand—
+Squawk! Silence again.</p></article><article class="card"><span class="no">013</span><p>An odd silent sand
+A crow limps onto the sand—
+Squawk! Silence again.</p></article><article class="card"><span class="no">014</span><p>An old silent sand
+A crow limps onto the sand—
+Squawk! Silence again.</p></article><article class="card"><span class="no">015</span><p>An old splint sand
+A crow limps onto the sand—
+Squawk! Silence again.</p></article><article class="card"><span class="no">016</span><p>An old sprint sand
+A crow limps onto the sand—
+Squawk! Silence again.</p></article><article class="card"><span class="no">017</span><p>An old spring sand
+A crow limps onto the sand—
+Squawk! Silence again.</p></article><article class="card"><span class="no">018</span><p>An old spring pond
+A crow limps onto the sand—
+Squawk! Silence again.</p></article><article class="card"><span class="no">019</span><p>An old spring pond
+A crow leaps onto the sand—
+Squawk! Silence again.</p></article><article class="card"><span class="no">020</span><p>An old spring pond
+A crab leaps onto the sand—
+Squawk! Silence again.</p></article><article class="card"><span class="no">021</span><p>An old spring pond
+A crab leaps onto the sand—
+Squash! Silence again.</p></article><article class="card"><span class="no">022</span><p>An old spring pond
+A crab leaps onto the sand—
+Squish! Silence again.</p></article><article class="card"><span class="no">023</span><p>An old spring pond
+A crab leaps onto the sand—
+Squish! Silence slain.</p></article><article class="card"><span class="no">024</span><p>An old spring pond
+A crab leaps onto the land—
+Squish! Silence slain.</p></article><article class="card"><span class="no">025</span><p>An old spring land
+A crab leaps onto the land—
+Squish! Silence slain.</p></article><article class="card"><span class="no">026</span><p>An old spring land
+A crow leaps onto the land—
+Squish! Silence slain.</p></article><article class="card"><span class="no">027</span><p>An old spring land
+A crow leaps onto the land—
+Squash! Silence slain.</p></article><article class="card"><span class="no">028</span><p>An old spring land
+A crow leaps onto the land—
+Squawk! Silence slain.</p></article><article class="card"><span class="no">029</span><p>An old spring land
+A crow leans onto the land—
+Squawk! Silence slain.</p></article><article class="card"><span class="no">030</span><p>An old spring land
+A crew leans onto the land—
+Squawk! Silence slain.</p></article><article class="card"><span class="no">031</span><p>An old spring land
+A tree leans onto the land—
+Squawk! Silence slain.</p></article><article class="card"><span class="no">032</span><p>An old spring land
+A tree leans into the land—
+Squawk! Silence slain.</p></article><article class="card"><span class="no">033</span><p>An old spring land
+A tree leans into the sand—
+Squawk! Silence slain.</p></article><article class="card"><span class="no">034</span><p>An old spring land
+A tree leans into the wind—
+Squawk! Silence slain.</p></article><article class="card"><span class="no">035</span><p>An old string land
+A tree leans into the wind—
+Squawk! Silence slain.</p></article><article class="card"><span class="no">036</span><p>An old strong land
+A tree leans into the wind—
+Squawk! Silence slain.</p></article><article class="card"><span class="no">037</span><p>An old strong sand
+A tree leans into the wind—
+Squawk! Silence slain.</p></article><article class="card"><span class="no">038</span><p>An old strong wind
+A tree leans into the wind—
+Squawk! Silence slain.</p></article><article class="card"><span class="no">039</span><p>An odd strong wind
+A tree leans into the wind—
+Squawk! Silence slain.</p></article><article class="card"><span class="no">040</span><p>An odd strong wind
+A tree leans into the wind—
+Squall! Silence slain.</p></article><article class="card"><span class="no">041</span><p>An odd strong wind
+A tree leans into the wind—
+Squall! Silence again.</p></article></div></section>
+<footer><nav><a href="index.html">← Tyler Burns’s website</a></nav>Original haiku: Matsuo Bashō. Starting English text: Harry Behn’s translation, with punctuation and capitalization adapted.<br>Dynamic adaptation: Tyler Burns. Subsequent versions are variations on the translation, not poems by Bashō or translations by Behn.<br><a href="https://music.unt.edu/files/default/files/digital-programs/2025.03.29_isabela-urroz-arena_449.pdf">Translation attribution (University of North Texas, p. 2)</a><br>Space plays and pauses · arrow keys step · slider selects a version</footer>
+</main><script>
+const DATA=[{"state":{"opening":"An","article":"A","the":"the","old":"old","silent":"silent","pond":"pond","frog":"frog","jumps":"jumps","into":"into","water":"pond","splash":"Splash","silence":"Silence","again":"again"},"changed":null},{"state":{"opening":"An","article":"A","the":"the","old":"odd","silent":"silent","pond":"pond","frog":"frog","jumps":"jumps","into":"into","water":"pond","splash":"Splash","silence":"Silence","again":"again"},"changed":"old"},{"state":{"opening":"An","article":"A","the":"the","old":"odd","silent":"silent","pond":"pool","frog":"frog","jumps":"jumps","into":"into","water":"pond","splash":"Splash","silence":"Silence","again":"again"},"changed":"pond"},{"state":{"opening":"An","article":"A","the":"the","old":"odd","silent":"silent","pond":"pool","frog":"frog","jumps":"jumps","into":"into","water":"pool","splash":"Splash","silence":"Silence","again":"again"},"changed":"water"},{"state":{"opening":"An","article":"A","the":"the","old":"odd","silent":"silent","pond":"pool","frog":"crow","jumps":"jumps","into":"into","water":"pool","splash":"Splash","silence":"Silence","again":"again"},"changed":"frog"},{"state":{"opening":"An","article":"A","the":"the","old":"odd","silent":"silent","pond":"pool","frog":"crow","jumps":"jumps","into":"into","water":"pool","splash":"Squash","silence":"Silence","again":"again"},"changed":"splash"},{"state":{"opening":"An","article":"A","the":"the","old":"odd","silent":"silent","pond":"pool","frog":"crow","jumps":"jumps","into":"into","water":"pool","splash":"Squawk","silence":"Silence","again":"again"},"changed":"splash"},{"state":{"opening":"An","article":"A","the":"the","old":"odd","silent":"silent","pond":"pool","frog":"crow","jumps":"limps","into":"into","water":"pool","splash":"Squawk","silence":"Silence","again":"again"},"changed":"jumps"},{"state":{"opening":"An","article":"A","the":"the","old":"odd","silent":"silent","pond":"pool","frog":"crow","jumps":"limps","into":"onto","water":"pool","splash":"Squawk","silence":"Silence","again":"again"},"changed":"into"},{"state":{"opening":"An","article":"A","the":"the","old":"odd","silent":"silent","pond":"pool","frog":"crow","jumps":"limps","into":"onto","water":"pond","splash":"Squawk","silence":"Silence","again":"again"},"changed":"water"},{"state":{"opening":"An","article":"A","the":"the","old":"odd","silent":"silent","pond":"pool","frog":"crow","jumps":"limps","into":"onto","water":"sand","splash":"Squawk","silence":"Silence","again":"again"},"changed":"water"},{"state":{"opening":"An","article":"A","the":"the","old":"odd","silent":"silent","pond":"pond","frog":"crow","jumps":"limps","into":"onto","water":"sand","splash":"Squawk","silence":"Silence","again":"again"},"changed":"pond"},{"state":{"opening":"An","article":"A","the":"the","old":"odd","silent":"silent","pond":"sand","frog":"crow","jumps":"limps","into":"onto","water":"sand","splash":"Squawk","silence":"Silence","again":"again"},"changed":"pond"},{"state":{"opening":"An","article":"A","the":"the","old":"old","silent":"silent","pond":"sand","frog":"crow","jumps":"limps","into":"onto","water":"sand","splash":"Squawk","silence":"Silence","again":"again"},"changed":"old"},{"state":{"opening":"An","article":"A","the":"the","old":"old","silent":"splint","pond":"sand","frog":"crow","jumps":"limps","into":"onto","water":"sand","splash":"Squawk","silence":"Silence","again":"again"},"changed":"silent"},{"state":{"opening":"An","article":"A","the":"the","old":"old","silent":"sprint","pond":"sand","frog":"crow","jumps":"limps","into":"onto","water":"sand","splash":"Squawk","silence":"Silence","again":"again"},"changed":"silent"},{"state":{"opening":"An","article":"A","the":"the","old":"old","silent":"spring","pond":"sand","frog":"crow","jumps":"limps","into":"onto","water":"sand","splash":"Squawk","silence":"Silence","again":"again"},"changed":"silent"},{"state":{"opening":"An","article":"A","the":"the","old":"old","silent":"spring","pond":"pond","frog":"crow","jumps":"limps","into":"onto","water":"sand","splash":"Squawk","silence":"Silence","again":"again"},"changed":"pond"},{"state":{"opening":"An","article":"A","the":"the","old":"old","silent":"spring","pond":"pond","frog":"crow","jumps":"leaps","into":"onto","water":"sand","splash":"Squawk","silence":"Silence","again":"again"},"changed":"jumps"},{"state":{"opening":"An","article":"A","the":"the","old":"old","silent":"spring","pond":"pond","frog":"crab","jumps":"leaps","into":"onto","water":"sand","splash":"Squawk","silence":"Silence","again":"again"},"changed":"frog"},{"state":{"opening":"An","article":"A","the":"the","old":"old","silent":"spring","pond":"pond","frog":"crab","jumps":"leaps","into":"onto","water":"sand","splash":"Squash","silence":"Silence","again":"again"},"changed":"splash"},{"state":{"opening":"An","article":"A","the":"the","old":"old","silent":"spring","pond":"pond","frog":"crab","jumps":"leaps","into":"onto","water":"sand","splash":"Squish","silence":"Silence","again":"again"},"changed":"splash"},{"state":{"opening":"An","article":"A","the":"the","old":"old","silent":"spring","pond":"pond","frog":"crab","jumps":"leaps","into":"onto","water":"sand","splash":"Squish","silence":"Silence","again":"slain"},"changed":"again"},{"state":{"opening":"An","article":"A","the":"the","old":"old","silent":"spring","pond":"pond","frog":"crab","jumps":"leaps","into":"onto","water":"land","splash":"Squish","silence":"Silence","again":"slain"},"changed":"water"},{"state":{"opening":"An","article":"A","the":"the","old":"old","silent":"spring","pond":"land","frog":"crab","jumps":"leaps","into":"onto","water":"land","splash":"Squish","silence":"Silence","again":"slain"},"changed":"pond"},{"state":{"opening":"An","article":"A","the":"the","old":"old","silent":"spring","pond":"land","frog":"crow","jumps":"leaps","into":"onto","water":"land","splash":"Squish","silence":"Silence","again":"slain"},"changed":"frog"},{"state":{"opening":"An","article":"A","the":"the","old":"old","silent":"spring","pond":"land","frog":"crow","jumps":"leaps","into":"onto","water":"land","splash":"Squash","silence":"Silence","again":"slain"},"changed":"splash"},{"state":{"opening":"An","article":"A","the":"the","old":"old","silent":"spring","pond":"land","frog":"crow","jumps":"leaps","into":"onto","water":"land","splash":"Squawk","silence":"Silence","again":"slain"},"changed":"splash"},{"state":{"opening":"An","article":"A","the":"the","old":"old","silent":"spring","pond":"land","frog":"crow","jumps":"leans","into":"onto","water":"land","splash":"Squawk","silence":"Silence","again":"slain"},"changed":"jumps"},{"state":{"opening":"An","article":"A","the":"the","old":"old","silent":"spring","pond":"land","frog":"crew","jumps":"leans","into":"onto","water":"land","splash":"Squawk","silence":"Silence","again":"slain"},"changed":"frog"},{"state":{"opening":"An","article":"A","the":"the","old":"old","silent":"spring","pond":"land","frog":"tree","jumps":"leans","into":"onto","water":"land","splash":"Squawk","silence":"Silence","again":"slain"},"changed":"frog"},{"state":{"opening":"An","article":"A","the":"the","old":"old","silent":"spring","pond":"land","frog":"tree","jumps":"leans","into":"into","water":"land","splash":"Squawk","silence":"Silence","again":"slain"},"changed":"into"},{"state":{"opening":"An","article":"A","the":"the","old":"old","silent":"spring","pond":"land","frog":"tree","jumps":"leans","into":"into","water":"sand","splash":"Squawk","silence":"Silence","again":"slain"},"changed":"water"},{"state":{"opening":"An","article":"A","the":"the","old":"old","silent":"spring","pond":"land","frog":"tree","jumps":"leans","into":"into","water":"wind","splash":"Squawk","silence":"Silence","again":"slain"},"changed":"water"},{"state":{"opening":"An","article":"A","the":"the","old":"old","silent":"string","pond":"land","frog":"tree","jumps":"leans","into":"into","water":"wind","splash":"Squawk","silence":"Silence","again":"slain"},"changed":"silent"},{"state":{"opening":"An","article":"A","the":"the","old":"old","silent":"strong","pond":"land","frog":"tree","jumps":"leans","into":"into","water":"wind","splash":"Squawk","silence":"Silence","again":"slain"},"changed":"silent"},{"state":{"opening":"An","article":"A","the":"the","old":"old","silent":"strong","pond":"sand","frog":"tree","jumps":"leans","into":"into","water":"wind","splash":"Squawk","silence":"Silence","again":"slain"},"changed":"pond"},{"state":{"opening":"An","article":"A","the":"the","old":"old","silent":"strong","pond":"wind","frog":"tree","jumps":"leans","into":"into","water":"wind","splash":"Squawk","silence":"Silence","again":"slain"},"changed":"pond"},{"state":{"opening":"An","article":"A","the":"the","old":"odd","silent":"strong","pond":"wind","frog":"tree","jumps":"leans","into":"into","water":"wind","splash":"Squawk","silence":"Silence","again":"slain"},"changed":"old"},{"state":{"opening":"An","article":"A","the":"the","old":"odd","silent":"strong","pond":"wind","frog":"tree","jumps":"leans","into":"into","water":"wind","splash":"Squall","silence":"Silence","again":"slain"},"changed":"splash"},{"state":{"opening":"An","article":"A","the":"the","old":"odd","silent":"strong","pond":"wind","frog":"tree","jumps":"leans","into":"into","water":"wind","splash":"Squall","silence":"Silence","again":"again"},"changed":"again"}], LINES=["{opening} {old} {silent} {pond}","{article} {frog} {jumps} {into} {the} {water}—","{splash}! {silence} {again}."], LETTERS=true, BLEAK=false;
+const $=id=>document.getElementById(id), reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+let index=0,direction=1,timer=null,speed=3200;
+// The bleak edition loses warmth from left to right in either system theme.
+const bleakDark=BLEAK && matchMedia('(prefers-color-scheme: dark)').matches;
+const bleakPalette={
+ light:{ground:['#e2e4de','#101116'],ink:['#1e2320','#e1deda'],soft:['#505951','#b5afb0'],rule:['#bec3ba','#55515a'],accent:['#2b6b70','#c1a4a8']},
+ dark:{ground:['#222b2c','#101116'],ink:['#e4e4d9','#e1deda'],soft:['#b3bbb5','#b5afb0'],rule:['#556563','#55515a'],accent:['#91c2ba','#c1a4a8']}
+};
+function darken(n){
+ if(!BLEAK)return;
+ const progress=n/(DATA.length-1),palette=bleakPalette[bleakDark?'dark':'light'];
+ const mix=(a,b)=>'#'+[1,3,5].map(i=>Math.round(parseInt(a.slice(i,i+2),16)*(1-progress)+parseInt(b.slice(i,i+2),16)*progress).toString(16).padStart(2,'0')).join('');
+ const root=document.documentElement, ground=mix(...palette.ground);
+ const luminance=color=>[1,3,5].map(i=>parseInt(color.slice(i,i+2),16)/255).map(v=>v<=.04045?v/12.92:((v+.055)/1.055)**2.4).reduce((sum,v,i)=>sum+v*[.2126,.7152,.0722][i],0);
+ const lum=luminance(ground),dim=lum<.179;
+ const readable=color=>{
+  const other=luminance(color),ratio=(Math.max(lum,other)+.05)/(Math.min(lum,other)+.05);
+  return ratio>=4.5?color:dim?'#ffffff':'#000000';
+ };
+ root.style.setProperty('--ground',ground);
+ root.style.setProperty('--ink',readable(palette.ink[dim?1:0]));
+ root.style.setProperty('--ink-soft',readable(palette.soft[dim?1:0]));
+ root.style.setProperty('--ink-faint',readable(palette.soft[dim?1:0]));
+ root.style.setProperty('--rule',mix(...palette.rule));
+ root.style.setProperty('--patina',readable(palette.accent[dim?1:0]));
+ root.style.setProperty('--patina-dim',dim?'rgba(193,164,168,.22)':'rgba(43,107,112,.22)');
+ root.style.colorScheme=dim?'dark':'light';
+}
+function paint(n){
+ const before=DATA[index].state, after=DATA[n].state;
+ const changed=Object.keys(after).filter(k=>before[k]!==after[k]);
+ index=n; $('poem').replaceChildren();
+ LINES.forEach(template=>{
+  const line=document.createElement('div');line.className='ln';
+  template.split(/\{(\w+)\}/g).forEach((part,i)=>{
+   if(i%2===0){line.append(document.createTextNode(part));return;}
+   const word=document.createElement('span');word.className='w';
+   const mark=changed.includes(part);
+   if(mark)word.classList.add('flash');
+   if(LETTERS&&mark&&changed.length===1){
+    [...after[part]].forEach((c,j)=>{const letter=document.createElement('span');letter.textContent=c;if(c!==before[part][j])letter.className='changed';word.append(letter);});
+   }else{word.textContent=after[part];if(mark)word.classList.add('changed');}
+   line.append(word);
+  });$('poem').append(line);
+ });
+ $('vnum').textContent=String(n+1).padStart(3,'0');$('position').value=n;
+ $('position').setAttribute('aria-valuetext','Version '+(n+1)+' of '+DATA.length);
+ $('swap').textContent=changed.length===1 ? before[changed[0]]+' → '+after[changed[0]] : n===0 ? 'Original text' : 'Version selected';
+ $('prev').disabled=n===0;$('next').disabled=n===DATA.length-1;
+ $('direction').textContent=BLEAK ? (n===DATA.length-1?'—':direction===1?'→':'←') : direction===1?'↗':'↙';
+ darken(n);
+ if(BLEAK && timer===null)$('play').textContent=n===DATA.length-1?'Replay':'Play';
+}
+function pause(){clearInterval(timer);timer=null;$('play').textContent=BLEAK && index===DATA.length-1?'Replay':'Play';}
+function play(){
+ pause();
+ if(BLEAK){direction=1;if(index===DATA.length-1)paint(0);}
+ $('play').textContent='Pause';
+ timer=setInterval(()=>{
+  if(BLEAK){paint(Math.min(index+1,DATA.length-1));if(index===DATA.length-1)pause();return;}
+  if(index===DATA.length-1)direction=-1;if(index===0)direction=1;paint(index+direction);
+ },speed);
+}
+function step(d){pause();direction=d;paint(Math.max(0,Math.min(DATA.length-1,index+d)));}
+$('play').onclick=()=>timer===null?play():pause();$('prev').onclick=()=>step(-1);$('next').onclick=()=>step(1);
+$('reset').onclick=()=>{pause();direction=1;paint(0);};
+$('position').oninput=e=>{pause();const n=Number(e.target.value);direction=n>=index?1:-1;paint(n);};
+ document.querySelectorAll('.speed').forEach(b=>b.onclick=()=>{speed=Number(b.dataset.ms);document.querySelectorAll('.speed').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));if(timer!==null)play();});
+$('highlight').onclick=()=>{const off=document.body.classList.toggle('nohl');$('highlight').setAttribute('aria-pressed',String(!off));};
+$('all').onclick=()=>{const open=$('archive').hidden;$('archive').hidden=!open;$('all').setAttribute('aria-expanded',String(open));};
+addEventListener('keydown',e=>{if(e.target.closest('button,input,a,textarea,select,[contenteditable]')||e.ctrlKey||e.metaKey||e.altKey)return;if(e.key===' '){e.preventDefault();timer===null?play():pause();}if(e.key==='ArrowRight'){e.preventDefault();step(1);}if(e.key==='ArrowLeft'){e.preventDefault();step(-1);}});
+paint(0);if(!reduced)play();
+</script></body></html>
