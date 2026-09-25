@@ -609,6 +609,20 @@ Automated gating (autogating) has been a topic of discussion for many years, but
 * AI-Assisted Bioinformatics
 #+HTML: <a href="#top">Back to top</a>
 Posts about LLMs and agents as analysis tools: pipeline generation, annotation, interpretation, prompt scripting, and failure modes.
+** [[https://lnkd.in/p/dknFp4iF][Claude Code builds gating interface and does manual gating]]
+In my hands, Claude Code is getting better at manually gating cells. I've been testing this since Opus 4.5. Here, I built a manual gating interface so I could watch Claude gate in real time. It was done on the Samusik_01 CyTOF dataset (mouse bone marrow).
+
+I ran it in two settings: with and without the visual gating strategy from the X-shift paper (Figure S5, Samusik et al, Nat. Methods 2016). The run with the image also had the reference population counts. Ground truth was the manual gates that are in the Samusik dataset.
+
+With the gating strategy image, it got 98% of assigned cells right. Without it, it got 85% of assigned cells right. This suggests that the model can take gating strategy information (visual, tree) and use it. Another observation, and I saw this in earlier experiments with Opus 4.5, is that in the latter case, there were a high number of cells labeled "unassigned" (55.3%) in comparison to the "ground truth" gates (38.8%). Most of these additional unassigned cells were monocytes. I haven't scrutinized each gate yet. I found many to be pretty good, but others to be a bit coarse-grained.
+
+What this means for you: the latest Claude Opus seems to have had a major upgrade in capabilities in my hands. I can say the same about GPT Codex, though I have not done this exact test yet. The results here suggest that AI gating assistants, (or God forbid: vibe gating) might be around the corner. Try this on your cells. Try the harder populations. See where the "edge cases" are. Make note of them.
+
+The bigger picture is that the models are at a point now where you should be testing their capabilities against your datasets. Know what they can do, and know where their failure modes are. Re-test with each new model. Leaders of research teams need to encourage this. There is a lot of upside coming, but also a lot of potential for catastrophic failure if you don't check every assumption.
+
+If there is anything you want to test, but you don't have the time or resources to do so, just let me know. I hope you all had a nice summer.
+
+file::images/gating_10x_from1m15_titled_stats_hires.gif
 ** [[https://www.linkedin.com/posts/tylerjburns_one-of-the-metrics-i-have-been-tracking-for-activity-7462852276383162369-Yzld?utm_source=share&utm_medium=member_desktop&rcm=ACoAAAbP8M8BYXs_UknoBHnmw2rZ-aRDTJF7L3Y][Claude Code experiments for manual gating, part 2]]
 One of the metrics I have been tracking for agentic AI is "can it gate my cells?" Here is a followup on my previous manual gating experiment, with Opus 4.7 instead of Opus 4.6.
 
