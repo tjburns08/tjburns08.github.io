@@ -610,6 +610,8 @@ Automated gating (autogating) has been a topic of discussion for many years, but
 #+HTML: <a href="#top">Back to top</a>
 Posts about LLMs and agents as analysis tools: pipeline generation, annotation, interpretation, prompt scripting, and failure modes.
 ** [[https://lnkd.in/p/dknFp4iF][Claude Code builds gating interface and does manual gating]]
+September 25, 2026
+
 In my hands, Claude Code is getting better at manually gating cells. I've been testing this since Opus 4.5. Here, I built a manual gating interface so I could watch Claude gate in real time. It was done on the Samusik_01 CyTOF dataset (mouse bone marrow).
 
 I ran it in two settings: with and without the visual gating strategy from the X-shift paper (Figure S5, Samusik et al, Nat. Methods 2016). The run with the image also had the reference population counts. Ground truth was the manual gates that are in the Samusik dataset.
@@ -624,6 +626,8 @@ If there is anything you want to test, but you don't have the time or resources 
 
 file::images/gating_10x_from1m15_titled_stats_hires.gif
 ** [[https://www.linkedin.com/posts/tylerjburns_one-of-the-metrics-i-have-been-tracking-for-activity-7462852276383162369-Yzld?utm_source=share&utm_medium=member_desktop&rcm=ACoAAAbP8M8BYXs_UknoBHnmw2rZ-aRDTJF7L3Y][Claude Code experiments for manual gating, part 2]]
+May 2026
+
 One of the metrics I have been tracking for agentic AI is "can it gate my cells?" Here is a followup on my previous manual gating experiment, with Opus 4.7 instead of Opus 4.6.
 
 The task: give an AI agent an 86,864-event CyTOF bone marrow dataset, a manual gating strategy, QA requirements, and ask it to write and iterate a full gating pipeline.
