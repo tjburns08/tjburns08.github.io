@@ -3,15 +3,26 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>The Old Pond, Crossing the Water</title>
-<meta name="description" content="A pond, a shore, a tree in the wind. Two letters let the scene travel further. Read again from the top.">
+<title>Dynamic Poetry</title>
+<meta name="description" content="Poems that keep changing while you read them.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cardo:ital,wght@0,400;1,400&family=Marcellus&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <style>
-:root{--ground:#E2E4DE;--ink:#1E2320;--soft:#545B55;--rule:#BEC3BA;--accent:#2B6B70;--faint:#6E746D;--grain:.035;--grain-blend:multiply;color-scheme:light;--body-font:"Shippori Mincho","Hiragino Mincho ProN",Georgia,serif;--body-weight:400;--display-font:"Shippori Mincho","Hiragino Mincho ProN",Georgia,serif;--display-weight:500;--display-track:.01em;--measure:38rem;--leading:2.05;--poem-size:clamp(1.2rem,1rem+2.2vw,2rem);--drift-out:-.25em;--drift-in:.25em;--glow:none;--tick-align:flex-end;--spread:0em;}
+:root{--ground:#E2E4DE;--ink:#1E2320;--soft:#545B55;--rule:#BEC3BA;--accent:#2B6B70;--faint:#6E746D;--grain:.035;--grain-blend:multiply;color-scheme:light;--body-font:"Cardo",Georgia,serif;--body-weight:400;--display-font:"Marcellus",Palatino,Georgia,serif;--display-weight:400;--display-track:.02em;--measure:44rem;}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--ground:#12151A;--ink:#D7D9D2;--soft:#939B97;--rule:#2A2F36;--accent:#7BC3C6;--faint:#737B7E;--grain:.05;--grain-blend:screen;color-scheme:dark;}}
 :root[data-theme="dark"]{--ground:#12151A;--ink:#D7D9D2;--soft:#939B97;--rule:#2A2F36;--accent:#7BC3C6;--faint:#737B7E;--grain:.05;--grain-blend:screen;color-scheme:dark;}
+.pieces{list-style:none;margin:0;padding:0}
+.group-head{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);padding-bottom:.7rem;border-bottom:1px solid var(--rule);margin:clamp(2.2rem,5vw,3rem) 0 0}
+.piece{display:block;padding:1.3rem 0;border-bottom:1px solid var(--rule);color:inherit;text-decoration:none}
+.piece h2{font-family:var(--display-font);font-weight:400;font-size:1.35rem;margin:0 0 .3rem;letter-spacing:.01em}
+.piece:hover h2{color:var(--accent)}
+.piece p{margin:0;color:var(--soft);font-size:.95rem;line-height:1.55}
+.piece .ends{display:grid;grid-template-columns:1fr auto 1fr;gap:.8rem;align-items:start;margin-top:.8rem;font-size:.86rem;line-height:1.55;white-space:pre-line}
+.piece .ends span:nth-child(2){color:var(--faint);font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:.7rem;padding-top:.15rem}
+.piece .ends span:last-child{color:var(--accent)}
+.piece .meta{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);margin-top:.7rem}
+@media (max-width:520px){.piece .ends{grid-template-columns:1fr}.piece .ends span:nth-child(2){display:none}}
 *{box-sizing:border-box}
 html{background:var(--ground)}
 body{
@@ -151,389 +162,90 @@ nav .group{color:var(--faint);flex-basis:100%;margin-top:.3rem}
 <div id="grain" aria-hidden="true"></div>
 <main class="wrap">
   <header>
-    <p class="eyebrow">Dynamic Poetry &middot; The Old Pond · two-letter drift</p>
-    <h1>The Old Pond, Crossing the Water</h1>
-    <p class="standfirst">A pond, a shore, a tree in the wind. Two letters let the scene travel further. Read again from the top.</p>
+    <p class="eyebrow">Tyler Burns &middot; 7 pieces</p>
+    <h1>Dynamic Poetry</h1>
+    <p class="standfirst">Poems that will not hold still. Each one alters itself a word or a letter at a time, so by the time you reach the bottom the top has changed, and you have to read it again.</p>
   </header>
-
-  <hr class="rule">
-
-  <div class="poem" id="poem" aria-live="off"></div>
-
-  <div class="strip" id="strip" role="slider" tabindex="0" aria-label="Version" aria-valuemin="1" aria-valuemax="41" aria-valuenow="1"></div>
-
-  <div class="meter">
-    <span>Version <b id="vnum">001</b> / 041 <span id="dir"></span></span>
-    <span class="gauge" title="Letters away from the original">Distance <i><span id="fill" style="width:0%"></span></i> <b id="away"></b></span>
-    <span id="swap" class="swap">&nbsp;</span>
-  </div>
-
-  <div class="controls">
-    <div class="grp">
-      <button id="prev" aria-label="Previous version" title="Previous version (left arrow)">&larr;</button>
-      <button id="play" title="Play / pause (space)">Play</button>
-      <button id="next" aria-label="Next version" title="Next version (right arrow)">&rarr;</button>
-    </div>
-    <div class="spacer"></div>
-    <div class="grp" role="group" aria-label="Speed">
-      <button class="speed" data-ms="6000" aria-pressed="false">Slow</button>
-      <button class="speed" data-ms="3200" aria-pressed="true">Reading</button>
-      <button class="speed" data-ms="1200" aria-pressed="false">Quick</button>
-    </div>
-    <div class="spacer"></div>
-    <button id="ends">To end</button>
-    <button id="highlight" aria-pressed="true">Mark change</button>
-    <button id="all" aria-expanded="false" aria-controls="archive">All 41</button>
-  </div>
-
-  <p class="note">One or two letters are replaced in one word at each step, and every result is an English word. The route passes through three scenes, with stranger passages between them. Playback travels out to the far end, then retraces its steps home.</p>
-
-  <section class="archive" id="archive" hidden>
-    <p class="arch-head">Every version, in order &middot; choose one to read it above</p>
-    <div class="grid" id="grid"></div>
-  </section>
-
-  <footer>
-    <nav><a href="index.html">← Tyler Burns’s website</a></nav>
-    <p>Original haiku by Matsuo Bashō (1686). Starting English text: Harry Behn’s translation, with punctuation and capitalization adapted. Later versions are variations on the translation, not poems by Bashō or translations by Behn. <a href="https://music.unt.edu/files/default/files/digital-programs/2025.03.29_isabela-urroz-arena_449.pdf">Translation attribution</a> (University of North Texas, p. 2).<br>Dynamic adaptation by Tyler Burns &middot; 41 versions</p>
-    <p>Space plays and pauses &middot; arrow keys step &middot; click or drag the strip to scrub &middot; a paused version&rsquo;s address links straight to it</p>
-  </footer>
+<h2 class="group-head">The Old Pond · Matsuo Bashō, tr. Harry Behn</h2>
+<ul class="pieces">
+<li><a class="piece" href="old-pond-one-night.html">
+  <h2>The Old Pond, One Night</h2>
+  <p>Dusk to dawn and round again. The moon comes down into the water, a crow takes the morning, and by daylight the pond is itself. Read again from the top.</p>
+  <div class="ends" aria-hidden="true"><span>An old silent pond
+A frog jumps into the pond—
+Splash! Silence again.</span><span>→</span><span>An old silent moon
+A frog leaps into the moon—
+Splash! Silence again.</span></div>
+  <div class="meta">22 versions &middot; one or two letters per step &middot; closed loop</div>
+</a></li>
+</ul>
+<h2 class="group-head">Genesis · on Bashō’s pond</h2>
+<ul class="pieces">
+<li><a class="piece" href="old-pond-creation.html">
+  <h2>The Old Pond, Creation</h2>
+  <p>The pond runs back to the formless deep and is made again in six days, each ending on the old refrain. On the seventh, a frog. Read again from the top.</p>
+  <div class="ends" aria-hidden="true"><span>An old silent pond
+A frog jumps into the pond—
+Splash! Silence again.</span><span>→</span><span>The first living soul
+A breath went into the man—
+Good! Morning again.</span></div>
+  <div class="meta">52 versions &middot; one word per step &middot; closed loop</div>
+</a></li>
+<li><a class="piece" href="old-pond-fall.html">
+  <h2>The Old Pond, the Fall</h2>
+  <p>An old Eden pond, one word from Bashō’s. A tree, a snake, a bite, and two people walking east.</p>
+  <div class="ends" aria-hidden="true"><span>An old silent pond
+A frog jumps into the pond—
+Splash! Silence again.</span><span>→</span><span>An old Eden pond
+A hand reached into the tree—
+Bite! Silence again.</span></div>
+  <div class="meta">50 versions &middot; one word per step &middot; one way</div>
+</a></li>
+<li><a class="piece" href="old-pond-cain-abel.html">
+  <h2>The Old Pond, Cain and Abel</h2>
+  <p>Two brothers, two fires, one field. The story of Cain and Abel, told without ever leaving Bashō’s haiku. Read again from the top.</p>
+  <div class="ends" aria-hidden="true"><span>An old silent pond
+A frog jumps into the pond—
+Splash! Silence again.</span><span>→</span><span>An old silent field
+Two men went into the field—
+Thud! Silence again.</span></div>
+  <div class="meta">69 versions &middot; one word per step &middot; closed loop</div>
+</a></li>
+<li><a class="piece" href="old-pond-flood.html">
+  <h2>The Old Pond, the Flood</h2>
+  <p>The pond rises until it takes the world. Then a dove, a leaf, a bow in the cloud, and the only promise in the series that answers “again.”</p>
+  <div class="ends" aria-hidden="true"><span>An old silent pond
+A frog jumps into the pond—
+Splash! Silence again.</span><span>→</span><span>The wide endless sea
+The world went into the sea—
+Splash! Silence again.</span></div>
+  <div class="meta">54 versions &middot; one word per step &middot; one way</div>
+</a></li>
+<li><a class="piece" href="old-pond-babel.html">
+  <h2>The Old Pond, Babel</h2>
+  <p>One speech, a plain, bricks, a tower whose top may reach unto heaven. Then the words scatter, and what is left is Bashō’s pond in five tongues at once.</p>
+  <div class="ends" aria-hidden="true"><span>An old silent pond
+A frog jumps into the pond—
+Splash! Silence again.</span><span>→</span><span>The high tower’s top
+The Lord came into the town—
+Down! Silence again.</span></div>
+  <div class="meta">46 versions &middot; one word per step &middot; one way</div>
+</a></li>
+</ul>
+<h2 class="group-head">The Gospels · on Bashō’s pond</h2>
+<ul class="pieces">
+<li><a class="piece" href="old-pond-passion.html">
+  <h2>The Old Pond, the Passion</h2>
+  <p>From a cold silent night to a dark silent noon. The life and death of Jesus, told without ever leaving Bashō’s haiku.</p>
+  <div class="ends" aria-hidden="true"><span>An old silent pond
+A frog jumps into the pond—
+Splash! Silence again.</span><span>→</span><span>It is finished now
+A breath went into the dark—
+Gone! Silence again.</span></div>
+  <div class="meta">132 versions &middot; one word per step &middot; one way</div>
+</a></li>
+</ul>
+<footer><p><a href="index.html">← Tyler Burns’s website</a></p></footer>
 </main>
-<script>
-const PIECE = {"lines":["{opening} {old} {silent} {pond}","{article} {frog} {jumps} {into} {the} {water}—","{splash}! {silence} {again}."],"breaks":[],"base":{"opening":"An","article":"A","the":"the","old":"old","silent":"silent","pond":"pond","frog":"frog","jumps":"jumps","into":"into","water":"pond","splash":"Splash","silence":"Silence","again":"again"},"changes":[["old","odd"],["pond","pool"],["water","pool"],["frog","crow"],["splash","Squash"],["splash","Squawk"],["jumps","limps"],["into","onto"],["water","pond"],["water","sand"],["pond","pond"],["pond","sand"],["old","old"],["silent","splint"],["silent","sprint"],["silent","spring"],["pond","pond"],["jumps","leaps"],["frog","crab"],["splash","Squash"],["splash","Squish"],["again","slain"],["water","land"],["pond","land"],["frog","crow"],["splash","Squash"],["splash","Squawk"],["jumps","leans"],["frog","crew"],["frog","tree"],["into","into"],["water","sand"],["water","wind"],["silent","string"],["silent","strong"],["pond","sand"],["pond","wind"],["old","odd"],["splash","Squall"],["again","again"]],"playback":"bounce","unit":"letter","palette":{"light":{"start":{"ground":"#E2E4DE","ink":"#1E2320","soft":"#545B55","rule":"#BEC3BA","accent":"#2B6B70","faint":"#6E746D"},"end":{"ground":"#E2E4DE","ink":"#1E2320","soft":"#545B55","rule":"#BEC3BA","accent":"#2B6B70","faint":"#6E746D"}},"dark":{"start":{"ground":"#12151A","ink":"#D7D9D2","soft":"#939B97","rule":"#2A2F36","accent":"#7BC3C6","faint":"#737B7E"},"end":{"ground":"#12151A","ink":"#D7D9D2","soft":"#939B97","rule":"#2A2F36","accent":"#7BC3C6","faint":"#737B7E"}}},"spread":0,"speeds":[6000,3200,1200],"ticks":"flat","labels":{"start":"Bashō / Behn","end":"the far end","homeward":"returning","gauge":"Distance","outward":"crossing"}};
-/* Dynamic poetry runtime. The build inlines this after `const PIECE = {...}`:
-   lines, breaks, base (the first state), changes ([slot, word] per step),
-   playback ('loop' | 'bounce' | 'once'), unit ('word' | 'letter'),
-   palette, spread, speeds, ticks, labels. */
-(() => {
-const P = PIECE;
-const $ = id => document.getElementById(id);
-const root = document.documentElement;
-const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
-if (reduced) document.body.classList.add('plain');
-
-const STATES = [P.base];
-for (const [key, word] of P.changes) STATES.push({ ...STATES[STATES.length - 1], [key]: word });
-const TOTAL = STATES.length, LAST = TOTAL - 1;
-const LOOP = P.playback === 'loop', ONCE = P.playback === 'once';
-// How far a version has travelled: words away from the original, or for
-// letter pieces, letters away. The gauge is full at the farthest version.
-const hamming = (a, b) => a.length === b.length ? [...a].filter((c, i) => c !== b[i]).length : Math.max(a.length, b.length);
-const distance = s => Object.keys(s).reduce((n, k) => n + (s[k] === P.base[k] ? 0 : P.unit === 'letter' ? hamming(s[k], P.base[k]) : 1), 0);
-const FARTHEST = Math.max(...STATES.map(distance));
-const pad = n => String(n).padStart(3, '0');
-const clamp = n => Math.max(0, Math.min(LAST, n));
-const wrap = n => (n + TOTAL) % TOTAL;
-const changedKeys = (a, b) => Object.keys(b).filter(k => a[k] !== b[k]);
-
-const SEGMENTS = P.lines.map(line =>
-  line.split(/\{(\w+)\}/g).map((piece, i) => (i % 2 ? { slot: piece } : { text: piece }))
-      .filter(seg => seg.slot || seg.text !== '')
-);
-
-/* ---------- poem: one span per mutable word ---------- */
-const spans = {};
-SEGMENTS.forEach((segs, li) => {
-  const line = document.createElement('div');
-  line.className = 'ln' + (P.breaks.includes(li) ? ' gap' : '');
-  for (const seg of segs){
-    if (seg.slot){
-      const w = document.createElement('span');
-      w.className = 'w';
-      w.textContent = P.base[seg.slot];
-      spans[seg.slot] = w;
-      line.append(w);
-    } else line.append(seg.text);
-  }
-  $('poem').append(line);
-});
-
-/* Letter pieces show which letters moved; word pieces swap the whole word. */
-function letterSpans(from, to, fresh){
-  return [...to].map((c, i) => {
-    const s = document.createElement('span');
-    s.textContent = c;
-    if (c !== from[i]) s.className = 'ch' + (fresh ? ' arriving' : '');
-    return s;
-  });
-}
-
-// A newer change to the same word cancels any swap still in flight.
-const generation = {};
-function setWord(key, from, to, animate, single){
-  const el = spans[key];
-  const gen = generation[key] = (generation[key] || 0) + 1;
-  el.classList.remove('gone', 'arriving', 'nofx');
-  const letterwise = P.unit === 'letter' && single && from.length === to.length;
-  el.classList.toggle('lw', letterwise);
-  if (letterwise){
-    el.replaceChildren(...letterSpans(from, to, animate));
-    if (animate) requestAnimationFrame(() => requestAnimationFrame(() => {
-      if (generation[key] === gen) el.querySelectorAll('.arriving').forEach(s => s.classList.remove('arriving'));
-    }));
-    return;
-  }
-  if (!animate){ el.textContent = to; return; }
-  el.classList.add('gone');
-  setTimeout(() => {
-    if (generation[key] !== gen) return;
-    el.classList.add('nofx');
-    el.textContent = to;
-    el.classList.remove('gone');
-    el.classList.add('arriving');
-    void el.offsetWidth;
-    el.classList.remove('nofx', 'arriving');
-  }, 340);
-}
-
-/* ---------- index strip ---------- */
-const strip = $('strip');
-const ticks = [];
-for (let i = 0; i < TOTAL; i++){
-  const t = document.createElement('i');
-  t.className = 'tick';
-  const f = i / LAST;
-  t.style.height = (P.ticks === 'rise' ? 5 + f * 15 : P.ticks === 'fall' ? 20 - f * 15 : 6) + 'px';
-  strip.append(t);
-  ticks.push(t);
-}
-strip.setAttribute('aria-valuemax', TOTAL);
-
-function scrub(e){
-  const r = strip.getBoundingClientRect();
-  const n = clamp(Math.floor((e.clientX - r.left) / r.width * TOTAL));
-  if (n !== cur){ dir = n > cur ? 1 : -1; go(n, Math.abs(n - cur) === 1); }
-}
-strip.addEventListener('pointerdown', e => { pause(); strip.setPointerCapture(e.pointerId); scrub(e); });
-strip.addEventListener('pointermove', e => { if (strip.hasPointerCapture(e.pointerId)) scrub(e); });
-strip.addEventListener('keydown', e => {
-  const to = { Home: 0, End: LAST, PageUp: cur - 10, PageDown: cur + 10 }[e.key];
-  if (to === undefined) return;
-  e.preventDefault(); pause(); dir = to >= cur ? 1 : -1; go(clamp(to), false);
-});
-
-/* ---------- the page drifts with the poem ---------- */
-const darkQuery = matchMedia('(prefers-color-scheme: dark)');
-const isDark = () => root.dataset.theme ? root.dataset.theme === 'dark' : darkQuery.matches;
-const rgb = c => [1, 3, 5].map(i => parseInt(c.slice(i, i + 2), 16));
-const mix = (a, b, t) => '#' + rgb(a).map((v, i) => Math.round(v + (rgb(b)[i] - v) * t).toString(16).padStart(2, '0')).join('');
-const luminance = c => rgb(c).map(v => v / 255).map(v => v <= .04045 ? v / 12.92 : ((v + .055) / 1.055) ** 2.4)
-  .reduce((sum, v, i) => sum + v * [.2126, .7152, .0722][i], 0);
-const contrast = (a, b) => { const [x, y] = [luminance(a), luminance(b)].sort((m, n) => n - m); return (x + .05) / (y + .05); };
-// When the ground crosses from light to dark, text must jump sides rather than fade through it.
-const MIN_CONTRAST = { ink: 4.5, soft: 4.5, accent: 3, faint: 3 };
-const STILL = ['light', 'dark'].every(m => JSON.stringify(P.palette[m].start) === JSON.stringify(P.palette[m].end));
-
-function drift(p){
-  root.style.setProperty('--spread', (p * P.spread).toFixed(3) + 'em');
-  if (STILL) return;
-  const pal = P.palette[isDark() ? 'dark' : 'light'];
-  const ground = mix(pal.start.ground, pal.end.ground, p);
-  root.style.setProperty('--ground', ground);
-  root.style.setProperty('--rule', mix(pal.start.rule, pal.end.rule, p));
-  for (const key in MIN_CONTRAST){
-    let c = mix(pal.start[key], pal.end[key], p);
-    if (contrast(c, ground) < MIN_CONTRAST[key])
-      c = [pal.start[key], pal.end[key]].sort((a, b) => contrast(b, ground) - contrast(a, ground))[0];
-    root.style.setProperty('--' + key, c);
-  }
-  const dim = luminance(ground) < .18;
-  root.style.colorScheme = dim ? 'dark' : 'light';
-  root.style.setProperty('--grain-blend', dim ? 'screen' : 'multiply');
-}
-darkQuery.addEventListener('change', () => drift(cur / LAST));
-
-/* ---------- painting ---------- */
-let cur = 0, dir = 1, timer = null, lit = [];
-let speed = P.speeds[1];
-
-function paint(n, animate){
-  const from = STATES[cur], to = STATES[n];
-  const moved = changedKeys(from, to);
-  const single = moved.length === 1;
-  lit.forEach(k => spans[k].classList.remove('lit'));
-  // Big jumps land at once; only small steps are worth watching.
-  for (const k of moved) setWord(k, from[k], to[k], animate && moved.length <= 3 && !reduced, single);
-  // After a jump, mark the word that arrived in this version instead.
-  let was = from;
-  if (!single){
-    was = n ? STATES[n - 1] : LOOP ? STATES[LAST] : to;
-    lit = changedKeys(was, to);
-    lit.forEach(k => setWord(k, was[k], to[k], false, true));
-  } else lit = moved;
-  lit.forEach(k => spans[k].classList.add('lit'));
-  $('swap').textContent = lit.length ? was[lit[0]] + ' → ' + to[lit[0]] : 'Original text';
-  cur = n;
-}
-
-function status(){
-  const p = cur / LAST;
-  drift(p);
-  $('vnum').textContent = pad(cur + 1);
-  const L = P.labels;
-  $('dir').textContent = '· ' + (cur === 0 ? L.start : cur === LAST && !LOOP ? L.end : dir > 0 ? L.outward + ' →' : '← ' + L.homeward);
-  const away = distance(STATES[cur]);
-  $('fill').style.width = (away / FARTHEST * 100).toFixed(1) + '%';
-  $('away').textContent = away + '/' + FARTHEST;
-  ticks.forEach((t, i) => { t.className = 'tick' + (i === cur ? ' now' : i < cur ? ' past' : ''); });
-  if (P.ticks === 'flat') ticks.forEach((t, i) => { t.style.height = (i === cur ? 20 : 6) + 'px'; });
-  strip.setAttribute('aria-valuenow', cur + 1);
-  strip.setAttribute('aria-valuetext', 'Version ' + (cur + 1) + ' of ' + TOTAL);
-  if (!LOOP){ $('prev').disabled = cur === 0; $('next').disabled = cur === LAST; }
-  $('ends').textContent = LOOP || cur >= LAST / 2 ? 'To start' : 'To end';
-  $('play').textContent = timer !== null ? 'Pause' : ONCE && cur === LAST ? 'Replay' : 'Play';
-  if (archiveBuilt) cards.forEach((c, i) => c.classList.toggle('now', i === cur));
-}
-
-// A paused version has an address, so it can be shared.
-function remember(){
-  const here = location.pathname + location.search;
-  history.replaceState(null, '', timer !== null || cur === 0 ? here : here + '#v' + (cur + 1));
-}
-
-function go(n, animate){
-  if (n !== cur) paint(n, animate);
-  status();
-  if (timer === null) remember();
-}
-
-/* ---------- playback ---------- */
-function advance(){
-  if (LOOP) return go(wrap(cur + 1), true);
-  if (ONCE){
-    go(clamp(cur + 1), true);
-    if (cur === LAST) pause();
-    return;
-  }
-  if (cur + dir > LAST || cur + dir < 0) dir = -dir;
-  go(cur + dir, true);
-}
-function play(){
-  clearInterval(timer);
-  if (ONCE && cur === LAST){ dir = 1; go(0, false); }
-  timer = setInterval(advance, speed);
-  $('play').textContent = 'Pause';
-  status();
-  remember();
-}
-function pause(){
-  if (timer === null) return;
-  clearInterval(timer);
-  timer = null;
-  status();
-  remember();
-}
-function step(d){
-  pause();
-  dir = d;
-  const n = LOOP ? wrap(cur + d) : clamp(cur + d);
-  if (n !== cur) go(n, true);
-}
-
-$('play').addEventListener('click', () => timer === null ? play() : pause());
-$('next').addEventListener('click', () => step(1));
-$('prev').addEventListener('click', () => step(-1));
-$('ends').addEventListener('click', () => {
-  pause();
-  const n = LOOP || cur >= LAST / 2 ? 0 : LAST;
-  dir = n ? 1 : -1;
-  go(n, false);
-});
-
-const speedButtons = [...document.querySelectorAll('.speed')];
-speedButtons.forEach(b => b.addEventListener('click', () => {
-  speed = +b.dataset.ms;
-  speedButtons.forEach(x => x.setAttribute('aria-pressed', String(x === b)));
-  if (timer !== null) play();
-}));
-
-$('highlight').addEventListener('click', e => {
-  const off = document.body.classList.toggle('nohl');
-  e.currentTarget.setAttribute('aria-pressed', String(!off));
-});
-
-addEventListener('keydown', e => {
-  if (e.ctrlKey || e.metaKey || e.altKey) return;
-  if (e.key === ' ' && e.target.closest('button,a')) return;
-  if (e.key === ' '){ e.preventDefault(); timer === null ? play() : pause(); }
-  else if (e.key === 'ArrowRight'){ e.preventDefault(); step(1); }
-  else if (e.key === 'ArrowLeft'){ e.preventDefault(); step(-1); }
-});
-
-/* ---------- every version, side by side ---------- */
-let archiveBuilt = false;
-const cards = [];
-$('all').addEventListener('click', e => {
-  const open = $('archive').hidden;
-  $('archive').hidden = !open;
-  e.currentTarget.setAttribute('aria-expanded', String(open));
-  if (open && !archiveBuilt) buildArchive();
-  if (open) $('archive').scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'start' });
-});
-
-function buildArchive(){
-  const frag = document.createDocumentFragment();
-  STATES.forEach((state, n) => {
-    const prev = n ? STATES[n - 1] : LOOP ? STATES[LAST] : null;
-    const card = document.createElement('button');
-    card.className = 'card';
-    card.setAttribute('aria-label', 'Show version ' + (n + 1));
-    const no = document.createElement('span');
-    no.className = 'no';
-    no.textContent = pad(n + 1);
-    const p = document.createElement('span');
-    p.className = 'p';
-    SEGMENTS.forEach((segs, li) => {
-      for (const seg of segs){
-        if (!seg.slot){ p.append(seg.text); continue; }
-        const word = state[seg.slot], was = prev && prev[seg.slot];
-        if (!was || was === word) p.append(word);
-        else if (P.unit === 'letter' && was.length === word.length)
-          [...word].forEach((c, i) => {
-            if (c === was[i]) return p.append(c);
-            const em = document.createElement('em'); em.textContent = c; p.append(em);
-          });
-        else { const em = document.createElement('em'); em.textContent = word; p.append(em); }
-      }
-      if (li < SEGMENTS.length - 1) p.append('\n');
-    });
-    card.append(no, p);
-    card.addEventListener('click', () => {
-      pause(); dir = n >= cur ? 1 : -1; go(n, false);
-      $('poem').scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'center' });
-    });
-    cards.push(card);
-    frag.append(card);
-  });
-  $('grid').append(frag);
-  archiveBuilt = true;
-  status();
-}
-
-/* ---------- paper grain: one small tile, repeated ---------- */
-(() => {
-  const c = document.createElement('canvas');
-  c.width = c.height = 160;
-  const ctx = c.getContext('2d');
-  const img = ctx.createImageData(160, 160);
-  for (let i = 0; i < img.data.length; i += 4){
-    img.data[i] = img.data[i + 1] = img.data[i + 2] = 120 + Math.random() * 135;
-    img.data[i + 3] = 255;
-  }
-  ctx.putImageData(img, 0, 0);
-  $('grain').style.background = 'url(' + c.toDataURL() + ') 0 0 / 80px 80px';
-})();
-
-/* ---------- start: at a shared version, paused; otherwise from the top ---------- */
-const shared = /^#v(\d+)$/.exec(location.hash);
-if (shared){
-  go(clamp(+shared[1] - 1), false);
-} else {
-  go(0, false);
-  $('swap').textContent = 'Original text';
-  if (!reduced) play();
-}
-})();
-</script>
 </body>
 </html>
