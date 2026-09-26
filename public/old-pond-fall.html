@@ -1,0 +1,549 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Old Pond, the Fall</title>
+<meta name="description" content="An old Eden pond, one word from Bashō’s. A tree, a snake, a bite, and two people walking east.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{--ground:#E2E4DE;--ink:#1E2320;--soft:#545B55;--rule:#BEC3BA;--accent:#2B6B70;--faint:#6E746D;--grain:.035;--grain-blend:multiply;color-scheme:light;--body-font:"Shippori Mincho","Hiragino Mincho ProN",Georgia,serif;--body-weight:400;--display-font:"Shippori Mincho","Hiragino Mincho ProN",Georgia,serif;--display-weight:500;--display-track:.01em;--measure:38rem;--leading:2.05;--poem-size:clamp(1.2rem,1rem+2.2vw,2rem);--drift-out:-.25em;--drift-in:.25em;--glow:none;--tick-align:flex-end;--spread:0em;}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--ground:#12151A;--ink:#D7D9D2;--soft:#939B97;--rule:#2A2F36;--accent:#7BC3C6;--faint:#737B7E;--grain:.05;--grain-blend:screen;color-scheme:dark;}}
+:root[data-theme="dark"]{--ground:#12151A;--ink:#D7D9D2;--soft:#939B97;--rule:#2A2F36;--accent:#7BC3C6;--faint:#737B7E;--grain:.05;--grain-blend:screen;color-scheme:dark;}
+*{box-sizing:border-box}
+html{background:var(--ground)}
+body{
+  background:var(--ground);
+  color:var(--ink);
+  font-family:var(--body-font);
+  font-weight:var(--body-weight);
+  margin:0;
+  padding-block:clamp(2.2rem,6vw,4.5rem) clamp(2.5rem,7vw,5rem);
+  padding-inline:16px;
+  -webkit-font-smoothing:antialiased;
+  transition:background-color 1.2s linear,color 1.2s linear;
+}
+#grain{position:fixed;inset:0;pointer-events:none;z-index:99;opacity:var(--grain);mix-blend-mode:var(--grain-blend)}
+
+.wrap{max-width:var(--measure);margin-inline:auto}
+
+.eyebrow{
+  font-family:"IBM Plex Mono",ui-monospace,monospace;
+  font-size:.66rem;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--faint);margin:0 0 1.1rem;
+}
+.eyebrow a{color:inherit;text-decoration:none}
+.eyebrow a:hover{color:var(--accent)}
+h1{
+  font-family:var(--display-font);
+  font-weight:var(--display-weight);
+  font-size:clamp(2rem,1.3rem+3.2vw,3.1rem);
+  letter-spacing:var(--display-track);
+  line-height:1.05;margin:0 0 .55rem;text-wrap:balance;
+}
+.standfirst{font-size:.98rem;line-height:1.6;color:var(--soft);margin:0;max-width:32rem;font-style:italic}
+.rule{height:1px;background:var(--rule);border:0;margin:clamp(2rem,5vw,3rem) 0;transition:background-color 1.2s linear}
+
+/* ---- poem ---- */
+.poem{
+  font-size:var(--poem-size);
+  line-height:var(--leading);
+  word-spacing:var(--spread);
+  transition:word-spacing 1.2s linear;
+}
+.ln{padding-left:1.3em;text-indent:-1.3em}
+.ln.gap{margin-top:.75em}
+.w{
+  display:inline-block;text-indent:0;
+  transition:opacity .34s ease,filter .34s ease,transform .34s ease,color .9s ease;
+}
+.w.gone{opacity:0;filter:blur(5px);transform:translateY(var(--drift-out))}
+.w.arriving{opacity:0;filter:blur(5px);transform:translateY(var(--drift-in))}
+.w.nofx{transition:none}
+.w .ch{transition:opacity .5s ease,filter .5s ease,color .9s ease}
+.w .ch.arriving{opacity:0;filter:blur(4px)}
+.w.lit{color:var(--accent);text-shadow:var(--glow)}
+.w.lit.lw{color:inherit;text-shadow:none}
+.w.lit.lw .ch{color:var(--accent);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:.2em}
+body.plain .w,body.plain .w .ch{transition:none;filter:none!important;transform:none!important;opacity:1!important}
+body.nohl .w.lit,body.nohl .w.lit .ch{color:inherit;text-shadow:none;text-decoration:none}
+
+/* ---- index strip: a slider you can click, drag, or arrow through ---- */
+.strip{
+  display:flex;gap:2px;align-items:var(--tick-align);height:24px;
+  margin:clamp(2rem,5vw,2.8rem) 0 .85rem;cursor:crosshair;touch-action:pan-y;
+  border-radius:1px;
+}
+.strip:focus-visible{outline:2px solid var(--accent);outline-offset:4px}
+@media (max-width:520px){.strip{gap:1px}}
+.tick{flex:1 1 0;min-width:0;background:var(--rule);transition:background-color .3s ease,height .25s ease}
+.tick.past{background:var(--accent);opacity:.45}
+.tick.now{background:var(--accent);opacity:1}
+
+.meter{
+  display:flex;justify-content:space-between;align-items:baseline;gap:.4rem 1rem;flex-wrap:wrap;
+  font-family:"IBM Plex Mono",ui-monospace,monospace;
+  font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);
+  font-variant-numeric:tabular-nums;
+}
+.meter b{color:var(--soft);font-weight:500}
+.meter .swap{color:var(--accent);min-height:1.5em;text-transform:none;letter-spacing:.04em;font-size:.78rem}
+.gauge{display:inline-flex;align-items:center;gap:.5rem}
+.gauge i{display:inline-block;width:4.5rem;height:3px;background:var(--rule);position:relative;font-style:normal}
+.gauge i span{position:absolute;inset:0 auto 0 0;background:var(--accent);transition:width .3s ease}
+
+.controls{display:flex;flex-wrap:wrap;gap:.5rem .4rem;align-items:center;margin-top:1.6rem}
+button{
+  font-family:"IBM Plex Mono",ui-monospace,monospace;
+  font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--soft);background:transparent;border:1px solid var(--rule);border-radius:1px;
+  padding:.5rem .7rem;cursor:pointer;transition:color .2s,border-color .2s;
+}
+button:hover{color:var(--ink);border-color:var(--soft)}
+button[aria-pressed="true"]{color:var(--accent);border-color:var(--accent)}
+button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+button:disabled{opacity:.4;cursor:default}
+.spacer{flex:1 1 0;min-width:0}
+.grp{display:flex}
+.grp button+button{margin-left:-1px}
+.note{font-size:.88rem;line-height:1.65;color:var(--soft);margin:1.8rem 0 0;max-width:34rem}
+
+/* ---- archive ---- */
+.archive{margin-top:clamp(2.5rem,6vw,4rem)}
+.archive[hidden]{display:none!important}
+.arch-head{
+  font-family:"IBM Plex Mono",ui-monospace,monospace;
+  font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);
+  padding-bottom:.7rem;border-bottom:1px solid var(--rule);margin:0 0 1.6rem;
+}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(15rem,100%),1fr));gap:1.4rem 1.2rem}
+.card{
+  font:inherit;font-size:.72rem;line-height:1.62;text-transform:none;letter-spacing:normal;
+  text-align:left;color:inherit;border:1px solid transparent;padding:.6rem;margin:-.6rem;
+}
+.card:hover{border-color:var(--rule)}
+.card.now{border-color:var(--accent)}
+.card .no{
+  font-family:"IBM Plex Mono",ui-monospace,monospace;
+  font-size:.62rem;letter-spacing:.12em;color:var(--faint);
+  display:block;margin-bottom:.5rem;font-variant-numeric:tabular-nums;
+}
+.card em{font-style:normal;color:var(--accent)}
+.card span.p{display:block;white-space:pre-line;color:var(--soft)}
+
+footer{
+  margin-top:clamp(2.5rem,6vw,4rem);padding-top:1.2rem;border-top:1px solid var(--rule);
+  font-family:"IBM Plex Mono",ui-monospace,monospace;
+  font-size:.66rem;line-height:1.9;letter-spacing:.06em;color:var(--faint);
+}
+footer p{margin:0 0 .6rem}
+footer a{color:var(--soft);text-decoration:none;border-bottom:1px solid var(--rule)}
+footer a:hover{color:var(--accent);border-color:var(--accent)}
+footer a[aria-current]{color:var(--accent);border-color:transparent}
+nav{margin-bottom:.9rem;display:flex;flex-wrap:wrap;gap:.35rem 1rem}
+nav .group{color:var(--faint);flex-basis:100%;margin-top:.3rem}
+@media (prefers-reduced-motion:reduce){.w,.w .ch,.tick,body,.poem,.rule{transition:none}}
+</style>
+</head>
+<body>
+<div id="grain" aria-hidden="true"></div>
+<main class="wrap">
+  <header>
+    <p class="eyebrow"><a href="old-pond-two-letters.html">Dynamic Poetry</a> &middot; Genesis · the third chapter</p>
+    <h1>The Old Pond, the Fall</h1>
+    <p class="standfirst">An old Eden pond, one word from Bashō’s. A tree, a snake, a bite, and two people walking east.</p>
+  </header>
+
+  <hr class="rule">
+
+  <div class="poem" id="poem" aria-live="off"></div>
+
+  <div class="strip" id="strip" role="slider" tabindex="0" aria-label="Version" aria-valuemin="1" aria-valuemax="50" aria-valuenow="1"></div>
+
+  <div class="meter">
+    <span>Version <b id="vnum">001</b> / 050 <span id="dir"></span></span>
+    <span class="gauge" title="Words away from the original">Changed <i><span id="fill" style="width:0%"></span></i> <b id="away"></b></span>
+    <span id="swap" class="swap">&nbsp;</span>
+  </div>
+
+  <div class="controls">
+    <div class="grp">
+      <button id="prev" aria-label="Previous version" title="Previous version (left arrow)">&larr;</button>
+      <button id="play" title="Play / pause (space)">Play</button>
+      <button id="next" aria-label="Next version" title="Next version (right arrow)">&rarr;</button>
+    </div>
+    <div class="spacer"></div>
+    <div class="grp" role="group" aria-label="Speed">
+      <button class="speed" data-ms="5000" aria-pressed="false">Slow</button>
+      <button class="speed" data-ms="2600" aria-pressed="true">Reading</button>
+      <button class="speed" data-ms="1100" aria-pressed="false">Quick</button>
+    </div>
+    <div class="spacer"></div>
+    <button id="ends">To end</button>
+    <button id="highlight" aria-pressed="true">Mark change</button>
+    <button id="all" aria-expanded="false" aria-controls="archive">All 50</button>
+  </div>
+
+  <p class="note">One whole word changes at each step. Every version keeps the 5–7–5 of the original and reads as a sentence. Playback rests at the gate. </p>
+
+  <section class="archive" id="archive" hidden>
+    <p class="arch-head">Every version, in order &middot; choose one to read it above</p>
+    <div class="grid" id="grid"></div>
+  </section>
+
+  <footer>
+    <nav aria-label="All pieces"><span class="group">The Old Pond · Matsuo Bashō, tr. Harry Behn</span><a href="old-pond-one-night.html">One Night</a><span class="group">Genesis · on Bashō’s pond</span><a href="old-pond-creation.html">Creation</a><a href="old-pond-fall.html" aria-current="page">The Fall</a><a href="old-pond-cain-abel.html">Cain and Abel</a><a href="old-pond-flood.html">The Flood</a><a href="old-pond-babel.html">Babel</a><span class="group">The Gospels · on Bashō’s pond</span><a href="old-pond-passion.html">The Passion</a></nav>
+    <p>Original haiku by Matsuo Bashō (1686). Starting English text: Harry Behn’s translation, with punctuation and capitalization adapted. Later versions are variations on the translation, not poems by Bashō or translations by Behn. <a href="https://music.unt.edu/files/default/files/digital-programs/2025.03.29_isabela-urroz-arena_449.pdf">Translation attribution</a> (University of North Texas, p. 2).<br>Dynamic adaptation by Tyler Burns &middot; 50 versions</p>
+    <p><a href="old-pond-two-letters.html">All pieces</a> &middot; <a href="index.html">Tyler Burns’s website</a></p>
+    <p>Space plays and pauses &middot; arrow keys step &middot; click or drag the strip to scrub &middot; a paused version&rsquo;s address links straight to it</p>
+  </footer>
+</main>
+<script>
+const PIECE = {"lines":["{opening} {old} {silent} {pond}","{article} {frog} {jumps} {into} {the} {water}—","{splash}! {silence} {again}."],"breaks":[],"base":{"opening":"An","article":"A","the":"the","old":"old","silent":"silent","pond":"pond","frog":"frog","jumps":"jumps","into":"into","water":"pond","splash":"Splash","silence":"Silence","again":"again"},"changes":[["silent","Eden"],["water","tree"],["into","upon"],["jumps","hung"],["frog","fruit"],["splash","No"],["frog","snake"],["jumps","slid"],["into","around"],["splash","Hiss"],["frog","hand"],["jumps","reached"],["into","into"],["splash","Bite"],["splash","Bare"],["pond","breeze"],["silent","evening"],["opening","The"],["old","cool"],["water","trees"],["into","among"],["jumps","hid"],["article","The"],["frog","pair"],["splash","Steps"],["pond","ground"],["silent","thorny"],["old","cursed"],["frog","snake"],["jumps","crawled"],["water","grass"],["into","upon"],["water","ground"],["splash","Dust"],["silence","Eating"],["frog","man"],["jumps","toiled"],["splash","Sweat"],["silence","Silence"],["frog","pair"],["jumps","walked"],["into","across"],["water","land"],["into","into"],["water","east"],["old","bright"],["silent","flaming"],["pond","sword"],["splash","Shut"]],"playback":"once","unit":"word","palette":{"light":{"start":{"ground":"#E2E4DE","ink":"#1E2320","soft":"#545B55","rule":"#BEC3BA","accent":"#2B6B70","faint":"#6E746D"},"via":{"ground":"#E2D6BF","ink":"#2A2119","soft":"#5C4E3E","rule":"#CBBB9E","accent":"#8E3F1E","faint":"#7A6A58"},"end":{"ground":"#1C1110","ink":"#E9DAD2","soft":"#B8A49C","rule":"#3A2522","accent":"#E57A4E","faint":"#937C74"}},"dark":{"start":{"ground":"#12151A","ink":"#D7D9D2","soft":"#939B97","rule":"#2A2F36","accent":"#7BC3C6","faint":"#737B7E"},"via":{"ground":"#221B13","ink":"#EBDFCC","soft":"#BAA88E","rule":"#3E3223","accent":"#DD9A5E","faint":"#8D7C68"},"end":{"ground":"#100807","ink":"#E2D4CC","soft":"#AD9A92","rule":"#2A1B18","accent":"#E57A4E","faint":"#86716A"}}},"spread":0,"speeds":[5000,2600,1100],"ticks":"flat","shades":[0,0,0.02,0.04,0.06,0.08,0.1,0.125,0.15,0.175,0.2,0.225,0.25,0.275,0.3,0.318,0.336,0.355,0.373,0.391,0.409,0.427,0.445,0.464,0.482,0.5,0.52,0.54,0.56,0.58,0.6,0.62,0.64,0.66,0.68,0.7,0.717,0.733,0.75,0.773,0.795,0.818,0.841,0.864,0.886,0.909,0.932,0.955,0.977,1],"labels":{"start":"Bashō / Behn","end":"east of Eden","homeward":"returning","gauge":"Changed","outward":"the garden"}};
+/* Dynamic poetry runtime. The build inlines this after `const PIECE = {...}`:
+   lines, breaks, base (the first state), changes ([slot, word] per step),
+   playback ('loop' | 'bounce' | 'once'), unit ('word' | 'letter'),
+   palette, spread, speeds, ticks, labels. */
+(() => {
+const P = PIECE;
+const $ = id => document.getElementById(id);
+const root = document.documentElement;
+const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+if (reduced) document.body.classList.add('plain');
+
+const STATES = [P.base];
+for (const [key, word] of P.changes) STATES.push({ ...STATES[STATES.length - 1], [key]: word });
+const TOTAL = STATES.length, LAST = TOTAL - 1;
+const LOOP = P.playback === 'loop', ONCE = P.playback === 'once';
+// How far a version has travelled: words away from the original, or for
+// letter pieces, letters away. The gauge is full at the farthest version.
+const hamming = (a, b) => a.length === b.length ? [...a].filter((c, i) => c !== b[i]).length : Math.max(a.length, b.length);
+const distance = s => Object.keys(s).reduce((n, k) => n + (s[k] === P.base[k] ? 0 : P.unit === 'letter' ? hamming(s[k], P.base[k]) : 1), 0);
+const FARTHEST = Math.max(...STATES.map(distance));
+const pad = n => String(n).padStart(3, '0');
+const clamp = n => Math.max(0, Math.min(LAST, n));
+const wrap = n => (n + TOTAL) % TOTAL;
+const changedKeys = (a, b) => Object.keys(b).filter(k => a[k] !== b[k]);
+
+const SEGMENTS = P.lines.map(line =>
+  line.split(/\{(\w+)\}/g).map((piece, i) => (i % 2 ? { slot: piece } : { text: piece }))
+      .filter(seg => seg.slot || seg.text !== '')
+);
+
+/* ---------- poem: one span per mutable word ---------- */
+const spans = {};
+SEGMENTS.forEach((segs, li) => {
+  const line = document.createElement('div');
+  line.className = 'ln' + (P.breaks.includes(li) ? ' gap' : '');
+  for (const seg of segs){
+    if (seg.slot){
+      const w = document.createElement('span');
+      w.className = 'w';
+      w.textContent = P.base[seg.slot];
+      spans[seg.slot] = w;
+      line.append(w);
+    } else line.append(seg.text);
+  }
+  $('poem').append(line);
+});
+
+/* Letter pieces show which letters moved; word pieces swap the whole word. */
+function letterSpans(from, to, fresh){
+  return [...to].map((c, i) => {
+    const s = document.createElement('span');
+    s.textContent = c;
+    if (c !== from[i]) s.className = 'ch' + (fresh ? ' arriving' : '');
+    return s;
+  });
+}
+
+// A newer change to the same word cancels any swap still in flight.
+const generation = {};
+function setWord(key, from, to, animate, single){
+  const el = spans[key];
+  const gen = generation[key] = (generation[key] || 0) + 1;
+  el.classList.remove('gone', 'arriving', 'nofx');
+  const letterwise = P.unit === 'letter' && single && from.length === to.length;
+  el.classList.toggle('lw', letterwise);
+  if (letterwise){
+    el.replaceChildren(...letterSpans(from, to, animate));
+    if (animate) requestAnimationFrame(() => requestAnimationFrame(() => {
+      if (generation[key] === gen) el.querySelectorAll('.arriving').forEach(s => s.classList.remove('arriving'));
+    }));
+    return;
+  }
+  if (!animate){ el.textContent = to; return; }
+  el.classList.add('gone');
+  setTimeout(() => {
+    if (generation[key] !== gen) return;
+    el.classList.add('nofx');
+    el.textContent = to;
+    el.classList.remove('gone');
+    el.classList.add('arriving');
+    void el.offsetWidth;
+    el.classList.remove('nofx', 'arriving');
+  }, 340);
+}
+
+/* ---------- index strip ---------- */
+const strip = $('strip');
+const ticks = [];
+for (let i = 0; i < TOTAL; i++){
+  const t = document.createElement('i');
+  t.className = 'tick';
+  const f = i / LAST;
+  t.style.height = (P.ticks === 'rise' ? 5 + f * 15 : P.ticks === 'fall' ? 20 - f * 15 : 6) + 'px';
+  strip.append(t);
+  ticks.push(t);
+}
+strip.setAttribute('aria-valuemax', TOTAL);
+
+function scrub(e){
+  const r = strip.getBoundingClientRect();
+  const n = clamp(Math.floor((e.clientX - r.left) / r.width * TOTAL));
+  if (n !== cur){ dir = n > cur ? 1 : -1; go(n, Math.abs(n - cur) === 1); }
+}
+strip.addEventListener('pointerdown', e => { pause(); strip.setPointerCapture(e.pointerId); scrub(e); });
+strip.addEventListener('pointermove', e => { if (strip.hasPointerCapture(e.pointerId)) scrub(e); });
+strip.addEventListener('keydown', e => {
+  const to = { Home: 0, End: LAST, PageUp: cur - 10, PageDown: cur + 10 }[e.key];
+  if (to === undefined) return;
+  e.preventDefault(); pause(); dir = to >= cur ? 1 : -1; go(clamp(to), false);
+});
+
+/* ---------- the page drifts with the poem ---------- */
+const darkQuery = matchMedia('(prefers-color-scheme: dark)');
+const isDark = () => root.dataset.theme ? root.dataset.theme === 'dark' : darkQuery.matches;
+const rgb = c => [1, 3, 5].map(i => parseInt(c.slice(i, i + 2), 16));
+const mix = (a, b, t) => '#' + rgb(a).map((v, i) => Math.round(v + (rgb(b)[i] - v) * t).toString(16).padStart(2, '0')).join('');
+const luminance = c => rgb(c).map(v => v / 255).map(v => v <= .04045 ? v / 12.92 : ((v + .055) / 1.055) ** 2.4)
+  .reduce((sum, v, i) => sum + v * [.2126, .7152, .0722][i], 0);
+const contrast = (a, b) => { const [x, y] = [luminance(a), luminance(b)].sort((m, n) => n - m); return (x + .05) / (y + .05); };
+// When the ground crosses from light to dark, text must jump sides rather than fade through it.
+const MIN_CONTRAST = { ink: 4.5, soft: 4.5, accent: 3, faint: 3 };
+const STILL = ['light', 'dark'].every(m => !P.palette[m].via && JSON.stringify(P.palette[m].start) === JSON.stringify(P.palette[m].end));
+
+// An optional `via` palette sits halfway, so day can pass through dusk to night.
+function blend(pal, key, p){
+  if (!pal.via) return mix(pal.start[key], pal.end[key], p);
+  return p < .5 ? mix(pal.start[key], pal.via[key], p * 2) : mix(pal.via[key], pal.end[key], p * 2 - 1);
+}
+
+function drift(p){
+  root.style.setProperty('--spread', (p * P.spread).toFixed(3) + 'em');
+  if (STILL) return;
+  const pal = P.palette[isDark() ? 'dark' : 'light'];
+  const ground = blend(pal, 'ground', p);
+  root.style.setProperty('--ground', ground);
+  root.style.setProperty('--rule', blend(pal, 'rule', p));
+  for (const key in MIN_CONTRAST){
+    let c = blend(pal, key, p);
+    if (contrast(c, ground) < MIN_CONTRAST[key])
+      c = [pal.start, pal.via, pal.end].filter(Boolean).map(x => x[key])
+        .sort((a, b) => contrast(b, ground) - contrast(a, ground))[0];
+    root.style.setProperty('--' + key, c);
+  }
+  const dim = luminance(ground) < .18;
+  root.style.colorScheme = dim ? 'dark' : 'light';
+  root.style.setProperty('--grain-blend', dim ? 'screen' : 'multiply');
+}
+// A composed piece may set its own light, version by version (0 is the start
+// palette, 1 the end); otherwise the palette follows progress.
+const shade = n => P.shades ? P.shades[n] : n / LAST;
+darkQuery.addEventListener('change', () => drift(shade(cur)));
+
+/* ---------- painting ---------- */
+let cur = 0, dir = 1, timer = null, lit = [];
+let speed = P.speeds[1];
+
+function paint(n, animate){
+  const from = STATES[cur], to = STATES[n];
+  const moved = changedKeys(from, to);
+  const single = moved.length === 1;
+  lit.forEach(k => spans[k].classList.remove('lit'));
+  // Big jumps land at once; only small steps are worth watching.
+  for (const k of moved) setWord(k, from[k], to[k], animate && moved.length <= 3 && !reduced, single);
+  // After a jump, mark the word that arrived in this version instead.
+  let was = from;
+  if (!single){
+    was = n ? STATES[n - 1] : LOOP ? STATES[LAST] : to;
+    lit = changedKeys(was, to);
+    lit.forEach(k => setWord(k, was[k], to[k], false, true));
+  } else lit = moved;
+  lit.forEach(k => spans[k].classList.add('lit'));
+  $('swap').textContent = lit.length ? was[lit[0]] + ' → ' + to[lit[0]] : 'Original text';
+  cur = n;
+}
+
+function status(){
+  drift(shade(cur));
+  $('vnum').textContent = pad(cur + 1);
+  const L = P.labels;
+  $('dir').textContent = '· ' + (cur === 0 ? L.start : cur === LAST && !LOOP ? L.end : dir > 0 ? L.outward + ' →' : '← ' + L.homeward);
+  const away = distance(STATES[cur]);
+  $('fill').style.width = (away / FARTHEST * 100).toFixed(1) + '%';
+  $('away').textContent = away + '/' + FARTHEST;
+  ticks.forEach((t, i) => { t.className = 'tick' + (i === cur ? ' now' : i < cur ? ' past' : ''); });
+  if (P.ticks === 'flat') ticks.forEach((t, i) => { t.style.height = (i === cur ? 20 : 6) + 'px'; });
+  strip.setAttribute('aria-valuenow', cur + 1);
+  strip.setAttribute('aria-valuetext', 'Version ' + (cur + 1) + ' of ' + TOTAL);
+  if (!LOOP){ $('prev').disabled = cur === 0; $('next').disabled = cur === LAST; }
+  $('ends').textContent = LOOP || cur >= LAST / 2 ? 'To start' : 'To end';
+  $('play').textContent = timer !== null ? 'Pause' : ONCE && cur === LAST ? 'Replay' : 'Play';
+  if (archiveBuilt) cards.forEach((c, i) => c.classList.toggle('now', i === cur));
+}
+
+// A paused version has an address, so it can be shared.
+function remember(){
+  const here = location.pathname + location.search;
+  history.replaceState(null, '', timer !== null || cur === 0 ? here : here + '#v' + (cur + 1));
+}
+
+function go(n, animate){
+  if (n !== cur) paint(n, animate);
+  status();
+  if (timer === null) remember();
+}
+
+/* ---------- playback ---------- */
+function advance(){
+  if (LOOP) return go(wrap(cur + 1), true);
+  if (ONCE){
+    go(clamp(cur + 1), true);
+    if (cur === LAST) pause();
+    return;
+  }
+  if (cur + dir > LAST || cur + dir < 0) dir = -dir;
+  go(cur + dir, true);
+}
+function play(){
+  clearInterval(timer);
+  if (ONCE && cur === LAST){ dir = 1; go(0, false); }
+  timer = setInterval(advance, speed);
+  $('play').textContent = 'Pause';
+  status();
+  remember();
+}
+function pause(){
+  if (timer === null) return;
+  clearInterval(timer);
+  timer = null;
+  status();
+  remember();
+}
+function step(d){
+  pause();
+  dir = d;
+  const n = LOOP ? wrap(cur + d) : clamp(cur + d);
+  if (n !== cur) go(n, true);
+}
+
+$('play').addEventListener('click', () => timer === null ? play() : pause());
+$('next').addEventListener('click', () => step(1));
+$('prev').addEventListener('click', () => step(-1));
+$('ends').addEventListener('click', () => {
+  pause();
+  const n = LOOP || cur >= LAST / 2 ? 0 : LAST;
+  dir = n ? 1 : -1;
+  go(n, false);
+});
+
+const speedButtons = [...document.querySelectorAll('.speed')];
+speedButtons.forEach(b => b.addEventListener('click', () => {
+  speed = +b.dataset.ms;
+  speedButtons.forEach(x => x.setAttribute('aria-pressed', String(x === b)));
+  if (timer !== null) play();
+}));
+
+$('highlight').addEventListener('click', e => {
+  const off = document.body.classList.toggle('nohl');
+  e.currentTarget.setAttribute('aria-pressed', String(!off));
+});
+
+addEventListener('keydown', e => {
+  if (e.ctrlKey || e.metaKey || e.altKey) return;
+  if (e.key === ' ' && e.target.closest('button,a')) return;
+  if (e.key === ' '){ e.preventDefault(); timer === null ? play() : pause(); }
+  else if (e.key === 'ArrowRight'){ e.preventDefault(); step(1); }
+  else if (e.key === 'ArrowLeft'){ e.preventDefault(); step(-1); }
+});
+
+/* ---------- every version, side by side ---------- */
+let archiveBuilt = false;
+const cards = [];
+$('all').addEventListener('click', e => {
+  const open = $('archive').hidden;
+  $('archive').hidden = !open;
+  e.currentTarget.setAttribute('aria-expanded', String(open));
+  if (open && !archiveBuilt) buildArchive();
+  if (open) $('archive').scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'start' });
+});
+
+function buildArchive(){
+  const frag = document.createDocumentFragment();
+  STATES.forEach((state, n) => {
+    const prev = n ? STATES[n - 1] : LOOP ? STATES[LAST] : null;
+    const card = document.createElement('button');
+    card.className = 'card';
+    card.setAttribute('aria-label', 'Show version ' + (n + 1));
+    const no = document.createElement('span');
+    no.className = 'no';
+    no.textContent = pad(n + 1);
+    const p = document.createElement('span');
+    p.className = 'p';
+    SEGMENTS.forEach((segs, li) => {
+      for (const seg of segs){
+        if (!seg.slot){ p.append(seg.text); continue; }
+        const word = state[seg.slot], was = prev && prev[seg.slot];
+        if (!was || was === word) p.append(word);
+        else if (P.unit === 'letter' && was.length === word.length)
+          [...word].forEach((c, i) => {
+            if (c === was[i]) return p.append(c);
+            const em = document.createElement('em'); em.textContent = c; p.append(em);
+          });
+        else { const em = document.createElement('em'); em.textContent = word; p.append(em); }
+      }
+      if (li < SEGMENTS.length - 1) p.append('\n');
+    });
+    card.append(no, p);
+    card.addEventListener('click', () => {
+      pause(); dir = n >= cur ? 1 : -1; go(n, false);
+      $('poem').scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'center' });
+    });
+    cards.push(card);
+    frag.append(card);
+  });
+  $('grid').append(frag);
+  archiveBuilt = true;
+  status();
+}
+
+/* ---------- paper grain: one small tile, repeated ---------- */
+(() => {
+  const c = document.createElement('canvas');
+  c.width = c.height = 160;
+  const ctx = c.getContext('2d');
+  const img = ctx.createImageData(160, 160);
+  for (let i = 0; i < img.data.length; i += 4){
+    img.data[i] = img.data[i + 1] = img.data[i + 2] = 120 + Math.random() * 135;
+    img.data[i + 3] = 255;
+  }
+  ctx.putImageData(img, 0, 0);
+  $('grain').style.background = 'url(' + c.toDataURL() + ') 0 0 / 80px 80px';
+})();
+
+/* ---------- start: at a shared version, paused; otherwise from the top ---------- */
+const shared = /^#v(\d+)$/.exec(location.hash);
+if (shared){
+  go(clamp(+shared[1] - 1), false);
+} else {
+  go(0, false);
+  $('swap').textContent = 'Original text';
+  if (!reduced) play();
+}
+})();
+</script>
+</body>
+</html>
