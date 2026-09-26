@@ -1,338 +1,539 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>The Old Pond, Crossing the Water</title>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Old Pond, Crossing the Water</title>
+<meta name="description" content="A pond, a shore, a tree in the wind. Two letters let the scene travel further. Read again from the top.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <style>
-:root{
-  --ground:#E2E4DE;
-  --ground-2:#D6D9D2;
-  --ink:#1E2320;
-  --ink-soft:#5E655F;
-  --ink-faint:#8B918A;
-  --rule:#BEC3BA;
-  --patina:#2B6B70;
-  --patina-dim:rgba(43,107,112,.22);
-  --grain:.035;
-}
-:root:not([data-theme="light"]){
-  color-scheme:light;
-}
-@media (prefers-color-scheme:dark){
-  :root:not([data-theme="light"]){
-    --ground:#12151A;
-    --ground-2:#191D23;
-    --ink:#D7D9D2;
-    --ink-soft:#8B938F;
-    --ink-faint:#5E6669;
-    --rule:#2A2F36;
-    --patina:#7BC3C6;
-    --patina-dim:rgba(123,195,198,.24);
-    --grain:.05;
-    color-scheme:dark;
-  }
-}
-:root[data-theme="dark"]{
-  --ground:#12151A;
-  --ground-2:#191D23;
-  --ink:#D7D9D2;
-  --ink-soft:#8B938F;
-  --ink-faint:#5E6669;
-  --rule:#2A2F36;
-  --patina:#7BC3C6;
-  --patina-dim:rgba(123,195,198,.24);
-  --grain:.05;
-  color-scheme:dark;
-}
-
+:root{--ground:#E2E4DE;--ink:#1E2320;--soft:#545B55;--rule:#BEC3BA;--accent:#2B6B70;--faint:#6E746D;--grain:.035;--grain-blend:multiply;color-scheme:light;--body-font:"Shippori Mincho","Hiragino Mincho ProN",Georgia,serif;--body-weight:400;--display-font:"Shippori Mincho","Hiragino Mincho ProN",Georgia,serif;--display-weight:500;--display-track:.01em;--measure:38rem;--leading:2.05;--poem-size:clamp(1.2rem,1rem+2.2vw,2rem);--drift-out:-.25em;--drift-in:.25em;--glow:none;--tick-align:flex-end;--spread:0em;}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--ground:#12151A;--ink:#D7D9D2;--soft:#939B97;--rule:#2A2F36;--accent:#7BC3C6;--faint:#737B7E;--grain:.05;--grain-blend:screen;color-scheme:dark;}}
+:root[data-theme="dark"]{--ground:#12151A;--ink:#D7D9D2;--soft:#939B97;--rule:#2A2F36;--accent:#7BC3C6;--faint:#737B7E;--grain:.05;--grain-blend:screen;color-scheme:dark;}
 *{box-sizing:border-box}
+html{background:var(--ground)}
 body{
   background:var(--ground);
   color:var(--ink);
-  font-family:"Cardo",Georgia,"Times New Roman",serif;
+  font-family:var(--body-font);
+  font-weight:var(--body-weight);
   margin:0;
   padding-block:clamp(2.2rem,6vw,4.5rem) clamp(2.5rem,7vw,5rem);
-  padding-inline:20px;
+  padding-inline:16px;
   -webkit-font-smoothing:antialiased;
+  transition:background-color 1.2s linear,color 1.2s linear;
 }
-#grain{
-  position:fixed;inset:0;pointer-events:none;z-index:99;
-  opacity:var(--grain);mix-blend-mode:multiply;
-}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) #grain{mix-blend-mode:screen}}
-:root[data-theme="dark"] #grain{mix-blend-mode:screen}
+#grain{position:fixed;inset:0;pointer-events:none;z-index:99;opacity:var(--grain);mix-blend-mode:var(--grain-blend)}
 
-.wrap{max-width:40rem;margin-inline:auto}
+.wrap{max-width:var(--measure);margin-inline:auto}
 
-/* ---- masthead ---- */
 .eyebrow{
   font-family:"IBM Plex Mono",ui-monospace,monospace;
   font-size:.66rem;letter-spacing:.18em;text-transform:uppercase;
-  color:var(--ink-faint);margin:0 0 1.1rem;
+  color:var(--faint);margin:0 0 1.1rem;
 }
+.eyebrow a{color:inherit;text-decoration:none}
+.eyebrow a:hover{color:var(--accent)}
 h1{
-  font-family:"Marcellus",Palatino,Georgia,serif;
-  font-weight:400;
+  font-family:var(--display-font);
+  font-weight:var(--display-weight);
   font-size:clamp(2rem,1.3rem+3.2vw,3.1rem);
-  letter-spacing:.02em;
-  line-height:1.05;
-  margin:0 0 .55rem;
-  text-wrap:balance;
+  letter-spacing:var(--display-track);
+  line-height:1.05;margin:0 0 .55rem;text-wrap:balance;
 }
-.standfirst{
-  font-size:.98rem;line-height:1.6;color:var(--ink-soft);
-  margin:0;max-width:32rem;font-style:italic;
-}
-.rule{height:1px;background:var(--rule);border:0;margin:clamp(2rem,5vw,3rem) 0}
+.standfirst{font-size:.98rem;line-height:1.6;color:var(--soft);margin:0;max-width:32rem;font-style:italic}
+.rule{height:1px;background:var(--rule);border:0;margin:clamp(2rem,5vw,3rem) 0;transition:background-color 1.2s linear}
 
 /* ---- poem ---- */
 .poem{
-  font-size:clamp(1.12rem,1rem+.75vw,1.5rem);
-  line-height:1.95;
-  letter-spacing:.004em;
+  font-size:var(--poem-size);
+  line-height:var(--leading);
+  word-spacing:var(--spread);
+  transition:word-spacing 1.2s linear;
 }
 .ln{padding-left:1.3em;text-indent:-1.3em}
 .ln.gap{margin-top:.75em}
 .w{
-  display:inline-block;
-  text-indent:0;
+  display:inline-block;text-indent:0;
   transition:opacity .34s ease,filter .34s ease,transform .34s ease,color .9s ease;
 }
-.w.gone{opacity:0;filter:blur(5px);transform:translateY(-.3em)}
-.w.arriving{opacity:0;filter:blur(5px);transform:translateY(.3em)}
+.w.gone{opacity:0;filter:blur(5px);transform:translateY(var(--drift-out))}
+.w.arriving{opacity:0;filter:blur(5px);transform:translateY(var(--drift-in))}
 .w.nofx{transition:none}
-.w.lit{color:var(--patina)}
-body.plain .w{transition:none;filter:none!important;transform:none!important}
-body.nohl .w.lit{color:inherit}
+.w .ch{transition:opacity .5s ease,filter .5s ease,color .9s ease}
+.w .ch.arriving{opacity:0;filter:blur(4px)}
+.w.lit{color:var(--accent);text-shadow:var(--glow)}
+.w.lit.lw{color:inherit;text-shadow:none}
+.w.lit.lw .ch{color:var(--accent);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:.2em}
+body.plain .w,body.plain .w .ch{transition:none;filter:none!important;transform:none!important;opacity:1!important}
+body.nohl .w.lit,body.nohl .w.lit .ch{color:inherit;text-shadow:none;text-decoration:none}
 
-/* ---- index strip ---- */
+/* ---- index strip: a slider you can click, drag, or arrow through ---- */
 .strip{
-  display:flex;gap:2px;align-items:flex-end;height:22px;margin:clamp(2rem,5vw,2.8rem) 0 .85rem;
-  cursor:crosshair;
+  display:flex;gap:2px;align-items:var(--tick-align);height:24px;
+  margin:clamp(2rem,5vw,2.8rem) 0 .85rem;cursor:crosshair;touch-action:pan-y;
+  border-radius:1px;
 }
-.tick{flex:1 1 0;min-width:0;height:6px;background:var(--rule);border:0;padding:0;transition:height .25s ease,background .25s ease}
-.tick.past{background:var(--patina-dim)}
-.tick.now{height:20px;background:var(--patina)}
+.strip:focus-visible{outline:2px solid var(--accent);outline-offset:4px}
+@media (max-width:520px){.strip{gap:1px}}
+.tick{flex:1 1 0;min-width:0;background:var(--rule);transition:background-color .3s ease,height .25s ease}
+.tick.past{background:var(--accent);opacity:.45}
+.tick.now{background:var(--accent);opacity:1}
 
 .meter{
-  display:flex;justify-content:space-between;align-items:baseline;gap:1rem;
+  display:flex;justify-content:space-between;align-items:baseline;gap:.4rem 1rem;flex-wrap:wrap;
   font-family:"IBM Plex Mono",ui-monospace,monospace;
-  font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-faint);
+  font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);
   font-variant-numeric:tabular-nums;
 }
-.meter b{color:var(--ink-soft);font-weight:500}
-.meter .swap{color:var(--patina)}
+.meter b{color:var(--soft);font-weight:500}
+.meter .swap{color:var(--accent);min-height:1.5em;text-transform:none;letter-spacing:.04em;font-size:.78rem}
+.gauge{display:inline-flex;align-items:center;gap:.5rem}
+.gauge i{display:inline-block;width:4.5rem;height:3px;background:var(--rule);position:relative;font-style:normal}
+.gauge i span{position:absolute;inset:0 auto 0 0;background:var(--accent);transition:width .3s ease}
 
-/* ---- controls ---- */
-.controls{
-  display:flex;flex-wrap:wrap;gap:.5rem .4rem;align-items:center;
-  margin-top:1.6rem;
-}
+.controls{display:flex;flex-wrap:wrap;gap:.5rem .4rem;align-items:center;margin-top:1.6rem}
 button{
   font-family:"IBM Plex Mono",ui-monospace,monospace;
   font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;
-  color:var(--ink-soft);background:transparent;
-  border:1px solid var(--rule);border-radius:1px;
-  padding:.5rem .7rem;cursor:pointer;
-  transition:color .2s,border-color .2s,background .2s;
+  color:var(--soft);background:transparent;border:1px solid var(--rule);border-radius:1px;
+  padding:.5rem .7rem;cursor:pointer;transition:color .2s,border-color .2s;
 }
-button:hover{color:var(--ink);border-color:var(--ink-faint)}
-button[aria-pressed="true"],button.on{color:var(--patina);border-color:var(--patina)}
-button:focus-visible{outline:2px solid var(--patina);outline-offset:2px}
-.spacer{flex:1 1 1.5rem;min-width:0}
+button:hover{color:var(--ink);border-color:var(--soft)}
+button[aria-pressed="true"]{color:var(--accent);border-color:var(--accent)}
+button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+button:disabled{opacity:.4;cursor:default}
+.spacer{flex:1 1 0;min-width:0}
 .grp{display:flex}
 .grp button+button{margin-left:-1px}
+.note{font-size:.88rem;line-height:1.65;color:var(--soft);margin:1.8rem 0 0;max-width:34rem}
 
 /* ---- archive ---- */
 .archive{margin-top:clamp(2.5rem,6vw,4rem)}
 .archive[hidden]{display:none!important}
 .arch-head{
   font-family:"IBM Plex Mono",ui-monospace,monospace;
-  font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-faint);
-  padding-bottom:.7rem;border-bottom:1px solid var(--rule);margin-bottom:1.6rem;
+  font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);
+  padding-bottom:.7rem;border-bottom:1px solid var(--rule);margin:0 0 1.6rem;
 }
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(15rem,1fr));gap:2rem 1.75rem}
-.card{font-size:.72rem;line-height:1.62}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(15rem,100%),1fr));gap:1.4rem 1.2rem}
+.card{
+  font:inherit;font-size:.72rem;line-height:1.62;text-transform:none;letter-spacing:normal;
+  text-align:left;color:inherit;border:1px solid transparent;padding:.6rem;margin:-.6rem;
+}
+.card:hover{border-color:var(--rule)}
+.card.now{border-color:var(--accent)}
 .card .no{
   font-family:"IBM Plex Mono",ui-monospace,monospace;
-  font-size:.62rem;letter-spacing:.12em;color:var(--ink-faint);
+  font-size:.62rem;letter-spacing:.12em;color:var(--faint);
   display:block;margin-bottom:.5rem;font-variant-numeric:tabular-nums;
 }
-.card em{font-style:normal;color:var(--patina)}
-.card p{margin:0;white-space:pre-line;color:var(--ink-soft)}
+.card em{font-style:normal;color:var(--accent)}
+.card span.p{display:block;white-space:pre-line;color:var(--soft)}
 
 footer{
   margin-top:clamp(2.5rem,6vw,4rem);padding-top:1.2rem;border-top:1px solid var(--rule);
   font-family:"IBM Plex Mono",ui-monospace,monospace;
-  font-size:.66rem;line-height:1.9;letter-spacing:.06em;color:var(--ink-faint);
+  font-size:.66rem;line-height:1.9;letter-spacing:.06em;color:var(--faint);
 }
-@media (prefers-reduced-motion:reduce){
-  .w,.tick{transition:none}
+footer p{margin:0 0 .6rem}
+footer a{color:var(--soft);text-decoration:none;border-bottom:1px solid var(--rule)}
+footer a:hover{color:var(--accent);border-color:var(--accent)}
+footer a[aria-current]{color:var(--accent);border-color:transparent}
+nav{margin-bottom:.9rem;display:flex;flex-wrap:wrap;gap:.35rem 1rem}
+nav .group{color:var(--faint);flex-basis:100%;margin-top:.3rem}
+@media (prefers-reduced-motion:reduce){.w,.w .ch,.tick,body,.poem,.rule{transition:none}}
+</style>
+</head>
+<body>
+<div id="grain" aria-hidden="true"></div>
+<main class="wrap">
+  <header>
+    <p class="eyebrow">Dynamic Poetry &middot; The Old Pond · two-letter drift</p>
+    <h1>The Old Pond, Crossing the Water</h1>
+    <p class="standfirst">A pond, a shore, a tree in the wind. Two letters let the scene travel further. Read again from the top.</p>
+  </header>
+
+  <hr class="rule">
+
+  <div class="poem" id="poem" aria-live="off"></div>
+
+  <div class="strip" id="strip" role="slider" tabindex="0" aria-label="Version" aria-valuemin="1" aria-valuemax="41" aria-valuenow="1"></div>
+
+  <div class="meter">
+    <span>Version <b id="vnum">001</b> / 041 <span id="dir"></span></span>
+    <span class="gauge" title="Letters away from the original">Distance <i><span id="fill" style="width:0%"></span></i> <b id="away"></b></span>
+    <span id="swap" class="swap">&nbsp;</span>
+  </div>
+
+  <div class="controls">
+    <div class="grp">
+      <button id="prev" aria-label="Previous version" title="Previous version (left arrow)">&larr;</button>
+      <button id="play" title="Play / pause (space)">Play</button>
+      <button id="next" aria-label="Next version" title="Next version (right arrow)">&rarr;</button>
+    </div>
+    <div class="spacer"></div>
+    <div class="grp" role="group" aria-label="Speed">
+      <button class="speed" data-ms="6000" aria-pressed="false">Slow</button>
+      <button class="speed" data-ms="3200" aria-pressed="true">Reading</button>
+      <button class="speed" data-ms="1200" aria-pressed="false">Quick</button>
+    </div>
+    <div class="spacer"></div>
+    <button id="ends">To end</button>
+    <button id="highlight" aria-pressed="true">Mark change</button>
+    <button id="all" aria-expanded="false" aria-controls="archive">All 41</button>
+  </div>
+
+  <p class="note">One or two letters are replaced in one word at each step, and every result is an English word. The route passes through three scenes, with stranger passages between them. Playback travels out to the far end, then retraces its steps home.</p>
+
+  <section class="archive" id="archive" hidden>
+    <p class="arch-head">Every version, in order &middot; choose one to read it above</p>
+    <div class="grid" id="grid"></div>
+  </section>
+
+  <footer>
+    <nav><a href="index.html">← Tyler Burns’s website</a></nav>
+    <p>Original haiku by Matsuo Bashō (1686). Starting English text: Harry Behn’s translation, with punctuation and capitalization adapted. Later versions are variations on the translation, not poems by Bashō or translations by Behn. <a href="https://music.unt.edu/files/default/files/digital-programs/2025.03.29_isabela-urroz-arena_449.pdf">Translation attribution</a> (University of North Texas, p. 2).<br>Dynamic adaptation by Tyler Burns &middot; 41 versions</p>
+    <p>Space plays and pauses &middot; arrow keys step &middot; click or drag the strip to scrub &middot; a paused version&rsquo;s address links straight to it</p>
+  </footer>
+</main>
+<script>
+const PIECE = {"lines":["{opening} {old} {silent} {pond}","{article} {frog} {jumps} {into} {the} {water}—","{splash}! {silence} {again}."],"breaks":[],"base":{"opening":"An","article":"A","the":"the","old":"old","silent":"silent","pond":"pond","frog":"frog","jumps":"jumps","into":"into","water":"pond","splash":"Splash","silence":"Silence","again":"again"},"changes":[["old","odd"],["pond","pool"],["water","pool"],["frog","crow"],["splash","Squash"],["splash","Squawk"],["jumps","limps"],["into","onto"],["water","pond"],["water","sand"],["pond","pond"],["pond","sand"],["old","old"],["silent","splint"],["silent","sprint"],["silent","spring"],["pond","pond"],["jumps","leaps"],["frog","crab"],["splash","Squash"],["splash","Squish"],["again","slain"],["water","land"],["pond","land"],["frog","crow"],["splash","Squash"],["splash","Squawk"],["jumps","leans"],["frog","crew"],["frog","tree"],["into","into"],["water","sand"],["water","wind"],["silent","string"],["silent","strong"],["pond","sand"],["pond","wind"],["old","odd"],["splash","Squall"],["again","again"]],"playback":"bounce","unit":"letter","palette":{"light":{"start":{"ground":"#E2E4DE","ink":"#1E2320","soft":"#545B55","rule":"#BEC3BA","accent":"#2B6B70","faint":"#6E746D"},"end":{"ground":"#E2E4DE","ink":"#1E2320","soft":"#545B55","rule":"#BEC3BA","accent":"#2B6B70","faint":"#6E746D"}},"dark":{"start":{"ground":"#12151A","ink":"#D7D9D2","soft":"#939B97","rule":"#2A2F36","accent":"#7BC3C6","faint":"#737B7E"},"end":{"ground":"#12151A","ink":"#D7D9D2","soft":"#939B97","rule":"#2A2F36","accent":"#7BC3C6","faint":"#737B7E"}}},"spread":0,"speeds":[6000,3200,1200],"ticks":"flat","labels":{"start":"Bashō / Behn","end":"the far end","homeward":"returning","gauge":"Distance","outward":"crossing"}};
+/* Dynamic poetry runtime. The build inlines this after `const PIECE = {...}`:
+   lines, breaks, base (the first state), changes ([slot, word] per step),
+   playback ('loop' | 'bounce' | 'once'), unit ('word' | 'letter'),
+   palette, spread, speeds, ticks, labels. */
+(() => {
+const P = PIECE;
+const $ = id => document.getElementById(id);
+const root = document.documentElement;
+const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+if (reduced) document.body.classList.add('plain');
+
+const STATES = [P.base];
+for (const [key, word] of P.changes) STATES.push({ ...STATES[STATES.length - 1], [key]: word });
+const TOTAL = STATES.length, LAST = TOTAL - 1;
+const LOOP = P.playback === 'loop', ONCE = P.playback === 'once';
+// How far a version has travelled: words away from the original, or for
+// letter pieces, letters away. The gauge is full at the farthest version.
+const hamming = (a, b) => a.length === b.length ? [...a].filter((c, i) => c !== b[i]).length : Math.max(a.length, b.length);
+const distance = s => Object.keys(s).reduce((n, k) => n + (s[k] === P.base[k] ? 0 : P.unit === 'letter' ? hamming(s[k], P.base[k]) : 1), 0);
+const FARTHEST = Math.max(...STATES.map(distance));
+const pad = n => String(n).padStart(3, '0');
+const clamp = n => Math.max(0, Math.min(LAST, n));
+const wrap = n => (n + TOTAL) % TOTAL;
+const changedKeys = (a, b) => Object.keys(b).filter(k => a[k] !== b[k]);
+
+const SEGMENTS = P.lines.map(line =>
+  line.split(/\{(\w+)\}/g).map((piece, i) => (i % 2 ? { slot: piece } : { text: piece }))
+      .filter(seg => seg.slot || seg.text !== '')
+);
+
+/* ---------- poem: one span per mutable word ---------- */
+const spans = {};
+SEGMENTS.forEach((segs, li) => {
+  const line = document.createElement('div');
+  line.className = 'ln' + (P.breaks.includes(li) ? ' gap' : '');
+  for (const seg of segs){
+    if (seg.slot){
+      const w = document.createElement('span');
+      w.className = 'w';
+      w.textContent = P.base[seg.slot];
+      spans[seg.slot] = w;
+      line.append(w);
+    } else line.append(seg.text);
+  }
+  $('poem').append(line);
+});
+
+/* Letter pieces show which letters moved; word pieces swap the whole word. */
+function letterSpans(from, to, fresh){
+  return [...to].map((c, i) => {
+    const s = document.createElement('span');
+    s.textContent = c;
+    if (c !== from[i]) s.className = 'ch' + (fresh ? ' arriving' : '');
+    return s;
+  });
 }
 
-.wrap{max-width:42rem}.poem{font-size:clamp(1.15rem,4.5vw,2rem);line-height:2.05;padding-block:1rem}.ln{padding:0;text-indent:0}.meter{flex-wrap:wrap}.swap{min-height:1.5em}.w.lit{color:inherit}.changed{color:var(--patina);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:.2em}body.nohl .changed{color:inherit;text-decoration:none}.w.flash{animation:arrival .55s ease}@keyframes arrival{from{background:var(--patina-dim)}to{background:transparent}}@media(prefers-reduced-motion:reduce){.w.flash{animation:none}}nav{display:flex;flex-wrap:wrap;gap:1rem;margin-bottom:.8rem}footer a{color:var(--ink-soft)}input[type=range]{width:100%;accent-color:var(--patina);margin:1.5rem 0 1rem}.note{font-size:.85rem;color:var(--ink-soft);line-height:1.6}button:disabled{opacity:.4;cursor:default}.card p{white-space:pre-line}
-
-</style></head><body><main class="wrap">
-<header><p class="eyebrow">Dynamic poetry · two-letter drift</p><h1>The Old Pond, Crossing the Water</h1><p class="standfirst">A pond, a shore, a tree in the wind. Two letters let the scene travel further. Read again from the top.</p><p class="note">After Matsuo Bashō · English translation by Harry Behn<br>Dynamic adaptation by Tyler Burns</p></header>
-<hr class="rule"><div class="poem" id="poem" aria-live="off"><div class="ln">An old silent pond</div><div class="ln">A frog jumps into the pond—</div><div class="ln">Splash! Silence again.</div></div>
-
-<input id="position" type="range" min="0" max="40" value="0" aria-label="Poem version">
-<div class="meter"><span>Version <b id="vnum">001</b> / 41 <span id="direction"></span></span><span class="swap" id="swap">Original text</span></div>
-<div class="controls"><div class="grp"><button id="prev" aria-label="Previous version">←</button><button id="play">Play</button><button id="next" aria-label="Next version">→</button></div><div class="spacer"></div><div class="grp"><button class="speed" data-ms="6000" aria-pressed="false">Slow</button><button class="speed" data-ms="3200" aria-pressed="true">Reading</button><button class="speed" data-ms="1200" aria-pressed="false">Quick</button></div><button id="reset">Original</button><button id="highlight" aria-pressed="true">Mark change</button><button id="all" aria-expanded="false" aria-controls="archive">All 41</button></div>
-<p class="note">One or two letters are replaced in one word at each step. Every resulting word is an English word. The route follows three scenes, with stranger passages between them. The poem travels outward, then retraces its steps home.</p>
-<section class="archive" id="archive" hidden><p class="arch-head">Every version, in order</p><div class="grid"><article class="card"><span class="no">001</span><p>An old silent pond
-A frog jumps into the pond—
-Splash! Silence again.</p></article><article class="card"><span class="no">002</span><p>An odd silent pond
-A frog jumps into the pond—
-Splash! Silence again.</p></article><article class="card"><span class="no">003</span><p>An odd silent pool
-A frog jumps into the pond—
-Splash! Silence again.</p></article><article class="card"><span class="no">004</span><p>An odd silent pool
-A frog jumps into the pool—
-Splash! Silence again.</p></article><article class="card"><span class="no">005</span><p>An odd silent pool
-A crow jumps into the pool—
-Splash! Silence again.</p></article><article class="card"><span class="no">006</span><p>An odd silent pool
-A crow jumps into the pool—
-Squash! Silence again.</p></article><article class="card"><span class="no">007</span><p>An odd silent pool
-A crow jumps into the pool—
-Squawk! Silence again.</p></article><article class="card"><span class="no">008</span><p>An odd silent pool
-A crow limps into the pool—
-Squawk! Silence again.</p></article><article class="card"><span class="no">009</span><p>An odd silent pool
-A crow limps onto the pool—
-Squawk! Silence again.</p></article><article class="card"><span class="no">010</span><p>An odd silent pool
-A crow limps onto the pond—
-Squawk! Silence again.</p></article><article class="card"><span class="no">011</span><p>An odd silent pool
-A crow limps onto the sand—
-Squawk! Silence again.</p></article><article class="card"><span class="no">012</span><p>An odd silent pond
-A crow limps onto the sand—
-Squawk! Silence again.</p></article><article class="card"><span class="no">013</span><p>An odd silent sand
-A crow limps onto the sand—
-Squawk! Silence again.</p></article><article class="card"><span class="no">014</span><p>An old silent sand
-A crow limps onto the sand—
-Squawk! Silence again.</p></article><article class="card"><span class="no">015</span><p>An old splint sand
-A crow limps onto the sand—
-Squawk! Silence again.</p></article><article class="card"><span class="no">016</span><p>An old sprint sand
-A crow limps onto the sand—
-Squawk! Silence again.</p></article><article class="card"><span class="no">017</span><p>An old spring sand
-A crow limps onto the sand—
-Squawk! Silence again.</p></article><article class="card"><span class="no">018</span><p>An old spring pond
-A crow limps onto the sand—
-Squawk! Silence again.</p></article><article class="card"><span class="no">019</span><p>An old spring pond
-A crow leaps onto the sand—
-Squawk! Silence again.</p></article><article class="card"><span class="no">020</span><p>An old spring pond
-A crab leaps onto the sand—
-Squawk! Silence again.</p></article><article class="card"><span class="no">021</span><p>An old spring pond
-A crab leaps onto the sand—
-Squash! Silence again.</p></article><article class="card"><span class="no">022</span><p>An old spring pond
-A crab leaps onto the sand—
-Squish! Silence again.</p></article><article class="card"><span class="no">023</span><p>An old spring pond
-A crab leaps onto the sand—
-Squish! Silence slain.</p></article><article class="card"><span class="no">024</span><p>An old spring pond
-A crab leaps onto the land—
-Squish! Silence slain.</p></article><article class="card"><span class="no">025</span><p>An old spring land
-A crab leaps onto the land—
-Squish! Silence slain.</p></article><article class="card"><span class="no">026</span><p>An old spring land
-A crow leaps onto the land—
-Squish! Silence slain.</p></article><article class="card"><span class="no">027</span><p>An old spring land
-A crow leaps onto the land—
-Squash! Silence slain.</p></article><article class="card"><span class="no">028</span><p>An old spring land
-A crow leaps onto the land—
-Squawk! Silence slain.</p></article><article class="card"><span class="no">029</span><p>An old spring land
-A crow leans onto the land—
-Squawk! Silence slain.</p></article><article class="card"><span class="no">030</span><p>An old spring land
-A crew leans onto the land—
-Squawk! Silence slain.</p></article><article class="card"><span class="no">031</span><p>An old spring land
-A tree leans onto the land—
-Squawk! Silence slain.</p></article><article class="card"><span class="no">032</span><p>An old spring land
-A tree leans into the land—
-Squawk! Silence slain.</p></article><article class="card"><span class="no">033</span><p>An old spring land
-A tree leans into the sand—
-Squawk! Silence slain.</p></article><article class="card"><span class="no">034</span><p>An old spring land
-A tree leans into the wind—
-Squawk! Silence slain.</p></article><article class="card"><span class="no">035</span><p>An old string land
-A tree leans into the wind—
-Squawk! Silence slain.</p></article><article class="card"><span class="no">036</span><p>An old strong land
-A tree leans into the wind—
-Squawk! Silence slain.</p></article><article class="card"><span class="no">037</span><p>An old strong sand
-A tree leans into the wind—
-Squawk! Silence slain.</p></article><article class="card"><span class="no">038</span><p>An old strong wind
-A tree leans into the wind—
-Squawk! Silence slain.</p></article><article class="card"><span class="no">039</span><p>An odd strong wind
-A tree leans into the wind—
-Squawk! Silence slain.</p></article><article class="card"><span class="no">040</span><p>An odd strong wind
-A tree leans into the wind—
-Squall! Silence slain.</p></article><article class="card"><span class="no">041</span><p>An odd strong wind
-A tree leans into the wind—
-Squall! Silence again.</p></article></div></section>
-<footer><nav><a href="index.html">← Tyler Burns’s website</a></nav>Original haiku: Matsuo Bashō. Starting English text: Harry Behn’s translation, with punctuation and capitalization adapted.<br>Dynamic adaptation: Tyler Burns. Subsequent versions are variations on the translation, not poems by Bashō or translations by Behn.<br><a href="https://music.unt.edu/files/default/files/digital-programs/2025.03.29_isabela-urroz-arena_449.pdf">Translation attribution (University of North Texas, p. 2)</a><br>Space plays and pauses · arrow keys step · slider selects a version</footer>
-</main><script>
-const DATA=[{"state":{"opening":"An","article":"A","the":"the","old":"old","silent":"silent","pond":"pond","frog":"frog","jumps":"jumps","into":"into","water":"pond","splash":"Splash","silence":"Silence","again":"again"},"changed":null},{"state":{"opening":"An","article":"A","the":"the","old":"odd","silent":"silent","pond":"pond","frog":"frog","jumps":"jumps","into":"into","water":"pond","splash":"Splash","silence":"Silence","again":"again"},"changed":"old"},{"state":{"opening":"An","article":"A","the":"the","old":"odd","silent":"silent","pond":"pool","frog":"frog","jumps":"jumps","into":"into","water":"pond","splash":"Splash","silence":"Silence","again":"again"},"changed":"pond"},{"state":{"opening":"An","article":"A","the":"the","old":"odd","silent":"silent","pond":"pool","frog":"frog","jumps":"jumps","into":"into","water":"pool","splash":"Splash","silence":"Silence","again":"again"},"changed":"water"},{"state":{"opening":"An","article":"A","the":"the","old":"odd","silent":"silent","pond":"pool","frog":"crow","jumps":"jumps","into":"into","water":"pool","splash":"Splash","silence":"Silence","again":"again"},"changed":"frog"},{"state":{"opening":"An","article":"A","the":"the","old":"odd","silent":"silent","pond":"pool","frog":"crow","jumps":"jumps","into":"into","water":"pool","splash":"Squash","silence":"Silence","again":"again"},"changed":"splash"},{"state":{"opening":"An","article":"A","the":"the","old":"odd","silent":"silent","pond":"pool","frog":"crow","jumps":"jumps","into":"into","water":"pool","splash":"Squawk","silence":"Silence","again":"again"},"changed":"splash"},{"state":{"opening":"An","article":"A","the":"the","old":"odd","silent":"silent","pond":"pool","frog":"crow","jumps":"limps","into":"into","water":"pool","splash":"Squawk","silence":"Silence","again":"again"},"changed":"jumps"},{"state":{"opening":"An","article":"A","the":"the","old":"odd","silent":"silent","pond":"pool","frog":"crow","jumps":"limps","into":"onto","water":"pool","splash":"Squawk","silence":"Silence","again":"again"},"changed":"into"},{"state":{"opening":"An","article":"A","the":"the","old":"odd","silent":"silent","pond":"pool","frog":"crow","jumps":"limps","into":"onto","water":"pond","splash":"Squawk","silence":"Silence","again":"again"},"changed":"water"},{"state":{"opening":"An","article":"A","the":"the","old":"odd","silent":"silent","pond":"pool","frog":"crow","jumps":"limps","into":"onto","water":"sand","splash":"Squawk","silence":"Silence","again":"again"},"changed":"water"},{"state":{"opening":"An","article":"A","the":"the","old":"odd","silent":"silent","pond":"pond","frog":"crow","jumps":"limps","into":"onto","water":"sand","splash":"Squawk","silence":"Silence","again":"again"},"changed":"pond"},{"state":{"opening":"An","article":"A","the":"the","old":"odd","silent":"silent","pond":"sand","frog":"crow","jumps":"limps","into":"onto","water":"sand","splash":"Squawk","silence":"Silence","again":"again"},"changed":"pond"},{"state":{"opening":"An","article":"A","the":"the","old":"old","silent":"silent","pond":"sand","frog":"crow","jumps":"limps","into":"onto","water":"sand","splash":"Squawk","silence":"Silence","again":"again"},"changed":"old"},{"state":{"opening":"An","article":"A","the":"the","old":"old","silent":"splint","pond":"sand","frog":"crow","jumps":"limps","into":"onto","water":"sand","splash":"Squawk","silence":"Silence","again":"again"},"changed":"silent"},{"state":{"opening":"An","article":"A","the":"the","old":"old","silent":"sprint","pond":"sand","frog":"crow","jumps":"limps","into":"onto","water":"sand","splash":"Squawk","silence":"Silence","again":"again"},"changed":"silent"},{"state":{"opening":"An","article":"A","the":"the","old":"old","silent":"spring","pond":"sand","frog":"crow","jumps":"limps","into":"onto","water":"sand","splash":"Squawk","silence":"Silence","again":"again"},"changed":"silent"},{"state":{"opening":"An","article":"A","the":"the","old":"old","silent":"spring","pond":"pond","frog":"crow","jumps":"limps","into":"onto","water":"sand","splash":"Squawk","silence":"Silence","again":"again"},"changed":"pond"},{"state":{"opening":"An","article":"A","the":"the","old":"old","silent":"spring","pond":"pond","frog":"crow","jumps":"leaps","into":"onto","water":"sand","splash":"Squawk","silence":"Silence","again":"again"},"changed":"jumps"},{"state":{"opening":"An","article":"A","the":"the","old":"old","silent":"spring","pond":"pond","frog":"crab","jumps":"leaps","into":"onto","water":"sand","splash":"Squawk","silence":"Silence","again":"again"},"changed":"frog"},{"state":{"opening":"An","article":"A","the":"the","old":"old","silent":"spring","pond":"pond","frog":"crab","jumps":"leaps","into":"onto","water":"sand","splash":"Squash","silence":"Silence","again":"again"},"changed":"splash"},{"state":{"opening":"An","article":"A","the":"the","old":"old","silent":"spring","pond":"pond","frog":"crab","jumps":"leaps","into":"onto","water":"sand","splash":"Squish","silence":"Silence","again":"again"},"changed":"splash"},{"state":{"opening":"An","article":"A","the":"the","old":"old","silent":"spring","pond":"pond","frog":"crab","jumps":"leaps","into":"onto","water":"sand","splash":"Squish","silence":"Silence","again":"slain"},"changed":"again"},{"state":{"opening":"An","article":"A","the":"the","old":"old","silent":"spring","pond":"pond","frog":"crab","jumps":"leaps","into":"onto","water":"land","splash":"Squish","silence":"Silence","again":"slain"},"changed":"water"},{"state":{"opening":"An","article":"A","the":"the","old":"old","silent":"spring","pond":"land","frog":"crab","jumps":"leaps","into":"onto","water":"land","splash":"Squish","silence":"Silence","again":"slain"},"changed":"pond"},{"state":{"opening":"An","article":"A","the":"the","old":"old","silent":"spring","pond":"land","frog":"crow","jumps":"leaps","into":"onto","water":"land","splash":"Squish","silence":"Silence","again":"slain"},"changed":"frog"},{"state":{"opening":"An","article":"A","the":"the","old":"old","silent":"spring","pond":"land","frog":"crow","jumps":"leaps","into":"onto","water":"land","splash":"Squash","silence":"Silence","again":"slain"},"changed":"splash"},{"state":{"opening":"An","article":"A","the":"the","old":"old","silent":"spring","pond":"land","frog":"crow","jumps":"leaps","into":"onto","water":"land","splash":"Squawk","silence":"Silence","again":"slain"},"changed":"splash"},{"state":{"opening":"An","article":"A","the":"the","old":"old","silent":"spring","pond":"land","frog":"crow","jumps":"leans","into":"onto","water":"land","splash":"Squawk","silence":"Silence","again":"slain"},"changed":"jumps"},{"state":{"opening":"An","article":"A","the":"the","old":"old","silent":"spring","pond":"land","frog":"crew","jumps":"leans","into":"onto","water":"land","splash":"Squawk","silence":"Silence","again":"slain"},"changed":"frog"},{"state":{"opening":"An","article":"A","the":"the","old":"old","silent":"spring","pond":"land","frog":"tree","jumps":"leans","into":"onto","water":"land","splash":"Squawk","silence":"Silence","again":"slain"},"changed":"frog"},{"state":{"opening":"An","article":"A","the":"the","old":"old","silent":"spring","pond":"land","frog":"tree","jumps":"leans","into":"into","water":"land","splash":"Squawk","silence":"Silence","again":"slain"},"changed":"into"},{"state":{"opening":"An","article":"A","the":"the","old":"old","silent":"spring","pond":"land","frog":"tree","jumps":"leans","into":"into","water":"sand","splash":"Squawk","silence":"Silence","again":"slain"},"changed":"water"},{"state":{"opening":"An","article":"A","the":"the","old":"old","silent":"spring","pond":"land","frog":"tree","jumps":"leans","into":"into","water":"wind","splash":"Squawk","silence":"Silence","again":"slain"},"changed":"water"},{"state":{"opening":"An","article":"A","the":"the","old":"old","silent":"string","pond":"land","frog":"tree","jumps":"leans","into":"into","water":"wind","splash":"Squawk","silence":"Silence","again":"slain"},"changed":"silent"},{"state":{"opening":"An","article":"A","the":"the","old":"old","silent":"strong","pond":"land","frog":"tree","jumps":"leans","into":"into","water":"wind","splash":"Squawk","silence":"Silence","again":"slain"},"changed":"silent"},{"state":{"opening":"An","article":"A","the":"the","old":"old","silent":"strong","pond":"sand","frog":"tree","jumps":"leans","into":"into","water":"wind","splash":"Squawk","silence":"Silence","again":"slain"},"changed":"pond"},{"state":{"opening":"An","article":"A","the":"the","old":"old","silent":"strong","pond":"wind","frog":"tree","jumps":"leans","into":"into","water":"wind","splash":"Squawk","silence":"Silence","again":"slain"},"changed":"pond"},{"state":{"opening":"An","article":"A","the":"the","old":"odd","silent":"strong","pond":"wind","frog":"tree","jumps":"leans","into":"into","water":"wind","splash":"Squawk","silence":"Silence","again":"slain"},"changed":"old"},{"state":{"opening":"An","article":"A","the":"the","old":"odd","silent":"strong","pond":"wind","frog":"tree","jumps":"leans","into":"into","water":"wind","splash":"Squall","silence":"Silence","again":"slain"},"changed":"splash"},{"state":{"opening":"An","article":"A","the":"the","old":"odd","silent":"strong","pond":"wind","frog":"tree","jumps":"leans","into":"into","water":"wind","splash":"Squall","silence":"Silence","again":"again"},"changed":"again"}], LINES=["{opening} {old} {silent} {pond}","{article} {frog} {jumps} {into} {the} {water}—","{splash}! {silence} {again}."], LETTERS=true, BLEAK=false;
-const $=id=>document.getElementById(id), reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
-let index=0,direction=1,timer=null,speed=3200;
-// The bleak edition loses warmth from left to right in either system theme.
-const bleakDark=BLEAK && matchMedia('(prefers-color-scheme: dark)').matches;
-const bleakPalette={
- light:{ground:['#e2e4de','#101116'],ink:['#1e2320','#e1deda'],soft:['#505951','#b5afb0'],rule:['#bec3ba','#55515a'],accent:['#2b6b70','#c1a4a8']},
- dark:{ground:['#222b2c','#101116'],ink:['#e4e4d9','#e1deda'],soft:['#b3bbb5','#b5afb0'],rule:['#556563','#55515a'],accent:['#91c2ba','#c1a4a8']}
-};
-function darken(n){
- if(!BLEAK)return;
- const progress=n/(DATA.length-1),palette=bleakPalette[bleakDark?'dark':'light'];
- const mix=(a,b)=>'#'+[1,3,5].map(i=>Math.round(parseInt(a.slice(i,i+2),16)*(1-progress)+parseInt(b.slice(i,i+2),16)*progress).toString(16).padStart(2,'0')).join('');
- const root=document.documentElement, ground=mix(...palette.ground);
- const luminance=color=>[1,3,5].map(i=>parseInt(color.slice(i,i+2),16)/255).map(v=>v<=.04045?v/12.92:((v+.055)/1.055)**2.4).reduce((sum,v,i)=>sum+v*[.2126,.7152,.0722][i],0);
- const lum=luminance(ground),dim=lum<.179;
- const readable=color=>{
-  const other=luminance(color),ratio=(Math.max(lum,other)+.05)/(Math.min(lum,other)+.05);
-  return ratio>=4.5?color:dim?'#ffffff':'#000000';
- };
- root.style.setProperty('--ground',ground);
- root.style.setProperty('--ink',readable(palette.ink[dim?1:0]));
- root.style.setProperty('--ink-soft',readable(palette.soft[dim?1:0]));
- root.style.setProperty('--ink-faint',readable(palette.soft[dim?1:0]));
- root.style.setProperty('--rule',mix(...palette.rule));
- root.style.setProperty('--patina',readable(palette.accent[dim?1:0]));
- root.style.setProperty('--patina-dim',dim?'rgba(193,164,168,.22)':'rgba(43,107,112,.22)');
- root.style.colorScheme=dim?'dark':'light';
+// A newer change to the same word cancels any swap still in flight.
+const generation = {};
+function setWord(key, from, to, animate, single){
+  const el = spans[key];
+  const gen = generation[key] = (generation[key] || 0) + 1;
+  el.classList.remove('gone', 'arriving', 'nofx');
+  const letterwise = P.unit === 'letter' && single && from.length === to.length;
+  el.classList.toggle('lw', letterwise);
+  if (letterwise){
+    el.replaceChildren(...letterSpans(from, to, animate));
+    if (animate) requestAnimationFrame(() => requestAnimationFrame(() => {
+      if (generation[key] === gen) el.querySelectorAll('.arriving').forEach(s => s.classList.remove('arriving'));
+    }));
+    return;
+  }
+  if (!animate){ el.textContent = to; return; }
+  el.classList.add('gone');
+  setTimeout(() => {
+    if (generation[key] !== gen) return;
+    el.classList.add('nofx');
+    el.textContent = to;
+    el.classList.remove('gone');
+    el.classList.add('arriving');
+    void el.offsetWidth;
+    el.classList.remove('nofx', 'arriving');
+  }, 340);
 }
-function paint(n){
- const before=DATA[index].state, after=DATA[n].state;
- const changed=Object.keys(after).filter(k=>before[k]!==after[k]);
- index=n; $('poem').replaceChildren();
- LINES.forEach(template=>{
-  const line=document.createElement('div');line.className='ln';
-  template.split(/\{(\w+)\}/g).forEach((part,i)=>{
-   if(i%2===0){line.append(document.createTextNode(part));return;}
-   const word=document.createElement('span');word.className='w';
-   const mark=changed.includes(part);
-   if(mark)word.classList.add('flash');
-   if(LETTERS&&mark&&changed.length===1){
-    [...after[part]].forEach((c,j)=>{const letter=document.createElement('span');letter.textContent=c;if(c!==before[part][j])letter.className='changed';word.append(letter);});
-   }else{word.textContent=after[part];if(mark)word.classList.add('changed');}
-   line.append(word);
-  });$('poem').append(line);
- });
- $('vnum').textContent=String(n+1).padStart(3,'0');$('position').value=n;
- $('position').setAttribute('aria-valuetext','Version '+(n+1)+' of '+DATA.length);
- $('swap').textContent=changed.length===1 ? before[changed[0]]+' → '+after[changed[0]] : n===0 ? 'Original text' : 'Version selected';
- $('prev').disabled=n===0;$('next').disabled=n===DATA.length-1;
- $('direction').textContent=BLEAK ? (n===DATA.length-1?'—':direction===1?'→':'←') : direction===1?'↗':'↙';
- darken(n);
- if(BLEAK && timer===null)$('play').textContent=n===DATA.length-1?'Replay':'Play';
+
+/* ---------- index strip ---------- */
+const strip = $('strip');
+const ticks = [];
+for (let i = 0; i < TOTAL; i++){
+  const t = document.createElement('i');
+  t.className = 'tick';
+  const f = i / LAST;
+  t.style.height = (P.ticks === 'rise' ? 5 + f * 15 : P.ticks === 'fall' ? 20 - f * 15 : 6) + 'px';
+  strip.append(t);
+  ticks.push(t);
 }
-function pause(){clearInterval(timer);timer=null;$('play').textContent=BLEAK && index===DATA.length-1?'Replay':'Play';}
+strip.setAttribute('aria-valuemax', TOTAL);
+
+function scrub(e){
+  const r = strip.getBoundingClientRect();
+  const n = clamp(Math.floor((e.clientX - r.left) / r.width * TOTAL));
+  if (n !== cur){ dir = n > cur ? 1 : -1; go(n, Math.abs(n - cur) === 1); }
+}
+strip.addEventListener('pointerdown', e => { pause(); strip.setPointerCapture(e.pointerId); scrub(e); });
+strip.addEventListener('pointermove', e => { if (strip.hasPointerCapture(e.pointerId)) scrub(e); });
+strip.addEventListener('keydown', e => {
+  const to = { Home: 0, End: LAST, PageUp: cur - 10, PageDown: cur + 10 }[e.key];
+  if (to === undefined) return;
+  e.preventDefault(); pause(); dir = to >= cur ? 1 : -1; go(clamp(to), false);
+});
+
+/* ---------- the page drifts with the poem ---------- */
+const darkQuery = matchMedia('(prefers-color-scheme: dark)');
+const isDark = () => root.dataset.theme ? root.dataset.theme === 'dark' : darkQuery.matches;
+const rgb = c => [1, 3, 5].map(i => parseInt(c.slice(i, i + 2), 16));
+const mix = (a, b, t) => '#' + rgb(a).map((v, i) => Math.round(v + (rgb(b)[i] - v) * t).toString(16).padStart(2, '0')).join('');
+const luminance = c => rgb(c).map(v => v / 255).map(v => v <= .04045 ? v / 12.92 : ((v + .055) / 1.055) ** 2.4)
+  .reduce((sum, v, i) => sum + v * [.2126, .7152, .0722][i], 0);
+const contrast = (a, b) => { const [x, y] = [luminance(a), luminance(b)].sort((m, n) => n - m); return (x + .05) / (y + .05); };
+// When the ground crosses from light to dark, text must jump sides rather than fade through it.
+const MIN_CONTRAST = { ink: 4.5, soft: 4.5, accent: 3, faint: 3 };
+const STILL = ['light', 'dark'].every(m => JSON.stringify(P.palette[m].start) === JSON.stringify(P.palette[m].end));
+
+function drift(p){
+  root.style.setProperty('--spread', (p * P.spread).toFixed(3) + 'em');
+  if (STILL) return;
+  const pal = P.palette[isDark() ? 'dark' : 'light'];
+  const ground = mix(pal.start.ground, pal.end.ground, p);
+  root.style.setProperty('--ground', ground);
+  root.style.setProperty('--rule', mix(pal.start.rule, pal.end.rule, p));
+  for (const key in MIN_CONTRAST){
+    let c = mix(pal.start[key], pal.end[key], p);
+    if (contrast(c, ground) < MIN_CONTRAST[key])
+      c = [pal.start[key], pal.end[key]].sort((a, b) => contrast(b, ground) - contrast(a, ground))[0];
+    root.style.setProperty('--' + key, c);
+  }
+  const dim = luminance(ground) < .18;
+  root.style.colorScheme = dim ? 'dark' : 'light';
+  root.style.setProperty('--grain-blend', dim ? 'screen' : 'multiply');
+}
+darkQuery.addEventListener('change', () => drift(cur / LAST));
+
+/* ---------- painting ---------- */
+let cur = 0, dir = 1, timer = null, lit = [];
+let speed = P.speeds[1];
+
+function paint(n, animate){
+  const from = STATES[cur], to = STATES[n];
+  const moved = changedKeys(from, to);
+  const single = moved.length === 1;
+  lit.forEach(k => spans[k].classList.remove('lit'));
+  // Big jumps land at once; only small steps are worth watching.
+  for (const k of moved) setWord(k, from[k], to[k], animate && moved.length <= 3 && !reduced, single);
+  // After a jump, mark the word that arrived in this version instead.
+  let was = from;
+  if (!single){
+    was = n ? STATES[n - 1] : LOOP ? STATES[LAST] : to;
+    lit = changedKeys(was, to);
+    lit.forEach(k => setWord(k, was[k], to[k], false, true));
+  } else lit = moved;
+  lit.forEach(k => spans[k].classList.add('lit'));
+  $('swap').textContent = lit.length ? was[lit[0]] + ' → ' + to[lit[0]] : 'Original text';
+  cur = n;
+}
+
+function status(){
+  const p = cur / LAST;
+  drift(p);
+  $('vnum').textContent = pad(cur + 1);
+  const L = P.labels;
+  $('dir').textContent = '· ' + (cur === 0 ? L.start : cur === LAST && !LOOP ? L.end : dir > 0 ? L.outward + ' →' : '← ' + L.homeward);
+  const away = distance(STATES[cur]);
+  $('fill').style.width = (away / FARTHEST * 100).toFixed(1) + '%';
+  $('away').textContent = away + '/' + FARTHEST;
+  ticks.forEach((t, i) => { t.className = 'tick' + (i === cur ? ' now' : i < cur ? ' past' : ''); });
+  if (P.ticks === 'flat') ticks.forEach((t, i) => { t.style.height = (i === cur ? 20 : 6) + 'px'; });
+  strip.setAttribute('aria-valuenow', cur + 1);
+  strip.setAttribute('aria-valuetext', 'Version ' + (cur + 1) + ' of ' + TOTAL);
+  if (!LOOP){ $('prev').disabled = cur === 0; $('next').disabled = cur === LAST; }
+  $('ends').textContent = LOOP || cur >= LAST / 2 ? 'To start' : 'To end';
+  $('play').textContent = timer !== null ? 'Pause' : ONCE && cur === LAST ? 'Replay' : 'Play';
+  if (archiveBuilt) cards.forEach((c, i) => c.classList.toggle('now', i === cur));
+}
+
+// A paused version has an address, so it can be shared.
+function remember(){
+  const here = location.pathname + location.search;
+  history.replaceState(null, '', timer !== null || cur === 0 ? here : here + '#v' + (cur + 1));
+}
+
+function go(n, animate){
+  if (n !== cur) paint(n, animate);
+  status();
+  if (timer === null) remember();
+}
+
+/* ---------- playback ---------- */
+function advance(){
+  if (LOOP) return go(wrap(cur + 1), true);
+  if (ONCE){
+    go(clamp(cur + 1), true);
+    if (cur === LAST) pause();
+    return;
+  }
+  if (cur + dir > LAST || cur + dir < 0) dir = -dir;
+  go(cur + dir, true);
+}
 function play(){
- pause();
- if(BLEAK){direction=1;if(index===DATA.length-1)paint(0);}
- $('play').textContent='Pause';
- timer=setInterval(()=>{
-  if(BLEAK){paint(Math.min(index+1,DATA.length-1));if(index===DATA.length-1)pause();return;}
-  if(index===DATA.length-1)direction=-1;if(index===0)direction=1;paint(index+direction);
- },speed);
+  clearInterval(timer);
+  if (ONCE && cur === LAST){ dir = 1; go(0, false); }
+  timer = setInterval(advance, speed);
+  $('play').textContent = 'Pause';
+  status();
+  remember();
 }
-function step(d){pause();direction=d;paint(Math.max(0,Math.min(DATA.length-1,index+d)));}
-$('play').onclick=()=>timer===null?play():pause();$('prev').onclick=()=>step(-1);$('next').onclick=()=>step(1);
-$('reset').onclick=()=>{pause();direction=1;paint(0);};
-$('position').oninput=e=>{pause();const n=Number(e.target.value);direction=n>=index?1:-1;paint(n);};
- document.querySelectorAll('.speed').forEach(b=>b.onclick=()=>{speed=Number(b.dataset.ms);document.querySelectorAll('.speed').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));if(timer!==null)play();});
-$('highlight').onclick=()=>{const off=document.body.classList.toggle('nohl');$('highlight').setAttribute('aria-pressed',String(!off));};
-$('all').onclick=()=>{const open=$('archive').hidden;$('archive').hidden=!open;$('all').setAttribute('aria-expanded',String(open));};
-addEventListener('keydown',e=>{if(e.target.closest('button,input,a,textarea,select,[contenteditable]')||e.ctrlKey||e.metaKey||e.altKey)return;if(e.key===' '){e.preventDefault();timer===null?play():pause();}if(e.key==='ArrowRight'){e.preventDefault();step(1);}if(e.key==='ArrowLeft'){e.preventDefault();step(-1);}});
-paint(0);if(!reduced)play();
-</script></body></html>
+function pause(){
+  if (timer === null) return;
+  clearInterval(timer);
+  timer = null;
+  status();
+  remember();
+}
+function step(d){
+  pause();
+  dir = d;
+  const n = LOOP ? wrap(cur + d) : clamp(cur + d);
+  if (n !== cur) go(n, true);
+}
+
+$('play').addEventListener('click', () => timer === null ? play() : pause());
+$('next').addEventListener('click', () => step(1));
+$('prev').addEventListener('click', () => step(-1));
+$('ends').addEventListener('click', () => {
+  pause();
+  const n = LOOP || cur >= LAST / 2 ? 0 : LAST;
+  dir = n ? 1 : -1;
+  go(n, false);
+});
+
+const speedButtons = [...document.querySelectorAll('.speed')];
+speedButtons.forEach(b => b.addEventListener('click', () => {
+  speed = +b.dataset.ms;
+  speedButtons.forEach(x => x.setAttribute('aria-pressed', String(x === b)));
+  if (timer !== null) play();
+}));
+
+$('highlight').addEventListener('click', e => {
+  const off = document.body.classList.toggle('nohl');
+  e.currentTarget.setAttribute('aria-pressed', String(!off));
+});
+
+addEventListener('keydown', e => {
+  if (e.ctrlKey || e.metaKey || e.altKey) return;
+  if (e.key === ' ' && e.target.closest('button,a')) return;
+  if (e.key === ' '){ e.preventDefault(); timer === null ? play() : pause(); }
+  else if (e.key === 'ArrowRight'){ e.preventDefault(); step(1); }
+  else if (e.key === 'ArrowLeft'){ e.preventDefault(); step(-1); }
+});
+
+/* ---------- every version, side by side ---------- */
+let archiveBuilt = false;
+const cards = [];
+$('all').addEventListener('click', e => {
+  const open = $('archive').hidden;
+  $('archive').hidden = !open;
+  e.currentTarget.setAttribute('aria-expanded', String(open));
+  if (open && !archiveBuilt) buildArchive();
+  if (open) $('archive').scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'start' });
+});
+
+function buildArchive(){
+  const frag = document.createDocumentFragment();
+  STATES.forEach((state, n) => {
+    const prev = n ? STATES[n - 1] : LOOP ? STATES[LAST] : null;
+    const card = document.createElement('button');
+    card.className = 'card';
+    card.setAttribute('aria-label', 'Show version ' + (n + 1));
+    const no = document.createElement('span');
+    no.className = 'no';
+    no.textContent = pad(n + 1);
+    const p = document.createElement('span');
+    p.className = 'p';
+    SEGMENTS.forEach((segs, li) => {
+      for (const seg of segs){
+        if (!seg.slot){ p.append(seg.text); continue; }
+        const word = state[seg.slot], was = prev && prev[seg.slot];
+        if (!was || was === word) p.append(word);
+        else if (P.unit === 'letter' && was.length === word.length)
+          [...word].forEach((c, i) => {
+            if (c === was[i]) return p.append(c);
+            const em = document.createElement('em'); em.textContent = c; p.append(em);
+          });
+        else { const em = document.createElement('em'); em.textContent = word; p.append(em); }
+      }
+      if (li < SEGMENTS.length - 1) p.append('\n');
+    });
+    card.append(no, p);
+    card.addEventListener('click', () => {
+      pause(); dir = n >= cur ? 1 : -1; go(n, false);
+      $('poem').scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'center' });
+    });
+    cards.push(card);
+    frag.append(card);
+  });
+  $('grid').append(frag);
+  archiveBuilt = true;
+  status();
+}
+
+/* ---------- paper grain: one small tile, repeated ---------- */
+(() => {
+  const c = document.createElement('canvas');
+  c.width = c.height = 160;
+  const ctx = c.getContext('2d');
+  const img = ctx.createImageData(160, 160);
+  for (let i = 0; i < img.data.length; i += 4){
+    img.data[i] = img.data[i + 1] = img.data[i + 2] = 120 + Math.random() * 135;
+    img.data[i + 3] = 255;
+  }
+  ctx.putImageData(img, 0, 0);
+  $('grain').style.background = 'url(' + c.toDataURL() + ') 0 0 / 80px 80px';
+})();
+
+/* ---------- start: at a shared version, paused; otherwise from the top ---------- */
+const shared = /^#v(\d+)$/.exec(location.hash);
+if (shared){
+  go(clamp(+shared[1] - 1), false);
+} else {
+  go(0, false);
+  $('swap').textContent = 'Original text';
+  if (!reduced) play();
+}
+})();
+</script>
+</body>
+</html>
