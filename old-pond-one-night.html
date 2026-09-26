@@ -77,7 +77,7 @@ body.nohl .w.lit,body.nohl .w.lit .ch{color:inherit;text-shadow:none;text-decora
   border-radius:1px;
 }
 .strip:focus-visible{outline:2px solid var(--accent);outline-offset:4px}
-@media (max-width:520px){.strip{gap:1px}}
+@media (max-width:520px){.strip{gap:1px;height:16px;margin-top:3.2rem}}
 .tick{flex:1 1 0;min-width:0;background:var(--rule);transition:background-color .3s ease,height .25s ease}
 .tick.past{background:var(--accent);opacity:.45}
 .tick.now{background:var(--accent);opacity:1}
@@ -177,8 +177,8 @@ nav .group{color:var(--faint);flex-basis:100%;margin-top:.3rem}
     <div class="spacer"></div>
     <div class="grp" role="group" aria-label="Speed">
       <button class="speed" data-ms="6000" aria-pressed="false">Slow</button>
-      <button class="speed" data-ms="3200" aria-pressed="true">Reading</button>
-      <button class="speed" data-ms="1200" aria-pressed="false">Quick</button>
+      <button class="speed" data-ms="3200" aria-pressed="false">Reading</button>
+      <button class="speed" data-ms="1200" aria-pressed="true">Quick</button>
     </div>
     <div class="spacer"></div>
     <button id="ends">To end</button>
@@ -294,7 +294,7 @@ for (let i = 0; i < TOTAL; i++){
   const t = document.createElement('i');
   t.className = 'tick';
   const f = i / LAST;
-  t.style.height = (P.ticks === 'rise' ? 5 + f * 15 : P.ticks === 'fall' ? 20 - f * 15 : 6) + 'px';
+  t.style.height = (P.ticks === 'rise' ? 20 + f * 60 : P.ticks === 'fall' ? 80 - f * 60 : 25) + '%';
   strip.append(t);
   ticks.push(t);
 }
@@ -356,7 +356,7 @@ darkQuery.addEventListener('change', () => drift(shade(cur)));
 
 /* ---------- painting ---------- */
 let cur = 0, dir = 1, timer = null, lit = [];
-let speed = P.speeds[1];
+let speed = P.speeds[2];
 
 function paint(n, animate){
   const from = STATES[cur], to = STATES[n];
@@ -386,7 +386,7 @@ function status(){
   $('fill').style.width = (away / FARTHEST * 100).toFixed(1) + '%';
   $('away').textContent = away + '/' + FARTHEST;
   ticks.forEach((t, i) => { t.className = 'tick' + (i === cur ? ' now' : i < cur ? ' past' : ''); });
-  if (P.ticks === 'flat') ticks.forEach((t, i) => { t.style.height = (i === cur ? 20 : 6) + 'px'; });
+  if (P.ticks === 'flat') ticks.forEach((t, i) => { t.style.height = (i === cur ? 80 : 25) + '%'; });
   strip.setAttribute('aria-valuenow', cur + 1);
   strip.setAttribute('aria-valuetext', 'Version ' + (cur + 1) + ' of ' + TOTAL);
   if (!LOOP){ $('prev').disabled = cur === 0; $('next').disabled = cur === LAST; }
@@ -418,17 +418,18 @@ function advance(){
   if (cur + dir > LAST || cur + dir < 0) dir = -dir;
   go(cur + dir, true);
 }
-function play(){
-  clearInterval(timer);
+// `wait` delays only the first step, so a reader can take in the poem first.
+function play(wait = speed){
+  clearTimeout(timer); clearInterval(timer);
   if (ONCE && cur === LAST){ dir = 1; go(0, false); }
-  timer = setInterval(advance, speed);
+  timer = setTimeout(() => { advance(); if (timer !== null) timer = setInterval(advance, speed); }, wait);
   $('play').textContent = 'Pause';
   status();
   remember();
 }
 function pause(){
   if (timer === null) return;
-  clearInterval(timer);
+  clearTimeout(timer); clearInterval(timer);
   timer = null;
   status();
   remember();
@@ -541,7 +542,7 @@ if (shared){
 } else {
   go(0, false);
   $('swap').textContent = 'Original text';
-  if (!reduced) play();
+  if (!reduced) play(5000);
 }
 })();
 </script>
